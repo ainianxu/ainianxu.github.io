@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.jpg# You can use local image or image external link","description":"从不勾栏听曲."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.jpg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -184,7 +184,12 @@
 <h2 id="1-1-线性回归过拟合问题"><a href="#1-1-线性回归过拟合问题" class="headerlink" title="1.1  线性回归过拟合问题"></a>1.1  线性回归过拟合问题</h2><ul>
 <li>欠拟合 | 刚好合适 | 过拟合</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/EsDjTwnZuyLcpIl.png" alt="image-20210714155814071"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/EsDjTwnZuyLcpIl.png"
+                      alt="image-20210714155814071"
+                ></p>
 <ul>
 <li>过度拟合问题将会在变量过多的时候出现，这时训练出的假设能够很好的拟合训练集（所以代价函数实际上可能非常接近于0。或者恰好等于0），但是可能会得到图三这样的曲线，去拟合训练集，以至于它无法泛化到新的样本中。</li>
 <li>泛化是指一个假设模型应用到新样本的能力</li>
@@ -192,7 +197,12 @@
 <h2 id="1-2-逻辑回归过拟合问题"><a href="#1-2-逻辑回归过拟合问题" class="headerlink" title="1.2  逻辑回归过拟合问题"></a>1.2  逻辑回归过拟合问题</h2><ul>
 <li>欠拟合 | 刚好合适 | 过拟合</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/wZy6uRBcSt4UG3H.png" alt="image-20210714161027764"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/wZy6uRBcSt4UG3H.png"
+                      alt="image-20210714161027764"
+                ></p>
 <ul>
 <li>如果我们有过多的特征变量而只有少量的训练集就会出现过拟合问题。</li>
 <li>有两种方法解决过拟合问题：<ol>
@@ -204,39 +214,79 @@
 <h1 id="02-代价函数"><a href="#02-代价函数" class="headerlink" title="02 代价函数"></a>02 代价函数</h1><ul>
 <li>正则化将多阶函数变成二阶函数（将参数尽可能减小），这些参数越小，我们得到的图像也就越圆滑越简单。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/nXrluhDtHQqPUSj.png" alt="image-20210714163230494"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/nXrluhDtHQqPUSj.png"
+                      alt="image-20210714163230494"
+                ></p>
 <ul>
 <li>一般来说我们只对参数1以及1之后的进行正则化</li>
 <li>在对代价函数进行修改，添加正则化项的目的是为了缩小参数的值。</li>
 <li>正则化参数是为了控制两个不同目标之间的取舍</li>
 <li>正则化参数如果过大，那么参数都会接近于0，这样就相当于把假设函数的全部项都忽略了，最终变成了欠拟合。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/y8h2zRlHEsOJTuN.png" alt="image-20210714164501298"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/y8h2zRlHEsOJTuN.png"
+                      alt="image-20210714164501298"
+                ></p>
 <h1 id="03-线性回归的正则化"><a href="#03-线性回归的正则化" class="headerlink" title="03 线性回归的正则化"></a>03 线性回归的正则化</h1><ul>
 <li>线性回归正则化的梯度下降法</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/4rzdJiZTx1DektE.png" alt="image-20210714171428902"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/4rzdJiZTx1DektE.png"
+                      alt="image-20210714171428902"
+                ></p>
 <ul>
 <li>线性回归正则化的正规方程法</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/hZnGId8afzLHUFM.png" alt="image-20210714171932298"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/hZnGId8afzLHUFM.png"
+                      alt="image-20210714171932298"
+                ></p>
 <ul>
 <li>m&lt;&#x3D;n，说明矩阵是不可逆的，但是当正则参数&gt;0，算出来的矩阵一定是可逆的。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/iC2gLWSwYJMOIsq.png" alt="image-20210714172415327"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/iC2gLWSwYJMOIsq.png"
+                      alt="image-20210714172415327"
+                ></p>
 <h1 id="04-Logistic-回归的正则化"><a href="#04-Logistic-回归的正则化" class="headerlink" title="04 Logistic 回归的正则化"></a>04 Logistic 回归的正则化</h1><ul>
 <li>Logistic 回归添加正则化项</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/kjU1qLs2xHWQdvI.png" alt="image-20210714173430686"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/kjU1qLs2xHWQdvI.png"
+                      alt="image-20210714173430686"
+                ></p>
 <ul>
 <li>Logistic 回归的正则化的梯度下降法</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/8Y1MsQ5BjbIyfLN.png" alt="image-20210714173512465"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/8Y1MsQ5BjbIyfLN.png"
+                      alt="image-20210714173512465"
+                ></p>
 <ul>
 <li>如何在更高级的算法中使用正则化：定义一个costFunction函数，以theta作为输入。在fminunc函数中括号里写上@cosFunction。</li>
 <li>fminunc的意思是函数在无约束条件下的最小值，fminunc函数会将costFunction函数最小化，</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/11/BIha7gCxFqULvtl.png" alt="image-20210714174441860"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/BIha7gCxFqULvtl.png"
+                      alt="image-20210714174441860"
+                ></p>
 
         </div>
 

@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.jpg# You can use local image or image external link","description":"从不勾栏听曲."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.jpg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -184,7 +184,12 @@
 <ul>
 <li>以邮件筛选为例，选择邮件的特征向量的方法。通常我们会挑选出在训练集中出现频率最多的n个单词，将其作为特征向量。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/whUE9WXlB5JIKoH.png" alt="image-20210718101424936"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/whUE9WXlB5JIKoH.png"
+                      alt="image-20210718101424936"
+                ></p>
 <ul>
 <li>如何在有限时间里让垃圾邮件分类器具有高精准度和低错误率。<ol>
 <li>用更复杂的特征变量来描述邮件（可以在邮件标题中获取复杂的特征，来捕捉这封邮件的来源，以此判断是否为垃圾邮件）。</li>
@@ -193,18 +198,33 @@
 </ol>
 </li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/OP7Uoilka1Wpw3f.png" alt="image-20210718102227370"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/OP7Uoilka1Wpw3f.png"
+                      alt="image-20210718102227370"
+                ></p>
 <h1 id="02-误差分析"><a href="#02-误差分析" class="headerlink" title="02 误差分析"></a>02 误差分析</h1><p><strong>误差分析就是一种手动地去检查算法所出现的失误的过程，走向最有成效的道路。</strong></p>
 <hr>
 <ul>
 <li>通过手动检查分类错误的邮件，来看哪一类分类错误的多，哪一个出现错的情况最多，就着重去构造这类特征，加以训练。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/riLVvqXx5WbdRcG.png" alt="image-20210718105039718"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/riLVvqXx5WbdRcG.png"
+                      alt="image-20210718105039718"
+                ></p>
 <ul>
 <li>交叉验证错误率：单一规则的数值评价指标。</li>
 <li>如果只是手动地去检查看看这些例子表现得好不好，会让你很难去决定到底应不应该做出某种决定；但是通过交叉验证错误率就可以直观的看误差率是变大还是变小了，他能告诉你你的想法是提高了还是降低。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/PWcCid5fRBQKles.png" alt="image-20210718105942150"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/PWcCid5fRBQKles.png"
+                      alt="image-20210718105942150"
+                ></p>
 <ul>
 <li>一旦有了一个初始的算法实现，我们就能使用一个强有力的工具，来帮助决定下一步应该做什么：<ol>
 <li>看看他所造成的错误：通过误差分析来看看它出现了什么失误，然后以此决定之后的优化方法。</li>
@@ -217,19 +237,39 @@
 <ul>
 <li>偏斜类：一个类中的样本数与另一个类中的数据相比多很多（比如，没有肿瘤的比有肿瘤的要多得多）。所以说恒把y&#x3D;0算出来的误差将会很小，因为有肿瘤的人很少。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/dR4uG2Wm1EhJXBe.png" alt="image-20210718114348142"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/dR4uG2Wm1EhJXBe.png"
+                      alt="image-20210718114348142"
+                ></p>
 <ul>
 <li>所以我们想要一个不同的评估度量值：查准率和召回率。其中查准率是指对于所有我们的预测，患有癌症的病人，有多大比率的病人是真正患有癌症的。召回率是指假设如果测试集或者验证集中的病人确实得了癌症，有多大比率正确预测他们得了癌症。也就是如果所有病人都得了癌症，有多少人我们能够正确告诉他们你需要治疗。查准率和召回率越高越好。算法预测值与实际值分别是：1&#x2F;1（真阳性）、0&#x2F;0（真阴性）、1&#x2F;0（假阳性）、0&#x2F;1（假阴性）。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/TpCek2mhfIvynQM.png" alt="image-20210718115945590"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/TpCek2mhfIvynQM.png"
+                      alt="image-20210718115945590"
+                ></p>
 <h1 id="04-精确度和召回率的权衡"><a href="#04-精确度和召回率的权衡" class="headerlink" title="04 精确度和召回率的权衡"></a>04 精确度和召回率的权衡</h1><ul>
 <li>在逻辑回归中逻辑输出在0到1之间，其中0.5是个分界值，但是我们想在十分确定得情况下告诉病人真实信息，因此分界值为0.7，甚至0.9（是一个高查准率的模型，但是召回率会变低）。现在我们将分界值设置到较低（有30%几率得病），会得到高召回率，较低得查准率。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/n9yg4AfsozJUDPF.png" alt="image-20210718130210092"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/n9yg4AfsozJUDPF.png"
+                      alt="image-20210718130210092"
+                ></p>
 <ul>
 <li>有没有办法自动选取临界值？或者说有不同的算法，我们如何比较不同的查准率和召回率？或者临界值不同，我们怎样决定哪个更好？–如果使用平均值来计算是不可行的，因为如果假设y &#x3D; 1和y &#x3D; 0这两种极端的情况（要么很高召回率、很低查准率，要么很低召回率、很高查准率），他们俩不是好的模型。再此我们使用F值的公式，因为它同时结合召回率及查准率。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/Kz8UO7MJXgkdWwE.png" alt="image-20210718131645694"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/Kz8UO7MJXgkdWwE.png"
+                      alt="image-20210718131645694"
+                ></p>
 <ul>
 <li>自动选择临界值来决定你希望预测y&#x3D;1还是y&#x3D;0合理的方法：试一试不同的临界值，在检验集进行测试，看哪个临界值可以在检验集得到最高的F。这就是为分类器自动选择临界值的合理方法。</li>
 </ul>
@@ -238,15 +278,30 @@
 <ul>
 <li>并不是拥有最好算法的人能成功，而是拥有最多数据的人能成功。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/uS4V3gvif5htDUw.png" alt="image-20210718165155794"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/uS4V3gvif5htDUw.png"
+                      alt="image-20210718165155794"
+                ></p>
 <ul>
 <li>如果让一个英语好的选词填空，它可以通过特征x让我们能够准确的预测y，相反的，我们让一个房地产专家预测一个房价，而只告诉它房子的面积，其他特征不告诉，他会很难预测。因此如果这个假设正确可以看出大量数据是很有意义的。</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/KcPJmMX43WlviOQ.png" alt="image-20210718165625270"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/KcPJmMX43WlviOQ.png"
+                      alt="image-20210718165625270"
+                ></p>
 <ul>
 <li>得到一个低偏差（一个强大的具有很多参数的学习算法，可以很好的拟合复杂的函数）和低方差（如果训练集远大于参数的数量，就不大可能会过拟合）的学习算法（特征值足够并且训练集很庞大）</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/04/12/Ff4AyO7norVXbZ8.png" alt="image-20210718155309138"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/12/Ff4AyO7norVXbZ8.png"
+                      alt="image-20210718155309138"
+                ></p>
 
         </div>
 
