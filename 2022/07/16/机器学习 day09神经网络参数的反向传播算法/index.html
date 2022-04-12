@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Hexo
+    </title>
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            机器学习 day09神经网络参数的反向传播算法
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h1 id="01-代价函数"><a href="#01-代价函数" class="headerlink" title="01 代价函数"></a>01 代价函数</h1><ul>
+<li>有m组训练样本，L代表神经网络结构的总层数，S_l代表第L层的单元数也就是神经元的数量（不包括第L层的偏差单元）。其中二元分类与多类别分类问题如下：</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/drDmMvuKHpgcTfO.png" alt="image-20210716093702674"></p>
+<ul>
+<li>应用于神经网络的代价函数：h(x)是一个k维向量，h(x)_i代表第i个输出；k的求和符号应用于y_k和h_K,是因为我们主要是将第k个输出单元的值和y_k的值的大小作比较；y_k的值就是这些向量中其应属于哪个类的量。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/yUiOtvjaTzdRsB8.png" alt="image-20210716094105142"></p>
+<h1 id="02-反向传播算法"><a href="#02-反向传播算法" class="headerlink" title="02 反向传播算法"></a>02 反向传播算法</h1><p>反向传播算法是计算代价函数关于所有参数的导数或者偏导数的一种有效方法。</p>
+<hr>
+<ul>
+<li>使用前向传播方法来计算的顺序，计算一下在给定输入的时候，假设函数是否会真的输出结果。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/Td4UHDJEwQntFfO.png" alt="image-20210716095924991"></p>
+<ul>
+<li>反向传播算法中，下图上方下标j上标（l)代表了第l层的第j个结点的误差，下图上方下标j上标（l)实际上就是假设的输出值和训练集y值之间的差。反向传播算法类似于把输出层的误差反向传播给了第三层，然后再传播给第二层，注意没有第一层（第一层可以直观的观察到，没有误差）。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/lrv49uMLYxS2HaG.png" alt="image-20210716101131864"></p>
+<ul>
+<li><p>如何实现反向传播算法来计算这些参数的偏导数：</p>
+<ol>
+<li>首先将每一个i和j对应的三角形（三角形是上图上方下标j上标（l)的大写）置0</li>
+<li>接下来遍历整个训练集，将输入层的激活函数设定他为第i个训练样本的输入值</li>
+<li>接下来用正向传播来计算第二层的激活值，然后第三层，最后到最后一层</li>
+<li>使用输出值来计算这个输出值对应的误差项（假设输出-目标输出）</li>
+<li>再通过反向传播算法计算前几层的误差项，一直到第二层</li>
+<li>最后通过三角形来累计我们再前面写好的偏导数项</li>
+</ol>
+</li>
+<li><p>跳出循环后，通过下面的式子计算D(j等于0和j不等于0的情况)，计算出来的D正好就是关于每个参数的偏导数，然后可以用梯度下降法或者一些其他的高级优化算法。</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/wiYsK8pBjWkSqIm.png" alt="image-20210716102950652"></p>
+<h1 id="03-理解反向传播"><a href="#03-理解反向传播" class="headerlink" title="03 理解反向传播"></a>03 理解反向传播</h1><ul>
+<li>理解前向传播</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/wBRkMNZcHlrs5bm.png" alt="image-20210716110750217"></p>
+<ul>
+<li>代价函数应用在只有一个输出单元的情况</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/SApIlocEOPWDBmZ.png" alt="image-20210716111945042"></p>
+<ul>
+<li>理解反向传播：代价函数是一个关于标签y和神经网络中h(x)的输出值的函数，只要稍微将z(l)j改一下，就会影响神经网络的h(x)，最终改变代价函数的值。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/QOt85NoFZVADRTq.png" alt="image-20210716142240315"></p>
+<h1 id="04-使用注意：展开参数"><a href="#04-使用注意：展开参数" class="headerlink" title="04 使用注意：展开参数"></a>04 使用注意：展开参数</h1><p>把参数从矩阵展开向量，以便在高级最优化步骤中的使用需要</p>
+<hr>
+<ul>
+<li>高级最优化算法都假定theta和initialTheta初始值都是参数向量，也许是n或者n+1维，同时假定这个代价函数的第二个返回值(梯度值)也是n维或者n+1维向量。但是现在在神经网络，参数不再是向量而是矩阵，三个参数在Octave表达如下；梯度矩阵在Octave表达也如下：</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/xrcGHU56CONBPS2.png" alt="image-20210716144733723"></p>
+<ul>
+<li>取出矩阵，并将其展开成向量传入theta中，并得到梯度返回值。</li>
+<li>thetaVec就是将这些矩阵全部展开成为一个很长的向量；DVec同理。reshape将相应元素组合起来成相应矩阵。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/UrhzsmlZnwb1LTq.png" alt="image-20210716145958657"></p>
+<ul>
+<li>上面步骤通过Octave实现如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;Theta1 = ones(10,11)</span><br><span class="line">Theta1 =</span><br><span class="line"></span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line"></span><br><span class="line">&lt;&lt;Theta2 = 2*ones(10,11)</span><br><span class="line">Theta2 =</span><br><span class="line"></span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line"></span><br><span class="line">&lt;&lt;Theta3 = 3*ones(1,11)</span><br><span class="line">Theta3 =</span><br><span class="line"></span><br><span class="line">   3   3   3   3   3   3   3   3   3   3   3</span><br><span class="line"></span><br><span class="line">&lt;&lt;thetaVec = [ Theta1(:);Theta2(:);Theta3(:)];</span><br><span class="line">&lt;&lt;size(thetaVec)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   231     1</span><br><span class="line"></span><br><span class="line">&lt;&lt;reshape(thetaVec(1:110),10,11)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line">   1   1   1   1   1   1   1   1   1   1   1</span><br><span class="line"></span><br><span class="line">&lt;&lt;reshape(thetaVec(111:220),10,11)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line">   2   2   2   2   2   2   2   2   2   2   2</span><br><span class="line"></span><br><span class="line">&lt;&lt;reshape(thetaVec(221:231),1,11)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   3   3   3   3   3   3   3   3   3   3   3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将这一方法应用于我们的学习算法</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/mX7EGcZ4NAYDbpr.png" alt="image-20210716151702593"></p>
+<h1 id="05-梯度检测"><a href="#05-梯度检测" class="headerlink" title="05 梯度检测"></a>05 梯度检测</h1><p>因为反向传播使用时会出现一些bug，而梯度检测可以很好的解决这些问题，确保前向传播及反向传播都百分百正确。</p>
+<hr>
+<ul>
+<li>求出该点导数的近似值（参数是实数的情况）</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/hYr2qFMTQK7dXlC.png" alt="image-20210716154015251"></p>
+<ul>
+<li>当参数维向量参数的时候</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/YdlaJmtzhKokDX2.png" alt="image-20210716154300648"></p>
+<ul>
+<li>在Octave中为了估算导数所要实现的</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/yBRY7UkvMq9tD4p.png" alt="image-20210716155456513"></p>
+<ul>
+<li>总结下如何实现数值上的梯度检验：（注意反向传播算法比梯度检测效率高，检测完一定要关闭梯度检测）</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/OxNDAUQcR3PaXS9.png" alt="image-20210716160140272"></p>
+<h1 id="06-随机初始化"><a href="#06-随机初始化" class="headerlink" title="06 随机初始化"></a>06 随机初始化</h1><ul>
+<li>在神经网络中将所有参数初始为0，没有任何意义，所有输入都是一样，也就意味这最后输出就输出一个特征，阻挡了神经网络学习任何有趣的东西，我们称之为高度冗余。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/JvQ9PKniBYzl5sS.png" alt="image-20210716160754828"></p>
+<ul>
+<li>因此就应该使用随机初始化方法。值得注意的是这里的EPSILON与梯度检测中的完全没有关系。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/91QM7VimcrYGOoK.png" alt="image-20210716161237859"></p>
+<ul>
+<li>为了训练神经网络首先将权重随机初始化为一个接近0范围在-EPSILON到EPSILON之间，然后进行反向传播，在进行梯度检测，最后梯度下降算法或其他高级优化算法来最小化代价函数（关于参数sita的函数）。</li>
+</ul>
+<h1 id="07-组合到一起"><a href="#07-组合到一起" class="headerlink" title="07 组合到一起"></a>07 组合到一起</h1><ul>
+<li>训练神经网络做的第一件事就是选择一种合适的网络架构（神经元之间的连接模式），注意输出时是输出一个向量y。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/4nmfAiVh37d5PIw.png" alt="image-20210716162121409"></p>
+<ul>
+<li>训练神经网络所需要的步骤</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/NsLGvWHeQfqYx6o.png" alt="image-20210716162700558"></p>
+<p><img src="https://s2.loli.net/2022/04/11/MFnKj9VoyYLdRgp.png" alt="image-20210716162914526"></p>
+<ul>
+<li>反向传播算法是为了算出梯度下降算法的下降方向</li>
+</ul>
+
+    </div>
+
+    
+</div>
+    <div class="footer" id="footer">
+    <p>Copyright © 2020 <a class="flink" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a>-<a class="flink" target="_blank" rel="noopener" href="https://github.com/ainianxu">Fang</a>.
+        <label class="el-switch el-switch-green el-switch-sm" style="vertical-align: sub;">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="CmCti21ooOOIzFOhEyFkFvR0-gzGzoHsz">
+<input type="hidden" id="valine_appKey" value="FqiyUqbg7McKN2eG0MCewupf">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
