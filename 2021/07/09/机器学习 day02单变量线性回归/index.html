@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Keep Team">
+    
+    <title>
+        
+            机器学习 day02单变量线性回归 |
+        
+        Keep Theme
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Keep Theme
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day02单变量线性回归</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Keep Team</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-09 11:54:58</span>
+        <span class="mobile">2021-07-09 11:54</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-模型描述"><a href="#01-模型描述" class="headerlink" title="01 模型描述"></a>01 模型描述</h1><p>为了更好的描述监督学习问题，需要给出训练集并以此构建一个模型。</p>
+<hr>
+<p>下面先学习几个符号：</p>
+<ul>
+<li>m:代表的是训练集有几个</li>
+<li>x:代表的是输入的特征</li>
+<li>y:代表的是输出，也就是预测的目标变量</li>
+<li>h:代表假设函数，引导从x得到y的函数</li>
+</ul>
+<h1 id="02-代价函数（平方误差函数）"><a href="#02-代价函数（平方误差函数）" class="headerlink" title="02 代价函数（平方误差函数）"></a>02 代价函数（平方误差函数）</h1><ol>
+<li><p>可以通过代价函数来衡量假设函数的准确性。</p>
+</li>
+<li><p>代价函数取值越小，假设函数就越准确。</p>
+</li>
+</ol>
+<hr>
+<ul>
+<li><p>代价函数有助于我们弄清楚如何把最有可能的直线与我们的数据相拟合。</p>
+</li>
+<li><p>在线性回归中，我们要解决的是最小化问题</p>
+</li>
+<li><p>代价函数是解决回归问题最常用的手段</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/GVKSmdr8D3Zpwgu.png" alt="image-20210709095406672"></p>
+<h1 id="03-梯度下降"><a href="#03-梯度下降" class="headerlink" title="03 梯度下降"></a>03 梯度下降</h1><p>梯度下降法：可以将代价函数最小化</p>
+<p><img src="https://s2.loli.net/2022/04/11/zhpPtnJEwNefB9X.png" alt="image-20210709103211861"></p>
+<p>一般将两个参数初始化为0，再不断的改变参数的值，使得代价函数取值达到最小。</p>
+<p><img src="https://s2.loli.net/2022/04/11/tzfyVa2he1PLA4w.png" alt="image-20210709105003404"></p>
+<ul>
+<li>a：代表学习率（永远为正），用来控制使用梯度下降时，迈出步子的大小。下面是a太小与太大的情况。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/zcf84kIJ5ovwsF3.png" alt="image-20210709110958488"></p>
+<ul>
+<li>导数的含义：针对于只有一个参数的，两种不同初始点的情况分析。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/3nY8eXwMvaQAIcG.png" alt="image-20210709110338694"></p>
+<ul>
+<li>事实上，当取值越接近最优解时，梯度下降的幅度也就越小，因为导数始终向0靠拢。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/ykvHcKpQNex6DmY.png" alt="image-20210709111513419"></p>
+<h1 id="04-线性回归的梯度下降"><a href="#04-线性回归的梯度下降" class="headerlink" title="04 线性回归的梯度下降"></a>04 线性回归的梯度下降</h1><ul>
+<li>将代价函数带入梯度下降算法，并求偏导数可得：</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/IUJ6mFl4vAGZD7i.png" alt="image-20210709112534510"></p>
+<ul>
+<li>将所求的偏导数带回梯度下降算法</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/LrGjCS9UTVF3pb5.png" alt="image-20210709112731345"></p>
+<ul>
+<li>通过梯度下降算法，一步步的进行，最终可以得到与数据最拟合的直线</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/04/11/JCeGlBtr4qINaiv.png" alt="image-20210709113953326"></p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day03%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">机器学习 day03线性代数基础</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day01%E5%88%9D%E8%AF%86%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">机器学习 day01初识机器学习</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Keep Team</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

@@ -197,10 +197,7 @@ KEEP.initUtils = () => {
       const innerHeight = window.innerHeight;
       const pb_dom = document.querySelector('.page-main-content-bottom');
       if (allDomHeight < innerHeight) {
-        const marginTopValue = Math.floor(innerHeight - allDomHeight);
-        if (marginTopValue > 0) {
-          pb_dom.style.marginTop = `${marginTopValue - 2}px`;
-        }
+        pb_dom.style.marginTop = Math.floor(innerHeight - allDomHeight) + 'px';
       }
     },
 
