@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            改善深层神经网络：超参数调试、正则化以及优化第二周检测 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">改善深层神经网络：超参数调试、正则化以及优化第二周检测</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-10 21:13:38</span>
+        <span class="mobile">2021-08-10 21:13</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="答案见下方"><a href="#答案见下方" class="headerlink" title="答案见下方"></a>答案见下方</h1><hr>
+<h2 id="1-当输入从第8个mini-batch的第7个的例子的时候，你会用哪种符号表示第3层的激活？"><a href="#1-当输入从第8个mini-batch的第7个的例子的时候，你会用哪种符号表示第3层的激活？" class="headerlink" title="1.当输入从第8个mini-batch的第7个的例子的时候，你会用哪种符号表示第3层的激活？"></a>1.当输入从第8个mini-batch的第7个的例子的时候，你会用哪种符号表示第3层的激活？</h2><p>A.a^ [3]{8}(7)</p>
+<p>B.a^ [8]{7}(3)</p>
+<p>C.a^ [8]{3}(7)</p>
+<p>D.a^ [3]{7}(8)</p>
+<h2 id="2-关于mini-batch的说法哪个是正确的？"><a href="#2-关于mini-batch的说法哪个是正确的？" class="headerlink" title="2. 关于mini-batch的说法哪个是正确的？"></a>2. 关于mini-batch的说法哪个是正确的？</h2><p>A.mini-batch迭代一次（计算1个mini-batch），要比批量梯度下降迭代一次快</p>
+<p>B.用mini-batch训练完整个数据集一次，要比批量梯度下降训练完整个数据集一次快</p>
+<p>C.在不同的mini-batch下，不需要显式地进行循环，就可以实现mini-batch梯度下降，从而使算法同时处理所有的数据（矢量化）</p>
+<h2 id="3-为什么最好的mini-batch的大小通常不是1也不是m，而是介于两者之间？"><a href="#3-为什么最好的mini-batch的大小通常不是1也不是m，而是介于两者之间？" class="headerlink" title="3.为什么最好的mini-batch的大小通常不是1也不是m，而是介于两者之间？"></a>3.为什么最好的mini-batch的大小通常不是1也不是m，而是介于两者之间？</h2><p>A.如果mini-batch的大小是1，那么在你取得进展前，你需要遍历整个训练集</p>
+<p>B.如果mini-batch的大小是m，就会变成批量梯度下降。在你取得进展前，你需要遍历整个训练集</p>
+<p>C.如果mini-batch的大小是1，那么你将失去mini-batch将数据矢量化带来的的好处</p>
+<p>D.如果mini-batch的大小是m，就会变成随机梯度下降，而这样做经常会比mini-batch慢</p>
+<h2 id="4-如果你的模型的成本J随着迭代次数的增加，绘制出来的图如下，那么："><a href="#4-如果你的模型的成本J随着迭代次数的增加，绘制出来的图如下，那么：" class="headerlink" title="4.如果你的模型的成本J随着迭代次数的增加，绘制出来的图如下，那么："></a>4.如果你的模型的成本J随着迭代次数的增加，绘制出来的图如下，那么：</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.kesci.com/upload/image/q48rj172dh.png?imageView2/0/w/960/h/960"
+                      alt="Image Name"
+                ></p>
+<p>A.如果你正在使用mini-batch梯度下降，那可能有问题；而如果你在使用批量梯度下降，那是合理的</p>
+<p>B.如果你正在使用mini-batch梯度下降，那看上去是合理的；而如果你在使用批量梯度下降，那可能有问题</p>
+<p>C.无论你在使用mini-batch还是批量梯度下降，看上去都是合理的</p>
+<p>D.无论你在使用mini-batch还是批量梯度下降，都可能有问题</p>
+<h2 id="5-假设一月的前三天卡萨布兰卡的气温是一样的：一月第一天-θ1-x3D-10"><a href="#5-假设一月的前三天卡萨布兰卡的气温是一样的：一月第一天-θ1-x3D-10" class="headerlink" title="5.假设一月的前三天卡萨布兰卡的气温是一样的：一月第一天: θ1&#x3D;10"></a>5.假设一月的前三天卡萨布兰卡的气温是一样的：一月第一天: θ1&#x3D;10</h2><p>一月第二天: θ2&#x3D;10,假设您使用β&#x3D;0.5的指数加权平均来跟踪温度：v0&#x3D;0,vt&#x3D;βv_t−1+(1−β)θ_t。如果v2是在没有偏差修正的情况下计算第2天后的值，并且v2corrected是您使用偏差修正计算的值。 这些下面的值是正确的是？</p>
+<p>A.v2&#x3D;10,v2corrected&#x3D;10</p>
+<p>B.v2&#x3D;10,v2corrected&#x3D;7.5</p>
+<p>C.v2&#x3D;7.5,v2corrected&#x3D;7.5</p>
+<p>D.v2&#x3D;7.5,v2corrected&#x3D;10</p>
+<h2 id="6-下面哪一个不是比较好的学习率衰减方法？"><a href="#6-下面哪一个不是比较好的学习率衰减方法？" class="headerlink" title="6.下面哪一个不是比较好的学习率衰减方法？"></a>6.下面哪一个不是比较好的学习率衰减方法？</h2><p>A.α&#x3D;1&#x2F;(1+2∗t) α0</p>
+<p>B.α&#x3D;1&#x2F;sqrt(t) α0</p>
+<p>C.α&#x3D;0.95^ t α0</p>
+<p>D.α&#x3D;e^ t α0</p>
+<h2 id="7-您在伦敦温度数据集上使用指数加权平均，-使用以下公式来追踪温度：vt-x3D-βv-t−1-1−β-θt。下图中红线使用的是β-x3D-0-9来计算的。当你改变β时，你的红色曲线会怎样变化？（选出所有正确项）"><a href="#7-您在伦敦温度数据集上使用指数加权平均，-使用以下公式来追踪温度：vt-x3D-βv-t−1-1−β-θt。下图中红线使用的是β-x3D-0-9来计算的。当你改变β时，你的红色曲线会怎样变化？（选出所有正确项）" class="headerlink" title="7.您在伦敦温度数据集上使用指数加权平均， 使用以下公式来追踪温度：vt&#x3D;βv_t−1+(1−β)θt。下图中红线使用的是β&#x3D;0.9来计算的。当你改变β时，你的红色曲线会怎样变化？（选出所有正确项）"></a>7.您在伦敦温度数据集上使用指数加权平均， 使用以下公式来追踪温度：vt&#x3D;βv_t−1+(1−β)θt。下图中红线使用的是β&#x3D;0.9来计算的。当你改变β时，你的红色曲线会怎样变化？（选出所有正确项）</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.kesci.com/upload/image/q4c2nyuibb.png?imageView2/0/w/960/h/960"
+                      alt="Image Name"
+                ></p>
+<p>A.减小β，红色线会略微右移<br>B.增加β，红色线会略微右移<br>C.减小β，红线会更加震荡<br>D.增加β，红线会更加震荡</p>
+<h2 id="8-下图中的曲线是由：梯度下降，动量梯度下降（β-x3D-0-5）和动量梯度下降（β-x3D-0-9）。哪条曲线对应哪种算法？"><a href="#8-下图中的曲线是由：梯度下降，动量梯度下降（β-x3D-0-5）和动量梯度下降（β-x3D-0-9）。哪条曲线对应哪种算法？" class="headerlink" title="8.下图中的曲线是由：梯度下降，动量梯度下降（β&#x3D;0.5）和动量梯度下降（β&#x3D;0.9）。哪条曲线对应哪种算法？"></a>8.下图中的曲线是由：梯度下降，动量梯度下降（β&#x3D;0.5）和动量梯度下降（β&#x3D;0.9）。哪条曲线对应哪种算法？</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.kesci.com/upload/image/q4c3gp9w4.png?imageView2/0/w/960/h/960"
+                      alt="Image Name"
+                ></p>
+<p>A.(1)是梯度下降；(2)是动量梯度下降（β&#x3D;0.9）；(3)是动量梯度下降（β&#x3D;0.5）</p>
+<p>B.(1)是梯度下降；(2)是动量梯度下降（β&#x3D;0.5）；(3)是动量梯度下降（β&#x3D;0.9）</p>
+<p>C.(1)是动量梯度下降（β&#x3D;0.5）；(2)是动量梯度下降（β&#x3D;0.9）；(3)是梯度下降</p>
+<p>D.(1)是动量梯度下降（β&#x3D;0.5）；(2)是梯度下降；(3)是动量梯度下降（β&#x3D;0.9）</p>
+<h2 id="9-假设在一个深度学习网络中，批量梯度下降花费了大量时间时来找到一组参数值，使成本函数J-W-1-b-1-…-W-L-b-L-小。以下哪些方法可以帮助找到J值较小的参数值？"><a href="#9-假设在一个深度学习网络中，批量梯度下降花费了大量时间时来找到一组参数值，使成本函数J-W-1-b-1-…-W-L-b-L-小。以下哪些方法可以帮助找到J值较小的参数值？" class="headerlink" title="9.假设在一个深度学习网络中，批量梯度下降花费了大量时间时来找到一组参数值，使成本函数J(W[1],b[1],…,W[L],b[L])小。以下哪些方法可以帮助找到J值较小的参数值？"></a>9.假设在一个深度学习网络中，批量梯度下降花费了大量时间时来找到一组参数值，使成本函数J(W[1],b[1],…,W[L],b[L])小。以下哪些方法可以帮助找到J值较小的参数值？</h2><p>A.令所有权重值初始化为0</p>
+<p>B.尝试调整学习率</p>
+<p>C.尝试mini-batch梯度下降</p>
+<p>D.尝试对权重进行更好的随机初始化</p>
+<p>E.尝试使用 Adam 算法</p>
+<h2 id="10-关于Adam算法，下列哪一个陈述是错误的？"><a href="#10-关于Adam算法，下列哪一个陈述是错误的？" class="headerlink" title="10.关于Adam算法，下列哪一个陈述是错误的？"></a>10.关于Adam算法，下列哪一个陈述是错误的？</h2><p>A.Adam结合了Rmsprop和动量的优点</p>
+<p>B.Adam中的学习率超参数α通常需要调整</p>
+<p>C.我们经常使用超参数的“默认”值β1&#x3D;0,9,β2&#x3D;0.999,ϵ&#x3D;10−8</p>
+<p>D.Adam应该用于批梯度计算，而不是用于mini-batch</p>
+<hr>
+<h2 id="答案："><a href="#答案：" class="headerlink" title="答案："></a>答案：</h2><ol>
+<li>A</li>
+<li>C</li>
+<li>BC</li>
+<li>B</li>
+<li>D</li>
+<li>D</li>
+<li>BC</li>
+<li>B</li>
+<li>BCDE</li>
+<li>D</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：改善深层神经网络：超参数调试、正则化以及优化第二周检测</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-10 21:13:38</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/10/改善深层神经网络：超参数调试、正则化以及优化第二周检测/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day09%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E3%80%81Batch%20%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day09 超参数调试、Batch 正则化和程序框架</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/10/%E6%94%B9%E5%96%84%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E3%80%81%E6%AD%A3%E5%88%99%E5%8C%96%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%AC%AC%E4%B8%80%E5%91%A8%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">改善深层神经网络：超参数调试、正则化以及优化第一周检测</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%94%E6%A1%88%E8%A7%81%E4%B8%8B%E6%96%B9"><span class="nav-number">1.</span> <span class="nav-text">答案见下方</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BD%93%E8%BE%93%E5%85%A5%E4%BB%8E%E7%AC%AC8%E4%B8%AAmini-batch%E7%9A%84%E7%AC%AC7%E4%B8%AA%E7%9A%84%E4%BE%8B%E5%AD%90%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%BD%A0%E4%BC%9A%E7%94%A8%E5%93%AA%E7%A7%8D%E7%AC%A6%E5%8F%B7%E8%A1%A8%E7%A4%BA%E7%AC%AC3%E5%B1%82%E7%9A%84%E6%BF%80%E6%B4%BB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.当输入从第8个mini-batch的第7个的例子的时候，你会用哪种符号表示第3层的激活？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%B3%E4%BA%8Emini-batch%E7%9A%84%E8%AF%B4%E6%B3%95%E5%93%AA%E4%B8%AA%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">2. 关于mini-batch的说法哪个是正确的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%80%E5%A5%BD%E7%9A%84mini-batch%E7%9A%84%E5%A4%A7%E5%B0%8F%E9%80%9A%E5%B8%B8%E4%B8%8D%E6%98%AF1%E4%B9%9F%E4%B8%8D%E6%98%AFm%EF%BC%8C%E8%80%8C%E6%98%AF%E4%BB%8B%E4%BA%8E%E4%B8%A4%E8%80%85%E4%B9%8B%E9%97%B4%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">3.为什么最好的mini-batch的大小通常不是1也不是m，而是介于两者之间？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%88%90%E6%9C%ACJ%E9%9A%8F%E7%9D%80%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E7%9A%84%E5%A2%9E%E5%8A%A0%EF%BC%8C%E7%BB%98%E5%88%B6%E5%87%BA%E6%9D%A5%E7%9A%84%E5%9B%BE%E5%A6%82%E4%B8%8B%EF%BC%8C%E9%82%A3%E4%B9%88%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">4.如果你的模型的成本J随着迭代次数的增加，绘制出来的图如下，那么：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%81%87%E8%AE%BE%E4%B8%80%E6%9C%88%E7%9A%84%E5%89%8D%E4%B8%89%E5%A4%A9%E5%8D%A1%E8%90%A8%E5%B8%83%E5%85%B0%E5%8D%A1%E7%9A%84%E6%B0%94%E6%B8%A9%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84%EF%BC%9A%E4%B8%80%E6%9C%88%E7%AC%AC%E4%B8%80%E5%A4%A9-%CE%B81-x3D-10"><span class="nav-number">1.5.</span> <span class="nav-text">5.假设一月的前三天卡萨布兰卡的气温是一样的：一月第一天: θ1&#x3D;10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%B8%8B%E9%9D%A2%E5%93%AA%E4%B8%80%E4%B8%AA%E4%B8%8D%E6%98%AF%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">6.下面哪一个不是比较好的学习率衰减方法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%82%A8%E5%9C%A8%E4%BC%A6%E6%95%A6%E6%B8%A9%E5%BA%A6%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%EF%BC%8C-%E4%BD%BF%E7%94%A8%E4%BB%A5%E4%B8%8B%E5%85%AC%E5%BC%8F%E6%9D%A5%E8%BF%BD%E8%B8%AA%E6%B8%A9%E5%BA%A6%EF%BC%9Avt-x3D-%CE%B2v-t%E2%88%921-1%E2%88%92%CE%B2-%CE%B8t%E3%80%82%E4%B8%8B%E5%9B%BE%E4%B8%AD%E7%BA%A2%E7%BA%BF%E4%BD%BF%E7%94%A8%E7%9A%84%E6%98%AF%CE%B2-x3D-0-9%E6%9D%A5%E8%AE%A1%E7%AE%97%E7%9A%84%E3%80%82%E5%BD%93%E4%BD%A0%E6%94%B9%E5%8F%98%CE%B2%E6%97%B6%EF%BC%8C%E4%BD%A0%E7%9A%84%E7%BA%A2%E8%89%B2%E6%9B%B2%E7%BA%BF%E4%BC%9A%E6%80%8E%E6%A0%B7%E5%8F%98%E5%8C%96%EF%BC%9F%EF%BC%88%E9%80%89%E5%87%BA%E6%89%80%E6%9C%89%E6%AD%A3%E7%A1%AE%E9%A1%B9%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">7.您在伦敦温度数据集上使用指数加权平均， 使用以下公式来追踪温度：vt&#x3D;βv_t−1+(1−β)θt。下图中红线使用的是β&#x3D;0.9来计算的。当你改变β时，你的红色曲线会怎样变化？（选出所有正确项）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E4%B8%8B%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9B%B2%E7%BA%BF%E6%98%AF%E7%94%B1%EF%BC%9A%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%EF%BC%8C%E5%8A%A8%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%EF%BC%88%CE%B2-x3D-0-5%EF%BC%89%E5%92%8C%E5%8A%A8%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%EF%BC%88%CE%B2-x3D-0-9%EF%BC%89%E3%80%82%E5%93%AA%E6%9D%A1%E6%9B%B2%E7%BA%BF%E5%AF%B9%E5%BA%94%E5%93%AA%E7%A7%8D%E7%AE%97%E6%B3%95%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">8.下图中的曲线是由：梯度下降，动量梯度下降（β&#x3D;0.5）和动量梯度下降（β&#x3D;0.9）。哪条曲线对应哪种算法？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%81%87%E8%AE%BE%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%BB%9C%E4%B8%AD%EF%BC%8C%E6%89%B9%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E8%8A%B1%E8%B4%B9%E4%BA%86%E5%A4%A7%E9%87%8F%E6%97%B6%E9%97%B4%E6%97%B6%E6%9D%A5%E6%89%BE%E5%88%B0%E4%B8%80%E7%BB%84%E5%8F%82%E6%95%B0%E5%80%BC%EF%BC%8C%E4%BD%BF%E6%88%90%E6%9C%AC%E5%87%BD%E6%95%B0J-W-1-b-1-%E2%80%A6-W-L-b-L-%E5%B0%8F%E3%80%82%E4%BB%A5%E4%B8%8B%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%B8%AE%E5%8A%A9%E6%89%BE%E5%88%B0J%E5%80%BC%E8%BE%83%E5%B0%8F%E7%9A%84%E5%8F%82%E6%95%B0%E5%80%BC%EF%BC%9F"><span class="nav-number">1.9.</span> <span class="nav-text">9.假设在一个深度学习网络中，批量梯度下降花费了大量时间时来找到一组参数值，使成本函数J(W[1],b[1],…,W[L],b[L])小。以下哪些方法可以帮助找到J值较小的参数值？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%85%B3%E4%BA%8EAdam%E7%AE%97%E6%B3%95%EF%BC%8C%E4%B8%8B%E5%88%97%E5%93%AA%E4%B8%80%E4%B8%AA%E9%99%88%E8%BF%B0%E6%98%AF%E9%94%99%E8%AF%AF%E7%9A%84%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">10.关于Adam算法，下列哪一个陈述是错误的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%94%E6%A1%88%EF%BC%9A"><span class="nav-number">1.11.</span> <span class="nav-text">答案：</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            深度学习 day10 机器学习（ML）策略 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">深度学习 day10 机器学习（ML）策略</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-16 06:54:24</span>
+        <span class="mobile">2021-08-16 06:54</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-为什么是ML策略"><a href="#01-为什么是ML策略" class="headerlink" title="01 为什么是ML策略"></a>01 为什么是ML策略</h1><ul>
+<li>当你尝试优化一个深度学习系统时，通常有很多想法可以去试。一些策略或者一些分析机器学习问题的方法可以指引你朝着最有希望的方向前进。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/V54kjvFlypodaI2.png"
+                      alt="image-20210814092245145"
+                ></p>
+<h1 id="02-正交化"><a href="#02-正交化" class="headerlink" title="02 正交化"></a>02 正交化</h1><p>搭建机器学习系统的挑战之一是可以尝试和改变的东西太多太多（比如：有那么多超参数需要调整）</p>
+<hr>
+<ul>
+<li>以左边电视为例，正交化指的是电视设计师设置不同的旋钮，使得每个旋钮只能调整一个性质，这样就可以将画面调整到合适的位置。又如右边的车，有方向盘、油门、刹车来分别控制性质，正交化就是这些控制互不影响，能够相互独立。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/zfOAKe6l3wEiIZD.png"
+                      alt="image-20210814105307415"
+                ></p>
+<ul>
+<li>要弄好一个监督学习系统，通常需要调节系统的旋钮来确保四件事：<ol>
+<li>系统在训练集上得到的结果不错，训练集上 的表现必须通过某种评估达到能接受的程度。（如果你的算法在成本函数上不能很好的拟合训练集，你需要一个旋钮来确保可以调整你的算法，让他更好的拟合训练集，用来调试的旋钮可以训练更大的网络，或者切换到更好的优化算法。）</li>
+<li>系统在开发集上有好的表现（如果发现算法对训练集很好，对开发集的拟合很差，那么就需要一个旋钮，在不影响训练集的同时，使算法更好的拟合开发集，增大训练集可以是另一个可用旋钮。）</li>
+<li>系统在测试集上有好的表现（如果算法对开发集很好，对测试集很差，这就可能意味着对开发集过拟合了，需要往回退一步使用更大的开发集，增大开发集可以是另一个可用旋钮。）</li>
+<li>系统在测试集上系统的成本函数在实际使用中表现令人满意（如果在测试集做的很好，但是无法给客户好的体验，这需要回去改变开发集或成本函数）</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/S9VKQgdXJD5nc78.png"
+                      alt="image-20210814105322388"
+                ></p>
+<h1 id="03-单一数字评估标准"><a href="#03-单一数字评估标准" class="headerlink" title="03 单一数字评估标准"></a>03 单一数字评估标准</h1><p>无论是调整超参数或者是尝试不同的学习算法亦或者是在搭建机器学习系统时尝试不同的手段，如果有一个单实数评估标准，它可以快速的告诉你新尝试的手段比之前的手段是好还是坏。</p>
+<hr>
+<ul>
+<li>比如说识别猫的例子：如果我们用查准率和查全率来评估分类器（查准率：就是这个图是猫的可能性，查全率：实际为猫的图片中有多少被系统识别出来），那么将很难选择出哪个好，哪个不好，因此需要找到一个结合了查准率和查全率新的评估指标F1调和平均数。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/rao1ePuqELImjkT.png"
+                      alt="image-20210814114358167"
+                ></p>
+<ul>
+<li>在有个例子就是各个地方的上传误差，最终使用一个平均值来衡量多个分类器，误差越小越好。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/v7psUqLIaci4ldb.png"
+                      alt="image-20210814114410967"
+                ></p>
+<h1 id="04-满足和优化指标"><a href="#04-满足和优化指标" class="headerlink" title="04 满足和优化指标"></a>04 满足和优化指标</h1><ul>
+<li>在该例子中，即看重查准率也看重运行时间，这时就可以将查准率和运行时间组合成一个整体评估指标；你也可以选择一个分类器，能够最大限度提升准确度，但必须满足运行时间小于等于100ms，在这种情况下我们说准确度是一个优化指标（想让准确度最大化），运行时间是满足指标（只要达到要求就行，要求以内都一样），这时B就是很好的分类器；如果你要考虑N个指标，有时候选择其中一个指标作为优化指标是合理的，剩下的均为满足指标。右边就是个例子懂了就不用看。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Kxhseauq2gcO4MW.png"
+                      alt="image-20210814215048347"
+                ></p>
+<h1 id="05-训练-x2F-开发-x2F-测试集划分"><a href="#05-训练-x2F-开发-x2F-测试集划分" class="headerlink" title="05 训练 &#x2F; 开发 &#x2F; 测试集划分"></a>05 训练 &#x2F; 开发 &#x2F; 测试集划分</h1><ul>
+<li>dev集也叫开发集有时称为保留交叉验证集。机器学习的工作流程是：你尝试很多思路，用训练集训练不同的模型，然后使用开发集来评估不同的思路，然后选择一个去不断地迭代来改善开发集的性能，得到一个满意的成本，然后用测试集去评估。开发集和优化指标构成了靶心，训练的目的就是向靶心靠拢，而设立训练集是加速靠近靶心的速度。</li>
+<li>以一个猫分类器为例，在下面这些区域内运营：<ol>
+<li>不推荐：你选择其中4个区域（可随机选取）的数据构成开发集，其他四个区域的数据构成测试集，因为开发集和测试集不在一个分布</li>
+<li>推荐：让二者来源一个分布，将所有数据随机洗牌将其放入开发集和测试集，这样开发集和测试集都有来自八个地区的数据。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/2lQse4GKAd8vySI.png"
+                      alt="image-20210814221205577"
+                ></p>
+<ul>
+<li>在设置开发集和测试集，要选择能够反映你未来会得到的数据、认为很重要的数据、必须得到好结果的数据这样的。</li>
+</ul>
+<h1 id="06-开发集合测试集的大小"><a href="#06-开发集合测试集的大小" class="headerlink" title="06 开发集合测试集的大小"></a>06 开发集合测试集的大小</h1><ul>
+<li>前两个是早期数据少的时候划分，最后一个是现在数据多的时候划分。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/yBSPL4FgAXQsifz.png"
+                      alt="image-20210815084825602"
+                ></p>
+<ul>
+<li>测试集的目的是完成系统开发之后，测试集可以帮你评估投产系统的性能。方针就是令你的测试集足够大以至于能够以高置信度评估系统整体性能。对于某些应用也许不需要对系统性能有置信度很高的评估，这时不单独分出一个测试集也是可以的，但是不建议，因为你可以使用这组不带偏差的数据来测量系统的性能。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/e9gZSE2tUr3V1kh.png"
+                      alt="image-20210815085143210"
+                ></p>
+<h1 id="07-什么时候该改变开发-x2F-测试集和指标"><a href="#07-什么时候该改变开发-x2F-测试集和指标" class="headerlink" title="07 什么时候该改变开发 &#x2F; 测试集和指标"></a>07 什么时候该改变开发 &#x2F; 测试集和指标</h1><p>设置开发集和评估指标就像把目标定在某个位置，让你的团队瞄准</p>
+<hr>
+<ul>
+<li>假设在构建一个猫分类器，使用的指标是分类误差，从图中看是A效果比较好，但是如果A会将色情图片看成猫的图片，用户是不接受的，而B不会将色情图片看成猫的图片，用户比较倾向于B，在这种情况下（原本的错误指标错误的预测算法A是更好的算法）就应该改变评估指标了或者改变开发集和测试集。可以将分类误差指标写成下面Error的形式，这个评估指标的问题是他对色情图片和非色情图片一视同仁，其中修改评估指标的方法是添加个权重w，图片x不是的话w为1，否则为10甚至100，如果希望归一化常数就是w(i)对所有i求和，这样误差仍然在0和1之间。在开发集和测试集中需要你自己将色情图片标记才能使用这个加权函数。评估指标的意义在于准确告诉你已知两个分类器哪一个更适合你的应用。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Do3i1aNF8PcHqU9.png"
+                      alt="image-20210815200723853"
+                ></p>
+<ul>
+<li>这实际上就是个正交化的例子，你想处理机器学习问题时，应该把它切分成独立的步骤：第一步是弄清楚如何定义一个指标来衡量你想要做的事情的表现（就是设置目标），第二步也许就是学习算法针对某个成本函数优化，加入权重还可能要修改归一化常数（如何精确瞄准，命中目标）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/sXZU7AH4vhxk3Mg.png"
+                      alt="image-20210815200734731"
+                ></p>
+<ul>
+<li>如果你当前的指标和当前用来评估数据和你真正关心必须做好的事情关系不大，那就应该改变指标或者你的开发测试集。（就好比下面这个图，你一直用网上下载下来的高质量图片训练，结果使用用户上传的质量层次不齐的图片，实际测试你就发现B比A效果好）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/rz4jftMx8FZ9dTE.png"
+                      alt="image-20210815200748278"
+                ></p>
+<ul>
+<li>总结：不建议在没有评估指标和开发集时跑太久</li>
+</ul>
+<h1 id="08-为什么是人的表现"><a href="#08-为什么是人的表现" class="headerlink" title="08 为什么是人的表现"></a>08 为什么是人的表现</h1><ul>
+<li><p>当你开始往人类水平努力时，进展很快；但过了一段时间，这个算法表现比人类更好时，那么进展和精确度的提升就变得更慢了，也许它还会越来越好，但是斜率也就越来越平缓。</p>
+</li>
+<li><p>贝叶斯最优误差一般认为理论上可能达到的最优误差：随着时间的推移，当您继续训练算法时，可能模型越来越大、数据越来越多，但性能无法超过某个理论上限。就是说没有任何办法设计出一个x到y的函数，让他能够超过一定的准确度。</p>
+</li>
+<li><p>为什么当超越人类表现后，进展就缓慢了？</p>
+<ol>
+<li>当超越人类表现后没有太多的空间继续改善了。</li>
+<li>没超越之前可以使用一些工具提升性能，超越之后就没那么好用了。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Ug5t17YhfXcsrpu.png"
+                      alt="image-20210815220342252"
+                ></p>
+<ul>
+<li>对于人类擅长的任务，只要你的机器学习算法比人类差，你就可以：让人帮助你标记数据，这样就有更多的数据可以给学习算法；人工误差分析：让人类看算法处理的例子，知道错误出在哪，并尝试了解为什么人能作对，算法做错；更好分析偏差和误差。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/n8ZHlcpmzuLNGsh.png"
+                      alt="image-20210815220403038"
+                ></p>
+<h1 id="09-可避免偏差"><a href="#09-可避免偏差" class="headerlink" title="09 可避免偏差"></a>09 可避免偏差</h1><p>可避免偏差：贝叶斯误差或者对贝叶斯误差的估计和训练误差之间的差值</p>
+<hr>
+<ul>
+<li>你的算法在训练集上的表现和人类水平的表现有很大差距的话，说明你的算法对训练集的拟合并不好，所以从减小偏差和方差的工具来看，重点是减小偏差，你需要做的是比如训练更大的神经网络或者跑久一点梯度下降。你的算法在训练集上的表现和人类水平的表现相近的话，但是开发集和训练集相差较大，就将重心放到减小方差上。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/vlx21D7m8bd4foJ.png"
+                      alt="image-20210815222311401"
+                ></p>
+<h1 id="10-理解人的表现"><a href="#10-理解人的表现" class="headerlink" title="10 理解人的表现"></a>10 理解人的表现</h1><p>人类水平误差用来估计贝叶斯误差也就是理论上最低的误差，任何函数不管是现在还是将来能够到达的最低值。</p>
+<hr>
+<ul>
+<li>医学图像分类的例子：下面是四个不同人的观察的误差值，那么应该如何界定人类水平误差呢？就是那个到达最低的值0.5。</li>
+<li>在定义人类水平误差时，要弄清楚你的目标所在，如果要表明你可以超越单个人类，那么就有理由在某些场合使用1%部署你的系统，如果你的目标是代替贝叶斯误差，那么就使用0.5的比较合适。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/N1fx8vicVIdW52T.png"
+                      alt="image-20210815225133174"
+                ></p>
+<ul>
+<li>误差分析的例子：第一个无论以哪个为目标，都要减少偏差，技术可以培训更大的网络；第二个无论以哪个为目标，都要减少方差，技术可以使用正则化或者去获得更大的训练集；第三个就是接近人类水平误差，改善空间就比较小了。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/KC4oGA7PY1953bI.png"
+                      alt="image-20210815225321181"
+                ></p>
+<h1 id="11-超过人的表现"><a href="#11-超过人的表现" class="headerlink" title="11 超过人的表现"></a>11 超过人的表现</h1><ul>
+<li>如果你的误差已经比一群充分讨论辩论后的人类专家更低，那么依靠人类直觉来判断你的算法还能往什么方向优化就很难了（比如右边的，如果都已经过拟合了，这咋判断）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/nf9wbJg7NkDWMSK.png"
+                      alt="image-20210815230714321"
+                ></p>
+<ul>
+<li>下面的结构化数据都是系统比人做的好的，都有一个数据库。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ehvGZXPH1moRTyK.png"
+                      alt="image-20210815230723952"
+                ></p>
+<h1 id="12-改善模型表现"><a href="#12-改善模型表现" class="headerlink" title="12  改善模型表现"></a>12  改善模型表现</h1><ul>
+<li>提高学习算法性能的指导方针：想让一个监督学习算法达到适用要做到：<ol>
+<li>你的算法对训练集的拟合很好（可避免偏差很低），可以训练更大的网络或者训练更长时间、使用更好的优化算法、寻找更好的新神经网络架构或者更好的超参数、改变激活函数或者层数或者隐藏单位数。</li>
+<li>在训练集做的好推广到开发集和测试集也要好（方差不是太大），可以正则化或者收集更多训练数据、寻找更好的新神经网络架构</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/NUF4uWVOPzIR3ey.png"
+                      alt="image-20210815232000368"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/KEdz1Tla4DOJtrU.png"
+                      alt="image-20210815232011048"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：深度学习 day10 机器学习（ML）策略</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-16 06:54:24</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/16/深度学习 day10机器学习（ML）策略/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day11%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88ML%EF%BC%89%E7%AD%96%E7%95%A5/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day11 机器学习（ML）策略</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day09%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E3%80%81Batch%20%E6%AD%A3%E5%88%99%E5%8C%96%E5%92%8C%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day09 超参数调试、Batch 正则化和程序框架</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFML%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">01 为什么是ML策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E6%AD%A3%E4%BA%A4%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">02 正交化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E5%8D%95%E4%B8%80%E6%95%B0%E5%AD%97%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">3.</span> <span class="nav-text">03 单一数字评估标准</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E6%BB%A1%E8%B6%B3%E5%92%8C%E4%BC%98%E5%8C%96%E6%8C%87%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">04 满足和优化指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E8%AE%AD%E7%BB%83-x2F-%E5%BC%80%E5%8F%91-x2F-%E6%B5%8B%E8%AF%95%E9%9B%86%E5%88%92%E5%88%86"><span class="nav-number">5.</span> <span class="nav-text">05 训练 &#x2F; 开发 &#x2F; 测试集划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E5%BC%80%E5%8F%91%E9%9B%86%E5%90%88%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">6.</span> <span class="nav-text">06 开发集合测试集的大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%AF%A5%E6%94%B9%E5%8F%98%E5%BC%80%E5%8F%91-x2F-%E6%B5%8B%E8%AF%95%E9%9B%86%E5%92%8C%E6%8C%87%E6%A0%87"><span class="nav-number">7.</span> <span class="nav-text">07 什么时候该改变开发 &#x2F; 测试集和指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%BA%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">8.</span> <span class="nav-text">08 为什么是人的表现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#09-%E5%8F%AF%E9%81%BF%E5%85%8D%E5%81%8F%E5%B7%AE"><span class="nav-number">9.</span> <span class="nav-text">09 可避免偏差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%90%86%E8%A7%A3%E4%BA%BA%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">10.</span> <span class="nav-text">10 理解人的表现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E8%B6%85%E8%BF%87%E4%BA%BA%E7%9A%84%E8%A1%A8%E7%8E%B0"><span class="nav-number">11.</span> <span class="nav-text">11 超过人的表现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E6%94%B9%E5%96%84%E6%A8%A1%E5%9E%8B%E8%A1%A8%E7%8E%B0"><span class="nav-number">12.</span> <span class="nav-text">12  改善模型表现</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            深度学习 day04 浅层神经网络 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">深度学习 day04 浅层神经网络</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-02 21:00:55</span>
+        <span class="mobile">2021-08-02 21:00</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-神经网络概览"><a href="#01-神经网络概览" class="headerlink" title="01 神经网络概览"></a>01 神经网络概览</h1><ul>
+<li>在这里用[ l ]来表示神经网络的第l层，用来跟( i )表示的第几个训练样本做区分。神经网络需要反复的计算z和a。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/hQZnDcgTCRfNvKd.png"
+                      alt="image-20210802094344557"
+                ></p>
+<h1 id="02-神经网络表示"><a href="#02-神经网络表示" class="headerlink" title="02 神经网络表示"></a>02 神经网络表示</h1><ul>
+<li>只有一个隐藏层的神经网络：分为输入层、隐藏层、输出层。其中输入层和输出层的值都是在训练集中能看到的，隐藏层的值不能看到。在计算神经网络层数时是不算输入层的，同时我们使用a^[ l ]表示符号，a也代表激活的意思，它意味着网络中不同层的值会传递给后面的层，即每一层都会产生激活值，我们将这些激活值用a^[ l ]_i表示（l表示第几层，下标i表示层中的第几个节点）。在本例中w参数是（4，3）维的，其中4代表四个隐藏单元，3代表有三个输入特征</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/XnvdfhPCUKxHTzA.png"
+                      alt="image-20210802100711582"
+                ></p>
+<h1 id="03-计算神经网络的输出"><a href="#03-计算神经网络的输出" class="headerlink" title="03 计算神经网络的输出"></a>03 计算神经网络的输出</h1><p>神经网络的输出究竟是如何算出来的</p>
+<hr>
+<ul>
+<li>这里的圆圈代表逻辑回归计算的两个步骤，神经网络只不过是计算这些步骤很多次（隐藏层的每一个节点都计算一次）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/EZqPbNCKwu7ntQp.png"
+                      alt="image-20210802104402117"
+                ></p>
+<ul>
+<li>下面把这四个等式向量化：向量化时的一条经验法则就是当我们在一层中有不同的节点，那就纵向的堆叠起来（例如a^[1]就是a^[1] _1~a^[4] _ 4这些激活值的堆叠）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/SqoHhxEXn1zYvDI.png"
+                      alt="image-20210802104426554"
+                ></p>
+<ul>
+<li>计算出四个隐藏层中的逻辑回归单元使用的是前两个等式，计算出输出层的逻辑回归用的是后两个等式</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Zlon2AQaY7X3yu4.png"
+                      alt="image-20210802104449194"
+                ></p>
+<h1 id="04-多个例子中的向量化"><a href="#04-多个例子中的向量化" class="headerlink" title="04 多个例子中的向量化"></a>04 多个例子中的向量化</h1><ul>
+<li>对于新的符号a^[2] (i)：这个i表示训练样本i。下面是没有向量化的实现并且想要计算所有训练样本的预测：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/mxta4LjFek8sqnd.png"
+                      alt="image-20210802113830274"
+                ></p>
+<ul>
+<li>下面将for循环变成向量化实现：将这些向量横向堆叠起来。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Z8sMWJKAz76xorQ.png"
+                      alt="image-20210802113849678"
+                ></p>
+<ul>
+<li>总结一下就是横向堆叠对应的是不同的训练样本，竖向堆叠的是不同的输入特征（也就是一层中不同的节点）。</li>
+</ul>
+<h1 id="05-向量化实现的解释"><a href="#05-向量化实现的解释" class="headerlink" title="05 向量化实现的解释"></a>05 向量化实现的解释</h1><ul>
+<li>为什么z^[1]&#x3D;w^[1]x+b^[1]?</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/dMQTzwDY35x2Z1j.png"
+                      alt="image-20210802145315344"
+                ></p>
+<ul>
+<li>如果将输入成列向量堆叠，那么在方程运算之后，也能得到成列对堆叠的输出。右上图是在单个训练样本中实现正向传播算法就是从1循环到m，右下图第一行代码可以对所有m个例子同时向量化，类似的右下图这四行代码都是上面四行代码正确的向量化形式。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/l2zUymPt8Kkr7Bq.png"
+                      alt="image-20210802145354073"
+                ></p>
+<h1 id="06-激活函数"><a href="#06-激活函数" class="headerlink" title="06 激活函数"></a>06 激活函数</h1><p>搭建神经网络，你可以选择在隐藏层用哪个激活函数，在输出层用哪个激活函数。</p>
+<hr>
+<ul>
+<li>一些其他的激活函数：【1】tanh函数（双曲正切函数）范围在-1到1之间。如果让函数g(z)&#x3D;tanh(z)，这几乎总比sigma函数效果好，因为现在函数输出介于-1和1之间，激活函数的平均值就更接近0。使用tanh也有类似数据中心化的效果，使得数据的平均值接近0而不是0.5，这使得下一层的学习更方便。几乎tanh函数在所有场合都适用，但是在输出层例外，因为如果输出层y是0或1，那么肯定要介于0和1之间，于此同时在二元分类就可以使用sigma函数作为输出层了。tanh函数和sigma函数都有一个缺点：当z特别大或者特别小时，函数的斜率可能就很小，这样会拖慢梯度下降算法。【2】ReLU函数（修正线性单元），ReLU的好处在于对很多z空间激活函数的斜率和0差很远。在实践中使用ReLU函数，你的神经网络的学习速度通常会比使用tanh或者sigma激活函数快很多，主要是ReLU没有这种斜率接近0时减慢学习速度的效应。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/H1WgSmjUQ2ED6ir.png"
+                      alt="image-20210802162429956"
+                ></p>
+<ul>
+<li>选择激活函数的经验：如果在做二元分类，输出值是0和1，那么选择sigma函数作为输出层的激活函数，然后其他所有单元都用ReLU。一般不使用sigma函数，因为tanh函数比他更适用，ReLU是默认的激活函数，不知道选谁就选它。如果实在不知道选择哪个激活函数，就在验证集或者开发集上跑跑，看看哪个效果好就选择哪个。</li>
+<li>下面是四种激活函数（最后一个是ReLU的特殊形式叫做带泄露的ReLU）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/RnmfUCDVv4cBOt9.png"
+                      alt="image-20210802162459839"
+                ></p>
+<h1 id="07-为什么需要非线性激活函数？"><a href="#07-为什么需要非线性激活函数？" class="headerlink" title="07 为什么需要非线性激活函数？"></a>07 为什么需要非线性激活函数？</h1><p>要让你的神经网络能够计算出有趣的函数就必须使用非线性激活函数。</p>
+<hr>
+<ul>
+<li>如果使用线性激活函数或者叫恒等激活函数，那么神经网络只是把输入线性组合再输出。线性隐层一点用都没有，只有一个地方可以使用线性激活函数g(z)&#x3D;z，就是你的机器学习是回归问题的输出层。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/a4PyuzomcjgBM5Y.png"
+                      alt="image-20210802170616075"
+                ></p>
+<h1 id="08-激活函数的导数"><a href="#08-激活函数的导数" class="headerlink" title="08 激活函数的导数"></a>08 激活函数的导数</h1><p>当对神经网络使用反向传播的时候，你需要计算激活函数的斜率或者说导数</p>
+<hr>
+<ul>
+<li>sigma激活函数的导数</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/2F476AJwPz5srgt.png"
+                      alt="image-20210802174103141"
+                ></p>
+<ul>
+<li>tanh激活函数的导数</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/GKcErp4BiIDNz9H.png"
+                      alt="image-20210802174116844"
+                ></p>
+<ul>
+<li>ReLU和带泄露的ReLU激活函数的导数</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/pMTrBVIafq7j1LW.png"
+                      alt="image-20210802174132642"
+                ></p>
+<h1 id="09-神经网络的梯度下降法"><a href="#09-神经网络的梯度下降法" class="headerlink" title="09 神经网络的梯度下降法"></a>09 神经网络的梯度下降法</h1><ul>
+<li>输入层有n^[0]个，隐层有n^[1]个，输出层有n^[2]个，还有一个神经网络的成本函数，在二元分类的情况下，成本函数就是1&#x2F;m对损失函数求平均。要训练参数，算法就需要做梯度下降，在训练神经网络时随机初始化参数很重要，而不是全部初始化为0。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/bLSsoME1CfI57Dh.png"
+                      alt="image-20210802180705723"
+                ></p>
+<ul>
+<li>针对于所有样本的前向传播和后向传播：keepdims就是防止python直接输出秩为1的数组（(n,)），确保python输出的是矩阵（(n,1)）。*代表逐个元素乘积。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/gCEud5RJw18vAMN.png"
+                      alt="image-20210802180735707"
+                ></p>
+<h1 id="10-直观理解反向传播"><a href="#10-直观理解反向传播" class="headerlink" title="10 直观理解反向传播"></a>10 直观理解反向传播</h1><ul>
+<li>单层神经网络：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/YTsozX43KhIPARO.png"
+                      alt="image-20210802201831405"
+                ></p>
+<ul>
+<li>双层神经网络：实现后向传播算法有个技巧，你必须确保矩阵的维度互相匹配。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/3WX6l8OQRhuVHFt.png"
+                      alt="image-20210802201851527"
+                ></p>
+<ul>
+<li>反向传播公式小总结：单个样本 | 总样本</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/T5Cw69YgQVIqso4.png"
+                      alt="image-20210802201913358"
+                ></p>
+<h1 id="11-随机初始化"><a href="#11-随机初始化" class="headerlink" title="11 随机初始化"></a>11 随机初始化</h1><p>对于逻辑回归可以将权重初始化为0，但是如果将神经网络的各参数数组全部初始化为0，再使用梯度下降算法将会完全无效</p>
+<hr>
+<ul>
+<li>如果将w所有值初始化为0，那么因为两个隐藏单元最开始就在做同样的计算，对输出单元的影响也一样大。那么一次迭代之后，同样的对称性依然存在，两个隐藏单元依然是对称的。无论你神经网络训练多久，两个隐藏单元依然在计算完全一样的函数，所以这种情况多个隐藏单元是没有意义的。当然对多个隐藏单元也适用。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/2UPb7tczsa6ITWG.png"
+                      alt="image-20210802204543096"
+                ></p>
+<ul>
+<li>因此解决这个问题就要随机初始化，通常喜欢将权重初始化成很小的数，因此乘一个0.01（深层就要乘一个0.01以外的数）。因为当使用tanh和sigma激活函数时，如果权重过大就会落到斜率平缓处，导致学习缓慢。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Ha2bpDcGBsAqV9o.png"
+                      alt="image-20210802205246538"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：深度学习 day04 浅层神经网络</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-02 21:00:55</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/02/深度学习 day04浅层神经网络/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/02/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%89%E5%91%A8%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">神经网络和深度学习第三周检测</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/01/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%91%A8%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">神经网络和深度学习第二周检测</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A6%82%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">01 神经网络概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">02 神经网络表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E8%AE%A1%E7%AE%97%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%BE%93%E5%87%BA"><span class="nav-number">3.</span> <span class="nav-text">03 计算神经网络的输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E5%A4%9A%E4%B8%AA%E4%BE%8B%E5%AD%90%E4%B8%AD%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">04 多个例子中的向量化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E5%90%91%E9%87%8F%E5%8C%96%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">5.</span> <span class="nav-text">05 向量化实现的解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">06 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">07 为什么需要非线性激活函数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">08 激活函数的导数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#09-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">09 神经网络的梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E7%9B%B4%E8%A7%82%E7%90%86%E8%A7%A3%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">10.</span> <span class="nav-text">10 直观理解反向传播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">11 随机初始化</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

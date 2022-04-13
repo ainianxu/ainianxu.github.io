@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            深度学习 day09 超参数调试、Batch 正则化和程序框架 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">深度学习 day09 超参数调试、Batch 正则化和程序框架</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-13 23:53:50</span>
+        <span class="mobile">2021-08-13 23:53</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-调试处理"><a href="#01-调试处理" class="headerlink" title="01 调试处理"></a>01 调试处理</h1><p>系统地组织超参调试过程的技巧</p>
+<hr>
+<ul>
+<li>学习速率是需要调试的最重要的超参数（红色），其次是momentum、mini-batch的大小及隐藏单元（黄色），重要性拍第三位的就是层数、学习率衰减、Adam算法（其余都是）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/j32RWxhcJb9TyiU.png"
+                      alt="image-20210811090955591"
+                ></p>
+<ul>
+<li>如果要调整一些超参数，该如何选择调试值呢？<ol>
+<li>在早一代的机器学习算法中（左图），如果有两个超参数，常见的作法是在网格中取样点，然后系统的研究这些数值，然后选择哪个参数效果最好。（参数的数量相对较少时）</li>
+<li>在深度学习领域中（右图）推荐下面做法：随机选择点，然后用随机取的点试验超参数的效果，之所以这么做是因为你 很难提前知道哪个超参数最重要。</li>
+</ol>
+</li>
+<li>就举两个极端的超参数，α和ε，无论ε取何值，结果基本都是一样的。对于左边的图来说25个样点，但是α只能尝试五个值，而对于右图，每个样点都是独立的也就是α可以取25个值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Fr7OSWuYZdbfUiV.png"
+                      alt="image-20210811091010777"
+                ></p>
+<ul>
+<li>当你给超参数取值时，另一个惯例就是采用由粗糙到精细的策略，也就是在整个的方格中进行粗略搜索后，发现某个点的效果最好，周围的点效果也不错，这时就可以聚集到这个点周围更小的方格中，在更小的方格中，更加密集的随机取点。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/oK5kFVN8J9aHnRe.png"
+                      alt="image-20210811091035843"
+                ></p>
+<h1 id="02-为超参数选择合适的范围"><a href="#02-为超参数选择合适的范围" class="headerlink" title="02 为超参数选择合适的范围"></a>02 为超参数选择合适的范围</h1><p>随机取值并不是在有效范围内的随机均匀取值，而是选择合适的标尺用于探究这些超参数。</p>
+<hr>
+<ul>
+<li>假设选取隐藏单元的数量n^ [l]，选择范围是从50到100中某点；如果要选取神经网络的层数L，选择范围是从2到4。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ca6IO7ZVk3vhCr5.png"
+                      alt="image-20210811174621431"
+                ></p>
+<ul>
+<li>假设你在搜索超参数学习率α，取值范围是0.0001到1，如果沿其随机均匀取值那么90%的数值会落在0.1到1，这样看起来不对，反而用对数标尺搜索超参数的方式会更合理，因此这里不使用线性轴，而是分别依次取0.0001、0.001、0.01、0.1、1，在对数轴上随机均匀取点，这样每个数值之间都有更多的搜索资源可用。用python实现如下：将超参数设置为10^ r，r取值在a到b之间，其中a与b是通过对最小值和最大值进行对数运算得出。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/v489h5bowf7uGCi.png"
+                      alt="image-20210811174643052"
+                ></p>
+<ul>
+<li>另一个棘手的例子就是给β取值，用来计算指数的加权平均值，取0.9就相当于在10个值中取平均值，取0.999相当于在1000个值中取平均，如果想要在0.9到0.999之间进行搜索就不能用线性轴取值，我们要探究的应该是1-β，值在0.001到0.1区间，要做的就是在[-3,-1]里随即均匀的给r取值，就相当于给β取值。为什么不能用线性轴呢？因为β接近1时，任何细微的变化都会产生大影响（1-β），所以在β趋近于1的范围内需要密集的取值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/c3ouXzgUYPvQqLd.png"
+                      alt="image-20210811174702165"
+                ></p>
+<ul>
+<li>即使标尺没有选对也没关系，只要数据足够就影响不大。</li>
+</ul>
+<h1 id="03-超参数训练的实践：Pandas-VS-Caviar"><a href="#03-超参数训练的实践：Pandas-VS-Caviar" class="headerlink" title="03 超参数训练的实践：Pandas VS Caviar"></a>03 超参数训练的实践：Pandas VS Caviar</h1><p>组织超参数搜索过程的建议和技巧</p>
+<hr>
+<ul>
+<li>由于某些情况你的原来设定的超参数不好用了，建议就是每隔几个月至少一次重新测试或评估你的超参数来确保你对数值依然很满意。</li>
+<li>关于如何搜索超参数的问题：<ol>
+<li>照看一个模型，对其细心照料（通常是有庞大的数据组，但是没有许多计算资源或者足够的CPU和GPU的情况下），即使它在试验时也可以进行改良。因为没有足够的计算能力，不能在同一时间试验大量的模型，所以要观察它的表现，不断调整学习率。</li>
+<li>同时试验多种模型，一视同仁：你设置一些超参数，就让他自己运行（蓝线），也可以开始一个有着不同超参数设定的不同模型，第二个模型（紫线），第三个模型（红色）等等，最后选择工作效果最好的那个。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/aXvHDeRQxm8Tl3j.png"
+                      alt="image-20210812091541070"
+                ></p>
+<h1 id="04-正则化网络的激活函数"><a href="#04-正则化网络的激活函数" class="headerlink" title="04 正则化网络的激活函数"></a>04 正则化网络的激活函数</h1><p>Batch归一化会使你的参数搜索问题变得很容易，使神经网络对超参数的选择更稳定，超参数的范围会更庞大，工作效果也很好，也会很容易的训练深层网络。</p>
+<hr>
+<ul>
+<li>对于逻辑回归和神经网络的归一化输入特征值来说，归一化输入特征是可以加速学习过程的。</li>
+<li>对于深层网络来说：Batch归一化的作用是：对于任何一个隐藏层而言，能够归一化a值以更快速的训练w和b。严格的来说，我们真正归一化的不是a而是z。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/LceCvta7NpYzSx2.png"
+                      alt="image-20210812155916904"
+                ></p>
+<ul>
+<li>单一隐含层Batch归一化的使用方法：网络中已知有些中间值，如假设有一些隐藏单元值z^ (1)到z^ (m)，接下来要计算平均值，然后计算方差，然后取每个z^ (i)规范化，化为含平均值0和方差1（**(z^ (i)-均值)&#x2F;标准偏差**），为了确保数值稳定这里我们依旧加一个ε。因为隐藏单元有不同的分布可能会有意义（例如在sigmoid激活函数，我们不希望值都集中在线性那），因此我们不想隐藏单元总是含有平均值0和方差1，所以我们开始接下来计算ztilde，其中这里的γ和β是模型的学习参数，然后使用梯度下降算法等方法更新γ和β。如果γ&#x3D;z的分母、β&#x3D;u，那么他就可以精准的转化公式使得z&#x3D;ztilde。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/XaxQZP9BTtVmIFU.png"
+                      alt="image-20210812160006217"
+                ></p>
+<ul>
+<li>Batch归一化的作用是它适用的归一化过程不只是输入层，也适用于神经网络中的深度隐藏层。</li>
+</ul>
+<h1 id="05-将Batch-Norm拟合进神经网络"><a href="#05-将Batch-Norm拟合进神经网络" class="headerlink" title="05 将Batch Norm拟合进神经网络"></a>05 将Batch Norm拟合进神经网络</h1><ul>
+<li>Batch归一化是发生在计算z和a之间的，与其应用没有规范过的z^ [i]，不如用经方差和均值归一后的ztilde^ [i]。而且这里的β与用在momentum、Adam、RMSprop里的β不同。可以用任何优化算法来更新参数β和γ，在TensorFlow框架中可以用右下角的函数来实现Batch归一化。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/FOZmSoJV3hD8rCT.png"
+                      alt="image-20210813110613549"
+                ></p>
+<ul>
+<li>在实践中，Batch归一化通常和训练集的mini-batch一起使用，应用Batch归一化的方式就是：用第一个mini-batch计算z^ [1]，然后在经Batch归一化得到ztilde^ [1]，再应用激活函数得到a^ [1]，然后再一直运行下去。再用第二个mini-batch，直到用完。值得注意的一点：使用Batch归一化可以消除参数b，因为mini-batch中增加任何常数，数值都不会变，加上的任何常数都会被均值减法所抵消。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ifCPauByoETeGbm.png"
+                      alt="image-20210813110626854"
+                ></p>
+<ul>
+<li>用Batch归一化来应用梯度下降法-&gt;假设你在使用mini-batch梯度下降法：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/idhWQlyICB3pojP.png"
+                      alt="image-20210813110640100"
+                ></p>
+<h1 id="06-Batch-Norm为什么奏效？"><a href="#06-Batch-Norm为什么奏效？" class="headerlink" title="06 Batch Norm为什么奏效？"></a>06 Batch Norm为什么奏效？</h1><ul>
+<li>batch归一化有效的第一个原因是它不仅仅针对输入值，还针对隐藏单元的值，将那一层所有的值通过归一化得到类似范围的值，可加速学习。第二个原因是它可以使权重比你的神经网络更滞后或者更深层（比如第十层相比于第一层的权重更能经受得住变化）。即使存在运行都很好的同一个函数，但你不会希望你的学习算法去发现绿色的决策边界，只看左边的数据的话，可能使得你产生数据改变分布的想法（covariate shift），正如x到y的映射一样，改变下，y也随之改变。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/NcqRdVIZGsQ8J6g.png"
+                      alt="image-20210813160313036"
+                ></p>
+<ul>
+<li>batch归一化做的是它减小了这些隐藏值分布变化的数量，就以z^ [2] _1与z^ [2] _1为例，即使它的值改变了，至少他们的均值和方差也会是均值0和方差1，亦或者是由β和γ决定的其他均值与方差。直观来说batch归一化减弱了前层参数的作用与后层参数的作用之间的联系，它使得网络每层都可以自己学习，稍稍独立于其他层，有利于加速整个网络的学习。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/q3zdSCKryb1JPYe.png"
+                      alt="image-20210813160357980"
+                ></p>
+<ul>
+<li>batch归一化另一个作用就是他有轻微的正则化效果，因为在mini-batch上计算的均值和方差，均值和方差都会有一些小噪音；缩放过程从z^ [l]到ztilde^ [l]也会有些噪音，因为它是用有噪音的均值和方差计算得出的，所以和dropout相似，他往每个隐藏层的激活值上增加了噪音，dropout含几重噪音是因为它以一定概率乘以0或1，batch归一化含几重噪音是因为标准差的缩放和减去均值带来的额外噪音。因为给隐藏单元添加了噪音，迫使后面单元不过分依赖任何一个隐藏单元，因为噪音很小，所以不是巨大的正则化效果，可以将batch归一化和dropout一块使用；dropout的一个特性是mini-batch越大，正则化效果越弱。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/51r9HwFJRZxgYut.png"
+                      alt="image-20210813160415039"
+                ></p>
+<ul>
+<li>注意：batch归一化一次只能处理一个mini-batch数据</li>
+</ul>
+<h1 id="07-测试时的-Batch-Norm"><a href="#07-测试时的-Batch-Norm" class="headerlink" title="07 测试时的 Batch Norm"></a>07 测试时的 Batch Norm</h1><p>Batch归一化将数据以mini-batch的形式逐一处理，但是在测试时，需要对每一个样本逐一处理</p>
+<hr>
+<ul>
+<li>我们用m来表示一个mini-batch中的样本数量，在测试过程中不可能将一个mini-batch中所有样本同时处理，所以需要用其他方法得到u和σ^ 2。为了将神经网络应用于测试就需要单独估算u和σ^ 2。在这里我们用指数加权平均来估算（这个平均数涵盖了所有mini-batch），训练l层的每一个mini-batch都会得到一个u值。可以用指数加权平均来追踪在这一层所有mini-batch中所见的σ^ 2的值，也可以用来追踪均值向量的最新平均值，因此在用不同的mini-batch训练神经网络的同时，能够得到你所查看的每一层的u和σ^ 2的平均数的实时数值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/23w9QiHnZLKWoFl.png"
+                      alt="image-20210813164723790"
+                ></p>
+<ul>
+<li>总结：在训练时u和σ^ 2是在整个mini-batch上计算出来的，但在测试时需要逐一处理样本，方法是根据你的训练集通过运用指数加权平均估算出u和σ^ 2，然后用测试中的u和σ^ 2来进行你所需的隐藏单元z值得调整。</li>
+</ul>
+<h1 id="08-Softmax回归"><a href="#08-Softmax回归" class="headerlink" title="08 Softmax回归"></a>08 Softmax回归</h1><p>Softmax回归能让你在试图识别某一分类时做出预测（识别多种分类）</p>
+<hr>
+<ul>
+<li>我们用C来表示有几个种类，我们想要输出层单元的数字告诉我们这四种类型中每一个的概率有多大，最后输出一个4*1矩阵。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/DiGeqdKOB3ocluV.png"
+                      alt="image-20210813222931774"
+                ></p>
+<ul>
+<li>让网络做到这一点的标准模型要用到Softmax层以及输出层来生成输出。算出z之后就需要应用Softmax激活函数（这个激活函数对于Softmax层而言有些不同）：首先计算一个适用于每个元素的临时变量t&#x3D;e的z^ [l]次方,然后经过计算得到a^ [l]（t经过归一化使和为1），举例右边：之前我们的激活函数都是接受单行数值输入（例如Sigmoid和ReLU激活函数输入一个实数输出一个实数），Softmax激活函数因为需要将所有可能的输出归一化，所以就需要输入一个向量，最后再输出一个向量。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/FLs8xhBNSy12TKd.png"
+                      alt="image-20210813222806913"
+                ></p>
+<ul>
+<li>Softmax分类器在没有隐藏层的情况下能后做到的事–线性决策边界，更深层的网络可以学习更复杂的非线性决策边界。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/d7smV56SUWEOupP.png"
+                      alt="image-20210813223008277"
+                ></p>
+<h1 id="09-训练一个Softmax分类器"><a href="#09-训练一个Softmax分类器" class="headerlink" title="09 训练一个Softmax分类器"></a>09 训练一个Softmax分类器</h1><ul>
+<li>hard max函数将概率最大的变为1，其他变为0。soft max函数相对比较柔和，该是多少概率就是多少。值得注意的是：如果C&#x3D;2，那么Softmax实际就变回了逻辑回归。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/jIJhzRxtGpUDVY4.png"
+                      alt="image-20210813230021529"
+                ></p>
+<ul>
+<li>怎样训练带有Softmax输出层的神经网络？我们应首先定义损失函数（左边是单个训练样本的损失，右边是整个训练集的损失J），下方是使用向量化实现矩阵大写Y。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/takqvK1x2SNzc7s.png"
+                      alt="image-20210813230234480"
+                ></p>
+<ul>
+<li>在有Softmax输出层时实现梯度下降法：输出层会计算出z^ [l] ( C * 1维)，然后用Softmax激活函数得到a^ [l]，然后由此算出损失。初始化反向传播所需的关键步骤或者说关键方程是dz那个表达式</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/mdCWRnMUXJ83N7T.png"
+                      alt="image-20210813230338115"
+                ></p>
+<h1 id="10-深度学习框架"><a href="#10-深度学习框架" class="headerlink" title="10 深度学习框架"></a>10 深度学习框架</h1><ul>
+<li>深度学习的一些框架及选择框架的标准：一个重要的标准就是便于编程（神经网络的开发、迭代、为产品进行配置），第二个标准是运行速度（特别是训练大数据集），第三个标准是这个框架是否真的开放(长时间开源)。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/sDO47ZFPSxvqw2V.png"
+                      alt="image-20210813231615002"
+                ></p>
+<h1 id="11-TensorFlow"><a href="#11-TensorFlow" class="headerlink" title="11 TensorFlow"></a>11 TensorFlow</h1><ul>
+<li>假设有一个J需要最小化，来使用TensorFlow将其最小化：第一行和第二行是引入库，接下来是将w初始化为0，然后定义损失函数，然后定义train为学习算法（用梯度下降优化器使损失函数最小化），下面的两行是惯用的表达，开启了一个TensorFlow session，接下来是初始化全局变量，然后用TensorFlow评估一个变量，然后运行梯度下降法再输出w。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/iKahp71CP6eMcG2.png"
+                      alt="image-20210813232819815"
+                ></p>
+<ul>
+<li>现在我们运行梯度下降1000次迭代，然后输出w</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/8yfqhuVizGYnNQR.png"
+                      alt="image-20210813233207951"
+                ></p>
+<ul>
+<li>TensorFlow中的placeholder是之后会赋值的变量，这种方法便于将训练数据加入损失方程（feed_dict函数）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/w2MnhjgvREylsfI.png"
+                      alt="image-20210813233854025"
+                ></p>
+<ul>
+<li>TensorFlow已经内置了所有必要的反向函数，通过内置函数来计算前向函数，它就能自动用反向函数实现反向传播。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/NuJjvPUFgW4YG26.png"
+                      alt="image-20210813234621008"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：深度学习 day09 超参数调试、Batch 正则化和程序框架</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-13 23:53:50</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/13/深度学习 day09超参数调试、Batch 正则化和程序框架/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day10%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88ML%EF%BC%89%E7%AD%96%E7%95%A5/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day10 机器学习（ML）策略</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/10/%E6%94%B9%E5%96%84%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9A%E8%B6%85%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E3%80%81%E6%AD%A3%E5%88%99%E5%8C%96%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E7%AC%AC%E4%BA%8C%E5%91%A8%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">改善深层神经网络：超参数调试、正则化以及优化第二周检测</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E8%B0%83%E8%AF%95%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">01 调试处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E4%B8%BA%E8%B6%85%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E8%8C%83%E5%9B%B4"><span class="nav-number">2.</span> <span class="nav-text">02 为超参数选择合适的范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E8%B6%85%E5%8F%82%E6%95%B0%E8%AE%AD%E7%BB%83%E7%9A%84%E5%AE%9E%E8%B7%B5%EF%BC%9APandas-VS-Caviar"><span class="nav-number">3.</span> <span class="nav-text">03 超参数训练的实践：Pandas VS Caviar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E6%AD%A3%E5%88%99%E5%8C%96%E7%BD%91%E7%BB%9C%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">04 正则化网络的激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E5%B0%86Batch-Norm%E6%8B%9F%E5%90%88%E8%BF%9B%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">5.</span> <span class="nav-text">05 将Batch Norm拟合进神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-Batch-Norm%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%8F%E6%95%88%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">06 Batch Norm为什么奏效？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E6%B5%8B%E8%AF%95%E6%97%B6%E7%9A%84-Batch-Norm"><span class="nav-number">7.</span> <span class="nav-text">07 测试时的 Batch Norm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-Softmax%E5%9B%9E%E5%BD%92"><span class="nav-number">8.</span> <span class="nav-text">08 Softmax回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#09-%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AASoftmax%E5%88%86%E7%B1%BB%E5%99%A8"><span class="nav-number">9.</span> <span class="nav-text">09 训练一个Softmax分类器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6"><span class="nav-number">10.</span> <span class="nav-text">10 深度学习框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-TensorFlow"><span class="nav-number">11.</span> <span class="nav-text">11 TensorFlow</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

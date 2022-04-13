@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            深度学习 day11 机器学习（ML）策略 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">深度学习 day11 机器学习（ML）策略</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-19 09:11:46</span>
+        <span class="mobile">2021-08-19 09:11</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>18 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-进行误差分析"><a href="#01-进行误差分析" class="headerlink" title="01 进行误差分析"></a>01 进行误差分析</h1><p>人工检查你的算法错误，也许可以让你了解接下来应该做什么，这个过程就叫误差分析</p>
+<hr>
+<ul>
+<li>同样是一个猫分类器，但是它的准确度只有90%，它会将一些狗的图片识别成猫，如果花费几个月的时间来开发专门研究狗的项目，那是大可不必，因为可能取不到效果。所以我们推荐使用误差分析：我们自己手动的观察100个错误标记的开发集例子，如果只有其中5个是狗的图片，那么就算把识别狗做的很好，误差也高达9.5%，如果其中有50个是狗的图片，这时我们在对识别狗进行完善就可以将误差减半到5%。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/yOIJjeVibLdG2nv.png"
+                      alt="image-20210817090520185"
+                ></p>
+<ul>
+<li><p>有时在做误差分析时，也可以同时并行评估几个想法，例如猫分类器：</p>
+<ol>
+<li>改善针对狗图的性能</li>
+<li>解决针对于猫科动物看做成家猫的错误</li>
+<li>提高画质</li>
+</ol>
+</li>
+<li><p>针对于上面这三个想法我们可以将其记录成下面的表，统计出每个想法占的百分比，在以此判断是否应该提升哪个的性能，提升哪个性能上限比较高。</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/3VTZdgPmMnoNipc.png"
+                      alt="image-20210817090534858"
+                ></p>
+<ul>
+<li>总结：进行误差分析应该找一组错误标记的例子，可能在开发集或者测试集里，观察错误标记的例子，看看假阳性和假阴性，统计属于不同错误类型的错误数量，可以帮助你发现哪些问题需要优先处理。</li>
+</ul>
+<h1 id="02-清楚标注错误的数据"><a href="#02-清楚标注错误的数据" class="headerlink" title="02 清楚标注错误的数据"></a>02 清楚标注错误的数据</h1><p>  监督学习问题的数据是由输入x和输出标签y组成，通过发现，得知有些输出标签y是错误的，是否值得花时间去修正这些标签呢？</p>
+<hr>
+<ul>
+<li><p>y为1是猫，为0不是猫，这时发现倒数第二个是错误标签，该怎么办？</p>
+<ol>
+<li>如果是训练集，深度学习算法对于训练集中的随机误差是很宽容的，只要这些错误例子离随机误差不太远，误差足够随机，那么放着这些误差不管可能也没问题。只要总数据集足够大，实际误差可能不会太高。</li>
+<li>如果担心开发集和测试集上标记出错的例子带来的影响，一般建议在误差分析的时候，添加一个额外的列来统计标签y错误的例子数。是否值得修正这6%标记出错的例子呢？如果这些错误标签严重影响了你在开发集上评估算法的能力，那么就应该花费时间去修正错误标签，反之不用。</li>
+<li>建议看三个数字来确定是否值得去人工修正标记出错的数据：整体的开发集误差10%；错误标记引起的错误的数量或者百分比0.6%（10%的6%）；其他原因导致错误的百分比9.4%（10%-0.6%）。对于左边的错误标签没有严重影响了你在开发集上评估算法的能力，而左边的错误标签严重影响了你在开发集上评估算法的能力。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ecOt4uxyNC1w536.png"
+                      alt="image-20210817110813946"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/4COHUKSuF3h6r1z.png"
+                      alt="image-20210817110828006"
+                ></p>
+<ul>
+<li>修正的建议：首先无论使用什么修正手段，都要同时作用到开发集和测试集上（开发集和测试集必须来自相同的分布，因为开发集确定了你的目标，当你击中目标后将算法推广到测试集中，这样你的团队才能更高效）来确保他们继续来自同一分布；其次要同时检验算法判断正确和判断错误的例子，如果你只修正算法出错的例子，你对算法的偏差估计可能会变大，修正错误的例子之后，一些改变可能使原本正确的例子也变成错误的了。但是我们通常不会这么做，因为如果你的分类器很准确，那么判断错的次数比判断正确的次数要小得多；如果你进入到一个开发集和测试集去修正部分标签，你不大可能去修正训练集的，因为训练集数据比开发集和测试集多的多，需要花费的时间也就多。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/f2yVLtO5Yraeg9n.png"
+                      alt="image-20210817110840750"
+                ></p>
+<ul>
+<li>总结：在构造实际系统时，通常需要更多的人工误差分析和人类见解，我们要看下犯错误的例子，这样可以帮助找到需要优先处理的任务。</li>
+</ul>
+<h1 id="03-快速搭建你的第一个系统，并进行迭代"><a href="#03-快速搭建你的第一个系统，并进行迭代" class="headerlink" title="03 快速搭建你的第一个系统，并进行迭代"></a>03 快速搭建你的第一个系统，并进行迭代</h1><ul>
+<li>一般来说，对于几乎所有的机器学习程序，可能会有50个不同的方向可以前进，并且都是相对合理的可以改善系统，但挑战在于你如何选择一个方向集中精力处理。</li>
+<li>如果你像搭建一个全新的机器学习程序，建议：首先快速设立开发集和测试集还有指标，决定了你的目标所在，如果错了可以在改，但是一定要设立；然后建议马上搭好一个机器学习系统原型（初始系统的全部意义在于有一个训练过的系统可以让你确定偏差和方差的范围，就知道下一步应该优先做什么，能够进行误差分析），然后找训练集进行训练，看效果。开始理解你的算法表现如何，在开发集测试集你的评估指标上表现如何；当你建立第一个系统后，你就可以马上用到偏差方差分析和误差分析。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Z9lHt7LKDSn4aAx.png"
+                      alt="image-20210817120247822"
+                ></p>
+<h1 id="04-在不同的划分上进行训练并测试"><a href="#04-在不同的划分上进行训练并测试" class="headerlink" title="04 在不同的划分上进行训练并测试"></a>04 在不同的划分上进行训练并测试</h1><ul>
+<li>如果你有两个数据来源，一个较小，一个较大，那么该怎么分布？</li>
+<li>第一条路：我们可以将来自互联网和用户的图片结合到一块，然后随机分配到训练、开发和测试集中，这样三个集的数据都来自同一分布，但是坏处在于，对于2500个开发集数据，其中很多图片都是来自网页下载，并不是真正关心的数据分布，真正要处理的是用户上传的，这样设立开发集导致团队针对不同于你实际关心的数据分布去优化。（不要用）</li>
+<li>推荐第二条路：我们训练集是来自互联网的图片，如果需要的话，再加上5000张来自手机上传的图片，对于开发集和测试集都是手机图片，这样的好处在于你现在瞄准的目标就是你想要处理的目标。开发集全部数据都来自用户，可以告诉你的团队这是你真正关心的图片分布，试着搭建一个学习系统，让系统在处理用户图片分布时效果良好。缺点在于你的训练集和开发集、测试集不在一个分布</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/NLS1lv3rjyqkICM.png"
+                      alt="image-20210817152708400"
+                ></p>
+<ul>
+<li>以语音激活后视镜为例，对于训练集你可以使用你所拥有的所有语音数据；对于开发集和测试集来说可能要小的多，比如实际上来自语音激活后视镜的数据。按照上面推荐第二条路进行分配。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/tJPjAav1SkXbCwM.png"
+                      alt="image-20210817152719753"
+                ></p>
+<h1 id="05-不匹配数据划分的偏差和方差"><a href="#05-不匹配数据划分的偏差和方差" class="headerlink" title="05 不匹配数据划分的偏差和方差"></a>05 不匹配数据划分的偏差和方差</h1><p>当你的训练集和你的开发集、测试集来自不同的分布时，分析偏差和方差的方式可能不一样</p>
+<hr>
+<ul>
+<li>训练集误差为1，开发集误差为10。如果训练集和开发集来自同一分布，这就存在很大的方差问题，算法不能很好的从训练集出发泛化；但如果你的训练集和开发集来自不同的分布，这时就不能轻易下结论，可能没有方差问题，只不过反映了开发集包括更难准确分类的图片。</li>
+<li>分析的问题在于当你看训练误差再看开发误差有有两件事变了：<ol>
+<li>算法只见过训练集数据，没见过开发集数据</li>
+<li>开发集数据来自不同的分布</li>
+</ol>
+</li>
+<li>我们设置一个新的数据子集叫训练-开发集，从训练集的分布里随机打散训练集，但是不会用来训练网络。为了进行误差分析，你应该做的是看看分类器在训练集上的误差1%、训练-开发集上的误差9%还有开发集上的误差10%。而训练集和训练-开发集上的差异在于你的神经网络能看到第一部分数据（红色部分）并在上面做训练，但没有在训练-开发集上直接训练，这就告诉算法存在方差。因为训练集上和训练-开发集来自同一分布的数据测得，所以尽管你的神经网络在训练集中表现良好，但无法泛化到来自相同分布的训练-开发集中；又如这三个误差分别是1%、1.5%、10%，这时方差问题就很小了。因为从训练集到训练-开发集误差只上升了一点点，但转到开发集时误差就大了很多，所以这是数据不匹配问题；又如这三个误差分别是10%、11%、12%，这时就存在偏差问题了；又如这三个误差分别是10%、11%、20%，这就有两个问题了：可避免偏差相当高还有数据不匹配问题很大。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/jN4syq3G1InPhMd.png"
+                      alt="image-20210817231557467"
+                ></p>
+<ul>
+<li>一般的原则，我们要看的关键数据是人类水平误差、训练集误差、训练开发集误差、开发集误差。如果再加一个测试误差，那么测试误差和开发集误差的间距就是你对开发集过拟合的程度。当然也可能出现右边的情况，是因为开发测试集分布比你应用实际处理的数据要容易得多，那么误差可能真的就下降。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/lW2CvLJXFIAVxKT.png"
+                      alt="image-20210817231619845"
+                ></p>
+<ul>
+<li>我们以语音激活后视镜为例子，横轴是不同的数据集，竖轴是我们要标记处理数据不同的方式或算法，最后一行放不开了，所以放到了右边。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/fE1V3KePrOokyBw.png"
+                      alt="image-20210817231631551"
+                ></p>
+<h1 id="06-定位数据不匹配"><a href="#06-定位数据不匹配" class="headerlink" title="06 定位数据不匹配"></a>06 定位数据不匹配</h1><ul>
+<li>如果发现数据不匹配问题，通常会做误差分析。还是以语音激活后视镜为例，可能要听一下来自开发集的样本，尝试弄清楚开发集和训练集到底有什么不同（比如说开发集的噪音很多）。你可以尝试把训练数据变得更像开发集一点，或者也可以收集更多类似开发集和测试集的数据（比如说发现车辆背景噪音是主要的误差来源，那么就有意识的收集这些数据加到训练集中）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/xvfHONQLCmIZiyp.png"
+                      alt="image-20210818105420142"
+                ></p>
+<ul>
+<li>如果你的目的是把训练数据变得更像开发集一点，可以使用人工合成数据技术，通过人工合成你可以快速制造更多的训练集。但是人工合成有一个潜在的问题，比如说你在安静的环境下录制了1000小时音频，在移动的车上只录制了1一个小时，当你重复的将这1小时的音频叠加到1000小时音频时，可能你的学习算法对这一小时汽车噪声过拟合。人工数据合成的挑战在于人耳对于1000小时听起来和1小时噪音听起来没什么区别，所以最后可能制造出这个原始数据很少的，在一个小得多的空间子集合成的训练数据。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/aocQR4YELhJHCkp.png"
+                      alt="image-20210818105431867"
+                ></p>
+<ul>
+<li>总结：如果你认为存在数据不匹配问题，建议做误差分析或者看看训练集和开发集，这两个数据分布到底有什么不同，然后尝试收集看起来像开发集数据做训练。当使用人工合成数据一定要谨慎，你有可能从所有可能性的空间只选了很小一部分去模拟数据。</li>
+</ul>
+<h1 id="07-迁移学习"><a href="#07-迁移学习" class="headerlink" title="07 迁移学习"></a>07 迁移学习</h1><p>深度学习中最强大的理念之一就是有时候神经网络可以从一个任务习得知识，并将这些知识应用到另一个独立的任务中，这就是迁移学习。</p>
+<hr>
+<ul>
+<li>假设你已经训练好一个图像识别神经网络，然后将这个神经网络拿来让他适应不同的任务（比如放射科诊断），可以做的就是把神经网络最后的输出层和进入到最后一层的权重删掉，然后加上一层或者几层新层，然后为最后一层或几层重新赋予随机权重，然后让它在放射诊断数据上训练。在进行图像识别的训练阶段，可以训练神经网络的所有常用参数、所有权重、所有层，然后就得到了一个能够做图像识别的神经网络，这时要实现迁移学习你要做的就是把数据集换成放射科的（x,y）训练集，而y就是你想要预测的诊断。然后我们随机初始化最后一层的权重w和b。已有语音识别系统神经网络，然后搭建一个触发词（可以唤醒智能设备）的神经网络，过程都同上。</li>
+<li>要用新的数据集重新训练神经网络有几种做法：<ol>
+<li>如果你有一个小的数据集，就只训练输出层前的最后一层或者最后两层。</li>
+<li>如果你有很多数据集，那么也许你可以重新训练网络中的所有参数。在图像识别数据的初期训练阶段（预训练），你在用图像识别数据预初始化，然后以后更新所有权重，在放射科数据上训练，有时这个过程叫微调。</li>
+</ol>
+</li>
+<li>迁移学习起作用的场合是：迁移来源问题你有很多数据，但迁移目标问题你没有那么多数据。（例如图像识别有一百万样本，可以学习低层次特征，可以在神经网络的前几层学到如何识别有用的特征，放射科数据有一万样本，在已经学习特征的基础上加以训练）数据量反着来的话（例如图像识别有50样本，放射科数据有300样本），就没有太大的意义了。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/1M5Jg9GcvWof3Sp.png"
+                      alt="image-20210818204432468"
+                ></p>
+<ul>
+<li>假设从任务A学习并迁移一些知识到任务B，那么什么时候迁移学习有意义？<ol>
+<li>当任务A和任务B都有同样的输入x（例如A和B输入都为图像）</li>
+<li>当任务A数据比任务B数据多得多的时候</li>
+<li>任务A的低层次特征可以帮助任务B的学习</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/V3lMdz7LPbtcQaT.png"
+                      alt="image-20210818204444568"
+                ></p>
+<h1 id="08-多任务学习"><a href="#08-多任务学习" class="headerlink" title="08 多任务学习"></a>08 多任务学习</h1><p>在迁移学习中，你的步骤是串行的（从A到B）；在多任务学习中，你可以同时开始学习，试图让单个神经网络同时做几件事，然后希望每个任务都能帮到其他所有任务</p>
+<hr>
+<ul>
+<li>以无人驾驶为例，需要同时识别多个不同的物体，比如行人、车辆、停车标志还有交通灯，以这四个为例设计出Y。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/BmTu24altLnpVQx.png"
+                      alt="image-20210818215353005"
+                ></p>
+<ul>
+<li>现在就可以训练一个神经网络来预测这些y值，输入x，输出的是一个四维向量y。要训练这个神经网络，需要定义神经网络的损失函数，和之前分类猫的例子主要区别在于需要对j&#x3D;1到4求和；这与softmax回归的主要区别在于softmax将单个标签分配给单个样本，而这个例子一张图可以有很多不同标签（行人、车辆、停车标志还有交通灯），所以在该例中你不是只给图片一个标签，而是需要遍历不同类型，然后看看每个类型是否出现在图中。</li>
+<li>如果你训练一个神经网络，并试图最小化这个成本函数，你做的就是多任务学习，由于神经网络早期的一些特征，在识别不同物体时都会用到，你发现训练一个神经网络做四件事会比训练四个完全独立的神经网络分别做四件事性能要更好。</li>
+<li>多任务学习也可以处理图像只有部分物体被标记的情况（右下角Y的情况，不清楚标记？），你就只对带0和1标签的j值求和，如果有？你就在求和时忽略那个项。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/qQKAh6t3OLCHsJv.png"
+                      alt="image-20210818215407044"
+                ></p>
+<ul>
+<li>多任务学习什么时候有意义？当三件事为真时，他就是有意义的：<ol>
+<li>如果你训练的一组任务可以共用低层次特征，比如无人驾驶例子，同时识别四个标签，因为这些都是道路上的特征。</li>
+<li>不一定对哈，如果你专注于单项任务，想要从多任务学习得到很大性能提升，那么其他任务加起来必须要有比单个任务大得多的数据量或者每个任务的数据量很接近。</li>
+<li>当你可以训练一个足够大的神经网络，同时做好所有的工作。多任务学习的替代方法是训练四个完全独立的神经网络，一个任务对应一个神经网络，如果神经网络足够大，就不用替代。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/DIRroy8ZjH5Jswx.png"
+                      alt="image-20210818215421479"
+                ></p>
+<ul>
+<li>总结：迁移学习用的多</li>
+</ul>
+<h1 id="09-什么是端对端的深度学习"><a href="#09-什么是端对端的深度学习" class="headerlink" title="09 什么是端对端的深度学习"></a>09 什么是端对端的深度学习</h1><p>深度学习中最令人振奋的最新动态之一就是端对端深度学习的兴起，以前有一些数据处理系统或者学习系统，他们需要多个阶段的处理，那么端对端深度学习就是忽略所有这些不同的阶段，用单个神经网络替代它</p>
+<hr>
+<ul>
+<li>以语音识别为例，需要很多阶段的处理，首先会提取一些特征（MFCC用来从音频中提取一组特定的人工设计的特征），提取完低层次的特征后就可以应用机器学习算法在音频片段中找到音位，然后将音位串在一起构成独立的词，然后将这些词串起来构成音频片段的听写文本；端对端深度学习就是训练一个巨大的神经网络，输入一段音频，输出直接是听写文本。</li>
+<li>端对端深度学习的挑战之一是你可能需要大量数据才能让系统表现良好。小数据集用传统的比较好（3000h）；大的数据集用端对端才好（10000h）；数据量适中也可以用中间件方法。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/pGC4uPD7JZhYWbI.png"
+                      alt="image-20210819082822446"
+                ></p>
+<ul>
+<li>搭建人脸识别门禁系统：第一件事是看看相机拍到的照片，你可以直接学习图像x到人物y身份的函数映射（这不是最好的方法，因为人可以从很多不同的角度接近门禁）；迄今为止最好的方法是多步方法，首先运行一个软件来检查人脸，所以第一个检测器找的是人脸位置，找到后裁剪图像使人脸居中，再喂到神经网络里去学习，将现拍的图片跟已存的图片进行对比。为什么两步法更好呢？一是你解决的两个问题，每个问题实际上要简单得多，二是两个子任务的训练数据都很多</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/jkFAYgCRI9S6wzQ.png"
+                      alt="image-20210819082835837"
+                ></p>
+<ul>
+<li>更多的例子：机器翻译，X扫描</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ulDXp2LUSEbqzfO.png"
+                      alt="image-20210819082920805"
+                ></p>
+<h1 id="10-是否要使用端对端的深度学习"><a href="#10-是否要使用端对端的深度学习" class="headerlink" title="10 是否要使用端对端的深度学习"></a>10 是否要使用端对端的深度学习</h1><ul>
+<li>端对端学习的好处：<ol>
+<li>只是让数据说话，让你的学习算法学习它想学习的任意表示方法，而不是强迫它使用特定的某种(音位)作为表示方法，其整体表现可能会更好。</li>
+<li>所需手工设计的组件更少，不需要花太多时间去手工设计功能。</li>
+</ol>
+</li>
+<li>端对端学习的缺点：<ol>
+<li>要直接学x到y的映射，它可能需要大量的数据。</li>
+<li>排除了可能有用的手工设计组件，当没办法从很小的训练集数据中获得洞察力，这时手工设计组件就可以把人类知识直接注入到算法。</li>
+</ol>
+</li>
+<li>学习算法有两个主要知识来源：如果数据少就需要用组件，如果数据多就可能不需要<ol>
+<li>数据</li>
+<li>手工设计的任何东西（也可能强迫学习算法使用特定的某种(音位)作为表示方法）</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/wBOdLi6jPtYhxeW.png"
+                      alt="image-20210819085149773"
+                ></p>
+<ul>
+<li>决定是否使用端对端的深度学习关键的问题是你有足够的数据能够直接学从x映射到y足够复杂的函数吗？</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/36ocdZPJhYsxNne.png"
+                      alt="image-20210819085536883"
+                ></p>
+<ul>
+<li>总之需要大量数据</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：深度学习 day11 机器学习（ML）策略</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-19 09:11:46</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/19/深度学习 day11机器学习（ML）策略/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day12%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day12卷积神经网络</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day10%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88ML%EF%BC%89%E7%AD%96%E7%95%A5/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day10 机器学习（ML）策略</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E8%BF%9B%E8%A1%8C%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">01 进行误差分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E6%B8%85%E6%A5%9A%E6%A0%87%E6%B3%A8%E9%94%99%E8%AF%AF%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">02 清楚标注错误的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%B9%B6%E8%BF%9B%E8%A1%8C%E8%BF%AD%E4%BB%A3"><span class="nav-number">3.</span> <span class="nav-text">03 快速搭建你的第一个系统，并进行迭代</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E5%9C%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E5%88%92%E5%88%86%E4%B8%8A%E8%BF%9B%E8%A1%8C%E8%AE%AD%E7%BB%83%E5%B9%B6%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">04 在不同的划分上进行训练并测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E4%B8%8D%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE%E5%88%92%E5%88%86%E7%9A%84%E5%81%8F%E5%B7%AE%E5%92%8C%E6%96%B9%E5%B7%AE"><span class="nav-number">5.</span> <span class="nav-text">05 不匹配数据划分的偏差和方差</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E5%AE%9A%E4%BD%8D%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="nav-number">6.</span> <span class="nav-text">06 定位数据不匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.</span> <span class="nav-text">07 迁移学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%AD%A6%E4%B9%A0"><span class="nav-number">8.</span> <span class="nav-text">08 多任务学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#09-%E4%BB%80%E4%B9%88%E6%98%AF%E7%AB%AF%E5%AF%B9%E7%AB%AF%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">9.</span> <span class="nav-text">09 什么是端对端的深度学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E6%98%AF%E5%90%A6%E8%A6%81%E4%BD%BF%E7%94%A8%E7%AB%AF%E5%AF%B9%E7%AB%AF%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-number">10.</span> <span class="nav-text">10 是否要使用端对端的深度学习</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

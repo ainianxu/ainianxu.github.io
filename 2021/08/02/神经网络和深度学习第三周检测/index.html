@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            神经网络和深度学习第三周检测 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">神经网络和深度学习第三周检测</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-02 22:22:29</span>
+        <span class="mobile">2021-08-02 22:22</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>950 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="答案见下方"><a href="#答案见下方" class="headerlink" title="答案见下方"></a>答案见下方</h1><hr>
+<h2 id="1-以下哪一项是正确的？"><a href="#1-以下哪一项是正确的？" class="headerlink" title="1.以下哪一项是正确的？"></a>1.以下哪一项是正确的？</h2><p>A. X是一个矩阵，其中每个列都是一个训练示例。<br>B. a^[2]_4 是第二层第四层神经元的激活的输出。<br>C. a^[2] (12)表示第二层的第12个样本的激活向量。<br>D. a^[2] 表示第二层的激活向量。</p>
+<h2 id="2-tanh激活函数通常比隐藏层单元的sigmoid激活函数效果更好，因为其输出的平均值更接近于零，因此它将数据集中在下一层是更好的选择，请问正确吗？"><a href="#2-tanh激活函数通常比隐藏层单元的sigmoid激活函数效果更好，因为其输出的平均值更接近于零，因此它将数据集中在下一层是更好的选择，请问正确吗？" class="headerlink" title="2.tanh激活函数通常比隐藏层单元的sigmoid激活函数效果更好，因为其输出的平均值更接近于零，因此它将数据集中在下一层是更好的选择，请问正确吗？"></a>2.tanh激活函数通常比隐藏层单元的sigmoid激活函数效果更好，因为其输出的平均值更接近于零，因此它将数据集中在下一层是更好的选择，请问正确吗？</h2><p>A. True<br>B. False</p>
+<h2 id="3-其中哪一个是第l层向前传播的正确向量化实现，其中1≤-l-≤L"><a href="#3-其中哪一个是第l层向前传播的正确向量化实现，其中1≤-l-≤L" class="headerlink" title="3.其中哪一个是第l层向前传播的正确向量化实现，其中1≤ l ≤L"></a>3.其中哪一个是第l层向前传播的正确向量化实现，其中1≤ l ≤L</h2><p>A. Z^ [l]&#x3D;W^ [l]A^ [l−1]+b[l]<br>B. A^ [l]&#x3D;g^ [l] (Z^ [l])</p>
+<h2 id="4-您正在构建一个识别黄瓜（y-x3D-1）与西瓜（y-x3D-0）的二元分类器。-你会推荐哪一种激活函数用于输出层？"><a href="#4-您正在构建一个识别黄瓜（y-x3D-1）与西瓜（y-x3D-0）的二元分类器。-你会推荐哪一种激活函数用于输出层？" class="headerlink" title="4.您正在构建一个识别黄瓜（y &#x3D; 1）与西瓜（y &#x3D; 0）的二元分类器。 你会推荐哪一种激活函数用于输出层？"></a>4.您正在构建一个识别黄瓜（y &#x3D; 1）与西瓜（y &#x3D; 0）的二元分类器。 你会推荐哪一种激活函数用于输出层？</h2><p>A. ReLU<br>B. Leaky ReLU<br>C. sigmoid<br>D. tanh</p>
+<h2 id="5-看一下下面的代码：请问B-shape的值是多少"><a href="#5-看一下下面的代码：请问B-shape的值是多少" class="headerlink" title="5.看一下下面的代码：请问B.shape的值是多少?"></a>5.看一下下面的代码：请问B.shape的值是多少?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A = np.random.randn(<span class="number">4</span>,<span class="number">3</span>)</span><br><span class="line">B = np.<span class="built_in">sum</span>(A, axis = <span class="number">1</span>, keepdims = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-假设你已经建立了一个神经网络。-您决定将权重和偏差初始化为零。-以下哪项陈述是正确的？"><a href="#6-假设你已经建立了一个神经网络。-您决定将权重和偏差初始化为零。-以下哪项陈述是正确的？" class="headerlink" title="6.假设你已经建立了一个神经网络。 您决定将权重和偏差初始化为零。 以下哪项陈述是正确的？"></a>6.假设你已经建立了一个神经网络。 您决定将权重和偏差初始化为零。 以下哪项陈述是正确的？</h2><p>A. 第一个隐藏层中的每个神经元节点将执行相同的计算。 所以即使经过多次梯度下降迭代后，层中的每个神经元节点都会计算出与其他神经元节点相同的东西。<br>B. 第一个隐藏层中的每个神经元将在第一次迭代中执行相同的计算。 但经过一次梯度下降迭代后，他们将学会计算不同的东西，因为我们已经“破坏了对称性”。<br>C. 第一个隐藏层中的每一个神经元都会计算出相同的东西，但是不同层的神经元会计算不同的东西，因此我们已经完成了“对称破坏”。<br>D. 即使在第一次迭代中，第一个隐藏层的神经元也会执行不同的计算， 他们的参数将以自己的方式不断发展。</p>
+<h2 id="7-Logistic回归的权重w应该随机初始化，而不是全零，因为如果初始化为全零，那么逻辑回归将无法学习到有用的决策边界，因为它将无法“破坏对称性”，是正确的吗？"><a href="#7-Logistic回归的权重w应该随机初始化，而不是全零，因为如果初始化为全零，那么逻辑回归将无法学习到有用的决策边界，因为它将无法“破坏对称性”，是正确的吗？" class="headerlink" title="7.Logistic回归的权重w应该随机初始化，而不是全零，因为如果初始化为全零，那么逻辑回归将无法学习到有用的决策边界，因为它将无法“破坏对称性”，是正确的吗？"></a>7.Logistic回归的权重w应该随机初始化，而不是全零，因为如果初始化为全零，那么逻辑回归将无法学习到有用的决策边界，因为它将无法“破坏对称性”，是正确的吗？</h2><p>A. True<br>B. False</p>
+<h2 id="8-您已经为所有隐藏单元使用tanh激活建立了一个网络。-使用np-random-randn（-，-）-1000将权重初始化为相对较大的值。-会发生什么？"><a href="#8-您已经为所有隐藏单元使用tanh激活建立了一个网络。-使用np-random-randn（-，-）-1000将权重初始化为相对较大的值。-会发生什么？" class="headerlink" title="8.您已经为所有隐藏单元使用tanh激活建立了一个网络。 使用np.random.randn（..，..）* 1000将权重初始化为相对较大的值。 会发生什么？"></a>8.您已经为所有隐藏单元使用tanh激活建立了一个网络。 使用np.random.randn（..，..）* 1000将权重初始化为相对较大的值。 会发生什么？</h2><p>A. 这没关系。只要随机初始化权重，梯度下降不受权重大小的影响。<br>B. 这将导致tanh的输入也非常大，因此导致梯度也变大。因此，您必须将α设置得非常小以防止发散; 这会减慢学习速度。<br>C. 这会导致tanh的输入也非常大，导致单位被“高度激活”，从而加快了学习速度，而权重必须从小数值开始。<br>D. 这将导致tanh的输入也很大，因此导致梯度接近于零， 优化算法将因此变得缓慢。</p>
+<h2 id="9-看一下下面的单隐层神经网络："><a href="#9-看一下下面的单隐层神经网络：" class="headerlink" title="9.看一下下面的单隐层神经网络："></a>9.看一下下面的单隐层神经网络：</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20210802211946697.png"
+                      alt="image-20210802211946697"
+                ></p>
+<p>A. b^[1] 的维度是(4, 1)<br>B. W^[1] 的维度是 (4, 2)<br>C. W^[2] 的维度是 (1, 4)<br>D. b^[2] 的维度是 (1, 1)</p>
+<h2 id="10-I在和上一个相同的网络中，Z-1-和-A-1-的维度是多少？"><a href="#10-I在和上一个相同的网络中，Z-1-和-A-1-的维度是多少？" class="headerlink" title="10.I在和上一个相同的网络中，Z^ [1] 和 A^ [1]的维度是多少？"></a>10.I在和上一个相同的网络中，Z^ [1] 和 A^ [1]的维度是多少？</h2><p>答：</p>
+<hr>
+<h2 id="答案："><a href="#答案：" class="headerlink" title="答案："></a>答案：</h2><ol>
+<li><p>ABCD</p>
+</li>
+<li><p>A</p>
+</li>
+<li><p>AD</p>
+</li>
+<li><p>C</p>
+</li>
+<li><pre><code class="PYTHON">B.shape = (4, 1) #keepdims = True）来确保A.shape是（4,1）
+</code></pre>
+</li>
+<li><p>A</p>
+</li>
+<li><p>A</p>
+</li>
+<li><p>D</p>
+</li>
+<li><p>ACD（B应该是（4，3））</p>
+</li>
+<li><p>Z^ [1] 和 A^ [1]的维度都是 (4,m)(注意z和Z的区别：z表示单个样本，Z表示所有样本)</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：神经网络和深度学习第三周检测</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-02 22:22:29</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/02/神经网络和深度学习第三周检测/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day05%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day05 深层神经网络</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/02/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day04%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day04 浅层神经网络</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%94%E6%A1%88%E8%A7%81%E4%B8%8B%E6%96%B9"><span class="nav-number">1.</span> <span class="nav-text">答案见下方</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%A5%E4%B8%8B%E5%93%AA%E4%B8%80%E9%A1%B9%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.以下哪一项是正确的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-tanh%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E9%80%9A%E5%B8%B8%E6%AF%94%E9%9A%90%E8%97%8F%E5%B1%82%E5%8D%95%E5%85%83%E7%9A%84sigmoid%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%95%88%E6%9E%9C%E6%9B%B4%E5%A5%BD%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%85%B6%E8%BE%93%E5%87%BA%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC%E6%9B%B4%E6%8E%A5%E8%BF%91%E4%BA%8E%E9%9B%B6%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%AE%83%E5%B0%86%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%AD%E5%9C%A8%E4%B8%8B%E4%B8%80%E5%B1%82%E6%98%AF%E6%9B%B4%E5%A5%BD%E7%9A%84%E9%80%89%E6%8B%A9%EF%BC%8C%E8%AF%B7%E9%97%AE%E6%AD%A3%E7%A1%AE%E5%90%97%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">2.tanh激活函数通常比隐藏层单元的sigmoid激活函数效果更好，因为其输出的平均值更接近于零，因此它将数据集中在下一层是更好的选择，请问正确吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%85%B6%E4%B8%AD%E5%93%AA%E4%B8%80%E4%B8%AA%E6%98%AF%E7%AC%ACl%E5%B1%82%E5%90%91%E5%89%8D%E4%BC%A0%E6%92%AD%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%90%91%E9%87%8F%E5%8C%96%E5%AE%9E%E7%8E%B0%EF%BC%8C%E5%85%B6%E4%B8%AD1%E2%89%A4-l-%E2%89%A4L"><span class="nav-number">1.3.</span> <span class="nav-text">3.其中哪一个是第l层向前传播的正确向量化实现，其中1≤ l ≤L</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%82%A8%E6%AD%A3%E5%9C%A8%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%AF%86%E5%88%AB%E9%BB%84%E7%93%9C%EF%BC%88y-x3D-1%EF%BC%89%E4%B8%8E%E8%A5%BF%E7%93%9C%EF%BC%88y-x3D-0%EF%BC%89%E7%9A%84%E4%BA%8C%E5%85%83%E5%88%86%E7%B1%BB%E5%99%A8%E3%80%82-%E4%BD%A0%E4%BC%9A%E6%8E%A8%E8%8D%90%E5%93%AA%E4%B8%80%E7%A7%8D%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%94%A8%E4%BA%8E%E8%BE%93%E5%87%BA%E5%B1%82%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4.您正在构建一个识别黄瓜（y &#x3D; 1）与西瓜（y &#x3D; 0）的二元分类器。 你会推荐哪一种激活函数用于输出层？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%9C%8B%E4%B8%80%E4%B8%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9A%E8%AF%B7%E9%97%AEB-shape%E7%9A%84%E5%80%BC%E6%98%AF%E5%A4%9A%E5%B0%91"><span class="nav-number">1.5.</span> <span class="nav-text">5.看一下下面的代码：请问B.shape的值是多少?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%81%87%E8%AE%BE%E4%BD%A0%E5%B7%B2%E7%BB%8F%E5%BB%BA%E7%AB%8B%E4%BA%86%E4%B8%80%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E3%80%82-%E6%82%A8%E5%86%B3%E5%AE%9A%E5%B0%86%E6%9D%83%E9%87%8D%E5%92%8C%E5%81%8F%E5%B7%AE%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E9%9B%B6%E3%80%82-%E4%BB%A5%E4%B8%8B%E5%93%AA%E9%A1%B9%E9%99%88%E8%BF%B0%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">6.假设你已经建立了一个神经网络。 您决定将权重和偏差初始化为零。 以下哪项陈述是正确的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Logistic%E5%9B%9E%E5%BD%92%E7%9A%84%E6%9D%83%E9%87%8Dw%E5%BA%94%E8%AF%A5%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%85%A8%E9%9B%B6%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%A6%82%E6%9E%9C%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E5%85%A8%E9%9B%B6%EF%BC%8C%E9%82%A3%E4%B9%88%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%B0%86%E6%97%A0%E6%B3%95%E5%AD%A6%E4%B9%A0%E5%88%B0%E6%9C%89%E7%94%A8%E7%9A%84%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C%EF%BC%8C%E5%9B%A0%E4%B8%BA%E5%AE%83%E5%B0%86%E6%97%A0%E6%B3%95%E2%80%9C%E7%A0%B4%E5%9D%8F%E5%AF%B9%E7%A7%B0%E6%80%A7%E2%80%9D%EF%BC%8C%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%90%97%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">7.Logistic回归的权重w应该随机初始化，而不是全零，因为如果初始化为全零，那么逻辑回归将无法学习到有用的决策边界，因为它将无法“破坏对称性”，是正确的吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%82%A8%E5%B7%B2%E7%BB%8F%E4%B8%BA%E6%89%80%E6%9C%89%E9%9A%90%E8%97%8F%E5%8D%95%E5%85%83%E4%BD%BF%E7%94%A8tanh%E6%BF%80%E6%B4%BB%E5%BB%BA%E7%AB%8B%E4%BA%86%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E3%80%82-%E4%BD%BF%E7%94%A8np-random-randn%EF%BC%88-%EF%BC%8C-%EF%BC%89-1000%E5%B0%86%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%BA%E7%9B%B8%E5%AF%B9%E8%BE%83%E5%A4%A7%E7%9A%84%E5%80%BC%E3%80%82-%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">8.您已经为所有隐藏单元使用tanh激活建立了一个网络。 使用np.random.randn（..，..）* 1000将权重初始化为相对较大的值。 会发生什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E7%9C%8B%E4%B8%80%E4%B8%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E5%8D%95%E9%9A%90%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%9A"><span class="nav-number">1.9.</span> <span class="nav-text">9.看一下下面的单隐层神经网络：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-I%E5%9C%A8%E5%92%8C%E4%B8%8A%E4%B8%80%E4%B8%AA%E7%9B%B8%E5%90%8C%E7%9A%84%E7%BD%91%E7%BB%9C%E4%B8%AD%EF%BC%8CZ-1-%E5%92%8C-A-1-%E7%9A%84%E7%BB%B4%E5%BA%A6%E6%98%AF%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">10.I在和上一个相同的网络中，Z^ [1] 和 A^ [1]的维度是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%94%E6%A1%88%EF%BC%9A"><span class="nav-number">1.11.</span> <span class="nav-text">答案：</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

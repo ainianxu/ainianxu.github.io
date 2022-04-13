@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            深度学习 day12卷积神经网络 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">深度学习 day12卷积神经网络</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-08-20 23:42:29</span>
+        <span class="mobile">2021-08-20 23:42</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-计算机视觉"><a href="#01-计算机视觉" class="headerlink" title="01 计算机视觉"></a>01 计算机视觉</h1><p>即使你在计算机视觉方面没有做出成果，希望你可以将所学的知识应用到其他算法和结构</p>
+<hr>
+<ul>
+<li>计算机视觉的一些例子：图片识别（给出一张图片让计算机去分辨出这是一只猫）、目标检测（首先算出有哪些物体，然后用一些技术识别出他们在图片的位置）、图片风格迁移（就是你有一张满意的图片和一张风格图，你可以用神经网络将他们融合在一起，描绘出一张新的图片，整体轮廓来自左边，风格却是右边的）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/c4AJBsUKf3TyjRw.png"
+                      alt="image-20210819152546875"
+                ></p>
+<ul>
+<li>在应用计算机视觉还有一个很大的挑战就是数据的输入可能会非常大，例如像素是1000×1000的，那么输入的数据就是三百万的数据量，你也许会有1000个隐藏单元，而所有的权值W，如果你使用的是标准的全连接网络，矩阵的大小也是（1000，三百万）也就是会有三十亿个参数。在参数量如此之大的情况下难以获取足够的数据来防止过拟合。如果想要也能计算大型图片就可以使用卷积运算。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/l5jndf4eCNRxEoT.png"
+                      alt="image-20210819152559336"
+                ></p>
+<h1 id="02-边缘检测示例"><a href="#02-边缘检测示例" class="headerlink" title="02 边缘检测示例"></a>02 边缘检测示例</h1><p>卷积运算是卷积神经网络最基本的组成部分</p>
+<hr>
+<ul>
+<li>给一张图片让电脑检测是什么物体，可能做的第一件事是检测图片中的垂直边缘，也可能想检测水平边缘。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/5AhQHvyPWOkowY1.png"
+                      alt="image-20210820092344753"
+                ></p>
+<ul>
+<li>那么如何在图像中检测这些边缘呢？下面是一个6×6的灰度图像，为了检测一个图像的垂直边缘可以构造一个3×3的矩阵（过滤器），卷积运算用*表示，该例中用3×3的过滤器对其进行卷积，输出4×4的矩阵（另一张图片）。4×4的矩阵的元素是将3×3的过滤器覆盖到6×6的灰度图像中，不断地平移得到。不同的语言使用不同的函数代表卷积。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/O78hn4qwLrCFRgB.png"
+                      alt="image-20210820092737334"
+                ></p>
+<ul>
+<li>在下面例子中输出图像中间区域的亮处，表示在图像中间有一个很明显的垂直边缘。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/armBpkl1hgHLofX.png"
+                      alt="image-20210820092445198"
+                ></p>
+<h1 id="03-更多边缘检测内容"><a href="#03-更多边缘检测内容" class="headerlink" title="03 更多边缘检测内容"></a>03 更多边缘检测内容</h1><ul>
+<li>通过不同的过滤器可以找出垂直或者水平的边缘。之前的图里面30是由10过渡到0得到的，所以就是由亮转暗；之前的 30 翻转成了-30，表明是由暗向亮过渡， 而不是由亮向暗过渡，因为看原图是从0到10，所以是从暗到亮的转化。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/PgaEqUfCLVsIhZv.png"
+                      alt="image-20210820101755312"
+                ></p>
+<ul>
+<li>水平边缘过滤器如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/i3ETomkwSYQXWe5.png"
+                      alt="image-20210820102053448"
+                ></p>
+<ul>
+<li>有多种过滤器：Sobel过滤器（增加了中间一行元素的权重）、Scharr过滤器、还有一种将九个数字都当成参数的思想（已经成为计算机视觉最为有效的思想之一）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/QwdaMvGLxoAi39r.png"
+                      alt="image-20210820102114071"
+                ></p>
+<h1 id="04-Padding"><a href="#04-Padding" class="headerlink" title="04 Padding"></a>04 Padding</h1><p>为了构建深度神经网络，需要学会使用卷积的基本操作Padding</p>
+<hr>
+<ul>
+<li>可以用公式计算为什么输出是4×4，公式为（n-f+1）×（n-f+1），其中n×n代表原图大小，f×f代表过滤器大小。这样的话会有两个缺点：一是每次做卷积操作，你的图像就会缩小，二是那些在角落或者边缘区域的像素点在输出中采用较少，意味着丢掉了图像边缘位置的许多信息。为了解决这些问题，可以在卷积操作之前填充这幅画（沿着图像边缘再填充一层像素），习惯上可以用0来填充，如果p是填充的数量（该例中p&#x3D;1，因为周围都填充了一个像素点），输出就变成了（n+2p-f+1）×（n+2p-f+1）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/bFtoevKHyMdOlJh.png"
+                      alt="image-20210820115241942"
+                ></p>
+<ul>
+<li>填充多少像素通常有两个选择：分别叫Valid卷积（不填充）和Same卷积（填充后你的输出大小和输入大小是一样的）。在计算机视觉中过滤器一般都是奇数维，因为如果f为偶数，那么你只能使用一些不对称填充，只有f为奇数时才会有自然填充；还有就是在奇数维中会有一个中心像素点，便于指出过滤器的位置。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/EzBZXkr31jLdFTJ.png"
+                      alt="image-20210820115253453"
+                ></p>
+<h1 id="05-卷积步长"><a href="#05-卷积步长" class="headerlink" title="05 卷积步长"></a>05 卷积步长</h1><ul>
+<li>步长为2，说明过滤器执行完一次后，平移两个格。输出格子公式：[(n+2p-f)&#x2F;s]+1 × [(n+2p-f)&#x2F;s]+1，如果不是一个整数的话就向下取整。按照惯例，过滤器必须完全处于图像中或者填充之后的图像区域内，才输出相应结果。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/nTuYINvzghmDj2A.png"
+                      alt="image-20210820152848282"
+                ></p>
+<ul>
+<li>总结下维度情况：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/INwQrlmeLn72Gi3.png"
+                      alt="image-20210820152914192"
+                ></p>
+<ul>
+<li>在有些定义中还有镜像翻转，对着对角线翻转，咱们这不用奥。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/u2wlxbph4PY1ejD.png"
+                      alt="image-20210820152957895"
+                ></p>
+<h1 id="06-卷积为何有效"><a href="#06-卷积为何有效" class="headerlink" title="06 卷积为何有效"></a>06 卷积为何有效</h1><ul>
+<li>假设我们想检测彩色图像的特征，那么对应的过滤器也应该有三层，对应红绿蓝三个通道。定义一下6×6×3这个形式：分别代表高、宽和通道数，并且图像的通道数必须和过滤器的通道数相等。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ib4k1hsEtd8RfSL.png"
+                      alt="image-20210820155626710"
+                ></p>
+<ul>
+<li>下面来看下计算立体图像的细节：首先我们的过滤器画成一个三维的立方体，然后把这个过滤器放到最左上角的位置，最后把27个对应数相乘相加就得到了输出的第一个数。依次平移得到剩下的数字。通过设置过滤器每层不同的参数，就可以检测不同颜色通道里的边界（右下角那两个例子）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/QiHenChouKUDxAc.png"
+                      alt="image-20210820155645064"
+                ></p>
+<ul>
+<li>我们想同时检测垂直和水平边缘还有45度倾斜的边缘还有70度倾斜的边缘该怎么做？（换句话说就是想同时用多个过滤器怎么办）就是用两个不同的过滤器，然后得到的结果依次进行叠加，得到一个立方体。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/xQcL36Dqa9fht4C.png"
+                      alt="image-20210820155718046"
+                ></p>
+<h1 id="07-单层卷积网络"><a href="#07-单层卷积网络" class="headerlink" title="07 单层卷积网络"></a>07 单层卷积网络</h1><ul>
+<li>通过不同的过滤器得到不同的输出后，通过python的广播机制给第一个矩阵这些元素都加上同一偏差，然后应用一个非线性激活函数ReLU；然后给第二个输出矩阵加上不同的偏差，同样也使用非线性激活函数ReLU，最后得到另一个4×4的矩阵，然后将两个矩阵叠加起来，就得到一个4×4×2的矩阵。</li>
+<li>a[0]到a[1]的演变过程：首先执行线性函数，然后将所有元素相乘做卷积，再加上偏差，然后应用激活函数ReLU，最后通过神经网络的一层，将6×6×3的维度a[0]演化为一个4×4×2维度的a[1],这就是卷积神经网络的一层。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/6O1bW9fAUcXeJYp.png"
+                      alt="image-20210820195009232"
+                ></p>
+<ul>
+<li>举个例子，有十个过滤器，每个过滤器是3×3×3的，问这一层有多少参数？因为过滤器是3×3×3的，所以有27个参数，然后加一个偏差就是28个，然后是10个过滤器也就是一共280个参数。无论输入的图片有多大，参数始终是280个，这是卷积神经网络的一个特征叫做“避免过拟合”。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/bvrHws14CkLy5Te.png"
+                      alt="image-20210820195038745"
+                ></p>
+<ul>
+<li>总结下用于描述卷积神经网络中的一层的各种标记：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/1LapcKxJ53zPErq.png"
+                      alt="image-20210820200118875"
+                ></p>
+<h1 id="08-简单卷积网络示例"><a href="#08-简单卷积网络示例" class="headerlink" title="08 简单卷积网络示例"></a>08 简单卷积网络示例</h1><ul>
+<li>想做一个图像识别，输入x，然后判别图片中有没有猫（0&#x2F;1表示）。通过下面的不同卷积不断地进行，最终为图片提取出7×7×40个特征，然后对该卷积层进行处理处理，可以将其平滑或展开成1960个单元，平滑处理后输出一个向量，其填充内容是逻辑回归单元还是softmax回归单元完全取决于我们是想识别图片上有没有猫还是想识别K种不同对象中的一种用y^表示最终神经网络的预测输出。</li>
+<li>随着神经网络计算深度不断加深，通常开始时的图像也要更大一些，高度和宽度会在一段时间内保持一致，然后随着深度的加深而逐渐减小，而信道数量在增加。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/aXEDsI9OtFM8wv5.png"
+                      alt="image-20210820204504429"
+                ></p>
+<ul>
+<li>一个典型的卷积神经网络通常有三层：卷积层（CONV）、池化层（POOL）、全连接层（FC）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/wHGmsxnS5pruJNI.png"
+                      alt="image-20210820204517662"
+                ></p>
+<h1 id="09-池化层"><a href="#09-池化层" class="headerlink" title="09 池化层"></a>09 池化层</h1><p>使用池化层来缩减模型的大小，提高计算速度，同时提高所提取特征的鲁棒性</p>
+<hr>
+<ul>
+<li>在此用到的池化类型是最大池化，下面的例子相当于我们选用了一个规模为2、步幅为2的过滤器，然后选择其中最大值。最大化操作的功能就是只要在任何一个象限内提取到某个特征，他都会保留在最大池化的输出中，最大池化的实际作用就是在过滤器中提取某个特征，然后保留其最大值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/t3yT2xeXg56VGp1.png"
+                      alt="image-20210820211745699"
+                ></p>
+<ul>
+<li>再看一个有若干超级参数的例子，每个信道都独立执行最大池化计算。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Op5iKwShmoIeyGE.png"
+                      alt="image-20210820211821158"
+                ></p>
+<ul>
+<li>平均池化——就是取平均值</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/UjCruST7XD2ehvF.png"
+                      alt="image-20210820212010845"
+                ></p>
+<ul>
+<li>总结：池化的超级参数包括过滤器大小f和步幅s，大部分情况下p&#x3D;0</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/s5mfHBJPuqThVoL.png"
+                      alt="image-20210820211932204"
+                ></p>
+<h1 id="10-卷积神经网络示例"><a href="#10-卷积神经网络示例" class="headerlink" title="10 卷积神经网络示例"></a>10 卷积神经网络示例</h1><ul>
+<li>在卷积文献中，卷积有两种分类，一类卷积是一个卷积层和一个池化层一起作为一层（人们在计算神经网络有多少层时，通常只是统计具有权重和参数的层，因为池化层没有权重和参数，只有一些超参数，所以将两者当着一层Layer1）；另一类卷积是把卷积层作为一层，池化层单独作为一层。</li>
+<li>我们针对识别数字例子，首先输入一个数字图片，通过两个神经网络的组合（卷积层+池化层），然后得到一个输出，将输出水平展开成向量，通过两个全连接层，最后用FC4的单元填充一个softmax单元，softmax会有十个输出。关于如何选定超级参数，常规做法是尽量不要自己设置，而是参考别人的文献采用了哪些超级参数，选择一个效果好的框架。在神经网络中另一种常见的模式是一个或多个卷积层后跟随一个池化层，然后一个或多个卷积层后再跟随一个池化层，然后是几个全连接层，最后是一个softmax。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/umNMPEZg5hIKvtC.png"
+                      alt="image-20210820230812377"
+                ></p>
+<ul>
+<li>神经网络激活值形状、激活值大小和参数数量。有几点注意：第一池化层和最大池化层没有参数；第二卷积层的参数相对较少，许多参数都存在于神经网络中的全连接层；第三随着神经网络的加深，激活值会逐渐减小（如果下降太快也会有所影响）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ARbxHeBP8Gmp1dw.png"
+                      alt="image-20210820230901334"
+                ></p>
+<h1 id="11为什么使用卷积？"><a href="#11为什么使用卷积？" class="headerlink" title="11为什么使用卷积？"></a>11为什么使用卷积？</h1><ul>
+<li>和只用全连接层相比卷积层的两个主要优势在于参数共享和稀疏连接。两个神经元相连会得到一个非常多的参数数量3072×4704，而使用卷积的话，一共才156个参数。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/onDqR5eY4ZCktcK.png"
+                      alt="image-20210820233215874"
+                ></p>
+<ul>
+<li>卷积网络映射这么少参数有两个原因：一是参数共享，一个特征检测器如垂直边缘检测器，用于检测图片左上角区域的特征，这个特征很可能也适用于右下角区域，因此在计算图片的左上和右下角区域时，不需要添加其他的特征检测器，假如有一个左上角和右下角可能有不同分布，但也可能很相似的数据集，整张图片共享特征检测器，提取效果也很好；二是稀疏连接，右图的输出单元仅与36个输入特征中的9个相连接，而其他像素值都不会对输出产生任何影响。神经网络通过这两种机制减少参数，以便我们用更小的训练集训练它，从而防止过拟合。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/gQbqWChjAzYfonG.png"
+                      alt="image-20210820233229584"
+                ></p>
+<ul>
+<li>要训练神经网络要做的就是使用梯度下降法，来优化神经网络中的所有参数，以及减小代价函数J的值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/IH3dlqUafFPrDLt.png"
+                      alt="image-20210820233240036"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：深度学习 day12卷积神经网络</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-08-20 23:42:29</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/08/20/深度学习 day12卷积神经网络/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/08/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day13%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%8E%A2%E7%A9%B6/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day13深度卷积网络：实例探究</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day11%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88ML%EF%BC%89%E7%AD%96%E7%95%A5/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day11 机器学习（ML）策略</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89"><span class="nav-number">1.</span> <span class="nav-text">01 计算机视觉</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">02 边缘检测示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E6%9B%B4%E5%A4%9A%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B%E5%86%85%E5%AE%B9"><span class="nav-number">3.</span> <span class="nav-text">03 更多边缘检测内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-Padding"><span class="nav-number">4.</span> <span class="nav-text">04 Padding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E5%8D%B7%E7%A7%AF%E6%AD%A5%E9%95%BF"><span class="nav-number">5.</span> <span class="nav-text">05 卷积步长</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E5%8D%B7%E7%A7%AF%E4%B8%BA%E4%BD%95%E6%9C%89%E6%95%88"><span class="nav-number">6.</span> <span class="nav-text">06 卷积为何有效</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E5%8D%95%E5%B1%82%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C"><span class="nav-number">7.</span> <span class="nav-text">07 单层卷积网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E7%AE%80%E5%8D%95%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">8.</span> <span class="nav-text">08 简单卷积网络示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#09-%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="nav-number">9.</span> <span class="nav-text">09 池化层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%A4%BA%E4%BE%8B"><span class="nav-number">10.</span> <span class="nav-text">10 卷积神经网络示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E5%8D%B7%E7%A7%AF%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">11为什么使用卷积？</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
