@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            机器学习 day05Octave教程 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day05Octave教程</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-12 18:00:45</span>
+        <span class="mobile">2021-07-12 18:00</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-基本操作"><a href="#01-基本操作" class="headerlink" title="01 基本操作"></a>01 基本操作</h1><ul>
+<li><p>注释表达：%</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; 1~= 2 %注释</span><br><span class="line">ans = 1</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>不等号表达：~&#x3D;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; 1~= 2</span><br><span class="line">ans = 1</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>隐藏提示命令：PS1(‘&gt;&gt; ‘);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">octave:6&gt; PS1(&#x27;&gt;&gt; &#x27;);</span><br><span class="line">&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>想分配一个变量，但是不想在屏幕上显示结果：只需在结尾加分号（;）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; a = pi;</span><br><span class="line">&gt;&gt; a = pi</span><br><span class="line">a = 3.1416</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>显示命令：disp( );</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; disp(a);</span><br><span class="line">3.1416</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用disp( );显示字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; disp(sprintf(&#x27;2 decimals:%0.2f&#x27;,a)) %0.2f:小数点后两位</span><br><span class="line">2 decimals:3.14</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示更多的小数点后几位：format long</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; format long</span><br><span class="line">&gt;&gt; a</span><br><span class="line">a = 3.141592653589793</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>显示少量的小数点后几位：format short</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; format short</span><br><span class="line">&gt;&gt; a</span><br><span class="line">a = 3.1416</span><br></pre></td></tr></table></figure>
+
+<hr>
+</li>
+<li><p>建立一个矩阵：</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; A = [1 2;3 4;5 6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   3   4</span><br><span class="line">   5   6</span><br><span class="line"></span><br><span class="line">&gt;&gt; A = [1 2;</span><br><span class="line">&gt; 3 4;</span><br><span class="line">&gt; 5 6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   3   4</span><br><span class="line">   5   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>建立向量：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; v = [1 2 3] %行向量</span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">   1   2   3</span><br><span class="line"></span><br><span class="line">&gt;&gt; v = [1; 2; 3] %列向量</span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   2</span><br><span class="line">   3</span><br><span class="line"></span><br><span class="line">&gt;&gt; v = 1:0.1:2 %从1开始每次增加0.1到2的行向量</span><br><span class="line">v =</span><br><span class="line"></span><br><span class="line">    1.0000    1.1000    1.2000    1.3000    1.4000    1.5000    1.6000    1.7000    1.8000    1.9000    2.0000</span><br><span class="line"></span><br><span class="line">&gt;&gt; V = 1:6 %从1到6的整数</span><br><span class="line">V =</span><br><span class="line"></span><br><span class="line">   1   2   3   4   5   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成单位矩阵</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; ones(2,3) %2×3的</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1   1   1</span><br><span class="line">   1   1   1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成零矩阵</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; zeros(2,3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   0   0   0</span><br><span class="line">   0   0   0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>随机生成0到1的值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; rand(3,3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   0.914686   0.131127   0.563647</span><br><span class="line">   0.296402   0.590713   0.134373</span><br><span class="line">   0.243013   0.477658   0.071331</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成服从高斯分布的随机数：均值为0，标准差或者方差为1</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;  w = randn(1,3)</span><br><span class="line">w =</span><br><span class="line"></span><br><span class="line">  -0.1177   2.0111   0.7261</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制直方图：hist( ):均值为-6，方差为10，标准差为根号10</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/B2nIxCv9eP1WXyY.png"
+                      alt="image-20210712095621302"
+                ></p>
+<ul>
+<li>生成单位矩阵：eye( )</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; eye(4)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">Diagonal Matrix</span><br><span class="line"></span><br><span class="line">   1   0   0   0</span><br><span class="line">   0   1   0   0</span><br><span class="line">   0   0   1   0</span><br><span class="line">   0   0   0   1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>显示帮助：help eye;help help;按q退出</p>
+</li>
+<li><p>显示矩阵大小:size( )</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A = [1 2; 3 4; 5 6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   3   4</span><br><span class="line">   5   6</span><br><span class="line"></span><br><span class="line">&lt;&lt; size(A)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   3   2</span><br><span class="line">&lt;&lt; size(A,1) %显示行数</span><br><span class="line">ans = 3</span><br><span class="line">&lt;&lt; size(A,2) %显示列数</span><br><span class="line">ans = 2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回最大维度大小：length( )|一般对向量使</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; length(A)</span><br><span class="line">ans = 3 %3×2，最大维度为3</span><br><span class="line">&lt;&lt; length([1;2;3;4;5])</span><br><span class="line">ans = 5</span><br></pre></td></tr></table></figure>
+
+<h1 id="02-移动数据"><a href="#02-移动数据" class="headerlink" title="02 移动数据"></a>02 移动数据</h1><ul>
+<li>显示当前在内存中存储的所有变量：who</li>
+<li>whos显示更加完善的信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; who</span><br><span class="line">Variables visible from the current scope:</span><br><span class="line"></span><br><span class="line">A    ans</span><br><span class="line"></span><br><span class="line">&lt;&lt; whos</span><br><span class="line">Variables visible from the current scope:</span><br><span class="line"></span><br><span class="line">variables in scope: top scope</span><br><span class="line"></span><br><span class="line">   Attr Name        Size                     Bytes  Class</span><br><span class="line">   ==== ====        ====                     =====  =====</span><br><span class="line">        A           3x2                         48  double</span><br><span class="line">        ans         1x10                        10  char</span><br><span class="line"></span><br><span class="line">Total is 16 elements using 58 bytes</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>载入文件格式：load+文件；load(‘文件’)</li>
+<li>删除某个变量：clear+变量</li>
+<li>存储数据到硬盘中：save+存储文件名+数据</li>
+<li>在找矩阵某一个元素时，：表示这一行或者这一列的元素</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A(2,1)</span><br><span class="line">ans = 3</span><br><span class="line">&lt;&lt; A(2,:)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   3   4</span><br><span class="line"></span><br><span class="line">&lt;&lt; A(:,2)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   2</span><br><span class="line">   4</span><br><span class="line">   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>索引操作：同时取得1、3行所有元素</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A([1 3],:)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   5   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将第二列用其他元素代替</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A(:,2) = [10; 11; 12]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">    1   10</span><br><span class="line">    3   11</span><br><span class="line">    5   12</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在A的右侧附加一列</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A = [A,[100; 200; 300]]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">     1    10   100</span><br><span class="line">     3    11   200</span><br><span class="line">     5    12   300</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把A所有元素放在单独的一列</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A(:)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">     1</span><br><span class="line">     3</span><br><span class="line">     5</span><br><span class="line">    10</span><br><span class="line">    11</span><br><span class="line">    12</span><br><span class="line">   100</span><br><span class="line">   200</span><br><span class="line">   300</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将两个矩阵结合在一起</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A = [1 2; 3 4; 5 6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   3   4</span><br><span class="line">   5   6</span><br><span class="line"></span><br><span class="line">&lt;&lt;  B = [11 12; 13 14; 15 16]</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   11   12</span><br><span class="line">   13   14</span><br><span class="line">   15   16</span><br><span class="line"></span><br><span class="line">&lt;&lt; C = [A B] %左右结合</span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">    1    2   11   12</span><br><span class="line">    3    4   13   14</span><br><span class="line">    5    6   15   16</span><br><span class="line">&lt;&lt; C = [A;B] %上下结合</span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">    1    2</span><br><span class="line">    3    4</span><br><span class="line">    5    6</span><br><span class="line">   11   12</span><br><span class="line">   13   14</span><br><span class="line">   15   16</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="03-计算数据"><a href="#03-计算数据" class="headerlink" title="03 计算数据"></a>03 计算数据</h1><ul>
+<li>两个矩阵相乘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A = [1 2; 3 4; 5 6]</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   1   2</span><br><span class="line">   3   4</span><br><span class="line">   5   6</span><br><span class="line"></span><br><span class="line">&lt;&lt;  B = [11 12; 13 14; 15 16]</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   11   12</span><br><span class="line">   13   14</span><br><span class="line">   15   16</span><br><span class="line">&lt;&lt; C = [1 1;2 2]</span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">   1   1</span><br><span class="line">   2   2</span><br><span class="line">&lt;&lt; A*C</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    5    5</span><br><span class="line">   11   11</span><br><span class="line">   17   17</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>两个矩阵对应数相乘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A.*B</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   11   24</span><br><span class="line">   39   56</span><br><span class="line">   75   96</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>A的每个元素进行乘方</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A.^2</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    1    4</span><br><span class="line">    9   16</span><br><span class="line">   25   36</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>求V对应元素的倒数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; V = [1; 2; 3]</span><br><span class="line">V =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   2</span><br><span class="line">   3</span><br><span class="line"></span><br><span class="line">&lt;&lt; 1 ./V</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1.0000</span><br><span class="line">   0.5000</span><br><span class="line">   0.3333</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以e为底，v中元素为指数的幂运算</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; exp(V)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    2.7183</span><br><span class="line">    7.3891</span><br><span class="line">   20.0855</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>求绝对值：abs( )</li>
+<li>求相反数直接加-；例如-V</li>
+<li>将V中每个元素+1</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; V + ones(length(V),1) %与V +1等价</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   2</span><br><span class="line">   3</span><br><span class="line">   4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>求A的转置</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A&#x27;</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1   3   5</span><br><span class="line">   2   4   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>求X最大的数及其索引</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; X = [1 15 2 0.5]</span><br><span class="line">X =</span><br><span class="line"></span><br><span class="line">    1.0000   15.0000    2.0000    0.5000</span><br><span class="line">&lt;&lt; val = max(X)</span><br><span class="line">val = 15</span><br><span class="line">&lt;&lt; [val,ind] = max(X)</span><br><span class="line">val = 15</span><br><span class="line">ind = 2</span><br><span class="line">%如果A是矩阵，那么将求出每一列最大值</span><br><span class="line">&lt;&lt; max(A)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   5   6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>X中每个元素与3比较，根据结果返回真和假</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; X&lt;3</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">  1  0  1  1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>找到比3小的数并返回其索引</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; find(X&lt;3)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   1   3   4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成一个幻方矩阵，每行、每列、每个对角线加起来都等于一个数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; B = magic(3)</span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">   8   1   6</span><br><span class="line">   3   5   7</span><br><span class="line">   4   9   2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>找出B中&gt;&#x3D;7的元素，并返回下标</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; [r,c] = find(B &gt;=7)</span><br><span class="line">r =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   3</span><br><span class="line">   2</span><br><span class="line"></span><br><span class="line">c =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   2</span><br><span class="line">   3</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>X中所有元素相加</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; sum(X)</span><br><span class="line">ans = 18.500</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>X中所有元素相乘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; prod(X)</span><br><span class="line">ans = 15</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对X中元素向下取整</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; floor(X)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    1   15    2    0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对X中元素向上取整</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; ceil(X)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">    1   15    2    1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取两个随机矩阵中较大的数组合成一个较大值的矩阵</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;  max(rand(3),rand(3))</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   0.6957   0.9634   0.7179</span><br><span class="line">   0.8404   0.9784   0.8319</span><br><span class="line">   0.5236   0.8063   0.6697</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取每一列&#x2F;行最大值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; max(B,[],1)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   8   9   7</span><br><span class="line"></span><br><span class="line">&lt;&lt; max(B,[],2)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   8</span><br><span class="line">   7</span><br><span class="line">   9</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>求每一行、每一列、对角线相加</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; C = magic(9)</span><br><span class="line">C =</span><br><span class="line"></span><br><span class="line">   47   58   69   80    1   12   23   34   45</span><br><span class="line">   57   68   79    9   11   22   33   44   46</span><br><span class="line">   67   78    8   10   21   32   43   54   56</span><br><span class="line">   77    7   18   20   31   42   53   55   66</span><br><span class="line">    6   17   19   30   41   52   63   65   76</span><br><span class="line">   16   27   29   40   51   62   64   75    5</span><br><span class="line">   26   28   39   50   61   72   74    4   15</span><br><span class="line">   36   38   49   60   71   73    3   14   25</span><br><span class="line">   37   48   59   70   81    2   13   24   35</span><br><span class="line">&lt;&lt; sum(C,2)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">   369</span><br><span class="line">&lt;&lt; sum(C,1)</span><br><span class="line">ans =</span><br><span class="line"></span><br><span class="line">   369   369   369   369   369   369   369   369   369</span><br><span class="line">&lt;&lt; sum(sum(C.*eye(9))) %正对角线相加</span><br><span class="line">ans = 369</span><br><span class="line">&lt;&lt; sum(sum(C.*flipud(eye(9)))) %副对角线相加，flipud表示使矩阵垂直翻转</span><br><span class="line">ans = 369</span><br></pre></td></tr></table></figure>
+
+<h1 id="04-数据绘制"><a href="#04-数据绘制" class="headerlink" title="04 数据绘制"></a>04 数据绘制</h1><ul>
+<li>绘制一个正弦函数图像：plot( );</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; t = [0:0.01:0.98];</span><br><span class="line">&lt;&lt; y1 = sin(2*pi*4*t);</span><br><span class="line">&lt;&lt; plot(t,y1);</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/8wdSBVXEstNUrLi.png"
+                      alt="image-20210712152708972"
+                ></p>
+<ul>
+<li>绘制一个余弦函数图像：plot( );</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; y2 = cos(2*pi*4*t);</span><br><span class="line">&lt;&lt; plot(t,y2);</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/caGB9dD1euryiT6.png"
+                      alt="image-20210712152919322"
+                ></p>
+<ul>
+<li>在旧的图像上面绘制新的图像：hold on;</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; t = [0:0.01:0.98];</span><br><span class="line">&lt;&lt; y1 = sin(2*pi*4*t);</span><br><span class="line">&lt;&lt; y2 = cos(2*pi*4*t);</span><br><span class="line">&lt;&lt; plot(t,y1);</span><br><span class="line">&lt;&lt; hold on;</span><br><span class="line">&lt;&lt; plot(t,y2,&#x27;r&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/dFOlK7fYJo2ktgw.png"
+                      alt="image-20210712153553613"
+                ></p>
+<ul>
+<li>加上横与纵轴的标签，标记两条函数，输入标题，并保存到桌面</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; xlabel(&#x27;time&#x27;)</span><br><span class="line">&lt;&lt; ylabel(&#x27;value&#x27;)</span><br><span class="line">&lt;&lt; legend(&#x27;sin&#x27;, &#x27;cos&#x27;)</span><br><span class="line">&lt;&lt; title(&#x27;my plot&#x27;)</span><br><span class="line">&lt;&lt; cd &#x27;C:\Users\1\Desktop&#x27;; print -dpng &#x27;plot.png&#x27;</span><br></pre></td></tr></table></figure>
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/aZ6L27DlPY5zpRi.png"
+                      alt="plot" style="zoom:80%;" 
+                >
+
+<ul>
+<li>为不同图像标号：就可以同时有两个图像</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; figure(1); plot(t,y1);</span><br><span class="line">&lt;&lt; figure(2); plot(t,y2);</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/Yeo7x2IWkBVtSaz.png"
+                      alt="image-20210712154937689"
+                ></p>
+<ul>
+<li>将一个界面分为两个格子，其中正弦占第一个，余弦占第二个</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subplot(1,2,1);</span><br><span class="line">&lt;&lt; plot(t,y1);</span><br><span class="line">&lt;&lt; subplot(1,2,2);</span><br><span class="line">&lt;&lt; plot(t,y2);</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/dlatgj6vBcoTnfm.png"
+                      alt="image-20210712155423575"
+                ></p>
+<ul>
+<li>设置横竖轴的范围</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; plot(t,y1);</span><br><span class="line">&lt;&lt; axis([0.5 1 -1 1])</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/StQiq4Y61Xj7a2d.png"
+                      alt="image-20210712155811378"
+                ></p>
+<ul>
+<li>可视化矩阵</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; A = magic(5)</span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">   17   24    1    8   15</span><br><span class="line">   23    5    7   14   16</span><br><span class="line">    4    6   13   20   22</span><br><span class="line">   10   12   19   21    3</span><br><span class="line">   11   18   25    2    9</span><br><span class="line"></span><br><span class="line">&lt;&lt; imagesc(A)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/uYN2z5wsHlXQVLP.png"
+                      alt="image-20210712160056450"
+                ></p>
+<ul>
+<li>生成颜色图像、灰度分布图并在右边加入一个颜色分布</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; imagesc(A), colorbar, colormap gray;</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/fNQ5KizjxTPFge3.png"
+                      alt="image-20210712160509454"
+                ></p>
+<ul>
+<li>添加环境路径，找文件时，即使不在文件环境，也可以使用其中的函数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addpath(&#x27;C:\Users\1\Desktop&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="05-控制语句"><a href="#05-控制语句" class="headerlink" title="05 控制语句"></a>05 控制语句</h1><ul>
+<li><p>octave可以返回多个返回值</p>
+</li>
+<li><p>函数定义</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function J = costFunctionJ(X,y, theta)</span><br><span class="line">  m = size(X,1);</span><br><span class="line">  predictions = X*theta;</span><br><span class="line">  sqrError = (predictions-y).^2;</span><br><span class="line">  J = 1/(2*m) * sum(sqrError);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt; addpath(&#x27;C:\Users\1\Desktop&#x27;)</span><br><span class="line">&lt;&lt; X = [1 1; 1 2; 1 3]</span><br><span class="line">X =</span><br><span class="line"></span><br><span class="line">   1   1</span><br><span class="line">   1   2</span><br><span class="line">   1   3</span><br><span class="line"></span><br><span class="line">&lt;&lt; y = [1; 2; 3]</span><br><span class="line">y =</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line">   2</span><br><span class="line">   3</span><br><span class="line"></span><br><span class="line">&lt;&lt; theta = [0;1];</span><br><span class="line">&lt;&lt; J = costFunctionJ(X,y, theta)</span><br><span class="line">J = 0</span><br><span class="line">&lt;&lt; theta = [0;0];</span><br><span class="line">&lt;&lt; J = costFunctionJ(X,y, theta)</span><br><span class="line">J = 2.3333</span><br><span class="line">&lt;&lt; (1^2+2^2+3^2)/(2*3)</span><br><span class="line">ans = 2.3333</span><br></pre></td></tr></table></figure>
+
+<h1 id="06-矢量"><a href="#06-矢量" class="headerlink" title="06 矢量"></a>06 矢量</h1><ul>
+<li>非向量化与向量化的代码对比</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/7JDWEqMIZAurHfn.png"
+                      alt="image-20210712173743441"
+                ></p>
+<ul>
+<li>用C++语言及C++线性库所写代码</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/SiknlqWt7vzLjRQ.png"
+                      alt="image-20210712173936846"
+                ></p>
+<ul>
+<li>向量化</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/11/dzC4wlaUM16NtHQ.png"
+                      alt="image-20210712175134285"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：机器学习 day05Octave教程</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-07-12 18:00:45</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/07/12/机器学习 day05Octave教程/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/12/java%20day06%20%E6%96%B9%E6%B3%95/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day06 方法</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/11/java%20day05%20%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day05 流程控制</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">01 基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E7%A7%BB%E5%8A%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">02 移动数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E8%AE%A1%E7%AE%97%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">03 计算数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E6%95%B0%E6%8D%AE%E7%BB%98%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">04 数据绘制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.</span> <span class="nav-text">05 控制语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E7%9F%A2%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">06 矢量</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

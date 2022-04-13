@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            机器学习 day13无监督学习 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day13无监督学习</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-20 16:31:47</span>
+        <span class="mobile">2021-07-20 16:31</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-无监督学习"><a href="#01-无监督学习" class="headerlink" title="01 无监督学习"></a>01 无监督学习</h1><ul>
+<li>无监督学习：训练集没有标签，也就是图上的点没有任何标签信息。我们要将这系列无标签的数据，输入到算法中，然后我们要让算法找到一些隐含在数据中的结构，这个图中数据集中的点两组分开的簇，这种能够找到这些簇的算法叫做聚类算法。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/h57nW6JIMLDcrdU.png"
+                      alt="image-20210720104734274"
+                ></p>
+<h1 id="02-K-Means算法"><a href="#02-K-Means算法" class="headerlink" title="02 K-Means算法"></a>02 K-Means算法</h1><p><strong>K均值算法是现在最为广泛运用的聚类算法</strong></p>
+<hr>
+<ul>
+<li>通过K均值算法将下图分为两个簇的具体操作：<ol>
+<li>随机生成两点（聚类中心），选取两点的原因是想将数据聚成两类。</li>
+</ol>
+</li>
+<li>K均值算法是个迭代算法，可以做两件事：簇分配和移动聚类中心。</li>
+<li>K均值算法每次内循环的第一步是要进行簇分配，观察图中的绿点，是接近哪个聚类中心，距离哪个近就分配给哪个。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/btCxj1PlQ4BO6e5.png"
+                      alt="image-20210720110012145"
+                ></p>
+<ul>
+<li>根据离红色或者蓝色聚类中心的远近，将每个点染成红色或者蓝色。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/gjCoNePSZQkhBnr.png"
+                      alt="image-20210720110100057"
+                ></p>
+<ul>
+<li>K均值算法每次内循环的第二步是移动聚类中心，将两个聚类中心移动到同色点的均值处。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/YFKVo6Bm4tWMqL5.png"
+                      alt="image-20210720110651122"
+                ></p>
+<ol start="2">
+<li>接着我们进入下一个簇分配步骤：再次检查所有的无标签样本，然后根据这些点离红色或者蓝色聚类中心的远近，将其染成红色或者蓝色。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/9qm1blvZng6RLpc.png"
+                      alt="image-20210720112657184"
+                ></p>
+<ul>
+<li>再一次移动聚类中心，将两个聚类中心移动到同色点的均值处。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/nz1GPgMUh2KYJrQ.png"
+                      alt="image-20210720112751139"
+                ></p>
+<ul>
+<li>以此类推，不断重复上面操作，得到最终结果。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/FBjbh8Kt42J7N6O.png"
+                      alt="image-20210720112846929"
+                ></p>
+<ul>
+<li>X^(i)是一个n维实数向量，这也就是训练样本是n维向量而不是n+1维向量的原因。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/vlJNQb4d9VIpBwk.png"
+                      alt="image-20210720113123916"
+                ></p>
+<ul>
+<li>以更加规范的格式写出K均值算法。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/wKgHi59mSNXuOvA.png"
+                      alt="image-20210720120029867"
+                ></p>
+<ul>
+<li>假设u_k是某个簇的均值，那么如果存在一个没有点的聚类中心，会怎么样？–直接移除那个聚类中心，这样会得到k-1个簇而不是k个簇；如果你确实必须要k个簇，那么就随机初始化这个聚类中心。</li>
+<li>K均值算法最常还应用在分离不佳的簇的问题（右图），如果想把衣服根据体重身高分为小中大三个号，这时就可以使用k均值算法。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/EiJ81z2Hu7jvbWk.png"
+                      alt="image-20210720144856861"
+                ></p>
+<h1 id="03-优化目标"><a href="#03-优化目标" class="headerlink" title="03 优化目标"></a>03 优化目标</h1><ul>
+<li><p>当运行k均值算法时，我们会对两组变量进行跟踪。</p>
+<ol>
+<li>c^(i)代表的是当前样本x^(i)所属的那个簇的索引。</li>
+<li>用u_k表示第k个聚类中心的位置（K表示聚类中心的数量，k表示聚类中心的下标）。</li>
+</ol>
+</li>
+<li><p>k均值算法的优化目标即最小化代价函数，代价函数有时也叫失真代价函数或者K均值算法的失真：</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/isQ1V5S2rp9gMmP.png"
+                      alt="image-20210720150626764"
+                ></p>
+<ul>
+<li>簇分配实际上就是，不改变聚类中心的位置，而是选出c^(1)到c^(m)来最小化这个代价函数；而移动聚类中心实际上就是选择u值来最小化J。然后保持迭代。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/E9VHxvWtwColkc7.png"
+                      alt="image-20210720151307367"
+                ></p>
+<h1 id="04-随机初始化"><a href="#04-随机初始化" class="headerlink" title="04 随机初始化"></a>04 随机初始化</h1><p><strong>如何初始化K均值聚类算法？引导讨论如何使算法避开局部最优。</strong></p>
+<hr>
+<ul>
+<li>初始化聚类中心的比较好的方法，通常随机挑选K个训练样本，然后设定u_1到u_k，由于随机初始化状态不同，所以K均值最后可能会得到不同的结果。（最好使用这种方法）</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/LNrgu9oCm53QypM.png"
+                      alt="image-20210720153213588"
+                ></p>
+<ul>
+<li>随机化得到结果比较好（右上图），也可能得到不好的局部最优值（右下图）。局部最优值指的是畸变函数J的局部最优，相对来说左下角图的这些局部最优所对应的情况，其实是K均值算法落在了局部最优，因而不能很好的最小化J。如果想要K均值算法找到最有可能的聚类（右上图），我们可以尝试多次随机初始化，并且运行多次。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ofT7HMcP3DpGtx5.png"
+                      alt="image-20210720154820728"
+                ></p>
+<ul>
+<li>具体步骤如下：典型运行K均值算法的次数在50到1000次，需要在最后选取代价最小的一个。如果你运行K均值算法时，所用的聚类数相当小（2到10之间），那么多次随机初始化通常能保证找到较好的局部最优解，保证能找到更好的聚类，很好的最小化J；如果K非常大的话，多次初始化也不会有太大的改善。更有可能第一次初始化就会有很好的结果。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/HUwGCWJlpf4mAdO.png"
+                      alt="image-20210720155847005"
+                ></p>
+<h1 id="05-选取聚类数量"><a href="#05-选取聚类数量" class="headerlink" title="05 选取聚类数量"></a>05 选取聚类数量</h1><p>K均值如何去选择聚类数量？–最常用还是根据观察可视化的图，或通过观察聚类算法的输出去手动选择。</p>
+<hr>
+<ul>
+<li>当谈到选择聚类数量的方法时，可能谈到的一种方法叫“肘部法则”。我们所要做的是改变K，我们先用一个类来聚类，然后计算代价函数，接着用两个、三个…..（其中可能会多次初始化），可能会得到一个图像（随着K增多J下降），选择K&#x3D;3可能是正确的，因为K&#x3D;3之前下降很快，而之后就下降很慢。但是实际上好多时候都是右图，比较平滑没有拐点，从而不能准确选择K。不能期望它能解决任何问题。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/g7DrVqBunXftGPy.png"
+                      alt="image-20210720161729180"
+                ></p>
+<ul>
+<li>如果后续目的如市场分割能给一个评估标准，那么决定K更好的方法是看哪个聚类数量能更好地应用于后续目的。从商业角度看，例如如果K&#x3D;5是否我的衣服能够很好的满足顾客需求，还是K&#x3D;3时更加符合利益。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/1zh8XpQFGEug3C2.png"
+                      alt="image-20210720162506252"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：机器学习 day13无监督学习</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-07-20 16:31:47</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/07/20/机器学习 day13无监督学习/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/20/java%20day12%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day12 面向对象</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day12%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">机器学习 day12支持向量机</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">01 无监督学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-K-Means%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">02 K-Means算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">03 优化目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">04 随机初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E9%80%89%E5%8F%96%E8%81%9A%E7%B1%BB%E6%95%B0%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">05 选取聚类数量</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

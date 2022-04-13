@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            机器学习 day15异常检测 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day15异常检测</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-23 20:42:36</span>
+        <span class="mobile">2021-07-23 20:42</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>14 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-问题动机"><a href="#01-问题动机" class="headerlink" title="01 问题动机"></a>01 问题动机</h1><p>异常检测主要用在非监督学习，但从某些角度看，跟有监督学习问题是非常相似的。</p>
+<hr>
+<ul>
+<li>异常检测问题就是我们希望知道新的测试数据是否有某种异常，换句话说新的测试数据是否需要进一步测试。如下面这个图（飞机引擎的例子），其中x_1、x_2是飞机引擎的特征。通过测试发现如果x_test在对应点里面，那么他就不存在异常，如果在对应的外面，那么就存在异常。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/6BxgWQUiwosPJ9p.png"
+                      alt="image-20210722163120915"
+                ></p>
+<ul>
+<li>我们通常认定这m个数据都是异常或者都不是异常的，我们需要一个算法告诉我们一个新的样本数据是否异常。因此我们要做的就是给定无标签训练集，我们对数据建模即p(x)，也就是对x的分布概率建模。如果测试集的概率p低于阈值那么就将其标为异常，否则正常。越中心的点概率越高。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/RahrOdNk9oeU2Kq.png"
+                      alt="image-20210722163938003"
+                ></p>
+<ul>
+<li>异常检测最常见的应用是欺诈检测，例如许多购物网站常用来识别异常用户。可以针对不同的用户活动计算特征变量x^(i)，于是建立一个模型来表示用户表现出各种行为的可能性。x_1也许是用户登陆的频率，x_2也许是用户访问某个页面的次数……，然后根据这些数据建立一个模型p(x),就可以用这个模型发现网站上行为可疑的人。</li>
+<li>另一个例子就是上面的飞机引擎例子。</li>
+<li>第三个是数据中心的计算机监控，这种技术被各大数据中心来监测大量的计算机可能发生的异常。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/O8svFbWJrmGpz5e.png"
+                      alt="image-20210722164533042"
+                ></p>
+<h1 id="02-高斯分布（正态分布）"><a href="#02-高斯分布（正态分布）" class="headerlink" title="02 高斯分布（正态分布）"></a>02 高斯分布（正态分布）</h1><ul>
+<li>假设x是一个实数的随机变量，如果x的概率分布服从高斯分布，那么记作X~N(均值，方差（标准差的平方）)。高斯分布的概率密度绘制出来是一个钟形，均值控制中心位置，标准差控制宽度。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/iuhrnIcxGBLU4K8.png"
+                      alt="image-20210722170841034"
+                ></p>
+<ul>
+<li>下面是参数不同画出来的图像，不管怎么样阴影部分的积分一定是1。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/MbQisYgV3pJ2tlq.png"
+                      alt="image-20210722171820106"
+                ></p>
+<ul>
+<li>参数估计问题：给定数据集希望能找到能够估算出均值和方差的值。下面是公式：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Xpxgsta6PE91NyG.png"
+                      alt="image-20210722173546335"
+                ></p>
+<h1 id="03-算法"><a href="#03-算法" class="headerlink" title="03 算法"></a>03 算法</h1><ul>
+<li>我们处理异常检测的方法是：我们我们要用数据集建立起模型概率p(x)，我们要试图解决出哪些特征量出现的概率较高，哪些出现的概率较低。分布项p(x)的估计问题有时也称为密度估计问题，我们列出p(x)的计算公式（x_1到x_n连乘）如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/uCy19BsjcHevbrl.png"
+                      alt="image-20210723104142159"
+                ></p>
+<ul>
+<li>异常检测算法：<ol>
+<li>选择特征量（能够描述所收集数据的一般特性的特征），能够帮助我们指出那些反常的样本。</li>
+<li>给出m个未作标记的样本的训练集。</li>
+<li>进行参数拟合u_1到u_n，(sita_1)^2到(sita_n)^2,运用公式来求解这些参数。</li>
+<li>给一个测试样本，根据p(x)的公式来测量是否异常。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ZxkgnVdC2IhKwSb.png"
+                      alt="image-20210723105612951"
+                ></p>
+<ul>
+<li>如何对这些数据拟合出参数值，通过第一个图的数据求出第二个图（概率图），然后将第二个图两个数据进行相乘画出第三个图（三维图）。如果一个想要检测一个样本是否异常，可以直接看三维图，异常的都在图像下围显示（概率低），而正常都在图像上围（概率高），其中上下围以一个值（伊克塞了吗）作为分界线。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/2P54mqQ7MH8OcI9.png"
+                      alt="image-20210723110241183"
+                ></p>
+<h1 id="04-开发和评估异常检测系统"><a href="#04-开发和评估异常检测系统" class="headerlink" title="04 开发和评估异常检测系统"></a>04 开发和评估异常检测系统</h1><ul>
+<li>实数评估的重要思想：当你为某一个应用开发学习算法时，你需要进行一系列的选择，比如选择使用什么特征。如果有一个方法通过返回一个实数来评估算法，那么就将变得容易多。如果有一个特征要考虑该不该将其纳入，就可以将其带入算法中返回一个实数来告诉你纳入前后对算法的影响。</li>
+<li>能够评估异常检测算法的标准方法：用一些带标签的数据来指明哪些是异常样本，哪些是正常样本。</li>
+<li>我们首先假设一些训练集看作是无标签的，他们是很大的正常样本的集合，即使其中掺杂了少许的异常样本也没关系。接下来在定义一些验证集和测试集（包含了已知是异常的样本即y&#x3D;1）用来评估这个异常检测算法。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/iA5kuzNVQpnT9jq.png"
+                      alt="image-20210723112915681"
+                ></p>
+<ul>
+<li>举一个例子：飞机成产了一万个正常飞机，2到50个异常飞机。把这些数据分配给训练集、验证集和测试集的经典方法是：分配正常样本是6：2：2。异常样本只分给验证集和测试集一人一半。按照道理来说验证集和测试集应该是完全不同的两种数据。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/aCdnHK6tQZjXIMy.png"
+                      alt="image-20210723113718592"
+                ></p>
+<ul>
+<li>得到训练集、验证集和测试集后推导和评估算法：<ol>
+<li>使用训练集拟合模型p(x)，也就是将这m个无标签（实际上都是正常的）样本都用高斯函数来拟合。</li>
+<li>在验证集和测试集给出x的值，算法将预测出y的值，y&#x3D;1对应异常样本，y&#x3D;0代表正常样本。</li>
+</ol>
+</li>
+<li>对于这个问题如果数据是倾斜数据（绝大多数数据都是正常的），我们就应该采用原来学过的真阳性、假阳性、真阴性、假阴性来计算召回率和准确率来预测算法的好坏。</li>
+<li>如果有一个验证集一个选择参数（伊克塞了吗）的方法就是尝试去使用许多不同的值，然后选择一个能够最大化F_1-score这样的实数，或者有其他好表现的。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/UcCOT1NjSvRnw7L.png"
+                      alt="image-20210723130956555"
+                ></p>
+<h1 id="05-异常检测-VS-监督学习"><a href="#05-异常检测-VS-监督学习" class="headerlink" title="05 异常检测 VS 监督学习"></a>05 异常检测 VS 监督学习</h1><ul>
+<li><p>什么情况下很可能使用异常检测算法以及什么时候使用监督学习算法？</p>
+<ol>
+<li>第一种–&gt;对于异常检测算法：它有很少的正样本和很多的负样本，当我们在处理估计p(x)的值来拟合所有的高斯参数的过程中，我们只需要负样本就够了；相反对于监督学习算法：在合理的范围内会有大量的正样本和负样本</li>
+<li>第二种–&gt;对于异常检测算法：经常会有许多不同类型的异常，因此如果是这种情况你会有很少量的正样本，对于一个算法就很难从少量的正样本去学习异常，尤其是未来可能出现的异常可能会和已有的异常截然不同。比如你在正样本中已经了解到5个或者更多发生故障的情况，但是可能到了明天你就需要检测一个全新的集合（新的异常），这种情况就可以对负样本用高斯分布模型来建模；相反对于监督学习算法：有一个足够多的正样本或者一个能识别正样本的算法（未来可能出现的正样本与你当前训练集中的正样本类似），他能观察大量的正样本和大量负样本来学习相应的特征，可以正确区分正负样本。（例如垃圾分类）</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/LEjXQPVWGD3R4bh.png"
+                      alt="image-20210723151924341"
+                ></p>
+</li>
+<li><p>下面是一些异常检测和监督学习的例子，对于欺诈行为&#x2F;飞机引擎&#x2F;计算机检测，如果有大量的欺诈行为&#x2F;引擎异常&#x2F;计算机运行异常的情况，就可以转化为监督学习，但是一般都是异常检测；对于垃圾分类，天气预报、癌症分类等问题有大量的同量级正负样本这些情况就使用监督学习。</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/xPfd9uYbv8orqk1.png"
+                      alt="image-20210723153415793"
+                ></p>
+<ul>
+<li>总结一句话就是异常检测以正常（负样本）来建模，监督学习以不正常（正样本）来训练。</li>
+</ul>
+<h1 id="06-选择要使用的功能"><a href="#06-选择要使用的功能" class="headerlink" title="06 选择要使用的功能"></a>06 选择要使用的功能</h1><p><strong>你使用什么特征来实现异常检测算法将会运用产生很大的影响</strong></p>
+<hr>
+<ul>
+<li>在异常检测中我们要做的其中一件事就是使用高斯分布来对特征建模，所以我们经常做的一件事就是画出数据或者用直方图来表示数据，以确保这些数据在进入异常检测算法前看上去比较接近高斯分布。当然即使数据不是高斯分布也是可以运行的，就是运行好坏的问题。例如下图所示，图一是比较理想的，如果得到图二，我希望对数据进行一些如下不同的转换使得它看上去更接近高斯分布。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Qup4qKIWsA7cPD3.png"
+                      alt="image-20210723161013338"
+                ></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hist(x.^0.05,50)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>你如何得到异常检测算法的特征：通常用的方法就是通过一个误差分析步骤（跟我们之前讨论监督学习算法时误差分析的步骤是类似的）。我们先完整地训练出一个算法，然后在一组验证集上运行算法，然后找出那些预测出错的样本，并看看我们能否找到一些其他的特征来帮助学习算法，让那些在验证集中判断出错的样本表现得更好。下面通过一个例子来解释这个过程。一些大众的问题就是正负样本的概率都很高，以一个特征为例，x&#x3D;2.5时的一个测试样本是异常的，但是混在了正常样本里，这时就需要找到一个新的特征来使算法可以很好的将x&#x3D;2.5的测试样本进行分离。（绿色的代表异常）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/aeV9HdocijCMUNk.png"
+                      alt="image-20210723162848372"
+                ></p>
+<ul>
+<li>下面是一些对异常检测算法选择特征变量时的一些思考：对于那些可能异常的样本即不选择那些特别特别大，也不选择特别特别小的特征。以监控数据中心的计算机的例子，如果一个计算机出现了故障，下面给出了一些可选的特征包括占用内存、磁盘每秒访问的次数、CPU负载和网络流量，现在假如说我怀疑某个出错的情况，在我的数据集中我的CPU负载和网络流量应该是线性关系，比如说检测服务器，一个服务器在运行多台电脑，这时x_3和x_4都很高；如果在运行任务时出现了死循环（x_3升高，x_4正常），这时要检测就可以建立一个新的特征x_5或者x_6。通过建立新的特征就可以捕捉到这些特殊的特征组合所出现的异常值。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/i2134BXmdMCauvT.png"
+                      alt="image-20210723164252333"
+                ></p>
+<h1 id="07-多变量高斯分布"><a href="#07-多变量高斯分布" class="headerlink" title="07 多变量高斯分布"></a>07 多变量高斯分布</h1><p>这节课将会学习目前为止学习的异常检测算法的一种可能的延伸，这个延伸会用到多元高斯分布。他有一些优势也有一些劣势，他能捕捉到之前的算法检测不出来的异常。</p>
+<hr>
+<ul>
+<li>异常检测算法给x_1和x_2建模的方法如下，给出一个样本(绿色的)，可以从大体上看出x_1和x_2是线性的，而绿色的可以看出x_1很少，而x_2很多是不符合线性的。该图认为同一个圈的概率是一样的，但是实际上从图可以看出其实是不一样的。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/5BZQIzTy4scl3GR.png"
+                      alt="image-20210723172738438"
+                ></p>
+<ul>
+<li><p>为了解决这个问题，我们要开发一个改良版的异常检测算法，要用到多元高斯分布或者叫多元正态分布。有一个特征向量x，我们不要对x_1和x_2分别建模，而是要建立一个整体的p(x)模型。它的参数是n维向量(u)和n×n的协方差矩阵。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">det(Sigma)--&gt;用来计算行列式</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/pyhZRFlIcxrvkGK.png"
+                      alt="image-20210723173619584"
+                ></p>
+</li>
+<li><p>我们来看下这里的p(x)是什么样的。其中Sigma衡量的是方差或者说是x_1和x_2的变化量。缩小方差相当于缩小(Sigma)^2，下面是同时改变Sigma的两个值。</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/nESxduBCGUO5wpJ.png"
+                      alt="image-20210723180550750"
+                ></p>
+<ul>
+<li>接下来我们只改变特征向量x_1的方差，展示如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/3mIDPujlTQXexhn.png"
+                      alt="image-20210723180851479"
+                ></p>
+<ul>
+<li>同样的们只改变特征向量x_2的方差，展示如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/eqo7pigumGSzRBh.png"
+                      alt="image-20210723180933257"
+                ></p>
+<ul>
+<li>多元高斯分布一件很棒的事是你可以用它给数据的相关性建立模型（可以用它来给x_1和x_2高度相关的情况建立模型），如果改变非对角线上的元素你会得到一种不同的高斯分布，随着非对角线上的值不断增加可以看出x接近y（大部分数据落到了x_1&#x3D;x_2），变得更窄。当把其设为正值时如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/CxKSHwiktaBdYbh.png"
+                      alt="image-20210723181702797"
+                ></p>
+<ul>
+<li>当把其设为负值时（x_1&#x3D;-x_2）如下：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/gMYqdczlHFGiAeu.png"
+                      alt="image-20210723181928134"
+                ></p>
+<ul>
+<li>当然还可以改变平均参数u，即中心点所在位置。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/8zStmwvVRNKbXTj.png"
+                      alt="image-20210723182038348"
+                ></p>
+<h1 id="08-使用多变量高斯分布的异常检测"><a href="#08-使用多变量高斯分布的异常检测" class="headerlink" title="08 使用多变量高斯分布的异常检测"></a>08 使用多变量高斯分布的异常检测</h1><ul>
+<li>给定参数集来进行参数拟合或者说是参数估计问题（其中Sigma和PCA中写的是一样的）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/yb8gYxAd9wVSpK7.png"
+                      alt="image-20210723182559120"
+                ></p>
+<ul>
+<li>把这些结合起来开发一个异常检测算法：<ol>
+<li>用我们的数据集来拟合模型</li>
+<li>有一个测试样本，用多元高斯分布的公式来计算p(x)</li>
+<li>比较p(x)与伊克塞了吗的大小来得出结果。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/mLzY4oBrIP1iHEa.png"
+                      alt="image-20210723182940873"
+                ></p>
+<ul>
+<li>原始模型对比多元高斯模型，多元高斯模型的轮廓都是轴对齐的。其实原始的模型就是多元高斯模型的特殊形式，，当多元高斯模型Sigma的非对角线都为0的情况下，将原始的方差放入到Sigma中，这时两个模型就会完全相同，也就是说这个用了多元高斯分布的新模型，比起之前的旧模型，这个新模型对应的分布方程的轮廓就是轴对齐的，所以不能用不同的特征之间的关系进行建模。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/P48leMqdbiTIDj7.png"
+                      alt="image-20210723183810744"
+                ></p>
+<ul>
+<li>那么什么时候用原始模型（比较常用），什么时候用多元高斯模型呢？比如之前计算机检测的例子，原始模型可能就需要建立一个新的特征，而多元高斯模型就能自动捕捉这种不同特征值之间的关系。</li>
+<li>原始模型的一个巨大的优势就是计算成本比较低（能适应数量巨大的特征），而多元高斯模型需要计算Sigma的逆矩阵也就意味着计算成本非常高。原始模型还有个优势是即使你有一个较小的有一定相关性的训练集也能顺利运行，而多元高斯分布模型需要样本的数量大于特征的数量（因为需要求逆矩阵）。我们使用多元高斯分布模型当且仅当m&gt;&gt;n（如果不满足这一点那么多元高斯分布模型就会有很多参数，因为协方差矩阵是一个n*n的，所以协方差矩阵有n^2个参数，同样因为是一个对称矩阵所以更接近n^2&#x2F;2），所以需要确保有一个很大的m值，确保有足够的数据来拟合变量。</li>
+<li>如果你需要捕捉一些具有相关性的特征，通常是手动设计新的特征，但是当m很大或者是n不是很大时这时多元高斯模型更好。</li>
+<li>如果在实际操作中发现Sigma是奇异的不可逆的那么有两种情况：<ol>
+<li>没有满足m大于n的条件</li>
+<li>存在冗余特征（比如x_1&#x3D;x_2、x_3&#x3D;x_4+x_5）</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/iwgqEzCxOZ93um8.png"
+                      alt="image-20210723190227085"
+                ></p>
+<ul>
+<li>总结下使用多元高斯分布来做异常检测，可以自动地捕捉正负样本各特征之间地关系。如果发现某些特征的组合值是异常的他就会标为异常样本。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：机器学习 day15异常检测</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-07-23 20:42:36</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/07/23/机器学习 day15异常检测/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day16%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">机器学习 day16推荐系统</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/21/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A71/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day13 面向对象三大特征1</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E9%97%AE%E9%A2%98%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">01 问题动机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%EF%BC%88%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">02 高斯分布（正态分布）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">03 算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E5%BC%80%E5%8F%91%E5%92%8C%E8%AF%84%E4%BC%B0%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">04 开发和评估异常检测系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B-VS-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">05 异常检测 VS 监督学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E9%80%89%E6%8B%A9%E8%A6%81%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">6.</span> <span class="nav-text">06 选择要使用的功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E5%A4%9A%E5%8F%98%E9%87%8F%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">7.</span> <span class="nav-text">07 多变量高斯分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E4%BD%BF%E7%94%A8%E5%A4%9A%E5%8F%98%E9%87%8F%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B"><span class="nav-number">8.</span> <span class="nav-text">08 使用多变量高斯分布的异常检测</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            机器学习 day14降维 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day14降维</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-21 15:38:53</span>
+        <span class="mobile">2021-07-21 15:38</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-目标-I：数据压缩"><a href="#01-目标-I：数据压缩" class="headerlink" title="01 目标 I：数据压缩"></a>01 目标 I：数据压缩</h1><ul>
+<li>想要使用降维的的原因：<ol>
+<li>数据压缩，数据压缩不仅能使数据占用少量的内存或硬盘空间，还能对算法进行加速。</li>
+</ol>
+</li>
+<li>如果特征高度相关，那么真的可能需要降低维数。</li>
+<li>将二维降到一维：两个特征变成一个特征，把每个样本都保持为一个数字，这样就能把内存需求（数据空间需求）减半。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/mBgDK6C1cRoF9Oh.png"
+                      alt="image-20210721082340233"
+                ></p>
+<ul>
+<li>从三维降到二维：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/Zlsei8C3yFnbOpq.png"
+                      alt="image-20210721085421875"
+                ></p>
+<h1 id="02-目标-II：可视化"><a href="#02-目标-II：可视化" class="headerlink" title="02 目标 II：可视化"></a>02 目标 II：可视化</h1><ul>
+<li><p>想要使用降维的的原因：</p>
+<ol start="2">
+<li>可视化数据：将数据从50维或者更高维降到三维或者两维，这样就可以将其在图中画出来更好的理解他。</li>
+</ol>
+</li>
+<li><p>50维数据：</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/RoEyNcGx7vQqaef.png"
+                      alt="image-20210721092454589"
+                ></p>
+<ul>
+<li>从50维降到2维，通常我们要了解z特征大致意味着什么。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/8XkAF3xcazCVgjw.png"
+                      alt="image-20210721092611016"
+                ></p>
+<ul>
+<li>并画出2维图像</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/cgC6K8ORYGTvjDN.png"
+                      alt="image-20210721092715748"
+                ></p>
+<h1 id="03-主成分分析问题规划1"><a href="#03-主成分分析问题规划1" class="headerlink" title="03 主成分分析问题规划1"></a>03 主成分分析问题规划1</h1><p><strong>对于降维问题最常用的一种算法叫主成分分析方法(PCA)的算法，本节课会试着用公式准确的表述PCA的用途。</strong></p>
+<hr>
+<ul>
+<li>PCA所做的就是试图寻找一个投影平面对数据进行投影，使得能最小化这个距离。（PCA所作的是找到一个低维平面也就是图中的线，然后将数据投影到上面，使得蓝色的小线段（投影误差）长度平方最小）。对比可得选择橘色的而不选择粉色的。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/GeFfQ2c83jhTtrk.png"
+                      alt="image-20210721095340021"
+                ></p>
+<ul>
+<li><p>在应用PCA之前最常规的做法是先进行均值归一化和特征规范化使得特征量x_1和x_2其均值为0，并且其数值在可比较的范围之内。</p>
+</li>
+<li><p>PCA与线性回归的区别：左图为线性回归，右图为PCA。线性回归的点是垂直横轴的（最小化蓝线之和的平方），而PCA的点是垂直那条线的（最小化蓝线的长度）。线性回归是通过输入x来预测y，PCA的特征值x之间都是平级关系。</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/4roFE3Qnh1Kk2V9.png"
+                      alt="image-20210721100710782"
+                ></p>
+<h1 id="04-主成分分析问题规划2"><a href="#04-主成分分析问题规划2" class="headerlink" title="04 主成分分析问题规划2"></a>04 主成分分析问题规划2</h1><ul>
+<li>在使用PCA之前首先要做的的就是对数据进行预处理。<ol>
+<li>给定一个训练集一定要做的是执行均值标准化：我们首先计算每个特征的均值，我们用减去它的均值取代每个特征x，这将使每个特征的均值正好为0</li>
+<li>根据数据也有可能需要进行特征缩放，缩放每个特征到一个相对的价值范围。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/75mVdCXjHMhFB6O.png"
+                      alt="image-20210721103024787"
+                ></p>
+<ul>
+<li>PCA要做的是：计算这些向量例如u^(1)（即投影平面）；计算这些数字z</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/kEcvD6RPN4fbVYB.png"
+                      alt="image-20210721103434952"
+                ></p>
+<ul>
+<li>用公式求解的过程：我们想把n维数据降到k维度，我们首先要做的是计算协方差（通常用大写的Sigma表示，是表示矩阵而不是求和），然后运用Octave中的svd()(奇异值分解)，也可以用eig()，不过svd()在数值上更加稳定。输出的将是三个U,S,V矩阵，我们真正需要的是U矩阵，可以发现U矩阵的列正是我们想要的u^(1)、u^()….。把n维数据降到k维度，就提取前k个向量。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/VeranDc3OYUl579.png"
+                      alt="image-20210721104854289"
+                ></p>
+<ul>
+<li>接下来我们要做的是获取我们的原始实数域数据集x找到一个低维的表示z。然后运用公式求解z</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/lDiKp1IxhaF7u3v.png"
+                      alt="image-20210721105427163"
+                ></p>
+<ul>
+<li>协方差矩阵sigma的一个向量化实现：sigma &#x3D; (1&#x2F;m)<em>X^T</em>X,类似于K均值这里的X_0不能为1.</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/TJYAgiQV7nNImbh.png"
+                      alt="image-20210721110031164"
+                ></p>
+<h1 id="05-主成分数量选择"><a href="#05-主成分数量选择" class="headerlink" title="05 主成分数量选择"></a>05 主成分数量选择</h1><p><strong>n维特征减少为k维特征，k为PCA算法的一个参数，也被称为主成分的数字，人们如何考虑选取k？</strong></p>
+<hr>
+<ul>
+<li>PCA试图去减小投影误差平方的平均值，也就是试图减小x和x在低维面的投影的距离的差的平方。</li>
+<li>数据的总方差为样本x的平方和的平均值，也就是我们训练集中每个样本的平均长度（我们样本距离全零向量（原点）的距离）。</li>
+<li>选择k一个常用的经验方法是选择较小的值，使得这两者之间的比值小于0.01：让平均投影误差平方&#x2F;数据的总方差（数据的波动程度）。我们希望这个比例小于0.01或者小于1%，用PCA语言来说就是99%的方差性会被保留。当然0.01也可以换成其他值。为了保留99%的方差可以减少数据维数，但仍保留大部分的方差。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20210721121526792.png"
+                      alt="image-20210721121526792"
+                ></p>
+<ul>
+<li>下面的算法不断尝试从1开始修改k的值，然后进行PCA运算，最终使99%的方差性会被保留。这是一种方式来选择最小的k从而使99%的方差被保留。另一种方法是：通过SVD()计算出S矩阵（只有对角才有值，剩下的值为0），然后通过公式直接将k从1开始带进去，取前k个对角线的值相加&#x2F;整个对角线的值相加，看是否大于0.99.如果大于就选择这个k。对比可以看出第二种算法效率高，因为只需调用一次SVD()，而第一种需要多次调用PCA算法，相对来说效率低。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/bK8NCrmVyYGUl93.png"
+                      alt="image-20210721144104708"
+                ></p>
+<h1 id="06-压缩重现"><a href="#06-压缩重现" class="headerlink" title="06 压缩重现"></a>06 压缩重现</h1><p><strong>如何从低维的z^(i)变回原来的高维x^(i)?</strong></p>
+<hr>
+<ul>
+<li>原始数据的重构：从压缩之后的低维的z^(i)变回原来未压缩的高维x^(i)：应用如下公式：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/wjOS7nHZGdLKAlW.png"
+                      alt="image-20210721145729672"
+                ></p>
+<h1 id="07-应用-PCA-的建议"><a href="#07-应用-PCA-的建议" class="headerlink" title="07 应用 PCA 的建议"></a>07 应用 PCA 的建议</h1><ul>
+<li>使用PCA算法对监督学习算法进行加速的步骤：<ol>
+<li>检查已经被标记的训练集，并抽取输入x，我们就得到了一个无标签的训练集x^(1)….x^(m)。</li>
+<li>用PCA得到原始数据的低维表示z，得到新的训练集。</li>
+<li>我们可以把这个低维的训练集输入到一个学习算法中，可以是神经网络、逻辑回归算法进行预测。</li>
+<li>注意PCA运算只能在训练集拟合这些参数，而不能在验证集或者测试集。定义x到z的映射后才能应用验证集和测试集中</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/lJvuNfZUbtq7CTE.png"
+                      alt="image-20210721151519700"
+                ></p>
+<ul>
+<li>对PCA错误的使用就是尝试使用PCA来减少数据维度去防止过拟合，正确方法就是使用正则化。PCA运算是不使用标签的，只是针对输入x^(i)变为低维z^(i)，而不关心y，如果有99%的方差得以保留可以防止过拟合，但是也可能舍弃一些重要的信息，使得方差保留过低。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/UyIdcxhg7OP3Wk9.png"
+                      alt="image-20210721152301055"
+                ></p>
+<ul>
+<li>在写下一个包含PCA的项目计划之前，应该问一问这个问题：<strong>如果我们直接去做而不使用PCA会怎样？</strong>一般直接建议：首先使用最原始的数据x^(i)，只有这么做达不到目的的情况下才考虑使用PCA和z^(i)，不要一开始就花大量的时间去应用PCA，计算k等等。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/ORiBLQPmfuYpaAk.png"
+                      alt="image-20210721153146990"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：机器学习 day14降维</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-07-21 15:38:53</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/07/21/机器学习 day14降维/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/21/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A71/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day13 面向对象三大特征1</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/20/java%20day12%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day12 面向对象</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E7%9B%AE%E6%A0%87-I%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9"><span class="nav-number">1.</span> <span class="nav-text">01 目标 I：数据压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E7%9B%AE%E6%A0%87-II%EF%BC%9A%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">02 目标 II：可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98%E8%A7%84%E5%88%921"><span class="nav-number">3.</span> <span class="nav-text">03 主成分分析问题规划1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E9%97%AE%E9%A2%98%E8%A7%84%E5%88%922"><span class="nav-number">4.</span> <span class="nav-text">04 主成分分析问题规划2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E4%B8%BB%E6%88%90%E5%88%86%E6%95%B0%E9%87%8F%E9%80%89%E6%8B%A9"><span class="nav-number">5.</span> <span class="nav-text">05 主成分数量选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E5%8E%8B%E7%BC%A9%E9%87%8D%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text">06 压缩重现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E5%BA%94%E7%94%A8-PCA-%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="nav-number">7.</span> <span class="nav-text">07 应用 PCA 的建议</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

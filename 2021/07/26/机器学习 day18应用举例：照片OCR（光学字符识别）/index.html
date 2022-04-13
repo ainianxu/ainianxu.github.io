@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            机器学习 day18应用举例：照片OCR（光学字符识别） |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"从不勾栏听曲"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">机器学习 day18应用举例：照片OCR（光学字符识别）</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2021-07-26 17:00:44</span>
+        <span class="mobile">2021-07-26 17:00</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="01-问题描述与-OCR-pipeline"><a href="#01-问题描述与-OCR-pipeline" class="headerlink" title="01 问题描述与 OCR pipeline"></a>01 问题描述与 OCR pipeline</h1><p>照片OCR问题注重的是如何让计算机读出照片中的文字信息（照片OCR对于读取文档来说很简单，但是对于数码照片来说还是很难的）</p>
+<hr>
+<ul>
+<li>照片OCR当你输入文字时，计算机就能自动的帮你找到相册里带有这些文字的照片，它有如下几个步骤：<ol>
+<li>给定某个照片，将其图像扫描一遍。</li>
+<li>找出照片中的文字信息</li>
+<li>找出照片中的文字信息之后，将重点关注这些文字区域，并对区域中的文字进行识别，当它正确读出这些文字之后，他会将这些文字内容显示并记录下来。</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/fXbsQ1mNltSpAa5.png"
+                      alt="image-20210726091931865"
+                ></p>
+<ul>
+<li>总体来说步骤分为三类：文字检测、字符分割以及字符分类（其实还有个拼写校正）。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/EgoaDR49sHT5zqf.png"
+                      alt="image-20210726092326214"
+                ></p>
+<ul>
+<li>像这样的系统，我们把它称为机器学习流水线：首先有一个照片，然后把它传给文字检测系统，识别出文字区域后，将文字区域中的单个字符分割出来，最后对这些单个字母进行识别。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/McNdgRFA95tOJsx.png"
+                      alt="image-20210726092737648"
+                ></p>
+<h1 id="02-滑动窗口"><a href="#02-滑动窗口" class="headerlink" title="02 滑动窗口"></a>02 滑动窗口</h1><p>关于流水线中每个独立的组件的工作原理，主要讲一个叫滑动窗口分类器。</p>
+<hr>
+<ul>
+<li>照片OCR问题难在文字区域对应的矩形具有不同的长宽比例，而对于行人检测来说，人们的长宽比基本相同。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/DFUBXPGnbktjvp2.png"
+                      alt="image-20210726093721758"
+                ></p>
+<ul>
+<li>建立一个行人检测系统，我们可以这么做：假如决定要把比例标准定为82 * 36（当然其他比例也可以），然后从数据集中收集一些正样本和负样本（都是82 * 36的照片），在你的网络中训练或者使用其他学习算法向其中输入一个82 * 36的图块来对y进行分类，来划分每个图块是否包括一个行人</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/UG8wcrEPst9NLyJ.png"
+                      alt="image-20210726094431832"
+                ></p>
+<ul>
+<li>下图相当于一个训练集，首先在图片中选取一个矩形块（比如是左上角绿框），然后将图块传送给我们的分类器，来检查图块中是否有行人，然后每次以一定的步长（也称滑动参数）来移动图块，传送给分类器不断地判断图块中是否有行人。然后再以更大窗口移动来判断是否有行人，这样算法便能检测出图中各个地方是否出现行人。这就是一个监督学习分类器，然后使用一个滑动窗口分类器来找出图中所有行人。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/WAZd4KSN8ogCJrO.png"
+                      alt="image-20210726095421693"
+                ></p>
+<ul>
+<li><p>接下来看一下在图片OCR中如何找出图中的文字区域：</p>
+<ol>
+<li>首先也是拿出一系列的包括正样本和负样本的训练集。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/nQzN8y3mJKsLaWv.png"
+                      alt="image-20210726095714220"
+                ></p>
+<ol start="2">
+<li>训练完后将其应用在一个新的测试集中的图片，在此使用固定比例的滑动窗口，会得到左下角的图片（白色表示文本检查系统发现了文本，而深浅不同的灰色对应的是分类器认为该处有文字的概率），然后将分类器的输出应用到一种叫放大算子（就是扩大白色区域，如何扩大呢？就是通过检查像素附近是否存在白色像素，然后把这一范围内都变成白色）的东西上得到右下角的图，然后需要在右下角图中白色周围绘制边框，文本周围的框宽度应该远大于高度，通过这个特性就可以筛选出正常的文字区域。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/qbSU5N1GQJh7Cs6.png"
+                      alt="image-20210726102550461"
+                ></p>
+<ol start="3">
+<li>接下来进入识别文本阶段也就是字符分割，在此我们再次使用监督学习算法用一些正样本（可以进行分割）和负样本（不可以进行分割），对分类器进行训练完就可以将其运行在文字检测系统输出的这些文本中，最终可以将图像全部分成单独的字符。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/bMA68RmjFeTa2HK.png"
+                      alt="image-20210726103351313"
+                ></p>
+</li>
+</ul>
+<h1 id="03-获取大量数据和人工数据"><a href="#03-获取大量数据和人工数据" class="headerlink" title="03 获取大量数据和人工数据"></a>03 获取大量数据和人工数据</h1><p>一个最可靠得到高性能机器学习系统的方法是使用一个低偏差机器学习算法并且使用庞大的训练集去训练他。其中人工数据合成可以为合适的机器学习问题轻松得到大规模的训练集。</p>
+<hr>
+<ul>
+<li><p>人工数据合成主要有两种形式：</p>
+<ol>
+<li>自己创造数据（从0开始创造新数据）</li>
+<li>已经有小的标签训练集，然后以某种方法扩充训练集（引入失真）</li>
+</ol>
+</li>
+<li><p>假如我们收集到了一个大的标签数据集如左图所示，我们的目标是输入一个图像块然后识别出图像块中央的字符。为了简化操作我们将图片处理成灰度图像而不是彩色图像。如果想要更多的训练样本一个方法就是用不同的字体生成字符，然后将其粘贴到任意不同的背景中，然后可以应用一点模糊算子或者仿射变换（仿射的意思是进行等分、缩放和一些旋转操作），完成这些操作就会得到一个人工合成训练集如右图所示。这个就是自己创造数据。</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/4SyWXYK2uhRPxbe.png"
+                      alt="image-20210726111305342"
+                ></p>
+<ul>
+<li>使用现有的样本生成训练集。可以对图片进行人工拉伸或者人工扭曲（必须要合理的，具有代表性），这样就可以将一个样本变成16个新样本了。通过这种方法就能将一个小的标签训练集扩充为一个更大的训练集。当然不同的机器学习应用，可能其他类型的失真将更合理。以语音识别为例，目的是从对话中获取内容，可以通过人工添加失真引入不同背景音乐，得到大量的训练集。生成的新样本一定要具有代表性是有可能在测试集中见到的样本。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/vUHsjhpNArw3Cua.png"
+                      alt="image-20210726144352845"
+                ></p>
+<hr>
+<ul>
+<li><p>在生成大量人工训练集之前最好画一个学习曲线保证你有一个低偏差高方差的分类器。如果你的偏差太高，可以尝试持续增加分类器的特征数量或者增加神经网络隐藏单元的数量，然后在花精力在生成大量人工训练集，这样就避免了花费大量的时间来收集数据却发现没有多大作用。用学习曲线做一个合理的检验看更多的数据是否真的有用。</p>
+</li>
+<li><p>获得目前训练集十倍的量需要花费多少工作量（方法）？</p>
+<ol>
+<li>人工合成数据</li>
+<li>自己收集数量或者添加标签</li>
+<li>众包数据标记：从花钱网上找人来帮你标记训练集</li>
+</ol>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/MQt8F7ZHxyq5OiS.png"
+                      alt="image-20210726151245938"
+                ></p>
+<h1 id="04-天花板分析：下一步工作的-pipeline"><a href="#04-天花板分析：下一步工作的-pipeline" class="headerlink" title="04 天花板分析：下一步工作的 pipeline"></a>04 天花板分析：下一步工作的 pipeline</h1><p>上线分析：当你自己或者跟你的团队在设计某个机器学习系统工作流时，这种方法能够提供一个很有价值的信号，知道你工作流中哪一部分最值得花费时间去研究。</p>
+<hr>
+<ul>
+<li>为了决定如何开发系统一个有效的方法就是对学习系统使用一个数值评价量度，假如我们用字符准确度作为这个量度，给定一个测试样本图像，那么这个数值就表示我们对测试图像中的文本识别正确的比例。如图所示：不管你用什么度量值来度量，整个系统的总的准确率为72%。</li>
+<li>下面是上线分析的主要思想：还是以图片OCR流水线为例，首先我们先关注文本检测，对于每一个测试样本都给一个正确的文本检测结果，换句话说就是要100%正确检测出图片中的文本信息。只需要找到对应图像，然后人为的识别出测试集图像中出现文本的区域，让这个模块人为的输出正确的结果，将结果传送给字符分割模块，然后运行后面两个模块，使用之前一样的评价量度指标算出整个系统总的准确率89%，同样的在上一个处理的基础上，字符分割模块也用全部正确的结果去输出，得到了90%的准确率，字符分类也一样（全都是正确的当然是100%）。</li>
+<li>使用上限分析就可以看出每个模块进行改善后各自的成长空间是多少，可以看出完美的文本检测得到的增益最大。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/4G5LkoePCjfMrNH.png"
+                      alt="image-20210726162024844"
+                ></p>
+<ul>
+<li>人脸识别也是一样：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/13/mtfDvPxZjSnihHz.png"
+                      alt="image-20210726164829202"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：机器学习 day18应用举例：照片OCR（光学字符识别）</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2021-07-26 17:00:44</li>
+        <li>
+            Post link：https://ainianxu.github.io/2021/07/26/机器学习 day18应用举例：照片OCR（光学字符识别）/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/28/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A72/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">java day13 面向对象三大特征2</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day17%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">机器学习 day17大规模机器学习</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%E4%B8%8E-OCR-pipeline"><span class="nav-number">1.</span> <span class="nav-text">01 问题描述与 OCR pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">02 滑动窗口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E8%8E%B7%E5%8F%96%E5%A4%A7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BA%BA%E5%B7%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">03 获取大量数据和人工数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E5%A4%A9%E8%8A%B1%E6%9D%BF%E5%88%86%E6%9E%90%EF%BC%9A%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%B7%A5%E4%BD%9C%E7%9A%84-pipeline"><span class="nav-number">4.</span> <span class="nav-text">04 天花板分析：下一步工作的 pipeline</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
