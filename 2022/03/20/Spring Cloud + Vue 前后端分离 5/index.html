@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Spring Cloud + Vue 前后端分离5 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Spring Cloud + Vue 前后端分离5</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-03-20 19:50:48</span>
+        <span class="mobile">2022-03-20 19:50</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>10.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>47 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第14章-项目优化"><a href="#第14章-项目优化" class="headerlink" title="第14章 项目优化"></a>第14章 项目优化</h1><p>至此整个项目的主框架和主业务都开发完成了，这一章将对项目做一些优化，比如控台报表显示，spring boot多环境配置，缓存的使用等。</p>
+<hr>
+<h2 id="14-1-项目初始化"><a href="#14-1-项目初始化" class="headerlink" title="14-1 项目初始化"></a>14-1 项目初始化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加readme.md，添加项目介绍</span><br><span class="line">2.修改初始化sql</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>readme.md是用来写一些项目描述信息，git远程仓库可以自动识别该页面，并显示到仓库首页下方</li>
+<li>有一个现象：sql初始化后，登录控台时，日志显示登录成功，但是页面一直在登录页面，没有跳到欢迎页面</li>
+<li>修改sql，增加一个00欢迎，并且将0101和0102和0103的page的开头&#x2F;去掉<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/31/zUDHXLEWaTMkGdI.png"
+                      alt="image-20220331094831861"
+                ></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 角色<span class="operator">-</span>资源关联表增加这一行</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `role_resource` <span class="keyword">values</span> (<span class="string">&#x27;00000009&#x27;</span>,<span class="string">&#x27;00000000&#x27;</span>,<span class="string">&#x27;00&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>还有一个现象：点击大章时，跳到登录页面。原因是：大章显示不显示再侧边栏，但是它也是一个单独的页面，也有路由，所以需要配置资源，同样还有小节页面，课程内容页面</p>
+</li>
+<li><p>&#96;&#96;&#96;json<br>,{<br>  “id”:”0206”,”name”:”大章管理”,”page”:”business&#x2F;chapter”,<br>  “children”:[<br>{“id”:”020601”,”name”:”增删改查”,”request”:[“&#x2F;business&#x2F;admin&#x2F;chapter”]}<br>  ]<br>},{<br>  “id”:”0207”,”name”:”小节管理”,”page”:”business&#x2F;section”,<br>  “children”:[<br>{“id”:”020701”,”name”:”增删改查”,”request”:[“&#x2F;business&#x2F;admin&#x2F;section”]}<br>  ]<br>},{<br>  “id”:”0208”,”name”:”内容管理”,”page”:”business&#x2F;content”,<br>  “children”:[<br>{“id”:”020801”,”name”:”增删改查”,”request”:[“&#x2F;business&#x2F;admin&#x2F;course”,”&#x2F;business&#x2F;admin&#x2F;course-content-file”]}<br>  ]<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 14-2 控台欢迎页开发</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.控台欢迎页面开发，增加顶部统计</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 修改welcome.vue</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div class=&quot;space-12&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;col-xs-12&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;text-center&quot;&gt;</span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-light no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170 blue&quot;&gt; 518 &lt;/span&gt;</span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 课程 &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-yellow no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170&quot;&gt; 6,321 &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 大章 &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-pink no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170&quot;&gt; 4,182 &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 小节 &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-success no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170&quot;&gt; 5.23 &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 会员(万) &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-primary no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170&quot;&gt; 12.76 &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 报名(万) &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">          &lt;span class=&quot;btn btn-app btn-sm btn-grey no-hover&quot;&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 bigger-170&quot;&gt; 32.96 &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">              &lt;br&gt;</span><br><span class="line">              &lt;span class=&quot;line-height-1 smaller-90&quot;&gt; 评论(万) &lt;/span&gt;</span><br><span class="line">          &lt;/span&gt;</span><br><span class="line">  </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">        &lt;div class=&quot;space-12&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.控台欢迎页面开发，增加了新增评论，新增注册会员，课程报名统计显示</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>问题：代码时两块分别占满12格的div，正常情况下是上下显示的，但是现在显示出来是有重叠部分。布局显示错乱，大概率是多个css样式冲突了，不同的css文件里起了相同的名字</p>
+</li>
+<li><p>我们经常通过在element窗口修改html或css，来调试显示效果，之后将最终的html或css样式复制到项目代码里</p>
+</li>
+<li><p>在上面修改之后增加</p>
+</li>
+<li><p>&#96;&#96;&#96;vue</p>
+  <div class="hr hr2 hr-double"></div>
+  <div class="space-12"></div>
+</div>
+<div class="col-sm-12 infobox-container">
+  <div class="infobox infobox-green">
+    <div class="infobox-icon">
+      <i class="ace-icon fa fa-comments"></i>
+    </div>
+
+<pre><code>&lt;div class=&quot;infobox-data&quot;&gt;
+  &lt;span class=&quot;infobox-data-number&quot;&gt;332&lt;/span&gt;
+  &lt;div class=&quot;infobox-content&quot;&gt;新增评论&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;stat stat-success&quot;&gt;8%&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="infobox infobox-blue">
+    <div class="infobox-icon">
+      <i class="ace-icon fa fa-twitter"></i>
+    </div>
+
+<pre><code>&lt;div class=&quot;infobox-data&quot;&gt;
+  &lt;span class=&quot;infobox-data-number&quot;&gt;58&lt;/span&gt;
+  &lt;div class=&quot;infobox-content&quot;&gt;新增注册会员&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;badge badge-success&quot;&gt;
+  +10%
+  &lt;i class=&quot;ace-icon fa fa-arrow-up&quot;&gt;&lt;/i&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="infobox infobox-pink">
+    <div class="infobox-icon">
+      <i class="ace-icon fa fa-shopping-cart"></i>
+    </div>
+
+<pre><code>&lt;div class=&quot;infobox-data&quot;&gt;
+  &lt;span class=&quot;infobox-data-number&quot;&gt;108&lt;/span&gt;
+  &lt;div class=&quot;infobox-content&quot;&gt;课程报名&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;stat stat-important&quot;&gt;4%&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="space-12"></div>
+
+  <div class="hr hr2 hr-double"></div>
+
+  <div class="space-12"></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.控台欢迎页面开发，增加销售量报表统计显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 图表可以使用jqery插件，这里ace模板用到的jquery.flot插件</span><br><span class="line"></span><br><span class="line">- 在上面之后增加</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;div class=&quot;col-sm-12&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;widget-box transparent&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;widget-header widget-header-flat&quot;&gt;</span><br><span class="line">        &lt;h4 class=&quot;widget-title lighter&quot;&gt;</span><br><span class="line">          &lt;i class=&quot;ace-icon fa fa-signal&quot;&gt;&lt;/i&gt;</span><br><span class="line">          销售量</span><br><span class="line">        &lt;/h4&gt;</span><br><span class="line">  </span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">      &lt;div class=&quot;widget-body&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;widget-main padding-4&quot;&gt;</span><br><span class="line">          &lt;div id=&quot;sales-charts&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;&lt;!-- /.widget-main --&gt;</span><br><span class="line">      &lt;/div&gt;&lt;!-- /.widget-body --&gt;</span><br><span class="line">    &lt;/div&gt;&lt;!-- /.widget-box --&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;div class=&quot;space-12&quot;&gt;&lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;div class=&quot;hr hr2 hr-double&quot;&gt;&lt;/div&gt;</span><br><span class="line">  </span><br><span class="line">    &lt;div class=&quot;space-12&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;&lt;!-- /.col --&gt;</span><br><span class="line">  ////////////////////////////////////////////////////////////////////////////////////////////</span><br><span class="line">  mounted:function () &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      _this.drawSaleChart();</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      drawSaleChart() &#123;</span><br><span class="line">        // 生成随机两组数据</span><br><span class="line">        let d1 = [];</span><br><span class="line">        for (let i = 0; i &lt; 30; i += 1) &#123;</span><br><span class="line">          d1.push([i + 1, 2000 + Math.floor((Math.random()*100)+1)]);</span><br><span class="line">        &#125;</span><br><span class="line">        let d2 = [];</span><br><span class="line">        for (let i = 0; i &lt; 30; i += 1) &#123;</span><br><span class="line">          d2.push([i + 1, 1900 + Math.floor((Math.random()*100)+1)]);</span><br><span class="line">        &#125;</span><br><span class="line">  </span><br><span class="line">        let sales_charts = $(&#x27;#sales-charts&#x27;).css(&#123;&#x27;width&#x27;:&#x27;100%&#x27; , &#x27;height&#x27;:&#x27;220px&#x27;&#125;);</span><br><span class="line">        $.plot(&quot;#sales-charts&quot;, [</span><br><span class="line">          &#123; label: &quot;最近30天&quot;, data: d1 &#125;,</span><br><span class="line">          &#123; label: &quot;上一周期&quot;, data: d2 &#125;,</span><br><span class="line">        ], &#123;</span><br><span class="line">          hoverable: true,</span><br><span class="line">          shadowSize: 0,</span><br><span class="line">          series: &#123;</span><br><span class="line">            lines: &#123; show: true &#125;,</span><br><span class="line">            points: &#123; show: true &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          xaxis: &#123;</span><br><span class="line">            tickLength: 0</span><br><span class="line">          &#125;,</span><br><span class="line">          yaxis: &#123;</span><br><span class="line">            tickLength: 0</span><br><span class="line">          &#125;,</span><br><span class="line">          grid: &#123;</span><br><span class="line">            backgroundColor: &#123; colors: [ &quot;#fff&quot;, &quot;#fff&quot; ] &#125;,</span><br><span class="line">            borderWidth: 1,</span><br><span class="line">            borderColor:&#x27;#555&#x27;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.控台欢迎页面开发，增加课程销售排名和分类销售排名统计显示</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>接着上面的修改</p>
+</li>
+<li><p>&#96;&#96;&#96;vue</p>
+<div class="col-sm-6">
+  <div class="widget-box transparent">
+    <div class="widget-header widget-header-flat">
+      <h4 class="widget-title lighter">
+        <i class="ace-icon fa fa-star orange"></i>
+        课程销售排名
+      </h4>
+
+<pre><code>&lt;/div&gt;
+
+&lt;div class=&quot;widget-body&quot;&gt;
+  &lt;div class=&quot;widget-main no-padding&quot;&gt;
+    &lt;table class=&quot;table table-bordered table-striped&quot;&gt;
+      &lt;thead class=&quot;thin-border-bottom&quot;&gt;
+      &lt;tr&gt;
+        &lt;th&gt;
+          &lt;i class=&quot;ace-icon fa fa-caret-right blue&quot;&gt;&lt;/i&gt;课程名称
+        &lt;/th&gt;
+
+        &lt;th&gt;
+          &lt;i class=&quot;ace-icon fa fa-caret-right blue&quot;&gt;&lt;/i&gt;价格
+        &lt;/th&gt;
+
+        &lt;th&gt;
+          &lt;i class=&quot;ace-icon fa fa-caret-right blue&quot;&gt;&lt;/i&gt;购买数
+        &lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+
+      &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;开发工具IDEA从入门到爱不释手&lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;b class=&quot;green&quot;&gt;￥299.00&lt;/b&gt;
+        &lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;span class=&quot;label label-warning arrowed arrowed-right&quot;&gt;5,132&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;开发工具IDEA从入门到爱不释手&lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;b class=&quot;red&quot;&gt;￥388.00&lt;/b&gt;
+        &lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;span class=&quot;label label-warning arrowed arrowed-right&quot;&gt;3,132&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;开发工具IDEA从入门到爱不释手&lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;b class=&quot;green&quot;&gt;￥199.00&lt;/b&gt;
+        &lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;span class=&quot;label label-warning arrowed arrowed-right&quot;&gt;2,132&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;开发工具IDEA从入门到爱不释手&lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;b class=&quot;green&quot;&gt;￥299.00&lt;/b&gt;
+        &lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;span class=&quot;label label-success arrowed arrowed-right&quot;&gt;1,654&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;开发工具IDEA从入门到爱不释手&lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;b class=&quot;green&quot;&gt;￥199.00&lt;/b&gt;
+        &lt;/td&gt;
+
+        &lt;td&gt;
+          &lt;span class=&quot;label label-success arrowed arrowed-right&quot;&gt;1,254&lt;/span&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;&lt;!-- /.widget-main --&gt;
+&lt;/div&gt;&lt;!-- /.widget-body --&gt;
+</code></pre>
+  </div><!-- /.widget-box -->
+</div><!-- /.col -->
+<div class="col-sm-6">
+  <div class="widget-box transparent">
+    <div class="widget-header widget-header-flat">
+      <h4 class="widget-title lighter">
+        <i class="ace-icon fa fa-star orange"></i>
+        分类销售排名
+      </h4>
+
+<pre><code>&lt;/div&gt;
+
+&lt;div class=&quot;widget-body&quot;&gt;
+  &lt;div class=&quot;widget-main&quot;&gt;
+    &lt;div id=&quot;piechart-placeholder&quot;&gt;&lt;/div&gt;
+
+  &lt;/div&gt;&lt;!-- /.widget-main --&gt;
+&lt;/div&gt;&lt;!-- /.widget-body --&gt;
+</code></pre>
+  </div><!-- /.widget-box -->
+</div><!-- /.col -->
+////////////////////////////////////////////////////////////////////////////mounted增加一个
+ _this.drawPieChart();
+ //////////////////////////////////////////////////////////////////////////methods增加一个
+     drawPieChart() {
+      let placeholder = $('#piechart-placeholder').css({'width':'90%' , 'min-height':'180px'});
+      let data = [
+        { label: "Java",  data: 38.7, color: "#68BC31"},
+        { label: "Python",  data: 24.5, color: "#2091CF"},
+        { label: "Android",  data: 18.6, color: "#DA5430"},
+        { label: "其它",  data: 10, color: "#FEE074"},
+      ];
+      $.plot(placeholder, data, {
+        series: {
+          pie: {
+            show: true,
+            tilt:0.8,
+            highlight: {
+              opacity: 0.25
+            },
+            stroke: {
+              color: '#fff',
+              width: 2
+            },
+            startAngle: 2
+          }
+        },
+        legend: {
+          show: true,
+          position: "ne",
+          labelBoxBorderColor: null,
+          margin:[-30,15]
+        }
+        ,
+        grid: {
+          hoverable: true,
+          clickable: true
+        }
+      })
+    }
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其实还需要引入图标的插件，但是我们之前就把所有的插件都复制过来了，所以这里不修改</span><br><span class="line"></span><br><span class="line">## 14-3 前后端多环境配置</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1，springboot多环境配置<br>使用application-xxx.propertie来设置不同环境的配置，xxx表示环境名称<br>公共模块要打包，不能带spring-boot-maven-plugin插件<br>springboot.jar包启动命令：java -jar aaa.jar –spring.profiles.active&#x3D;xxx，xxx表示环境名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 常见的环境有以下这些：开发、测试、集成、联调、准备生成、灰度、生产</span><br><span class="line">- 问题：发布生产时，端口号和本地开发的不一样。需要根据不同的环境配置不同的端口，我们以system为例</span><br><span class="line">- application-xxx.properties，xxx就是环境名，可自定义，可以叫dev也可以叫development</span><br><span class="line">- 我们将system的application.properties复制一份重命名为application-dev.properties，里面就放要修改的比如端口号server.port=19001，怎么让他生效呢，我们只需要如下图所示，在有效配置文件写上dev即可![image-20220331103702681](https://s2.loli.net/2022/03/31/d682hCE7KrzRLYq.png)</span><br><span class="line"></span><br><span class="line">- 通过在启动命令里增加spring.profiles.active的变量值，达到支持多环境的效果</span><br><span class="line"></span><br><span class="line">- 问题：本地和生产的数据库配置肯定是不一样的，ip、端口、用户名、密码等都不一样。需要根据不同的环境配置不同的数据库连接。数据库配置是放到server模块的，然后操作跟上面一样。</span><br><span class="line"></span><br><span class="line">- 问题：项目怎么打包？</span><br><span class="line"></span><br><span class="line">- 在父模块中增加了spring-boot-maven-plugin，那么打包时，所以子模块都会按这个插件来打包，但是server模块并不需要启动，不需要这个插件。</span><br><span class="line"></span><br><span class="line">- 我们只需要将所有需要启动的模块，都加上spring-boot-maven-plugin插件,同时将course根目录的这段插件删除</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  &lt;build&gt;</span><br><span class="line">     &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">     &lt;/plugins&gt;</span><br><span class="line">  &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>然后如图所示instalinstall下，就是打包了<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/31/rImFp9EAxtUKJZ2.png"
+                      alt="image-20220331105728732"
+                ></p>
+</li>
+<li><p>那么我们打包后的文件去了哪？先找到maven的本地仓库，然后就可以在文件夹中看到了<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/31/h3w5vrJC4fzq1A2.png"
+                      alt="image-20220331105929614"
+                ></p>
+</li>
+<li><p>问题：打好的jar包咋用？</p>
+</li>
+<li><p>我们在命令行进入想使用的jar包的文件夹target，然后输入java -jar xxx.jar；如果想在生产上使用java -jar xxx.jar –spring.profiles.active&#x3D;dev</p>
+</li>
+</ul>
+<h2 id="14-4-前后端缓存的使用"><a href="#14-4-前后端缓存的使用" class="headerlink" title="14-4 前后端缓存的使用"></a>14-4 前后端缓存的使用</h2><ul>
+<li><p>高频查询，低频修改的数据，特别适合使用缓存，我们以web的index.vue为例</p>
+</li>
+<li><p>&#96;&#96;&#96;vue<br>&#x2F;**</p>
+<ul>
+<li>查询新上好课</li>
+</ul>
+<p> *&#x2F;<br>listNew() {<br>  let _this &#x3D; this;<br>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;<br>  &#x2F;&#x2F; 新上好课不经常变，又经常被访问，适合用缓存<br>  &#x2F;&#x2F; 判断是否有缓存<br>  let news &#x3D; SessionStorage.get(“news”);<br>  if (!Tool.isEmpty(news)) {<br>    _this.news &#x3D; news;<br>    return;<br>  }<br>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;<br>  _this.$ajax.get(process.env.VUE_APP_SERVER + ‘&#x2F;business&#x2F;web&#x2F;course&#x2F;list-new’).then((response)&#x3D;&gt;{<br>    console.log(“查询新上好课结果：”, response);<br>    let resp &#x3D; response.data;<br>    if (resp.success) {<br>      _this.news &#x3D; resp.content;<br>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;<br>      &#x2F;&#x2F; 保存到缓存<br>      SessionStorage.set(“news”, _this.news);<br>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;<br>    }<br>  }).catch((response)&#x3D;&gt;{<br>    console.log(“error：”, response);<br>  })<br>},</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 控台管理的缓存使用思路：可以使用LocalStorags最大程度的减少请求，配合主动清除缓存来处理过期数据</span><br><span class="line">- 主动清除缓存来处理过期数据：在右上角菜单中增加【清除分类缓存】【清楚除资源缓存】或【清除全部缓存】，点击的时候，清除相应的缓存。</span><br><span class="line"></span><br><span class="line"># 第15章 课程总结</span><br><span class="line"></span><br><span class="line">本章将带大家回顾总结课程重点难点</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">**环境的搭建**</span><br><span class="line"></span><br><span class="line">**代码生成器**</span><br><span class="line"></span><br><span class="line">**文件上传和视频播放**</span><br><span class="line"></span><br><span class="line">**通用权限设计**</span><br><span class="line"></span><br><span class="line"># 第16章 项目功能升级</span><br><span class="line"></span><br><span class="line">本章是对课程做的升级，核心是对部分功能升级优化，比如优化验证码的清晰度，优化登录token超时的问题，关闭播放器模态框时停止播放，还会分享学习Vue事件总线、Vue新增属性的数据绑定等新的技能。</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">## 16-1 已提交的代码讲解</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.将gateway中的路由配置改为IP，用lb:&#x2F;&#x2F;时，有时候会有延迟，需要等一会才能访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 后续介绍生产发布时，会将eureak换成nacos，既是注册中心，又是配置中心，解决不同环境使用不同配置。开发环境用ip.port，生产环境用lb。修改gateway的application.properties</span><br><span class="line"></span><br><span class="line">- ```properties</span><br><span class="line">  spring.cloud.gateway.routes[1].uri=http://192.168.0.105:9002</span><br><span class="line">  #spring.cloud.gateway.routes[1].uri=lb://business</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.BUG修复，文件上传改为OSS后，文件检查check方法中，应该拼上OSS地址</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>我们修改UploadController</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>@Value(“${oss.domain}”)<br>private String OSS_DOMAIN;<br>&#x2F;&#x2F;在check方法中使用OSS_DOMAIN<br>if (StringUtils.isEmpty(fileDto.getVod())){<br>fileDto.setPath(OSS_DOMAIN+fileDto.getPath());<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.修改redis地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 遇到的问题：把redis地址改成了自己的redis，结果存进去后，取不到值。这是因为修改redis地址只改了一个，要两个都改，server和gateway的application.properties</span><br><span class="line"></span><br><span class="line">- ```properties</span><br><span class="line">  spring.redis.host=127.0.0.1</span><br><span class="line">  spring.redis.port=6379</span><br><span class="line">  spring.redis.password=Redis000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.BUG修复：注册时，验证码校验通过后，短信记录未变成已使用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在SmsService中的validCode方法，自始至终都用的smsDb这个，从数据库里直接取。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.解决侧边栏收缩按钮不起作用的BUG</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>window.open是js原生方法，用于打开某个页面，我们修改admin的login.vue的login()方法修改</p>
+</li>
+<li><p>&#96;&#96;&#96;vue<br>&#x2F;&#x2F; _this.$router.push(“&#x2F;welcome”);<br>window.open(“&#x2F;welcome”, “_self”);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 因为我们现在使用的是js原生的跳转，这是admin.vue的这个就可以注释了</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  // $.getScript(&#x27;/ace/assets/js/ace.min.js&#x27;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="16-2-验证码图片清晰度优化"><a href="#16-2-验证码图片清晰度优化" class="headerlink" title="16-2 验证码图片清晰度优化"></a>16-2 验证码图片清晰度优化</h2><ul>
+<li><p>我们在com.course.server.util增加NoWaterRipple.java</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.server.util;</p>
+<p>import com.google.code.kaptcha.GimpyEngine;<br>import com.google.code.kaptcha.util.Configurable;</p>
+<p>import java.awt.*;<br>import java.awt.image.BufferedImage;<br>import java.awt.image.ImageObserver;</p>
+<p>public class NoWaterRipple extends Configurable implements GimpyEngine {<br>  public NoWaterRipple(){}<br><br>  @Override<br>  public BufferedImage getDistortedImage(BufferedImage baseImage) {<br>     &#x2F;&#x2F;NoiseProducer noiseProducer &#x3D; this.getConfig().getNoiseImpl();<br>     BufferedImage distortedImage &#x3D; new BufferedImage(baseImage.getWidth(), baseImage.getHeight(), 2);<br>     Graphics2D graphics &#x3D; (Graphics2D)distortedImage.getGraphics();<br>     &#x2F;&#x2F;RippleFilter rippleFilter &#x3D; new RippleFilter();<br>     &#x2F;&#x2F;rippleFilter.setWaveType(0);<br>     &#x2F;&#x2F;rippleFilter.setXAmplitude(2.6F);<br>     &#x2F;&#x2F;rippleFilter.setYAmplitude(1.7F);<br>     &#x2F;&#x2F;rippleFilter.setXWavelength(15.0F);<br>     &#x2F;&#x2F;rippleFilter.setYWavelength(5.0F);<br>     &#x2F;&#x2F;rippleFilter.setEdgeAction(0);<br>     &#x2F;&#x2F;WaterFilter waterFilter &#x3D; new WaterFilter();<br>     &#x2F;&#x2F;waterFilter.setAmplitude(1.5F);<br>     &#x2F;&#x2F;waterFilter.setPhase(10.0F);<br>     &#x2F;&#x2F;waterFilter.setWavelength(2.0F);<br>     &#x2F;&#x2F;BufferedImage effectImage &#x3D; waterFilter.filter(baseImage, (BufferedImage)null);<br>     &#x2F;&#x2F;effectImage &#x3D; rippleFilter.filter(effectImage, (BufferedImage)null);<br>     graphics.drawImage(baseImage, 0, 0, (Color)null, (ImageObserver)null);<br>     graphics.dispose();<br>     &#x2F;&#x2F;noiseProducer.makeNoise(distortedImage, 0.1F, 0.1F, 0.25F, 0.25F);<br>     &#x2F;&#x2F;noiseProducer.makeNoise(distortedImage, 0.1F, 0.25F, 0.5F, 0.9F);<br>     return distortedImage;<br>  }<br>   }</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后将KaptchaConfig进行修改</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //properties.setProperty(&quot;kaptcha.obscurificator.impl&quot;, &quot;com.google.code.kaptcha.impl.WaterRipple&quot;);</span><br><span class="line">  properties.setProperty(&quot;kaptcha.obscurificator.impl&quot;, &quot;com.course.server.util.NoWaterRipple&quot;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="16-3-Vue-CLI多环境编译"><a href="#16-3-Vue-CLI多环境编译" class="headerlink" title="16-3 Vue CLI多环境编译"></a>16-3 Vue CLI多环境编译</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加配置文件vue.config.js，作用类似于springboot的application.properties，参考文档时cli.vue.js的那部分</span><br><span class="line">2.修改BASE_URL改为相对路径，对应配置publicPath</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>修改package.json</p>
+</li>
+<li><pre><code class="json">&quot;build-dev&quot;: &quot;vue-cli-service build --mode dev&quot;,
+&quot;build-prod&quot;: &quot;vue-cli-service build --mode prod&quot;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后在npm编译，双击后，就会在admin模块出现dist目录，这就是编译后的结果。但是编译之后会把我们的BASE_URL变成/，这时我们在admin根目录下新增vue.config.js</span><br><span class="line">- ![image-20220331161109192](https://s2.loli.net/2022/03/31/bPmdr4Qs51MH7NT.png)</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  //本地开发使用绝对路径，生产开发使用相对路径</span><br><span class="line">  module.exports = &#123;</span><br><span class="line">    publicPath: process.env.NODE_ENV === &#x27;production&#x27;</span><br><span class="line">        ? &#x27;/&#x27;</span><br><span class="line">        : &#x27;/&#x27;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>要发布的话，就是将dist目录拷贝到服务器上，用nginx，tomcat，nodejs等容器启动</p>
+</li>
+</ul>
+<h2 id="16-4-新增视频时没有触发绑定"><a href="#16-4-新增视频时没有触发绑定" class="headerlink" title="16-4 新增视频时没有触发绑定"></a>16-4 新增视频时没有触发绑定</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.两种方法解决新增讲师头像不能实时预览的问题</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>新增时，teacher是空对象，初始没有image属性，也就不会有对应的监听操作，所以即使js代码里为image赋值，也不不会渲染到页面上，而编辑时，teacher是从后端返回的，此时所有属性都会有，即使存的是空值。</p>
+</li>
+<li><p>原理大概是vue会为存在的属性生成set，get方法，在方法中做文章，如果初始空对象，没有任何属性，也就不会生成方法。</p>
+</li>
+<li><p>我们有两个方法，第一个就是初始化时就给teacher一个image属性（可以为null），在add方法中修改；方法二就是在afterUpload方法中强制渲染</p>
+</li>
+<li><pre><code class="vue">//新增讲师，上传头像后不能实时预览，解决方法一
+_this.teacher = &#123;
+  image:null
+&#125;;
+///////////////////////////////////////////////////
+// 新增讲师，上传头像后不能实时预览，解决方法二
+_this.$forceUpdate();
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 16-5 关闭播放器模态框时停止播放</span><br><span class="line"></span><br><span class="line">- 问题：关闭模态框时，视频还在播放</span><br><span class="line"></span><br><span class="line">- 正常功能：关闭模态框时，自动停止播放</span><br><span class="line"></span><br><span class="line">- 步骤一：找到关闭模态框的事件![image-20220331170249373](https://s2.loli.net/2022/03/31/5o7C2RhtLfrYGwJ.png)</span><br><span class="line"></span><br><span class="line">- 步骤二：找到视频播放器暂停的方法![image-20220331170502264](https://s2.loli.net/2022/03/31/AjpELvJHBOVFUaW.png)</span><br><span class="line"></span><br><span class="line">- 我们修改player.vue在methods中增加</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  pause() &#123;</span><br><span class="line">    let _this = this;</span><br><span class="line">    _this.aliPlayer.pause();</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后我们修改modal-player.vue，增加如下</p>
+</li>
+<li><pre><code class="vue">mounted() &#123;
+  let _this = this;
+  // 当关闭模态框时，暂停播放
+  $(&#39;#player-modal&#39;).on(&#39;hidden.bs.modal&#39;, function (e) &#123;
+    _this.$refs.player.pause();
+  &#125;)
+&#125;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">我们解决：修改fontawesome-cdn地址的问题</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>用CDN的好处，就是代码中不用加入各种依赖，只要引入cdn地址就可了并且加载的资源都不占用本地的带宽和流量。缺点就是受人牵制CDN可能失效，所以需要找稳定，当然也有付费的CDN。我们在index.html中重新引入</p>
+</li>
+<li><p>&#96;&#96;&#96;html</p>
+<link href="https://cdn.bootcss.com/font-awesome/5.13.0/css/all.css" rel="stylesheet">
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 16-6 登录token超时优化</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.登陆超时时，前端axios拦截器统一处理，跳到登录页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 正确的做法：登录超时时，跳回登录页面</span><br><span class="line"></span><br><span class="line">- 应该想办法统一的拦截超时请求，而不是对每个请求做超时判断</span><br><span class="line"></span><br><span class="line">- 我们修改admin里的main.js。error里加如下</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  axios.interceptors.request.use(function (response)&#123;</span><br><span class="line">    console.log(&quot;返回结果:&quot;,response);</span><br><span class="line">    return response;</span><br><span class="line">  &#125;,error =&gt; &#123;</span><br><span class="line">    console.log(&quot;返回拦截：&quot;, error.response);</span><br><span class="line">    let response = error.response;</span><br><span class="line">    const status = response.status;</span><br><span class="line">    if (status === 401) &#123;</span><br><span class="line">      // 判断状态码是401 跳转到登录</span><br><span class="line">      console.log(&quot;未登录，跳到登录页面&quot;);</span><br><span class="line">      Tool.setLoginUser(null);</span><br><span class="line">      router.push(&#x27;/login&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">      data: &#123;</span><br><span class="line">        success: false,</span><br><span class="line">        message: &quot;请重新登录&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>因为在刚才加的错误处理中，最后return时，只构造了success和message，所以这里的resp.content就是null，后面再加一个.list就会报错。这是我们修改user.vue，再list方法中加一个判断</p>
+</li>
+<li><p>&#96;&#96;&#96;vue<br>if (resp.success) {<br>  _this.users &#x3D; resp.content.list;<br>  _this.$refs.pagination.render(page, resp.content.total);<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.gateway每次登录验证成功，刷新登录token超时时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 超时时间指的是空闲时间，如果控台一直有操作，就应该不算超时，就应该刷新token超时时间</span><br><span class="line"></span><br><span class="line">- 只需要再LoginAdminGatewayFilter中加一行</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  LOG.info(&quot;已登录:&#123;&#125;&quot;,object);</span><br><span class="line">  // 增加权限校验，gateway里没有LoginUserDto，所以全部用JSON操作</span><br><span class="line">  LOG.info(&quot;接口权限校验，请求地址：&#123;&#125;&quot;, path);</span><br><span class="line">  boolean exist = false;</span><br><span class="line">  JSONObject loginUserDto = JSON.parseObject(String.valueOf(object));</span><br><span class="line">  /////////////////////////////////////////////////////////////////////////下面这一行</span><br><span class="line">  redisTemplate.opsForValue().set(token, JSON.toJSONString(loginUserDto), 3600,  TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
+<h2 id="16-7-Vue事件总线使用案例"><a href="#16-7-Vue事件总线使用案例" class="headerlink" title="16-7 Vue事件总线使用案例"></a>16-7 Vue事件总线使用案例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加事件总线，用于两个毫无关系的组件之间触发事件，代码不好跟踪，尽量少用</span><br><span class="line">2.前端调试可以要打断点的地方增一行：debugger</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>实现功能：点击播放小节视频时，如果需要登录，则直接弹出登录窗口</p>
+</li>
+<li><p>如何实现两个毫无关系的组件之间的方法调用？使用事件总线</p>
+</li>
+<li><p>功能第一步：定义一个全局的事件总线</p>
+</li>
+<li><p>首先在web的main.js添加</p>
+</li>
+<li><pre><code class="js">//事件总线EventBus
+Vue.prototype.$event = new Vue();
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 事件总线的使用分为两步，1发送事件，2监听事件</span><br><span class="line"></span><br><span class="line">- 事件总线是全局的，所有组件都可以往总线里发送个事件，所有的组件都可以监听里面的事件。就像一根通往干家万户的电线一样。</span><br><span class="line"></span><br><span class="line">- 功能实现第二步：播放方法里，发送一个打开登录窗口事件，使用$emit触发一个事件，事件名称可自定义。</span><br><span class="line"></span><br><span class="line">- 我们在detail.vue的play方法中的判断是否是会员里添加</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  // Toast.warning(&quot;请先登录&quot;);</span><br><span class="line">  // 触发打开登录窗口事件，用到事件总线</span><br><span class="line">  _this.$event.$emit(&quot;openLoginModal&quot;, &quot;111&quot;);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>功能实现第三步：在登陆组件中增加监听打开登录窗口的事件，打开登录窗口事件随时都有可能有，login组件不知道何时来，所以应该初始化的事件就开始监听。使用$on监听事件，监听的事件名称要和$emit的事件名称一致。同时给事件总线传参数。如果要传递多个参数：可以将多个参数变成json对象进行传递。</p>
+</li>
+<li><p>前端调试按巧：在要调试（打断点）的地方，加一行代码：debugger：注意：浏览器需要打开开发者工具（按F12才能生效）</p>
+</li>
+<li><p>我们修改login.vue，在初始化mounted加入如下代码</p>
+</li>
+<li><pre><code class="vue">// 监听事件总线，openLoginModal事件
+_this.$event.$on(&quot;openLoginModal&quot;, function (param) &#123;
+  console.log(param);
+  // 前端调试可以使用debugger。
+  // debugger;
+  _this.openLoginModal();
+&#125;)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 事件总线实际上就是空的vue组件</span><br><span class="line"></span><br><span class="line"># 第17章 生产打包与发布</span><br><span class="line"></span><br><span class="line">本章是对课程做的升级，核心是掌握如何将整个项目发布到生产环境，通过外网来访问</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">## 17-1 注册中心&amp;配置中心Nacos</span><br><span class="line"></span><br><span class="line">**注册中心**</span><br><span class="line"></span><br><span class="line">- 使用Nacos和使用Redis，MQ类似，要先下载并启动server端。Java代码中加入client端依赖去连接server端![image-20220401172702652](https://s2.loli.net/2022/04/01/OV2fjurYd4tLw5M.png)</span><br><span class="line"></span><br><span class="line">- 启动就点击如图所示：![image-20220401172826062](https://s2.loli.net/2022/04/01/excyLIQCv4UYfhJ.png)</span><br><span class="line"></span><br><span class="line">- 启动成功就会显示后台地址：![image-20220401211705438](https://s2.loli.net/2022/04/01/g8VqD7FsGjwbfnY.png)</span><br><span class="line"></span><br><span class="line">- 默认账号密码都是nacos</span><br><span class="line"></span><br><span class="line">- type =pom，可以理解为一组依赖，比如有10个Jar，只需要引入一个type=pom的依赖就可以了，不需要引入10个jar包依赖。我们给course的pom添加依赖</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;spring-cloud-alibaba-dependencies&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.2.1.RELEASE&lt;/version&gt;</span><br><span class="line">     &lt;type&gt;pom&lt;/type&gt;</span><br><span class="line">     &lt;scope&gt;import&lt;/scope&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>将system模块的注册中心，从eureka改为nacos</p>
+</li>
+<li><pre><code class="xml">&lt;!--        &lt;dependency&gt;--&gt;
+&lt;!--            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;--&gt;
+&lt;!--            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;--&gt;
+&lt;!--        &lt;/dependency&gt;--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 也要修改system的配置文件</span><br><span class="line"></span><br><span class="line">- ```properties</span><br><span class="line">  #eureka.client.service-url.defaultZone=http://localhost:8761/eureka/</span><br><span class="line">  spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后把system启动类的注释换成@EnableDiscoveryClient</p>
+</li>
+</ul>
+<h2 id="17-2-注册中心-amp-配置中心Nacos2"><a href="#17-2-注册中心-amp-配置中心Nacos2" class="headerlink" title="17-2 注册中心&amp;配置中心Nacos2"></a>17-2 注册中心&amp;配置中心Nacos2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.system连接nacos配置中心</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>因为将key写在源码里，容易泄露掉，所以这时候就需要一个配置中心，将特殊的配置梵高配置中心，而不是放到源码里</p>
+</li>
+<li><p>对于公司来说，开发人员能够看到所有生产的数据库地址、用户名、密码，是不安全的，为了避免程序员删库跑路，需要将生成配置放到配置中心，只有有权限的人才能登录配置中心修改配置。怎么配置的，看nacos文档。</p>
+</li>
+<li><p>下面我们新建一个配置<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/02/zQRw64xJhGK5Pi9.png"
+                      alt="image-20220402092636545"
+                ></p>
+</li>
+<li><p>客户端的使用需要增加一个依赖，哪里需要就在哪个pom.xml增加依赖</p>
+</li>
+<li><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-config&lt;/artifactId&gt;
+&lt;/dependency&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 官方使用是使用了applicationContext，我们可以跟正常使用application.properties的写法一样，用@Value注解</span><br><span class="line"></span><br><span class="line">- 在这之前， **必须使用 bootstrap.properties 配置文件来配置Nacos Server 地址**，Spring Boot中有两个上下文，一种是bootstrap，另一种是spplication，bootstrap是应用程序的父上下文，bootstrap的优先级高于application。bootstrap主要用于从额外的资源中加载配置文件。我们在system的resources中新建配置文件bootstrap.properties</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  spring.cloud.nacos.config.server-addr=127.0.0.1:8848</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>@Value注解需要记住，用法：@Value(“${xxx}”)，也可以使用带默认值的写法，比如@Value(“${system.test:TEST}”),当没有写system.test配置项时，就用”TEST”</p>
+</li>
+<li><p>接下来写一个测试请求TestController，用来读取配置中心岗配置好的system.test的值</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.system.controller;</p>
+<p>import com.course.server.dto.ResponseDto;<br>import org.springframework.beans.factory.annotation.Value;<br>import org.springframework.cloud.context.config.annotation.RefreshScope;<br>import org.springframework.web.bind.annotation.GetMapping;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.RestController;</p>
+<p>@RestController<br>@RequestMapping(“&#x2F;test”)<br>public class TestController {</p>
+<pre><code>@Value(&quot;$&#123;system.test&#125;&quot;)
+private String systemTest;
+
+@GetMapping(&quot;/list&quot;)
+public ResponseDto list() &#123;
+    ResponseDto responseDto = new ResponseDto();
+    responseDto.setContent(systemTest);
+    return responseDto;
+&#125;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 实现功能：动态刷新配置。例如一些告警阈值配置，需要将阈值调低，立即生效，且不需要重启服务器</span><br><span class="line"></span><br><span class="line">- 方法一：客户端主动刷新：每30s会获取一次发生变化的配置值</span><br><span class="line"></span><br><span class="line">- 方法二：客户端被动监听：服务端有值发生变化时就主动告诉客户端拉取一次最新的值。两种方法同时存在，互补。防止某一方式因线程卡住等问题失效</span><br><span class="line"></span><br><span class="line">- 我们现在代码监听到了配置值发生变化，但是没有实时反应到程序的结果中.我们怎么做呢？就是在TestController增加一个注解@RefreshScope</span><br><span class="line"></span><br><span class="line">## 17-3 阿里云部署方案介绍</span><br><span class="line"></span><br><span class="line">- 首先RDS购买和配置，阿里云提供了musql、oracle等数据库服务，并且还有各种单机、集群方案，开箱即用，省去了我们大量的运维工作。</span><br><span class="line">- 接下来要初始化我们数据库，要在购买好的RDS上新那建项目实例，并执行初始化脚本。一个RDS可以创建多个实例，如果有多个学习项目，只需要购买一次RDS就可以了，减少学习成本</span><br><span class="line">- 接下来购买和配置ECS（就是一台虚拟机，可以选择windows或者linux，在其上安装各种应用程序）</span><br><span class="line">- 接下来安装SecureCRT(SecureCRT是ssh工具，主要用来远程执行命令，方便我们直接在本</span><br><span class="line">  地电脑运行ECS服务器的命令。程序员最常用来看生产日志。)和WinSCP（是sftp工具，用来传文件到RDS，比如把打包好的源码上传到服务器上）。之前我用的是Xftp和Xshell</span><br><span class="line">- 然后是JDK的安装和配置</span><br><span class="line">- 然后是Nacos安装和启动</span><br><span class="line">- 然后是Nginx安装与配置（前端VueCLI编译打包后，使用Nginx启动，也可以使用Tomcat,Apache、Nodejs等容器来启动）</span><br><span class="line">- 然后是前后端模块打包与发布</span><br><span class="line">- 最后就是域名配置</span><br><span class="line"></span><br><span class="line">## 17-4 RDS购买与配置</span><br><span class="line"></span><br><span class="line">- 这个页面点击立即购买，选择自己想要的![image-20220403102137659](https://s2.loli.net/2022/04/03/Z2xV4z5Kaqgfvty.png)</span><br><span class="line"></span><br><span class="line">- 专有网络，可以理解为搭建个虚拟的局域网，把相关的服务器、数据库都放到同一个专有网络。默认就行![image-20220403102310724](https://s2.loli.net/2022/04/03/d1rfeOkGDAWIqn9.png)</span><br><span class="line"></span><br><span class="line">- 购买成功后，我们进入RDS管理里面，设置下白名单![image-20220403102631225](https://s2.loli.net/2022/04/03/FX7UyJ6SlQ9bxYn.png)</span><br><span class="line"></span><br><span class="line">- 白名单用法一：选择内网ECS服务器，只能被某几台ECS使用，安全性能高</span><br><span class="line">- 白名单用法二：填入特定的白名单，为了方便，我选择全部IP都可以访问，填入0.0.0.0/0</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>接下来的内容：创建一个courseimooc的数据库实例，以及对应的用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 依旧是进入到管理里面，申请外网，这样内网地址和外网地址就都有了，在代码中配置数据库地址使用内网地址；通过本机客户端工具连接RDS、维护RDS，使用外网</span><br><span class="line">- 接下来先创建一个账号：![image-20220403103807595](https://s2.loli.net/2022/04/03/IC5lSsmqTw87f6t.png)</span><br><span class="line"></span><br><span class="line">- 然后我们在创建一个数据库![image-20220403103912468](https://s2.loli.net/2022/04/03/RyZscIkmOlbYiAT.png)</span><br><span class="line"></span><br><span class="line">- 然后我们就可以直接在管理的基本信息那登录数据库，登录的时候有个云资源授权，就是子账号（一般用作权限隔离。在企业中，不同的员工有不同的权限，可以通过子账号对员工划分权限）</span><br><span class="line">- 一般公司生产库不能通过外网连接，只能通过RDS控台来访问数据库。并且可以控制开发人员登录后只能查数据，不能修改表结构</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>接下来我们要初始化我们数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 复制下外网地址，然后进入数据库连接，填入以下内容就行了![image-20220403104552636](https://s2.loli.net/2022/04/03/wG2PW9xe8qoKszf.png)</span><br><span class="line"></span><br><span class="line">## 17-5 ECS购买与配置</span><br><span class="line"></span><br><span class="line">- 这个页面点击立即购买，选择自己想要的，当选择可用区域我们要选择和数据库一样的可用区域，同样专有网络也要和RDS一样![image-20220403105638267](https://s2.loli.net/2022/04/03/cZNd9znavt1JV5S.png)</span><br><span class="line"></span><br><span class="line">- 突发性能型：会有一个性能基准线，平时低于基准线会累计积分，在高峰期高于基准线时会消耗积分。</span><br><span class="line">- 安全组就是控制外网对ECS的端口访问，及ECS对外的访问。只有勾选的端口才能被外网访问到，这里会自动创建一个安全组，后续在部署应用时，需要再次设置安全组，开放8848，9000等端口。</span><br><span class="line">- 到了系统配置那一步，会设置账号密码，后续的登录ECS需要用到这组用户名和密码</span><br><span class="line">- 配置完之后就可以进入到管理控台了，里面也有ECS的管理，点进去就能看到公网IP和私有IP，复制下公网IP，![](https://s2.loli.net/2022/04/03/mrs7qlYjtSeTJfP.png)</span><br><span class="line"></span><br><span class="line">- 然后我们使用SecureCRT工具，用于登录远程ECS并执行命令。![image-20220403111322097](https://s2.loli.net/2022/04/03/I7q9hWNJmpwnvgZ.png)</span><br><span class="line"></span><br><span class="line">- 作为开发人员需要熟悉一些常用的linux命令，生产部署主要是关于文件、文件夹的操作如cd lI rm tar等。生产运维就是关于进程、CPU、内存，如ps free top等，最常用的是查看日志，如grep tail等</span><br><span class="line"></span><br><span class="line">- WinSCP是sftp工具，用于上传和下载文件![image-20220403111947566](https://s2.loli.net/2022/04/03/whTqtVaOdXPLCEG.png)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">## 17-6 JDK安装与Nacos安装</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在ECS中安装JDK</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 首先在本电脑下载Java8版本，然后移到ECS中，或者直接使用SecureCRT使用wget+下载地址命令下载</span><br><span class="line">- 打文件名的前缀，再按Tab键，可以自动提取整个文件名</span><br><span class="line">- 重命名命令格式就是：mv 原名 现在名</span><br><span class="line">- 解压缩就是：tar -zxvf 文件名</span><br><span class="line">- ll命令是查看现在的文件夹</span><br><span class="line">- 我们配置JDK环境可以使用vim命令，编辑/etc/profile文件，加入JDK环境变量</span><br><span class="line">- 移动到文件最后，输入i，就进入编辑状态，新增下面三行，新增两个变量，JAVA_HOME和CLASSPATH</span><br><span class="line">  第三方应用会用到，例如Tomcat，Nacos,并将/bin目录加到PATH变量中，用于直接执行java，javac等命令</span><br><span class="line">- ![image-20220403145702487](https://s2.loli.net/2022/04/03/rlLhsIioG79f6yY.png)</span><br><span class="line"></span><br><span class="line">- 然后按ESC键，退出编辑状态，再输入“:wg”保存并退出</span><br><span class="line">- 让配置好的变量立即生效，使用source/etc/profile，然后输入java，然后java-version就能识别我们的版本号了</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在ECS中安装Nacos</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 首先把本电脑的nacos移动到ECS</span><br><span class="line">- 进入到nacos目录cd nacos ，cd bin ，ll就能看到本目录下所有的文件，然后就可以输入sh startup.sh运行</span><br><span class="line">- 然后我们可以用ps -ef是查看所有进程如果后面加”|”是管道符，可以在第一个指令的结果集里，再执行第二个指令，例如ps -ef | grep java，就是再第一个结果下查看java</span><br><span class="line">- linux环境启动nacos默认会失败，需要修改下nacos配置，linux的启动脚本配置的启动模式是集群，需要改成单机。</span><br><span class="line">  关于集群部署，有兴趣的可以按官方文档，自己操作下。</span><br><span class="line">- 我们直接使用WinSCP进入到nacos的bin目录，我们编辑两个启动文件，搜索MODE就可以看到window使用的是单机，而linux是集群，我们把单机复制过去</span><br><span class="line">- cluster和standalone是比较常见的单词，需要掌握。像缓存、消息队列等中间件，都会有单机和集群的部署方式。是属于偏架构师方向的知识</span><br><span class="line">- 回到命令窗口按上下键就可以找到之前使用的命令</span><br><span class="line">- curl命令可以用来发送get和post请求。发送get请求时，类似于在浏览器直接输入地址。增加-XPOST参数可</span><br><span class="line">  以用来发送post请求。这里就可以输入curl 127.0.0.1:8848查看是否成功</span><br><span class="line">- 由于之前配置ECS时没有打开8848端口，所以现在还不能访问。我们进入到实例，然后管理，然后本实例安全组，点击配置规则，配置完就能访问了![image-20220403153620154](https://s2.loli.net/2022/04/03/gP58SYTnUamLoz2.png)</span><br><span class="line"></span><br><span class="line">## 17-7 后台模块打包与发布1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>本节内容：将4个java应用发布到ECS上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 我们使用course下的install，把其下面的maven项目全部打包。</span><br><span class="line"></span><br><span class="line">- 以system为例，就会在system下面生成一个target里面有system+版本号.jar，我们将这个jar包放到服务器上用java命令运行就行了。如果想这个jar包只显示模块名，我们可以再pom.xml中的&lt;build&gt;下增加</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;finalName&gt;$&#123;artifactId&#125;&lt;/finalName&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>将jar包移动到ECS中，然后使用命令行java -jar jar包名。可能会报错记得配置nacos，和ECS的端口</p>
+</li>
+<li><p>为了安全，所有的后端Java应用，只有gateway允许被外部访问，其它应用都是内部应用，对外隐藏。否则别人通过外网直接system，那么权限控制就没用了。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/ndbhIfQ1jxJZOKe.png"
+                      alt="image-20220403164414917"
+                ></p>
+</li>
+<li><p>由于我们到了生产环境，所以我们要修改配置中心，我们来看看server中application数据库连接和我们现在生产的配置RDS哪几个不一样，本机和生产的用户名密码都是courseimooc，所以不用配到配置中心。生产有特殊配置的，需要覆盖代码的配置的，才需要配到配置中。我们只需要将下面这行再nacos进行配置,将localhost换成内网地址</p>
+</li>
+<li><pre><code>spring.datasource.url=jdbc:mysql://localhost:3306/courseimooc?characterEncoding=UTF8&amp;autoReconnect=true
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 如果命令窗口出现中文乱码，只需要设置选项中会话选项里的外观的字符编码为UTF-8，但是这是一次性的，我们要永久解决这个问题，我们就修改配置文件在C:\Users\AppDate\Config\Sessions\Default.ini找到Output Transformer Name改为UTF-8</span><br><span class="line"></span><br><span class="line">## 17-8 后台模块打包与发布2</span><br><span class="line"></span><br><span class="line">- 直接用java命令启动，就会一直占用当前会话窗口，不能执行其他命令。我们使用下面这命令行意思是在后台运行，并且生产日志</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  nohup java -jar jar包名 &gt;/root/logs/名称.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>关闭进程 kill -9 pid</p>
+</li>
+<li><p>可题：SecureCRT一段时间不用的话就会自动断开可通过设置反空闲功能解决</p>
+</li>
+<li><p>解决步骤：点击选项的全局选项的默认会话，里面编辑默认设置，发送字符可以填一个空格<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/HUfDCAsFJpyRYxt.png"
+                      alt="image-20220403191751982"
+                ></p>
+</li>
+<li><p>命令行输入history就能查看曾经输入的命令</p>
+</li>
+<li><p>用tail命令查看最新日志，tail -200f error.log，查看最新的两百行，此时，会话窗口不能执行其他命令，正在实时等待最新日志，一旦有最新日志，就会实时显示到屏幕</p>
+</li>
+<li><p>用grep命令查找某段日志 ，（grep 未获取 error.log）就会获取包含未获取关键字的日志段。grep -c 10 未获取 error.log这命令就会获取 未获取关键字的上下十行</p>
+</li>
+<li><p>grep通过搜索日志ID，来查看某一次请求完整的日志，方便分析问题，</p>
+</li>
+<li><p>还可以通过搜索某个时间点的上下N行来分析问题，注意如果搜索的关键字包含空格，需要用“”包起来</p>
+</li>
+<li><p>当然不要忘要为business和file增加配置中心，修改数据库连接。注意：到这一步，business和file的代码并没有加配置中心的配置，所以实际上还没有连到配置中心。</p>
+</li>
+</ul>
+<h2 id="17-9-Nginx安装与Vue项目发布"><a href="#17-9-Nginx安装与Vue项目发布" class="headerlink" title="17-9 Nginx安装与Vue项目发布"></a>17-9 Nginx安装与Vue项目发布</h2><ul>
+<li><p>我们发布含有多个Vue项目：一种方法：通过配置不同的二级目录，来访问不同的模块，第二种就是：通过配置不同的域名，来访问不同的模块</p>
+</li>
+<li><p>命令行在线安装yum install xxx</p>
+</li>
+<li><p>我们命令行输入nginx -v就可以查看版本</p>
+</li>
+<li><p>怎么启动nginx呢？只需要输入service ngnix start</p>
+</li>
+<li><p>验证启动成功，就是输入公网ip，里面有东西就是启动成功</p>
+</li>
+<li><p>然后进入我们admin文件夹下的.env.prod就可以将公网ip进行替换了</p>
+</li>
+<li><pre><code>NODE_ENV=development
+VUE_APP_SERVER=公网ip
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后修改vue.config.js</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  module.exports = &#123;</span><br><span class="line">    publicPath: process.env.NODE_ENV === &#x27;production&#x27;</span><br><span class="line">        ? &#x27;/admin/&#x27;</span><br><span class="line">        : &#x27;/&#x27;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>之后就可以打包了</p>
+</li>
+<li><p>之后放到ECS种，配置nginx让他能够读到我们打包的vue，我们可以将自定义的配置放到&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;下，文件名xxx.conf。我们就写一个admin.conf文件<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/J48OwefvGrykijb.png"
+                      alt="image-20220403201646521"
+                ></p>
+</li>
+<li><p>当访问：47.103.86.218&#x2F;admin&#x2F;时，就会访问到服务器资源：&#x2F;root&#x2F;admin&#x2F;index.html</p>
+</li>
+<li><p>设置完我们需要重启nginx，命令就是nginx -s reload</p>
+</li>
+<li><p>安装完nginx后，会多一个nginx用户，并且默认以nginx用户启动，而admin相关的文件是用root用户上传的，这时nginx用户就没有权限去读admin相关的文件，所以访问时报错403，这时我们就要修改nginx.conf，将user nginx改为user root就行了，但是登录控台进去又报错是，是因为我们之前使用window.open（“&#x2F;welcome”），ip+端口后面的目录都会被去掉，而使用push，虽然也是&#x2F;welcome，但是因为是vue框架的绝对路径，所以会保留baseUrl的配置，即保留&#x2F;admin&#x2F;。这里还原成push写法</p>
+</li>
+<li><p>vue cli有个解决404的方法，就是将我画出的那行复制到admin.conf里<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/Vax2NFjDyPYULqE.png"
+                      alt="image-20220403205800267"
+                ></p>
+</li>
+<li><p>本节讲的是用二级目录配置会有很多问题</p>
+</li>
+</ul>
+<h2 id="17-10-域名配置1"><a href="#17-10-域名配置1" class="headerlink" title="17-10 域名配置1"></a>17-10 域名配置1</h2><ul>
+<li><p>以域名courseimooc.com为例</p>
+</li>
+<li><p>通过admin.courseimooc.com访问控台</p>
+</li>
+<li><p>通过<a class="link"   target="_blank" rel="noopener" href="http://www.courseimooc.com访问web网站/" >www.courseimooc.com访问web网站<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>通过server.courseimooc.com来访问路由</p>
+</li>
+<li><p>注意：不是所有的域名都能备案，如果是要长期用的，可以选择.com，.cn等能备案的域名。不能备案的域名不能解析到国内ECS，只能买国外或香港的ECS，网络肯定不如国内的好</p>
+</li>
+<li><p>现在不能备案，但是我们要解析<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/sIrlTkwcZSvMDYH.png"
+                      alt="image-20220403214837963"
+                ></p>
+</li>
+<li><p>然后我们要更改ECS里的admin.conf，将server_name后面改为admin.courseimooc.com，然后因为2级目录也不需要了，所以location后一个&#x2F;就行了，然后我们刷新不需要&#x2F;admin了，就把try_files的&#x2F;admin去了，图片忘去了。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/8pyhxonHNr6APBK.png"
+                      alt="image-20220403215010504"
+                ></p>
+</li>
+<li><p>因为是二级域名了，所以vue.config.js改回去</p>
+</li>
+<li><pre><code class="js">module.exports = &#123;
+  publicPath: process.env.NODE_ENV === &#39;production&#39;
+      ? &#39;./&#39;
+      : &#39;/&#39;
+&#125;;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 17-11 域名配置2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+通过server.courseimooc.com来访问路由
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 当我们进入页面，按F12会看到下面是通过ip和端口来访问的，我们需要将其改为域名![](https://s2.loli.net/2022/04/03/mYTAFcSNuvlhkxR.png)</span><br><span class="line"></span><br><span class="line">- 我们首先依旧是解析域名![image-20220403220224562](https://s2.loli.net/2022/04/03/s7v41zlFUEuyjrM.png)</span><br><span class="line"></span><br><span class="line">- 其次为了掩盖端口，我们要在nginx做文章，我们在nginx的conf.d目录下在新建一个server.conf，他和admin.conf不同在于，它使用了反向代理，反向代理，代理的是服务器，浏览器只知道访问了80端口，并不知道真实的服务端是9000端口。正向代理，代理的是客户端，如VPN，服务端只知道被VPN服务器访阅了，但不知道真实的客户端来自哪里</span><br><span class="line"></span><br><span class="line">- ![image-20220403220340115](https://s2.loli.net/2022/04/03/U4ivPHA3Ygeu9xd.png)</span><br><span class="line"></span><br><span class="line">- 我们修改.env.prod</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  NODE_ENV=development</span><br><span class="line">  VUE_APP_SERVER=http://server.courseimooc.com</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>改完这些<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/S1MlfiREPF3WKbj.png"
+                      alt="image-20220403221008771"
+                ></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过www.courseimooc.com访问web网站</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>同样需要解析域名</p>
+</li>
+<li><p>修改web的.env.prod</p>
+</li>
+<li><pre><code>NODE_ENV=development
+VUE_APP_SERVER=http://www.imooc.com
+</code></pre>
+</li>
+<li><p>我们在nginx的conf.d目录下在新建一个web.conf<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/tXcaugvhdkpWo79.png"
+                      alt="image-20220403221634910"
+                ></p>
+</li>
+<li><p>注意：使用了配置中心后，要把项目中，用到@Value的配置移动到bootstrap.properties，或者配置到nacos中。就是bootstrap.properties和nacos任意一个地方要有配置，以file为例，把这部分移到bootstrap.properties<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/03/IWhKgToRQ5VbDwB.png"
+                      alt="image-20220403222847138"
+                ></p>
+<ul>
+<li>在真实项目里，不会用这么暴力的kill-9，一般会搭配一些流量控制的功能，先将流量切断，等待当前所有的线程执行完，确认服务器日志没有再刷了，最后再kill-9</li>
+<li>扩展：本项目演示只用了一台服务器。真实的项目中，一般一个应用放一台服务器，不要把鸡蛋放在一个篮子里。并且每个应用会配置多个节点，防止宕（dang）机</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Spring Cloud + Vue 前后端分离5</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-03-20 19:50:48</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/03/20/Spring Cloud + Vue 前后端分离 5/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/04/12/%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E8%AF%B7%E4%BD%A0%E8%B0%88%E8%B0%88%E7%BD%91%E7%AB%99%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%BF%E9%97%AE%E7%9A%84/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">请你谈谈网站是如何进行访问的</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/15/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%204-2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离4-2</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC14%E7%AB%A0-%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">第14章 项目优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#14-1-%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">14-1 项目初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">
+        
+        课程销售排名
+      </span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">
+        
+        分类销售排名
+      </span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-4-%E5%89%8D%E5%90%8E%E7%AB%AF%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">14-4 前后端缓存的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-2-%E9%AA%8C%E8%AF%81%E7%A0%81%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">16-2 验证码图片清晰度优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-3-Vue-CLI%E5%A4%9A%E7%8E%AF%E5%A2%83%E7%BC%96%E8%AF%91"><span class="nav-number">1.4.</span> <span class="nav-text">16-3 Vue CLI多环境编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-4-%E6%96%B0%E5%A2%9E%E8%A7%86%E9%A2%91%E6%97%B6%E6%B2%A1%E6%9C%89%E8%A7%A6%E5%8F%91%E7%BB%91%E5%AE%9A"><span class="nav-number">1.5.</span> <span class="nav-text">16-4 新增视频时没有触发绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-7-Vue%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">1.6.</span> <span class="nav-text">16-7 Vue事件总线使用案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-2-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83-amp-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83Nacos2"><span class="nav-number">1.7.</span> <span class="nav-text">17-2 注册中心&amp;配置中心Nacos2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-9-Nginx%E5%AE%89%E8%A3%85%E4%B8%8EVue%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83"><span class="nav-number">1.8.</span> <span class="nav-text">17-9 Nginx安装与Vue项目发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-10-%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE1"><span class="nav-number">1.9.</span> <span class="nav-text">17-10 域名配置1</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

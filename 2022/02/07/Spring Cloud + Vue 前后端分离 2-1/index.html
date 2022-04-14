@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Spring Cloud + Vue 前后端分离2-1 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Spring Cloud + Vue 前后端分离2-1</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-07 15:20:23</span>
+        <span class="mobile">2022-02-07 15:20</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>12k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>68 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第6章-通用代码生成器开发"><a href="#第6章-通用代码生成器开发" class="headerlink" title="第6章 通用代码生成器开发"></a>第6章 通用代码生成器开发</h1><p>本章将演示代码生成器的制作，学习模板引擎freemarker的使用。通过代码生成器可以快速生成dto、service、controller和vue界面代码，再配合上mybatis generator，可以快速完成单表的增删改查管理功能，极大的提高开发效率。另外，本章的知识也可应用于静态页面生成、导出复杂excel等涉及文件生成的场景。…</p>
+<h2 id="6-1-代码生成器原理介绍"><a href="#6-1-代码生成器原理介绍" class="headerlink" title="6-1 代码生成器原理介绍"></a>6-1 代码生成器原理介绍</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加generator模块，用于代码生成</span><br><span class="line">2.集成freemarker</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>freemarker和thymeleaf代码风格：前一个的逻辑主要写在自定义标签中；后一个的逻辑主要写在标签的属性中，web开发时可读性好一点。</p>
+</li>
+<li><p>步骤1：在父pom.xml中添加freemarker.jar依赖</p>
+</li>
+<li><pre><code class="xml">&lt;!-- 模板引擎freemarker --&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.freemarker&lt;/groupId&gt;
+   &lt;artifactId&gt;freemarker&lt;/artifactId&gt;
+   &lt;version&gt;2.3.29&lt;/version&gt;
+&lt;/dependency&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 步骤2：增加generator子模块，代码生成器专用，并添加freemarker.jar依赖</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;!-- 模板引擎freemarker --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.freemarker&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;freemarker&lt;/artifactId&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>步骤3：添加模板文件test.ftl和启动文件TestUtil.java</p>
+</li>
+<li><pre><code class="ftl">package com.course.generator.test;
+
+public class Test &#123;
+/**
+* ID111
+*/
+private String id;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.generator.test;</span><br><span class="line">  </span><br><span class="line">  import freemarker.template.Configuration;</span><br><span class="line">  import freemarker.template.DefaultObjectWrapper;</span><br><span class="line">  import freemarker.template.Template;</span><br><span class="line">  import freemarker.template.TemplateException;</span><br><span class="line">  </span><br><span class="line">  import java.io.BufferedWriter;</span><br><span class="line">  import java.io.File;</span><br><span class="line">  import java.io.FileWriter;</span><br><span class="line">  import java.io.IOException;</span><br><span class="line">  </span><br><span class="line">  public class TestUtil &#123;</span><br><span class="line">  </span><br><span class="line">          static String ftlPath = &quot;generator\\src\\main\\java\\com\\course\\generator\\test\\&quot;;</span><br><span class="line">          static String toPath = &quot;generator\\src\\main\\java\\com\\course\\generator\\test\\&quot;;</span><br><span class="line">  </span><br><span class="line">          public static void main(String[] args) throws IOException, TemplateException &#123;</span><br><span class="line">                  Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);</span><br><span class="line">                  cfg.setDirectoryForTemplateLoading(new File(ftlPath));</span><br><span class="line">                  cfg.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_29));</span><br><span class="line">                  Template temp = cfg.getTemplate(&quot;test.ftl&quot;);</span><br><span class="line">  </span><br><span class="line">                  FileWriter fw = new FileWriter(toPath + &quot;Test.java&quot;);</span><br><span class="line">                  BufferedWriter bw = new BufferedWriter(fw);</span><br><span class="line">                  temp.process(null, bw);</span><br><span class="line">                  bw.flush();</span><br><span class="line">                  fw.close();</span><br><span class="line">          &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>.ftl是freemarker约定的模板后缀名，也可以改成任意其他后缀；ftlPath：模板文件所在的路径；toPath：要生成的文件的路径</p>
+</li>
+</ul>
+<h2 id="6-2-controller层和service层代码生成"><a href="#6-2-controller层和service层代码生成" class="headerlink" title="6-2 controller层和service层代码生成"></a>6-2 controller层和service层代码生成</h2><p>小节表持久层代码生成：</p>
+<ul>
+<li><p>创建一个all.sql</p>
+</li>
+<li><p>&#96;&#96;&#96;sql</p>
+<h1 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h1><p>DROP TABLE IF EXISTS <code>Section</code>;<br>create table <code>Section</code><br>(<br><code>id</code>         CHAR(8)     NOT NULL DEFAULT ‘’ COMMENT ‘ID’,<br><code>title</code>      VARCHAR(50) NOT NULL COMMENT ‘标题’,<br><code>course_id</code>  CHAR(8) COMMENT ‘课程|course.id’,<br><code>chapter_id</code> CHAR(8) COMMENT ‘大章|chapter.id’,<br><code>video</code>      VARCHAR(200) COMMENT ‘视频’,<br><code>time</code>       INT COMMENT ‘时长|单位秒’,<br><code>charge</code>     CHAR(1) COMMENT ‘收费|C 收费;F 免费’,<br><code>sort</code>       INT COMMENT ‘顺序’,<br><code>created_at</code> DATETIME(3) COMMENT ‘创建时间’,<br><code>updated_at</code> DATETIME(3) COMMENT ‘修改时间’,<br>PRIMARY KEY (<code>id</code>)<br>)engine &#x3D;innodb default charset&#x3D;utf8mb4 comment&#x3D;’小节’;</p>
+<p>INSERT INTO <code>section</code>(id,title,course_id,chapter_id,video,time,charge,sort,created_at,updated_at)<br>VALUES(‘00000001’,’测试小节01’,’00000001’,’00000000’,’’,500,’F’,1,now(),now());</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 再在generatorconfig中添加代码&lt;table tableName=&quot;section&quot; domainObjectName=&quot;Section&quot;/&gt;，运用mybatis-generator代码生成器。</span><br><span class="line"></span><br><span class="line">service层代码生成：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.制作freemarkerUtil，简化生成器的使用<br>2.新增ServerGenerator，用于生成后端代码;controller,service,dto</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ftlPath是统一放模板的地方，这个属性值一般不会变，所以可以直接放在工具类里</span><br><span class="line"></span><br><span class="line">- 首先建立FreemarkerUtil</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.generator.server;</span><br><span class="line">  </span><br><span class="line">  import com.course.generator.util.DbUtil;</span><br><span class="line">  import com.course.generator.util.Field;</span><br><span class="line">  import com.course.generator.util.FreemarkerUtil;</span><br><span class="line">  import org.dom4j.Document;</span><br><span class="line">  import org.dom4j.Element;</span><br><span class="line">  import org.dom4j.io.SAXReader;</span><br><span class="line">  </span><br><span class="line">  import java.io.File;</span><br><span class="line">  import java.util.*;</span><br><span class="line">  </span><br><span class="line">  public class ServerGenerator &#123;</span><br><span class="line">      static String MODULE = &quot;business&quot;;</span><br><span class="line">      static String toDtoPath = &quot;server\\src\\main\\java\\com\\course\\server\\dto\\&quot;;</span><br><span class="line">      static String toServicePath = &quot;server\\src\\main\\java\\com\\course\\server\\service\\&quot;;</span><br><span class="line">      static String toControllerPath = MODULE + &quot;\\src\\main\\java\\com\\course\\&quot; + MODULE + &quot;\\controller\\admin\\&quot;;</span><br><span class="line">      static String generatorConfigPath = &quot;server\\src\\main\\resources\\generator\\generatorConfig.xml&quot;;</span><br><span class="line">  </span><br><span class="line">      public static void main(String[] args) throws Exception &#123;</span><br><span class="line">          String module = MODULE;</span><br><span class="line">  </span><br><span class="line">          // 只生成配置文件中的第一个table节点</span><br><span class="line">          File file = new File(generatorConfigPath);</span><br><span class="line">          SAXReader reader=new SAXReader();</span><br><span class="line">          //读取xml文件到Document中</span><br><span class="line">          Document doc=reader.read(file);</span><br><span class="line">          //获取xml文件的根节点</span><br><span class="line">          Element rootElement=doc.getRootElement();</span><br><span class="line">          //读取context节点</span><br><span class="line">          Element contextElement = rootElement.element(&quot;context&quot;);</span><br><span class="line">          //定义一个Element用于遍历</span><br><span class="line">          Element tableElement;</span><br><span class="line">          //取第一个“table”的节点</span><br><span class="line">          tableElement=contextElement.elementIterator(&quot;table&quot;).next();</span><br><span class="line">          String Domain = tableElement.attributeValue(&quot;domainObjectName&quot;);</span><br><span class="line">          String tableName = tableElement.attributeValue(&quot;tableName&quot;);</span><br><span class="line">          String tableNameCn = DbUtil.getTableComment(tableName);</span><br><span class="line">          String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);</span><br><span class="line">          System.out.println(&quot;表：&quot;+tableElement.attributeValue(&quot;tableName&quot;));</span><br><span class="line">          System.out.println(&quot;Domain：&quot;+tableElement.attributeValue(&quot;domainObjectName&quot;));</span><br><span class="line">  </span><br><span class="line">          List&lt;Field&gt; fieldList = DbUtil.getColumnByTableName(tableName);</span><br><span class="line">          Set&lt;String&gt; typeSet = getJavaTypes(fieldList);</span><br><span class="line">          Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">          map.put(&quot;Domain&quot;, Domain);</span><br><span class="line">          map.put(&quot;domain&quot;, domain);</span><br><span class="line">          map.put(&quot;tableNameCn&quot;, tableNameCn);</span><br><span class="line">          map.put(&quot;module&quot;, module);</span><br><span class="line">          map.put(&quot;fieldList&quot;, fieldList);</span><br><span class="line">          map.put(&quot;typeSet&quot;, typeSet);</span><br><span class="line">  </span><br><span class="line">          // 生成dto</span><br><span class="line">          FreemarkerUtil.initConfig(&quot;dto.ftl&quot;);</span><br><span class="line">          FreemarkerUtil.generator(toDtoPath + Domain + &quot;Dto.java&quot;, map);</span><br><span class="line">  </span><br><span class="line">          // 生成service</span><br><span class="line">          FreemarkerUtil.initConfig(&quot;service.ftl&quot;);</span><br><span class="line">          FreemarkerUtil.generator(toServicePath + Domain + &quot;Service.java&quot;, map);</span><br><span class="line">  </span><br><span class="line">          // 生成controller</span><br><span class="line">          FreemarkerUtil.initConfig(&quot;controller.ftl&quot;);</span><br><span class="line">          FreemarkerUtil.generator(toControllerPath + Domain + &quot;Controller.java&quot;, map);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 获取所有的Java类型，使用Set去重</span><br><span class="line">       */</span><br><span class="line">      private static Set&lt;String&gt; getJavaTypes(List&lt;Field&gt; fieldList) &#123;</span><br><span class="line">          Set&lt;String&gt; set = new HashSet&lt;&gt;();</span><br><span class="line">          for (int i = 0; i &lt; fieldList.size(); i++) &#123;</span><br><span class="line">              Field field = fieldList.get(i);</span><br><span class="line">              set.add(field.getJavaType());</span><br><span class="line">          &#125;</span><br><span class="line">          return set;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其次建立启动类ServerGenerator</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.generator.server;</p>
+<p>import com.course.generator.util.FreemarkerUtil;<br>import freemarker.template.TemplateException;</p>
+<p>import java.io.IOException;</p>
+<p>public class ServerGenerator {<br>static String toPath &#x3D; “generator\src\main\java\com\course\generator\test\“;<br>public static void main(String[] args) throws IOException, TemplateException {<br>    FreemarkerUtil.initConfig(“test.ftl”);<br>    FreemarkerUtil.generator(toPath+”Test.java”);<br>}<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.生成器开发，增加生成service层的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 首先创建service.ftl，就是把chapterservice复制一份，把Chapter改成$&#123;Domain&#125;，chapter改成$&#123;domain&#125;</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.server.service;</span><br><span class="line">  </span><br><span class="line">  import com.course.server.domain.$&#123;Domain&#125;;</span><br><span class="line">  import com.course.server.domain.$&#123;Domain&#125;Example;</span><br><span class="line">  import com.course.server.dto.$&#123;Domain&#125;Dto;</span><br><span class="line">  import com.course.server.dto.PageDto;</span><br><span class="line">  import com.course.server.mapper.$&#123;Domain&#125;Mapper;</span><br><span class="line">  import com.course.server.util.CopyUtil;</span><br><span class="line">  import com.course.server.util.UuidUtil;</span><br><span class="line">  import com.github.pagehelper.PageHelper;</span><br><span class="line">  import com.github.pagehelper.PageInfo;</span><br><span class="line">  import org.springframework.beans.BeanUtils;</span><br><span class="line">  import org.springframework.stereotype.Service;</span><br><span class="line">  import org.springframework.util.StringUtils;</span><br><span class="line">  </span><br><span class="line">  import javax.annotation.Resource;</span><br><span class="line">  import java.util.ArrayList;</span><br><span class="line">  import java.util.List;</span><br><span class="line">  </span><br><span class="line">  @Service</span><br><span class="line">  public class $&#123;Domain&#125;Service &#123;</span><br><span class="line">      @Resource</span><br><span class="line">      private $&#123;Domain&#125;Mapper $&#123;domain&#125;Mapper;</span><br><span class="line">      /**</span><br><span class="line">       * 列表查询</span><br><span class="line">       */</span><br><span class="line">      public void list(PageDto pageDto)&#123;</span><br><span class="line">          PageHelper.startPage(pageDto.getPage(),pageDto.getSize());</span><br><span class="line">          $&#123;Domain&#125;Example $&#123;domain&#125;Example = new $&#123;Domain&#125;Example();</span><br><span class="line">  </span><br><span class="line">          List&lt;$&#123;Domain&#125;&gt; $&#123;domain&#125;List = $&#123;domain&#125;Mapper.selectByExample($&#123;domain&#125;Example);</span><br><span class="line">          PageInfo&lt;$&#123;Domain&#125;&gt; pageInfo =new PageInfo&lt;&gt;($&#123;domain&#125;List);</span><br><span class="line">          pageDto.setTotal(pageInfo.getTotal());</span><br><span class="line">          ArrayList&lt;$&#123;Domain&#125;Dto&gt; $&#123;domain&#125;DtoArrayList = new ArrayList&lt;$&#123;Domain&#125;Dto&gt;();</span><br><span class="line">          for (int i = 0, l=$&#123;domain&#125;List.size(); i &lt;l ; i++) &#123;</span><br><span class="line">              $&#123;Domain&#125; $&#123;domain&#125; = $&#123;domain&#125;List.get(i);</span><br><span class="line">              $&#123;Domain&#125;Dto $&#123;domain&#125;Dto = new $&#123;Domain&#125;Dto();</span><br><span class="line">              BeanUtils.copyProperties($&#123;domain&#125;,$&#123;domain&#125;Dto);</span><br><span class="line">              $&#123;domain&#125;DtoArrayList.add($&#123;domain&#125;Dto);</span><br><span class="line">          &#125;</span><br><span class="line">          pageDto.setList($&#123;domain&#125;DtoArrayList);</span><br><span class="line">      &#125;</span><br><span class="line">      /**</span><br><span class="line">       * 保存，id有值时更新，无值时新增</span><br><span class="line">       */</span><br><span class="line">      public void save($&#123;Domain&#125;Dto $&#123;domain&#125;Dto)&#123;</span><br><span class="line">          $&#123;Domain&#125; $&#123;domain&#125; = CopyUtil.copy($&#123;domain&#125;Dto, $&#123;Domain&#125;.class);</span><br><span class="line">          if(StringUtils.isEmpty($&#123;domain&#125;Dto.getId()))&#123;</span><br><span class="line">              this.insert($&#123;domain&#125;);</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">              this.update($&#123;domain&#125;);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      /**</span><br><span class="line">       * 插入</span><br><span class="line">       */</span><br><span class="line">      private void insert($&#123;Domain&#125; $&#123;domain&#125;)&#123;</span><br><span class="line">          $&#123;domain&#125;.setId(UuidUtil.getShortUuid());</span><br><span class="line">          $&#123;domain&#125;Mapper.insert($&#123;domain&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      /**</span><br><span class="line">       * 更新</span><br><span class="line">       */</span><br><span class="line">      private void update($&#123;Domain&#125; $&#123;domain&#125;)&#123;</span><br><span class="line">          $&#123;domain&#125;Mapper.updateByPrimaryKey($&#123;domain&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      /**</span><br><span class="line">       * 删除</span><br><span class="line">       */</span><br><span class="line">      public void delete(String id)&#123;</span><br><span class="line">          $&#123;domain&#125;Mapper.deleteByPrimaryKey(id);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其次修改ServerGenerator代码，添加代码变量Domain</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.generator.server;</p>
+<p>import com.course.generator.util.FreemarkerUtil;<br>import freemarker.template.TemplateException;</p>
+<p>import java.io.IOException;<br>import java.util.HashMap;<br>import java.util.Map;</p>
+<p>public class ServerGenerator {<br>static String toServicePath &#x3D; “server\src\main\java\com\course\server\service\“;<br>public static void main(String[] args) throws IOException, TemplateException {<br>    String Domain &#x3D; “Section”;<br>    String domain &#x3D; “section”;<br>    Map&lt;String,Object&gt; map &#x3D;new HashMap&lt;&gt;();<br>    map.put(“Domain”,Domain);<br>    map.put(“domain”,domain);<br><br>    FreemarkerUtil.initConfig(“service.ftl”);<br>    FreemarkerUtil.generator(toServicePath+Domain+”Service.java”,map);<br>}<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最后改FreemarkerUtil代码，添加参数Map&lt;String,Object&gt; map和修改temp.process(map, bw);</span><br><span class="line"></span><br><span class="line">生成controller层代码，跟生成service一样</span><br><span class="line"></span><br><span class="line">## 6-3 dto层代码生成</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.生成器开发：解决controller模板中的中文业务名称和模块名称问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">static String MODULE = &quot;business&quot;;</span><br><span class="line">static String toControllerPath = MODULE+&quot;\\src\\main\\java\\com\\course\\&quot;+MODULE+&quot;\\controller\\admin\\&quot;;</span><br><span class="line">String tableNameCn = &quot;小节&quot;;</span><br><span class="line">String module = MODULE;</span><br><span class="line">map.put(&quot;tableNameCn&quot;,tableNameCn);</span><br><span class="line">map.put(&quot;module&quot;,module);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>就是添加了两个变量，再将模板ftl中的值换成变量的值</li>
+</ul>
+<p>dto层代码的生成：</p>
+<ul>
+<li><p>dto层的生成，需要知道表的所有字段，每个字段的类型需要映射成java类型，并且要把字段的变成小驼峰和大驼峰，比如course_id变成CourseId</p>
+</li>
+<li><p>Field类，用于存储每个字段的信息。流程：根据表名获取所有的字段信息，再将字段信息填充到Field类中，得到Field列表,之后将Field列表变量传入模板</p>
+</li>
+<li><pre><code class="java">package com.course.generator.util;
+
+public class Field &#123;
+    private String name; // 字段名：course_id
+    private String nameHump; // 字段名小驼峰：courseId
+    private String nameBigHump; // 字段名大驼峰：CourseId
+    private String nameCn; // 中文名：课程
+    private String type; // 字段类型：char(8)
+    private String javaType; // java类型：String
+    private String comment; // 注释：课程|ID
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public String getNameHump() &#123;
+        return nameHump;
+    &#125;
+
+    public void setNameHump(String nameHump) &#123;
+        this.nameHump = nameHump;
+    &#125;
+
+    public String getNameBigHump() &#123;
+        return nameBigHump;
+    &#125;
+
+    public void setNameBigHump(String nameBigHump) &#123;
+        this.nameBigHump = nameBigHump;
+    &#125;
+
+    public String getNameCn() &#123;
+        return nameCn;
+    &#125;
+
+    public void setNameCn(String nameCn) &#123;
+        this.nameCn = nameCn;
+    &#125;
+
+    public String getType() &#123;
+        return type;
+    &#125;
+
+    public void setType(String type) &#123;
+        this.type = type;
+    &#125;
+
+    public String getComment() &#123;
+        return comment;
+    &#125;
+
+    public void setComment(String comment) &#123;
+        this.comment = comment;
+    &#125;
+
+    public String getJavaType() &#123;
+        return javaType;
+    &#125;
+
+    public void setJavaType(String javaType) &#123;
+        this.javaType = javaType;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        final StringBuffer sb = new StringBuffer(&quot;Field&#123;&quot;);
+        sb.append(&quot;name=&#39;&quot;).append(name).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, nameHump=&#39;&quot;).append(nameHump).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, nameBigHump=&#39;&quot;).append(nameBigHump).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, nameCn=&#39;&quot;).append(nameCn).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, type=&#39;&quot;).append(type).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, javaType=&#39;&quot;).append(javaType).append(&#39;\&#39;&#39;);
+        sb.append(&quot;, comment=&#39;&quot;).append(comment).append(&#39;\&#39;&#39;);
+        sb.append(&#39;&#125;&#39;);
+        return sb.toString();
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- typeSet作用：整理出所有用到的Java类型，生成import语一种类型只需import一次，所以用set去重</span><br><span class="line"></span><br><span class="line">- JsonFormat注解：将后端日期类型格式化，再返回给前端</span><br><span class="line">  </span><br><span class="line">- 增加DbUtil.java</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.generator.util;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  import java.sql.*;</span><br><span class="line">  import java.util.ArrayList;</span><br><span class="line">  import java.util.List;</span><br><span class="line">  import java.util.regex.Matcher;</span><br><span class="line">  import java.util.regex.Pattern;</span><br><span class="line">  </span><br><span class="line">  public class DbUtil &#123;</span><br><span class="line">  </span><br><span class="line">      public static Connection getConnection() &#123;</span><br><span class="line">          Connection conn = null;</span><br><span class="line">          try &#123;</span><br><span class="line">              Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">              String url = &quot;jdbc:mysql://localhost:3306/courseimooc&quot;;</span><br><span class="line">              String user = &quot;courseimooc&quot;;</span><br><span class="line">              String pass = &quot;666666&quot;;</span><br><span class="line">              conn = DriverManager.getConnection(url, user, pass);</span><br><span class="line">          &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125; catch (SQLException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">          return conn;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 获得表注释</span><br><span class="line">       * @param tableName</span><br><span class="line">       * @return</span><br><span class="line">       * @throws Exception</span><br><span class="line">       */</span><br><span class="line">      public static String getTableComment(String tableName) throws Exception &#123;</span><br><span class="line">          Connection conn = getConnection();</span><br><span class="line">          Statement stmt = conn.createStatement();</span><br><span class="line">          ResultSet rs = stmt.executeQuery(&quot;select table_comment from information_schema.tables Where table_name = &#x27;&quot; + tableName + &quot;&#x27;&quot;);</span><br><span class="line">          String tableNameCH = &quot;&quot;;</span><br><span class="line">          if (rs != null) &#123;</span><br><span class="line">              while(rs.next()) &#123;</span><br><span class="line">                  tableNameCH = rs.getString(&quot;table_comment&quot;);</span><br><span class="line">                  break;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          rs.close();</span><br><span class="line">          stmt.close();</span><br><span class="line">          conn.close();</span><br><span class="line">          System.out.println(&quot;表名：&quot; + tableNameCH);</span><br><span class="line">          return tableNameCH;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 获得所有列信息</span><br><span class="line">       * @param tableName</span><br><span class="line">       * @return</span><br><span class="line">       * @throws Exception</span><br><span class="line">       */</span><br><span class="line">      public static List&lt;Field&gt; getColumnByTableName(String tableName) throws Exception &#123;</span><br><span class="line">          List&lt;Field&gt; fieldList = new ArrayList&lt;&gt;();</span><br><span class="line">          Connection conn = getConnection();</span><br><span class="line">          Statement stmt = conn.createStatement();</span><br><span class="line">          ResultSet rs = stmt.executeQuery(&quot;show full columns from `&quot; + tableName + &quot;`&quot;);</span><br><span class="line">          if (rs != null) &#123;</span><br><span class="line">              while(rs.next()) &#123;</span><br><span class="line">                  String columnName = rs.getString(&quot;Field&quot;);</span><br><span class="line">                  String type = rs.getString(&quot;Type&quot;);</span><br><span class="line">                  String comment = rs.getString(&quot;Comment&quot;);</span><br><span class="line">                  String nullAble = rs.getString(&quot;Null&quot;); //YES NO</span><br><span class="line">                  Field field = new Field();</span><br><span class="line">                  field.setName(columnName);</span><br><span class="line">                  field.setNameHump(lineToHump(columnName));</span><br><span class="line">                  field.setNameBigHump(lineToBigHump(columnName));</span><br><span class="line">                  field.setType(type);</span><br><span class="line">                  field.setJavaType(DbUtil.sqlTypeToJavaType(rs.getString(&quot;Type&quot;)));</span><br><span class="line">                  field.setComment(comment);</span><br><span class="line">                  if (comment.contains(&quot;|&quot;)) &#123;</span><br><span class="line">                      field.setNameCn(comment.substring(0, comment.indexOf(&quot;|&quot;)));</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                      field.setNameCn(comment);</span><br><span class="line">                  &#125;</span><br><span class="line">  </span><br><span class="line">                  fieldList.add(field);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          rs.close();</span><br><span class="line">          stmt.close();</span><br><span class="line">          conn.close();</span><br><span class="line">          System.out.println(&quot;列信息：&quot; + fieldList);</span><br><span class="line">          return fieldList;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 下划线转小驼峰</span><br><span class="line">       */</span><br><span class="line">      public static String lineToHump(String str)&#123;</span><br><span class="line">          Pattern linePattern = Pattern.compile(&quot;_(\\w)&quot;);</span><br><span class="line">          str = str.toLowerCase();</span><br><span class="line">          Matcher matcher = linePattern.matcher(str);</span><br><span class="line">          StringBuffer sb = new StringBuffer();</span><br><span class="line">          while(matcher.find())&#123;</span><br><span class="line">              matcher.appendReplacement(sb, matcher.group(1).toUpperCase());</span><br><span class="line">          &#125;</span><br><span class="line">          matcher.appendTail(sb);</span><br><span class="line">          return sb.toString();</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 下划线转大驼峰</span><br><span class="line">       */</span><br><span class="line">      public static String lineToBigHump(String str)&#123;</span><br><span class="line">          String s = lineToHump(str);</span><br><span class="line">          return s.substring(0, 1).toUpperCase() + s.substring(1);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 数据库类型转为Java类型</span><br><span class="line">       */</span><br><span class="line">      public static String sqlTypeToJavaType(String sqlType) &#123;</span><br><span class="line">          if (sqlType.toUpperCase().contains(&quot;varchar&quot;.toUpperCase())</span><br><span class="line">                  || sqlType.toUpperCase().contains(&quot;char&quot;.toUpperCase())</span><br><span class="line">                  || sqlType.toUpperCase().contains(&quot;text&quot;.toUpperCase())) &#123;</span><br><span class="line">              return &quot;String&quot;;</span><br><span class="line">          &#125; else if (sqlType.toUpperCase().contains(&quot;datetime&quot;.toUpperCase())) &#123;</span><br><span class="line">              return &quot;Date&quot;;</span><br><span class="line">          &#125; else if (sqlType.toUpperCase().contains(&quot;int&quot;.toUpperCase())) &#123;</span><br><span class="line">              return &quot;Integer&quot;;</span><br><span class="line">          &#125; else if (sqlType.toUpperCase().contains(&quot;long&quot;.toUpperCase())) &#123;</span><br><span class="line">              return &quot;Long&quot;;</span><br><span class="line">          &#125; else if (sqlType.toUpperCase().contains(&quot;decimal&quot;.toUpperCase())) &#123;</span><br><span class="line">              return &quot;BigDecimal&quot;;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              return &quot;String&quot;;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>记得导入数据库连接的依赖，然后使用在启动类</p>
+</li>
+<li><pre><code class="java">List&lt;Field&gt; fieldList = null;
+try &#123;
+    fieldList = DbUtil.getColumnByTableName(domain);
+&#125; catch (Exception e) &#123;
+    e.printStackTrace();
+&#125;
+Set&lt;String&gt; typeSet = getJavaTypes(fieldList);
+map.put(&quot;fieldList&quot;,fieldList);
+map.put(&quot;typeSet&quot;,typeSet);
+//生成dto
+FreemarkerUtil.initConfig(&quot;dto.ftl&quot;);
+FreemarkerUtil.generator(toDtoPath+Domain+&quot;Dto.java&quot;,map);
+    private static Set&lt;String&gt; getJavaTypes(List&lt;Field&gt; fieldList) &#123;
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        for (int i = 0; i &lt; fieldList.size(); i++) &#123;
+            Field field = fieldList.get(i);
+            set.add(field.getJavaType());
+        &#125;
+        return set;
+    &#125;
+
+  
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">通用代码生成器和mybatis generator整合：</span><br><span class="line"></span><br><span class="line">- 首先增加依赖（根目录和generator）</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;!-- 读xml --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.dom4j&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;dom4j&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>在启动类增加代码</p>
+</li>
+<li><pre><code class="java">static String generatorConfigPath = &quot;server\\src\\main\\resources\\generator\\generatorConfig.xml&quot;;
+    // 只生成配置文件中的第一个table节点
+    File file = new File(generatorConfigPath);
+    SAXReader reader=new SAXReader();
+    //读取xml文件到Document中
+    Document doc= null;
+    try &#123;
+        doc = reader.read(file);
+    &#125; catch (DocumentException e) &#123;
+        e.printStackTrace();
+    &#125;
+    //获取xml文件的根节点
+    Element rootElement=doc.getRootElement();
+    //读取context节点
+    Element contextElement = rootElement.element(&quot;context&quot;);
+    //定义一个Element用于遍历
+    Element tableElement;
+    //取第一个“table”的节点
+    tableElement=contextElement.elementIterator(&quot;table&quot;).next();
+    String Domain = tableElement.attributeValue(&quot;domainObjectName&quot;);
+    String tableName = tableElement.attributeValue(&quot;tableName&quot;);
+    String tableNameCn = null;
+    try &#123;
+        tableNameCn = DbUtil.getTableComment(tableName);
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125;
+    String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);
+    System.out.println(&quot;表：&quot;+tableElement.attributeValue(&quot;tableName&quot;));
+    System.out.println(&quot;Domain：&quot;+tableElement.attributeValue(&quot;domainObjectName&quot;));
+    List&lt;Field&gt; fieldList  = null;
+    try &#123;
+        fieldList = DbUtil.getColumnByTableName(tableName);
+    &#125; catch (Exception e) &#123;
+        e.printStackTrace();
+    &#125;
+
+    Set&lt;String&gt; typeSet = getJavaTypes(fieldList);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 6-4 前端vue界面代码生成</span><br><span class="line"></span><br><span class="line">vue cli多环境处理：自定义多环境变量必须以VUE_APP开头；NODE_ENV用来表示生产的环境</span><br><span class="line"></span><br><span class="line">- 在admin下增加两个文件分别是.env.dev和.env.prod</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  NODE_ENV=development</span><br><span class="line">  VUE_APP_SERVER=http://192.168.0.105:9000</span><br><span class="line">  ////////////////////////////////////////////</span><br><span class="line">  NODE_ENV=development</span><br><span class="line">  VUE_APP_SERVER=http://server.imooc.com</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>最后将地址改为变量VUE_APP_SERVER</p>
+</li>
+</ul>
+<p>新建VueGenerator用于生成vue页面代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.生成器开发：增加生成vue界面代码。</span><br><span class="line">2.小节管理增删改查功能测试成功</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>新建vue.ftl，代码从chapter.vue复制过来。注意：这里的粘贴应该右键-选择不带格式化的粘贴。一样改变量</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">      &lt;button v-on:click=&quot;add()&quot; class=&quot;btn btn-white btn-default btn-round&quot;&gt;</span><br><span class="line">        &lt;i class=&quot;ace-icon fa fa-edit red2&quot;&gt;&lt;/i&gt;</span><br><span class="line">        新增</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &amp;nbsp;</span><br><span class="line">      &lt;button v-on:click=&quot;list()&quot; class=&quot;btn btn-white btn-default btn-round&quot;&gt;</span><br><span class="line">        &lt;i class=&quot;ace-icon fa fa-refresh red2&quot;&gt;&lt;/i&gt;</span><br><span class="line">        刷新</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    &lt;pagination ref=&quot;pagination&quot; v-bind:list=&quot;list&quot; v-bind:itemCount=&quot;8&quot;&gt;&lt;/pagination&gt;</span><br><span class="line">      &lt;table id=&quot;simple-table&quot; class=&quot;table  table-bordered table-hover&quot;&gt;</span><br><span class="line">        &lt;thead&gt;</span><br><span class="line">        &lt;tr&gt;&lt;#list fieldList as field&gt;</span><br><span class="line">            &lt;th&gt;$&#123;field.nameCn&#125;&lt;/th&gt;&lt;/#list&gt;</span><br><span class="line">            &lt;th&gt;操作&lt;/th&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;/thead&gt;</span><br><span class="line"></span><br><span class="line">        &lt;tbody&gt;</span><br><span class="line">        &lt;tr v-for=&quot;$&#123;domain&#125; in $&#123;domain&#125;s&quot;&gt;</span><br><span class="line">          &lt;#list fieldList as field&gt;</span><br><span class="line">            &lt;td&gt;&#123;&#123;$&#123;domain&#125;.$&#123;field.nameHump&#125;&#125;&#125;&lt;/td&gt;</span><br><span class="line">          &lt;/#list&gt;</span><br><span class="line"></span><br><span class="line">          &lt;td&gt;</span><br><span class="line">            &lt;div class=&quot;hidden-sm hidden-xs btn-group&quot;&gt;</span><br><span class="line"></span><br><span class="line">              &lt;button v-on:click=&quot;edit($&#123;domain&#125;)&quot; class=&quot;btn btn-xs btn-info&quot;&gt;</span><br><span class="line">                &lt;i class=&quot;ace-icon fa fa-pencil bigger-120&quot;&gt;&lt;/i&gt;</span><br><span class="line">              &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">              &lt;button v-on:click=&quot;del($&#123;domain&#125;.id)&quot; class=&quot;btn btn-xs btn-danger&quot;&gt;</span><br><span class="line">                &lt;i class=&quot;ace-icon fa fa-trash-o bigger-120&quot;&gt;&lt;/i&gt;</span><br><span class="line">              &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;div class=&quot;hidden-md hidden-lg&quot;&gt;</span><br><span class="line">              &lt;div class=&quot;inline pos-rel&quot;&gt;</span><br><span class="line">                &lt;button class=&quot;btn btn-minier btn-primary dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; data-position=&quot;auto&quot;&gt;</span><br><span class="line">                  &lt;i class=&quot;ace-icon fa fa-cog icon-only bigger-110&quot;&gt;&lt;/i&gt;</span><br><span class="line">                &lt;/button&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ul class=&quot;dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close&quot;&gt;</span><br><span class="line">                  &lt;li&gt;</span><br><span class="line">                    &lt;a href=&quot;#&quot; class=&quot;tooltip-info&quot; data-rel=&quot;tooltip&quot; title=&quot;View&quot;&gt;</span><br><span class="line">                                                         &lt;span class=&quot;blue&quot;&gt;</span><br><span class="line">                                                            &lt;i class=&quot;ace-icon fa fa-search-plus bigger-120&quot;&gt;&lt;/i&gt;</span><br><span class="line">                                                         &lt;/span&gt;</span><br><span class="line">                    &lt;/a&gt;</span><br><span class="line">                  &lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                  &lt;li&gt;</span><br><span class="line">                    &lt;a href=&quot;#&quot; class=&quot;tooltip-success&quot; data-rel=&quot;tooltip&quot; title=&quot;Edit&quot;&gt;</span><br><span class="line">                                                         &lt;span class=&quot;green&quot;&gt;</span><br><span class="line">                                                            &lt;i class=&quot;ace-icon fa fa-pencil-square-o bigger-120&quot;&gt;&lt;/i&gt;</span><br><span class="line">                                                         &lt;/span&gt;</span><br><span class="line">                    &lt;/a&gt;</span><br><span class="line">                  &lt;/li&gt;</span><br><span class="line"></span><br><span class="line">                  &lt;li&gt;</span><br><span class="line">                    &lt;a href=&quot;#&quot; class=&quot;tooltip-error&quot; data-rel=&quot;tooltip&quot; title=&quot;Delete&quot;&gt;</span><br><span class="line">                                                         &lt;span class=&quot;red&quot;&gt;</span><br><span class="line">                                                            &lt;i class=&quot;ace-icon fa fa-trash-o bigger-120&quot;&gt;&lt;/i&gt;</span><br><span class="line">                                                         &lt;/span&gt;</span><br><span class="line">                    &lt;/a&gt;</span><br><span class="line">                  &lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">              &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">          &lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">        &lt;/tbody&gt;</span><br><span class="line">      &lt;/table&gt;</span><br><span class="line">    &lt;div id=&quot;form-modal&quot; class=&quot;modal fade&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;modal-dialog&quot; role=&quot;document&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;modal-content&quot;&gt;</span><br><span class="line">          &lt;div class=&quot;modal-header&quot;&gt;</span><br><span class="line">            &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;</span><br><span class="line">            &lt;h4 class=&quot;modal-title&quot;&gt;表单&lt;/h4&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;modal-body&quot;&gt;</span><br><span class="line">            &lt;form class=&quot;form-horizontal&quot;&gt;</span><br><span class="line">              &lt;#list fieldList as field&gt;</span><br><span class="line">                &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">                  &lt;label  class=&quot;col-sm-2 control-label&quot;&gt;$&#123;field.nameCn&#125;&lt;/label&gt;</span><br><span class="line">                  &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">                    &lt;input v-model=&quot;$&#123;domain&#125;.$&#123;field.nameHump&#125;&quot; class=&quot;form-control&quot;  &gt;</span><br><span class="line">                  &lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">              &lt;/#list&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/form&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;div class=&quot;modal-footer&quot;&gt;</span><br><span class="line">            &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;取消&lt;/button&gt;</span><br><span class="line">            &lt;button v-on:click=&quot;save()&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;保存&lt;/button&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;&lt;!-- /.modal-content --&gt;</span><br><span class="line">      &lt;/div&gt;&lt;!-- /.modal-dialog --&gt;</span><br><span class="line">    &lt;/div&gt;&lt;!-- /.modal --&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import Pagination from &quot;../../components/pagination&quot;;</span><br><span class="line">export default &#123;</span><br><span class="line">  components: &#123;Pagination&#125;,</span><br><span class="line">  name: &#x27;$&#123;domain&#125;&#x27;,</span><br><span class="line">  data: function () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      $&#123;domain&#125;: &#123;&#125;,</span><br><span class="line">      $&#123;domain&#125;s: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: function () &#123;</span><br><span class="line">    let _this = this;</span><br><span class="line">    _this.$refs.pagination.size = 5;</span><br><span class="line">    _this.list(1);</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    add() &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      _this.$&#123;domain&#125; = &#123;&#125;;</span><br><span class="line">      $(&quot;#form-modal&quot;).modal(&quot;show&quot;);</span><br><span class="line">    &#125;,</span><br><span class="line">    edit($&#123;domain&#125;) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      _this.$&#123;domain&#125; = $.extend(&#123;&#125;, $&#123;domain&#125;);</span><br><span class="line">      $(&quot;#form-modal&quot;).modal(&quot;show&quot;);</span><br><span class="line">    &#125;,</span><br><span class="line">    /**</span><br><span class="line">     * 列表查询</span><br><span class="line">     */</span><br><span class="line">    list(page) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      Loading.show();</span><br><span class="line">      _this.$ajax.post(process.env.VUE_APP_SERVER +&#x27;/$&#123;module&#125;/admin/$&#123;domain&#125;/list&#x27;, &#123;</span><br><span class="line">        page: page,</span><br><span class="line">        size: _this.$refs.pagination.size,</span><br><span class="line">      &#125;).then((respond) =&gt; &#123;</span><br><span class="line">        Loading.hide();</span><br><span class="line">        let resp = respond.data;</span><br><span class="line">        _this.$&#123;domain&#125;s = resp.content.list;</span><br><span class="line">        _this.$refs.pagination.render(page, resp.content.total);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    /**</span><br><span class="line">     * 点击保存</span><br><span class="line">     */</span><br><span class="line">    save(page) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line"></span><br><span class="line">      // 保存校验</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      Loading.show();</span><br><span class="line">      _this.$ajax.post(process.env.VUE_APP_SERVER +&#x27;/$&#123;module&#125;/admin/$&#123;domain&#125;/save&#x27;, _this.$&#123;domain&#125;).then((respond) =&gt; &#123;</span><br><span class="line">        Loading.hide();</span><br><span class="line">        let resp = respond.data;</span><br><span class="line">        if (resp.success) &#123;</span><br><span class="line">          $(&quot;#form-modal&quot;).modal(&quot;hide&quot;);</span><br><span class="line">          _this.list(1);</span><br><span class="line">          Toast.success(&quot;保存成功&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          Toast.warning(resp.message);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    /**</span><br><span class="line">     * 点击删除</span><br><span class="line">     */</span><br><span class="line">    del(id) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      Confirm.show(&quot;删除$&#123;tableNameCn&#125;后不可恢复!&quot;,function ()&#123;</span><br><span class="line">        Loading.show();</span><br><span class="line">        _this.$ajax.delete(process.env.VUE_APP_SERVER +&#x27;/$&#123;module&#125;/admin/$&#123;domain&#125;/delete/&#x27; + id).then((respond) =&gt; &#123;</span><br><span class="line">          Loading.hide();</span><br><span class="line">          let resp = respond.data;</span><br><span class="line">          if (resp.success) &#123;</span><br><span class="line">            _this.list(1);</span><br><span class="line">            Toast.success(&quot;删除成功&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其次创建VueGenerator启动类</p>
+</li>
+<li><pre><code class="java">package com.course.generator.vue;
+
+import com.course.generator.util.DbUtil;
+import com.course.generator.util.Field;
+import com.course.generator.util.FreemarkerUtil;
+import freemarker.template.TemplateException;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+public class VueGenerator &#123;
+    static String MODULE = &quot;business&quot;;
+    static String toVuePath = &quot;admin\\src\\views\\admin\\&quot;;
+
+    static String generatorConfigPath = &quot;server\\src\\main\\resources\\generator\\generatorConfig.xml&quot;;
+
+    public static void main(String[] args) throws IOException, TemplateException &#123;
+
+        String module = MODULE;
+
+        // 只生成配置文件中的第一个table节点
+        File file = new File(generatorConfigPath);
+        SAXReader reader=new SAXReader();
+        //读取xml文件到Document中
+        Document doc= null;
+        try &#123;
+            doc = reader.read(file);
+        &#125; catch (DocumentException e) &#123;
+            e.printStackTrace();
+        &#125;
+        //获取xml文件的根节点
+        Element rootElement=doc.getRootElement();
+        //读取context节点
+        Element contextElement = rootElement.element(&quot;context&quot;);
+        //定义一个Element用于遍历
+        Element tableElement;
+        //取第一个“table”的节点
+        tableElement=contextElement.elementIterator(&quot;table&quot;).next();
+        String Domain = tableElement.attributeValue(&quot;domainObjectName&quot;);
+        String tableName = tableElement.attributeValue(&quot;tableName&quot;);
+        String tableNameCn = null;
+        try &#123;
+            tableNameCn = DbUtil.getTableComment(tableName);
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+        String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);
+        System.out.println(&quot;表：&quot;+tableElement.attributeValue(&quot;tableName&quot;));
+        System.out.println(&quot;Domain：&quot;+tableElement.attributeValue(&quot;domainObjectName&quot;));
+        List&lt;Field&gt; fieldList  = null;
+        try &#123;
+            fieldList = DbUtil.getColumnByTableName(tableName);
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+
+        Set&lt;String&gt; typeSet = getJavaTypes(fieldList);
+        Map&lt;String,Object&gt; map =new HashMap&lt;&gt;();
+        map.put(&quot;Domain&quot;,Domain);
+        map.put(&quot;domain&quot;,domain);
+        map.put(&quot;tableNameCn&quot;,tableNameCn);
+        map.put(&quot;module&quot;,module);
+        map.put(&quot;fieldList&quot;,fieldList);
+        map.put(&quot;typeSet&quot;,typeSet);
+        //生成dto
+        FreemarkerUtil.initConfig(&quot;vue.ftl&quot;);
+        FreemarkerUtil.generator(toVuePath+domain+&quot;.vue&quot;,map);
+       &#125;
+    /**
+     * 获取所有的Java类型，使用Set去重
+     */
+    private static Set&lt;String&gt; getJavaTypes(List&lt;Field&gt; fieldList) &#123;
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        for (int i = 0; i &lt; fieldList.size(); i++) &#123;
+            Field field = fieldList.get(i);
+            set.add(field.getJavaType());
+        &#125;
+        return set;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后在admin.vue增加</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;li class=&quot;active&quot; id=&quot;business-section-sidebar&quot;&gt;</span><br><span class="line">    &lt;router-link to=&quot;/business/section&quot;&gt;</span><br><span class="line">      &lt;i class=&quot;menu-icon fa fa-caret-right&quot;&gt;&lt;/i&gt;</span><br><span class="line">      小节管理</span><br><span class="line">    &lt;/router-link&gt;</span><br><span class="line">    &lt;b class=&quot;arrow&quot;&gt;&lt;/b&gt;</span><br><span class="line">  &lt;/li&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>添加路由</p>
+</li>
+<li><p>&#96;&#96;&#96;js<br>,{<br>path: “business&#x2F;section”,<br>name:”business&#x2F;section”,<br>component: Section,<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 6-5 字段校验和通用字段的处理</span><br><span class="line"></span><br><span class="line">前后端模板增加字段校验</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.生成器开发，前后端模板增加字段校验</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在Field添加两个变量</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  private Boolean nullAble;//是否可为空</span><br><span class="line">  private Integer length;//字符串长度</span><br><span class="line">  /////////////////////////////////</span><br><span class="line">  public Boolean getNullAble() &#123;</span><br><span class="line">      return nullAble;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public void setNullAble(Boolean nullAble) &#123;</span><br><span class="line">      this.nullAble = nullAble;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public Integer getLength() &#123;</span><br><span class="line">      return length;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public void setLength(Integer length) &#123;</span><br><span class="line">      this.length = length;</span><br><span class="line">  &#125;</span><br><span class="line">  ////////////////////////////////////////////////////</span><br><span class="line">  sb.append(&quot;, nullAble=&quot;).append(nullAble);</span><br><span class="line">  sb.append(&quot;, length=&quot;).append(length);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>其次在DbUtil中增加：</p>
+</li>
+<li><p>约定：当length&gt;0时，表示需要对lenth做校验，当length&#x3D;0时，表示不需要校验</p>
+</li>
+<li><p>疑问：char类型为什么不需要效验长度？</p>
+</li>
+<li><p>解答：char类型一般用于固定长度的字段，常见的有id字段和枚举字段，id字段不需要校验，枚举字段界面一般会有下拉框，不是手输的，不需要校验。</p>
+</li>
+<li><pre><code class="java">String nullAble = rs.getString(&quot;Null&quot;); //YES NO
+field.setNullAble(&quot;YES&quot;.equals(nullAble));
+if(type.toUpperCase().contains(&quot;varchar&quot;.toUpperCase()))&#123;
+    String lengthStr = type.substring(type.indexOf(&quot;(&quot;)+1,type.length()-1);
+    field.setLength(Integer.valueOf(lengthStr));
+&#125;else&#123;
+    field.setLength(0);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 增加controller.ftl的保存校验</span><br><span class="line"></span><br><span class="line">- ```ftl</span><br><span class="line">  &lt;#list fieldList as field&gt;</span><br><span class="line">  &lt;#if !field.nullAble&gt;</span><br><span class="line">      ValidatorUtil.require($&#123;domain&#125;Dto.get$&#123;field.nameBigHump&#125;(), &quot;$&#123;field.nameCn&#125;&quot;);</span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">  &lt;#if (field.length &gt; 0)&gt;</span><br><span class="line">      ValidatorUtil.length($&#123;domain&#125;Dto.get$&#123;field.nameBigHump&#125;(), &quot;$&#123;field.nameCn&#125;&quot;, 1, $&#123;field.length&#125;);</span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">  &lt;/#list&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>增加前端vue.ftl校验</p>
+</li>
+<li><pre><code class="ftl">// 保存校验
+if (1 != 1 //是为了第一个请求或者长度没有||
+&lt;#list fieldList as field&gt;
+&lt;#if !field.nullAble&gt;
+|| !Validator.require(_this.$&#123;domain&#125;.$&#123;field.nameHump&#125;, &quot;$&#123;field.nameCn&#125;&quot;)
+&lt;/#if&gt;
+&lt;#if (field.length &gt; 0)&gt;
+|| !Validator.length(_this.$&#123;domain&#125;.$&#123;field.nameHump&#125;, &quot;$&#123;field.nameCn&#125;&quot;, 1, $&#123;field.length&#125;)
+&lt;/#if&gt;
+&lt;/#list&gt;
+) &#123;
+  return;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对ValidatorUtil的js和后端的java分别增加</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  if(Tool.isEmpty(value))&#123;</span><br><span class="line">      return true;</span><br><span class="line">  &#125;</span><br><span class="line">  //////////////////////////////////</span><br><span class="line">  if(StringUtils.isEmpty(str))&#123;</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+cdn.bootcss.com偶尔会出现404，导致jquery.blockUI.min.js没下载下来。原因可能是cdn不稳定，也可能是本地网络不稳定.将jquery.blockUI.min.js复制到本地，不使用cdn
+</code></pre>
+</li>
+<li><pre><code class="js">/*
+* jQuery BlockUI; v20141123
+* http://jquery.malsup.com/block/
+* Copyright (c) 2014 M. Alsup; Dual licensed: MIT/GPL
+*/
+(function()&#123;&quot;use strict&quot;;function e(e)&#123;function o(o,i)&#123;var s,h,k=o==window,v=i&amp;&amp;void 0!==i.message?i.message:void 0;if(i=e.extend(&#123;&#125;,e.blockUI.defaults,i||&#123;&#125;),!i.ignoreIfBlocked||!e(o).data(&quot;blockUI.isBlocked&quot;))&#123;if(i.overlayCSS=e.extend(&#123;&#125;,e.blockUI.defaults.overlayCSS,i.overlayCSS||&#123;&#125;),s=e.extend(&#123;&#125;,e.blockUI.defaults.css,i.css||&#123;&#125;),i.onOverlayClick&amp;&amp;(i.overlayCSS.cursor=&quot;pointer&quot;),h=e.extend(&#123;&#125;,e.blockUI.defaults.themedCSS,i.themedCSS||&#123;&#125;),v=void 0===v?i.message:v,k&amp;&amp;b&amp;&amp;t(window,&#123;fadeOut:0&#125;),v&amp;&amp;&quot;string&quot;!=typeof v&amp;&amp;(v.parentNode||v.jquery))&#123;var y=v.jquery?v[0]:v,m=&#123;&#125;;e(o).data(&quot;blockUI.history&quot;,m),m.el=y,m.parent=y.parentNode,m.display=y.style.display,m.position=y.style.position,m.parent&amp;&amp;m.parent.removeChild(y)&#125;e(o).data(&quot;blockUI.onUnblock&quot;,i.onUnblock);var g,I,w,U,x=i.baseZ;g=r||i.forceIframe?e(&#39;&lt;iframe class=&quot;blockUI&quot; style=&quot;z-index:&#39;+x++ +&#39;;display:none;border:none;margin:0;padding:0;position:absolute;width:100%;height:100%;top:0;left:0&quot; src=&quot;&#39;+i.iframeSrc+&#39;&quot;&gt;&lt;/iframe&gt;&#39;):e(&#39;&lt;div class=&quot;blockUI&quot; style=&quot;display:none&quot;&gt;&lt;/div&gt;&#39;),I=i.theme?e(&#39;&lt;div class=&quot;blockUI blockOverlay ui-widget-overlay&quot; style=&quot;z-index:&#39;+x++ +&#39;;display:none&quot;&gt;&lt;/div&gt;&#39;):e(&#39;&lt;div class=&quot;blockUI blockOverlay&quot; style=&quot;z-index:&#39;+x++ +&#39;;display:none;border:none;margin:0;padding:0;width:100%;height:100%;top:0;left:0&quot;&gt;&lt;/div&gt;&#39;),i.theme&amp;&amp;k?(U=&#39;&lt;div class=&quot;blockUI &#39;+i.blockMsgClass+&#39; blockPage ui-dialog ui-widget ui-corner-all&quot; style=&quot;z-index:&#39;+(x+10)+&#39;;display:none;position:fixed&quot;&gt;&#39;,i.title&amp;&amp;(U+=&#39;&lt;div class=&quot;ui-widget-header ui-dialog-titlebar ui-corner-all blockTitle&quot;&gt;&#39;+(i.title||&quot;&amp;nbsp;&quot;)+&quot;&lt;/div&gt;&quot;),U+=&#39;&lt;div class=&quot;ui-widget-content ui-dialog-content&quot;&gt;&lt;/div&gt;&#39;,U+=&quot;&lt;/div&gt;&quot;):i.theme?(U=&#39;&lt;div class=&quot;blockUI &#39;+i.blockMsgClass+&#39; blockElement ui-dialog ui-widget ui-corner-all&quot; style=&quot;z-index:&#39;+(x+10)+&#39;;display:none;position:absolute&quot;&gt;&#39;,i.title&amp;&amp;(U+=&#39;&lt;div class=&quot;ui-widget-header ui-dialog-titlebar ui-corner-all blockTitle&quot;&gt;&#39;+(i.title||&quot;&amp;nbsp;&quot;)+&quot;&lt;/div&gt;&quot;),U+=&#39;&lt;div class=&quot;ui-widget-content ui-dialog-content&quot;&gt;&lt;/div&gt;&#39;,U+=&quot;&lt;/div&gt;&quot;):U=k?&#39;&lt;div class=&quot;blockUI &#39;+i.blockMsgClass+&#39; blockPage&quot; style=&quot;z-index:&#39;+(x+10)+&#39;;display:none;position:fixed&quot;&gt;&lt;/div&gt;&#39;:&#39;&lt;div class=&quot;blockUI &#39;+i.blockMsgClass+&#39; blockElement&quot; style=&quot;z-index:&#39;+(x+10)+&#39;;display:none;position:absolute&quot;&gt;&lt;/div&gt;&#39;,w=e(U),v&amp;&amp;(i.theme?(w.css(h),w.addClass(&quot;ui-widget-content&quot;)):w.css(s)),i.theme||I.css(i.overlayCSS),I.css(&quot;position&quot;,k?&quot;fixed&quot;:&quot;absolute&quot;),(r||i.forceIframe)&amp;&amp;g.css(&quot;opacity&quot;,0);var C=[g,I,w],S=k?e(&quot;body&quot;):e(o);e.each(C,function()&#123;this.appendTo(S)&#125;),i.theme&amp;&amp;i.draggable&amp;&amp;e.fn.draggable&amp;&amp;w.draggable(&#123;handle:&quot;.ui-dialog-titlebar&quot;,cancel:&quot;li&quot;&#125;);var O=f&amp;&amp;(!e.support.boxModel||e(&quot;object,embed&quot;,k?null:o).length&gt;0);if(u||O)&#123;if(k&amp;&amp;i.allowBodyStretch&amp;&amp;e.support.boxModel&amp;&amp;e(&quot;html,body&quot;).css(&quot;height&quot;,&quot;100%&quot;),(u||!e.support.boxModel)&amp;&amp;!k)var E=d(o,&quot;borderTopWidth&quot;),T=d(o,&quot;borderLeftWidth&quot;),M=E?&quot;(0 - &quot;+E+&quot;)&quot;:0,B=T?&quot;(0 - &quot;+T+&quot;)&quot;:0;e.each(C,function(e,o)&#123;var t=o[0].style;if(t.position=&quot;absolute&quot;,2&gt;e)k?t.setExpression(&quot;height&quot;,&quot;Math.max(document.body.scrollHeight, document.body.offsetHeight) - (jQuery.support.boxModel?0:&quot;+i.quirksmodeOffsetHack+&#39;) + &quot;px&quot;&#39;):t.setExpression(&quot;height&quot;,&#39;this.parentNode.offsetHeight + &quot;px&quot;&#39;),k?t.setExpression(&quot;width&quot;,&#39;jQuery.support.boxModel &amp;&amp; document.documentElement.clientWidth || document.body.clientWidth + &quot;px&quot;&#39;):t.setExpression(&quot;width&quot;,&#39;this.parentNode.offsetWidth + &quot;px&quot;&#39;),B&amp;&amp;t.setExpression(&quot;left&quot;,B),M&amp;&amp;t.setExpression(&quot;top&quot;,M);else if(i.centerY)k&amp;&amp;t.setExpression(&quot;top&quot;,&#39;(document.documentElement.clientHeight || document.body.clientHeight) / 2 - (this.offsetHeight / 2) + (blah = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + &quot;px&quot;&#39;),t.marginTop=0;else if(!i.centerY&amp;&amp;k)&#123;var n=i.css&amp;&amp;i.css.top?parseInt(i.css.top,10):0,s=&quot;((document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + &quot;+n+&#39;) + &quot;px&quot;&#39;;t.setExpression(&quot;top&quot;,s)&#125;&#125;)&#125;if(v&amp;&amp;(i.theme?w.find(&quot;.ui-widget-content&quot;).append(v):w.append(v),(v.jquery||v.nodeType)&amp;&amp;e(v).show()),(r||i.forceIframe)&amp;&amp;i.showOverlay&amp;&amp;g.show(),i.fadeIn)&#123;var j=i.onBlock?i.onBlock:c,H=i.showOverlay&amp;&amp;!v?j:c,z=v?j:c;i.showOverlay&amp;&amp;I._fadeIn(i.fadeIn,H),v&amp;&amp;w._fadeIn(i.fadeIn,z)&#125;else i.showOverlay&amp;&amp;I.show(),v&amp;&amp;w.show(),i.onBlock&amp;&amp;i.onBlock.bind(w)();if(n(1,o,i),k?(b=w[0],p=e(i.focusableElements,b),i.focusInput&amp;&amp;setTimeout(l,20)):a(w[0],i.centerX,i.centerY),i.timeout)&#123;var W=setTimeout(function()&#123;k?e.unblockUI(i):e(o).unblock(i)&#125;,i.timeout);e(o).data(&quot;blockUI.timeout&quot;,W)&#125;&#125;&#125;function t(o,t)&#123;var s,l=o==window,a=e(o),d=a.data(&quot;blockUI.history&quot;),c=a.data(&quot;blockUI.timeout&quot;);c&amp;&amp;(clearTimeout(c),a.removeData(&quot;blockUI.timeout&quot;)),t=e.extend(&#123;&#125;,e.blockUI.defaults,t||&#123;&#125;),n(0,o,t),null===t.onUnblock&amp;&amp;(t.onUnblock=a.data(&quot;blockUI.onUnblock&quot;),a.removeData(&quot;blockUI.onUnblock&quot;));var r;r=l?e(&quot;body&quot;).children().filter(&quot;.blockUI&quot;).add(&quot;body &gt; .blockUI&quot;):a.find(&quot;&gt;.blockUI&quot;),t.cursorReset&amp;&amp;(r.length&gt;1&amp;&amp;(r[1].style.cursor=t.cursorReset),r.length&gt;2&amp;&amp;(r[2].style.cursor=t.cursorReset)),l&amp;&amp;(b=p=null),t.fadeOut?(s=r.length,r.stop().fadeOut(t.fadeOut,function()&#123;0===--s&amp;&amp;i(r,d,t,o)&#125;)):i(r,d,t,o)&#125;function i(o,t,i,n)&#123;var s=e(n);if(!s.data(&quot;blockUI.isBlocked&quot;))&#123;o.each(function()&#123;this.parentNode&amp;&amp;this.parentNode.removeChild(this)&#125;),t&amp;&amp;t.el&amp;&amp;(t.el.style.display=t.display,t.el.style.position=t.position,t.el.style.cursor=&quot;default&quot;,t.parent&amp;&amp;t.parent.appendChild(t.el),s.removeData(&quot;blockUI.history&quot;)),s.data(&quot;blockUI.static&quot;)&amp;&amp;s.css(&quot;position&quot;,&quot;static&quot;),&quot;function&quot;==typeof i.onUnblock&amp;&amp;i.onUnblock(n,i);var l=e(document.body),a=l.width(),d=l[0].style.width;l.width(a-1).width(a),l[0].style.width=d&#125;&#125;function n(o,t,i)&#123;var n=t==window,l=e(t);if((o||(!n||b)&amp;&amp;(n||l.data(&quot;blockUI.isBlocked&quot;)))&amp;&amp;(l.data(&quot;blockUI.isBlocked&quot;,o),n&amp;&amp;i.bindEvents&amp;&amp;(!o||i.showOverlay)))&#123;var a=&quot;mousedown mouseup keydown keypress keyup touchstart touchend touchmove&quot;;o?e(document).bind(a,i,s):e(document).unbind(a,s)&#125;&#125;function s(o)&#123;if(&quot;keydown&quot;===o.type&amp;&amp;o.keyCode&amp;&amp;9==o.keyCode&amp;&amp;b&amp;&amp;o.data.constrainTabKey)&#123;var t=p,i=!o.shiftKey&amp;&amp;o.target===t[t.length-1],n=o.shiftKey&amp;&amp;o.target===t[0];if(i||n)return setTimeout(function()&#123;l(n)&#125;,10),!1&#125;var s=o.data,a=e(o.target);return a.hasClass(&quot;blockOverlay&quot;)&amp;&amp;s.onOverlayClick&amp;&amp;s.onOverlayClick(o),a.parents(&quot;div.&quot;+s.blockMsgClass).length&gt;0?!0:0===a.parents().children().filter(&quot;div.blockUI&quot;).length&#125;function l(e)&#123;if(p)&#123;var o=p[e===!0?p.length-1:0];o&amp;&amp;o.focus()&#125;&#125;function a(e,o,t)&#123;var i=e.parentNode,n=e.style,s=(i.offsetWidth-e.offsetWidth)/2-d(i,&quot;borderLeftWidth&quot;),l=(i.offsetHeight-e.offsetHeight)/2-d(i,&quot;borderTopWidth&quot;);o&amp;&amp;(n.left=s&gt;0?s+&quot;px&quot;:&quot;0&quot;),t&amp;&amp;(n.top=l&gt;0?l+&quot;px&quot;:&quot;0&quot;)&#125;function d(o,t)&#123;return parseInt(e.css(o,t),10)||0&#125;e.fn._fadeIn=e.fn.fadeIn;var c=e.noop||function()&#123;&#125;,r=/MSIE/.test(navigator.userAgent),u=/MSIE 6.0/.test(navigator.userAgent)&amp;&amp;!/MSIE 8.0/.test(navigator.userAgent);document.documentMode||0;var f=e.isFunction(document.createElement(&quot;div&quot;).style.setExpression);e.blockUI=function(e)&#123;o(window,e)&#125;,e.unblockUI=function(e)&#123;t(window,e)&#125;,e.growlUI=function(o,t,i,n)&#123;var s=e(&#39;&lt;div class=&quot;growlUI&quot;&gt;&lt;/div&gt;&#39;);o&amp;&amp;s.append(&quot;&lt;h1&gt;&quot;+o+&quot;&lt;/h1&gt;&quot;),t&amp;&amp;s.append(&quot;&lt;h2&gt;&quot;+t+&quot;&lt;/h2&gt;&quot;),void 0===i&amp;&amp;(i=3e3);var l=function(o)&#123;o=o||&#123;&#125;,e.blockUI(&#123;message:s,fadeIn:o.fadeIn!==void 0?o.fadeIn:700,fadeOut:o.fadeOut!==void 0?o.fadeOut:1e3,timeout:o.timeout!==void 0?o.timeout:i,centerY:!1,showOverlay:!1,onUnblock:n,css:e.blockUI.defaults.growlCSS&#125;)&#125;;l(),s.css(&quot;opacity&quot;),s.mouseover(function()&#123;l(&#123;fadeIn:0,timeout:3e4&#125;);var o=e(&quot;.blockMsg&quot;);o.stop(),o.fadeTo(300,1)&#125;).mouseout(function()&#123;e(&quot;.blockMsg&quot;).fadeOut(1e3)&#125;)&#125;,e.fn.block=function(t)&#123;if(this[0]===window)return e.blockUI(t),this;var i=e.extend(&#123;&#125;,e.blockUI.defaults,t||&#123;&#125;);return this.each(function()&#123;var o=e(this);i.ignoreIfBlocked&amp;&amp;o.data(&quot;blockUI.isBlocked&quot;)||o.unblock(&#123;fadeOut:0&#125;)&#125;),this.each(function()&#123;&quot;static&quot;==e.css(this,&quot;position&quot;)&amp;&amp;(this.style.position=&quot;relative&quot;,e(this).data(&quot;blockUI.static&quot;,!0)),this.style.zoom=1,o(this,t)&#125;)&#125;,e.fn.unblock=function(o)&#123;return this[0]===window?(e.unblockUI(o),this):this.each(function()&#123;t(this,o)&#125;)&#125;,e.blockUI.version=2.7,e.blockUI.defaults=&#123;message:&quot;&lt;h1&gt;Please wait...&lt;/h1&gt;&quot;,title:null,draggable:!0,theme:!1,css:&#123;padding:0,margin:0,width:&quot;30%&quot;,top:&quot;40%&quot;,left:&quot;35%&quot;,textAlign:&quot;center&quot;,color:&quot;#000&quot;,border:&quot;3px solid #aaa&quot;,backgroundColor:&quot;#fff&quot;,cursor:&quot;wait&quot;&#125;,themedCSS:&#123;width:&quot;30%&quot;,top:&quot;40%&quot;,left:&quot;35%&quot;&#125;,overlayCSS:&#123;backgroundColor:&quot;#000&quot;,opacity:.6,cursor:&quot;wait&quot;&#125;,cursorReset:&quot;default&quot;,growlCSS:&#123;width:&quot;350px&quot;,top:&quot;10px&quot;,left:&quot;&quot;,right:&quot;10px&quot;,border:&quot;none&quot;,padding:&quot;5px&quot;,opacity:.6,cursor:&quot;default&quot;,color:&quot;#fff&quot;,backgroundColor:&quot;#000&quot;,&quot;-webkit-border-radius&quot;:&quot;10px&quot;,&quot;-moz-border-radius&quot;:&quot;10px&quot;,&quot;border-radius&quot;:&quot;10px&quot;&#125;,iframeSrc:/^https/i.test(window.location.href||&quot;&quot;)?&quot;javascript:false&quot;:&quot;about:blank&quot;,forceIframe:!1,baseZ:1e3,centerX:!0,centerY:!0,allowBodyStretch:!0,bindEvents:!0,constrainTabKey:!0,fadeIn:200,fadeOut:400,timeout:0,showOverlay:!0,focusInput:!0,focusableElements:&quot;:input:enabled:visible&quot;,onBlock:null,onUnblock:null,onOverlayClick:null,quirksmodeOffsetHack:4,blockMsgClass:&quot;blockMsg&quot;,ignoreIfBlocked:!1&#125;;var b=null,p=[]&#125;&quot;function&quot;==typeof define&amp;&amp;define.amd&amp;&amp;define.amd.jQuery?define([&quot;jquery&quot;],e):e(jQuery)&#125;)();
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">通用字段处理：1.生成器开发，通用字段处理，id，createdAt，updateAt，sort</span><br><span class="line"></span><br><span class="line">- 对controller.ftl保存校验做修改，并不是所有字段都需要做校验</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //保存校验</span><br><span class="line">  &lt;#list fieldList as field&gt;</span><br><span class="line">  &lt;#if field.name!=&quot;id&quot; &amp;&amp; field.nameHump!=&quot;createdAt&quot;&amp;&amp; field.nameHump!=&quot;updatedAt&quot; &amp;&amp; field.nameHump!=&quot;sort&quot;&gt;</span><br><span class="line">  &lt;#if !field.nullAble&gt;</span><br><span class="line">      ValidatorUtil.require($&#123;domain&#125;Dto.get$&#123;field.nameBigHump&#125;(), &quot;$&#123;field.nameCn&#125;&quot;);</span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">  &lt;#if (field.length &gt; 0)&gt;</span><br><span class="line">      ValidatorUtil.length($&#123;domain&#125;Dto.get$&#123;field.nameBigHump&#125;(), &quot;$&#123;field.nameCn&#125;&quot;, 1, $&#123;field.length&#125;);</span><br><span class="line">  &lt;/#if&gt; </span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">  &lt;/#list&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>对service.ftl进行修改</p>
+</li>
+<li><pre><code class="ftl">//导入部分
+&lt;#list typeSet as type&gt;
+    &lt;#if type==&#39;Date&#39;&gt;
+        import java.util.Date;
+    &lt;/#if&gt;
+&lt;/#list&gt;
+//列表查询
+&lt;#list fieldList as field&gt;
+    &lt;#if field.nameHump==&#39;sort&#39;&gt;
+    $&#123;domain&#125;Example.setOrderByClause(&quot;sort asc&quot;);
+    &lt;/#if&gt;
+&lt;/#list&gt;
+//插入
+ &lt;#list typeSet as type&gt;
+            &lt;#if type==&#39;Date&#39;&gt;
+        Date now = new Date();
+            &lt;/#if&gt;
+        &lt;/#list&gt;
+&lt;#list fieldList as field&gt;
+    &lt;#if field.nameHump==&#39;createdAt&#39;&gt;
+            $&#123;domain&#125;.setCreatedAt(now);
+    &lt;/#if&gt;
+    &lt;#if field.nameHump==&#39;updatedAt&#39;&gt;
+            $&#123;domain&#125;.setUpdatedAt(now);
+    &lt;/#if&gt;
+&lt;/#list&gt;
+//更新
+ &lt;#list fieldList as field&gt;
+     &lt;#if field.nameHump==&#39;updatedAt&#39;&gt;
+            $&#123;domain&#125;.setUpdatedAt(new Date());
+     &lt;/#if&gt;
+ &lt;/#list&gt;
+        
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- vue.ftl进行修改：去除创建时间和更新时间的显示</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  &lt;tr&gt;&lt;#list fieldList as field&gt;</span><br><span class="line">      &lt;#if field.nameHump!=&quot;createdAt&quot; &amp;&amp; field.nameHump!=&quot;updatedAt&quot;&gt;//就增加这一行</span><br><span class="line">      &lt;th&gt;$&#123;field.nameCn&#125;&lt;/th&gt;&lt;/#if&gt;&lt;/#list&gt;</span><br><span class="line">      &lt;th&gt;操作&lt;/th&gt;</span><br><span class="line">  &lt;/tr&gt;</span><br><span class="line">  //表单</span><br><span class="line">   &lt;#list fieldList as field&gt;</span><br><span class="line">         &lt;#if field.name!=&quot;id&quot; &amp;&amp; field.nameHump!=&quot;createdAt&quot; &amp;&amp; field.nameHump!=&quot;updatedAt&quot;&gt;//就增加这一行</span><br><span class="line">                  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">                    &lt;label  class=&quot;col-sm-2 control-label&quot;&gt;$&#123;field.nameCn&#125;&lt;/label&gt;</span><br><span class="line">                    &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">                      &lt;input v-model=&quot;$&#123;domain&#125;.$&#123;field.nameHump&#125;&quot; class=&quot;form-control&quot;  &gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                  &lt;/div&gt;</span><br><span class="line">         &lt;/#if&gt;</span><br><span class="line">     &lt;/#list&gt;</span><br><span class="line">   // 保存校验跟后端一样</span><br><span class="line">        if (1 != 1</span><br><span class="line">        &lt;#list fieldList as field&gt;</span><br><span class="line">            &lt;#if field.name!=&quot;id&quot; &amp;&amp; field.nameHump!=&quot;createdAt&quot; &amp;&amp; field.nameHump!=&quot;updatedAt&quot; &amp;&amp; field.nameHump!=&quot;sort&quot;&gt;</span><br><span class="line">            &lt;#if !field.nullAble&gt;</span><br><span class="line">        || !Validator.require(_this.$&#123;domain&#125;.$&#123;field.nameHump&#125;, &quot;$&#123;field.nameCn&#125;&quot;)</span><br><span class="line">        &lt;/#if&gt;</span><br><span class="line">        &lt;#if (field.length &gt; 0)&gt;</span><br><span class="line">        || !Validator.length(_this.$&#123;domain&#125;.$&#123;field.nameHump&#125;, &quot;$&#123;field.nameCn&#125;&quot;, 1, $&#123;field.length&#125;)</span><br><span class="line">        &lt;/#if&gt;</span><br><span class="line">        &lt;/#if&gt;</span><br><span class="line">        &lt;/#list&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>实际开发中，是先写好SectionService的代码，再根据代码修改模板，测试生成的代码和手写的代码一致。</p>
+</li>
+<li><p>controller.fi模板改动了，但SectionController之前已经手动把id的校验删除并提交了，所以本次生成的代码没有变动</p>
+</li>
+</ul>
+<h2 id="6-6-前端枚举代码的生成"><a href="#6-6-前端枚举代码的生成" class="headerlink" title="6-6 前端枚举代码的生成"></a>6-6 前端枚举代码的生成</h2><p>前端下拉框和列表枚举的设计：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.枚举字段，表格显示中文，表单显示下拉菜单</span><br><span class="line">2.vue增加过滤器</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>给收费增加一个下拉框，将收费的输入改成这个</p>
+</li>
+<li><pre><code>&lt;select v-model=&quot;section.charge&quot; class=&quot;form-control&quot;  &gt;
+  &lt;option v-for=&quot;o in CHARGE&quot; v-bind:value=&quot;o.key&quot;&gt;&#123;&#123;o.value&#125;&#125;&lt;/option&gt;
+&lt;/select&gt;
+CHARGE:[&#123;key:&quot;C&quot;,value:&quot;收费&quot;&#125;,&#123;key:&quot;F&quot;,value:&quot;免费&quot;&#125;],//在data里面写死的
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 修改下页面收费显示文字的问题：![image-20220301100046630](https://s2.loli.net/2022/03/01/bQPd9aOo3lHzNZu.png)</span><br><span class="line"></span><br><span class="line">- 首先增加一个过滤器，在admin下src创建filter目录创建filter.js</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  /**</span><br><span class="line">   * 数组过滤器 例如：&#123;&#123;SECTION_CHARGE | option..KV(section.charge)&#125;&#125;</span><br><span class="line">   * @param list 例如：&#123;&#123;key:&quot;C&quot;, value:&quot;收费&quot;&#125;,&#123;key:&quot;F&quot;, value:&quot;免费&quot;&#125;&#125;</span><br><span class="line">   * @param key 例如：C</span><br><span class="line">   * @returns &#123;string&#125; 例如：收费</span><br><span class="line">   */</span><br><span class="line">  let option..KV = (list, key) =&gt;  &#123;</span><br><span class="line">      if (!list || !key) &#123;</span><br><span class="line">          return &quot;&quot;;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          let result = &quot;&quot;;</span><br><span class="line">          for(let i = 0;i&lt;list.length;i++)&#123;</span><br><span class="line">              if (key === list[i][&quot;key&quot;]) &#123;</span><br><span class="line">                  result = list[i][&quot;value&quot;];</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return result;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  export default &#123;</span><br><span class="line">      option..KV,</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后再main.js增加，这样就把filter变成vue的过滤器了</p>
+</li>
+<li><p>&#96;&#96;&#96;js<br>import filter from ‘.&#x2F;filter&#x2F;filter’<br>&#x2F;&#x2F;全局过滤器<br>Object.keys(filter).forEach(key &#x3D;&gt;{<br>  Vue.filter(key,filter[key])<br>});</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 过滤器有了，使用再section.vue</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">   &lt;td&gt;&#123;&#123;section.charge&#125;&#125;&lt;/td&gt;</span><br><span class="line">   //将这行改成</span><br><span class="line">   &lt;td&gt;这里是两个大括号将他们括起来CHARGE|option..KV(section.charge)&lt;/td&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>对于下拉框的列表值，一般会提取成全局的变量，方便多个页面使用：</p>
+<ul>
+<li>&#96;&#96;&#96;<br>&#x2F;&#x2F;首先再js创建enums.js<br>CHARGE &#x3D; [{key:”C”,value:”收费”},{key:”F”,value:”免费”}];<br>&#x2F;&#x2F;其次再index引用<!--  枚举类  -->
+<script src="<%= BASE_URL %>static/js/enums.js"></script>
+&#x2F;&#x2F;最后再vue使用<br> CHARGE: CHARGE,<td>这是两个大括号包的CHARGE|option..KV(section.charge)</td>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">新增EnumGenerator用于生成前端枚举：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.增加了枚举生成器<br>2.option..KV过滤器从list改成object</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 问题：前端的枚举缺少枚举类型的信息，后续我们会碰到直接再前端用枚举值，我们的写法是直接SECTION_CHARGE.CHARGE.key，而不是写“C”。我们进行下列修改,注意表单的下拉框也要改成SECTION_CHARGE</span><br><span class="line"></span><br><span class="line">  ```js</span><br><span class="line">  //首先修改enums.js</span><br><span class="line">  SECTION_CHARGE = &#123;CHARGE:&#123;key:&quot;C&quot;,value:&quot;收费&quot;&#125;,FREE:&#123;key:&quot;F&quot;,value:&quot;免费&quot;&#125;&#125;;</span><br><span class="line">  //其次对filter.js</span><br><span class="line">  /**</span><br><span class="line">   * 数组过滤器 例如：两个大括号包住SECTION_CHARGE | option..KV(section.charge)</span><br><span class="line">   * @param object 例如：&#123;CHARGE:&#123;key:&quot;C&quot;, value:&quot;收费&quot;&#125;,FREE:&#123;key:&quot;F&quot;, value:&quot;免费&quot;&#125;&#125;</span><br><span class="line">   * @param key 例如：C</span><br><span class="line">   * @returns &#123;string&#125; 例如：收费</span><br><span class="line">   */</span><br><span class="line">  let option..KV = (object, key) =&gt;  &#123;</span><br><span class="line">      if (!object || !key) &#123;</span><br><span class="line">          return &quot;&quot;;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          let result = &quot;&quot;;</span><br><span class="line">          for(let enums in object)&#123;</span><br><span class="line">              if (key === object[enums][&quot;key&quot;]) &#123;</span><br><span class="line">                  result = object[enums][&quot;value&quot;];</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          return result;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  export default &#123;</span><br><span class="line">      option..KV,</span><br><span class="line">  &#125;</span><br><span class="line">  //最后再vue使用</span><br><span class="line">  SECTION_CHARGE: SECTION_CHARGE,</span><br><span class="line">  &lt;td&gt;两个大括号包住SECTION_CHARGE|option..KV(section.charge)&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>通过后端的枚举，来生成枚举代码生成器，首先再server下建立软件包enums，然后放入两个文件，分别是SectionChargeEnum和YesNoEnum</p>
+</li>
+<li><pre><code class="java">package com.course.server.enums;
+
+public enum SectionChargeEnum &#123;
+
+    CHARGE(&quot;C&quot;, &quot;收费&quot;),
+    FREE(&quot;F&quot;, &quot;免费&quot;);
+
+    private String code;
+
+    private String desc;
+
+    SectionChargeEnum(String code, String desc) &#123;
+        this.code = code;
+        this.desc = desc;
+    &#125;
+
+    public String getCode() &#123;
+        return code;
+    &#125;
+
+    public void setCode(String code) &#123;
+        this.code = code;
+    &#125;
+
+    public void setDesc(String desc) &#123;
+        this.desc = desc;
+    &#125;
+
+    public String getDesc() &#123;
+        return desc;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">package com.course.server.enums;</span><br><span class="line"></span><br><span class="line">public enum YesNoEnum &#123;</span><br><span class="line"></span><br><span class="line">    YES(&quot;1&quot;, &quot;是&quot;),</span><br><span class="line">    NO(&quot;0&quot;, &quot;否&quot;);</span><br><span class="line"></span><br><span class="line">    private String code;</span><br><span class="line"></span><br><span class="line">    private String desc;</span><br><span class="line"></span><br><span class="line">    YesNoEnum(String code, String desc) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCode() &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCode(String code) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDesc(String desc) &#123;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getDesc() &#123;</span><br><span class="line">        return desc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>记得再sectionservice中增加</p>
+</li>
+<li><pre><code class="java">/**
+ * 插入
+ */
+private void insert(Section section)&#123;
+            Date now = new Date();
+            section.setCreatedAt(now);
+            section.setUpdatedAt(now);
+    section.setId(UuidUtil.getShortUuid());
+    section.setCharge(SectionChargeEnum.CHARGE.getCode());//这一行
+    sectionMapper.insert(section);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最后写枚举生成器EnumGenerator</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.generator.enums;</span><br><span class="line">  import java.io.FileOutputStream;</span><br><span class="line">  import java.io.OutputStreamWriter;</span><br><span class="line">  import java.lang.reflect.Method;</span><br><span class="line">  import java.util.regex.Matcher;</span><br><span class="line">  import java.util.regex.Pattern;</span><br><span class="line">  </span><br><span class="line">  public class EnumGenerator &#123;</span><br><span class="line">      static String path = &quot;admin\\public\\static\\js\\enums.js&quot;;</span><br><span class="line">  </span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">          StringBuffer bufferObject = new StringBuffer();</span><br><span class="line">          StringBuffer bufferArray = new StringBuffer();</span><br><span class="line">          long begin = System.currentTimeMillis();</span><br><span class="line">          try &#123;</span><br><span class="line">              toJson(SectionChargeEnum.class, bufferObject, bufferArray);</span><br><span class="line">              toJson(YesNoEnum.class, bufferObject, bufferArray);</span><br><span class="line">  </span><br><span class="line">              StringBuffer buffer = bufferObject.append(&quot;\r\n&quot;).append(bufferArray);</span><br><span class="line">              writeJs(buffer);</span><br><span class="line">          &#125; catch (Exception e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">          long end = System.currentTimeMillis();</span><br><span class="line">          System.out.println(&quot;执行耗时:&quot; + (end - begin) + &quot; 毫秒&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      private static void toJson(Class clazz, StringBuffer bufferObject, StringBuffer bufferArray) throws Exception &#123;</span><br><span class="line">          String key = toUnderline(clazz.getSimpleName());</span><br><span class="line">          toJson(clazz, key, bufferObject, bufferArray);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      private static void toJson(Class clazz, String key, StringBuffer bufferObject, StringBuffer bufferArray) throws Exception &#123;</span><br><span class="line">          Object[] objects = clazz.getEnumConstants();</span><br><span class="line">          Method name = clazz.getMethod(&quot;name&quot;);</span><br><span class="line">          Method getDesc = clazz.getMethod(&quot;getDesc&quot;);</span><br><span class="line">          Method getCode = clazz.getMethod(&quot;getCode&quot;);</span><br><span class="line">  </span><br><span class="line">          // 生成对象</span><br><span class="line">          bufferObject.append(key).append(&quot;=&#123;&quot;);</span><br><span class="line">          for (int i = 0; i &lt; objects.length; i++) &#123;</span><br><span class="line">              Object obj = objects[i];</span><br><span class="line">              if (getCode == null) &#123;</span><br><span class="line">                  bufferObject.append(name.invoke(obj)).append(&quot;:&#123;key:\&quot;&quot;).append(name.invoke(obj)).append(&quot;\&quot;, value:\&quot;&quot;).append(getDesc.invoke(obj)).append(&quot;\&quot;&#125;&quot;);</span><br><span class="line">              &#125; else &#123;</span><br><span class="line">                  bufferObject.append(name.invoke(obj)).append(&quot;:&#123;key:\&quot;&quot;).append(getCode.invoke(obj)).append(&quot;\&quot;, value:\&quot;&quot;).append(getDesc.invoke(obj)).append(&quot;\&quot;&#125;&quot;);</span><br><span class="line">              &#125;</span><br><span class="line">              if (i &lt; objects.length - 1) &#123;</span><br><span class="line">                  bufferObject.append(&quot;,&quot;);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          bufferObject.append(&quot;&#125;;\r\n&quot;);</span><br><span class="line">  </span><br><span class="line">          // 生成数组</span><br><span class="line">          bufferArray.append(key).append(&quot;_ARRAY=[&quot;);</span><br><span class="line">          for (int i = 0; i &lt; objects.length; i++) &#123;</span><br><span class="line">              Object obj = objects[i];</span><br><span class="line">              if (getCode == null) &#123;</span><br><span class="line">                  bufferArray.append(&quot;&#123;key:\&quot;&quot;).append(name.invoke(obj)).append(&quot;\&quot;, value:\&quot;&quot;).append(getDesc.invoke(obj)).append(&quot;\&quot;&#125;&quot;);</span><br><span class="line">              &#125; else &#123;</span><br><span class="line">                  bufferArray.append(&quot;&#123;key:\&quot;&quot;).append(getCode.invoke(obj)).append(&quot;\&quot;, value:\&quot;&quot;).append(getDesc.invoke(obj)).append(&quot;\&quot;&#125;&quot;);</span><br><span class="line">              &#125;</span><br><span class="line">              if (i &lt; objects.length - 1) &#123;</span><br><span class="line">                  bufferArray.append(&quot;,&quot;);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          bufferArray.append(&quot;];\r\n&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 写文件</span><br><span class="line">       * @param stringBuffer</span><br><span class="line">       */</span><br><span class="line">      public static void writeJs(StringBuffer stringBuffer) &#123;</span><br><span class="line">          FileOutputStream out = null;</span><br><span class="line">          try &#123;</span><br><span class="line">              out = new FileOutputStream(path);</span><br><span class="line">              OutputStreamWriter osw = new OutputStreamWriter(out, &quot;UTF-8&quot;);</span><br><span class="line">              System.out.println(path);</span><br><span class="line">              osw.write(stringBuffer.toString());</span><br><span class="line">              osw.close();</span><br><span class="line">          &#125; catch (Exception e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">          finally &#123;</span><br><span class="line">              try &#123;</span><br><span class="line">                  out.close();</span><br><span class="line">              &#125; catch (Exception e) &#123;</span><br><span class="line">                  e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">  </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 功能：驼峰转大写下划线，并去掉_ENUM</span><br><span class="line">       * 如：SectionChargeEnum 变成 SECTION_CHARGE</span><br><span class="line">       * @param str</span><br><span class="line">       * @return</span><br><span class="line">       */</span><br><span class="line">      public static String toUnderline(String str) &#123;</span><br><span class="line">          String result = underline(str).toString();</span><br><span class="line">          return result.substring(1, result.length()).toUpperCase().replace(&quot;_ENUM&quot;, &quot;&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 驼峰转下划线，第一位是下划线</span><br><span class="line">       * 如：SectionChargeEnum 变成 _section_charge_enum</span><br><span class="line">       * @param str</span><br><span class="line">       * @return</span><br><span class="line">       */</span><br><span class="line">      private static StringBuffer underline(String str) &#123;</span><br><span class="line">          Pattern pattern = Pattern.compile(&quot;[A-Z]&quot;);</span><br><span class="line">          Matcher matcher = pattern.matcher(str);</span><br><span class="line">          StringBuffer sb = new StringBuffer(str);</span><br><span class="line">          if(matcher.find()) &#123;</span><br><span class="line">              sb = new StringBuffer();</span><br><span class="line">              matcher.appendReplacement(sb,&quot;_&quot;+matcher.group(0).toLowerCase());</span><br><span class="line">              matcher.appendTail(sb);</span><br><span class="line">          &#125;else &#123;</span><br><span class="line">              return sb;</span><br><span class="line">          &#125;</span><br><span class="line">          return underline(sb.toString());</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>原理：通过反射，得到枚举类的枚举类型、code、desc，然后通过字符串拼接的方式，得到最终完整的json字符串，再通过写文件的方式直接写入enums.js。</p>
+</li>
+<li><p>记得添加依赖，才能引入包</p>
+</li>
+<li><pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.course&lt;/groupId&gt;
+    &lt;artifactId&gt;server&lt;/artifactId&gt;
+&lt;/dependency&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">      解决这个问题 [Vue warn]: Do not use built-in or reserved HTML elements as component id: section</span><br><span class="line">      将export default &#123;</span><br><span class="line">      components: &#123;Pagination&#125;,</span><br><span class="line">      name: &#x27;business-section&#x27;,//将section变成了business-section</span><br><span class="line"></span><br><span class="line">## 6-7 生成器综合示例</span><br><span class="line"></span><br><span class="line">课程管理功能开发：</span><br><span class="line"></span><br><span class="line">- 日期字段都是用datetime(3)，精确到毫秒。界面显示可以只到秒，但是落库要精确</span><br><span class="line"></span><br><span class="line">- 首先生成数据库，all.sql</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  # 课程</span><br><span class="line">  DROP TABLE IF EXISTS `course`;</span><br><span class="line">  create table `course`</span><br><span class="line">  (</span><br><span class="line">      `id`         CHAR(8)     NOT NULL DEFAULT &#x27;&#x27; COMMENT &#x27;ID&#x27;,</span><br><span class="line">      `name`      VARCHAR(50) NOT NULL COMMENT &#x27;名称&#x27;,</span><br><span class="line">      `summary`  VARCHAR(2000) COMMENT &#x27;概述&#x27;,</span><br><span class="line">      `time`       INT default 0 COMMENT &#x27;时长|单位秒&#x27;,</span><br><span class="line">      `price`     decimal(8,2)  default 0.00 comment &#x27;价格(元)&#x27;,</span><br><span class="line">      `image`  VARCHAR(100) COMMENT &#x27;封面&#x27;,</span><br><span class="line">      `level`     CHAR(1)  COMMENT &#x27;级别|ONE(&quot;1&quot;,&quot;初级&quot;),ONE(&quot;2&quot;,&quot;中级&quot;),ONE(&quot;3&quot;,&quot;高级&quot;)&#x27;,</span><br><span class="line">      `charge`     CHAR(1) COMMENT &#x27;收费|CHARGE(&quot;C&quot;,&quot;收费&quot;),FREE(&quot;F&quot;,&quot;免费&quot;)&#x27;,</span><br><span class="line">      `status`     CHAR(1) COMMENT &#x27;状态|PUBLISH(&quot;P&quot;,&quot;发布&quot;),DRAFT(&quot;D&quot;,&quot;草稿&quot;)&#x27;,</span><br><span class="line">      `enroll`    integer default 0 comment &#x27;报名数&#x27;,</span><br><span class="line">      `sort`       INT COMMENT &#x27;顺序&#x27;,</span><br><span class="line">      `created_at` DATETIME(3) COMMENT &#x27;创建时间&#x27;,</span><br><span class="line">      `updated_at` DATETIME(3) COMMENT &#x27;修改时间&#x27;,</span><br><span class="line">      PRIMARY KEY (`id`)</span><br><span class="line">     )engine =innodb default charset=utf8mb4 comment=&#x27;课程&#x27;;</span><br><span class="line">  INSERT INTO `course`(id,name,summary,time,price,image,level,charge,status,enroll,sort,created_at,updated_at)</span><br><span class="line">  VALUES(&#x27;00000001&#x27;,&#x27;测试课程01&#x27;,&#x27;这时一门测试课程&#x27;,7200,19.9,&#x27;&#x27;,0,&#x27;C&#x27;,&#x27;D&#x27;,100,0,now(),now());</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>其次在generatorConfiguration</p>
+</li>
+<li><pre><code class="xml">&lt;table tableName=&quot;course&quot; domainObjectName=&quot;Course&quot;/&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后mybatis-generator，后端，前端代码生成器</span><br><span class="line"></span><br><span class="line">- 其次在admin增加管理</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;li class=&quot;active&quot; id=&quot;business-course-sidebar&quot;&gt;</span><br><span class="line">    &lt;router-link to=&quot;/business/course&quot;&gt;</span><br><span class="line">      &lt;i class=&quot;menu-icon fa fa-caret-right&quot;&gt;&lt;/i&gt;</span><br><span class="line">      课程管理</span><br><span class="line">    &lt;/router-link&gt;</span><br><span class="line">    &lt;b class=&quot;arrow&quot;&gt;&lt;/b&gt;</span><br><span class="line">  &lt;/li&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>在路由router.js</p>
+</li>
+<li><pre><code class="js">&#123;
+    path: &quot;business/course&quot;,
+    name:&quot;business/course&quot;,
+    component: Course,
+&#125;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在vue.ftl和controller。ftl都在长度后加?c这样会将数字2.000变为2000</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  || !Validator.length(_this.$&#123;domain&#125;.$&#123;field.nameHump&#125;, &quot;$&#123;field.nameCn&#125;&quot;, 1, $&#123;field.length?c&#125;)</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>为其生成三个枚举分别是CourseChargeEnum，CourseLevelEnum，CourseStatusEnum</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.server.enums;</p>
+<p>public enum CourseChargeEnum {</p>
+<pre><code>CHARGE(&quot;C&quot;, &quot;收费&quot;),
+FREE(&quot;F&quot;, &quot;免费&quot;);
+
+private String code;
+
+private String desc;
+
+CourseChargeEnum(String code, String desc) &#123;
+    this.code = code;
+    this.desc = desc;
+&#125;
+
+public String getCode() &#123;
+    return code;
+&#125;
+
+public void setCode(String code) &#123;
+    this.code = code;
+&#125;
+
+public void setDesc(String desc) &#123;
+    this.desc = desc;
+&#125;
+
+public String getDesc() &#123;
+    return desc;
+&#125;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">package com.course.server.enums;</span><br><span class="line"></span><br><span class="line">public enum CourseLevelEnum &#123;</span><br><span class="line"></span><br><span class="line">    ONE(&quot;1&quot;, &quot;初级&quot;),</span><br><span class="line">    TWO(&quot;2&quot;, &quot;中级&quot;),</span><br><span class="line">    THREE(&quot;3&quot;, &quot;高级&quot;);</span><br><span class="line"></span><br><span class="line">    private String code;</span><br><span class="line"></span><br><span class="line">    private String desc;</span><br><span class="line"></span><br><span class="line">    CourseLevelEnum(String code, String desc) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCode() &#123;</span><br><span class="line">        return code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCode(String code) &#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDesc(String desc) &#123;</span><br><span class="line">        this.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getDesc() &#123;</span><br><span class="line">        return desc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.enums;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">CourseStatusEnum</span> &#123;</span><br><span class="line"></span><br><span class="line">    PUBLISH(<span class="string">&quot;P&quot;</span>, <span class="string">&quot;发布&quot;</span>),</span><br><span class="line">    DRAFT(<span class="string">&quot;D&quot;</span>, <span class="string">&quot;草稿&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String desc;</span><br><span class="line"></span><br><span class="line">    CourseStatusEnum(String code, String desc) &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">        <span class="built_in">this</span>.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCode</span><span class="params">(String code)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDesc</span><span class="params">(String desc)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.desc = desc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDesc</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> desc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>然后再EnumGenerator增加</p>
+</li>
+<li><p>&#96;&#96;&#96;JAVA<br>toJson(CourseLevelEnum.class, bufferObject, bufferArray);<br>toJson(CourseChargeEnum.class, bufferObject, bufferArray);<br>toJson(CourseStatusEnum.class, bufferObject, bufferArray);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后再course.vue增加</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  data: function () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      course: &#123;&#125;,</span><br><span class="line">      courses: [],</span><br><span class="line">      COURSE_LEVEL:COURSE_LEVEL,</span><br><span class="line">      COURSE_CHARGE:COURSE_CHARGE,</span><br><span class="line">      COURSE_STATUS:COURSE_STATUS,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  ////////////////////////////////////////////////////////</span><br><span class="line">     &lt;td&gt;&#123;&#123;COURSE_LEVEL|option..KV(course.level)&#125;&#125;&lt;/td&gt;</span><br><span class="line">     &lt;td&gt;&#123;&#123;COURSE_CHARGE|option..KV(course.charge)&#125;&#125;&lt;/td&gt;</span><br><span class="line">     &lt;td&gt;&#123;&#123;COURSE_STATUS|option..KV(course.status)&#125;&#125;&lt;/td&gt;</span><br><span class="line">  /////////////////////////////////////////////////////////</span><br><span class="line">  &lt;select v-model=&quot;course.level&quot; class=&quot;form-control&quot;  &gt;</span><br><span class="line">      &lt;option v-for=&quot;o in COURSE_LEVEL&quot; v-bind:value=&quot;o.key&quot;&gt;&#123;&#123;o.value&#125;&#125;&lt;/option&gt;</span><br><span class="line">     &lt;/select&gt;</span><br><span class="line">  &lt;select v-model=&quot;course.charge&quot; class=&quot;form-control&quot;  &gt;</span><br><span class="line">     &lt;option v-for=&quot;o in COURSE_CHARGE&quot; v-bind:value=&quot;o.key&quot;&gt;&#123;&#123;o.value&#125;&#125;&lt;/option&gt;</span><br><span class="line">     &lt;/select&gt;</span><br><span class="line">  &lt;select v-model=&quot;course.status&quot; class=&quot;form-control&quot;  &gt;</span><br><span class="line">     &lt;option v-for=&quot;o in COURSE_STATUS&quot; v-bind:value=&quot;o.key&quot;&gt;&#123;&#123;o.value&#125;&#125;&lt;/option&gt;</span><br><span class="line">   &lt;/select&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6-8-生成器升级作业"><a href="#6-8-生成器升级作业" class="headerlink" title="6-8 生成器升级作业"></a>6-8 生成器升级作业</h2><p>生成器升级作业：将枚举类型的字段加入到代码生成器里面</p>
+<ul>
+<li><p>首先再all.sql进行修改，约定：枚举类型字段，增加“枚举”中文，并且将对应的枚举类写在[]中</p>
+</li>
+<li><pre><code class="sql">`level`     CHAR(1)  COMMENT &#39;级别|枚举[CourseLevelEnum]:ONE(&quot;1&quot;,&quot;初级&quot;),ONE(&quot;2&quot;,&quot;中级&quot;),ONE(&quot;3&quot;,&quot;高级&quot;)&#39;,
+`charge`     CHAR(1) COMMENT &#39;收费|枚举[CourseChargeEnum]:CHARGE(&quot;C&quot;,&quot;收费&quot;),FREE(&quot;F&quot;,&quot;免费&quot;)&#39;,
+`status`     CHAR(1) COMMENT &#39;状态|枚举[CourseStatusEnum]:PUBLISH(&quot;P&quot;,&quot;发布&quot;),DRAFT(&quot;D&quot;,&quot;草稿&quot;)&#39;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其次再field.java增加两个字段</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  package com.course.generator.util;</span><br><span class="line">  </span><br><span class="line">  public class Field &#123;</span><br><span class="line">      private Boolean enums; // 是否是枚举</span><br><span class="line">      private String enumsConst; // 枚举常量 COURSE_LEVEL</span><br><span class="line">      </span><br><span class="line">      public Boolean getEnums() &#123;</span><br><span class="line">          return enums;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      public void setEnums(Boolean enums) &#123;</span><br><span class="line">          this.enums = enums;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      public String getEnumsConst() &#123;</span><br><span class="line">          return enumsConst;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      public void setEnumsConst(String enumsConst) &#123;</span><br><span class="line">          this.enumsConst = enumsConst;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      @Override</span><br><span class="line">      public String toString() &#123;</span><br><span class="line">          sb.append(&quot;, enums=&quot;).append(enums);</span><br><span class="line">          sb.append(&quot;, enumsConst=&#x27;&quot;).append(enumsConst).append(&#x27;\&#x27;&#x27;);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后再DbUtil.java增加</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>if (comment.contains(“枚举”)) {<br>field.setEnums(true);<br><br>&#x2F;&#x2F; 以课程等级为例：从注释中的“枚举[CourseLevelEnum]”，得到COURSE_LEVEL<br>int start &#x3D; comment.indexOf(“[“);<br>int end &#x3D; comment.indexOf(“]”);<br>String enumsName &#x3D; comment.substring(start + 1, end);<br>String enumsConst &#x3D; EnumGenerator.toUnderline(enumsName);<br>field.setEnumsConst(enumsConst);<br>} else {<br>field.setEnums(false);<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最后对vue.ftl增加枚举判断</span><br><span class="line"></span><br><span class="line">- ```ftl</span><br><span class="line">  &lt;#list fieldList as field&gt;</span><br><span class="line">    &lt;#if field.nameHump!=&quot;createdAt&quot;&amp;&amp; field.nameHump!=&quot;updatedAt&quot; &gt;</span><br><span class="line">      &lt;#if field.enums&gt;</span><br><span class="line">      &lt;td&gt;&#123;&#123;$&#123;field.enumsConst&#125;|option..KV($&#123;domain&#125;.$&#123;field.nameHump&#125;)&#125;&#125;&lt;/td&gt;</span><br><span class="line">      &lt;#else&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123;$&#123;domain&#125;.$&#123;field.nameHump&#125;&#125;&#125;&lt;/td&gt;</span><br><span class="line">    &lt;/#if&gt;</span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//表单也得改，进行判断</span><br><span class="line">&lt;#list fieldList as field&gt;</span><br><span class="line">  &lt;#if field.name!=&quot;id&quot; &amp;&amp; field.nameHump!=&quot;createdAt&quot; &amp;&amp; field.nameHump!=&quot;updatedAt&quot;&gt;</span><br><span class="line">    &lt;#if field.enums&gt;</span><br><span class="line">&lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">  &lt;label class=&quot;col-sm-2 control-label&quot;&gt;$&#123;field.nameCn&#125;&lt;/label&gt;</span><br><span class="line">  &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">    &lt;select v-model=&quot;$&#123;domain&#125;.$&#123;field.nameHump&#125;&quot; class=&quot;form-control&quot;&gt;</span><br><span class="line">      &lt;option v-for=&quot;o in $&#123;field.enumsConst&#125;&quot; v-bind:value=&quot;o.key&quot;&gt;&#123;&#123;o.value&#125;&#125;&lt;/option&gt;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;#else&gt;</span><br><span class="line">&lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">  &lt;label class=&quot;col-sm-2 control-label&quot;&gt;$&#123;field.nameCn&#125;&lt;/label&gt;</span><br><span class="line">  &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">    &lt;input v-model=&quot;$&#123;domain&#125;.$&#123;field.nameHump&#125;&quot; class=&quot;form-control&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">    &lt;/#if&gt;</span><br><span class="line">  &lt;/#if&gt;</span><br><span class="line">&lt;/#list&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//data这也得增加</span></span><br><span class="line">data: function () &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    $&#123;domain&#125;: &#123;&#125;,</span><br><span class="line">    $&#123;domain&#125;s: [],</span><br><span class="line">    &lt;#list fieldList as field&gt;</span><br><span class="line">     &lt;#<span class="keyword">if</span> field.enums&gt;</span><br><span class="line">    $&#123;field.enumsConst&#125;: $&#123;field.enumsConst&#125;,</span><br><span class="line">     &lt;/#<span class="keyword">if</span>&gt;</span><br><span class="line">    &lt;/#list&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Spring Cloud + Vue 前后端分离2-1</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-02-07 15:20:23</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/02/07/Spring Cloud + Vue 前后端分离 2-1/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/02/15/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%202-2/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离2-2</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/07/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离1</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC6%E7%AB%A0-%E9%80%9A%E7%94%A8%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">第6章 通用代码生成器开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">6-1 代码生成器原理介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-controller%E5%B1%82%E5%92%8Cservice%E5%B1%82%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="nav-number">1.2.</span> <span class="nav-text">6-2 controller层和service层代码生成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E8%8A%82"><span class="nav-number">2.</span> <span class="nav-text">小节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E5%89%8D%E7%AB%AF%E6%9E%9A%E4%B8%BE%E4%BB%A3%E7%A0%81%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">6-6 前端枚举代码的生成</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

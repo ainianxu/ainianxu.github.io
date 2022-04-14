@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Spring Cloud + Vue 前后端分离3-2 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Spring Cloud + Vue 前后端分离3-2</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-25 12:19:22</span>
+        <span class="mobile">2022-02-25 12:19</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>11.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>58 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第9章-大文件断点续与极速秒传"><a href="#第9章-大文件断点续与极速秒传" class="headerlink" title="第9章 大文件断点续与极速秒传"></a>第9章 大文件断点续与极速秒传</h1><p>本章将在上一章的基础上增加大文件断点续传功能。作为一个视频网站，一个文件从几十M到上G，上传一个大文件受网络影响很大，一次上传成功的几率很小，为此我们会在本章完善文件上传功能，支持断点续传并且上传文件时，检查文件是否上传过实现极速秒传。…</p>
+<hr>
+<h2 id="9-1-分片传输的试探"><a href="#9-1-分片传输的试探" class="headerlink" title="9-1 分片传输的试探"></a>9-1 分片传输的试探</h2><p>分片上传：1.大文件断原续传与极速秒传：增加big-fi1e组件，分片传输测试成功</p>
+<ul>
+<li><p>极速秒传听起来很高深，原理其实很简单，就是开始上传前，先检查一下文件是否上传过了，如果已上传过，直接弹出提示，极速秒传成功。</p>
+</li>
+<li><p>一个文件有10M，每个分片定义为1M，那这个文件就会被分为10片进行传输</p>
+</li>
+<li><p>首先创建一个组件big-file就是把file复制过去修改下</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>&#x2F;&#x2F;修改姓名和文本<br>name: ‘big-file’,<br>  props: {<br>text: {<br>  default: “上传大文件”<br>},<br>  }<br>&#x2F;&#x2F;在uploadFile中增加文件分片<br>let shardSize&#x3D;20 * 1024 * 1024;&#x2F;&#x2F;以20MB为一个分片<br>let shardIndex &#x3D; 0;&#x2F;&#x2F;分片索引<br>let start &#x3D; shardIndex * shardSize;&#x2F;&#x2F;当前分片起始位置<br>let end &#x3D; Math.min(file.size,start+shardSize);&#x2F;&#x2F;当前分片结束位置<br>let fileShard &#x3D; file.slice(start,end);&#x2F;&#x2F;从文件中截取当前的分片数据</p>
+<p>&#x2F;&#x2F; key：”file”必须和后端controller参数名一致<br>formData.append(‘file’, fileShard);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- file.slice（），对文件进行截取</span><br><span class="line"></span><br><span class="line">- 在section中引入big-file，并将file组件改为big-file</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  import BigFile from &quot;../../components/big-file&quot;;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;Pagination,BigFile&#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>分片合并：1.大文件断点续传与极速秒传：分片合并测试成功</p>
+<ul>
+<li><p>在UploadController中增加方法</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>@GetMapping(“merge”)<br>public ResponseDto merge() throws Exception {<br>File newFile &#x3D; new File(FILE_PATH + “&#x2F;course&#x2F;test123.mp4”);<br>FileOutputStream outputStream &#x3D; new FileOutputStream(newFile, true);&#x2F;&#x2F;文件追加写入<br>FileInputStream fileInputStream &#x3D; null;&#x2F;&#x2F;分片文件<br>byte[] byt &#x3D; new byte[10 * 1024 * 1024];<br>int len;<br>try {<br>    &#x2F;&#x2F;读取第一个分片<br>    fileInputStream &#x3D; new FileInputStream(new File(FILE_PATH + “&#x2F;course&#x2F;G8Yfj2Ij.blob”));<br>    while ((len &#x3D; fileInputStream.read(byt)) !&#x3D; -1) {<br>        outputStream.write(byt, 0, len);<br>    }<br>    &#x2F;&#x2F;读第二个分片<br>    fileInputStream &#x3D; new FileInputStream(new File(FILE_PATH + “&#x2F;course&#x2F;NUTxyaDe.blob”));<br>    while ((len &#x3D; fileInputStream.read(byt)) !&#x3D; -1) {<br>        outputStream.write(byt, 0, len);<br>    }<br>}catch (IOException e){<br>    LOG.error(“分片异常”,e);<br>}finally {<br>    try {<br>        if(fileInputStream!&#x3D;null){<br>            fileInputStream.close();<br>        }<br>        outputStream.close();<br>        LOG.info(“IO流关闭”);<br>    }catch (Exception e){<br>        LOG.error(“IO流关闭”,e);<br>    }<br>}<br>ResponseDto responseDto &#x3D; new ResponseDto();<br>return  responseDto;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 9-2 分片上传功能开发1</span><br><span class="line"></span><br><span class="line">文件分片管理的模型设计：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.大文件断点续传与极速秒传：文件表增加分片相关字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在all.sql的“文件”中增加，然后mybatis-generator</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  alter table `file` add column (`Shard_index` int comment &#x27;已上传分片&#x27;);</span><br><span class="line">  alter table `file` add column (`Shard_size` int comment &#x27;分片大小|B&#x27;);</span><br><span class="line">  alter table `file` add column (`Shard_total` int comment &#x27;分片总数&#x27;);</span><br><span class="line">  alter table `file` add column (`key` varchar(32) comment &#x27;文件标识&#x27;);</span><br><span class="line">  alter table `file` add unique key key_unique(`key`);</span><br></pre></td></tr></table></figure>
+
+<p>分片数据传输：</p>
+<ul>
+<li><p>经验分享：对于对于一些不涉及安全性的数据，可以交由前端来计算，这样可以减轻服务端的压力</p>
+</li>
+<li><p>我们将File中生成的变量复制到filedto中然后生成get和set和tostring方法</p>
+</li>
+<li><p>然后我们对前端big-file组件做修改：</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>let size &#x3D; file.size;<br>let shardTotal &#x3D; Math.ceil(size&#x2F;shardSize);&#x2F;&#x2F;总片数<br>&#x2F;&#x2F; key：”file”必须和后端controller参数名一致<br>formData.append(‘shard’, fileShard);<br>formData.append(‘shardIndex’, shardIndex);<br>formData.append(‘shardSize’, shardSize);<br>formData.append(‘shardTotal’, shardTotal);<br>&#x2F;&#x2F;提交表单时将use也提交出去<br>formData.append(‘use’, _this.use);<br>formData.append(‘name’, file.name);<br>formData.append(‘suffix’, suffix);<br>formData.append(‘size’, size);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其次对服务端UploadController做修改：</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //对传入参数进行增加</span><br><span class="line">  public ResponseDto upload(@RequestParam MultipartFile shard,</span><br><span class="line">                                              String use,</span><br><span class="line">                                              String name,</span><br><span class="line">                                              String suffix,</span><br><span class="line">                                              Integer size,</span><br><span class="line">                                              Integer shardIndex,</span><br><span class="line">                                              Integer shardSize,</span><br><span class="line">                                              Integer shardTotal) throws IOException &#123;</span><br><span class="line">  //将file改为shard</span><br><span class="line">  shard.transferTo(dest);</span><br><span class="line">  //将里面参数进行修改</span><br><span class="line">  fileDto.setName(name);</span><br><span class="line">  fileDto.setSize(size);</span><br><span class="line">  //再将新增参数设置进去</span><br><span class="line">  fileDto.setShardIndex(shardIndex);</span><br><span class="line">  fileDto.setSize(shardSize);</span><br><span class="line">  fileDto.setShardTotal(shardTotal);</span><br><span class="line">  fileDto.setKey(key);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>文件标识的设计：1.大文件断点续传与极速秒传：使用文件生成md5签名，作为文件标识</p>
+<ul>
+<li><p>数据库设计上传第一个分片时，插入一条记录，上传之后的分片都是更新记录，只需更新shard_index字段，当然也包括updated_at</p>
+</li>
+<li><p>数据库设计：shard_index和shard_total的值相等时表示所有分片都已上传完成</p>
+</li>
+<li><p>数据库设计：不管上传第几个分片，传输的key值是一样的，key跟文件相关，跟分片无关</p>
+</li>
+<li><p>MD5信息摘要算法，常用于密码加密传输与存储，会生成128位二制数，每4个二进制可以转成1个16进制数字，结果是32个16进制数字</p>
+</li>
+<li><p>26个大写字字母+26个小写字母+10个阿拉伯数字，共62个字符，可以表达62进制数字。</p>
+</li>
+<li><p>首先我们增加md5.js文件</p>
+</li>
+<li><pre><code class="js">var KEY = &quot;!@#QWERT&quot;;
+/*
+ * Configurable variables. You may need to tweak these to be compatible with
+ * the server-side, but the defaults work in most cases.
+ */
+var hexcase = 0;  /* hex output format. 0 - lowercase; 1 - uppercase        */
+var b64pad  = &quot;&quot;; /* base-64 pad character. &quot;=&quot; for strict RFC compliance   */
+var chrsz   = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode      */
+
+/*
+ * These are the functions you&#39;ll usually want to call
+ * They take string arguments and return either hex or base-64 encoded strings
+ */
+function hex_md5(s)&#123; return binl2hex(core_md5(str2binl(s), s.length * chrsz));&#125;
+function b64_md5(s)&#123; return binl2b64(core_md5(str2binl(s), s.length * chrsz));&#125;
+function str_md5(s)&#123; return binl2str(core_md5(str2binl(s), s.length * chrsz));&#125;
+function hex_hmac_md5(key, data) &#123; return binl2hex(core_hmac_md5(key, data)); &#125;
+function b64_hmac_md5(key, data) &#123; return binl2b64(core_hmac_md5(key, data)); &#125;
+function str_hmac_md5(key, data) &#123; return binl2str(core_hmac_md5(key, data)); &#125;
+
+/*
+ * Perform a simple self-test to see if the VM is working
+ */
+function md5_vm_test()
+&#123;
+  return hex_md5(&quot;abc&quot;) == &quot;900150983cd24fb0d6963f7d28e17f72&quot;;
+&#125;
+
+/*
+ * Calculate the MD5 of an array of little-endian words, and a bit length
+ */
+function core_md5(x, len)
+&#123;
+  /* append padding */
+  x[len &gt;&gt; 5] |= 0x80 &lt;&lt; ((len) % 32);
+  x[(((len + 64) &gt;&gt;&gt; 9) &lt;&lt; 4) + 14] = len;
+
+  var a =  1732584193;
+  var b = -271733879;
+  var c = -1732584194;
+  var d =  271733878;
+
+  for(var i = 0; i &lt; x.length; i += 16)
+  &#123;
+    var olda = a;
+    var oldb = b;
+    var oldc = c;
+    var oldd = d;
+
+    a = md5_ff(a, b, c, d, x[i+ 0], 7 , -680876936);
+    d = md5_ff(d, a, b, c, x[i+ 1], 12, -389564586);
+    c = md5_ff(c, d, a, b, x[i+ 2], 17,  606105819);
+    b = md5_ff(b, c, d, a, x[i+ 3], 22, -1044525330);
+    a = md5_ff(a, b, c, d, x[i+ 4], 7 , -176418897);
+    d = md5_ff(d, a, b, c, x[i+ 5], 12,  1200080426);
+    c = md5_ff(c, d, a, b, x[i+ 6], 17, -1473231341);
+    b = md5_ff(b, c, d, a, x[i+ 7], 22, -45705983);
+    a = md5_ff(a, b, c, d, x[i+ 8], 7 ,  1770035416);
+    d = md5_ff(d, a, b, c, x[i+ 9], 12, -1958414417);
+    c = md5_ff(c, d, a, b, x[i+10], 17, -42063);
+    b = md5_ff(b, c, d, a, x[i+11], 22, -1990404162);
+    a = md5_ff(a, b, c, d, x[i+12], 7 ,  1804603682);
+    d = md5_ff(d, a, b, c, x[i+13], 12, -40341101);
+    c = md5_ff(c, d, a, b, x[i+14], 17, -1502002290);
+    b = md5_ff(b, c, d, a, x[i+15], 22,  1236535329);
+
+    a = md5_gg(a, b, c, d, x[i+ 1], 5 , -165796510);
+    d = md5_gg(d, a, b, c, x[i+ 6], 9 , -1069501632);
+    c = md5_gg(c, d, a, b, x[i+11], 14,  643717713);
+    b = md5_gg(b, c, d, a, x[i+ 0], 20, -373897302);
+    a = md5_gg(a, b, c, d, x[i+ 5], 5 , -701558691);
+    d = md5_gg(d, a, b, c, x[i+10], 9 ,  38016083);
+    c = md5_gg(c, d, a, b, x[i+15], 14, -660478335);
+    b = md5_gg(b, c, d, a, x[i+ 4], 20, -405537848);
+    a = md5_gg(a, b, c, d, x[i+ 9], 5 ,  568446438);
+    d = md5_gg(d, a, b, c, x[i+14], 9 , -1019803690);
+    c = md5_gg(c, d, a, b, x[i+ 3], 14, -187363961);
+    b = md5_gg(b, c, d, a, x[i+ 8], 20,  1163531501);
+    a = md5_gg(a, b, c, d, x[i+13], 5 , -1444681467);
+    d = md5_gg(d, a, b, c, x[i+ 2], 9 , -51403784);
+    c = md5_gg(c, d, a, b, x[i+ 7], 14,  1735328473);
+    b = md5_gg(b, c, d, a, x[i+12], 20, -1926607734);
+
+    a = md5_hh(a, b, c, d, x[i+ 5], 4 , -378558);
+    d = md5_hh(d, a, b, c, x[i+ 8], 11, -2022574463);
+    c = md5_hh(c, d, a, b, x[i+11], 16,  1839030562);
+    b = md5_hh(b, c, d, a, x[i+14], 23, -35309556);
+    a = md5_hh(a, b, c, d, x[i+ 1], 4 , -1530992060);
+    d = md5_hh(d, a, b, c, x[i+ 4], 11,  1272893353);
+    c = md5_hh(c, d, a, b, x[i+ 7], 16, -155497632);
+    b = md5_hh(b, c, d, a, x[i+10], 23, -1094730640);
+    a = md5_hh(a, b, c, d, x[i+13], 4 ,  681279174);
+    d = md5_hh(d, a, b, c, x[i+ 0], 11, -358537222);
+    c = md5_hh(c, d, a, b, x[i+ 3], 16, -722521979);
+    b = md5_hh(b, c, d, a, x[i+ 6], 23,  76029189);
+    a = md5_hh(a, b, c, d, x[i+ 9], 4 , -640364487);
+    d = md5_hh(d, a, b, c, x[i+12], 11, -421815835);
+    c = md5_hh(c, d, a, b, x[i+15], 16,  530742520);
+    b = md5_hh(b, c, d, a, x[i+ 2], 23, -995338651);
+
+    a = md5_ii(a, b, c, d, x[i+ 0], 6 , -198630844);
+    d = md5_ii(d, a, b, c, x[i+ 7], 10,  1126891415);
+    c = md5_ii(c, d, a, b, x[i+14], 15, -1416354905);
+    b = md5_ii(b, c, d, a, x[i+ 5], 21, -57434055);
+    a = md5_ii(a, b, c, d, x[i+12], 6 ,  1700485571);
+    d = md5_ii(d, a, b, c, x[i+ 3], 10, -1894986606);
+    c = md5_ii(c, d, a, b, x[i+10], 15, -1051523);
+    b = md5_ii(b, c, d, a, x[i+ 1], 21, -2054922799);
+    a = md5_ii(a, b, c, d, x[i+ 8], 6 ,  1873313359);
+    d = md5_ii(d, a, b, c, x[i+15], 10, -30611744);
+    c = md5_ii(c, d, a, b, x[i+ 6], 15, -1560198380);
+    b = md5_ii(b, c, d, a, x[i+13], 21,  1309151649);
+    a = md5_ii(a, b, c, d, x[i+ 4], 6 , -145523070);
+    d = md5_ii(d, a, b, c, x[i+11], 10, -1120210379);
+    c = md5_ii(c, d, a, b, x[i+ 2], 15,  718787259);
+    b = md5_ii(b, c, d, a, x[i+ 9], 21, -343485551);
+
+    a = safe_add(a, olda);
+    b = safe_add(b, oldb);
+    c = safe_add(c, oldc);
+    d = safe_add(d, oldd);
+  &#125;
+  return Array(a, b, c, d);
+
+&#125;
+
+/*
+ * These functions implement the four basic operations the algorithm uses.
+ */
+function md5_cmn(q, a, b, x, s, t)
+&#123;
+  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s),b);
+&#125;
+function md5_ff(a, b, c, d, x, s, t)
+&#123;
+  return md5_cmn((b &amp; c) | ((~b) &amp; d), a, b, x, s, t);
+&#125;
+function md5_gg(a, b, c, d, x, s, t)
+&#123;
+  return md5_cmn((b &amp; d) | (c &amp; (~d)), a, b, x, s, t);
+&#125;
+function md5_hh(a, b, c, d, x, s, t)
+&#123;
+  return md5_cmn(b ^ c ^ d, a, b, x, s, t);
+&#125;
+function md5_ii(a, b, c, d, x, s, t)
+&#123;
+  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t);
+&#125;
+
+/*
+ * Calculate the HMAC-MD5, of a key and some data
+ */
+function core_hmac_md5(key, data)
+&#123;
+  var bkey = str2binl(key);
+  if(bkey.length &gt; 16) bkey = core_md5(bkey, key.length * chrsz);
+
+  var ipad = Array(16), opad = Array(16);
+  for(var i = 0; i &lt; 16; i++)
+  &#123;
+    ipad[i] = bkey[i] ^ 0x36363636;
+    opad[i] = bkey[i] ^ 0x5C5C5C5C;
+  &#125;
+
+  var hash = core_md5(ipad.concat(str2binl(data)), 512 + data.length * chrsz);
+  return core_md5(opad.concat(hash), 512 + 128);
+&#125;
+
+/*
+ * Add integers, wrapping at 2^32. This uses 16-bit operations internally
+ * to work around bugs in some JS interpreters.
+ */
+function safe_add(x, y)
+&#123;
+  var lsw = (x &amp; 0xFFFF) + (y &amp; 0xFFFF);
+  var msw = (x &gt;&gt; 16) + (y &gt;&gt; 16) + (lsw &gt;&gt; 16);
+  return (msw &lt;&lt; 16) | (lsw &amp; 0xFFFF);
+&#125;
+
+/*
+ * Bitwise rotate a 32-bit number to the left.
+ */
+function bit_rol(num, cnt)
+&#123;
+  return (num &lt;&lt; cnt) | (num &gt;&gt;&gt; (32 - cnt));
+&#125;
+
+/*
+ * Convert a string to an array of little-endian words
+ * If chrsz is ASCII, characters &gt;255 have their hi-byte silently ignored.
+ */
+function str2binl(str)
+&#123;
+  var bin = Array();
+  var mask = (1 &lt;&lt; chrsz) - 1;
+  for(var i = 0; i &lt; str.length * chrsz; i += chrsz)
+    bin[i&gt;&gt;5] |= (str.charCodeAt(i / chrsz) &amp; mask) &lt;&lt; (i%32);
+  return bin;
+&#125;
+
+/*
+ * Convert an array of little-endian words to a string
+ */
+function binl2str(bin)
+&#123;
+  var str = &quot;&quot;;
+  var mask = (1 &lt;&lt; chrsz) - 1;
+  for(var i = 0; i &lt; bin.length * 32; i += chrsz)
+    str += String.fromCharCode((bin[i&gt;&gt;5] &gt;&gt;&gt; (i % 32)) &amp; mask);
+  return str;
+&#125;
+
+/*
+ * Convert an array of little-endian words to a hex string.
+ */
+function binl2hex(binarray)
+&#123;
+  var hex_tab = hexcase ? &quot;0123456789ABCDEF&quot; : &quot;0123456789abcdef&quot;;
+  var str = &quot;&quot;;
+  for(var i = 0; i &lt; binarray.length * 4; i++)
+  &#123;
+    str += hex_tab.charAt((binarray[i&gt;&gt;2] &gt;&gt; ((i%4)*8+4)) &amp; 0xF) +
+           hex_tab.charAt((binarray[i&gt;&gt;2] &gt;&gt; ((i%4)*8  )) &amp; 0xF);
+  &#125;
+  return str;
+&#125;
+
+/*
+ * Convert an array of little-endian words to a base-64 string
+ */
+function binl2b64(binarray)
+&#123;
+  var tab = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;
+  var str = &quot;&quot;;
+  for(var i = 0; i &lt; binarray.length * 4; i += 3)
+  &#123;
+    var triplet = (((binarray[i   &gt;&gt; 2] &gt;&gt; 8 * ( i   %4)) &amp; 0xFF) &lt;&lt; 16)
+                | (((binarray[i+1 &gt;&gt; 2] &gt;&gt; 8 * ((i+1)%4)) &amp; 0xFF) &lt;&lt; 8 )
+                |  ((binarray[i+2 &gt;&gt; 2] &gt;&gt; 8 * ((i+2)%4)) &amp; 0xFF);
+    for(var j = 0; j &lt; 4; j++)
+    &#123;
+      if(i * 8 + j * 6 &gt; binarray.length * 32) str += b64pad;
+      else str += tab.charAt((triplet &gt;&gt; 6*(3-j)) &amp; 0x3F);
+    &#125;
+  &#125;
+  return str;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后我们在index中引用</span><br><span class="line"></span><br><span class="line">- ```html</span><br><span class="line">  &lt;!--  md5工具类--&gt;</span><br><span class="line">  &lt;script src=&quot;&lt;%= BASE_URL %&gt;static/js/md5.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后再big-file中就可以使用了，再uploadFile中增加</p>
+</li>
+<li><pre><code class="vue">//生成文件标识，标识多次上传的是不是同一文件
+let key = hex_md5(file);
+let key10 = parseInt(key,16);
+let key62 = Tool._10to62(key10);
+console.log(key,key10,key62)
+//表单增加key
+formData.append(&#39;key&#39;, key62);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对于Tool._10to62方法，我们在tool中增加</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  /**</span><br><span class="line">   * 10进制转62进制</span><br><span class="line">   * @param number</span><br><span class="line">   * @returns &#123;string&#125;</span><br><span class="line">   * @private</span><br><span class="line">   */</span><br><span class="line">  _10to62: function (number) &#123;</span><br><span class="line">      let chars = &#x27;0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ&#x27;;</span><br><span class="line">      let radix = chars.length;</span><br><span class="line">      let arr = [];</span><br><span class="line">      do &#123;</span><br><span class="line">          let mod = number % radix;</span><br><span class="line">          number = (number - mod) / radix;</span><br><span class="line">          arr.unshift(chars[mod]);</span><br><span class="line">      &#125; while (number);</span><br><span class="line">      return arr.join(&#x27;&#x27;);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>在UploadController增加String key参数，将自定义参数key删了</p>
+</li>
+</ul>
+<p>大文件断点续传与极速秒传：根据文件标识来新增或修改文件记录，修改分片索引从1开始</p>
+<ul>
+<li><p>实际使用场景中，一个文件太大，当第一次上传一半，失败了。第二次再上传时，有可能隔了一天或更久</p>
+</li>
+<li><p>我们对FileService进行修改</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>&#x2F;&#x2F;增加方法<br>public File selectByKet(String key){<br>FileExample example &#x3D; new FileExample();<br>example.createCriteria().andKeyEqualTo(key);<br>List<File> fileList &#x3D; fileMapper.selectByExample(example);<br>if(CollectionUtils.isEmpty(fileList)){<br>    return null;<br>}else{<br>    return fileList.get(0);<br>}<br>}<br>&#x2F;&#x2F;使用方法<br>public void save(FileDto fileDto){<br>    File file &#x3D; CopyUtil.copy(fileDto, File.class);<br>    File fileDb &#x3D; selectByKet(fileDto.getKey());<br>    if(fileDb &#x3D;&#x3D; null){<br>        this.insert(file);<br>    }else{<br>        fileDb.setShardIndex(fileDb.getShardIndex());<br>        this.update(fileDb);<br>    }<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- big-file中也进行修改，1标识第一个分片</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  let shardIndex = 1;//分片索引 1标识第一个分片</span><br><span class="line">  let start = (shardIndex-1) * shardSize;//当前分片起始位置</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="9-3-分片上传功能开发2"><a href="#9-3-分片上传功能开发2" class="headerlink" title="9-3 分片上传功能开发2"></a><strong>9-3 分片上传功能开发2</strong></h2><p>分片数据格式转换，统一系统前后端数据交互传参：1.大文件断点续传与极速秒传：分片数据改成base64进行传输，后端统一用RequestBody接收数据</p>
+<ul>
+<li><p>将file类型转换成String有一个方法就是base64</p>
+</li>
+<li><p>首先在big-file中的uploadFile方法增加</p>
+</li>
+<li><pre><code class="vue">let fileReader = new FileReader();
+  fileReader.onload = function (e)&#123;//当读分片数据时就会触发onload事件监听
+    let base64 = e.target.result;
+
+    let param = &#123;//就可以将上面append那些注释掉了
+      &#39;shard&#39;:base64,
+      &#39;shardIndex&#39;: shardIndex,
+      &#39;shardSize&#39;: shardSize,
+      &#39;shardTotal&#39;: shardTotal,
+      &#39;use&#39;: _this.use,
+      &#39;name&#39;: file.name,
+      &#39;suffix&#39;: suffix,
+      &#39;size&#39;: size,
+      &#39;key&#39;: key62
+    &#125;;
+    Loading.show();
+    _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/file/admin/upload&#39;, param).then((response)=&gt;&#123;
+      Loading.hide();
+      let resp = response.data;
+      console.log(&quot;上传文件成功：&quot;, resp);
+      _this.afterUpload(resp);
+      $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);
+    &#125;);
+  &#125;;
+  fileReader.readAsDataURL(fileShard);//这个方法去读分片数据
+&#125;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 这时我们就可以在UploadController中将参数改了</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  public ResponseDto upload(@RequestBody FileDto fileDto) </span><br><span class="line">  //删除一些东西</span><br><span class="line">  //FileDto fileDto = new FileDto();</span><br><span class="line">  fileDto.setPath(path);</span><br><span class="line">  //fileDto.setName(name);</span><br><span class="line">  //fileDto.setSize(size);</span><br><span class="line">  //fileDto.setSuffix(suffix);</span><br><span class="line">  //fileDto.setUse(use);</span><br><span class="line">  //fileDto.setShardIndex(shardIndex);</span><br><span class="line">  //fileDto.setSize(shardSize);</span><br><span class="line">  //.setShardTotal(shardTotal);</span><br><span class="line">  //fileDto.setKey(key);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>记得在FileDto中增加，生成方法和tostring</p>
+</li>
+<li><pre><code class="java">/**
+ *base64
+ */
+private  String shard;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 这时有四个变量没有定义我们将他们定义成本地变量![image-20220316095352944](https://s2.loli.net/2022/03/16/C4YgUfzwObcGJpv.png)</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  String use = fileDto.getUse();</span><br><span class="line">  String key = fileDto.getKey();</span><br><span class="line">  String suffix = fileDto.getSuffix();</span><br><span class="line">  String shardBase64 = fileDto.getShard();</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>这时我还有一处报错，因为现在的shard是String类型，我们还要把string类型转成MultipartFile，所以我们将shard名改为shardBase64，不使用同一名称。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/16/jSm7NtLEnKZDcIo.png"
+                      alt="image-20220316095802234"
+                ></p>
+</li>
+<li><p>我们在util增加Base64ToMultipartFile类</p>
+</li>
+<li><pre><code class="java">package com.course.server.util;
+
+import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Decoder;
+
+import java.io.*;
+
+public class Base64ToMultipartFile implements MultipartFile &#123;
+
+    private final byte[] imgContent;
+    private final String header;
+
+    public Base64ToMultipartFile(byte[] imgContent, String header) &#123;
+        this.imgContent = imgContent;
+        this.header = header.split(&quot;;&quot;)[0];
+    &#125;
+
+    @Override
+    public String getName() &#123;
+        // TODO - implementation depends on your requirements
+        return System.currentTimeMillis() + Math.random() + &quot;.&quot; + header.split(&quot;/&quot;)[1];
+    &#125;
+
+    @Override
+    public String getOriginalFilename() &#123;
+        // TODO - implementation depends on your requirements
+        return System.currentTimeMillis() + (int) Math.random() * 10000 + &quot;.&quot; + header.split(&quot;/&quot;)[1];
+    &#125;
+
+    @Override
+    public String getContentType() &#123;
+        // TODO - implementation depends on your requirements
+        return header.split(&quot;:&quot;)[1];
+    &#125;
+
+    @Override
+    public boolean isEmpty() &#123;
+        return imgContent == null || imgContent.length == 0;
+    &#125;
+
+    @Override
+    public long getSize() &#123;
+        return imgContent.length;
+    &#125;
+
+    @Override
+    public byte[] getBytes() throws IOException &#123;
+        return imgContent;
+    &#125;
+
+    @Override
+    public InputStream getInputStream() throws IOException &#123;
+        return new ByteArrayInputStream(imgContent);
+    &#125;
+
+    @Override
+    public void transferTo(File dest) throws IOException, IllegalStateException &#123;
+        new FileOutputStream(dest).write(imgContent);
+    &#125;
+
+    public static MultipartFile base64ToMultipart(String base64) &#123;
+        try &#123;
+            String[] baseStrs = base64.split(&quot;,&quot;);
+
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] b = new byte[0];
+            b = decoder.decodeBuffer(baseStrs[1]);
+
+            for(int i = 0; i &lt; b.length; ++i) &#123;
+                if (b[i] &lt; 0) &#123;
+                    b[i] += 256;
+                &#125;
+            &#125;
+
+            return new Base64ToMultipartFile(b, baseStrs[0]);
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+            return null;
+        &#125;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最后我们在UploadController使用</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  MultipartFile shard = Base64ToMultipartFile.base64ToMultipart(shardBase64);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>base64格式：文件说明+“+文件内容</p>
+</li>
+<li><p>将文件转成base64进行传输，优势是变成了常见的字符串类型，劣势是传输的数据会变大</p>
+</li>
+</ul>
+<p>设置分片文件名:</p>
+<ul>
+<li><p>小提示：当字符串拼接个数大多时，不要使用+，而是使用StringBuffer</p>
+</li>
+<li><pre><code class="java">//String path = dir + File.separator + key + &quot;.&quot; + suffix+ &quot;.&quot; +fileDto.getShardIndex();
+String path = new StringBuffer(dir)
+        .append(File.separator)
+        .append(key)
+        .append(&quot;.&quot;)
+        .append(suffix)
+        .append(&quot;.&quot;)
+        .append(fileDto.getShardIndex()).toString();
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">支持连续上传多个分片:</span><br><span class="line"></span><br><span class="line">- 在上传结束时，做个判断，如果shardlndex==shardTotal，表示所有分片都上传完成了,如果shardindex&lt;shardTotal，继续上传下一个分片。以下在big-file中进行</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  if (shardIndex &lt; shardTotal) &#123;</span><br><span class="line">    // 上传下一个分片</span><br><span class="line">    param.shardIndex = param.shardIndex + 1;</span><br><span class="line">    _this.upload(param);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    _this.afterUpload(resp);</span><br><span class="line">    $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>递归，不断的重复做某一件事（上传分片），直到某个条件成立（shardlndex&#x3D;&#x3D;shardTotal），退出重复做的事。</p>
+</li>
+<li><p>然后将代码重构</p>
+</li>
+<li><p>&#96;&#96;&#96;vue<br>&#x2F;**</p>
+<ul>
+<li>将分片数据转成base64进行上传</li>
+</ul>
+<p> *&#x2F;<br>upload (param) {<br>  let _this &#x3D; this;<br>  let shardIndex &#x3D; param.shardIndex;<br>  let shardTotal &#x3D; param.shardTotal;<br>  let shardSize &#x3D; param.shardSize;<br>  let fileShard &#x3D; _this.getFileShard(shardIndex, shardSize);<br>  &#x2F;&#x2F; 将图片转为base64进行传输<br>  let fileReader &#x3D; new FileReader();</p>
+<p>  fileReader.onload &#x3D; function (e) {<br>    let base64 &#x3D; e.target.result;<br>    &#x2F;&#x2F; console.log(“base64:”, base64);</p>
+<pre><code>param.shard = base64;
+Loading.show();
+_this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/file/admin/upload&#39;, param).then((response) =&gt; &#123;
+  Loading.hide();
+  let resp = response.data;
+  console.log(&quot;上传文件成功：&quot;, resp);
+  if (shardIndex &lt; shardTotal) &#123;
+    // 上传下一个分片
+    param.shardIndex = param.shardIndex + 1;
+    _this.upload(param);
+  &#125; else &#123;
+    _this.afterUpload(resp);
+    $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);
+  &#125;
+&#125;);
+</code></pre>
+<p>  };<br>  fileReader.readAsDataURL(fileShard);<br>},</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  getFileShard (shardIndex, shardSize) &#123;</span><br><span class="line">    let _this = this;</span><br><span class="line">    let file = _this.$refs.file.files[0];</span><br><span class="line">    let start = (shardIndex - 1) * shardSize;  //当前分片起始位置</span><br><span class="line">    let end = Math.min(file.size, start + shardSize); //当前分片结束位置</span><br><span class="line">    let fileShard = file.slice(start, end); //从文件中截取当前的分片数据</span><br><span class="line">    return fileShard;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="9-4-分片合并功能开发"><a href="#9-4-分片合并功能开发" class="headerlink" title="9-4 分片合并功能开发"></a>9-4 分片合并功能开发</h2><p>按分片顺序合并成原始文件：</p>
+<ul>
+<li><p>保存到本地的分片名是xxx.mp4.1，但是我们返给前端和保存进数据库的path都用xxx.mp4</p>
+</li>
+<li><p>UploadController首先我们先修改下路径，一个文件带多余后缀的，一个不带的</p>
+</li>
+<li><pre><code class="java">String path = new StringBuffer(dir)
+        .append(File.separator)
+        .append(key)
+        .append(&quot;.&quot;)
+        .append(suffix)
+        .toString();
+String localPath = new StringBuffer(path)
+        .append(&quot;.&quot;)
+        .append(fileDto.getShardIndex()).toString();
+String fullPath = FILE_PATH + localPath;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后我们想要将分片合并，这时我们就要判断分片是不是最后一个分片，如果是就调用本地方法merge</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  if(fileDto.getShardIndex().equals(fileDto.getShardTotal()) )&#123;//因为是一个对象所以用equals</span><br><span class="line">      this.merge(fileDto);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>最后修改merge</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>public void merge(FileDto fileDto) throws Exception {<br>    LOG.info(“合并分片开始”);<br>    String path &#x3D; fileDto.getPath();&#x2F;&#x2F;这个是全路径，我们只需要绝对路径<br><br>    path &#x3D; path.replace(FILE_DOMAIN,””);<br>    Integer ShardTotal &#x3D; fileDto.getShardTotal();<br>    File newFile &#x3D; new File(FILE_PATH + path);<br>    &#x2F;&#x2F;FileOutputStream outputStream &#x3D; new FileOutputStream(newFile, true);&#x2F;&#x2F;文件追加写入<br>    &#x2F;&#x2F;FileInputStream fileInputStream &#x3D; null;&#x2F;&#x2F;分片文件<br>   &#x2F;&#x2F; byte[] byt &#x3D; new byte[10 * 1024 * 1024];<br>   &#x2F;&#x2F; int len;<br>   &#x2F;&#x2F; try {<br>        for (int i &#x3D; 0; i &lt; shardTotal; i++) {<br>            &#x2F;&#x2F;读取第i个分片<br>            fileInputStream &#x3D; new FileInputStream(new File(FILE_PATH + path+”.”+(i+1)));<br>            while ((len &#x3D; fileInputStream.read(byt)) !&#x3D; -1) {<br>                outputStream.write(byt, 0, len);<br>            }<br>        }<br>   &#x2F;&#x2F; }catch (IOException e){<br>        &#x2F;&#x2F;LOG.error(“分片异常”,e);<br>    &#x2F;&#x2F;}finally {<br>       &#x2F;&#x2F; try {<br>          &#x2F;&#x2F;  if(fileInputStream!&#x3D;null){<br>           &#x2F;&#x2F;     fileInputStream.close();<br>          &#x2F;&#x2F;  }<br>          &#x2F;&#x2F;  outputStream.close();<br>          &#x2F;&#x2F;  LOG.info(“IO流关闭”);<br>&#x2F;&#x2F;}catch (Exception e){<br>           &#x2F;&#x2F; LOG.error(“IO流关闭”,e);<br>        }<br>    }<br>    LOG.info(“合并分片结束”);<br>}<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">合并完成后删除多余分片:1.大文件断点续传与极速秒传：合并成原始文件后，删除所有分片</span><br><span class="line"></span><br><span class="line">- 就是在合并分片结束后加一个删除分片</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  System.gc();</span><br><span class="line">  //删除分片</span><br><span class="line">  LOG.info(&quot;删除分片开始&quot;);</span><br><span class="line">  for (int i = 0; i &lt; shardTotal; i++) &#123;</span><br><span class="line">      String filePath = FILE_PATH+path+&quot;.&quot;+(i+1);</span><br><span class="line">      File file = new File(filePath);</span><br><span class="line">      boolean result = file.delete();</span><br><span class="line">      LOG.info(&quot;删除&#123;&#125;,&#123;&#125;&quot;,filePath,result?&quot;成功&quot; : &quot;失败&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  LOG.info(&quot;删除分片结束&quot;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="9-5-分片检查与极速秒传"><a href="#9-5-分片检查与极速秒传" class="headerlink" title="9-5 分片检查与极速秒传"></a>9-5 分片检查与极速秒传</h2><p>上传分片之前先进行分片检查：1.大文件断点续传与极速秒传：上传分片之前先进行分片检查，支持断点续传</p>
+<ul>
+<li><p>开始上传之前，先检查资源率当前的文件是否上传过了（数据库是否有记录），如果上传过了，已经传到第几个分片了。</p>
+</li>
+<li><p>首先在FileService中增加方法</p>
+</li>
+<li><pre><code class="java">/**
+ * 根据文件标识查询数据库记录
+ */
+public FileDto findByKey(String key)&#123;
+    return CopyUtil.copy(selectByKet(key),FileDto.class);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后再UploadController中使用</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  @GetMapping(&quot;/check/&#123;key&#125;&quot;)</span><br><span class="line">  public  ResponseDto check(@PathVariable String key)&#123;</span><br><span class="line">      LOG.info(&quot;减产上传分片开始：&#123;&#125;&quot;,key);</span><br><span class="line">      ResponseDto responseDto = new ResponseDto();</span><br><span class="line">      FileDto fileDto = fileService.findByKey(key);</span><br><span class="line">      responseDto.setContent(fileDto);</span><br><span class="line">      return  responseDto;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>最后修改big-file将uploadFile方法中的_this.upload改为  _this.check(param);增加check方法</p>
+</li>
+<li><pre><code class="vue">/**
+ * 检查文件状态，是否已上传过？上传到第几个分片？
+ */
+check(param)&#123;
+  let _this =this;
+  _this.$ajax.get(process.env.VUE_APP_SERVER + &#39;/file/admin/check/&#39;+param.key).then((response)=&gt;&#123;
+    let resp = response.data;
+    if (resp.success)&#123;
+      let obj = resp.content;
+      if (!obj)&#123;
+        param.shardIndex = 1;
+        console.log(&quot;没有找到文件记录，从分片1开始上传&quot;);
+        _this.upload(param);
+      &#125;else&#123;
+        param.shardIndex = obj.shardIndex+1;
+        console.log(&quot;找到文件记录，从分片&quot;+param.shardIndex+&quot;开始上传&quot;);
+        _this.upload(param);
+      &#125;
+    &#125;else&#123;
+      Toast.warning(&quot;文件上传失败&quot;);
+      $(&quot;#&quot;+_this.inputId+&quot;-input&quot;).val(&quot;&quot;);
+    &#125;
+  &#125;)
+&#125;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">极速秒传：就是检查是否已经上传过了文件，如果上传过了就显示极速秒传</span><br><span class="line"></span><br><span class="line">- 首先再big-file中的check增加代码</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  /**</span><br><span class="line">   * 检查文件状态，是否已上传过？上传到第几个分片？</span><br><span class="line">   */</span><br><span class="line">  check(param)&#123;</span><br><span class="line">    let _this =this;</span><br><span class="line">    _this.$ajax.get(process.env.VUE_APP_SERVER + &#x27;/file/admin/check/&#x27;+param.key).then((respond)=&gt;&#123;</span><br><span class="line">      let resp = respond.data;</span><br><span class="line">      if (resp.success)&#123;</span><br><span class="line">        let obj = resp.content;</span><br><span class="line">        if (!obj)&#123;</span><br><span class="line">          param.shardIndex = 1;</span><br><span class="line">          console.log(&quot;没有找到文件记录，从分片1开始上传&quot;);</span><br><span class="line">          _this.upload(param);</span><br><span class="line">        &#125;else if(obj.shardIndex === obj.shardTotal)&#123;//增加这行</span><br><span class="line">          Toast.success(&quot;文件极速秒传成功！&quot;);</span><br><span class="line">          _this.afterUpload(resp);</span><br><span class="line">          $(&quot;#&quot;+_this.inputId+&quot;-input&quot;).val(&quot;&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">          param.shardIndex = obj.shardIndex+1;</span><br><span class="line">          console.log(&quot;找到文件记录，从分片&quot;+param.shardIndex+&quot;开始上传&quot;);</span><br><span class="line">          _this.upload(param);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;else&#123;</span><br><span class="line">        Toast.warning(&quot;文件上传失败&quot;);</span><br><span class="line">        $(&quot;#&quot;+_this.inputId+&quot;-input&quot;).val(&quot;&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>再UploadController中增加,返回前端的应该是全路径</p>
+</li>
+<li><pre><code>public  ResponseDto check(@PathVariable String key)&#123;
+    LOG.info(&quot;减产上传分片开始：&#123;&#125;&quot;,key);
+    ResponseDto responseDto = new ResponseDto();
+    FileDto fileDto = fileService.findByKey(key);
+    if(fileDto != null)&#123;//增加这个
+        fileDto.setPath(FILE_DOMAIN+fileDto.getPath());
+    &#125;
+    responseDto.setContent(fileDto);
+    return  responseDto;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">增加上传进度条：</span><br><span class="line"></span><br><span class="line">- 可以做成vue组件，也可以做成is工具类，做成vue组件的话，就只能在vue框架中使用，做成js组件的话可以在isp页面、thymelea模板页面、angular等前端框架中直接使用。</span><br><span class="line"></span><br><span class="line">- progress-div显示的进度条，progress-overlay：背景遮罩，将页面所有的元素挡住，不可点击任何地方，常用于防止重复提交。</span><br><span class="line"></span><br><span class="line">- 做成is全局工具类，可以直接使用，不需要import</span><br><span class="line"></span><br><span class="line">- 首先再js中创建Progress.js代码</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  Progress = &#123;</span><br><span class="line">    show: function (width) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      _this.width = width;</span><br><span class="line">      if ($(&quot;#progress-div&quot;).length &gt; 0) &#123;</span><br><span class="line">        $(&quot;.progress&quot;).attr(&quot;data-percent&quot;, width);</span><br><span class="line">        $(&quot;.progress-bar&quot;).width(width + &quot;%&quot;);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        let progressDiv = &quot;&lt;div id=\&quot;progress-div\&quot; style=\&quot;z-index: 10011;\n&quot; +</span><br><span class="line">          &quot;    position: fixed;\n&quot; +</span><br><span class="line">          &quot;    padding: 10px;\n&quot; +</span><br><span class="line">          &quot;    margin: 0px 0px 0px -150px;\n&quot; +</span><br><span class="line">          &quot;    width: 300px;\n&quot; +</span><br><span class="line">          &quot;    top: 40%;\n&quot; +</span><br><span class="line">          &quot;    left: 50%;\n&quot; +</span><br><span class="line">          &quot;    text-align: center;\n&quot; +</span><br><span class="line">          &quot;    height: 45px;\n&quot; +</span><br><span class="line">          &quot;    color: rgb(0, 0, 0);\n&quot; +</span><br><span class="line">          &quot;    border: 3px solid rgb(170, 170, 170);\n&quot; +</span><br><span class="line">          &quot;    background-color: rgb(255, 255, 255);\n&quot; +</span><br><span class="line">          &quot;    cursor: wait;\&quot;&gt;&lt;div class=\&quot;progress pos-rel\&quot; data-percent=\&quot;&quot; + width + &quot;%\&quot;&gt;&lt;div class=\&quot;progress-bar\&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&quot;;</span><br><span class="line">        $(&quot;#progress-div&quot;).remove();</span><br><span class="line">        $(&quot;body&quot;).append(progressDiv);</span><br><span class="line">  </span><br><span class="line">        // 背景遮罩</span><br><span class="line">        $(&quot;body&quot;).append($(&quot;&lt;div id=\&quot;progress-overlay\&quot; style=\&quot;z-index: 10010;\n&quot; +</span><br><span class="line">          &quot;  border: none;\n&quot; +</span><br><span class="line">          &quot;  margin: 0px;\n&quot; +</span><br><span class="line">          &quot;  padding: 0px;\n&quot; +</span><br><span class="line">          &quot;  width: 100%;\n&quot; +</span><br><span class="line">          &quot;  height: 100%;\n&quot; +</span><br><span class="line">          &quot;  top: 0px;\n&quot; +</span><br><span class="line">          &quot;  left: 0px;\n&quot; +</span><br><span class="line">          &quot;  background-color: rgb(0, 0, 0);\n&quot; +</span><br><span class="line">          &quot;  opacity: 0.6;\n&quot; +</span><br><span class="line">          &quot;  cursor: wait;\n&quot; +</span><br><span class="line">          &quot;  position: fixed;\&quot;&gt;&lt;/div&gt;&quot;));</span><br><span class="line">        $(&quot;.progress-bar&quot;).width(width + &quot;%&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">    &#125;,</span><br><span class="line">  </span><br><span class="line">    hide: function () &#123;</span><br><span class="line">      setTimeout(function () &#123;</span><br><span class="line">        $(&quot;#progress-div&quot;).remove();</span><br><span class="line">        $(&quot;#progress-overlay&quot;).remove();</span><br><span class="line">      &#125;, 1000);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后再index中引入</p>
+</li>
+<li><p>&#96;&#96;&#96;html</p>
+<!--  进度条  -->
+<script src="<%= BASE_URL %>static/js/progress.js"></script>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在big-file中使用</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  Progress.show(parseInt((shardIndex-1)*100/shardTotal));</span><br><span class="line">  console.log(&quot;上传文件成功：&quot;, resp);</span><br><span class="line">  Progress.show(parseInt((shardIndex)*100/shardTotal));</span><br><span class="line">  Progress.hide(); </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>大文件断点续传与极速秒传：讲师师头像和课程封面改用大文件组件：</p>
+<ul>
+<li><p>就是将teacher和course中file改为big-file，并且将大组件引入。</p>
+</li>
+<li><p>我们还将改下big-file中，hex_md5中的参数，如果直接传入file，所得的md5永远都是一个值，因为这样相当于传入一个空数组</p>
+</li>
+<li><pre><code class="vue">//生成文件标识，标识多次上传的是不是同一文件
+let key = hex_md5(file.name+file.size+file.type);
+let key10 = parseInt(key,16);
+let key62 = Tool._10to62(key10);
+console.log(key,key10,key62);
+console.log(hex_md5(Array()));
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 9-6 文件上传流程图</span><br><span class="line"></span><br><span class="line">![](https://s2.loli.net/2022/03/18/8Bxg3WM5t1rqkzK.png)</span><br><span class="line"></span><br><span class="line">![image-20220317112616569](https://s2.loli.net/2022/03/18/ZgeIuThVN6wrXOD.png)</span><br><span class="line"></span><br><span class="line">![](https://s2.loli.net/2022/03/18/ZgeIuThVN6wrXOD.png)</span><br><span class="line"></span><br><span class="line"># 第10章 基于阿里云OSS的文件上传</span><br><span class="line"></span><br><span class="line">在线视频课程的核心内容就是视频，保障视频不外泄是程序的重中之重，所以我们需要对视频做加密处理，本章我们选择阿里云视频加密，阿里云视频点播是对OSS的包装，支持防盗链和视频加密。</span><br><span class="line"></span><br><span class="line">***</span><br><span class="line"></span><br><span class="line">## 10-1 阿里云OSS简介</span><br><span class="line"></span><br><span class="line">- 前面介绍的文件上传是基于本地文件服务器的文件上传，但是自己搭文件服务器会有很多运维的问题，比如磁盘满了要扩容，高峰期要增加带宽，低谷期要减少带宽，为了安全，我们还要对文件做备份等等所以一般会选择云平台来存储文件，云平台有很多，比如阿里云、腾讯云、百度云等，云平台做得最好的是亚马逊我们这里选择国内最大的阿里云。</span><br><span class="line">- 防盗链：防止别人盗用你网站资源链接，包括视频，音频，图片等</span><br><span class="line">- 从浏览器通过ECS（服务器）访问OSS算内网访问，不算流量费，但是要考虑ECS的带宽问题。从浏览器直接访问OSS资源，算外网访问OSS需付流量费，但是可以不用考虑带宽</span><br><span class="line"></span><br><span class="line">## 10-2 基于OSS接口的文件上传</span><br><span class="line"></span><br><span class="line">阿里云OSS控台的使用:</span><br><span class="line"></span><br><span class="line">- bucket：存储空间，名称必须是全阿里云唯一</span><br><span class="line">- 上传的文件默认都继承bucket，这里的设置读写权限，只针对当前的文件有效</span><br><span class="line"></span><br><span class="line">基于OSS接口实现文件上传:1.大文件断点续传与极速秒传：基于oss接口实现文件上传，增加文件追加上传oss-append和简单上传oss-simple</span><br><span class="line"></span><br><span class="line">- 首先开通OSS，然后就可以上传文件了，在权限管理的RAM创建用户![image-20220317175917177](https://s2.loli.net/2022/03/18/lSnfAvgqshPQH9T.png)</span><br><span class="line">- Key ID就是开发文档里的那个</span><br><span class="line"></span><br><span class="line">![image-20220317180015443](https://s2.loli.net/2022/03/18/xGFMlOg8qV6Dj7K.png)</span><br><span class="line"></span><br><span class="line">- 这个页面就有很多示例![image-20220317180230837](https://s2.loli.net/2022/03/18/tziOYhkyHVcBK72.png)</span><br><span class="line"></span><br><span class="line">- 每次分片上传都是一个新的请求所以在每次请求里，只需要append一次</span><br><span class="line"></span><br><span class="line">- 我们在course和file的pom.xml中都加入</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;!--阿里云oss--&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.aliyun.oss&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;aliyun-sdk-oss&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;3.10.2&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>首先在file中创建一个新的controller（OssController），里面一个追加上传，一个简单上传</p>
+</li>
+<li><pre><code class="java">package com.course.file.controller.admin;
+
+import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.AppendObjectRequest;
+import com.aliyun.oss.model.AppendObjectResult;
+import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.PutObjectRequest;
+import com.course.server.dto.FileDto;
+import com.course.server.dto.ResponseDto;
+import com.course.server.enums.FileUseEnum;
+import com.course.server.service.FileService;
+import com.course.server.util.Base64ToMultipartFile;
+import com.course.server.util.UuidUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+
+@RequestMapping(&quot;/admin&quot;)
+@RestController
+public class OssController &#123;
+
+    private static final Logger LOG = LoggerFactory.getLogger(OssController.class);
+
+    public static final String BUSINESS_NAME = &quot;文件上传&quot;;
+
+    @Value(&quot;$&#123;accessKeyId&#125;&quot;)
+    private String accessKeyId;
+
+    @Value(&quot;$&#123;accessKeySecret&#125;&quot;)
+    private String accessKeySecret;
+
+    @Value(&quot;$&#123;endpoint&#125;&quot;)
+    private String endpoint;
+
+    @Value(&quot;$&#123;ossDomain&#125;&quot;)
+    private String ossDomain;
+
+    @Value(&quot;$&#123;bucket&#125;&quot;)
+    private String bucket;
+
+    @Resource
+    private FileService fileService;
+
+   @PostMapping(&quot;/oss-append&quot;)
+    public ResponseDto fileUpload(@RequestBody FileDto fileDto) throws IOException &#123;
+       LOG.info(&quot;上传文件开始&quot;);
+       String use = fileDto.getUse();
+       String key = fileDto.getKey();
+       String suffix = fileDto.getSuffix();
+       Integer shardIndex = fileDto.getShardIndex();
+       Integer shardSize = fileDto.getShardSize();
+       String shardBase64 = fileDto.getShard();
+       MultipartFile shard = Base64ToMultipartFile.base64ToMultipart(shardBase64);
+
+       // 保存文件到本地
+       FileUseEnum useEnum = FileUseEnum.getByCode(use);
+
+       //如果文件夹不存在则创建
+       String dir = useEnum.name().toLowerCase();
+
+       String path = new StringBuffer(dir)
+               .append(File.separator)
+               .append(key)
+               .append(&quot;.&quot;)
+               .append(suffix)
+               .toString();
+
+               // 创建OSSClient实例。
+       OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+       ObjectMetadata meta = new ObjectMetadata();
+       meta.setContentType(&quot;text/plain&quot;);
+       // 通过AppendObjectRequest设置多个参数。
+       AppendObjectRequest appendObjectRequest = new AppendObjectRequest(bucket, path, new ByteArrayInputStream(shard.getBytes()),meta);
+       // 第一次追加。
+       // 设置文件的追加位置。
+       appendObjectRequest.setPosition((long) ((shardIndex - 1) * shardSize));
+       AppendObjectResult appendObjectResult = ossClient.appendObject(appendObjectRequest);
+       // 文件的64位CRC值。此值根据ECMA-182标准计算得出。
+       System.out.println(appendObjectResult.getObjectCRC());
+       System.out.println(JSONObject.toJSONString(appendObjectResult));
+       ossClient.shutdown();
+
+       LOG.info(&quot;保存文件记录开始&quot;);
+       fileDto.setPath(path);
+       fileService.save(fileDto);
+
+       ResponseDto responseDto = new ResponseDto();
+       fileDto.setPath(ossDomain + path);
+       responseDto.setContent(fileDto);
+
+       return responseDto;
+   &#125;
+
+    @PostMapping(&quot;/oss-simple&quot;)
+    public ResponseDto fileUpload(@RequestParam MultipartFile file, String use) throws Exception &#123;
+        LOG.info(&quot;上传文件开始&quot;);
+        FileUseEnum useEnum = FileUseEnum.getByCode(use);
+        String key = UuidUtil.getShortUuid();
+        String fileName = file.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1).toLowerCase();
+        String dir = useEnum.name().toLowerCase();
+        String path = dir + &quot;/&quot; + key + &quot;.&quot; + suffix;
+
+        // 创建OSSClient实例。
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+        // 创建PutObjectRequest对象。
+//        String content = &quot;Hello OSS&quot;;
+        // &lt;yourObjectName&gt;表示上传文件到OSS时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
+        PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, path, new ByteArrayInputStream(file.getBytes()));
+
+        // 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。
+        // ObjectMetadata metadata = new ObjectMetadata();
+        // metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
+        // metadata.setObjectAcl(CannedAccessControlList.Private);
+        // putObjectRequest.setMetadata(metadata);
+
+        // 上传字符串。
+        ossClient.putObject(putObjectRequest);
+
+//        LOG.info(&quot;保存文件记录开始&quot;);
+//        fileDto.setPath(path);
+//        fileService.save(fileDto);
+
+        ResponseDto responseDto = new ResponseDto();
+        FileDto fileDto = new FileDto();
+        fileDto.setPath(ossDomain + path);
+        responseDto.setContent(fileDto);
+
+        return responseDto;
+    &#125;
+
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 里面的一些参数我们在application中写入</span><br><span class="line"></span><br><span class="line">- ```properties</span><br><span class="line">  #oss</span><br><span class="line">  accessKeyId = 自己申请的Id</span><br><span class="line">  accessKeySecret = 自己申请的</span><br><span class="line">  endpoint = http://oss-cn-shanghai.aliyuncs.com</span><br><span class="line">  ossDomain = http://course-imooc123.oss-cn-shanghai.aliyuncs.com</span><br><span class="line">  bucket = course-imooc123</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后分别把big-file和file.vue的upload</p>
+</li>
+<li><pre><code class="vue"> _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/file/admin/oss-append&#39;, param)
+  _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/file/admin/oss-simple&#39;, param)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 使用的时候，就跟平常一样，引入组件</span><br><span class="line"></span><br><span class="line">## 10-3 阿里云视频点播服务介绍</span><br><span class="line"></span><br><span class="line">阿里云视频点播服务介绍：</span><br><span class="line"></span><br><span class="line">- 视频点播（ApsaraVideo VoD，简称VoD）是集视频采集、编辑、上传、媒体资源管理、自动化转码处理（窄带高清™）、视频审核分析、分发加速于一体的一站式音视频点播解决方案。</span><br><span class="line"></span><br><span class="line">视频点播控台的使用：</span><br><span class="line"></span><br><span class="line">![image-20220318100227475](https://s2.loli.net/2022/03/18/rVwLAcmoHM5NdIp.png)</span><br><span class="line"></span><br><span class="line">视频点播帮助文档概览：</span><br><span class="line"></span><br><span class="line">![image-20220318100727542](https://s2.loli.net/2022/03/18/Out79eVMalPJjCE.png)</span><br><span class="line"></span><br><span class="line">## 10-4 基于OSS原生SDK上传视频到点播1</span><br><span class="line"></span><br><span class="line">**VOD上传并加密转码：**</span><br><span class="line"></span><br><span class="line">1.视频加密与授权播放：基于oss原生SDK上传视频到点播服务，官方示例代码</span><br><span class="line"></span><br><span class="line">- 在course和server中pom都加入jar包</span><br><span class="line"></span><br><span class="line">- ```xml</span><br><span class="line">  &lt;!--阿里云oss--&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.aliyun.oss&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;aliyun-sdk-oss&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;3.10.2&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;!-- 阿里云vod --&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.aliyun&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;4.3.3&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;com.aliyun&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;aliyun-java-sdk-vod&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.15.8&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;3.4&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>在server的util中增加VodUtil</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.server.util;</p>
+<p>import com.alibaba.fastjson.JSONObject;<br>import com.aliyun.oss.OSSClient;<br>import com.aliyuncs.DefaultAcsClient;<br>import com.aliyuncs.exceptions.ClientException;<br>import com.aliyuncs.profile.DefaultProfile;<br>import com.aliyuncs.vod.model.v20170321.CreateUploadVideoRequest;<br>import com.aliyuncs.vod.model.v20170321.CreateUploadVideoResponse;<br>import org.apache.commons.codec.binary.Base64;</p>
+<p>import java.io.File;<br>public class VodUtil {<br>public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {<br>    &#x2F;&#x2F; 根据点播接入服务所在的Region填写，例如：接入服务在上海，则填cn-shanghai；其他区域请参见存储说明。<br>    String regionId &#x3D; “cn-shanghai”;<br>    DefaultProfile profile &#x3D; DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);<br>    DefaultAcsClient client &#x3D; new DefaultAcsClient(profile);<br>    return client;<br>}<br><br>public static CreateUploadVideoResponse createUploadVideo(DefaultAcsClient vodClient) throws ClientException {<br>    CreateUploadVideoRequest request &#x3D; new CreateUploadVideoRequest();<br>    request.setFileName(“vod_test.mp4”);<br>    request.setTitle(“this is title”);<br>    &#x2F;&#x2F;request.setDescription(“this is desc”);<br>    &#x2F;&#x2F;request.setTags(“tag1,tag2”);<br>    &#x2F;&#x2F;CoverURL示例：<a class="link"   target="_blank" rel="noopener" href="http://example.aliyundoc.com/test_cover_****.jpg" >http://example.aliyundoc.com/test_cover_****.jpg<i class="fas fa-external-link-alt"></i></a><br>    &#x2F;&#x2F;request.setCoverURL(“<your CoverURL>“);<br>    &#x2F;&#x2F;request.setCateId(-1L);<br>    &#x2F;&#x2F;request.setTemplateGroupId(“”);<br>    &#x2F;&#x2F;request.setWorkflowId(“”);<br>    &#x2F;&#x2F;request.setStorageLocation(“”);<br>    &#x2F;&#x2F;request.setAppId(“app-1000000”);<br>    &#x2F;&#x2F;设置请求超时时间<br>    request.setSysReadTimeout(1000);<br>    request.setSysConnectTimeout(1000);<br>    return vodClient.getAcsResponse(request);<br>}<br><br>public static OSSClient initOssClient(JSONObject uploadAuth, JSONObject uploadAddress) {<br>    String endpoint &#x3D; uploadAddress.getString(“Endpoint”);<br>    String accessKeyId &#x3D; uploadAuth.getString(“AccessKeyId”);<br>    String accessKeySecret &#x3D; uploadAuth.getString(“AccessKeySecret”);<br>    String securityToken &#x3D; uploadAuth.getString(“SecurityToken”);<br>    return new OSSClient(endpoint, accessKeyId, accessKeySecret, securityToken);<br>}<br><br>public static void uploadLocalFile(OSSClient ossClient, JSONObject uploadAddress, String localFile) {<br>    String bucketName &#x3D; uploadAddress.getString(“Bucket”);<br>    String objectName &#x3D; uploadAddress.getString(“FileName”);<br>    File file &#x3D; new File(localFile);<br>    ossClient.putObject(bucketName, objectName, file);<br>}<br><br>public static void main(String[] argv) {<br>    &#x2F;&#x2F;您的AccessKeyId<br>    String accessKeyId &#x3D; “LTAI5tCDYephRBLH8xn9w48J”;<br>    &#x2F;&#x2F;您的AccessKeySecret<br>    String accessKeySecret &#x3D; “5qunGIsBmu475zk27xPfqBKa8V48K9”;<br>    &#x2F;&#x2F;需要上传到VOD的本地视频文件的完整路径，需要包含文件扩展名<br>    String localFile &#x3D; “C:\Users\1\Desktop\fang\course\admin\public\static\image\小节视频\test.mp4”;<br>    try {<br>        &#x2F;&#x2F; 初始化VOD客户端并获取上传地址和凭证<br>        DefaultAcsClient vodClient &#x3D; initVodClient(accessKeyId, accessKeySecret);<br>        CreateUploadVideoResponse createUploadVideoResponse &#x3D; createUploadVideo(vodClient);<br>        &#x2F;&#x2F; 执行成功会返回VideoId、UploadAddress和UploadAuth<br>        String videoId &#x3D; createUploadVideoResponse.getVideoId();<br><br>        JSONObject uploadAuth &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAuth()),JSONObject.class);<br>        JSONObject uploadAddress &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAddress()),JSONObject.class);<br><br>        &#x2F;&#x2F; 使用UploadAuth和UploadAddress初始化OSS客户端<br>        OSSClient ossClient &#x3D; initOssClient(uploadAuth, uploadAddress);<br>        &#x2F;&#x2F; 上传文件，注意是同步上传会阻塞等待，耗时与文件大小和网络上行带宽有关<br>        uploadLocalFile(ossClient, uploadAddress, localFile);<br>        System.out.println(“Put local file succeed, VideoId : “ + videoId);<br>    } catch (Exception e) {<br>        System.out.println(“Put local file fail, ErrorMessage : “ + e.getLocalizedMessage());<br>    }<br>}<br><br>private static String decodeBase64(String data) {<br>    return new String(Base64.decodeBase64(data));<br>}<br> }</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 10-5 基于OSS原生SDK上传视频到点播2</span><br><span class="line"></span><br><span class="line">2.视频加密与授权播放：基于OSS原生SDK上传视频到点播服务，上传到指定分类并自动转码：</span><br><span class="line"></span><br><span class="line">- 把上面这部分注释注释掉</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  request.setCoverURL(&quot;https://s2.loli.net/2022/03/18/Out79eVMalPJjCE.png&quot;);</span><br><span class="line">  request.setCateId(1000384585L);</span><br><span class="line">  request.setTemplateGroupId(&quot;f563e13b2a67fdd2b4e44bc1b1d421c2&quot;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.视频点播不支持追加上传：</p>
+<ul>
+<li>在上面uploadLocalFile方法中官方示例中用是简单上传putObiect，我们要改成我们需要的追加上传,很遗憾是不能实现的。</li>
+</ul>
+<p><strong>项目集成VOD上传：</strong></p>
+<p>1.视频加密与授权播放：小节增加vod字段：</p>
+<ul>
+<li><p>我们首先在all小节处增加一列</p>
+</li>
+<li><p>&#96;&#96;&#96;sql<br> alter table <code>section</code> add column (<code>vod</code> char(32) comment ‘VOD|阿里云VOD’);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后mybatis-generator，然后我们还需要在sectionDto增加新增的变量。</span><br><span class="line"></span><br><span class="line">- 先对big-file进行修改</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  //设置两个默认值</span><br><span class="line">  shardSize:&#123;</span><br><span class="line">    default:50*1024</span><br><span class="line">  &#125;,</span><br><span class="line">  url:&#123;</span><br><span class="line">    default:&quot;oss-append&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  //使用默认值</span><br><span class="line">  let shardSize = _this.shardSize;</span><br><span class="line">  _this.$ajax.post(process.env.VUE_APP_SERVER + &#x27;/file/admin/&#x27;+_this.url, param)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>2，视频加密与授权播放：增加vod组件，用于上传视频到视频点播服务：</p>
+<ul>
+<li><p>vod组件就是对big-file组件做了一层封装，要注意度，封装得越多，灵活度就越低。</p>
+</li>
+<li><p>然后我们就在组件中创建一个vod.vue</p>
+</li>
+<li><p>&#96;&#96;&#96;</p>
+<template>
+  <big-file v-bind:input-id="inputId"
+            v-bind:text="text"
+            v-bind:suffixs="suffixs"
+            v-bind:use="use"
+            v-bind:after-upload="afterUpload"
+            v-bind:shard-size="shardSize"
+            v-bind:url="oss-append"></big-file>
+</template>
+
+<script>
+import BigFile from "./big-file"
+export default {
+  components:{BigFile},
+  name: 'vod',
+  props: {
+    text: {
+      default: "上传VOD"
+    },
+    inputId: {
+      default: "vod-upload"
+    },
+    suffixs: {
+      default: []
+    },
+    use: {
+      default: ""
+    },
+    shardSize:{
+      default:50*1024
+    },
+    afterUpload: {
+      type: Function,
+      default: null
+    },
+  },
+  data: function () {
+    return {
+    }
+  },
+  methods: {
+  }
+}
+</script>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 我们在js里对video赋值，vue会监听到值的变化”并渲染视频控件。如果还没渲染完，我们就去获取时长，这时就会得到NaN，所以需要加延时获取。因此我们修改section获取时长代码，增加一个延迟。另外我们在section中使用vod组件。</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  /**</span><br><span class="line">   * 获取时长</span><br><span class="line">   */</span><br><span class="line">  getTime()&#123;</span><br><span class="line">    let _this=this;</span><br><span class="line">    setTimeout(function ()&#123;let ele =document.getElementById(&quot;video&quot;);</span><br><span class="line">      _this.section.time =parseInt(ele.duration,10);</span><br><span class="line">    &#125;,100);</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>3.视频加密与授权播放：file表增加vod字段</p>
+<ul>
+<li><p>我们给file也增加vod字段，其他忽略</p>
+</li>
+<li><pre><code class="sql">alter table `file` add column (`vod` char(32) comment &#39;Vod|阿里云Vod&#39;);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4.视频加密与授权播放：增加视频点播文件上传功能</span><br><span class="line"></span><br><span class="line">- 我们首先修改下application，并将OssController对应的值也进行修改</span><br><span class="line"></span><br><span class="line">- ```properties</span><br><span class="line">  #oss</span><br><span class="line">  oss.accessKeyId = 自己申请的</span><br><span class="line">  oss.accessKeySecret = 自己申请的</span><br><span class="line">  oss.endpoint = http://oss-cn-shanghai.aliyuncs.com</span><br><span class="line">  oss.domain = http://course-imooc123.oss-cn-shanghai.aliyuncs.com</span><br><span class="line">  oss.bucket = course-imooc123</span><br><span class="line">  </span><br><span class="line">  #vod</span><br><span class="line">  vod.accessKeyId = 自己申请的</span><br><span class="line">  vod.accessKeySecret = 自己申请的</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>由于视频点播不支持追加上传，所以使用vod组件进行上传的，只能有一个分片，所以我们将shardSize写死，不给暴漏出去,就默认1G</p>
+</li>
+<li><pre><code class="vue">v-bind:shard-size=&quot;1000*1024*1024&quot;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 接下来修改VodUtil</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //给函数增加一个参数</span><br><span class="line">  public static CreateUploadVideoResponse createUploadVideo(DefaultAcsClient vodClient,String fileName) throws ClientException &#123;</span><br><span class="line">      request.setFileName(fileName);</span><br><span class="line">      request.setTitle(fileName);</span><br><span class="line">  &#125;</span><br><span class="line">  //在main中使用该函数</span><br><span class="line">  String fileName = &quot;test.mp4&quot;;</span><br><span class="line">  CreateUploadVideoResponse createUploadVideoResponse = createUploadVideo(vodClient,fileName);</span><br><span class="line">              </span><br><span class="line">   /**</span><br><span class="line">       * 增加简单上传</span><br><span class="line">       * @param ossClient</span><br><span class="line">       * @param uploadAddress</span><br><span class="line">       * @param inputStream</span><br><span class="line">       */</span><br><span class="line">      public static void uploadLocalFile(OSSClient ossClient, JSONObject uploadAddress, InputStream inputStream) &#123;</span><br><span class="line">          String bucketName = uploadAddress.getString(&quot;Bucket&quot;);</span><br><span class="line">          String objectName = uploadAddress.getString(&quot;FileName&quot;);</span><br><span class="line">          //单文件上传</span><br><span class="line">          ossClient.putObject(bucketName, objectName, inputStream);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>下面加这个方法的目的就是去获取播放地址</p>
+</li>
+<li><pre><code class="java">/**
+ * 取源文件信息
+ * @param client
+ * @param videoId
+ * @return
+ * @throws ClientException
+ */
+public static GetMezzanineInfoResponse getMezzanineInfo(DefaultAcsClient client,String videoId) throws ClientException &#123;
+    GetMezzanineInfoRequest request = new GetMezzanineInfoRequest();
+    request.setVideoId(videoId);
+    //源片下载地址过期时间
+    request.setAuthTimeout(3600L);
+    return client.getAcsResponse(request);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 阿里云JAR里的实体类里没有重写tostring（方法，所以每次打印日志都要用JSoN.to]sONString()，这就是为什么我要求自己的实体类要生成tostring（）</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  System.out.println(&quot;视频上传成功, VideoId : &quot; + videoId);//再这之后添加代码</span><br><span class="line">  GetMezzanineInfoResponse response = new GetMezzanineInfoResponse();</span><br><span class="line">  response = getMezzanineInfo(vodClient,videoId);</span><br><span class="line">  System.out.println(&quot;获取视频信息,response : &quot;+ JSON.toJSONString(response));</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>我们新建一个VodController</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>package com.course.file.controller.admin;</p>
+<p>import com.alibaba.fastjson.JSON;<br>import com.alibaba.fastjson.JSONObject;<br>import com.aliyun.oss.OSSClient;<br>import com.aliyuncs.DefaultAcsClient;<br>import com.aliyuncs.vod.model.v20170321.CreateUploadVideoResponse;<br>import com.aliyuncs.vod.model.v20170321.GetMezzanineInfoResponse;<br>import com.course.server.dto.FileDto;<br>import com.course.server.dto.ResponseDto;<br>import com.course.server.enums.FileUseEnum;<br>import com.course.server.service.FileService;<br>import com.course.server.util.Base64ToMultipartFile;<br>import com.course.server.util.VodUtil;<br>import org.apache.commons.codec.binary.Base64;<br>import org.slf4j.Logger;<br>import org.slf4j.LoggerFactory;<br>import org.springframework.beans.factory.annotation.Value;<br>import org.springframework.web.bind.annotation.PostMapping;<br>import org.springframework.web.bind.annotation.RequestBody;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.RestController;<br>import org.springframework.web.multipart.MultipartFile;</p>
+<p>import javax.annotation.Resource;<br>import java.io.File;<br>import java.io.IOException;</p>
+<p>@RequestMapping(“&#x2F;admin”)<br>@RestController<br>public class VodController {</p>
+<pre><code>private static final Logger LOG = LoggerFactory.getLogger(VodController.class);
+
+public static final String BUSINESS_NAME = &quot;文件上传&quot;;
+
+@Value(&quot;$&#123;vod.accessKeyId&#125;&quot;)
+private String accessKeyId;
+
+@Value(&quot;$&#123;vod.accessKeySecret&#125;&quot;)
+private String accessKeySecret;
+
+
+
+@Resource
+private FileService fileService;
+</code></pre>
+<p>   @PostMapping(“&#x2F;vod”)<br>public ResponseDto fileUpload(@RequestBody FileDto fileDto) throws IOException {<br>   LOG.info(“上传文件开始”);<br>   String use &#x3D; fileDto.getUse();<br>   String key &#x3D; fileDto.getKey();<br>   String suffix &#x3D; fileDto.getSuffix();<br>   Integer shardIndex &#x3D; fileDto.getShardIndex();<br>   Integer shardSize &#x3D; fileDto.getShardSize();<br>   String shardBase64 &#x3D; fileDto.getShard();<br>   MultipartFile shard &#x3D; Base64ToMultipartFile.base64ToMultipart(shardBase64);<br><br>   &#x2F;&#x2F; 保存文件到本地<br>   FileUseEnum useEnum &#x3D; FileUseEnum.getByCode(use);<br><br>   &#x2F;&#x2F;如果文件夹不存在则创建<br>   String dir &#x3D; useEnum.name().toLowerCase();<br><br>   String path &#x3D; new StringBuffer(dir)<br>           .append(File.separator)<br>           .append(key)<br>           .append(“.”)<br>           .append(suffix)<br>           .toString();<br><br>   String vod &#x3D;””;<br>   String fileUrl &#x3D; “”;<br>   try {<br>       &#x2F;&#x2F; 初始化VOD客户端并获取上传地址和凭证<br>       DefaultAcsClient vodClient &#x3D; VodUtil.initVodClient(accessKeyId, accessKeySecret);<br>       CreateUploadVideoResponse createUploadVideoResponse &#x3D; VodUtil.createUploadVideo(vodClient,path);<br>       &#x2F;&#x2F; 执行成功会返回VideoId、UploadAddress和UploadAuth<br>       vod &#x3D; createUploadVideoResponse.getVideoId();<br><br>       JSONObject uploadAuth &#x3D; JSONObject.parseObject(<br>               Base64.decodeBase64(createUploadVideoResponse.getUploadAuth()),JSONObject.class);<br>       JSONObject uploadAddress &#x3D; JSONObject.parseObject(<br>               Base64.decodeBase64(createUploadVideoResponse.getUploadAddress()),JSONObject.class);<br><br>       &#x2F;&#x2F; 使用UploadAuth和UploadAddress初始化OSS客户端<br>       OSSClient ossClient &#x3D; VodUtil.initOssClient(uploadAuth, uploadAddress);<br>       &#x2F;&#x2F; 上传文件，注意是同步上传会阻塞等待，耗时与文件大小和网络上行带宽有关<br>       VodUtil.uploadLocalFile(ossClient, uploadAddress, shard.getInputStream());<br>       System.out.println(“视频上传成功, VideoId : “ + vod);<br>       GetMezzanineInfoResponse response &#x3D;  VodUtil.getMezzanineInfo(vodClient,vod);<br>       System.out.println(“获取视频信息,response : “+ JSON.toJSONString(response));<br>       fileUrl &#x3D; response.getMezzanine().getFileURL();<br>       ossClient.shutdown();<br>   } catch (Exception e) {<br>       System.out.println(“文件上传失败, ErrorMessage : “ + e.getLocalizedMessage());<br>   }<br><br>   LOG.info(“保存文件记录开始”);<br>   fileDto.setPath(path);<br>   fileDto.setVod(vod);<br>   fileService.save(fileDto);<br><br>   ResponseDto responseDto &#x3D; new ResponseDto();<br>   fileDto.setPath(fileUrl);&#x2F;&#x2F;返回给前端的需要一个可播放的地址，为了自动获取时长<br>   responseDto.setContent(fileDto);<br><br>   return responseDto;<br>   }</p>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 修改section</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  //获取到的可播放地址是有时效的，所以就算保存到数据库也会过期没用。以后会根据vod来播放，所以我们保存的时候将video的全路径清空，在save方法中加</span><br><span class="line">  _this.section.video=&quot;&quot;;</span><br><span class="line">  //上传完文件后，多返回一个vod，那么我们在afterUpload方法中将vod放到section.vod中</span><br><span class="line">  let vod =resp.content.vod;</span><br><span class="line">  _this.section.vod = vod;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>5.视频加密与授权播放：文件检查时，根据是否是视频点播文件来获取视频信息</p>
+<ul>
+<li>在UploadController中check方法增加判断vod是否有值，如过有就上传vod的地址，如果没有就上传本地地址</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;vod.accessKeyId&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String accessKeyId;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;vod.accessKeySecret&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String accessKeySecret;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(fileDto != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isEmpty(fileDto.getVod()))&#123;</span><br><span class="line">        fileDto.setPath(FILE_DOMAIN+fileDto.getPath());</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="type">DefaultAcsClient</span> <span class="variable">vodClient</span> <span class="operator">=</span> VodUtil.initVodClient(accessKeyId, accessKeySecret);</span><br><span class="line">        <span class="type">GetMezzanineInfoResponse</span> <span class="variable">response</span> <span class="operator">=</span>  VodUtil.getMezzanineInfo(vodClient,fileDto.getVod());</span><br><span class="line">        System.out.println(<span class="string">&quot;获取视频信息,response : &quot;</span>+ JSON.toJSONString(response));</span><br><span class="line">        <span class="type">String</span> <span class="variable">fileUrl</span> <span class="operator">=</span> response.getMezzanine().getFileURL();</span><br><span class="line">        fileDto.setPath(fileUrl);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-6-视频授权播放功能开发"><a href="#10-6-视频授权播放功能开发" class="headerlink" title="10-6 视频授权播放功能开发"></a>10-6 视频授权播放功能开发</h2><p><strong>阿里云播放器的基本使用:</strong></p>
+<p>1.视频加密与授权播放：集成阿里云播放器，制作player播放器组件</p>
+<ul>
+<li><p>我们再次创建一个组件player.vue</p>
+</li>
+<li><pre><code class="vue">&lt;template&gt;
+  &lt;div v-bind:id=&quot;playerId&quot;&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export  default &#123;
+    name:&#39;player&#39;,
+    props:&#123;
+      playerId:&#123;
+        default:&quot;player-div&quot;
+      &#125;,
+    &#125;,
+    data: function ()&#123;
+      return&#123;
+        aliPlayer:&#123;&#125;,//播放器实例
+      &#125;
+    &#125;,
+    methods:&#123;
+      playUrl(url)&#123;
+        let _this=this;
+        console.log(&quot;开始播放:&quot;,url);
+        //如果已经有播放器了，则将播放器的div删除
+        if (_this.aliPlayer)&#123;
+          _this.aliPlayer=null;
+          $(&quot;#J_prismPlayer&quot;).remove();
+        &#125;
+        //初始播放器
+        $(&quot;#&quot;+_this.playerId).append(&quot;&lt;div class=\&quot;prism-player\&quot; id=\&quot;J_prismPlayer\&quot;&gt;&lt;/div&gt;&quot;);
+        _this.aliPlayer = new Aliplayer(&#123;
+          id: &#39;J_prismPlayer&#39;,
+          width: &#39;100%&#39;,
+          autoplay:false,
+          source:url,
+          cover:&#39;https://s2.loli.net/2022/03/01/6wagXDIZQGcebUt.png&#39;,
+        &#125;,function(player)&#123;
+          console.log(&#39;播放器创建好了&#39;)
+        &#125;);
+      &#125;
+    &#125;
+  &#125;
+&lt;/script&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后我们在index中引入代码js和css</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  &lt;!--  阿里云播放器--&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://g.alicdn.com/de/prismplayer/2.9.19/skins/default/aliplayer-min.css&quot; /&gt; </span><br><span class="line">   &lt;!--  阿里云播放器--&gt;</span><br><span class="line">  &lt;script charset=&quot;utf-8&quot; type=&quot;text/javascript&quot; src=&quot;https://g.alicdn.com/de/prismplayer/2.9.19/aliplayer-min.js&quot;&gt;&lt;/script&gt; </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>最后我们对section进行修改</p>
+</li>
+<li><pre><code class="vue">//增加了player，并且将video隐藏起来，不能注释掉，因为我们要用它获取时长
+&lt;player ref=&quot;player&quot;&gt;&lt;/player&gt;
+&lt;video v-bind:src=&quot;section.video&quot; id=&quot;video&quot; controls=&quot;controls&quot; class=&quot;hidden&quot;&gt;&lt;/video&gt;
+//引入player组件
+import Player from &quot;../../components/player&quot;;
+components: &#123;Player, Pagination,BigFile,Vod&#125;,
+//在afterUpload方法中增加，通过url播放视频
+_this.$refs.player.playUrl(video);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**获取vod授权码并授权播放**</span><br><span class="line"></span><br><span class="line">1.视频加密与授权播放：获取vod授权码并授权播放，需要在存储管理中将权限设置成公共读         </span><br><span class="line"></span><br><span class="line">- 首先在VodUtil中增加</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  /**</span><br><span class="line">   * 获取播放凭证函数</span><br><span class="line">   * @param client</span><br><span class="line">   * @return</span><br><span class="line">   * @throws Exception</span><br><span class="line">   */</span><br><span class="line">  public static GetVideoPlayAuthResponse getVideoPlayAuth(DefaultAcsClient client, String videoId) throws Exception &#123;</span><br><span class="line">      GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();</span><br><span class="line">      request.setVideoId(videoId);</span><br><span class="line">      return client.getAcsResponse(request);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后我们在VodController中增加请求</p>
+</li>
+<li><pre><code class="java">@RequestMapping(value = &quot;/get-auth/&#123;vod&#125;&quot;, method = RequestMethod.GET)
+public ResponseDto getAuth(@PathVariable String vod) throws ClientException, ClientException &#123;
+    LOG.info(&quot;获取播放授权开始: &quot;);
+    ResponseDto responseDto = new ResponseDto();
+    DefaultAcsClient client = VodUtil.initVodClient(accessKeyId, accessKeySecret);
+    GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
+    try &#123;
+        response = VodUtil.getVideoPlayAuth(client, vod);
+        LOG.info(&quot;授权码 = &#123;&#125;&quot;, response.getPlayAuth());
+        responseDto.setContent(response.getPlayAuth());
+        //VideoMeta信息
+        LOG.info(&quot;VideoMeta = &#123;&#125;&quot;, JSON.toJSONString(response.getVideoMeta()));
+    &#125; catch (Exception e) &#123;
+        System.out.print(&quot;ErrorMessage = &quot; + e.getLocalizedMessage());
+    &#125;
+    LOG.info(&quot;获取播放授权结束&quot;);
+    return responseDto;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 一个页面可能会放多个player组件，所以需要把id做成动态变化，一个页面的元素，id值要是唯一的。修改player.vue</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">   $(&quot;#&quot;+_this.playerId+&#x27;-player&#x27;).remove();</span><br><span class="line">  //初始播放器</span><br><span class="line">  $(&quot;#&quot;+_this.playerId).append(&quot;&lt;div class=\&quot;prism-player\&quot; id=\&quot;&quot;+_this.playerId+&quot;-player\&quot;&gt;&lt;/div&gt;&quot;);</span><br><span class="line">  _this.aliPlayer = new Aliplayer(&#123;</span><br><span class="line">    id: _this.playerId+&#x27;-player&#x27;,&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>我们在player组件增加一个方法，设置播放凭证</p>
+</li>
+<li><pre><code class="vue">playVod (vod) &#123;
+  let _this = this;
+  Loading.show();
+  _this.$ajax.get(process.env.VUE_APP_SERVER + &#39;/file/admin/get-auth/&#39; + vod).then((response)=&gt;&#123;
+    Loading.hide();
+    let resp = response.data;
+    if (resp.success) &#123;
+      //如果已经有播放器了，则将播放器div删除
+      if (_this.aliPlayer) &#123;
+        _this.aliPlayer = null;
+        $(&quot;#&quot; + _this.playerId + &#39;-player&#39;).remove();
+      &#125;
+
+      // 初始化播放器
+      $(&quot;#&quot; + _this.playerId).append(&quot;&lt;div class=\&quot;prism-player\&quot; id=\&quot;&quot; + _this.playerId + &quot;-player\&quot;&gt;&lt;/div&gt;&quot;);
+      _this.aliPlayer = new Aliplayer(&#123;
+        id: _this.playerId + &#39;-player&#39;,
+        width: &#39;100%&#39;,
+        autoplay: false,
+        vid: vod,
+        playauth: resp.content,
+        cover: &#39;http://liveroom-img.oss-cn-qingdao.aliyuncs.com/logo.png&#39;,
+        encryptType:1, //当播放私有加密流时需要设置。
+      &#125;,function(player)&#123;
+        console.log(&#39;播放器创建好了。&#39;)
+      &#125;);
+    &#125; else &#123;
+      Toast.warning(&#39;播放错误。&#39;)
+    &#125;
+  &#125;)
+
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 我们再创建一个带有模态框的播放器组件modal-player，里面包含了player组件</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;template&gt;</span><br><span class="line">    &lt;div id=&quot;player-modal&quot; class=&quot;modal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;modal-dialog&quot; role=&quot;document&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;modal-content&quot;&gt;</span><br><span class="line">          &lt;div class=&quot;modal-body&quot;&gt;</span><br><span class="line">            &lt;player v-bind:player-id=&quot;&#x27;modal-player-div&#x27;&quot;</span><br><span class="line">                    ref=&quot;player&quot;&gt;&lt;/player&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    import Player from &quot;./player&quot;;</span><br><span class="line">    export default &#123;</span><br><span class="line">      name: &#x27;modal-player&#x27;,</span><br><span class="line">      components: &#123;Player&#125;,</span><br><span class="line">      data: function () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">          aliPlayer: &#123;&#125;, // 播放器实例</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">        playUrl(url) &#123;</span><br><span class="line">          let _this = this;</span><br><span class="line">          _this.$refs.player.playUrl(url);</span><br><span class="line">        &#125;,</span><br><span class="line">  </span><br><span class="line">        playVod(vod) &#123;</span><br><span class="line">          let _this = this;</span><br><span class="line">          _this.$refs.player.playVod(vod);</span><br><span class="line">          $(&quot;#player-modal&quot;).modal(&quot;show&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;style scoped&gt;</span><br><span class="line">    #player-modal .modal-body &#123;</span><br><span class="line">      padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  &lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>接下来我们设置个section，改动如下</p>
+</li>
+<li><pre><code>//将视频改为VOD
+&lt;th&gt;VOD&lt;/th&gt;
+//操作中增加一个按钮
+ &lt;button v-on:click=&quot;play(section)&quot; class=&quot;btn btn-xs btn-info&quot;&gt;
+    &lt;i class=&quot;ace-icon fa fa-video-camera bigger-120&quot;&gt;&lt;/i&gt;
+ &lt;/button&gt;
+//给player设置一个id
+&lt;player v-bind:player-id=&quot;&#39;form-player-div&#39;&quot; ref=&quot;player&quot;&gt;&lt;/player&gt;
+//再最后一个div前面加
+&lt;modal-player ref=&quot;modalPlayer&quot;&gt;&lt;/modal-player&gt;
+//引入组件
+import ModalPlayer from &quot;../../components/modal-player&quot;;
+components: &#123;ModalPlayer, Player, Pagination,BigFile,Vod&#125;,
+//增加play方法
+play(section)&#123;
+  let _this=this;
+  _this.$refs.modalPlayer.playVod(section.vod);
+&#125;
+</code></pre>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Spring Cloud + Vue 前后端分离3-2</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-02-25 12:19:22</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/02/25/Spring Cloud + Vue 前后端分离 3-2/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/03/07/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%204-1/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离4-1</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/02/20/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%203-1/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离3-1</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC9%E7%AB%A0-%E5%A4%A7%E6%96%87%E4%BB%B6%E6%96%AD%E7%82%B9%E7%BB%AD%E4%B8%8E%E6%9E%81%E9%80%9F%E7%A7%92%E4%BC%A0"><span class="nav-number">1.</span> <span class="nav-text">第9章 大文件断点续与极速秒传</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E5%88%86%E7%89%87%E4%BC%A0%E8%BE%93%E7%9A%84%E8%AF%95%E6%8E%A2"><span class="nav-number">1.1.</span> <span class="nav-text">9-1 分片传输的试探</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%912"><span class="nav-number">1.2.</span> <span class="nav-text">9-3 分片上传功能开发2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-%E5%88%86%E7%89%87%E5%90%88%E5%B9%B6%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">9-4 分片合并功能开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-%E5%88%86%E7%89%87%E6%A3%80%E6%9F%A5%E4%B8%8E%E6%9E%81%E9%80%9F%E7%A7%92%E4%BC%A0"><span class="nav-number">1.4.</span> <span class="nav-text">9-5 分片检查与极速秒传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-%E8%A7%86%E9%A2%91%E6%8E%88%E6%9D%83%E6%92%AD%E6%94%BE%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">1.5.</span> <span class="nav-text">10-6 视频授权播放功能开发</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

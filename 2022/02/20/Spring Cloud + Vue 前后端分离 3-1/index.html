@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Spring Cloud + Vue 前后端分离3-1 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Spring Cloud + Vue 前后端分离3-1</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv5</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-20 16:10:39</span>
+        <span class="mobile">2022-02-20 16:10</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>6.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>34 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第8章-文件上传功能开发"><a href="#第8章-文件上传功能开发" class="headerlink" title="第8章 文件上传功能开发"></a>第8章 文件上传功能开发</h1><p>本章将演示文件模块的开发，会使用SpringBoot + Vue完成文件上传功能，上传的图片支持实时预览显示。文件上传是系统操作中常见的功能，文件有大有小，不可避免带来带宽的问题，单独的文件模块很好的解决这个问题。</p>
+<hr>
+<h2 id="8-1-完成基本的文件上传功能"><a href="#8-1-完成基本的文件上传功能" class="headerlink" title="8-1 完成基本的文件上传功能"></a>8-1 完成基本的文件上传功能</h2><p>搭建文件模块-file：1.增加file模块用于文件上传和储存</p>
+<ul>
+<li>就是maven模块，增加启动文件，配置文件，路由转发。</li>
+</ul>
+<p>springboot+vue文件上传功能：1.文件上传功能开发：springboot+vue基本的文件上传功能，上传讲师头像</p>
+<ul>
+<li><p>type&#x3D;file，文件上传控件，将头像的input进行修改</p>
+</li>
+<li><pre><code class="vue">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label class=&quot;col-sm-2 control-label&quot;&gt;头像&lt;/label&gt;
+  &lt;div class=&quot;col-sm-10&quot;&gt;
+    &lt;input type = &quot;file&quot;  &gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 触发文件上传动作方法一：增加一个新的按钮开始上传</span><br><span class="line"></span><br><span class="line">- 触发文件上传动作方法一：在文件上传组件上增加chang事件（选择这个）</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">    &lt;label class=&quot;col-sm-2 control-label&quot;&gt;头像&lt;/label&gt;</span><br><span class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">      &lt;input type = &quot;file&quot; v-on:change=&quot;uploadImage()&quot; id=&quot;file-upload-input&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  //添加方法</span><br><span class="line">  uploadImage()&#123;</span><br><span class="line">        let _this =this;</span><br><span class="line">        let formData = new window.FormData();</span><br><span class="line">        //key：”file“必须和后端controller参数名一致</span><br><span class="line">        formData.append(&#x27;file&#x27;,document.querySelector(&#x27;#file-upload-input&#x27;).files[0]);</span><br><span class="line">        Loading.show();</span><br><span class="line">        _this.$ajax.post(process.env.VUE_APP_SERVER +&#x27;/file/admin/upload&#x27;,formData).then((respond) =&gt; &#123;</span><br><span class="line">          Loading.hide();</span><br><span class="line">          let resp = respond.data;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>在file文件下创建controller.admin,创建文件UploadController</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>@RequestMapping(“&#x2F;admin”)<br>@RestController<br>public class UploadController {<br>   private static final Logger LOG &#x3D; LoggerFactory.getLogger(UploadController.class);</p>
+<pre><code>@RequestMapping(&quot;/upload&quot;)
+ public ResponseDto upload(@RequestParam MultipartFile file) throws IOException &#123;
+     LOG.info(&quot;上传文件开始：&#123;&#125;&quot;,file);
+     LOG.info(file.getOriginalFilename());
+     LOG.info(String.valueOf(file.getSize()));
+
+     //保存文件到本地
+    String fileName =file.getOriginalFilename();
+    String key = UuidUtil.getShortUuid();
+    String fullPath = &quot;C:/Users/1/Desktop/方梓旭/course/admin/public/static/image/讲师头像/&quot;+key+&quot;-&quot;+fileName;
+    File dest = new File(fullPath);
+    file.transferTo(dest);
+    LOG.info(dest.getAbsolutePath());
+
+    ResponseDto responseDto = new ResponseDto();
+    return responseDto;
+&#125;
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 8-2 讲师头像的保存与显示</span><br><span class="line"></span><br><span class="line">文件访问配置：1.文件上传功能开发：增加springboot静态资源配置，配置文件访问路径</span><br><span class="line"></span><br><span class="line">- SpringBoot静态资源配置，静态资源包含图片.Css、JS等</span><br><span class="line"></span><br><span class="line">- 测试路由转发到file模块是否生效，测试的时候要注意浏览器是有静态资源缓存的，可以用ctrl+f5强制刷新姿可铁用ohrome无痕浏览来测试，不会有缓存</span><br><span class="line"></span><br><span class="line">- 在file.config目录下创建SpringMvcConfig文件</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.file.config;</span><br><span class="line">  </span><br><span class="line">  import org.springframework.context.annotation.Configuration;</span><br><span class="line">  import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;</span><br><span class="line">  import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line">  </span><br><span class="line">  @Configuration</span><br><span class="line">  public class SpringMvcConfig implements WebMvcConfigurer &#123;</span><br><span class="line">  </span><br><span class="line">      @Override</span><br><span class="line">      public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">          registry.addResourceHandler(&quot;/f/**&quot;).addResourceLocations(&quot;file:C:/Users/1/Desktop/方梓旭/course/admin/public/static/image/&quot; );</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>文件上传实时显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传功能开发：文件上传实时显示与保存</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在UploadController中将地址返回到前端</p>
+</li>
+<li><pre><code class="java">responseDto.setContent(&quot;http://192.168.0.105:9000/file/f/讲师头像/&quot;+key+&quot;-&quot;+fileName);
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在teacher前端的uploadImage方法中，取出来照片地址</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  let image =resp.content;</span><br><span class="line">  console.log(&quot;头像地址:&quot;,image);</span><br><span class="line">  _this.teacher.image = image;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>img-responsive：bootstrap内置的样式，图片自适应</p>
+</li>
+<li><p>在teacher.vue表单中头像input下增加</p>
+</li>
+<li><pre><code class="vue">&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label class=&quot;col-sm-2 control-label&quot;&gt;头像&lt;/label&gt;
+  &lt;div class=&quot;col-sm-10&quot;&gt;
+    &lt;input type = &quot;file&quot; v-on:change=&quot;uploadImage()&quot; id=&quot;file-upload-input&quot;&gt;
+    &lt;img v-bind:src=&quot;teacher.image&quot; class=&quot;img-responsive&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">讲师头像显示优化：</span><br><span class="line"></span><br><span class="line">- 如果头像显示特别大class就应该使用</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;img v-show=&quot;!teacher.image&quot; class=&quot;editable img-responsive editable-click editable-empty&quot; src=&quot;/static/image/讲师头像/头像1.jpg&quot; v-bind:title=&quot;teacher.intro&quot;/&gt;</span><br><span class="line">  &lt;img v-show=&quot;teacher.image&quot; class=&quot;editable img-responsive editable-click editable-empty&quot; v-bind:src=&quot;teacher.image&quot; v-bind:title=&quot;teacher.intro&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>利用bootstrape栅格系统，一个div是12格，可以让图片只占4格的宽度</p>
+</li>
+<li><pre><code class="vue">&lt;div v-show=&quot;teacher.image&quot; class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-4&quot;&gt;
+    &lt;img v-bind:src=&quot;teacher.image&quot; class=&quot;img-responsive&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 接下来我们把图片地址进行修改，不写死。首先在application中增加</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  file.path=C:/Users/1/Desktop/方梓旭/course/admin/public/static/image/</span><br><span class="line">  file.domain=http://192.168.0.105:9000/file/</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>其次在UploadController，@Value，注入属性值</p>
+</li>
+<li><pre><code>@Value(&quot;$&#123;file.domain&#125;&quot;)
+private String FILE_DOMAIN;
+
+@Value(&quot;$&#123;file.path&#125;&quot;)
+private String FILE_PATH;
+//将地址替换
+ String fullPath = FILE_PATH+&quot;讲师头像/&quot;+key+&quot;-&quot;+fileName;
+ responseDto.setContent(FILE_DOMAIN+&quot;/f/讲师头像/&quot;+key+&quot;-&quot;+fileName);     
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 同样在SpringMvcConfig中也注入</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  @Value(&quot;$&#123;file.path&#125;&quot;)</span><br><span class="line">  private String FILE_PATH;</span><br><span class="line">  registry.addResourceHandler(&quot;/f/**&quot;).addResourceLocations(&quot;file:&quot;+FILE_PATH );</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>Maven多环境配置，将开发环境和生产环境配置成不同的值</p>
+</li>
+</ul>
+<h2 id="8-3-文件上传组件开发1"><a href="#8-3-文件上传组件开发1" class="headerlink" title="8-3 文件上传组件开发1"></a>8-3 文件上传组件开发1</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传功能开发，使用单独的文件上传按钮</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优化点：用一个单独的按钮，来代替file控件，且操作的流程没有变化</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/10/G3eArFUsVDhRJQ1.png"
+                      alt="image-20220310101103257"
+                ></p>
+<ul>
+<li><p>对teacher.vue进行修改，增加了button按钮，并将input隐藏，写selectImage方法</p>
+</li>
+<li><p>&#96;&#96;&#96;vue</p>
+<div class="form-group">
+  <label class="col-sm-2 control-label">头像</label>
+  <div class="col-sm-10">
+    <button type="button" v-on:click="selectImage()" class="btn btn-white btn-default btn-round">
+      <i class="ace-icon fa fa-upload"></i>
+      上传头像
+    </button>
+    <input class="hidden" type = "file" v-on:change="uploadImage()" id="file-upload-input">
+    <div v-show="teacher.image" class="row">
+      <div class="col-md-4">
+        <img  v-bind:
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="teacher.image"
+                      class="img-responsive"
+                >
+      </div>
+    </div>
+  </div>
+</div>
+//selectImage方法
+  selectImage(){
+      $("#file-upload-input").trigger("click");
+    }
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20220310102612545](https://s2.loli.net/2022/03/10/inwODrlohaQKgzy.png)</span><br><span class="line"></span><br><span class="line">增加上传文件类型判断：1.文件上传功能开发，增加上传文件类型的判断</span><br><span class="line"></span><br><span class="line">图片显示不出来我又把SpringMvcConfig改了回去</span><br><span class="line"></span><br><span class="line">- 优化：使用vue的$refs来获取组件</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  //在头像那加ref</span><br><span class="line">  &lt;input class=&quot;hidden&quot; type = &quot;file&quot; ref=&quot;file&quot; v-on:change=&quot;uploadImage()&quot; id=&quot;file-upload-input&quot;&gt;</span><br><span class="line">  //在uploadImage中增加</span><br><span class="line">  let file = _this.$refs.file.files[0];</span><br><span class="line">        //判断文件格式</span><br><span class="line">        let suffixs = [&quot;jpg&quot;,&quot;png&quot;,&quot;jpeg&quot;];</span><br><span class="line">        let fileName = file.name;</span><br><span class="line">        let suffix = fileName.substring(fileName.lastIndexOf(&quot;.&quot;)+1,fileName.length).toLowerCase();</span><br><span class="line">        let validateSuffix = false;</span><br><span class="line">        for (let i = 0; i &lt; suffixs.length; i++) &#123;</span><br><span class="line">          if(suffixs[i].toLowerCase() === suffix)&#123;</span><br><span class="line">            validateSuffix = true;</span><br><span class="line">            break;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(!validateSuffix)&#123;</span><br><span class="line">          Toast.warning(&quot;文件格式不对！只支持上传：&quot;+suffixs.join(&quot;,&quot;));</span><br><span class="line">          return;</span><br><span class="line">        &#125;</span><br><span class="line">        //key：”file“必须和后端controller参数名一致</span><br><span class="line">        formData.append(&#x27;file&#x27;,file);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>制作文件上传公共组件1：</p>
+<ul>
+<li><p>一个项目中，很多地方都会用到文件上传功能，所以有必要把文件上传做成通用组件，这样以后也可以把文件组件直接拷贝到其他项目直接引用</p>
+</li>
+<li><p>props，用于父子组件传递数据，可以理解成组件可配置的属性</p>
+</li>
+<li><p>创建了file.vue组件</p>
+</li>
+<li><p>&#96;&#96;&#96;vue</p>
+<template>
+  <div>
+    <button type="button" v-on:click="selectFile()" class="btn btn-white btn-default btn-round">
+      <i class="ace-icon fa fa-upload"></i>
+      
+    </button>
+    <input class="hidden" type = "file" ref="file" v-on:change="uploadFile()" id="file-upload-input">
+    <div v-show="teacher.image" class="row">
+      <div class="col-md-4">
+        <img  v-bind:
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="teacher.image"
+                      class="img-responsive"
+                >
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'pagination',
+  props: {
+    text:{
+      default: "上传文件"
+    },
+    list: {
+      type: Function,
+      default: null
+    },
+    itemCount: Number // 显示的页码数，比如总共有100页，只显示10页，其它用省略号表示
+  },
+  data: function () {
+
+
+  },
+  methods: {
+    uploadFile(){
+      let _this =this;
+      let formData = new window.FormData();
+      let file = _this.$refs.file.files[0];
+
+      //判断文件格式
+      let suffixs = ["jpg","png","jpeg"];
+      let fileName = file.name;
+      let suffix = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length).toLowerCase();
+      let validateSuffix = false;
+      for (let i = 0; i < suffixs.length; i++) {
+        if(suffixs[i].toLowerCase() === suffix){
+          validateSuffix = true;
+          break;
+        }
+      }
+      if(!validateSuffix){
+        Toast.warning("文件格式不对！只支持上传："+suffixs.join(","));
+        return;
+      }
+      //key：”file“必须和后端controller参数名一致
+      formData.append('file',file);
+      Loading.show();
+      _this.$ajax.post(process.env.VUE_APP_SERVER +'/file/admin/upload',formData).then((respond) => {
+        Loading.hide();
+        let resp = respond.data;
+        let image =resp.content;
+        console.log("头像地址:",image);
+        _this.teacher.image = image;
+      });
+    },
+    selectFile(){
+      $("#file-upload-input").trigger("click");
+    }
+  }
+}
+</script>
+
+<style scoped>
+.pagination {
+  vertical-align: middle !important;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.pagination button {
+  margin-right: 5px;
+}
+
+.btn-primary.active {
+  background-color: #2f7bba !important;
+  border-color: #27689d !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+/*.pagination select {*/
+/*vertical-align: middle !important;*/
+/*font-size: 16px;*/
+/*margin-top: 0;*/
+/*}*/
+</style>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 8-4 文件上传组件开发2</span><br><span class="line"></span><br><span class="line">制作文件上传公共组件1：</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.文件上传功能开发：制作文件上传公共组件<br>2.修复不能连续上传同一个文件的BUG</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对file进行修改</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;button type=&quot;button&quot; v-on:click=&quot;selectFile()&quot; class=&quot;btn btn-white btn-default btn-round&quot;&gt;</span><br><span class="line">        &lt;i class=&quot;ace-icon fa fa-upload&quot;&gt;&lt;/i&gt;</span><br><span class="line">        &#123;&#123;text&#125;&#125;</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">      &lt;input class=&quot;hidden&quot; type=&quot;file&quot; ref=&quot;file&quot; v-on:change=&quot;uploadFile()&quot; v-bind:id=&quot;inputId+&#x27;-input&#x27;&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &#x27;file&#x27;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      text: &#123;</span><br><span class="line">        default: &quot;上传文件&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      inputId: &#123;</span><br><span class="line">        default: &quot;file-upload&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      suffixs: &#123;</span><br><span class="line">        default: []</span><br><span class="line">      &#125;,</span><br><span class="line">      use: &#123;</span><br><span class="line">        default: &quot;&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      afterUpload: &#123;</span><br><span class="line">        type: Function,</span><br><span class="line">        default: null</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    data: function () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      uploadFile () &#123;</span><br><span class="line">        let _this = this;</span><br><span class="line">        let formData = new window.FormData();</span><br><span class="line">        let file = _this.$refs.file.files[0];</span><br><span class="line">  </span><br><span class="line">        // 判断文件格式</span><br><span class="line">        let suffixs = _this.suffixs;</span><br><span class="line">        let fileName = file.name;</span><br><span class="line">        let suffix = fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1, fileName.length).toLowerCase();</span><br><span class="line">        let validateSuffix = false;</span><br><span class="line">        for (let i = 0; i &lt; suffixs.length; i++) &#123;</span><br><span class="line">          if (suffixs[i].toLowerCase() === suffix) &#123;</span><br><span class="line">            validateSuffix = true;</span><br><span class="line">            break;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!validateSuffix) &#123;</span><br><span class="line">          Toast.warning(&quot;文件格式不正确！只支持上传：&quot; + suffixs.join(&quot;,&quot;));</span><br><span class="line">          $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);//将控件里的值清空</span><br><span class="line">          return;</span><br><span class="line">        &#125;</span><br><span class="line">  </span><br><span class="line">        // key：&quot;file&quot;必须和后端controller参数名一致</span><br><span class="line">        formData.append(&#x27;file&#x27;, file);</span><br><span class="line">        formData.append(&#x27;use&#x27;, _this.use);</span><br><span class="line">        Loading.show();</span><br><span class="line">        _this.$ajax.post(process.env.VUE_APP_SERVER + &#x27;/file/admin/upload&#x27;, formData).then((response)=&gt;&#123;</span><br><span class="line">          Loading.hide();</span><br><span class="line">          let resp = response.data;</span><br><span class="line">          console.log(&quot;上传文件成功：&quot;, resp);</span><br><span class="line">          _this.afterUpload(resp);//回调函数</span><br><span class="line">          $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);//将控件里的值清空</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">  </span><br><span class="line">      selectFile () &#123;</span><br><span class="line">        let _this = this;</span><br><span class="line">        $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).trigger(&quot;click&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>为组件增加上传成功后的回调函数，和组件不相关的业务代码应该由外部通过回调函数传进来。因为在file组件中没有teacher这个属性，所以需要在file中增加一个回调</p>
+</li>
+<li><p>公共的代码放到组件里，变化的代码做成可配置的属性，由外部传入</p>
+</li>
+<li><p>如果一个页面放了两个文件上传组件，会出现两个input的id重复，可以把id也做成可配置的。</p>
+</li>
+<li><p>在teacher.vue中引用，file的可配置属性，然后再引入公共组件，最后设置回调函数</p>
+</li>
+<li><pre><code class="vue">&lt;file v-bind:input-id=&quot;&#39;image-upload&#39;&quot;
+          v-bind:text=&quot;&#39;上传头像&#39;&quot;
+          v-bind:suffixs=&quot;[&#39;jpg&#39;, &#39;jpeg&#39;, &#39;png&#39;]&quot;
+          v-bind:after-upload=&quot;afterUpload&quot;&gt;&lt;/file&gt;
+//引入公共组件
+import File from &quot;../../components/file&quot;;
+export default &#123;
+  components: &#123;Pagination,File&#125;,
+  &#125;
+//设置回调函数
+ afterUpload(resp)&#123;
+      let _this=this;
+      let image =resp.content;
+
+      _this.teacher.image = image;
+    &#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- BUG：连续选择同一个文件的时候，第二次会没反应，这时就要增加  $(&quot;#&quot; + _this.inputId + &quot;-input&quot;).val(&quot;&quot;);（上面file标注了）</span><br><span class="line"></span><br><span class="line">## 8-5 增加文件管理功能1</span><br><span class="line"></span><br><span class="line">文件表设计与基本代码生成：</span><br><span class="line"></span><br><span class="line">- 首先在all.sql中写</span><br><span class="line"></span><br><span class="line">- ```sql</span><br><span class="line">  #文件</span><br><span class="line">  drop table if exists `file`;</span><br><span class="line">  create table `file`(</span><br><span class="line">              `id` char(8) not null default &#x27;&#x27; comment &#x27;id&#x27;,</span><br><span class="line">              `path` varchar(100)  not null comment &#x27;相对路径&#x27;,</span><br><span class="line">              `name` varchar(100)  comment &#x27;文件名&#x27;,</span><br><span class="line">              `suffix` varchar(10)  comment &#x27;后缀&#x27;,</span><br><span class="line">              `size` int  comment &#x27;大小|字节B&#x27;,</span><br><span class="line">              `use` char(1)  comment &#x27;用途|枚举[FileUseEnum]:COURSE(&quot;C&quot;,&quot;讲师&quot;),TEACHER(&quot;T&quot;,&quot;课程&quot;)&#x27;,</span><br><span class="line">              `created_at` datetime(3) comment &#x27;创建时间&#x27;,</span><br><span class="line">              `updated_at` datetime(3) comment &#x27;修改时间&#x27;,</span><br><span class="line">               primary key (`id`),</span><br><span class="line">               unique key `path_unique`(`path`)</span><br><span class="line">  )engine =innodb default charset=utf8mb4 comment=&#x27;文件&#x27;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>对于sql关键字就要在生成器中添加</p>
+</li>
+<li><pre><code class="xml">&lt;!--        会对关键字的表、 字段，增加反引号 (Shift+~)--&gt;
+        &lt;property name=&quot;autoDelimitKeywords&quot; value=&quot;true&quot;/&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 对这个代码mybatis-generator，后端，前端，枚举。</span><br><span class="line"></span><br><span class="line">- 在对ServerGenerator和VueGenerator修改时，都要修改这个值</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  static String MODULE = &quot;file&quot;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>然后在server.enums创建FileUseEnum</p>
+</li>
+<li><pre><code class="java">package com.course.server.enums;
+
+public enum FileUseEnum &#123;
+
+    COURSE(&quot;C&quot;, &quot;课程&quot;),
+    TEACHER(&quot;T&quot;, &quot;讲师&quot;);
+
+    private String code;
+
+    private String desc;
+
+    FileUseEnum(String code, String desc) &#123;
+        this.code = code;
+        this.desc = desc;
+    &#125;
+
+    public String getCode() &#123;
+        return code;
+    &#125;
+
+    public void setCode(String code) &#123;
+        this.code = code;
+    &#125;
+
+    public void setDesc(String desc) &#123;
+        this.desc = desc;
+    &#125;
+
+    public String getDesc() &#123;
+        return desc;
+    &#125;
+
+    public static FileUseEnum getByCode(String code)&#123;
+        for(FileUseEnum e: FileUseEnum.values())&#123;
+            if(code.equals(e.getCode()))&#123;
+                return e;
+            &#125;
+        &#125;
+        return  null;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后再EnumGenerator加入</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  toJson(FileUseEnum.class, bufferObject, bufferArray);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>接下来对admin进行修改</p>
+</li>
+<li><p>&#96;&#96;&#96;vue</p>
+<li class="active open">
+  <a href="#" class="dropdown-toggle">
+    <i class="menu-icon fa fa-list"></i>
+    <span class="menu-text"> 文件管理 </span>
+
+<pre><code>&lt;b class=&quot;arrow fa fa-angle-down&quot;&gt;&lt;/b&gt;
+</code></pre>
+  </a>
+
+<p>  <b class="arrow"></b></p>
+  <ul class="submenu">
+    <li class="active" id="file-file-sidebar">
+      <router-link to="/file/file">
+        <i class="menu-icon fa fa-caret-right"></i>
+        分类管理
+      </router-link>
+      <b class="arrow"></b>
+    </li>
+
+  </ul>
+</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后是router.js</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  import File from &quot;./views/admin/file.vue&quot;</span><br><span class="line">  </span><br><span class="line">  ,&#123;</span><br><span class="line">      path: &quot;file/file&quot;,</span><br><span class="line">      name:&quot;file/file&quot;,</span><br><span class="line">      component: File,</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>上传文件时保存文件记录：1.文件上传功能开发：上传文件时保存文件记录</p>
+<ul>
+<li><p>统一文件名为8位uuid+文件后缓。下一章，我们还会对进一步规范文件名。</p>
+</li>
+<li><p>文件记录不允许编辑和删除，但是可以做一些统计功能，比如文件大小统计，文件类型统计，也可增加文件审核功能，对不合规的图片、视频做处理</p>
+</li>
+<li><p>先把application中，地址加一个f&#x2F;，好看</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>file.domain&#x3D;<a class="link"   target="_blank" rel="noopener" href="http://192.168.0.105:9000/file/f/" >http://192.168.0.105:9000/file/f/<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 然后修改UploadController</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //注入</span><br><span class="line">  @Resource</span><br><span class="line">  private FileService fileService;</span><br><span class="line">  //取后缀</span><br><span class="line">  String suffix =fileName.substring(fileName.lastIndexOf(&quot;.&quot;)+1).toLowerCase();</span><br><span class="line">  String path = &quot;teacher/&quot;+key+&quot;.&quot;+suffix;</span><br><span class="line">  String fullPath = FILE_PATH+path;</span><br><span class="line">  //记录</span><br><span class="line">  LOG.info(&quot;保存文件记录开始&quot;);</span><br><span class="line">  FileDto fileDto = new FileDto();</span><br><span class="line">  fileDto.setPath(path);</span><br><span class="line">  fileDto.setName(fileName);</span><br><span class="line">  fileDto.setSize(Math.toIntExact(file.getSize()));</span><br><span class="line">  fileDto.setSuffix(suffix);</span><br><span class="line">  fileDto.setUse(&quot;&quot;);</span><br><span class="line">  fileService.save(fileDto);</span><br><span class="line">  //地址也得相应修改       </span><br><span class="line">  responseDto.setContent(FILE_DOMAIN+path);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="8-6-增加文件管理功能2"><a href="#8-6-增加文件管理功能2" class="headerlink" title="8-6 增加文件管理功能2"></a>8-6 增加文件管理功能2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传功能开发：去掉文件管理的新增、修改，删除功能</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>就是该删删</li>
+</ul>
+<p>文件上传功能开发：增加文件大小格式化过滤器</p>
+<ul>
+<li><p>小技巧：不用算出最终的数值大小，直接写表达式，让程序来计算，这种写法方便维护和修改，比如我写个5242880，看不出来是多少但是写5 * 1024 * 1024，一看就是5M。</p>
+</li>
+<li><p>再filter.js中设置格式化方法</p>
+</li>
+<li><p>&#96;&#96;&#96;js<br>&#x2F;**</p>
+<ul>
+<li>格式化文件大小</li>
+<li>@param value</li>
+<li>@returns {string}</li>
+</ul>
+<p> *&#x2F;</p>
+<p>let formatFileSize &#x3D; (value) &#x3D;&gt; {<br>    value &#x3D; value || 0;<br>    let result;<br>    if (value &gt; 100 * 1024) {<br>        result &#x3D; Math.round((value &#x2F; 1024 &#x2F; 1024) * 100) &#x2F; 100 + “MB”;<br>    } else {<br>        result &#x3D; Math.round((value &#x2F; 1024) * 100) &#x2F; 100 + “KB”;<br>    }<br>    return result;<br>};<br>&#x2F;&#x2F;将其抛出<br>export default {<br>    formatFileSize<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在filter.vue中使用只需要这样</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;td&gt;&#123;&#123;file.size|formatFileSize&#125;&#125;&lt;/td&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>文件按用途分类保存：</p>
+<ul>
+<li>首先在FileUseEnum中创建一个方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过code得到完整的枚举</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> FileUseEnum <span class="title function_">getByCode</span><span class="params">(String code)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(FileUseEnum e: FileUseEnum.values())&#123;</span><br><span class="line">        <span class="keyword">if</span>(code.equals(e.getCode()))&#123;</span><br><span class="line">            <span class="keyword">return</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>然后再filevue（这个是哪个通用组件）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//增加一个可改变的属性</span><br><span class="line">props: &#123;</span><br><span class="line">  use: &#123;</span><br><span class="line">    default: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;</span><br><span class="line"> //提交表单时将use也提交出去</span><br><span class="line"> formData.append(&#x27;use&#x27;, _this.use);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>再teacher.vue中使用，生成的枚举</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>data: function () {<br>  return {<br>teacher: {},<br>teachers: [],<br>FILE_USE:FILE_USE&#x2F;&#x2F;将枚举js全局变量定义组件变量，再html中使用的时组件变量<br>  }<br>},<br>&#x2F;&#x2F;再上传file标签那使用<br>v-bind:use&#x3D;”FILE_USE.TEACHER.key”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 最后在UploadController中</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //将use传进来</span><br><span class="line">  public ResponseDto upload(@RequestParam MultipartFile file,String use) throws IOException &#123;    </span><br><span class="line">  //保存文件到本地，通过use获取枚举类型</span><br><span class="line">   FileUseEnum useEnum =FileUseEnum.getByCode(use);      </span><br><span class="line">  //如果文件夹不存在，创建文件夹</span><br><span class="line">   String dir = useEnum.name().toLowerCase();</span><br><span class="line">   File fullDir = new File(FILE_PATH+dir);</span><br><span class="line">   if(!fullDir.exists())&#123;</span><br><span class="line">   	fullDir.mkdir();</span><br><span class="line">    &#125;</span><br><span class="line">   String path = dir+File.separator+key+&quot;.&quot;+suffix;   </span><br><span class="line">  //将use设置进去</span><br><span class="line">  fileDto.setUse(use);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="8-7-文件上传组件的使用"><a href="#8-7-文件上传组件的使用" class="headerlink" title="8-7 文件上传组件的使用"></a>8-7 文件上传组件的使用</h2><p>文件上传成功后返回值处理：1，文件上传功能开发：文件上传成功后返回值的处理</p>
+<ul>
+<li><p>要将全路径返回回去，首先在UploadController中重新设置下全路径，再将其设置到内容里</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>fileDto.setPath(FILE_DOMAIN+path);<br>responseDto.setContent(fileDto);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 与此同时teacher.vue也要改afterUpload方法中content后加一个.path</span><br><span class="line"></span><br><span class="line">- ```</span><br><span class="line">  afterUpload(resp)&#123;</span><br><span class="line">    let _this=this;</span><br><span class="line">    let image =resp.content.path;</span><br><span class="line">    _this.teacher.image = image;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>课程管理和小节管理使用文件组件：1.文件上传功能开发：课程管理和小节管理使用文件组件</p>
+<ul>
+<li><p>我们先修改course的封面：</p>
+</li>
+<li><pre><code class="vue">//修改封面部分
+&lt;div class=&quot;form-group&quot;&gt;
+  &lt;label  class=&quot;col-sm-2 control-label&quot;&gt;封面&lt;/label&gt;
+  &lt;div class=&quot;col-sm-10&quot;&gt;
+    &lt;file v-bind:input-id=&quot;&#39;image-upload&#39;&quot;
+          v-bind:text=&quot;&#39;上传封面&#39;&quot;
+          v-bind:suffixs=&quot;[&#39;jpg&#39;, &#39;jpeg&#39;, &#39;png&#39;]&quot;
+          v-bind:use=&quot;FILE_USE.COURSE.key&quot;
+          v-bind:after-upload=&quot;afterUpload&quot;&gt;&lt;/file&gt;
+    &lt;div v-show=&quot;course.image&quot; class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-md-4&quot;&gt;
+        &lt;img v-bind:src=&quot;course.image&quot; class=&quot;img-responsive&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+//引入File
+import File from &quot;../../components/file&quot;;
+export default &#123;
+   components: &#123;Pagination,File&#125;,
+  &#125;
+//data中引入全局变量
+FILE_USE:FILE_USE,
+//引入方法
+afterUpload(resp)&#123;
+    let _this=this;
+    let image =resp.content.path;
+    _this.course.image = image;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 接下来我们改小节的视频上传部分：</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  //修改视频部分</span><br><span class="line">  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">    &lt;label  class=&quot;col-sm-2 control-label&quot;&gt;视频&lt;/label&gt;</span><br><span class="line">    &lt;div class=&quot;col-sm-10&quot;&gt;</span><br><span class="line">      &lt;file v-bind:input-id=&quot;&#x27;video-upload&#x27;&quot;</span><br><span class="line">            v-bind:text=&quot;&#x27;上传视频&#x27;&quot;</span><br><span class="line">            v-bind:suffixs=&quot;[&#x27;mp4&#x27;]&quot;</span><br><span class="line">            v-bind:use=&quot;FILE_USE.COURSE.key&quot;</span><br><span class="line">            v-bind:after-upload=&quot;afterUpload&quot;&gt;&lt;/file&gt;</span><br><span class="line">      &lt;div v-show=&quot;section.video&quot; class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-md-9&quot;&gt;</span><br><span class="line">          &lt;video v-bind:src=&quot;section.video&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  //引入File</span><br><span class="line">  import File from &quot;../../components/file&quot;;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;Pagination,File&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  //data中引入变量</span><br><span class="line">  FILE_USE:FILE_USE,</span><br><span class="line">  //引入方法</span><br><span class="line">   afterUpload(resp)&#123;</span><br><span class="line">        let _this=this;</span><br><span class="line">        let video =resp.content.path;</span><br><span class="line">        _this.section.video = video;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>max-file-size：单个文件的大小；max-request-size：请求的大小，比如一次请求可以上传多个文件，这时两个值就不一样了。</p>
+</li>
+<li><p>修改File的application</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>spring.servlet.multipart.max-file-size&#x3D;100MB<br>spring.servlet.multipart.max-request-size&#x3D;100MB</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">自动获取视频时长：1.文件上传功能开发：自动获取视频时长</span><br><span class="line"></span><br><span class="line">- 修改section.vue</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  //给video标签加一个id</span><br><span class="line">  &lt;div class=&quot;col-md-9&quot;&gt;</span><br><span class="line">    &lt;video v-bind:src=&quot;section.video&quot; id=&quot;video&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  //  afterUpload中使用getTime方法</span><br><span class="line">  afterUpload(resp)&#123;</span><br><span class="line">        _this.getTime();</span><br><span class="line">      &#125;,</span><br><span class="line">  //加一个获取时长方法</span><br><span class="line">      /**</span><br><span class="line">       * 获取时长</span><br><span class="line">       */</span><br><span class="line">      getTime()&#123;</span><br><span class="line">        let _this=this;</span><br><span class="line">        let ele =document.getElementById(&quot;video&quot;);</span><br><span class="line">        _this.section.time =parseInt(ele.duration,10);</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="8-8-作业讲解：课程内容中增加文件管理"><a href="#8-8-作业讲解：课程内容中增加文件管理" class="headerlink" title="8-8 作业讲解：课程内容中增加文件管理"></a>8-8 作业讲解：课程内容中增加文件管理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传功能开发：增加误程内容文件管理，用于富文本框中插入图片或视</span><br><span class="line">2.修复course，section，teacher页面中关于文件组件中inputId的赋值</span><br><span class="line">3，修复file组件中selectFile，id的值改为变量</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>首先在all.sql中写入</p>
+</li>
+<li><pre><code class="sql">#课程内容文件
+drop table if exists `course_content_file`;
+create table `course_content_file`(
+                       `id` char(8) not null default &#39;&#39; comment &#39;id&#39;,
+                       `course_id` char(8) not null  comment &#39;课程id&#39;,
+                       `url` varchar(100)  comment &#39;地址&#39;,
+                       `name` varchar(100)  comment &#39;文件名&#39;,
+                       `size` int  comment &#39;大小|字节B&#39;,
+                       primary key (`id`)
+)engine =innodb default charset=utf8mb4 comment=&#39;课程内容文件&#39;;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 只需要生成持久层和服务端的代码，不需要生成界面，记得改后端生成器ServerGenerator的模块名</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  static String MODULE = &quot;business&quot;;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>对生成的CourseContentFileService进行一些改动</p>
+</li>
+<li><pre><code class="java">/**
+* 列表查询
+*/
+    public List&lt;CourseContentFileDto&gt; list(String courseId) &#123;
+        CourseContentFileExample example = new CourseContentFileExample();
+        CourseContentFileExample.Criteria criteria =example.createCriteria();
+        criteria.andCourseIdEqualTo(courseId);
+        List&lt;CourseContentFile&gt; fileList = courseContentFileMapper.selectByExample(example);
+        return CopyUtil.copyList(fileList,CourseContentFileDto.class);
+    &#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- CourseContentFileController也做修改</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  //习惯用哪个就写成哪个</span><br><span class="line">  @RequestMapping(&quot;/admin/course-content-file&quot;)</span><br><span class="line">  </span><br><span class="line">  /**</span><br><span class="line">  * 列表查询</span><br><span class="line">  */</span><br><span class="line">  @GetMapping(&quot;/list/&#123;courseId&#125;&quot;)</span><br><span class="line">  public ResponseDto list(@PathVariable String courseId)&#123;</span><br><span class="line">      ResponseDto responseDto = new ResponseDto();</span><br><span class="line">      List&lt;CourseContentFileDto&gt; fileDtoList = courseContentFileService.list(courseId);</span><br><span class="line">      responseDto.setContent(fileDtoList);</span><br><span class="line">      return responseDto;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>首先修改course.vue</p>
+</li>
+<li><pre><code class="vue">//增加模态框
+&lt;file v-bind:input-id=&quot;&#39;content--upload&#39;&quot;
+      v-bind:text=&quot;&#39;上传文件&#39;&quot;
+      v-bind:suffixs=&quot;[&#39;jpg&#39;, &#39;jpeg&#39;, &#39;png&#39;]&quot;
+      v-bind:use=&quot;FILE_USE.COURSE.key&quot;
+      v-bind:after-upload=&quot;afterUploadContentFile&quot;&gt;&lt;/file&gt;
+&lt;br&gt;
+&lt;table id=&quot;file-table&quot; class=&quot;table  table-bordered table-hover&quot;&gt;
+  &lt;thead&gt;
+  &lt;tr&gt;
+
+    &lt;th&gt;名称&lt;/th&gt;
+    &lt;th&gt;地址&lt;/th&gt;
+    &lt;th&gt;大小&lt;/th&gt;
+    &lt;th&gt;操作&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;tr v-for=&quot;(f,i) in files&quot; v-bind:key=&quot;f.id&quot;&gt;
+    &lt;td&gt;&#123;&#123;f.name&#125;&#125;&lt;/td&gt;
+    &lt;td&gt;&#123;&#123;f.url&#125;&#125;&lt;/td&gt;
+    &lt;td&gt;&#123;&#123;f.size|formatFileSize&#125;&#125;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;button v-on:click=&quot;delFile(f)&quot; class=&quot;btn btn-white btn-xs btn-warning&quot;&gt;
+          &lt;i class=&quot;ace-icon fa fa-times red2&quot;&gt;&lt;/i&gt;
+          删除
+        &lt;/button&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+//在data中增加变量
+files: [],
+//在editContent方法中增加，加载内容文件列表
+_this.listContentFiles();
+//添加相应方法
+ /**
+     * 加载文件列表
+     */
+    listContentFiles()&#123;
+      let _this =this;
+      _this.$ajax.get(process.env.VUE_APP_SERVER +&#39;/business/admin/course-content-file/list&#39;+_this.course.id).then((respond)=&gt;&#123;
+        let resp = respond.data;
+        if(resp.success)&#123;
+          _this.file = resp.content;
+        &#125;
+      &#125;);
+    &#125;,
+    /**
+     * 上传内容文件后，保存内容文件记录，流程：先使用文件上传组件，上传文件，并保存file表记录，前端拿到上传结果后，再调一次服务端，保存course_content_file表记录。
+     */
+    afterUploadContentFile(response) &#123;
+      let _this = this;
+      console.log(&quot;开始保存文件记录&quot;);
+      let file = response.content;
+      file.courseId = _this.course.id;
+      file.url = file.path;
+      _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/business/admin/course-content-file/save&#39;, file).then((response)=&gt;&#123;
+        let resp = response.data;
+        if (resp.success) &#123;
+          Toast.success(&quot;上传文件成功&quot;);
+          _this.files.push(resp.content);
+        &#125;
+      &#125;);
+
+    &#125;,
+
+    /**
+     * 删除内容文件，这里的删除只是删除course-content-file表的记录，并没有删除真正的文件，也没有删除fie表的记录，看起来会导致脏数据，下一章我们会解决这个问题
+     */
+    delFile(f) &#123;
+      let _this = this;
+      Confirm.show(&quot;删除课程后不可恢复，确认删除？&quot;, function () &#123;
+        _this.$ajax.delete(process.env.VUE_APP_SERVER + &#39;/business/admin/course-content-file/delete/&#39; + f.id).then((response)=&gt;&#123;
+          let resp = response.data;
+          if (resp.success) &#123;
+            Toast.success(&quot;删除文件成功&quot;);
+            Tool.removeObj(_this.files, f);
+          &#125;
+        &#125;);
+      &#125;);
+    &#125;,
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在Tool.js中添加removeObj方法</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">  /**</span><br><span class="line">   * 移除对象数组中的对象</span><br><span class="line">   * @param array</span><br><span class="line">   * @param obj</span><br><span class="line">   * @returns &#123;number&#125;</span><br><span class="line">   */</span><br><span class="line">  removeObj: function (array, obj) &#123;</span><br><span class="line">      let index = -1;</span><br><span class="line">      for (let i = 0; i &lt; array.length; i++) &#123;</span><br><span class="line">          if (array[i] === obj) &#123;</span><br><span class="line">              array.splice(i, 1);//splice(）方法向/从数组中添加/删除项目，然后返回被删除的项目。注释：该方法会改变原始数组。</span><br><span class="line">              index = i;</span><br><span class="line">              break;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return index;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传功能开发：将文件内容权态柜做成单独的页面，代码更容易维护，内容编辑更方便</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>增加一个content页面</p>
+</li>
+<li><pre><code class="vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h4 class=&quot;lighter&quot;&gt;
+      &lt;i class=&quot;ace-icon fa fa-hand-o-right icon-animated-hand-pointer blue&quot;&gt;&lt;/i&gt;
+      &lt;router-link to=&quot;/business/course&quot; class=&quot;pink&quot;&gt; &#123;&#123;course.name&#125;&#125; &lt;/router-link&gt;
+    &lt;/h4&gt;
+    &lt;hr&gt;
+
+    &lt;file v-bind:input-id=&quot;&#39;content-file-upload&#39;&quot;
+          v-bind:text=&quot;&#39;上传文件&#39;&quot;
+          v-bind:suffixs=&quot;[&#39;jpg&#39;, &#39;jpeg&#39;, &#39;png&#39;, &#39;mp4&#39;]&quot;
+          v-bind:use=&quot;FILE_USE.COURSE.key&quot;
+          v-bind:after-upload=&quot;afterUploadContentFile&quot;&gt;&lt;/file&gt;
+    &lt;br&gt;
+    &lt;table id=&quot;file-table&quot; class=&quot;table  table-bordered table-hover&quot;&gt;
+      &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;名称&lt;/th&gt;
+        &lt;th&gt;地址&lt;/th&gt;
+        &lt;th&gt;大小&lt;/th&gt;
+        &lt;th&gt;操作&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;/thead&gt;
+
+      &lt;tbody&gt;
+      &lt;tr v-for=&quot;(f, i) in files&quot; v-bind:key=&quot;f.id&quot;&gt;
+        &lt;td&gt;&#123;&#123;f.name&#125;&#125;&lt;/td&gt;
+        &lt;td&gt;&#123;&#123;f.url&#125;&#125;&lt;/td&gt;
+        &lt;td&gt;&#123;&#123;f.size | formatFileSize&#125;&#125;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;button v-on:click=&quot;delFile(f)&quot; class=&quot;btn btn-white btn-xs btn-warning btn-round&quot;&gt;
+            &lt;i class=&quot;ace-icon fa fa-times red2&quot;&gt;&lt;/i&gt;
+            删除
+          &lt;/button&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;form class=&quot;form-horizontal&quot;&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-lg-12&quot;&gt;
+          &#123;&#123;saveContentLabel&#125;&#125;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-lg-12&quot;&gt;
+          &lt;div id=&quot;content&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-lg-12&quot;&gt;
+          &#123;&#123;saveContentLabel&#125;&#125;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+    &lt;p&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn btn-white btn-info btn-round&quot; v-on:click=&quot;saveContent()&quot;&gt;
+        &lt;i class=&quot;ace-icon fa fa-plus blue&quot;&gt;&lt;/i&gt;
+        保存
+      &lt;/button&gt;&amp;nbsp;
+      &lt;router-link to=&quot;/business/course&quot; type=&quot;button&quot; class=&quot;btn btn-white btn-default btn-round&quot; data-dismiss=&quot;modal&quot;&gt;
+        &lt;i class=&quot;ace-icon fa fa-times&quot;&gt;&lt;/i&gt;
+        返回课程
+      &lt;/router-link&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import File from &quot;../../components/file&quot;;
+export default &#123;
+  components: &#123;File&#125;,
+  name: &quot;business-course-content&quot;,
+  data: function() &#123;
+    return &#123;
+      course: &#123;&#125;,
+      FILE_USE: FILE_USE,
+      saveContentLabel: &quot;&quot;,
+      files: [],
+      saveContentInterval: &#123;&#125;,
+    &#125;
+  &#125;,
+  mounted: function() &#123;
+    let _this = this;
+
+    let course = SessionStorage.get(SESSION_KEY_COURSE) || &#123;&#125;;
+    if (Tool.isEmpty(course)) &#123;
+      _this.$router.push(&quot;/welcome&quot;);
+    &#125;
+    _this.course = course;
+
+    _this.init();
+
+    // sidebar激活样式方法一
+    this.$parent.activeSidebar(&quot;business-course-sidebar&quot;);
+
+  &#125;,
+  destroyed: function() &#123;
+    let _this = this;
+    console.log(&quot;组件销毁&quot;);
+    clearInterval(_this.saveContentInterval);
+  &#125;,
+  methods: &#123;
+
+    /**
+     * 打开内容编辑框
+     */
+    init() &#123;
+      let _this = this;
+      let course = _this.course;
+      let id = course.id;
+      $(&quot;#content&quot;).summernote(&#123;
+        focus: true,
+        height: 300
+      &#125;);
+
+      // 先清空历史文本
+      $(&quot;#content&quot;).summernote(&#39;code&#39;, &#39;&#39;);
+      _this.saveContentLabel = &quot;&quot;;
+
+      // 加载内容文件列表
+      _this.listContentFiles();
+
+      Loading.show();
+      _this.$ajax.get(process.env.VUE_APP_SERVER + &#39;/business/admin/course/find-content/&#39; + id).then((response)=&gt;&#123;
+        Loading.hide();
+        let resp = response.data;
+
+        if (resp.success) &#123;
+          if (resp.content) &#123;
+            $(&quot;#content&quot;).summernote(&#39;code&#39;, resp.content.content);
+          &#125;
+
+          // 定时自动保存
+          _this.saveContentInterval = setInterval(function() &#123;
+            _this.saveContent();
+          &#125;, 5000);
+        &#125; else &#123;
+          Toast.warning(resp.message);
+        &#125;
+      &#125;);
+    &#125;,
+
+    /**
+     * 保存内容
+     */
+    saveContent () &#123;
+      let _this = this;
+      let content = $(&quot;#content&quot;).summernote(&quot;code&quot;);
+      _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/business/admin/course/save-content&#39;, &#123;
+        id: _this.course.id,
+        content: content
+      &#125;).then((response)=&gt;&#123;
+        Loading.hide();
+        let resp = response.data;
+        if (resp.success) &#123;
+          // Toast.success(&quot;内容保存成功&quot;);
+          // let now = Tool.dateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);
+          let now = Tool.dateFormat(&quot;mm:ss&quot;);
+          _this.saveContentLabel = &quot;最后保存时间：&quot; + now;
+        &#125; else &#123;
+          Toast.warning(resp.message);
+        &#125;
+      &#125;);
+    &#125;,
+
+    /**
+     * 加载内容文件列表
+     */
+    listContentFiles() &#123;
+      let _this = this;
+      _this.$ajax.get(process.env.VUE_APP_SERVER + &#39;/business/admin/course-content-file/list/&#39; + _this.course.id).then((response)=&gt;&#123;
+        let resp = response.data;
+        if (resp.success) &#123;
+          _this.files = resp.content;
+        &#125;
+      &#125;);
+    &#125;,
+
+    /**
+     * 上传内容文件后，保存内容文件记录
+     */
+    afterUploadContentFile(response) &#123;
+      let _this = this;
+      console.log(&quot;开始保存文件记录&quot;);
+      let file = response.content;
+      file.courseId = _this.course.id;
+      file.url = file.path;
+      _this.$ajax.post(process.env.VUE_APP_SERVER + &#39;/business/admin/course-content-file/save&#39;, file).then((response)=&gt;&#123;
+        let resp = response.data;
+        if (resp.success) &#123;
+          Toast.success(&quot;上传文件成功&quot;);
+          _this.files.push(resp.content);
+        &#125;
+      &#125;);
+
+    &#125;,
+
+    /**
+     * 删除内容文件
+     */
+    delFile(f) &#123;
+      let _this = this;
+      Confirm.show(&quot;删除课程后不可恢复，确认删除？&quot;, function () &#123;
+        _this.$ajax.delete(process.env.VUE_APP_SERVER + &#39;/business/admin/course-content-file/delete/&#39; + f.id).then((response)=&gt;&#123;
+          let resp = response.data;
+          if (resp.success) &#123;
+            Toast.success(&quot;删除文件成功&quot;);
+            Tool.removeObj(_this.files, f);
+          &#125;
+        &#125;);
+      &#125;);
+    &#125;,
+  &#125;
+&#125;
+&lt;/script&gt;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 原来是逻辑是打开模态框时，开始定时任务，关闭模态框时，清除定时任务。现在要改为打开页面组件初始化时（mounted），开始定时任务，页面组件销毁时（destroyed），清除定时任务。</span><br><span class="line"></span><br><span class="line">- 修改course.vue</span><br><span class="line"></span><br><span class="line">- ```vue</span><br><span class="line">  &lt;button v-on:click=&quot;toContent(course)&quot; class=&quot;btn btn-white btn-xs btn-info btn-round&quot;&gt;</span><br><span class="line">    内容</span><br><span class="line">  &lt;/button&gt;&amp;nbsp;&amp;nbsp;</span><br><span class="line">  //增加toContent方法</span><br><span class="line">  	/**</span><br><span class="line">       * 点击内容</span><br><span class="line">       * @param course</span><br><span class="line">       */</span><br><span class="line">      toContent(course) &#123;</span><br><span class="line">        let _this = this;</span><br><span class="line">        SessionStorage.set(SESSION_KEY_COURSE, course);</span><br><span class="line">        _this.$router.push(&quot;/business/content&quot;);</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>增加路由router.js</p>
+</li>
+<li><pre><code class="js">import Content from &quot;./views/admin/content.vue&quot;
+&#123;
+    path: &quot;business/content&quot;,
+    name:&quot;business/content&quot;,
+    component: Content,
+&#125;,
+</code></pre>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Spring Cloud + Vue 前后端分离3-1</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-02-20 16:10:39</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/02/20/Spring Cloud + Vue 前后端分离 3-1/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/02/25/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%203-2/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离3-2</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/02/15/Spring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%202-2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring Cloud + Vue 前后端分离2-2</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC8%E7%AB%A0-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">第8章 文件上传功能开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-%E5%AE%8C%E6%88%90%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.</span> <span class="nav-text">8-1 完成基本的文件上传功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%911"><span class="nav-number">1.2.</span> <span class="nav-text">8-3 文件上传组件开发1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6-%E5%A2%9E%E5%8A%A0%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD2"><span class="nav-number">1.3.</span> <span class="nav-text">8-6 增加文件管理功能2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-7-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">8-7 文件上传组件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-8-%E4%BD%9C%E4%B8%9A%E8%AE%B2%E8%A7%A3%EF%BC%9A%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9%E4%B8%AD%E5%A2%9E%E5%8A%A0%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">8-8 作业讲解：课程内容中增加文件管理</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
