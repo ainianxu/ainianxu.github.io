@@ -485,7 +485,7 @@
 </li>
 </ul>
 <h2 id="4-3-集成路由vue-route"><a href="#4-3-集成路由vue-route" class="headerlink" title="4-3 集成路由vue-route"></a>4-3 集成路由vue-route</h2><ul>
-<li><p>这里使用vue-route的版本是v3.5.3   npm install <a class="link"   href="mailto:&#118;&#x75;&#x65;&#x2d;&#x72;&#111;&#117;&#x74;&#x65;&#114;&#x40;&#x33;&#x2e;&#53;&#46;&#x33;" >&#118;&#x75;&#x65;&#x2d;&#x72;&#111;&#117;&#x74;&#x65;&#114;&#x40;&#x33;&#x2e;&#53;&#46;&#x33;<i class="fas fa-external-link-alt"></i></a></p>
+<li><p>这里使用vue-route的版本是v3.5.3   npm install <a class="link"   href="mailto:&#118;&#x75;&#101;&#x2d;&#x72;&#111;&#x75;&#x74;&#101;&#114;&#64;&#x33;&#46;&#53;&#46;&#51;" >&#118;&#x75;&#101;&#x2d;&#x72;&#111;&#x75;&#x74;&#101;&#114;&#64;&#x33;&#46;&#53;&#46;&#51;<i class="fas fa-external-link-alt"></i></a></p>
 </li>
 <li><p>在命令行cd admin 然后npm install –save vue-router。</p>
 </li>
@@ -986,40 +986,81 @@ toast = &#123;
 <ul>
 <li><p>最后在chapter中save方法中调用：</p>
 </li>
-<li><pre><code class="vue">// 保存校验
-if (!Validator.require(_this.chapter.name, &quot;名称&quot;)
-    || !Validator.length(_this.chapter.courseId, &quot;课程ID&quot;, 1, 8)) &#123;
-  return;
-&#125;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">后端代码校验：是为了防止被绕过前端界面，利用第三方工具如postman，直接访问后端接口</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">1.增加了后端校验工具类ValidatorUtil</span><br><span class="line">2.增加了统一异常处理ControllerExceptionHandler，关键字@ControllerAdvice</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>自定义异常可以继承RuntimeException或Exception。一般项目内部的业务异常，可以用RuntimeException，不需要trycatch。如果是开发一些框架或工具类，明确告诉外部需要做异常处理的，可以用Exception。另外还需要考虑事务中的异常处理。在server中建立ValidatorException.java</p>
-</li>
-<li><pre><code class="java">package com.course.server.exception;
+<li><p>&#96;&#96;&#96;vue<br>&#x2F;&#x2F; 保存校验<br>if (!Validator.require(_this.chapter.name, “名称”)<br>|| !Validator.length(_this.chapter.courseId, “课程ID”, 1, 8)) {<br>  return;<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">后端代码校验：是为了防止被绕过前端界面，利用第三方工具如postman，直接访问后端接口</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>1.增加了后端校验工具类ValidatorUtil<br>2.增加了统一异常处理ControllerExceptionHandler，关键字@ControllerAdvice</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 自定义异常可以继承RuntimeException或Exception。一般项目内部的业务异常，可以用RuntimeException，不需要trycatch。如果是开发一些框架或工具类，明确告诉外部需要做异常处理的，可以用Exception。另外还需要考虑事务中的异常处理。在server中建立ValidatorException.java</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.server.exception;</span><br><span class="line">  </span><br><span class="line">  public class ValidatorException extends RuntimeException&#123;</span><br><span class="line">      public ValidatorException(String message)&#123;super(message);&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-public class ValidatorException extends RuntimeException&#123;
-    public ValidatorException(String message)&#123;super(message);&#125;
+<ul>
+<li><p>其次在util中建立ValidatorUtil文件</p>
+</li>
+<li><pre><code class="java">package com.course.server.util;
+
+import com.course.server.exception.ValidatorException;
+import org.springframework.util.StringUtils;
+
+public class ValidatorUtil &#123;
+
+    /**
+     * 空校验（null or &quot;&quot;）
+     */
+    public static void require(Object str, String fieldName) &#123;
+        if (StringUtils.isEmpty(str)) &#123;
+            throw new ValidatorException(fieldName + &quot;不能为空&quot;);
+        &#125;
+    &#125;
+
+    /**
+     * 长度校验
+     */
+    public static void length(String str, String fieldName, int min, int max) &#123;
+        if (StringUtils.isEmpty(str)) &#123;
+            return;
+        &#125;
+        int length = 0;
+        if (!StringUtils.isEmpty(str)) &#123;
+            length = str.length();
+        &#125;
+        if (length &lt; min || length &gt; max) &#123;
+            throw new ValidatorException(fieldName + &quot;长度&quot; + min + &quot;~&quot; + max + &quot;位&quot;);
+        &#125;
+    &#125;
 &#125;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其次在util中建立ValidatorUtil文件</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.server.util;</span><br><span class="line">  </span><br><span class="line">  import com.course.server.exception.ValidatorException;</span><br><span class="line">  import org.springframework.util.StringUtils;</span><br><span class="line">  </span><br><span class="line">  public class ValidatorUtil &#123;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 空校验（null or &quot;&quot;）</span><br><span class="line">       */</span><br><span class="line">      public static void require(Object str, String fieldName) &#123;</span><br><span class="line">          if (StringUtils.isEmpty(str)) &#123;</span><br><span class="line">              throw new ValidatorException(fieldName + &quot;不能为空&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  </span><br><span class="line">      /**</span><br><span class="line">       * 长度校验</span><br><span class="line">       */</span><br><span class="line">      public static void length(String str, String fieldName, int min, int max) &#123;</span><br><span class="line">          if (StringUtils.isEmpty(str)) &#123;</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br><span class="line">          int length = 0;</span><br><span class="line">          if (!StringUtils.isEmpty(str)) &#123;</span><br><span class="line">              length = str.length();</span><br><span class="line">          &#125;</span><br><span class="line">          if (length &lt; min || length &gt; max) &#123;</span><br><span class="line">              throw new ValidatorException(fieldName + &quot;长度&quot; + min + &quot;~&quot; + max + &quot;位&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 如果直接在chaptercontroller中使用保存校验会出现问题：直接进行后端代码校验会出现问题：现象：后端出异常，导致前后收不到结果，vue中的.then方法没有执行，等待框没有关闭导致不能继续任何操作，只能刷新页面。</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  // 保存校验</span><br><span class="line">  ValidatorUtil.require(chapterDto.getName(), &quot;名称&quot;);</span><br><span class="line">  ValidatorUtil.require(chapterDto.getCourseId(), &quot;课程ID&quot;);</span><br><span class="line">  ValidatorUtil.length(chapterDto.getCourseId(), &quot;课程ID&quot;, 1, 8);</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
-<li><p>如果直接在chaptercontroller中使用保存校验会出现问题：直接进行后端代码校验会出现问题：现象：后端出异常，导致前后收不到结果，vue中的.then方法没有执行，等待框没有关闭导致不能继续任何操作，只能刷新页面。</p>
+<li><p>解决这个问题，写一个统一处理方法就在controller软件包下建一个ControllerExceptionHandler.java</p>
 </li>
-<li><pre><code class="java">// 保存校验
-ValidatorUtil.require(chapterDto.getName(), &quot;名称&quot;);
-ValidatorUtil.require(chapterDto.getCourseId(), &quot;课程ID&quot;);
-ValidatorUtil.length(chapterDto.getCourseId(), &quot;课程ID&quot;, 1, 8);
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 解决这个问题，写一个统一处理方法就在controller软件包下建一个ControllerExceptionHandler.java</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  package com.course.business.controller;</span><br><span class="line">  </span><br><span class="line">  import com.course.server.dto.ResponseDto;</span><br><span class="line">  import com.course.server.exception.ValidatorException;</span><br><span class="line">  import org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line">  import org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line">  import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line">  @ControllerAdvice//@ControllerAdvice是Controller增强器，可以对Controller做统一的处理，如异常处理、数据处理等</span><br><span class="line">  public class ControllerExceptionHandler &#123;</span><br><span class="line">      @ExceptionHandler(value = ValidatorException.class)</span><br><span class="line">      @ResponseBody//以JISON方式返回</span><br><span class="line">      public ResponseDto validatorExceptionHandler(ValidatorException e)&#123;</span><br><span class="line">      ResponseDto responseDto = new ResponseDto();</span><br><span class="line">      responseDto.setSuccess(false);</span><br><span class="line">      responseDto.setMessage(e.getMessage());</span><br><span class="line">      return responseDto;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<li><pre><code class="java">package com.course.business.controller;
+
+import com.course.server.dto.ResponseDto;
+import com.course.server.exception.ValidatorException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+@ControllerAdvice//@ControllerAdvice是Controller增强器，可以对Controller做统一的处理，如异常处理、数据处理等
+public class ControllerExceptionHandler &#123;
+    @ExceptionHandler(value = ValidatorException.class)
+    @ResponseBody//以JISON方式返回
+    public ResponseDto validatorExceptionHandler(ValidatorException e)&#123;
+    ResponseDto responseDto = new ResponseDto();
+    responseDto.setSuccess(false);
+    responseDto.setMessage(e.getMessage());
+    return responseDto;
+    &#125;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 有时候我们的接口原本是不对外的，或者只跟特定的第三方应用做对接，这时为了内部安全，不应该把参数的校验规则暴露出去，所以需要模糊返回信息。类似登录接门应该返回“用户名或密码错”，而不是“用户名不存在，或“密码错误”（容易被探测）。**所以我们将返回统一信息如下，并设置一个日志返回真正信息。**</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  LOG.warn(e.getMessage());</span><br><span class="line">  responseDto.setMessage(&quot;请求参数异常!&quot;);</span><br></pre></td></tr></table></figure>
 </code></pre>
 </li>
-<li><p>有时候我们的接口原本是不对外的，或者只跟特定的第三方应用做对接，这时为了内部安全，不应该把参数的校验规则暴露出去，所以需要模糊返回信息。类似登录接门应该返回“用户名或密码错”，而不是“用户名不存在，或“密码错误”（容易被探测）。<strong>所以我们将返回统一信息如下，并设置一个日志返回真正信息。</strong></p>
+<li><p>如果开发过程中提示“请求参数异常“说明后端有校验拦截，前端没有，此时应该把前端校验加上</p>
 </li>
-<li><pre><code class="java">LOG.warn(e.getMessage());
-responseDto.setMessage(&quot;请求参数异常!&quot;);
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 如果开发过程中提示“请求参数异常“说明后端有校验拦截，前端没有，此时应该把前端校验加上</span><br><span class="line"></span><br><span class="line">使用AOP制作一个统一日志输出</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">1.增加了日志AOP，统一日志输出</span><br><span class="line">2.logback增加了打印日志跟踪号</span><br></pre></td></tr></table></figure>
-</code></pre>
+<li><p>使用AOP制作一个统一日志输出</p>
 </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加了日志AOP，统一日志输出</span><br><span class="line">2.logback增加了打印日志跟踪号</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>统一日志处理可以用AOP也可以用Spring拦截器</p>
 </li>
 <li><p>约定优于配置。又一个约定：查询类接口以list或query开头，保存用save开头，删除用delete开头</p>
@@ -1038,7 +1079,7 @@ responseDto.setMessage(&quot;请求参数异常!&quot;);
 </li>
 <li><p>当然需要添加依赖：根目录和server依赖</p>
 </li>
-<li><p>&#96;&#96;&#96;xml</p>
+<li><p>&#96;&#96;&#96;</p>
 <dependency>
     <groupId>com.alibaba</groupId>
     <artifactId>fastjson</artifactId>
