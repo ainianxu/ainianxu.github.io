@@ -989,7 +989,7 @@ public class OssController &#123;
 </li>
 <li><p>&#96;&#96;&#96;java<br>package com.course.server.util;</p>
 <p>import com.alibaba.fastjson.JSONObject;<br>import com.aliyun.oss.OSSClient;<br>import com.aliyuncs.DefaultAcsClient;<br>import com.aliyuncs.exceptions.ClientException;<br>import com.aliyuncs.profile.DefaultProfile;<br>import com.aliyuncs.vod.model.v20170321.CreateUploadVideoRequest;<br>import com.aliyuncs.vod.model.v20170321.CreateUploadVideoResponse;<br>import org.apache.commons.codec.binary.Base64;</p>
-<p>import java.io.File;<br>public class VodUtil {<br>public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {<br>    &#x2F;&#x2F; 根据点播接入服务所在的Region填写，例如：接入服务在上海，则填cn-shanghai；其他区域请参见存储说明。<br>    String regionId &#x3D; “cn-shanghai”;<br>    DefaultProfile profile &#x3D; DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);<br>    DefaultAcsClient client &#x3D; new DefaultAcsClient(profile);<br>    return client;<br>}<br><br>public static CreateUploadVideoResponse createUploadVideo(DefaultAcsClient vodClient) throws ClientException {<br>    CreateUploadVideoRequest request &#x3D; new CreateUploadVideoRequest();<br>    request.setFileName(“vod_test.mp4”);<br>    request.setTitle(“this is title”);<br>    &#x2F;&#x2F;request.setDescription(“this is desc”);<br>    &#x2F;&#x2F;request.setTags(“tag1,tag2”);<br>    &#x2F;&#x2F;CoverURL示例：<a class="link"   target="_blank" rel="noopener" href="http://example.aliyundoc.com/test_cover_****.jpg" >http://example.aliyundoc.com/test_cover_****.jpg<i class="fas fa-external-link-alt"></i></a><br>    &#x2F;&#x2F;request.setCoverURL(“<your CoverURL>“);<br>    &#x2F;&#x2F;request.setCateId(-1L);<br>    &#x2F;&#x2F;request.setTemplateGroupId(“”);<br>    &#x2F;&#x2F;request.setWorkflowId(“”);<br>    &#x2F;&#x2F;request.setStorageLocation(“”);<br>    &#x2F;&#x2F;request.setAppId(“app-1000000”);<br>    &#x2F;&#x2F;设置请求超时时间<br>    request.setSysReadTimeout(1000);<br>    request.setSysConnectTimeout(1000);<br>    return vodClient.getAcsResponse(request);<br>}<br><br>public static OSSClient initOssClient(JSONObject uploadAuth, JSONObject uploadAddress) {<br>    String endpoint &#x3D; uploadAddress.getString(“Endpoint”);<br>    String accessKeyId &#x3D; uploadAuth.getString(“AccessKeyId”);<br>    String accessKeySecret &#x3D; uploadAuth.getString(“AccessKeySecret”);<br>    String securityToken &#x3D; uploadAuth.getString(“SecurityToken”);<br>    return new OSSClient(endpoint, accessKeyId, accessKeySecret, securityToken);<br>}<br><br>public static void uploadLocalFile(OSSClient ossClient, JSONObject uploadAddress, String localFile) {<br>    String bucketName &#x3D; uploadAddress.getString(“Bucket”);<br>    String objectName &#x3D; uploadAddress.getString(“FileName”);<br>    File file &#x3D; new File(localFile);<br>    ossClient.putObject(bucketName, objectName, file);<br>}<br><br>public static void main(String[] argv) {<br>    &#x2F;&#x2F;您的AccessKeyId<br>    String accessKeyId &#x3D; “LTAI5tCDYephRBLH8xn9w48J”;<br>    &#x2F;&#x2F;您的AccessKeySecret<br>    String accessKeySecret &#x3D; “5qunGIsBmu475zk27xPfqBKa8V48K9”;<br>    &#x2F;&#x2F;需要上传到VOD的本地视频文件的完整路径，需要包含文件扩展名<br>    String localFile &#x3D; “C:\Users\1\Desktop\fang\course\admin\public\static\image\小节视频\test.mp4”;<br>    try {<br>        &#x2F;&#x2F; 初始化VOD客户端并获取上传地址和凭证<br>        DefaultAcsClient vodClient &#x3D; initVodClient(accessKeyId, accessKeySecret);<br>        CreateUploadVideoResponse createUploadVideoResponse &#x3D; createUploadVideo(vodClient);<br>        &#x2F;&#x2F; 执行成功会返回VideoId、UploadAddress和UploadAuth<br>        String videoId &#x3D; createUploadVideoResponse.getVideoId();<br><br>        JSONObject uploadAuth &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAuth()),JSONObject.class);<br>        JSONObject uploadAddress &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAddress()),JSONObject.class);<br><br>        &#x2F;&#x2F; 使用UploadAuth和UploadAddress初始化OSS客户端<br>        OSSClient ossClient &#x3D; initOssClient(uploadAuth, uploadAddress);<br>        &#x2F;&#x2F; 上传文件，注意是同步上传会阻塞等待，耗时与文件大小和网络上行带宽有关<br>        uploadLocalFile(ossClient, uploadAddress, localFile);<br>        System.out.println(“Put local file succeed, VideoId : “ + videoId);<br>    } catch (Exception e) {<br>        System.out.println(“Put local file fail, ErrorMessage : “ + e.getLocalizedMessage());<br>    }<br>}<br><br>private static String decodeBase64(String data) {<br>    return new String(Base64.decodeBase64(data));<br>}<br> }</p>
+<p>import java.io.File;<br>public class VodUtil {<br>public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {<br>    &#x2F;&#x2F; 根据点播接入服务所在的Region填写，例如：接入服务在上海，则填cn-shanghai；其他区域请参见存储说明。<br>    String regionId &#x3D; “cn-shanghai”;<br>    DefaultProfile profile &#x3D; DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);<br>    DefaultAcsClient client &#x3D; new DefaultAcsClient(profile);<br>    return client;<br>}<br><br>public static CreateUploadVideoResponse createUploadVideo(DefaultAcsClient vodClient) throws ClientException {<br>    CreateUploadVideoRequest request &#x3D; new CreateUploadVideoRequest();<br>    request.setFileName(“vod_test.mp4”);<br>    request.setTitle(“this is title”);<br>    &#x2F;&#x2F;request.setDescription(“this is desc”);<br>    &#x2F;&#x2F;request.setTags(“tag1,tag2”);<br>    &#x2F;&#x2F;CoverURL示例：<a class="link"   target="_blank" rel="noopener" href="http://example.aliyundoc.com/test_cover_****.jpg" >http://example.aliyundoc.com/test_cover_****.jpg<i class="fas fa-external-link-alt"></i></a><br>    &#x2F;&#x2F;request.setCoverURL(“<your CoverURL>“);<br>    &#x2F;&#x2F;request.setCateId(-1L);<br>    &#x2F;&#x2F;request.setTemplateGroupId(“”);<br>    &#x2F;&#x2F;request.setWorkflowId(“”);<br>    &#x2F;&#x2F;request.setStorageLocation(“”);<br>    &#x2F;&#x2F;request.setAppId(“app-1000000”);<br>    &#x2F;&#x2F;设置请求超时时间<br>    request.setSysReadTimeout(1000);<br>    request.setSysConnectTimeout(1000);<br>    return vodClient.getAcsResponse(request);<br>}<br><br>public static OSSClient initOssClient(JSONObject uploadAuth, JSONObject uploadAddress) {<br>    String endpoint &#x3D; uploadAddress.getString(“Endpoint”);<br>    String accessKeyId &#x3D; uploadAuth.getString(“AccessKeyId”);<br>    String accessKeySecret &#x3D; uploadAuth.getString(“AccessKeySecret”);<br>    String securityToken &#x3D; uploadAuth.getString(“SecurityToken”);<br>    return new OSSClient(endpoint, accessKeyId, accessKeySecret, securityToken);<br>}<br><br>public static void uploadLocalFile(OSSClient ossClient, JSONObject uploadAddress, String localFile) {<br>    String bucketName &#x3D; uploadAddress.getString(“Bucket”);<br>    String objectName &#x3D; uploadAddress.getString(“FileName”);<br>    File file &#x3D; new File(localFile);<br>    ossClient.putObject(bucketName, objectName, file);<br>}<br><br>public static void main(String[] argv) {<br>    &#x2F;&#x2F;您的AccessKeyId<br>    String accessKeyId &#x3D; “您的AccessKeyId”;<br>    &#x2F;&#x2F;您的AccessKeySecret<br>    String accessKeySecret &#x3D; “您的AccessKeySecret”;<br>    &#x2F;&#x2F;需要上传到VOD的本地视频文件的完整路径，需要包含文件扩展名<br>    String localFile &#x3D; “C:\Users\1\Desktop\fang\course\admin\public\static\image\小节视频\test.mp4”;<br>    try {<br>        &#x2F;&#x2F; 初始化VOD客户端并获取上传地址和凭证<br>        DefaultAcsClient vodClient &#x3D; initVodClient(accessKeyId, accessKeySecret);<br>        CreateUploadVideoResponse createUploadVideoResponse &#x3D; createUploadVideo(vodClient);<br>        &#x2F;&#x2F; 执行成功会返回VideoId、UploadAddress和UploadAuth<br>        String videoId &#x3D; createUploadVideoResponse.getVideoId();<br><br>        JSONObject uploadAuth &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAuth()),JSONObject.class);<br>        JSONObject uploadAddress &#x3D; JSONObject.parseObject(<br>                Base64.decodeBase64(createUploadVideoResponse.getUploadAddress()),JSONObject.class);<br><br>        &#x2F;&#x2F; 使用UploadAuth和UploadAddress初始化OSS客户端<br>        OSSClient ossClient &#x3D; initOssClient(uploadAuth, uploadAddress);<br>        &#x2F;&#x2F; 上传文件，注意是同步上传会阻塞等待，耗时与文件大小和网络上行带宽有关<br>        uploadLocalFile(ossClient, uploadAddress, localFile);<br>        System.out.println(“Put local file succeed, VideoId : “ + videoId);<br>    } catch (Exception e) {<br>        System.out.println(“Put local file fail, ErrorMessage : “ + e.getLocalizedMessage());<br>    }<br>}<br><br>private static String decodeBase64(String data) {<br>    return new String(Base64.decodeBase64(data));<br>}<br> }</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 10-5 基于OSS原生SDK上传视频到点播2</span><br><span class="line"></span><br><span class="line">2.视频加密与授权播放：基于OSS原生SDK上传视频到点播服务，上传到指定分类并自动转码：</span><br><span class="line"></span><br><span class="line">- 把上面这部分注释注释掉</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  request.setCoverURL(&quot;https://s2.loli.net/2022/03/18/Out79eVMalPJjCE.png&quot;);</span><br><span class="line">  request.setCateId(1000384585L);</span><br><span class="line">  request.setTemplateGroupId(&quot;f563e13b2a67fdd2b4e44bc1b1d421c2&quot;);</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>3.视频点播不支持追加上传：</p>
@@ -1425,38 +1425,35 @@ play(section)&#123;
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
+            .footer {
+  font-size: 1rem;
+  color: var(--third-text-color);
+
+
+  a {
+    color: var(--third-text-color);
+
+
+    &:hover {
+      color: var(--primary-color);
+
+    }
+  }
+
+  .info-container {
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .info-item {
+    margin: 5px 0;
+  }
+
+  .icon-animate {
+    animation: icon-animate 1.2s ease-in-out infinite;
+  }
+
+}
 
         </div>
     </div>
