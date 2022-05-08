@@ -9,7 +9,7 @@
     
     <title>
         
-            Spring之xml实现IOC |
+            Spring之IOC创建对象方式 |
         
         念~旭
     </title>
@@ -156,7 +156,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Spring之xml实现IOC</span>
+            <span class="title-hover-animation">Spring之IOC创建对象方式</span>
         </div>
 
         
@@ -175,8 +175,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-05-08 11:23:51</span>
-        <span class="mobile">2022-05-08 11:23</span>
+        <span class="pc">2022-05-08 17:00:50</span>
+        <span class="mobile">2022-05-08 17:00</span>
     </span>
     
     
@@ -195,7 +195,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>561 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>444 Words</span>
         </span>
     
     
@@ -216,29 +216,42 @@
         
 
         <div class="article-content markdown-body">
-            <p>在上一个代码的基础上进行修改</p>
-<ol>
-<li>编写我们的spring文件 , 这里我们命名为beans.xml</li>
+            <h1 id="通过无参构造方式来创建"><a href="#通过无参构造方式来创建" class="headerlink" title="通过无参构造方式来创建"></a>通过无参构造方式来创建</h1><ol>
+<li>User.java</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--bean就是java对象 , 由Spring创建和管理--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--下面的两个就是我们接口的实现类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.fang.Dao.UserDaoImpl&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;mysql&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.fang.Dao.UserDaoMySqlImpl&quot;</span>/&gt;</span></span><br><span class="line">     <span class="comment">&lt;!--下面的这个就是我们业务层调用接口实现类的方法 就是set注入--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ServiceImpl&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.fang.Service.UserServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--引用另外一个bean , 不是用value（具体的值 基本数据类型） 而是用 ref（引用spring创建好的值）--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;mysql&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">User</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;无参构造&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name = &quot;</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
+<li>beans.xml</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.fang.pojo.User&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;xiaoxiao&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">        <span class="comment">//在执行getBean的时候, user已经创建好了 , 通过无参构造</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) context.getBean(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        <span class="comment">//调用对象的方法 .</span></span><br><span class="line">        user.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">无参构造</span><br><span class="line">name = xiaoxiao</span><br></pre></td></tr></table></figure>
+
+<p>结果可以发现，在调用show方法之前，User对象已经通过无参构造初始化了！</p>
+<h1 id="通过有参构造方法来创建"><a href="#通过有参构造方法来创建" class="headerlink" title="通过有参构造方法来创建"></a>通过有参构造方法来创建</h1><ol>
+<li>UserT . java</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserT</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">UserT</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;name=&quot;</span>+ name );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>beans.xml 有三种方式编写</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="string">&quot;userT&quot;</span> class=<span class="string">&quot;com.fang.pojo.UserT&quot;</span>&gt;</span><br><span class="line">    &lt;!-- index指构造方法 , 下标从<span class="number">0</span>开始 --&gt;</span><br><span class="line">    &lt;constructor-arg index=<span class="string">&quot;0&quot;</span> value=<span class="string">&quot;xiao1&quot;</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 第二种根据参数名字设置 --&gt;</span><br><span class="line">&lt;bean id=<span class="string">&quot;userT&quot;</span> class=<span class="string">&quot;com.fang.pojo.UserT&quot;</span>&gt;</span><br><span class="line">    &lt;!-- name指参数名 --&gt;</span><br><span class="line">    &lt;constructor-arg name=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;xiao2&quot;</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 第三种根据参数类型设置 --&gt;</span><br><span class="line">&lt;bean id=<span class="string">&quot;userT&quot;</span> class=<span class="string">&quot;com.fang.pojo.UserT&quot;</span>&gt;</span><br><span class="line">    &lt;constructor-arg type=<span class="string">&quot;java.lang.String&quot;</span> value=<span class="string">&quot;xiao3&quot;</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
 <li>测试</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//解析beans.xml文件 , 生成管理相应的Bean对象</span></span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">        <span class="comment">//getBean : 参数即为spring配置文件中bean的id .</span></span><br><span class="line">        <span class="type">UserServiceImpl</span> <span class="variable">serviceImpl</span> <span class="operator">=</span> (UserServiceImpl) context.getBean(<span class="string">&quot;ServiceImpl&quot;</span>);</span><br><span class="line">        serviceImpl.getUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;beans.xml&quot;</span>);</span><br><span class="line">        <span class="type">UserT</span> <span class="variable">user</span> <span class="operator">=</span> (UserT) context.getBean(<span class="string">&quot;userT&quot;</span>);</span><br><span class="line">        user.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>思考：</strong></p>
-<ul>
-<li>user对象是谁创建的 ? 【 user对象是由Spring创建的 】</li>
-<li>user对象的属性是怎么设置的 ? 【user对象的属性是由Spring容器设置的 】</li>
-</ul>
-<p>这个过程就叫控制反转 : </p>
-<ul>
-<li>控制 : 谁来控制对象的创建 , 传统应用程序的对象是由程序本身控制创建的 , 使用Spring后 , 对象是由Spring来创建的 </li>
-<li>反转 : 程序本身不创建对象 , 而变成被动的接收对象 .</li>
-</ul>
-<p>依赖注入 : 就是利用set方法来进行注入的. </p>
-<p><strong>IOC是一种编程思想，由主动的编程变成被动的接收</strong> 可以通过new ClassPathXmlApplicationContext去浏览一下底层源码 .<br>到了现在 , 我们彻底不用再程序中去改动了 , 要实现不同的操作 , 只需要在xml配置文件中进行修改 , 所谓的IOC,一句话搞定 : <strong>对象由Spring 来创建 , 管理 , 装配 !</strong></p>
+<p>结论：在配置文件加载的时候。其中管理的对象<strong>都</strong>已经初始化了！</p>
 
         </div>
 
@@ -246,11 +259,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Spring之xml实现IOC</li>
+        <li>Post title：Spring之IOC创建对象方式</li>
         <li>Post author：Fang</li>
-        <li>Create time：2022-05-08 11:23:51</li>
+        <li>Create time：2022-05-08 17:00:50</li>
         <li>
-            Post link：https://ainianxu.github.io/2022/05/08/Spring之xml实现IOC/
+            Post link：https://ainianxu.github.io/2022/05/08/Spring之IOC创建对象方式/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -274,29 +287,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/05/08/Spring%E4%B9%8BIOC%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%96%B9%E5%BC%8F/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Spring之IOC创建对象方式</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/05/08/Spring%E4%B9%8BIOC%E6%9C%AC%E8%B4%A8/"
+                           href="/2022/05/08/Spring%E4%B9%8Bxml%E5%AE%9E%E7%8E%B0IOC/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Spring之IOC本质</span>
+                                <span class="post-nav-title-item">Spring之xml实现IOC</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -514,7 +512,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">通过无参构造方式来创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%9C%89%E5%8F%82%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E6%9D%A5%E5%88%9B%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">通过有参构造方法来创建</span></a></li></ol>
     </div>
 </div>
         </aside>
