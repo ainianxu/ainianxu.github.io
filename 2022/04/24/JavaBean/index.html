@@ -195,7 +195,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>463 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>462 Words</span>
         </span>
     
     
@@ -257,92 +257,19 @@
 </tr>
 </tbody></table>
 <ul>
-<li><p>对应的实体类</p>
-</li>
-<li><pre><code class="java">public class Person &#123;
-    private int id;
-    private String name ;
-    private int age;
-    private String address;
-
-    public Person(int id, String name, int age, String address) &#123;
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-    &#125;
-
-    public Person() &#123;
-    &#125;
-
-    public int getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(int id) &#123;
-        this.id = id;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public int getAge() &#123;
-        return age;
-    &#125;
-
-    public void setAge(int age) &#123;
-        this.age = age;
-    &#125;
-
-    public String getAddress() &#123;
-        return address;
-    &#125;
-
-    @Override
-    public String toString() &#123;
-        final StringBuffer sb = new StringBuffer(&quot;Person&#123;&quot;);
-        sb.append(&quot;id=&quot;).append(id);
-        sb.append(&quot;, name=&#39;&quot;).append(name).append(&#39;\&#39;&#39;);
-        sb.append(&quot;, age=&quot;).append(age);
-        sb.append(&quot;, address=&#39;&quot;).append(address).append(&#39;\&#39;&#39;);
-        sb.append(&#39;&#125;&#39;);
-        return sb.toString();
-    &#125;
-
-    public void setAddress(String address) &#123;
-        this.address = address;
-    &#125;
-&#125;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 使用的时候就</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  class A&#123;</span><br><span class="line">      new Person(1,&quot;xiao&quot;,5,&quot;天津&quot;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>使用jsp设置参数得到参数</p>
-</li>
-<li><pre><code class="jsp">&lt;%
-//    Person person = new Person();
-//    person.setAge();
-//    person.setName();
-//    person.setId();
-//    person.setAddress();
-%&gt;
-&lt;jsp:useBean id=&quot;person&quot; class=&quot;Person&quot; scope=&quot;page&quot;/&gt;
-&lt;jsp:setProperty name=&quot;person&quot; property=&quot;id&quot; value=&quot;1&quot;/&gt;
-&lt;jsp:setProperty name=&quot;person&quot; property=&quot;name&quot; value=&quot;小&quot;/&gt;
-&lt;jsp:setProperty name=&quot;person&quot; property=&quot;age&quot; value=&quot;5&quot;/&gt;
-&lt;jsp:setProperty name=&quot;person&quot; property=&quot;address&quot; value=&quot;天津&quot;/&gt;
-&lt;%--&lt;%=person.getAddress()%&gt;--%&gt;
-id：&lt;jsp:getProperty name=&quot;person&quot; property=&quot;id&quot;/&gt;
-姓名：&lt;jsp:getProperty name=&quot;person&quot; property=&quot;name&quot;/&gt;
-年龄：&lt;jsp:getProperty name=&quot;person&quot; property=&quot;age&quot;/&gt;
-地址：&lt;jsp:getProperty name=&quot;person&quot; property=&quot;address&quot;/&gt;
-</code></pre>
-</li>
+<li>对应的实体类</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String name ;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(<span class="type">int</span> id, String name, <span class="type">int</span> age, String address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAddress</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>(<span class="string">&quot;Person&#123;&quot;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;id=&quot;</span>).append(id);</span><br><span class="line">        sb.append(<span class="string">&quot;, name=&#x27;&quot;</span>).append(name).append(<span class="string">&#x27;\&#x27;&#x27;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;, age=&quot;</span>).append(age);</span><br><span class="line">        sb.append(<span class="string">&quot;, address=&#x27;&quot;</span>).append(address).append(<span class="string">&#x27;\&#x27;&#x27;</span>);</span><br><span class="line">        sb.append(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAddress</span><span class="params">(String address)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.address = address;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用的时候就</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">1</span>,<span class="string">&quot;xiao&quot;</span>,<span class="number">5</span>,<span class="string">&quot;天津&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用jsp设置参数得到参数</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"><span class="comment">//    Person person = new Person();</span></span><br><span class="line"><span class="comment">//    person.setAge();</span></span><br><span class="line"><span class="comment">//    person.setName();</span></span><br><span class="line"><span class="comment">//    person.setId();</span></span><br><span class="line"><span class="comment">//    person.setAddress();</span></span><br><span class="line">%&gt;</span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;person&quot;</span> class=<span class="string">&quot;Person&quot;</span> scope=<span class="string">&quot;page&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;id&quot;</span> value=<span class="string">&quot;1&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;小&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;age&quot;</span> value=<span class="string">&quot;5&quot;</span>/&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;address&quot;</span> value=<span class="string">&quot;天津&quot;</span>/&gt;</span><br><span class="line">&lt;%--&lt;%=person.getAddress()%&gt;--%&gt;</span><br><span class="line">id：&lt;jsp:getProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;id&quot;</span>/&gt;</span><br><span class="line">姓名：&lt;jsp:getProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;name&quot;</span>/&gt;</span><br><span class="line">年龄：&lt;jsp:getProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;age&quot;</span>/&gt;</span><br><span class="line">地址：&lt;jsp:getProperty name=<span class="string">&quot;person&quot;</span> property=<span class="string">&quot;address&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
 
         </div>
 

@@ -221,10 +221,16 @@
 <li><p>是一类在运行时可以改变其结构的语言：例如新的函数、对象、甚至代码可以被引进，已有的 函数可以被删除或是其他结构上的变化。通俗点说就是在运行时代码可以根据某些条件改变自 身结构。</p>
 </li>
 <li><p>主要动态语言：Object-C、C#、JavaScript、PHP、Python等。 </p>
-</li>
-<li><p>&#96;&#96;&#96;javascript<br>&#x2F;&#x2F;体现动态语言的代码<br>function test() {<br>var x &#x3D; “var a&#x3D;3;var b&#x3D;5;alert(a+b)”;<br>eval(x);<br>}</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**静态语言** </span><br><span class="line"></span><br><span class="line">- 与动态语言相对应的，运行时结构不可变的语言就是静态语言。如Java、C、C++。</span><br><span class="line">- Java不是动态语言，但Java可以称之为“准动态语言”。即Java有一定的动态性，我们可以利用 反射机制获得类似动态语言的特性。Java的动态性让编程的时候更加灵活！</span><br><span class="line"></span><br><span class="line">## 2、Java Reflection </span><br><span class="line"></span><br><span class="line">Reflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflection API取 得任何类的内部信息，并能直接操作任意对象的内部属性及方法。 </span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">Class c = Class.forName(&quot;java.lang.String&quot;)</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//体现动态语言的代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">var</span> x = <span class="string">&quot;var a=3;var b=5;alert(a+b)&quot;</span>;</span><br><span class="line"><span class="built_in">eval</span>(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
+<p><strong>静态语言</strong> </p>
+<ul>
+<li>与动态语言相对应的，运行时结构不可变的语言就是静态语言。如Java、C、C++。</li>
+<li>Java不是动态语言，但Java可以称之为“准动态语言”。即Java有一定的动态性，我们可以利用 反射机制获得类似动态语言的特性。Java的动态性让编程的时候更加灵活！</li>
+</ul>
+<h2 id="2、Java-Reflection"><a href="#2、Java-Reflection" class="headerlink" title="2、Java Reflection"></a>2、Java Reflection</h2><p>Reflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflection API取 得任何类的内部信息，并能直接操作任意对象的内部属性及方法。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;java.lang.String&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 <p>加载完类之后，在堆内存的方法区中就产生了一个Class类型的对象（一个类只有一个Class对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。这个对象就像一面镜子， 透过这个镜子看到类的结构，所以，我们形象的称之为：反射<img  
                      lazyload
                      src="/images/loading.svg"
@@ -266,11 +272,57 @@
 <li><p>通过Class可以完整地得到一个类中的所有被加载的结构 </p>
 </li>
 <li><p>Class类是Reflection的根源，针对任何你想动态加载、运行的类，唯有先获得相应的Class对象</p>
-</li>
-<li><p>&#96;&#96;&#96;java<br>import java.lang.annotation.*;</p>
-<p>public class demo1  {<br>public static void main(String[] args) throws ClassNotFoundException {<br>    Person person &#x3D; new Student();<br>    System.out.println(“这个人是：”+person.name);<br>    &#x2F;&#x2F;获得class办法一:通过对象获得<br>    Class class1 &#x3D; person.getClass();<br>    &#x2F;&#x2F;&#x2F;&#x2F;获得class办法二:通过字符串获得(包名+类名)<br>    Class class2 &#x3D; Class.forName(“Student”);<br>    &#x2F;&#x2F;获得class办法三:通过类的静态成员class获得<br>    Class class3 &#x3D; Person.class;<br>    &#x2F;&#x2F;获得class办法四:只针对内置的基本数据类型<br>    Class class4 &#x3D; Integer.TYPE;<br>    &#x2F;&#x2F;获得父类类型<br>    Class class5 &#x3D; class2.getSuperclass();<br>    System.out.println(class1);<br>    System.out.println(class2);<br>    System.out.println(class3);<br>    System.out.println(class4);<br>    System.out.println(class5);<br>}<br>}<br>class Person {<br>public String name;<br>public Person() {<br>}<br>public Person(String name) {<br>    this.name &#x3D; name;<br>}<br>@Override<br>public String toString() {<br>    return “Person{“ +<br>            “name&#x3D;’” + name + ‘&#39;‘ +<br>            ‘}’;<br>}<br>}<br>class Student extends Person{<br>public Student(){<br>    this.name &#x3D; “学生”;<br>}<br>}<br>class Teacher extends Person{<br>public Teacher(){<br>    this.name &#x3D; “老师”;<br>}<br>}<br>&#x2F;&#x2F;输出结果<br>这个人是：学生<br>class Student<br>class Student<br>class Person<br>int<br>class Person</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**Class类的常用方法**</span><br><span class="line"></span><br><span class="line">| 方法名                                  | 功能说明                                                     |</span><br><span class="line">| --------------------------------------- | ------------------------------------------------------------ |</span><br><span class="line">| static ClassforName(String name)        | 返回指定类名name的Class对象                                  |</span><br><span class="line">| Object newInstance()                    | 调用缺省构造函数，返回Class对象的一个实例                    |</span><br><span class="line">| getName()                               | 返回此Class对象所表示的实体（类，接口，数组类或 void）的名称。 |</span><br><span class="line">| Class getSuperClass()                   | 返回当前Class对象的父类的Class对象                           |</span><br><span class="line">| Class[] getinterfaces()                 | 获取当前Class对象的接口                                      |</span><br><span class="line">| ClassLoader getClassLoader()            | 返回该类的类加载器                                           |</span><br><span class="line">| Constructor[] getConstructors()         | 返回一个包含某些Constructor对象的数组                        |</span><br><span class="line">| Method getMothed(String name,Class.. T) | 返回一个Method对象，此对象的形参类型为paramType              |</span><br><span class="line">| Field[] getDeclaredFields()             | 返回Field对象的一个数组                                      |</span><br><span class="line"></span><br><span class="line">**获取Class类的实例**</span><br><span class="line"></span><br><span class="line">a）若已知具体的类，通过类的class属性获取，该方法最为安全可靠，程序性能最高。</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">Class clazz = Person.class;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span>  &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        System.out.println(<span class="string">&quot;这个人是：&quot;</span>+person.name);</span><br><span class="line">        <span class="comment">//获得class办法一:通过对象获得</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> person.getClass();</span><br><span class="line">        <span class="comment">////获得class办法二:通过字符串获得(包名+类名)</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;Student&quot;</span>);</span><br><span class="line">        <span class="comment">//获得class办法三:通过类的静态成员class获得</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class3</span> <span class="operator">=</span> Person.class;</span><br><span class="line">        <span class="comment">//获得class办法四:只针对内置的基本数据类型</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class4</span> <span class="operator">=</span> Integer.TYPE;</span><br><span class="line">        <span class="comment">//获得父类类型</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class5</span> <span class="operator">=</span> class2.getSuperclass();</span><br><span class="line">        System.out.println(class1);</span><br><span class="line">        System.out.println(class2);</span><br><span class="line">        System.out.println(class3);</span><br><span class="line">        System.out.println(class4);</span><br><span class="line">        System.out.println(class5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = <span class="string">&quot;学生&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = <span class="string">&quot;老师&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果</span></span><br><span class="line">这个人是：学生</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br></pre></td></tr></table></figure></li>
 </ul>
+<p><strong>Class类的常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static ClassforName(String name)</td>
+<td>返回指定类名name的Class对象</td>
+</tr>
+<tr>
+<td>Object newInstance()</td>
+<td>调用缺省构造函数，返回Class对象的一个实例</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>返回此Class对象所表示的实体（类，接口，数组类或 void）的名称。</td>
+</tr>
+<tr>
+<td>Class getSuperClass()</td>
+<td>返回当前Class对象的父类的Class对象</td>
+</tr>
+<tr>
+<td>Class[] getinterfaces()</td>
+<td>获取当前Class对象的接口</td>
+</tr>
+<tr>
+<td>ClassLoader getClassLoader()</td>
+<td>返回该类的类加载器</td>
+</tr>
+<tr>
+<td>Constructor[] getConstructors()</td>
+<td>返回一个包含某些Constructor对象的数组</td>
+</tr>
+<tr>
+<td>Method getMothed(String name,Class.. T)</td>
+<td>返回一个Method对象，此对象的形参类型为paramType</td>
+</tr>
+<tr>
+<td>Field[] getDeclaredFields()</td>
+<td>返回Field对象的一个数组</td>
+</tr>
+</tbody></table>
+<p><strong>获取Class类的实例</strong></p>
+<p>a）若已知具体的类，通过类的class属性获取，该方法最为安全可靠，程序性能最高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Person.class;</span><br></pre></td></tr></table></figure>
+
 <p>b）已知某个类的实例，调用该实例的getClass()方法获取Class对象 </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> person.getClass();</span><br></pre></td></tr></table></figure>
 
@@ -293,55 +345,7 @@
 <li><p>primitive type：基本数据类型 </p>
 </li>
 <li><p>void</p>
-</li>
-<li><pre><code class="java">import java.lang.annotation.*;
-
-public class demo1 &#123;
-    public static void main(String[] args) &#123;
-        Class c1 = Object.class;
-        Class c2 = Comparable.class;
-        Class c3 = String[].class;
-        Class c4 = int[][].class;
-        Class c5 = ElementType.class;
-        Class c6 = Override.class;
-        Class c7 = Integer.class;
-        Class c8 = void.class;
-        Class c9 = Class.class;
-        int[] a = new int[10];
-        int[] b = new int[100];
-        Class c10 = a.getClass();
-        Class c11 = b.getClass();
-        System.out.println(c1);
-        System.out.println(c2);
-        System.out.println(c3);
-        System.out.println(c4);
-        System.out.println(c5);
-        System.out.println(c6);
-        System.out.println(c7);
-        System.out.println(c8);
-        System.out.println(c9);
-        System.out.println(c10);
-        System.out.println(c11);
-        //只要元素类型与维度一样,就是同一个Class
-        System.out.println(c11==c10);
-    &#125;
-
-&#125;
-//输出
-class java.lang.Object
-interface java.lang.Comparable
-class [Ljava.lang.String;
-class [[I
-class java.lang.annotation.ElementType
-interface java.lang.Override
-class java.lang.Integer
-void
-class java.lang.Class
-class [I
-class [I
-true
-</code></pre>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c1</span> <span class="operator">=</span> Object.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c2</span> <span class="operator">=</span> Comparable.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c3</span> <span class="operator">=</span> String[].class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="type">int</span>[][].class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c5</span> <span class="operator">=</span> ElementType.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c6</span> <span class="operator">=</span> Override.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c7</span> <span class="operator">=</span> Integer.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c8</span> <span class="operator">=</span> <span class="keyword">void</span>.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c9</span> <span class="operator">=</span> Class.class;</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c10</span> <span class="operator">=</span> a.getClass();</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c11</span> <span class="operator">=</span> b.getClass();</span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        System.out.println(c2);</span><br><span class="line">        System.out.println(c3);</span><br><span class="line">        System.out.println(c4);</span><br><span class="line">        System.out.println(c5);</span><br><span class="line">        System.out.println(c6);</span><br><span class="line">        System.out.println(c7);</span><br><span class="line">        System.out.println(c8);</span><br><span class="line">        System.out.println(c9);</span><br><span class="line">        System.out.println(c10);</span><br><span class="line">        System.out.println(c11);</span><br><span class="line">        <span class="comment">//只要元素类型与维度一样,就是同一个Class</span></span><br><span class="line">        System.out.println(c11==c10);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Object</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">java</span>.lang.Comparable</span><br><span class="line">class [Ljava.lang.String;</span><br><span class="line">class [[I</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.annotation.ElementType</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">java</span>.lang.Override</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Integer</span><br><span class="line"><span class="keyword">void</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Class</span><br><span class="line">class [I</span><br><span class="line">class [I</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
         </div>
@@ -618,7 +622,7 @@ true
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%9D%99%E6%80%81-VS-%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1、静态 VS 动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%8E%B7%E5%BE%97%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">3. 获得反射对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BE%97%E5%88%B0Class%E7%B1%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">4.得到Class类的几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%89%80%E6%9C%89%E7%B1%BB%E5%9E%8B%E7%9A%84Class%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">5.所有类型的Class对象</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%9D%99%E6%80%81-VS-%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1、静态 VS 动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Java-Reflection"><span class="nav-number">2.</span> <span class="nav-text">2、Java Reflection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%8E%B7%E5%BE%97%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">3. 获得反射对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BE%97%E5%88%B0Class%E7%B1%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">4.得到Class类的几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%89%80%E6%9C%89%E7%B1%BB%E5%9E%8B%E7%9A%84Class%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">5.所有类型的Class对象</span></a></li></ol>
     </div>
 </div>
         </aside>

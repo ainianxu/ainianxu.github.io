@@ -195,7 +195,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>891 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>895 Words</span>
         </span>
     
     
@@ -222,11 +222,15 @@
 <li>获取web开发的常用对象</li>
 </ul>
 <h2 id="JSP标签"><a href="#JSP标签" class="headerlink" title="JSP标签"></a>JSP标签</h2><ul>
-<li><p>建立一个设置参数的jsp</p>
-</li>
-<li><p>&#96;&#96;&#96;jsp<br>&lt;jsp:forward page&#x3D;”jsptag1.jsp”&gt;<br>&lt;jsp:param name&#x3D;”name” value&#x3D;”xiao”&#x2F;&gt;<br>&lt;jsp:param name&#x3D;”age” value&#x3D;”12”&#x2F;&gt;<br></jsp:forward></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 建立一个取参数的jsp</span><br><span class="line"></span><br><span class="line">- ```jsp</span><br><span class="line">  名字：&lt;%=request.getParameter(&quot;name&quot;)%&gt;</span><br><span class="line">  年龄：&lt;%=request.getParameter(&quot;age&quot;)%&gt;</span><br></pre></td></tr></table></figure></li>
+<li>建立一个设置参数的jsp</li>
 </ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page=<span class="string">&quot;jsptag1.jsp&quot;</span>&gt;</span><br><span class="line">    &lt;jsp:param name=<span class="string">&quot;name&quot;</span> value=<span class="string">&quot;xiao&quot;</span>/&gt;</span><br><span class="line">    &lt;jsp:param name=<span class="string">&quot;age&quot;</span> value=<span class="string">&quot;12&quot;</span>/&gt;</span><br><span class="line">&lt;/jsp:forward&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>建立一个取参数的jsp</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">名字：&lt;%=request.getParameter(<span class="string">&quot;name&quot;</span>)%&gt;</span><br><span class="line">年龄：&lt;%=request.getParameter(<span class="string">&quot;age&quot;</span>)%&gt;</span><br></pre></td></tr></table></figure>
+
 <h2 id="JSTL表达式"><a href="#JSTL表达式" class="headerlink" title="JSTL表达式"></a>JSTL表达式</h2><ul>
 <li>JSTL标签库的使用就是为了弥补HTML标签的不足；它自定义许多标签，可以供我们使用，标签的功能和 Java代码一样！</li>
 <li>在使用JSTL之前我们要引入jar包</li>
@@ -251,64 +255,18 @@
 </li>
 <li><p>c:if的使用</p>
 </li>
-<li><pre><code class="jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; isELIgnored=&quot;false&quot; %&gt;
-&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h4&gt;if测试&lt;/h4&gt;
-&lt;hr&gt;
-&lt;form action=&quot;jsptag1.jsp&quot; method=&quot;get&quot;&gt;
-    &lt;%--
-    EL表达式获取表单中的数据
-    $&#123;param.参数名&#125;
-    --%&gt;
-    &lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;$&#123;param.username&#125;&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;登录&quot;&gt;
-&lt;/form&gt;
-&lt;%--判断如果提交的用户名是管理员，则登录成功--%&gt;
-&lt;c:if test=&quot;$&#123;param.username==&#39;admin&#39;&#125;&quot; var=&quot;isAdmin&quot;&gt;
-    &lt;c:out value=&quot;欢迎&quot;/&gt;
-&lt;/c:if&gt;
-&lt;c:out value=&quot;$&#123;isAdmin&#125;&quot;/&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- c:choose c:when的使用</span><br><span class="line"></span><br><span class="line">- ```jsp</span><br><span class="line">  &lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; isELIgnored=&quot;false&quot; %&gt;</span><br><span class="line">  &lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</span><br><span class="line">  &lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">      &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;c:set var=&quot;score&quot; value=&quot;55&quot;/&gt;</span><br><span class="line">  &lt;c:choose&gt;</span><br><span class="line">      &lt;c:when test=&quot;$&#123;score&gt;=90&#125;&quot;&gt;</span><br><span class="line">          你的成绩为优秀</span><br><span class="line">      &lt;/c:when&gt;</span><br><span class="line">      &lt;c:when test=&quot;$&#123;score&gt;=80&#125;&quot;&gt;</span><br><span class="line">          你的成绩为一般</span><br><span class="line">      &lt;/c:when&gt;</span><br><span class="line">      &lt;c:when test=&quot;$&#123;score&gt;=70&#125;&quot;&gt;</span><br><span class="line">          你的成绩为良好</span><br><span class="line">      &lt;/c:when&gt;</span><br><span class="line">      &lt;c:when test=&quot;$&#123;score&lt;=60&#125;&quot;&gt;</span><br><span class="line">          你的成绩为不及格</span><br><span class="line">      &lt;/c:when&gt;</span><br><span class="line">  &lt;/c:choose&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">  &lt;/html&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-<li><p>c:forEach使用</p>
-</li>
-<li><pre><code class="jsp">&lt;%@ page import=&quot;java.util.ArrayList&quot; %&gt;
-&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; isELIgnored=&quot;false&quot; %&gt;
-&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;%
-    ArrayList&lt;String&gt; people = new ArrayList&lt;&gt;();
-    people.add(0,&quot;0&quot;);
-    people.add(1,&quot;1&quot;);
-    people.add(2,&quot;2&quot;);
-    people.add(3,&quot;3&quot;);
-    people.add(4,&quot;4&quot;);
-    request.setAttribute(&quot;list&quot;,people);
-%&gt;
-&lt;c:forEach var=&quot;people&quot; items=&quot;$&#123;list&#125;&quot;&gt;
-    &lt;c:out value=&quot;$&#123;people&#125;&quot;/&gt;&lt;br&gt;
-&lt;/c:forEach&gt;
-&lt;hr&gt;
-&lt;c:forEach var=&quot;people&quot; items=&quot;$&#123;list&#125;&quot; begin=&quot;1&quot; end=&quot;3&quot; step=&quot;2&quot;&gt;
-    &lt;c:out value=&quot;$&#123;people&#125;&quot;/&gt;&lt;br&gt;
-&lt;/c:forEach&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-</li>
 </ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> isELIgnored=<span class="string">&quot;false&quot;</span> %&gt;</span><br><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;c&quot;</span> uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h4&gt;<span class="keyword">if</span>测试&lt;/h4&gt;</span><br><span class="line">&lt;hr&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;jsptag1.jsp&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">    &lt;%--</span><br><span class="line">    EL表达式获取表单中的数据</span><br><span class="line">    $&#123;param.参数名&#125;</span><br><span class="line">    --%&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span> value=<span class="string">&quot;$&#123;param.username&#125;&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;登录&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;%--判断如果提交的用户名是管理员，则登录成功--%&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;param.username==&#x27;admin&#x27;&#125;&quot;</span> <span class="keyword">var</span>=<span class="string">&quot;isAdmin&quot;</span>&gt;</span><br><span class="line">    &lt;c:out value=<span class="string">&quot;欢迎&quot;</span>/&gt;</span><br><span class="line">&lt;/c:<span class="keyword">if</span>&gt;</span><br><span class="line">&lt;c:out value=<span class="string">&quot;$&#123;isAdmin&#125;&quot;</span>/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>c:choose c:when的使用</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> isELIgnored=<span class="string">&quot;false&quot;</span> %&gt;</span><br><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;c&quot;</span> uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;c:set <span class="keyword">var</span>=<span class="string">&quot;score&quot;</span> value=<span class="string">&quot;55&quot;</span>/&gt;</span><br><span class="line">&lt;c:choose&gt;</span><br><span class="line">    &lt;c:when test=<span class="string">&quot;$&#123;score&gt;=90&#125;&quot;</span>&gt;</span><br><span class="line">        你的成绩为优秀</span><br><span class="line">    &lt;/c:when&gt;</span><br><span class="line">    &lt;c:when test=<span class="string">&quot;$&#123;score&gt;=80&#125;&quot;</span>&gt;</span><br><span class="line">        你的成绩为一般</span><br><span class="line">    &lt;/c:when&gt;</span><br><span class="line">    &lt;c:when test=<span class="string">&quot;$&#123;score&gt;=70&#125;&quot;</span>&gt;</span><br><span class="line">        你的成绩为良好</span><br><span class="line">    &lt;/c:when&gt;</span><br><span class="line">    &lt;c:when test=<span class="string">&quot;$&#123;score&lt;=60&#125;&quot;</span>&gt;</span><br><span class="line">        你的成绩为不及格</span><br><span class="line">    &lt;/c:when&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>c:forEach使用</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.ArrayList&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> isELIgnored=<span class="string">&quot;false&quot;</span> %&gt;</span><br><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;c&quot;</span> uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    ArrayList&lt;String&gt; people = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    people.add(<span class="number">0</span>,<span class="string">&quot;0&quot;</span>);</span><br><span class="line">    people.add(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    people.add(<span class="number">2</span>,<span class="string">&quot;2&quot;</span>);</span><br><span class="line">    people.add(<span class="number">3</span>,<span class="string">&quot;3&quot;</span>);</span><br><span class="line">    people.add(<span class="number">4</span>,<span class="string">&quot;4&quot;</span>);</span><br><span class="line">    request.setAttribute(<span class="string">&quot;list&quot;</span>,people);</span><br><span class="line">%&gt;</span><br><span class="line">&lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;people&quot;</span> items=<span class="string">&quot;$&#123;list&#125;&quot;</span>&gt;</span><br><span class="line">    &lt;c:out value=<span class="string">&quot;$&#123;people&#125;&quot;</span>/&gt;&lt;br&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br><span class="line">&lt;hr&gt;</span><br><span class="line">&lt;c:forEach <span class="keyword">var</span>=<span class="string">&quot;people&quot;</span> items=<span class="string">&quot;$&#123;list&#125;&quot;</span> begin=<span class="string">&quot;1&quot;</span> end=<span class="string">&quot;3&quot;</span> step=<span class="string">&quot;2&quot;</span>&gt;</span><br><span class="line">    &lt;c:out value=<span class="string">&quot;$&#123;people&#125;&quot;</span>/&gt;&lt;br&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
         </div>
 
