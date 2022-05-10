@@ -9,7 +9,7 @@
     
     <title>
         
-            Spring之注解开发 |
+            Spring之使用JavaConfig实现配置 |
         
         念~旭
     </title>
@@ -156,7 +156,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Spring之注解开发</span>
+            <span class="title-hover-animation">Spring之使用JavaConfig实现配置</span>
         </div>
 
         
@@ -175,8 +175,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-05-09 17:20:32</span>
-        <span class="mobile">2022-05-09 17:20</span>
+        <span class="pc">2022-05-10 10:17:55</span>
+        <span class="mobile">2022-05-10 10:17</span>
     </span>
     
     
@@ -195,12 +195,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>841 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>299 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
         </span>
     
     
@@ -216,73 +216,32 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1.说明"></a>1.说明</h2><p>在spring4之后，想要使用注解形式，必须得要引入aop的包，引入spring-webmvc时就已经引入了</p>
-<p>在配置文件当中，还得要引入一个context约束</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-Bean的实现"><a href="#2-Bean的实现" class="headerlink" title="2.Bean的实现"></a>2.Bean的实现</h2><p>我们之前都是使用 bean 的标签进行bean注入，但是实际开发中，我们一般都会使用注解！ </p>
+            <p>JavaConfig 原来是 Spring 的一个子项目，它通过 Java 类的方式提供 Bean 的定义信息，在 Spring4 的 版本， JavaConfig 已正式成为 Spring4 的核心功能 。</p>
 <ol>
-<li>在xml中配置扫描哪些包下的注解</li>
+<li>编写一个实体类，Dog</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--指定注解扫描包--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.fang.pojo&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;dog&quot;)</span></span><br><span class="line">   <span class="keyword">public</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li>在指定包下编写类，增加注解</li>
+<li>新建一个config配置包，编写一个MyConfig配置类</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;people&quot;)</span></span><br><span class="line"><span class="comment">// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;xiao&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//代表这是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span> <span class="comment">//通过方法注册一个bean，这里的返回值就Bean的类型，方法名就是bean的id！</span></span><br><span class="line">    <span class="keyword">public</span> Dog <span class="title function_">dog</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>测试</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        <span class="type">People</span> <span class="variable">people</span> <span class="operator">=</span> context.getBean(<span class="string">&quot;people&quot;</span>, People.class);</span><br><span class="line">        System.out.println(people.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(MyConfig.class);</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">dog</span> <span class="operator">=</span> (Dog) applicationContext.getBean(<span class="string">&quot;dog&quot;</span>);</span><br><span class="line">        System.out.println(dog.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-属性注入"><a href="#3-属性注入" class="headerlink" title="3.属性注入"></a>3.属性注入</h2><p>使用注解注入属性 </p>
+<p><strong>导入其他配置如何做呢？</strong></p>
 <ol>
-<li>可以不用提供set方法，直接在直接名上添加@value(“值”)</li>
+<li>我们再编写一个配置类！</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;people&quot;)</span></span><br><span class="line"><span class="comment">// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;xiao&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String name ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span> <span class="comment">//代表这是一个配置类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig2</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li>如果提供了set方法，在set方法上添加@value(“值”)</li>
+<li>在之前的配置类中我们来选择导入这个配置类</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;people&quot;)</span></span><br><span class="line"><span class="comment">// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name ;</span><br><span class="line">    <span class="meta">@Value(&quot;xiao&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-衍生注解"><a href="#4-衍生注解" class="headerlink" title="4.衍生注解"></a>4.衍生注解</h2><p>我们这些注解，就是替代了在配置文件当中配置步骤而已！更加的方便快捷！ </p>
-<p><strong>@Component三个衍生注解</strong> </p>
-<p>为了更好的进行分层，Spring可以使用其它三个注解，功能一样，目前使用哪一个功能都一样。 </p>
-<ul>
-<li>@Controller：controller层 </li>
-<li>@Service：service层 </li>
-<li>@Repository：dao层</li>
-</ul>
-<p>写上这些注解，就相当于将这个类交给Spring管理装配了！</p>
-<h2 id="5-作用域"><a href="#5-作用域" class="headerlink" title="5.作用域"></a>5.作用域</h2><p>@scope </p>
-<ul>
-<li>singleton：默认的，Spring会采用单例模式创建这个对象。关闭工厂 ，所有的对象都会销毁。 </li>
-<li>prototype：多例模式。关闭工厂 ，所有的对象不会销毁。内部的垃圾回收机制会回收</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component(&quot;people&quot;)</span></span><br><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="comment">// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String name ;</span><br><span class="line">    <span class="meta">@Value(&quot;xiao&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-小结"><a href="#6-小结" class="headerlink" title="6.小结"></a>6.小结</h2><p><strong>XML与注解比较</strong> </p>
-<ul>
-<li>XML可以适用任何场景 ，结构清晰，维护方便 </li>
-<li>注解不是自己提供的类使用不了，开发简单方便</li>
-</ul>
-<p><strong>xml与注解整合开发</strong> ：推荐最佳实践 </p>
-<ul>
-<li>xml管理Bean </li>
-<li>注解完成属性注入 </li>
-<li>使用过程中， 可以不用扫描，扫描是为了类上的注解</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>作用：</strong> </p>
-<ul>
-<li>进行注解驱动注册，从而使注解生效 </li>
-<li>用于激活那些已经在spring容器里注册过的bean上面的注解，也就是显示的向Spring注册 </li>
-<li>如果不扫描包，就需要手动配置bean </li>
-<li>如果不加注解驱动，则注入的值为null！</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span><span class="comment">//代表这是一个配置类</span></span><br><span class="line"><span class="meta">@Import(MyConfig2.class)</span><span class="comment">//导入合并其他配置类，类似于配置文件中的 inculde 标签</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span> <span class="comment">//通过方法注册一个bean，这里的返回值就Bean的类型，方法名就是bean的id！</span></span><br><span class="line">    <span class="keyword">public</span> Dog <span class="title function_">dog</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -290,11 +249,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Spring之注解开发</li>
+        <li>Post title：Spring之使用JavaConfig实现配置</li>
         <li>Post author：Fang</li>
-        <li>Create time：2022-05-09 17:20:32</li>
+        <li>Create time：2022-05-10 10:17:55</li>
         <li>
-            Post link：https://ainianxu.github.io/2022/05/09/Spring之注解开发/
+            Post link：https://ainianxu.github.io/2022/05/10/Spring之使用JavaConfig实现配置/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -321,13 +280,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/05/10/Spring%E4%B9%8B%E4%BD%BF%E7%94%A8JavaConfig%E5%AE%9E%E7%8E%B0%E9%85%8D%E7%BD%AE/"
+                           href="/2022/05/10/Spring%E4%B9%8B%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Spring之使用JavaConfig实现配置</span>
+                                <span class="post-nav-title-item">Spring之代理模式</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -337,10 +296,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/05/09/Spring%E4%B9%8B%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8DBean/"
+                           href="/2022/05/09/Spring%E4%B9%8B%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Spring之自动装配Bean</span>
+                                <span class="post-nav-title-item">Spring之注解开发</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -558,7 +517,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">1.说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Bean%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">2.Bean的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">3.属性注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A1%8D%E7%94%9F%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.衍生注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">5.</span> <span class="nav-text">5.作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B0%8F%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">6.小结</span></a></li></ol>
+        
     </div>
 </div>
         </aside>
