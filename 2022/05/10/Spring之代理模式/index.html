@@ -195,12 +195,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.1k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
         </span>
     
     
@@ -289,6 +289,77 @@
                      data-src="https://s2.loli.net/2022/05/10/3ZcHGvTySdj7EVi.png"
                       alt="image-20220510113816241"
                 ></p>
+<h2 id="2-动态代理"><a href="#2-动态代理" class="headerlink" title="2.动态代理"></a>2.动态代理</h2><ul>
+<li>动态代理的角色和静态代理的一样 . </li>
+<li>动态代理的代理类是动态生成的 . 静态代理的代理类是我们提前写好的 </li>
+<li>动态代理分为两类 : 一类是基于接口动态代理 , 一类是基于类的动态代理 <ul>
+<li>基于接口的动态代理—-JDK动态代理 </li>
+<li>基于类的动态代理–cglib </li>
+<li>现在用的比较多的是 javasist 来生成动态代理 . 百度一下javasist</li>
+<li>我们这里使用JDK的原生代码来实现，其余的道理都是一样的！</li>
+</ul>
+</li>
+</ul>
+<p>JDK的动态代理需要了解两个类：核心 : InvocationHandler 和 Proxy ， 打开JDK帮助文档看看</p>
+<p><strong>【InvocationHandler：调用处理程序】</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/05/10/ThOU6trS97KceIn.png"
+                      alt="image-20220510191422190"
+                ></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object <span class="title function_">invoke</span><span class="params">(Object proxy, 方法 method, Object[] args)</span>；</span><br><span class="line"><span class="comment">//参数</span></span><br><span class="line"><span class="comment">//proxy - 调用该方法的代理实例</span></span><br><span class="line"><span class="comment">//method -所述方法对应于调用代理实例上的接口方法的实例。 方法对象的声明类将是该方法声明的接口，它可以是代理类继承该方法的代理接口的超级接口。</span></span><br><span class="line"><span class="comment">//args -包含的方法调用传递代理实例的参数值的对象的阵列，或null如果接口方法没有参数。 原始类型的参数包含在适当的原始包装器类的实例中，例如java.lang.Integer或java.lang.Boolean</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>【Proxy : 代理】</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/05/10/a5ew8djfU9QiFBg.png"
+                      alt="image-20220510191940726"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/05/10/3nftOL7eruEbSBD.png"
+                      alt="image-20220510192040032"
+                ></p>
+<p><strong>代码实现</strong></p>
+<ol>
+<li>Rent . java 即抽象角色</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象角色：租房</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Rent</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">rent</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Host . java 即真实角色</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//真实角色: 房东，房东要出租房子</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Host</span> <span class="keyword">implements</span> <span class="title class_">Rent</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">rent</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;房屋出租&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>ProxyInvocationHandler. java 即代理角色</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Rent rent;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRent</span><span class="params">(Rent rent)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.rent = rent;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//生成代理类，重点是第二个参数，获取要代理的抽象角色！之前都是一个角色，现在可以代理一类角色</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getProxy</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(<span class="built_in">this</span>.getClass().getClassLoader(),</span><br><span class="line">                rent.getClass().getInterfaces(),<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// proxy : 代理类 method : 代理类的调用处理程序的方法对象.</span></span><br><span class="line">    <span class="comment">// 处理代理实例上的方法调用并返回结果</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span></span><br><span class="line">            Throwable &#123;</span><br><span class="line">        seeHouse();</span><br><span class="line">        <span class="comment">//核心：本质利用反射实现！</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(rent, args);</span><br><span class="line">        fare();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//看房</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">seeHouse</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;带房客看房&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//收中介费</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">fare</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;收中介费&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Client . java</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//租客</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//真实角色</span></span><br><span class="line">        <span class="type">Host</span> <span class="variable">host</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Host</span>();</span><br><span class="line">        <span class="comment">//代理实例的调用处理程序</span></span><br><span class="line">        <span class="type">ProxyInvocationHandler</span> <span class="variable">pih</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyInvocationHandler</span>();</span><br><span class="line">        pih.setRent(host); <span class="comment">//将真实角色放置进去！</span></span><br><span class="line">        <span class="type">Rent</span> <span class="variable">proxy</span> <span class="operator">=</span> (Rent)pih.getProxy(); <span class="comment">//动态生成对应的代理类！</span></span><br><span class="line">        proxy.rent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>核心：一个动态代理 , 一般代理某一类业务 , 一个动态代理可以代理多个类，代理的是接口！、</strong></p>
+<h3 id="1-深化理解"><a href="#1-深化理解" class="headerlink" title="1.深化理解"></a>1.深化理解</h3><p>我们来使用动态代理实现代理我们后面写的UserService！ </p>
+<p>我们也可以编写一个通用的动态代理实现的类！所有的代理对象设置为Object即可！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTarget</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//生成代理类，重点是第二个参数，获取要代理的抽象角色！之前都是一个角色，现在可以代理一类角色</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getProxy</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(<span class="built_in">this</span>.getClass().getClassLoader(),</span><br><span class="line">                target.getClass().getInterfaces(),<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// proxy : 代理类 method : 代理类的调用处理程序的方法对象.</span></span><br><span class="line">    <span class="comment">// 处理代理实例上的方法调用并返回结果</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        log(method.getName());</span><br><span class="line">        <span class="comment">//核心：本质利用反射实现！</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">log</span><span class="params">(String methodName)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;执行了&quot;</span>+methodName+<span class="string">&quot;方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Client</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//真实角色</span></span><br><span class="line">        <span class="type">UserServiceImpl</span> <span class="variable">userService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserServiceImpl</span>();</span><br><span class="line">        <span class="comment">//代理实例的调用处理程序</span></span><br><span class="line">        <span class="type">ProxyInvocationHandler</span> <span class="variable">pih</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxyInvocationHandler</span>();</span><br><span class="line">        pih.setTarget(userService); <span class="comment">//将真实角色放置进去！</span></span><br><span class="line">        <span class="type">UserService</span> <span class="variable">proxy</span> <span class="operator">=</span> (UserService)pih.getProxy(); <span class="comment">//动态生成对应的代理类！</span></span><br><span class="line">        proxy.delete();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line">执行了delete方法</span><br><span class="line">删除了一个用户</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-动态代理的好处"><a href="#2-动态代理的好处" class="headerlink" title="2.动态代理的好处"></a>2.动态代理的好处</h3><p>静态代理有的它都有，静态代理没有的，它也有！ </p>
+<ul>
+<li>可以使得我们的真实角色更加纯粹 . 不再去关注一些公共的事情 . </li>
+<li>公共的业务由代理来完成 . 实现了业务的分工 , </li>
+<li>公共业务发生扩展时变得更加集中和方便 . </li>
+<li>一个动态代理 , 一般代理某一类业务 </li>
+<li>一个动态代理可以代理多个类，代理的是接口！</li>
+</ul>
 
         </div>
 
@@ -323,6 +394,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/05/11/Spring%E4%B9%8BAOP/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Spring之AOP</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -549,7 +635,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">1.静态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.静态代理的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%86%8D%E7%90%86%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">2.静态代理再理解</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">1.静态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.静态代理的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%86%8D%E7%90%86%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">2.静态代理再理解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">2.动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">1.深化理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">2.2.</span> <span class="nav-text">2.动态代理的好处</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

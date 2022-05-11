@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Anylogic之基于百度地图做热力图 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Anylogic之基于百度地图做热力图</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-25 22:51:01</span>
+        <span class="mobile">2022-04-25 22:51</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Anylogic/">Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>第一步：我们先把先把准备好的数据转化成固定格式<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/25/ZDyXjiWJLUxaT2O.png"
+                      alt="image-20220425225404976"
+                ></p>
+<ul>
+<li><p>通过以下代码进行转化（使用的是pycharm）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gain_location</span>(<span class="params">adress</span>):</span><br><span class="line">    api_url =<span class="string">&quot;http://api.map.baidu.com/geocoding/v3/?address=&#123;adress&#125;&amp;output=json&amp;ak=你自己的密钥&amp;callback=showLocation&quot;</span>.<span class="built_in">format</span>(adress=adress)</span><br><span class="line">    r = requests.get(api_url)</span><br><span class="line">    r = r.text</span><br><span class="line">    r = r.strip(<span class="string">&#x27;showLocation&amp;&amp;showLocation(&#x27;</span>)</span><br><span class="line">    r = r.strip(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">    jsonData = json.loads(r)  <span class="comment"># 将json字符串转换为字典类型转为字典格式类型</span></span><br><span class="line">    <span class="keyword">return</span> jsonData</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">r&#x27;附件2 北京地铁各站点进站客流分时汇总表.csv&#x27;</span>,encoding = <span class="string">&#x27;gb18030&#x27;</span>) <span class="keyword">as</span> csvfile: <span class="comment">#打开csv</span></span><br><span class="line">    reader = csv.reader(csvfile)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> reader: <span class="comment">#读取csv里的数据</span></span><br><span class="line">        <span class="keyword">if</span> reader.line_num == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> gain_location(line[<span class="number">0</span>]).get(<span class="string">&#x27;result&#x27;</span>, <span class="literal">False</span>):</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                lng = gain_location(line[<span class="number">0</span>])[<span class="string">&#x27;result&#x27;</span>][<span class="string">&#x27;location&#x27;</span>][<span class="string">&#x27;lng&#x27;</span>]  <span class="comment"># 经度</span></span><br><span class="line">                lat = gain_location(line[<span class="number">0</span>])[<span class="string">&#x27;result&#x27;</span>][<span class="string">&#x27;location&#x27;</span>][<span class="string">&#x27;lat&#x27;</span>]  <span class="comment"># 纬度</span></span><br><span class="line">                count = line[<span class="number">1</span>]  <span class="comment"># 地名计数</span></span><br><span class="line">                str_temp = <span class="string">&#x27;&#123;&quot;lat&quot;:&#x27;</span> + <span class="built_in">str</span>(lat) + <span class="string">&#x27;,&quot;lng&quot;:&#x27;</span> + <span class="built_in">str</span>(lng) + <span class="string">&#x27;,&quot;count&quot;:&#x27;</span> + <span class="built_in">str</span>(count) + <span class="string">&#x27;&#125;,&#x27;</span>  <span class="comment"># 将经度，纬度，计数变成格式</span></span><br><span class="line">                <span class="built_in">print</span>(str_temp)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="built_in">print</span>(line[<span class="number">0</span>])  <span class="comment"># 打印出出问题的地名</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用上面代码转化csv图片得到的数据是<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/04/25/JLZYzxGrkt2bwdQ.png"
+                      alt="image-20220425225738432"
+                ></p>
+</li>
+<li><p>然后我们将百度地图的热力图示例复制过来稍作修该</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0, user-scalable=no&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;//api.map.baidu.com/api?v=2.0&amp;ak=你自己的密钥&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;//api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>热力图功能示例<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">ul</span>,<span class="selector-tag">li</span>&#123;<span class="attribute">list-style</span>: none;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>;<span class="attribute">float</span><span class="selector-pseudo">:left</span>;&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">html</span>&#123;<span class="attribute">height</span>:<span class="number">100%</span>&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">body</span>&#123;<span class="attribute">height</span>:<span class="number">100%</span>;<span class="attribute">margin</span>:<span class="number">0px</span>;<span class="attribute">padding</span>:<span class="number">0px</span>;<span class="attribute">font-family</span>:<span class="string">&quot;微软雅黑&quot;</span>;&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-id">#container</span>&#123;<span class="attribute">height</span>:<span class="number">500px</span>;<span class="attribute">width</span>:<span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-id">#r-result</span>&#123;<span class="attribute">width</span>:<span class="number">100%</span>;&#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;r-result&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>  <span class="attr">onclick</span>=<span class="string">&quot;openHeatmap();&quot;</span> <span class="attr">value</span>=<span class="string">&quot;显示热力图&quot;</span>/&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>  <span class="attr">onclick</span>=<span class="string">&quot;closeHeatmap();&quot;</span> <span class="attr">value</span>=<span class="string">&quot;关闭热力图&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> map = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;container&quot;</span>);          <span class="comment">// 创建地图实例</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> point = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.438927</span>, <span class="number">39.923508</span>);<span class="comment">//中心点坐标</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">centerAndZoom</span>(point, <span class="number">15</span>);             <span class="comment">// 初始化地图，设置中心点坐标和地图级别</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">enableScrollWheelZoom</span>(); <span class="comment">// 允许滚轮缩放</span></span></span><br><span class="line"><span class="language-javascript"><span class="comment">//这个就是上面我们输出出来的数据</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> points =[</span></span><br><span class="line"><span class="language-javascript">    &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.914537522974534</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.50836872513715</span>,<span class="string">&quot;count&quot;</span>:<span class="number">37794</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.914537522974534</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.50836872513715</span>,<span class="string">&quot;count&quot;</span>:<span class="number">35550</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.91645575947582</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.46703499370652</span>,<span class="string">&quot;count&quot;</span>:<span class="number">46435</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">22.828572041904824</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">120.23700834379214</span>,<span class="string">&quot;count&quot;</span>:<span class="number">33390</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.920195646104496</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.4342834036266</span>,<span class="string">&quot;count&quot;</span>:<span class="number">31753</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.92315809391276</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.42394965636201</span>,<span class="string">&quot;count&quot;</span>:<span class="number">14195</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.92223158631893</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">116.4186675301328</span>,<span class="string">&quot;count&quot;</span>:<span class="number">33208</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">31.34224126103566</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">121.2789357477942</span>,<span class="string">&quot;count&quot;</span>:<span class="number">33006</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">   &#123;<span class="string">&quot;lat&quot;</span>:<span class="number">39.08308716818319</span>,<span class="string">&quot;lng&quot;</span>:<span class="number">117.2690831157461</span>,<span class="string">&quot;count&quot;</span>:<span class="number">35867</span>&#125;,</span></span><br><span class="line"><span class="language-javascript">];</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span>(!<span class="title function_">isSupportCanvas</span>())&#123;</span></span><br><span class="line"><span class="language-javascript">       <span class="title function_">alert</span>(<span class="string">&#x27;热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">   <span class="comment">//详细的参数,可以查看heatmap.js的文档 https://github.com/pa7/heatmap.js/blob/master/README.md</span></span></span><br><span class="line"><span class="language-javascript">   <span class="comment">//参数说明如下:</span></span></span><br><span class="line"><span class="language-javascript">   <span class="comment">/* visible 热力图是否显示,默认为true</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">     * opacity 热力的透明度,1-100</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">     * radius 势力图的每个点的半径大小</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">     * gradient  &#123;JSON&#125; 热力图的渐变区间 . gradient如下所示</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">     * &#123;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         .2:&#x27;rgb(0, 255, 255)&#x27;,</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         .5:&#x27;rgb(0, 110, 255)&#x27;,</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         .8:&#x27;rgb(100, 0, 255)&#x27;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">      &#125;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">      其中 key 表示插值的位置, 0~1.</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">          value 为颜色值.</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">     */</span></span></span><br><span class="line"><span class="language-javascript">   heatmapOverlay = <span class="keyword">new</span> <span class="title class_">BMapLib</span>.<span class="title class_">HeatmapOverlay</span>(&#123;<span class="string">&quot;radius&quot;</span>:<span class="number">40</span>&#125;);<span class="comment">//热力图半径</span></span></span><br><span class="line"><span class="language-javascript">   map.<span class="title function_">addOverlay</span>(heatmapOverlay);</span></span><br><span class="line"><span class="language-javascript">   heatmapOverlay.<span class="title function_">setDataSet</span>(&#123;<span class="attr">data</span>:points,<span class="attr">max</span>:<span class="number">40000</span>&#125;);</span></span><br><span class="line"><span class="language-javascript">   <span class="comment">//是否显示热力图</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">openHeatmap</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">        heatmapOverlay.<span class="title function_">show</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">   <span class="keyword">function</span> <span class="title function_">closeHeatmap</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">        heatmapOverlay.<span class="title function_">hide</span>();</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">   <span class="title function_">closeHeatmap</span>();</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">setGradient</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">       <span class="comment">/*格式如下所示:</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">      &#123;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         0:&#x27;rgb(102, 255, 0)&#x27;,</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         .5:&#x27;rgb(255, 170, 0)&#x27;,</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">         1:&#x27;rgb(255, 0, 0)&#x27;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">      &#125;*/</span></span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> gradient = &#123;&#125;;</span></span><br><span class="line"><span class="language-javascript">       <span class="keyword">var</span> colors = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;input[type=&#x27;color&#x27;]&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">       colors = [].<span class="property">slice</span>.<span class="title function_">call</span>(colors,<span class="number">0</span>);</span></span><br><span class="line"><span class="language-javascript">       colors.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">ele</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">         gradient[ele.<span class="title function_">getAttribute</span>(<span class="string">&quot;data-key&quot;</span>)] = ele.<span class="property">value</span>;</span></span><br><span class="line"><span class="language-javascript">       &#125;);</span></span><br><span class="line"><span class="language-javascript">        heatmapOverlay.<span class="title function_">setOptions</span>(&#123;<span class="string">&quot;gradient&quot;</span>:gradient&#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">   <span class="comment">//判断浏览区是否支持canvas</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">isSupportCanvas</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> elem = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;canvas&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> !!(elem.<span class="property">getContext</span> &amp;&amp; elem.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Anylogic之基于百度地图做热力图</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-04-25 22:51:01</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/04/25/Anylogic之基于百度地图做热力图/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Anylogic/">#Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/04/28/JavaWeb%E4%B9%8B%E7%9B%91%E5%90%AC%E5%99%A8GUI%E4%B8%AD%E7%9A%84%E7%90%86%E8%A7%A3/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaWeb之监听器GUI中的理解</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/25/JavaWeb%E4%B9%8B%E7%9B%91%E5%90%AC%E5%99%A8/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">JavaWeb之监听器</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

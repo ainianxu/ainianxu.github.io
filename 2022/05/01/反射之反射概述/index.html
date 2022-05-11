@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            反射之反射概述 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">反射之反射概述</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-01 09:27:18</span>
+        <span class="mobile">2022-05-01 09:27</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="1、静态-VS-动态语言"><a href="#1、静态-VS-动态语言" class="headerlink" title="1、静态 VS 动态语言"></a>1、静态 VS 动态语言</h2><p><strong>动态语言</strong></p>
+<ul>
+<li><p>是一类在运行时可以改变其结构的语言：例如新的函数、对象、甚至代码可以被引进，已有的 函数可以被删除或是其他结构上的变化。通俗点说就是在运行时代码可以根据某些条件改变自 身结构。</p>
+</li>
+<li><p>主要动态语言：Object-C、C#、JavaScript、PHP、Python等。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//体现动态语言的代码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">var</span> x = <span class="string">&quot;var a=3;var b=5;alert(a+b)&quot;</span>;</span><br><span class="line"><span class="built_in">eval</span>(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>静态语言</strong> </p>
+<ul>
+<li>与动态语言相对应的，运行时结构不可变的语言就是静态语言。如Java、C、C++。</li>
+<li>Java不是动态语言，但Java可以称之为“准动态语言”。即Java有一定的动态性，我们可以利用 反射机制获得类似动态语言的特性。Java的动态性让编程的时候更加灵活！</li>
+</ul>
+<h2 id="2、Java-Reflection"><a href="#2、Java-Reflection" class="headerlink" title="2、Java Reflection"></a>2、Java Reflection</h2><p>Reflection（反射）是Java被视为动态语言的关键，反射机制允许程序在执行期借助于Reflection API取 得任何类的内部信息，并能直接操作任意对象的内部属性及方法。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">c</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;java.lang.String&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>加载完类之后，在堆内存的方法区中就产生了一个Class类型的对象（一个类只有一个Class对象），这个对象就包含了完整的类的结构信息。我们可以通过这个对象看到类的结构。这个对象就像一面镜子， 透过这个镜子看到类的结构，所以，我们形象的称之为：反射<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/05/01/3AwSa9U1Bkjs6KD.png"
+                      alt="image-20220501093231900"
+                ></p>
+<h2 id="3-获得反射对象"><a href="#3-获得反射对象" class="headerlink" title="3. 获得反射对象"></a>3. 获得反射对象</h2><p><strong>Java反射机制提供的功能</strong></p>
+<ul>
+<li>在运行时判断任意一个对象所属的类 </li>
+<li>在运行时构造任意一个类的对象 </li>
+<li>在运行时判断任意一个类所具有的成员变量和方法 </li>
+<li>在运行时获取泛型信息 </li>
+<li>在运行时调用任意一个对象的成员变量和方法 </li>
+<li>在运行时处理注解 生成动态代理 ……</li>
+</ul>
+<p><strong>Java反射优点和缺点</strong> </p>
+<ul>
+<li>优点：可以实现动态创建对象和编译，体现出很大的灵活性 ! </li>
+<li>缺点：对性能有影响。使用反射基本上是一种解释操作，我们可以告诉JVM，我们希望做什么并且它满足我们的要求。这类操作总是慢于直接执行相同的操作。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span>  &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        Class&lt;?&gt; c1 = Class.forName(<span class="string">&quot;User&quot;</span>);</span><br><span class="line">        <span class="comment">//一个类被加载后 , 类的整个结构信息会被放到对应的Class对象中</span></span><br><span class="line">        System.out.println(c1);</span><br><span class="line"><span class="comment">//一个类只对应一个Class对象</span></span><br><span class="line">        Class&lt;?&gt; c2 = Class.forName(<span class="string">&quot;User&quot;</span>);</span><br><span class="line">        System.out.println(c1.hashCode());</span><br><span class="line">        System.out.println(c2.hashCode());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1. 创建一个实体类</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> id;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">User</span><span class="params">()</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">User</span><span class="params">(<span class="type">int</span> id, <span class="type">int</span> age, String name)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.id = id;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">            <span class="built_in">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> id;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.id = id;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> age;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;User&#123;&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;id=&quot;</span> + id +</span><br><span class="line">                    <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                    <span class="string">&quot;, name=&quot;</span> + name +</span><br><span class="line">                    <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-得到Class类的几种方式"><a href="#4-得到Class类的几种方式" class="headerlink" title="4.得到Class类的几种方式"></a>4.得到Class类的几种方式</h2><p>在Object类中定义了以下的方法，此方法将被所有子类继承</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> Class <span class="title function_">getClass</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上的方法返回值的类型是一个Class类，此类是Java反射的源头，实际上所谓反射从程序的运行结果来 看也很好理解，即：可以通过对象反射求出类的名称。</p>
+<p>对象照镜子后可以得到的信息：某个类的属性、方法和构造器、某个类到底实现了哪些接口。对于每个 类而言，JRE 都为其保留一个不变的 Class 类型的对象。一个 Class 对象包含了特定某个结构 (class&#x2F;interface&#x2F;enum&#x2F;annotation&#x2F;primitive type&#x2F;void&#x2F;[])的有关信息。</p>
+<ul>
+<li><p>Class 本身也是一个类 </p>
+</li>
+<li><p>Class 对象只能由系统建立对象 </p>
+</li>
+<li><p>一个加载的类在 JVM 中只会有一个Class实例 </p>
+</li>
+<li><p>一个Class对象对应的是一个加载到JVM中的一个.class文件 </p>
+</li>
+<li><p>每个类的实例都会记得自己是由哪个Class 实例所生成 </p>
+</li>
+<li><p>通过Class可以完整地得到一个类中的所有被加载的结构 </p>
+</li>
+<li><p>Class类是Reflection的根源，针对任何你想动态加载、运行的类，唯有先获得相应的Class对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span>  &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        System.out.println(<span class="string">&quot;这个人是：&quot;</span>+person.name);</span><br><span class="line">        <span class="comment">//获得class办法一:通过对象获得</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> person.getClass();</span><br><span class="line">        <span class="comment">////获得class办法二:通过字符串获得(包名+类名)</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;Student&quot;</span>);</span><br><span class="line">        <span class="comment">//获得class办法三:通过类的静态成员class获得</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class3</span> <span class="operator">=</span> Person.class;</span><br><span class="line">        <span class="comment">//获得class办法四:只针对内置的基本数据类型</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class4</span> <span class="operator">=</span> Integer.TYPE;</span><br><span class="line">        <span class="comment">//获得父类类型</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">class5</span> <span class="operator">=</span> class2.getSuperclass();</span><br><span class="line">        System.out.println(class1);</span><br><span class="line">        System.out.println(class2);</span><br><span class="line">        System.out.println(class3);</span><br><span class="line">        System.out.println(class4);</span><br><span class="line">        System.out.println(class5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Person&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = <span class="string">&quot;学生&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = <span class="string">&quot;老师&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果</span></span><br><span class="line">这个人是：学生</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>Class类的常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static ClassforName(String name)</td>
+<td>返回指定类名name的Class对象</td>
+</tr>
+<tr>
+<td>Object newInstance()</td>
+<td>调用缺省构造函数，返回Class对象的一个实例</td>
+</tr>
+<tr>
+<td>getName()</td>
+<td>返回此Class对象所表示的实体（类，接口，数组类或 void）的名称。</td>
+</tr>
+<tr>
+<td>Class getSuperClass()</td>
+<td>返回当前Class对象的父类的Class对象</td>
+</tr>
+<tr>
+<td>Class[] getinterfaces()</td>
+<td>获取当前Class对象的接口</td>
+</tr>
+<tr>
+<td>ClassLoader getClassLoader()</td>
+<td>返回该类的类加载器</td>
+</tr>
+<tr>
+<td>Constructor[] getConstructors()</td>
+<td>返回一个包含某些Constructor对象的数组</td>
+</tr>
+<tr>
+<td>Method getMothed(String name,Class.. T)</td>
+<td>返回一个Method对象，此对象的形参类型为paramType</td>
+</tr>
+<tr>
+<td>Field[] getDeclaredFields()</td>
+<td>返回Field对象的一个数组</td>
+</tr>
+</tbody></table>
+<p><strong>获取Class类的实例</strong></p>
+<p>a）若已知具体的类，通过类的class属性获取，该方法最为安全可靠，程序性能最高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Person.class;</span><br></pre></td></tr></table></figure>
+
+<p>b）已知某个类的实例，调用该实例的getClass()方法获取Class对象 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> person.getClass();</span><br></pre></td></tr></table></figure>
+
+<p>c）已知一个类的全类名，且该类在类路径下，可通过Class类的静态方法forName()获取，可能抛出 ClassNotFoundException </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> Class.forName(<span class="string">&quot;demo01.Student&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>d）内置基本数据类型可以直接用类名.Type </p>
+<p>e）还可以利用ClassLoader我们之后讲解</p>
+<h2 id="5-所有类型的Class对象"><a href="#5-所有类型的Class对象" class="headerlink" title="5.所有类型的Class对象"></a>5.所有类型的Class对象</h2><ul>
+<li><p>class：外部类，成员(成员内部类，静态内部类)，局部内部类，匿名内部类。 </p>
+</li>
+<li><p>interface：接口 </p>
+</li>
+<li><p>[]：数组 </p>
+</li>
+<li><p>enum：枚举 </p>
+</li>
+<li><p>annotation：注解@interface </p>
+</li>
+<li><p>primitive type：基本数据类型 </p>
+</li>
+<li><p>void</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c1</span> <span class="operator">=</span> Object.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c2</span> <span class="operator">=</span> Comparable.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c3</span> <span class="operator">=</span> String[].class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c4</span> <span class="operator">=</span> <span class="type">int</span>[][].class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c5</span> <span class="operator">=</span> ElementType.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c6</span> <span class="operator">=</span> Override.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c7</span> <span class="operator">=</span> Integer.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c8</span> <span class="operator">=</span> <span class="keyword">void</span>.class;</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c9</span> <span class="operator">=</span> Class.class;</span><br><span class="line">        <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="type">int</span>[] b = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c10</span> <span class="operator">=</span> a.getClass();</span><br><span class="line">        <span class="type">Class</span> <span class="variable">c11</span> <span class="operator">=</span> b.getClass();</span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        System.out.println(c2);</span><br><span class="line">        System.out.println(c3);</span><br><span class="line">        System.out.println(c4);</span><br><span class="line">        System.out.println(c5);</span><br><span class="line">        System.out.println(c6);</span><br><span class="line">        System.out.println(c7);</span><br><span class="line">        System.out.println(c8);</span><br><span class="line">        System.out.println(c9);</span><br><span class="line">        System.out.println(c10);</span><br><span class="line">        System.out.println(c11);</span><br><span class="line">        <span class="comment">//只要元素类型与维度一样,就是同一个Class</span></span><br><span class="line">        System.out.println(c11==c10);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Object</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">java</span>.lang.Comparable</span><br><span class="line">class [Ljava.lang.String;</span><br><span class="line">class [[I</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.annotation.ElementType</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">java</span>.lang.Override</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Integer</span><br><span class="line"><span class="keyword">void</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">java</span>.lang.Class</span><br><span class="line">class [I</span><br><span class="line">class [I</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：反射之反射概述</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-05-01 09:27:18</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/05/01/反射之反射概述/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%8F%8D%E5%B0%84/">#反射</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%8F%8D%E5%B0%84/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">反射之Java内存分析</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/01/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">注解之自定义注解</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%9D%99%E6%80%81-VS-%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1、静态 VS 动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Java-Reflection"><span class="nav-number">2.</span> <span class="nav-text">2、Java Reflection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%8E%B7%E5%BE%97%E5%8F%8D%E5%B0%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">3. 获得反射对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BE%97%E5%88%B0Class%E7%B1%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">4.得到Class类的几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%89%80%E6%9C%89%E7%B1%BB%E5%9E%8B%E7%9A%84Class%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">5.所有类型的Class对象</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
