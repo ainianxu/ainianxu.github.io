@@ -19,7 +19,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"你舍得放弃么？你愿意放弃么？你能......放弃么？"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -158,22 +158,29 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E6%98%A0%E5%B0%84%E5%99%A8%E8%AF%B4%E6%98%8E/">
-                        Mybatis之配置之映射器说明
+                    <a href="/2022/05/07/Mybatis%E4%B9%8B%E5%8A%A8%E6%80%81SQL%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/">
+                        Mybatis之动态SQL常用标签
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1.mappers
-映射器（mapper） : 定义映射SQL语句文件 
-既然 MyBatis 的行为其他元素已经配置完了，我们现在就要定义 SQL 映射语句了。但是首先我们 需要告诉 MyBatis 到哪里去找到这些语句。 Java 在自动查找这方...
+                        1.if 语句需求：根据作者名字和博客名字来查询博客！如果作者名字为空，那么只根据博客名字查询，反之，则 根据作者名来查询
+
+编写接口类
+
+1List&lt;Blog&gt; queryBlogIf(Map map);
+
+
+编写SQL语句
+
+1234...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 16:16:39 GMT+0800">2022-05-03</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat May 07 2022 16:28:30 GMT+0800">2022-05-07</span></span>
         
         
             <span class="home-article-tag">
@@ -190,7 +197,7 @@
         
     </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E6%98%A0%E5%B0%84%E5%99%A8%E8%AF%B4%E6%98%8E/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/07/Mybatis%E4%B9%8B%E5%8A%A8%E6%80%81SQL%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -200,21 +207,21 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%88%AB%E5%90%8D%E4%BC%98%E5%8C%96/">
-                        Mybatis之配置之别名优化
+                    <a href="/2022/05/07/Mybatis%E4%B9%8B%E5%8A%A8%E6%80%81SQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+                        Mybatis之动态SQL环境搭建
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        typeAliases优化类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全 限定名的冗余。
-在mybatis-config.xml中配置别名，当这样配置时， User 可以用在任何使用 com.k...
+                        介绍什么是动态SQL：动态SQL指的是根据不同的查询条件 , 生成不同的Sql语句。
+123456789101112131415官网描述：MyBatis 的强大特性之一便是它的动态 SQL。如果你有使用 JDBC 或其它类似框架的经验，你就能体会到根...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 15:55:46 GMT+0800">2022-05-03</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat May 07 2022 16:00:47 GMT+0800">2022-05-07</span></span>
         
         
             <span class="home-article-tag">
@@ -231,7 +238,7 @@
         
     </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%88%AB%E5%90%8D%E4%BC%98%E5%8C%96/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/07/Mybatis%E4%B9%8B%E5%8A%A8%E6%80%81SQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -241,25 +248,25 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%B1%9E%E6%80%A7%E4%BC%98%E5%8C%96/">
-                        Mybatis之配置之属性优化
+                    <a href="/2022/05/07/Mybatis%E4%B9%8B%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E5%A4%84%E7%90%86/">
+                        Mybatis之一对多的处理
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1.核心配置文件
-mybatis-config.xml 系统核心配置文件 
-MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 
-能配置的内容如下：
+                        一对多的理解： 
 
-1234567891011121314configuration（...
+一个老师拥有多个学生 
+如果对于老师这边，就是一个一对多的现象，即从一个老师下面拥有一群学生（集合）！
+
+1.实体类编写123456@Datapublic class Student &#123;    private int i...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 15:15:57 GMT+0800">2022-05-03</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat May 07 2022 10:33:42 GMT+0800">2022-05-07</span></span>
         
         
             <span class="home-article-tag">
@@ -276,7 +283,7 @@ MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性
         
     </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%B1%9E%E6%80%A7%E4%BC%98%E5%8C%96/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/07/Mybatis%E4%B9%8B%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E5%A4%84%E7%90%86/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -286,28 +293,25 @@ MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8BMap%E5%92%8C%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/">
-                        Mybatis之Map和模糊查询拓展
+                    <a href="/2022/05/05/Mybatis%E4%B9%8B%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86/">
+                        Mybatis之多对一的处理
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1.万能的Map
-在接口方法中，参数直接传递Map；
+                        多对一的理解： 
 
-12//使用MapUser selectUserByNP2(Map&lt;String,Object&gt; map);
+多个学生对应一个老师 
+如果对于学生这边，就是一个多对一的现象，即从学生这边关联一个老师！
 
-
-编写sql语句的时候，需要传递参数类型，参数类型为map
-
-123&...
+1.数据库设计12345678910111213141516171819CREATE TABLE `teacher` (        ...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 11:25:13 GMT+0800">2022-05-03</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 19:00:54 GMT+0800">2022-05-05</span></span>
         
         
             <span class="home-article-tag">
@@ -324,7 +328,7 @@ MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性
         
     </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8BMap%E5%92%8C%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/05/Mybatis%E4%B9%8B%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -334,24 +338,21 @@ MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8BMyBatis%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/">
-                        Mybatis之MyBatis实现CRUD操作
+                    <a href="/2022/05/05/Mybatis%E4%B9%8B%E6%B3%A8%E8%A7%A3%E5%A2%9E%E5%88%A0%E6%94%B9/">
+                        Mybatis之注解增删改
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1.namespace配置文件中namespace中的名称为对应Mapper接口或者Dao接口的完整包名,必须一致！
-2.select
-select标签是mybatis中最常用的标签之一 
-select语句有很多属性可以详细配置每一条SQL语句 
-i...
+                        1.使用注解实现增删改查改造MybatisUtils工具类的getSession( ) 方法，重载实现。（就是加一个true）
+123public static SqlSession getSession()&#123;    return sqlS...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 10:03:58 GMT+0800">2022-05-03</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 17:30:15 GMT+0800">2022-05-05</span></span>
         
         
             <span class="home-article-tag">
@@ -368,7 +369,7 @@ i...
         
     </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8BMyBatis%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/05/Mybatis%E4%B9%8B%E6%B3%A8%E8%A7%A3%E5%A2%9E%E5%88%A0%E6%94%B9/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -378,111 +379,21 @@ i...
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/02/Mybatis%E4%B9%8BMyBatis%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">
-                        Mybatis之MyBatis第一个程序
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        第一个Mybatis程序思路流程：搭建环境–&gt;导入Mybatis—&gt;编写代码—&gt;测试
-1.我们先搭建实验数据库，我是直接在IDEA中先连接上数据库，然后输入以下代码
-123456789101112create database `m...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 02 2022 17:07:37 GMT+0800">2022-05-02</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/02/Mybatis%E4%B9%8BMyBatis%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/02/Mybatis%E4%B9%8B%E4%BB%80%E4%B9%88%E6%98%AFMybatis/">
-                        Mybatis之Mybatis简介
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1.什么是MyBatis
-MyBatis 是一款优秀的持久层框架 
-MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集的过程 
-MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 实体...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 02 2022 15:35:55 GMT+0800">2022-05-02</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/02/Mybatis%E4%B9%8B%E4%BB%80%E4%B9%88%E6%98%AFMybatis/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/">
-                        反射之Java反射
+                    <a href="/2022/05/05/Mybatis%E4%B9%8BMybatis%E8%AF%A6%E7%BB%86%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/">
+                        Mybatis之Mybatis详细的执行流程
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-1. 类的加载过程
-2.类的加载与ClassLoader的理解加载： 
 
-将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构， 然后生成一个代表这个类的java.lang.Class对象.
-
-链接：将Java类的二...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 17:57:17 GMT+0800">2022-05-01</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 17:25:06 GMT+0800">2022-05-05</span></span>
         
         
             <span class="home-article-tag">
@@ -491,7 +402,7 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
                     
                         <li>
                             
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
+                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -499,7 +410,7 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
         
     </div>
 
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/05/Mybatis%E4%B9%8BMybatis%E8%AF%A6%E7%BB%86%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -509,26 +420,65 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%8F%8D%E5%B0%84/">
-                        反射之Java内存分析
+                    <a href="/2022/05/05/Mybatis%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">
+                        Mybatis之使用注解开发
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        面向接口编程
+大家之前都学过面向对象编程，也学习过接口，但在真正的开发中，很多时候我们会选择面向接口编程 
+根本原因 : 解耦 , 可拓展 , 提高复用 , 分层开发中 , 上层不用管具体的实现 , 大家都遵守共同的标准 , 使得开发变得容易 , 规...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 16:06:09 GMT+0800">2022-05-05</span></span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022/05/05/Mybatis%E4%B9%8B%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022/05/05/Mybatis%E4%B9%8BPageHelper/">
+                        Mybatis之PageHelper
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
                         
-1. 类的加载过程
-2.类的加载与ClassLoader的理解加载： 
+官方文档：https://pagehelper.github.io/
+详细使用文档：https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/en/HowToUse.md
 
-将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构， 然后生成一个代表这个类的java.lang.Class对象.
-
-链接：将Java类的二...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 17:57:17 GMT+0800">2022-05-01</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 15:57:14 GMT+0800">2022-05-05</span></span>
         
         
             <span class="home-article-tag">
@@ -537,7 +487,7 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
                     
                         <li>
                             
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
+                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -545,7 +495,7 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
         
     </div>
 
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%8F%8D%E5%B0%84/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/05/Mybatis%E4%B9%8BPageHelper/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -555,24 +505,25 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E8%BF%B0/">
-                        反射之反射概述
+                    <a href="/2022/05/05/Mybatis%E4%B9%8BRowBounds%E5%88%86%E9%A1%B5/">
+                        Mybatis之RowBounds分页
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1、静态 VS 动态语言动态语言
+                        我们除了使用Limit在SQL层面实现分页，也可以使用RowBounds在Java代码层面实现分页，当然此种方 式作为了解即可。我们来看下如何实现的！
+步骤： 
 
-是一类在运行时可以改变其结构的语言：例如新的函数、对象、甚至代码可以被引进，已有的 函数可以被删除或是其他结构上的变化。通俗点说就是在运行时代码可以根据某些条件改变自 身结构。
+mapper接口
 
-主要动态语言：Object-C、C...
+12//选择全部用户RowBounds实现分页List&lt;Us...
                     
                 </div>
 
                 <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 09:27:18 GMT+0800">2022-05-01</span></span>
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 15:37:55 GMT+0800">2022-05-05</span></span>
         
         
             <span class="home-article-tag">
@@ -581,7 +532,7 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
                     
                         <li>
                             
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
+                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -589,7 +540,49 @@ MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将�
         
     </div>
 
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E8%BF%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2022/05/05/Mybatis%E4%B9%8BRowBounds%E5%88%86%E9%A1%B5/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2022/05/05/Mybatis%E4%B9%8Blimit%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5/">
+                        Mybatis之limit实现分页
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        思考：为什么需要分页？
+在学习mybatis等持久层框架的时候，会经常对数据进行增删改查操作，使用最多的是对数据库进行查 询操作，如果查询大量数据的时候，我们往往使用分页进行查询，也就是每次处理小部分数据，这样对 数据库压力就在可控范围内。
+使用Li...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu May 05 2022 11:51:43 GMT+0800">2022-05-05</span></span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2022/05/05/Mybatis%E4%B9%8Blimit%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
