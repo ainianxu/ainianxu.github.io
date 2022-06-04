@@ -222,7 +222,7 @@
 <p><strong>代码：01-v-bind.html</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    如果要将模型数据绑定在html属性中</span></span><br><span class="line"><span class="comment">    则使用 v-bind 指令,此时title中显示的是模型数据</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-bind:title</span>=<span class="string">&quot;message&quot;</span>&gt;</span>鼠标悬停几秒钟查看此处动态绑定的提示信息！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- v-bind 指令的简写形式： 冒号（:） --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">:title</span>=<span class="string">&quot;message&quot;</span>&gt;</span>我是标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">message</span>:<span class="string">&#x27;页面加载于&#x27;</span>+<span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toLocaleString</span>()</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>你看到的 v-bind 特性被称为指令。指令带有前缀 v- ，以表示它们是 Vue 提供的特殊特性。 除了使用插值表达式（两个大括号）进行数据渲染，也可以使用 v-bind指令，它的简写的形式就是一个冒号（:）</p>
+<p>你看到的 v-bind 特性被称为指令。指令带有前缀 v- ，以表示它们是 Vue 提供的特殊特性。 除了使用插值表达式进行数据渲染，也可以使用 v-bind指令，它的简写的形式就是一个冒号（:）</p>
 <h1 id="2、v-if-系列"><a href="#2、v-if-系列" class="headerlink" title="2、v-if 系列"></a>2、v-if 系列</h1><p>什么是条件判断语句,以下两个属性！  </p>
 <ul>
 <li>v-if </li>
@@ -305,6 +305,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/05/28/Vue%E4%B9%8BVue%E7%BB%84%E4%BB%B6%E8%AE%B2%E8%A7%A3/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Vue之Vue组件讲解</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
