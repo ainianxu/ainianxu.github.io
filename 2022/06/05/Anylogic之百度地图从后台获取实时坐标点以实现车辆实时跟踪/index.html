@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-05 20:12:27</span>
+        <span class="mobile">2022-06-05 20:12</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Anylogic/">Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>​		要想实现车辆实时跟踪，就必须实时获取车辆的坐标点，然后展示在百度地图上。而实现实时获取车辆坐标点的功能，有两个方案：方案①定义一个函数getCars()，此函数的功能是通过<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ajax&spm=1001.2101.3001.7020" >ajax<i class="fas fa-external-link-alt"></i></a>访问后台接口，从而返回车辆的实时位置信息。然后利用setInterval() 方法，每隔2000毫秒（根据业务需求确定）就调用一次获取车辆实时位置信息的函数； 方案②：定义一个获取车辆实时位置信息的函数getCars()，并在此函数中使用setTimeout() 方法在2000毫秒后重新调用上面的函数getCars()。</p>
+<p>  方案确定好后，怎样具体实现跟踪功能呢，且跟踪时需要将车辆在跟踪期间走过的路径绘制出来。</p>
+<pre><code>  首先，在实现跟踪之前，应该先把所有车辆当前的位置信息定位在百度地图上，且每个车辆对应百度地图中的一个marker，然后给每个车辆的marker添加一个鼠标滑过打开信息窗口的功能。被打开的信息窗口中有一个“跟踪”按钮，当用户点击“跟踪”按钮时，就每隔2000毫秒调用已经定义好的获取车辆实时位置信息的函数getCars()。在getCars()函数中，首先通过ajax调用后台接口，以从后台获取到车辆的实时位置信息；然后将此实时位置信息push到一个全局数组trackMap中，此数组存放被跟踪车辆所走过的轨迹坐标点；随后，利用Polyline将trackMap中最新的两个坐标点用线段连接起来，再利用addOverlay将此线段添加到百度地图中，以作为被跟踪车辆所走过的历史轨迹路线；最后，利用marker的setPosition()方法，将代表被跟踪车辆的marker移动到最新的位置trackMap[trackMap.length - 1]处，即可。至此，就实现了车辆的实时跟踪。
+</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0, user-scalable=no&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">html</span>&#123;<span class="attribute">height</span>:<span class="number">100%</span>&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">body</span>&#123;<span class="attribute">height</span>:<span class="number">100%</span>;<span class="attribute">margin</span>:<span class="number">0px</span>;<span class="attribute">padding</span>:<span class="number">0px</span>&#125;</span></span><br><span class="line"><span class="language-css">      <span class="selector-id">#allmap</span>&#123;<span class="attribute">height</span>:<span class="number">100%</span>&#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=自己的&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>单个标注点沿直线的轨迹运动<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;allmap&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 百度地图API功能</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> map=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;allmap&quot;</span>);<span class="comment">//创建地图实例</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.297611</span>,<span class="number">40.047363</span>), <span class="number">15</span>);</span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript">    $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">async</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">cache</span>:<span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">url</span>: <span class="string">&quot;/baidu&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">result</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span>(result != <span class="literal">undefined</span> &amp;&amp; result.<span class="property">length</span> &gt;<span class="number">0</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                 lon = [], lat = [];</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; result.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript">                    lon[i] = result[i].<span class="property">lontitude</span>;</span></span><br><span class="line"><span class="language-javascript">                    lat[i] = result[i].<span class="property">latitude</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> myIcon=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Icon</span>(<span class="string">&quot;http://lbsyun.baidu.com/jsdemo/img/Mario.png&quot;</span>, <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">32</span>, <span class="number">70</span>), &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">offset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, -<span class="number">5</span>),</span></span><br><span class="line"><span class="language-javascript">                        <span class="comment">//相当于CSS精灵</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">imageOffset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, <span class="number">0</span>)</span></span><br><span class="line"><span class="language-javascript">                        <span class="comment">//图片的偏移量。为了是图片底部中心对准坐标点。</span></span></span><br><span class="line"><span class="language-javascript">                    &#125;);</span></span><br><span class="line"><span class="language-javascript">                     steelMarker = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(lon[i],lat[i]), &#123;<span class="attr">icon</span>:myIcon&#125;);<span class="comment">//</span></span></span><br><span class="line"><span class="language-javascript">                     steelContent = <span class="string">&#x27;&lt;div&gt;&lt;p style=&quot;margin:0;line-height:1.5;font-size:13px;text-indent:2em&quot;&gt;&lt;br/&gt;经度：&#x27;</span>+lon[i]+<span class="string">&#x27;&lt;br/&gt;纬度：&#x27;</span>+lat[i]+</span></span><br><span class="line"><span class="language-javascript">                        <span class="string">&#x27;&lt;br/&gt;&lt;button type=&quot;button&quot; onclick=&quot;getCars()&quot;&gt;点击我！&lt;/button&gt;&lt;/p&gt;&lt;/div&gt;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">                     steelOpts = &#123;</span></span><br><span class="line"><span class="language-javascript">                        width : <span class="number">260</span>,     <span class="comment">//信息窗口宽度</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">height</span>: <span class="number">200</span>,     <span class="comment">//信息窗口高度</span></span></span><br><span class="line"><span class="language-javascript">                        title : <span class="string">&quot;&lt;b&gt;车辆信息&lt;/b&gt;&quot;</span> , <span class="comment">//信息窗口标题</span></span></span><br><span class="line"><span class="language-javascript">                        <span class="attr">enableMessage</span>:<span class="literal">true</span> <span class="comment">//设置允许信息窗发送短息</span></span></span><br><span class="line"><span class="language-javascript">                    &#125;;</span></span><br><span class="line"><span class="language-javascript">                    map.<span class="title function_">addOverlay</span>(steelMarker); <span class="comment">//将标注添加到地图中</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">//添加鼠标双击时打开自定义信息窗口事件</span></span></span><br><span class="line"><span class="language-javascript">                    steelMarker.<span class="title function_">addEventListener</span>(<span class="string">&quot;mouseover&quot;</span>,<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="variable language_">this</span>.<span class="title function_">openInfoWindow</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">InfoWindow</span>(steelContent, steelOpts));</span></span><br><span class="line"><span class="language-javascript">                      &#125;</span></span><br><span class="line"><span class="language-javascript">                    );</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">error</span>:<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//alert(&quot;获取信息失败&quot;);</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> trackMap = [];</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">getCars</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">async</span>:<span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">cache</span>:<span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&quot;/baidu&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">dataType</span>:<span class="string">&#x27;text&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">result</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                result = <span class="built_in">eval</span>(<span class="string">&#x27;(&#x27;</span>+ result +<span class="string">&#x27;)&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; result.<span class="property">length</span>; i++) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">/*** 实时获取经纬度信息 ***/</span></span></span><br><span class="line"><span class="language-javascript">                    sitsLongitude = result[i].<span class="property">lontitude</span>;</span></span><br><span class="line"><span class="language-javascript">                    sitsLatitude = result[i].<span class="property">latitude</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">info</span>(sitsLongitude);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    trackMap.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(sitsLongitude, sitsLatitude));<span class="comment">//push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。</span></span></span><br><span class="line"><span class="language-javascript">                    carContent = <span class="string">&#x27;&lt;div&gt;&lt;br/&gt;经度： &#x27;</span> + sitsLongitude + <span class="string">&#x27;&lt;br/&gt;纬度： &#x27;</span> + sitsLatitude + <span class="string">&#x27;&lt;p style=&quot;color:green; margin-left:65%;&quot;&gt;正在跟踪中&lt;/p&gt;&lt;/div&gt;&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">//addOverlay(overlay: Overlay) : 将覆盖物添加到地图中，一个覆盖物实例只能向地图中添加一次</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">//Polyline(points: Array&lt;Point&gt;, opts: PolylineOptions) : 创建折线覆盖物对象</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">//PolylineOptions: 此类表示Polyline构造函数的可选参数。</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span> (trackMap.<span class="property">length</span> &gt; <span class="number">2</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        map.<span class="title function_">addOverlay</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Polyline</span>([trackMap[trackMap.<span class="property">length</span>-<span class="number">2</span>], trackMap[trackMap.<span class="property">length</span>-<span class="number">1</span>]], &#123;</span></span><br><span class="line"><span class="language-javascript">                            <span class="attr">strokeColor</span>: <span class="string">&quot;blue&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                            <span class="attr">strokeWeight</span>: <span class="number">3</span>,</span></span><br><span class="line"><span class="language-javascript">                            <span class="attr">strokeOpacity</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                        &#125;));</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">addEventListener</span>(carContent, steelMarker);</span></span><br><span class="line"><span class="language-javascript">                    steelMarker.<span class="title function_">setPosition</span>(trackMap[trackMap.<span class="property">length</span> - <span class="number">1</span>]);<span class="comment">//setPosition:设置标注的地理坐标</span></span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">error</span>:<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;获取物资信息失败&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123; <span class="comment">//setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。setTimeout() 只执行 code 一次。如果要多次调用，请使用 setInterval() 或者让 code 自身再次调用 setTimeout()。</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">getCars</span>();</span></span><br><span class="line"><span class="language-javascript">        &#125;, <span class="number">2000</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<p>​    1.  在使用setPosition()方法设置被跟踪车辆的最新位置时，应在跟踪之前，就将代表车辆的marker添加至地图中，不然setPosition()不会起作用的。具体将车辆marker添加到地图中的操作，即是跟踪之前的定位操作。</p>
+<p>​    2. 为marker添加鼠标滑过事件addMouseoverHandler()，也参考定位的那篇文章。只是在跟踪时，需要将最新的经纬度信息重新获取后再展示即可。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-06-05 20:12:27</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/06/05/Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Anylogic/">#Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/06/Vue%E4%B9%8BNPM%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Vue之NPM包管理器</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/04/Vue%E4%B9%8Bvue-elementUI/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Vue之vue+elementUI</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
