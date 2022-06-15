@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            SpringBoot基础篇之基础配置 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">SpringBoot基础篇之基础配置</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-10 15:49:12</span>
+        <span class="mobile">2022-06-10 15:49</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>如果我们想修改默认的配置，这个信息应该写在什么位置呢？目前我们接触的入门案例中一共有3个文件，第一是pom.xml文件，设置项目的依赖的，这个没什么好研究的，相关的高级内容咱们到原理篇再说，第二是引导类，这个是执行SpringBoot程序的入口，也不像是做配置的地方，其实还有一个信息，就是在resources目录下面有一个空白的文件，叫做application.properties。一看就是个配置文件，咱们这一章就来说说配置文件怎么写，能写什么，怎么干预SpringBoot的默认配置，修改成自己的配置。</p>
+<hr>
+<h1 id="1、属性配置"><a href="#1、属性配置" class="headerlink" title="1、属性配置"></a>1、属性配置</h1><p>SpringBoot通过配置文件application.properties就可以修改默认的配置，那咱们就先找个简单的配置下手，当前访问tomcat的默认端口是8080，好熟悉的味道，但是不便于书写，我们先改成80，通过这个操作来熟悉一下SpringBoot的配置格式是什么样的</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/eNpSxJrZsqhmC8a.png"
+                      alt="image-20220610155246803"
+                ></p>
+<p>那该如何写呢？properties格式的文件书写规范是key&#x3D;value</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=itheima</span><br></pre></td></tr></table></figure>
+
+<p>​	这个格式肯定是不能颠覆的，那就尝试性的写就行了，改端口，写port。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br></pre></td></tr></table></figure>
+
+<p>下面就可以直接运行程序，测试效果了。</p>
+<p>​	其实到这里我们应该得到如下三个信息</p>
+<ol>
+<li>SpringBoot程序可以在application.properties文件中进行属性配置</li>
+<li>application.properties文件中只要输入要配置的属性关键字就可以根据提示进行设置</li>
+<li>SpringBoot将配置信息集中在一个文件中写，不管你是服务器的配置，还是数据库的配置，总之都写在一起，逃离一个项目十几种配置文件格式的尴尬局面</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li>SpringBoot默认配置文件是application.properties</li>
+</ol>
+<hr>
+<p>​	做完了端口的配置，趁热打铁，再做几个配置，目前项目启动时会显示一些日志信息，就来改一改这里面的一些设置。</p>
+<p><strong>关闭运行日志图表（banner)</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.main.banner-mode</span>=<span class="string">off</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>设置运行日志的显示级别</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging.level.root</span>=<span class="string">debug</span></span><br></pre></td></tr></table></figure>
+
+<p>我们现在配置了3个信息，但是又有新的问题了。这个配置是随便写的吗？什么都能配？有没有一个东西显示所有能配置的项呢？此外这个配置和什么东西有关呢？会不会因为我写了什么东西以后才可以写什么配置呢？比如我现在没有写数据库相关的东西，能否配置数据呢？一个一个来，先说第一个问题，都能配置什么。</p>
+<p>​	打开SpringBoot的官网，找到SpringBoot官方文档，打开查看附录中的Application Properties就可以获取到对应的配置项了，网址奉上：<a class="link"   target="_blank" rel="noopener" href="https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties" >https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties<i class="fas fa-external-link-alt"></i></a></p>
+<p>​	能写什么的问题解决了，再来说第二个问题，这个配置项和什么有关。在pom中注释掉导入的spring-boot-starter-web，然后刷新工程，你会发现配置的提示消失了。闹了半天是设定使用了什么技术才能做什么配置。也合理，不然配置的东西都没有使用对应技术，配了也是白配。</p>
+<p><strong><font color="#f0f">温馨提示</font></strong></p>
+<p>所有的starter中都会依赖下面这个starter，叫做spring-boot-starter。这个starter是所有的SpringBoot的starter的基础依赖，里面定义了SpringBoot相关的基础配置，关于这个starter我们到开发应用篇和原理篇中再深入讲解。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<ol>
+<li>SpringBoot中导入对应starter后，提供对应配置属性</li>
+<li>书写SpringBoot配置采用关键字+提示形式书写</li>
+</ol>
+<h1 id="2、配置文件分类"><a href="#2、配置文件分类" class="headerlink" title="2、配置文件分类"></a>2、配置文件分类</h1><p>现在已经能够进行SpringBoot相关的配置了，但是properties格式的配置写起来总是觉得看着不舒服，所以就期望存在一种书写起来更简便的配置格式提供给开发者使用。SpringBoot除了支持properties格式的配置文件，还支持另外两种格式的配置文件。分别如下:</p>
+<ul>
+<li><p>properties格式</p>
+</li>
+<li><p>yml格式</p>
+</li>
+<li><p>yaml格式</p>
+</li>
+<li><p>application.properties（properties格式）</p>
+</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server.port</span>=<span class="string">80</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>application.yml（yml格式）</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">81</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>application.yaml（yaml格式）</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">82</span></span><br></pre></td></tr></table></figure>
+
+<p>仔细看会发现yml格式和yaml格式除了文件名后缀不一样，格式完全一样，是这样的，yml和yaml文件格式就是一模一样的，只是文件后缀不同，所以可以合并成一种格式来看。以后基本上都是用yml格式的.</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li>SpringBoot提供了3种配置文件的格式<ul>
+<li>properties（传统格式&#x2F;默认格式）</li>
+<li><strong>yml</strong>（主流格式）</li>
+<li>yaml</li>
+</ul>
+</li>
+</ol>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a><strong>思考</strong></h2><p>​	现在我们已经知道使用三种格式都可以做配置了万一我三个都写了，他们三个谁说了算呢？</p>
+<h1 id="3、配置文件优先级"><a href="#3、配置文件优先级" class="headerlink" title="3、配置文件优先级"></a>3、配置文件优先级</h1><p>每个配置文件中的项都会生效，只不过如果多个配置文件中有相同类型的配置会优先级高的文件覆盖优先级的文件中的配置。如果配置项不同的话，那所有的配置项都会生效。</p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li>配置文件间的加载优先级	properties（最高）&gt;  yml  &gt;  yaml（最低）</li>
+<li>不同配置文件中相同配置按照加载优先级相互覆盖，不同配置文件中不同配置全部保留</li>
+</ol>
+<h1 id="4、自动提示功能消失解决方案"><a href="#4、自动提示功能消失解决方案" class="headerlink" title="4、自动提示功能消失解决方案"></a>4、自动提示功能消失解决方案</h1><p>可能有些小伙伴会基于各种各样的原因导致配置文件中没有提示，这个确实很让人头疼，所以下面给大家说一下如果自动提示功能消失了怎么解决。</p>
+<p>​	先要明确一个核心，就是自动提示功能不是SpringBoot技术给我们提供的，是我们在Idea工具下编程，这个编程工具给我们提供的。明白了这一点后，再来说为什么会出现这种现象。其实这个自动提示功能消失的原因还是蛮多的，如果想解决这个问题，就要知道为什么会消失，大体原因有如下3种：</p>
+<ol>
+<li><p>Idea认为你现在写配置的文件不是个配置文件，所以拒绝给你提供提示功能</p>
+</li>
+<li><p>Idea认定你是合理的配置文件，但是Idea加载不到对应的提示信息</p>
+<p>这里我们主要解决第一个现象，第二种现象到原理篇再讲解。第一种现象的解决方式如下：</p>
+</li>
+</ol>
+<p><strong>步骤①</strong>：打开设置，【Files】→【Project Structure…】</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/aQGvwWOf5XY9PAD.png"
+                      alt="image-20220610170515613"
+                ></p>
+<p><strong>步骤②</strong>：在弹出窗口中左侧选择【Facets】，右侧选中Spring路径下对应的模块名称，也就是你自动提示功能消失的那个模块</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/8WFLIlORf61g7AB.png"
+                      alt="image-20220610170537621"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/kSKvfGtc52uBREr.png"
+                      alt="image-20220610170552901"
+                ></p>
+<p><strong>步骤③</strong>：点击Customize Spring Boot按钮，此时可以看到当前模块对应的配置文件是哪些了。如果没有你想要称为配置文件的文件格式，就有可能无法弹出提示</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/igmS6ZFasBJeEQX.png"
+                      alt="image-20220610170613358"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/IFZPun5aSfrzqDy.png"
+                      alt="image-20220610170700302"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/IFZPun5aSfrzqDy.png"
+                     
+                ></p>
+<p><strong>步骤④</strong>：选择添加配置文件，然后选中要作为配置文件的具体文件就OK了</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/jHDwRQNoXmFZ37P.png"
+                      alt="image-20220610170746191"
+                ></p>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li><p>指定SpringBoot配置文件</p>
+<ul>
+<li>Setting → Project Structure → Facets</li>
+<li>选中对应项目&#x2F;工程</li>
+<li>Customize Spring Boot</li>
+<li>选择配置文件</li>
+</ul>
+</li>
+</ol>
+<h1 id="5、yaml数据格式"><a href="#5、yaml数据格式" class="headerlink" title="5、yaml数据格式"></a>5、yaml数据格式</h1><p>SpringBoot的配置以后主要使用yml结尾的这种文件格式，并且在书写时可以通过提示的形式加载正确的格式。但是这种文件还是有严格的书写格式要求的。下面就来说一下具体的语法格式。</p>
+<p>​	YAML（YAML Ain’t Markup Language），一种数据序列化格式。具有容易阅读、容易与脚本语言交互、以数据为核心，重数据轻格式的特点。常见的文件扩展名有两种：</p>
+<ul>
+<li><p>.yml格式（主流）</p>
+</li>
+<li><p>.yaml格式</p>
+<p> 对于文件自身在书写时，具有严格的语法格式要求，具体如下：</p>
+</li>
+</ul>
+<ol>
+<li>大小写敏感</li>
+<li>属性层级关系使用多行描述，<strong>每行结尾使用冒号结束</strong></li>
+<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
+<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
+<li>#号 表示注释</li>
+</ol>
+<p>  上述规则不要死记硬背，按照书写习惯慢慢适应，并且在Idea下由于具有提示功能，慢慢适应着写格式就行了。核心的一条规则要记住，<font color="#ff0000"><b>数据前面要加空格与冒号隔开</b></font></p>
+<p>​	下面列出常见的数据书写格式，熟悉一下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">boolean:</span> <span class="literal">TRUE</span>  						<span class="comment">#TRUE,true,True,FALSE,false，False均可</span></span><br><span class="line"><span class="attr">float:</span> <span class="number">3.14</span>    						<span class="comment">#6.8523015e+5  #支持科学计数法</span></span><br><span class="line"><span class="attr">int:</span> <span class="number">123</span>       						<span class="comment">#0b1010_0111_0100_1010_1110    #支持二进制、八进制、十六进制</span></span><br><span class="line"><span class="attr">null:</span> <span class="string">~</span>        						<span class="comment">#使用~表示null</span></span><br><span class="line"><span class="attr">string:</span> <span class="string">HelloWorld</span>      			<span class="comment">#字符串可以直接书写</span></span><br><span class="line"><span class="attr">string2:</span> <span class="string">&quot;Hello World&quot;</span>  			<span class="comment">#可以使用双引号包裹特殊字符</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018-02-17</span>        			<span class="comment">#日期必须使用yyyy-MM-dd格式</span></span><br><span class="line"><span class="attr">datetime:</span> <span class="number">2018-02-17T15:02:31+08:00</span>  <span class="comment">#时间和日期之间使用T连接，最后使用+代表时区</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，yaml格式中也可以表示数组，在属性名书写位置的下方使用减号作为数据开始符号，每行书写一个数据，减号与数据间空格分隔</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">subject:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">enterprise:</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">itcast</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">16</span></span><br><span class="line">    <span class="attr">subject:</span></span><br><span class="line">    	<span class="bullet">-</span> <span class="string">Java</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">前端</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">大数据</span></span><br><span class="line"><span class="attr">likes:</span> [<span class="string">王者荣耀</span>,<span class="string">刺激战场</span>]			<span class="comment">#数组书写缩略格式</span></span><br><span class="line"><span class="attr">users:</span>							 <span class="comment">#对象数组格式一</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">   	<span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">users:</span>							 <span class="comment">#对象数组格式二</span></span><br><span class="line">  <span class="bullet">-</span>  </span><br><span class="line">    <span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">4</span></span><br><span class="line">  <span class="bullet">-</span>   </span><br><span class="line">    <span class="attr">name:</span> <span class="string">Jerry</span></span><br><span class="line">    <span class="attr">age:</span> <span class="number">5</span>			    </span><br><span class="line"><span class="attr">users2:</span> [ &#123; <span class="string">name:Tom</span> , <span class="string">age:4</span> &#125; , &#123; <span class="string">name:Jerry</span> , <span class="string">age:5</span> &#125; ]	<span class="comment">#对象数组缩略格式</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li>yaml语法规则<ul>
+<li>大小写敏感</li>
+<li>属性层级关系使用多行描述，每行结尾使用冒号结束</li>
+<li>使用缩进表示层级关系，同层级左侧对齐，只允许使用空格（不允许使用Tab键）</li>
+<li>属性值前面添加空格（属性名与属性值之间使用冒号+空格作为分隔）</li>
+<li>#号 表示注释</li>
+</ul>
+</li>
+<li>注意属性名冒号后面与数据之间有一个<strong>空格</strong></li>
+<li>字面值、对象数据格式、数组数据格式</li>
+</ol>
+<h2 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a><strong>思考</strong></h2><p>​	现在我们已经知道了yaml具有严格的数据格式要求，并且已经可以正确的书写yaml文件了，那这些文件书写后其实是在定义一些数据。这些数据时给谁用的呢？大部分是SpringBoot框架内部使用，但是如果我们想配置一些数据自己使用，能不能用呢？答案是可以的，那如何读取yaml文件中的数据呢？</p>
+<h1 id="6、yaml数据读取"><a href="#6、yaml数据读取" class="headerlink" title="6、yaml数据读取"></a>6、yaml数据读取</h1><h2 id="1-读取单一数据"><a href="#1-读取单一数据" class="headerlink" title="1.读取单一数据"></a>1.读取单一数据</h2><p>yaml中保存的单个数据，可以使用Spring中的注解直接读取，使用@Value可以读取单个数据，属性名引用方式：<font color="#ff0000"><b>${一级属性名.二级属性名……}</b></font></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/dg9LIlFptw65hRX.png"
+                      alt="image-20220610184146703"
+                ></p>
+<p>​	记得使用@Value注解时，要将该注入写在某一个指定的Spring管控的bean的属性名上方。现在就可以读取到对应的单一数据行了</p>
+<h2 id="2-yaml文件中的数据引用"><a href="#2-yaml文件中的数据引用" class="headerlink" title="2.yaml文件中的数据引用"></a>2.yaml文件中的数据引用</h2><p>​	如果你在书写yaml数据时，经常出现如下现象，比如很多个文件都具有相同的目录前缀</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">center:</span></span><br><span class="line">	<span class="attr">dataDir:</span> <span class="string">/usr/local/fire/data</span></span><br><span class="line">    <span class="attr">tmpDir:</span> <span class="string">/usr/local/fire/tmp</span></span><br><span class="line">    <span class="attr">logDir:</span> <span class="string">/usr/local/fire/log</span></span><br><span class="line">    <span class="attr">msgDir:</span> <span class="string">/usr/local/fire/msgDir</span></span><br></pre></td></tr></table></figure>
+
+<p>​	这个时候你可以使用引用格式来定义数据，其实就是搞了个变量名，然后引用变量了，格式如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">baseDir:</span> <span class="string">/usr/local/fire</span></span><br><span class="line">	<span class="attr">center:</span></span><br><span class="line">    <span class="attr">dataDir:</span> <span class="string">$&#123;baseDir&#125;/data</span></span><br><span class="line">    <span class="attr">tmpDir:</span> <span class="string">$&#123;baseDir&#125;/tmp</span></span><br><span class="line">    <span class="attr">logDir:</span> <span class="string">$&#123;baseDir&#125;/log</span></span><br><span class="line">    <span class="attr">msgDir:</span> <span class="string">$&#123;baseDir&#125;/msgDir</span></span><br></pre></td></tr></table></figure>
+
+<p>​	还有一个注意事项，在书写字符串时，如果需要使用转义字符，需要将数据字符串使用双引号包裹起来</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">lesson:</span> <span class="string">&quot;Spring\tboot\nlesson&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-5"><a href="#总结-5" class="headerlink" title="总结"></a><strong>总结</strong></h3><ol>
+<li>在配置文件中可以使用${属性名}方式引用属性值</li>
+<li>如果属性中出现特殊字符，可以使用双引号包裹起来作为字符解析</li>
+</ol>
+<h2 id="3-读取全部数据"><a href="#3-读取全部数据" class="headerlink" title="3.读取全部数据"></a>3.读取全部数据</h2><p>​	读取单一数据可以解决读取数据的问题，但是如果定义的数据量过大，这么一个一个书写肯定会累死人的，SpringBoot提供了一个对象，能够把所有的数据都封装到这一个对象中，这个对象叫做Environment，使用自动装配注解可以将所有的yaml数据封装到这个对象中</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/z9acWj68HIUw5kM.png"
+                      alt="image-20220610193852218"
+                ></p>
+<p>​	数据封装到了Environment对象中，获取属性时，通过Environment的接口操作进行，具体方法时getProperties（String），参数填写属性名即可</p>
+<h3 id="总结-6"><a href="#总结-6" class="headerlink" title="总结"></a><strong>总结</strong></h3><ol>
+<li>使用Environment对象封装全部配置信息</li>
+<li>使用@Autowired自动装配数据到Environment对象中</li>
+</ol>
+<h2 id="4-读取对象数据"><a href="#4-读取对象数据" class="headerlink" title="4.读取对象数据"></a>4.读取对象数据</h2><p>单一数据读取书写比较繁琐，全数据封装又封装的太厉害了，每次拿数据还要一个一个的getProperties（）,总之用起来都不是很舒服。由于Java是一个面向对象的语言，很多情况下，我们会将一组数据封装成一个对象。SpringBoot也提供了可以将一组yaml对象数据封装一个Java对象的操作</p>
+<p>​	首先定义一个对象，并将该对象纳入Spring管控的范围，也就是定义成一个bean，然后使用注解@ConfigurationProperties指定该对象加载哪一组yaml中配置的信息。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/y8K7WgpGDEUaZcw.png"
+                      alt="image-20220610194901098"
+                ></p>
+<p>​	这个@ConfigurationProperties必须告诉他加载的数据前缀是什么，这样当前前缀下的所有属性就封装到这个对象中。记得数据属性名要与对象的变量名一一对应啊，不然没法封装。其实以后如果你要定义一组数据自己使用，就可以先写一个对象，然后定义好属性，下面到配置中根据这个格式书写即可。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/06/10/dF29BQXW3MloNh8.png"
+                      alt="image-20220610194956409"
+                ></p>
+<h3 id="总结-7"><a href="#总结-7" class="headerlink" title="总结"></a><strong>总结</strong></h3><ol>
+<li>使用@ConfigurationProperties注解绑定配置信息到封装类中</li>
+<li>封装类需要定义为Spring管理的bean，否则无法进行属性注入</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：SpringBoot基础篇之基础配置</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-06-10 15:49:12</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/06/10/SpringBoot基础篇之基础配置/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/SpringBoot/">#SpringBoot</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/11/SpringBoot%E5%9F%BA%E7%A1%80%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88JUnit/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpringBoot基础篇之整合JUnit</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/09/Anylogic%E4%B9%8BUDP%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Anylogic之UDP实现数据可视化</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1、属性配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">2、配置文件分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">2.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">2.2.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">3、配置文件优先级</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-number">3.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E8%87%AA%E5%8A%A8%E6%8F%90%E7%A4%BA%E5%8A%9F%E8%83%BD%E6%B6%88%E5%A4%B1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">4、自动提示功能消失解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-3"><span class="nav-number">4.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81yaml%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">5、yaml数据格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-4"><span class="nav-number">5.1.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83-1"><span class="nav-number">5.2.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81yaml%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96"><span class="nav-number">6.</span> <span class="nav-text">6、yaml数据读取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%AF%BB%E5%8F%96%E5%8D%95%E4%B8%80%E6%95%B0%E6%8D%AE"><span class="nav-number">6.1.</span> <span class="nav-text">1.读取单一数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-yaml%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BC%95%E7%94%A8"><span class="nav-number">6.2.</span> <span class="nav-text">2.yaml文件中的数据引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-5"><span class="nav-number">6.2.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AF%BB%E5%8F%96%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">6.3.</span> <span class="nav-text">3.读取全部数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-6"><span class="nav-number">6.3.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AF%BB%E5%8F%96%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">6.4.</span> <span class="nav-text">4.读取对象数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-7"><span class="nav-number">6.4.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

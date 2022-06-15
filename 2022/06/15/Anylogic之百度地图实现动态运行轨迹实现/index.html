@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Anylogic之百度地图实现动态运行轨迹实现 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Anylogic之百度地图实现动态运行轨迹实现</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-15 09:21:00</span>
+        <span class="mobile">2022-06-15 09:21</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Anylogic/">Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>​	要求：一个基于离线百度地图(此方法在线也适用)实时展示车或者其他对象的运行轨迹，且在运行过程中需要车头方向随着角度进行变化。</p>
+<h1 id="1、创建地图"><a href="#1、创建地图" class="headerlink" title="1、创建地图"></a>1、创建地图</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0, user-scalable=no&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">		<span class="selector-tag">body</span>, <span class="selector-tag">html</span>,<span class="selector-id">#allmap</span> &#123;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">overflow</span>: hidden;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">font-family</span>:<span class="string">&quot;微软雅黑&quot;</span>;&#125;</span></span><br><span class="line"><span class="language-css">		</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=密匙&quot;</span>&gt;</span>	</span><br><span class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>单个标注点沿直线的轨迹运动<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;allmap&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="comment">// 百度地图API功能</span></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> map=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;allmap&quot;</span>); <span class="comment">// 创建map实例</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.36239048877775</span>, <span class="number">39.938322220559</span>), <span class="number">15</span>);<span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);<span class="comment">//鼠标滚轮缩放</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">addControl</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">MapTypeControl</span>()); <span class="comment">//添加切换地图类型附件</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2、绘制折线路径点"><a href="#2、绘制折线路径点" class="headerlink" title="2、绘制折线路径点"></a>2、绘制折线路径点</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">PointArr</span> = [</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.938322220559</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93793496684673</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93760303333522</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.936883838492925</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93627528306042</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93577737001302</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93527945331416</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36260608210014</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93472620825511</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36260608210014</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.933785681309004</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36274981098174</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9334537275117</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93295579377289</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.932402529780596</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93184926128044</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93063205471247</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36274981098174</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92902752181022</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92841889596463</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92781026466464</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92703563512155</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.926260996743295</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.925541681766745</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36296540430413</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92410302895963</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36332472650813</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9228303491527</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36382777759371</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9228303491527</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36469015088329</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922775014707135</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36619930414005</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922719680216495</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36655862634404</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92288568355318</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36627116858085</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9242690289156</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36670235522564</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36742099963362</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3684989662456</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36943320397597</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37029557726555</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37094235723274</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37158913719992</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3723796460487</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92443502846588</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37302642601588</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37360134154227</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37439185039105</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924545694607346</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37496676591743</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924545694607346</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37546981700302</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37582913920701</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924656360568505</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37669151249659</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924656360568505</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37719456358218</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92471169348146</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37776947910857</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37848812351655</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924822359172175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37906303904293</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37963795456932</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924822359172175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92443502846588</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.923992362096946</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3801410056549</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92332835713435</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3801410056549</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9229410179086</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802128700957</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92227700266861</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802847345365</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92155764550042</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802847345365</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92089361673764</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.920229581483945</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91962087679934</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.918956829104815</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91829277491945</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3804284634181</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91762871424328</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3804284634181</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91696464707632</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805721922997</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91524911018613</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805003278589</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914806383957064</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805003278589</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914363654843264</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38186575223406</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91331216163647</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38315931216843</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3844528721028</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38553083871477</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91331216163647</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38739931417552</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3885491452283</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913367503789864</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38977084072187</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91358887195269</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39092067177464</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91353352997958</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39199863838661</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39415457161057</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39551999598574</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91381023939432</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3967416914793</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913754897601514</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913865581142055</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913920922844696</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39817898029527</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91469570194906</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39817898029527</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.915304450761944</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91624523365416</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91707532538824</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39796338697288</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91773939147339</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39803525141367</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9184587890743</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39796338697288</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91912284163695</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39789152253208</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92045092728972</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9212256319304</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92200032773621</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922719680216495</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39767592920968</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.923605026657604</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39753220032809</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39753220032809</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.925541681766745</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92637165990969</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.928474225812344</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39896948914405</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92958081330031</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39997559131523</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92958081330031</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40148474457199</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92974679986831</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40292203338795</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40443118664471</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40579661101988</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40716203539505</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92991278603061</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40852745977021</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92985745735493</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4088867819742</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92991278603061</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4090305108558</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.929470155362914</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4091023752966</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.928861533484174</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4091023752966</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92786559500822</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4092461041782</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92637165990969</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40946169750059</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92388169505393</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40953356194139</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92244300708714</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92161298093767</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92039559090589</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.919178179057525</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91685396858412</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91574717374566</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914751042975595</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40974915526378</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91419763068185</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40802440868462</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91414228920457</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40665898430946</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91419763068185</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40594033990148</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91408694768221</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40594033990148</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91309079257217</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40579661101988</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9118179064571</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40608406878307</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91087706226448</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40615593322387</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91010223961911</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40629966210547</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.909272062695706</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40608406878307</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90871860577934</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40615593322387</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90766702522079</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40601220434228</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90689216597646</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4050061021711</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40320949115115</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40134101569039</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90661542839114</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39904135358485</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90683681854954</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;]</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、设置小车图标"><a href="#3、设置小车图标" class="headerlink" title="3、设置小车图标"></a>3、设置小车图标</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myIcon=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Icon</span>(<span class="string">&quot;http://lbsyun.baidu.com/jsdemo/img/Mario.png&quot;</span>, <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">32</span>, <span class="number">70</span>), &#123; </span><br><span class="line">	</span><br><span class="line">		<span class="attr">offset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, -<span class="number">5</span>),   </span><br><span class="line">		<span class="comment">//相当于CSS精灵	</span></span><br><span class="line">		<span class="attr">imageOffset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">		<span class="comment">//图片的偏移量。为了是图片底部中心对准坐标点。</span></span><br><span class="line">		&#125;);</span><br><span class="line">	<span class="keyword">var</span> carMk;<span class="comment">//先将终点坐标展示的mark对象定义</span></span><br><span class="line">       <span class="comment">//小车行驶图标</span></span><br><span class="line">       <span class="keyword">var</span> drivingPoint = myIcon;</span><br><span class="line">       <span class="comment">//终点图标</span></span><br><span class="line">       <span class="keyword">var</span> terminalPoint = myIcon;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4、展示实时画线的效果"><a href="#4、展示实时画线的效果" class="headerlink" title="4、展示实时画线的效果"></a>4、展示实时画线的效果</h1><p>我们将数组300毫秒取出一个，这里时间间隔可以根据自己需求设定。然后将取出值存储到新的数组里，通过数组拿出前后两个值进行画线。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">var</span> interval = <span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> (i &gt;= <span class="title class_">PointArr</span>.<span class="property">length</span>) &#123;</span><br><span class="line">               <span class="built_in">clearInterval</span>(interval);</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="title function_">drawLine</span>(map,<span class="title class_">PointArr</span>[i],<span class="title class_">PointArr</span>[i+<span class="number">1</span>]);<span class="comment">//画线调用</span></span><br><span class="line">           i = i + <span class="number">1</span>;</span><br><span class="line">       &#125;, <span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="5、绘制运动路径调用方法："><a href="#5、绘制运动路径调用方法：" class="headerlink" title="5、绘制运动路径调用方法："></a>5、绘制运动路径调用方法：</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">drawLine</span>(<span class="params">map,PointArr,PointArrNext</span>) &#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span>(<span class="title class_">PointArrNext</span>!=<span class="literal">undefined</span>) &#123;</span><br><span class="line">             <span class="keyword">var</span> polyline = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Polyline</span>(</span><br><span class="line">                 [</span><br><span class="line">                     <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="title class_">PointArr</span>.<span class="property">lng</span>, <span class="title class_">PointArr</span>.<span class="property">lat</span>),</span><br><span class="line">                     <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="title class_">PointArrNext</span>.<span class="property">lng</span>, <span class="title class_">PointArrNext</span>.<span class="property">lat</span>)</span><br><span class="line">                 ],</span><br><span class="line">                 &#123;</span><br><span class="line">                     <span class="attr">strokeColor</span>: <span class="string">&quot;red&quot;</span>,</span><br><span class="line">                     <span class="attr">strokeWeight</span>: <span class="number">7</span>,</span><br><span class="line">                     <span class="attr">strokeOpacity</span>: <span class="number">1</span></span><br><span class="line">                 &#125;);   <span class="comment">//创建折线</span></span><br><span class="line">             map.<span class="title function_">addOverlay</span>(polyline);<span class="comment">//将折线添加到地图上</span></span><br><span class="line">             <span class="title function_">addMarkerEnd</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="title class_">PointArrNext</span>.<span class="property">lng</span>, <span class="title class_">PointArrNext</span>.<span class="property">lat</span>), <span class="string">&#x27;小车行驶&#x27;</span>, map, <span class="title class_">PointArrNext</span>, <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="title class_">PointArr</span>.<span class="property">lng</span>, <span class="title class_">PointArr</span>.<span class="property">lat</span>));<span class="comment">//添加图标</span></span><br><span class="line">         &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="title function_">addMarkerEnd</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="title class_">PointArr</span>.<span class="property">lng</span>, <span class="title class_">PointArr</span>.<span class="property">lat</span>), <span class="string">&#x27;终点&#x27;</span>, map);<span class="comment">//添加终点图标</span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6、模拟出运动效果"><a href="#6、模拟出运动效果" class="headerlink" title="6、模拟出运动效果"></a>6、模拟出运动效果</h1><p>交互没关，在画下一次图标时候先将前一个图标清除掉，重新绘制新位置的图标；</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addMarkerEnd</span>(<span class="params">point, name,mapInit,trackUnit,prePoint</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(name==<span class="string">&quot;小车行驶&quot;</span>)&#123;</span><br><span class="line">              <span class="keyword">if</span>(carMk)&#123;<span class="comment">//先判断第一次进来的时候这个值有没有定义，有的话就清除掉上一次的。然后在进行画图标。第一次进来时候没有定义也就不走这块，直接进行画图标</span></span><br><span class="line">                  mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              &#125;</span><br><span class="line">              carMk = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(point,&#123;<span class="attr">icon</span>:drivingPoint&#125;);  <span class="comment">// 创建标注</span></span><br><span class="line">              <span class="title function_">getCarAngle</span>(point,prePoint);<span class="comment">// js求解两点之间的角度</span></span><br><span class="line">              carMk.<span class="title function_">setRotation</span>(<span class="title function_">getCarAngle</span>(point,prePoint)-<span class="number">90</span>);<span class="comment">// 旋转的角度</span></span><br><span class="line">              mapInit.<span class="title function_">addOverlay</span>(carMk);               <span class="comment">// 将标注添加到地图中</span></span><br><span class="line">		<span class="comment">//carMk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画</span></span><br><span class="line">          &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">              mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              <span class="comment">// carMk = new BMap.Marker(point,&#123;icon:terminalPoint&#125;);  // 创建标注</span></span><br><span class="line">              <span class="comment">// mapInit.addOverlay(carMk);</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7、获得角度的函数"><a href="#7、获得角度的函数" class="headerlink" title="7、获得角度的函数"></a>7、获得角度的函数</h1><p>比如汽车运动时，图标肯定是有朝向的，比如车头永远朝前面，所以我们需要对角度方向进行调整，所以我们就根据点的经纬度调整方向，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCarAngle</span>(<span class="params">n,next</span>)&#123;</span><br><span class="line">          <span class="keyword">var</span> ret</span><br><span class="line">          <span class="keyword">var</span> w1 = n.<span class="property">lat</span>/<span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span><br><span class="line">          <span class="keyword">var</span> j1 = n.<span class="property">lng</span>/<span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span><br><span class="line">          <span class="keyword">var</span> w2 = next.<span class="property">lat</span>/<span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span><br><span class="line">          <span class="keyword">var</span> j2 = next.<span class="property">lng</span>/<span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span><br><span class="line">          ret = <span class="number">4</span> * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="title class_">Math</span>.<span class="title function_">sin</span>((w1 - w2) / <span class="number">2</span>), <span class="number">2</span>) - <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="title class_">Math</span>.<span class="title function_">sin</span>((j1 - j2) / <span class="number">2</span>) * (<span class="title class_">Math</span>.<span class="title function_">cos</span>(w1) - <span class="title class_">Math</span>.<span class="title function_">cos</span>(w2)), <span class="number">2</span>);</span><br><span class="line">          ret = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(ret);</span><br><span class="line">          <span class="comment">// var temp = Math.sin(Math.abs(j1 - j2) / 2) * (Math.cos(w1) + Math.cos(w2));</span></span><br><span class="line">          <span class="keyword">var</span> temp = <span class="title class_">Math</span>.<span class="title function_">sin</span>((j1 - j2) / <span class="number">2</span>) * (<span class="title class_">Math</span>.<span class="title function_">cos</span>(w1) + <span class="title class_">Math</span>.<span class="title function_">cos</span>(w2));</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(temp)</span><br><span class="line">          ret = ret/temp;</span><br><span class="line">          ret = <span class="title class_">Math</span>.<span class="title function_">atan</span>(ret) / <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">180</span> ;</span><br><span class="line">          ret += <span class="number">90</span>;</span><br><span class="line">          <span class="comment">// 这里用如此臃肿的if..else是为了判定追踪单个点的具体情况,从而调整ret的值</span></span><br><span class="line">          <span class="keyword">if</span>(j1-j2 &lt; <span class="number">0</span>)&#123;</span><br><span class="line">              <span class="keyword">if</span>(w1-w2 &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                  ret;</span><br><span class="line">              &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  ret = -ret+<span class="number">180</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">              <span class="keyword">if</span>(w1-w2 &lt; <span class="number">0</span>)&#123;</span><br><span class="line">                  ret = <span class="number">180</span>+ret;</span><br><span class="line">              &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  ret = -ret;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> ret ;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="8、删除折线覆盖物"><a href="#8、删除折线覆盖物" class="headerlink" title="8、删除折线覆盖物"></a>8、删除折线覆盖物</h1><p>在这个基础上添加一个功能，当小车到达终点时，将绘制的折线全部删除。在百度地图中所有的覆盖物都是通过map.addOverlay存储的，也就是存在同一个地方，正好轨迹覆盖物是折线，那就找到所有的折线覆盖物删除即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addMarkerEnd</span>(<span class="params">point, name,mapInit,trackUnit,prePoint,p</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(name==<span class="string">&quot;小车行驶&quot;</span>)&#123;</span><br><span class="line">              <span class="keyword">if</span>(carMk)&#123;<span class="comment">//先判断第一次进来的时候这个值有没有定义，有的话就清除掉上一次的。然后在进行画图标。第一次进来时候没有定义也就不走这块，直接进行画图标</span></span><br><span class="line">                  mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              &#125;</span><br><span class="line">              carMk = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(point,&#123;<span class="attr">icon</span>:drivingPoint&#125;);  <span class="comment">// 创建标注</span></span><br><span class="line">              <span class="title function_">getCarAngle</span>(point,prePoint);<span class="comment">// js求解两点之间的角度</span></span><br><span class="line">              carMk.<span class="title function_">setRotation</span>(<span class="title function_">getCarAngle</span>(point,prePoint)-<span class="number">90</span>);<span class="comment">// 旋转的角度</span></span><br><span class="line">              mapInit.<span class="title function_">addOverlay</span>(carMk);               <span class="comment">// 将标注添加到地图中</span></span><br><span class="line">		<span class="comment">//carMk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画</span></span><br><span class="line">          &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">              mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              <span class="keyword">var</span> allOverlay = map.<span class="title function_">getOverlays</span>();<span class="comment">////返回地图上的所有覆盖物</span></span><br><span class="line">                  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allOverlay.<span class="property">length</span>; i++)&#123;</span><br><span class="line">                      <span class="keyword">if</span>(allOverlay[i].<span class="title function_">toString</span>().<span class="title function_">indexOf</span>(<span class="string">&quot;Polyline&quot;</span>) &gt; <span class="number">0</span>) </span><br><span class="line">                      &#123;<span class="comment">//删除折线</span></span><br><span class="line">                          map.<span class="title function_">removeOverlay</span>(allOverlay[i]);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              <span class="comment">// carMk = new BMap.Marker(point,&#123;icon:terminalPoint&#125;);  // 创建标注</span></span><br><span class="line">              <span class="comment">// mapInit.addOverlay(carMk);</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Anylogic之百度地图实现动态运行轨迹实现</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-06-15 09:21:00</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/06/15/Anylogic之百度地图实现动态运行轨迹实现/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Anylogic/">#Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/15/Anylogic%E4%B9%8B%E8%B7%AF%E4%B9%A6%E5%AE%9E%E7%8E%B0%E4%B8%80%E8%BE%B9%E8%B5%B0%E4%B8%80%E8%BE%B9%E7%94%BB/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Anylogic之路书实现一边走一边画</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/14/SpringBoot%E8%BF%90%E7%BB%B4%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%97%A5%E5%BF%97/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpringBoot运维实用篇之日志</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E5%9C%B0%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">1、创建地图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E7%BB%98%E5%88%B6%E6%8A%98%E7%BA%BF%E8%B7%AF%E5%BE%84%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2、绘制折线路径点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E5%B0%8F%E8%BD%A6%E5%9B%BE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">3、设置小车图标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E5%B1%95%E7%A4%BA%E5%AE%9E%E6%97%B6%E7%94%BB%E7%BA%BF%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">4、展示实时画线的效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E7%BB%98%E5%88%B6%E8%BF%90%E5%8A%A8%E8%B7%AF%E5%BE%84%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">5、绘制运动路径调用方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81%E6%A8%A1%E6%8B%9F%E5%87%BA%E8%BF%90%E5%8A%A8%E6%95%88%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">6、模拟出运动效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81%E8%8E%B7%E5%BE%97%E8%A7%92%E5%BA%A6%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">7、获得角度的函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8%E3%80%81%E5%88%A0%E9%99%A4%E6%8A%98%E7%BA%BF%E8%A6%86%E7%9B%96%E7%89%A9"><span class="nav-number">8.</span> <span class="nav-text">8、删除折线覆盖物</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
