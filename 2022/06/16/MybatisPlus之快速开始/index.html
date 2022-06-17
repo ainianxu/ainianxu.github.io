@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MybatisPlus之快速开始 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MybatisPlus之快速开始</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv6</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-16 17:18:22</span>
+        <span class="mobile">2022-06-16 17:18</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MybatisPlus/">MybatisPlus</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>544 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>官网地址：<a class="link"   target="_blank" rel="noopener" href="https://mp.baomidou.com/guide/quick-start.html" >https://mp.baomidou.com/guide/quick-start.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>使用第三方组件：</p>
+<ol>
+<li>导入对应的依赖</li>
+<li>研究依赖如何配置</li>
+<li>代码如何编写</li>
+<li>提高扩展技术能力！</li>
+</ol>
+<p>步骤：</p>
+<h1 id="1、创建数据库-mybatis-plus"><a href="#1、创建数据库-mybatis-plus" class="headerlink" title="1、创建数据库 mybatis_plus"></a>1、创建数据库 mybatis_plus</h1><h1 id="2、创建user表并插入数据"><a href="#2、创建user表并插入数据" class="headerlink" title="2、创建user表并插入数据"></a>2、创建user表并插入数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">user</span></span><br><span class="line">(</span><br><span class="line">	id <span class="type">BIGINT</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;主键ID&#x27;</span>,</span><br><span class="line">	name <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">	age <span class="type">INT</span>(<span class="number">11</span>) <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;年龄&#x27;</span>,</span><br><span class="line">	email <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY (id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">user</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span> (id, name, age, email) <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>, <span class="string">&#x27;Jone&#x27;</span>, <span class="number">18</span>, <span class="string">&#x27;test1@baomidou.com&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>, <span class="string">&#x27;Jack&#x27;</span>, <span class="number">20</span>, <span class="string">&#x27;test2@baomidou.com&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>, <span class="string">&#x27;Tom&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;test3@baomidou.com&#x27;</span>),</span><br><span class="line">(<span class="number">4</span>, <span class="string">&#x27;Sandy&#x27;</span>, <span class="number">21</span>, <span class="string">&#x27;test4@baomidou.com&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>, <span class="string">&#x27;Billie&#x27;</span>, <span class="number">24</span>, <span class="string">&#x27;test5@baomidou.com&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="3、编写项目，初始化项目！使用SpringBoot初始化！"><a href="#3、编写项目，初始化项目！使用SpringBoot初始化！" class="headerlink" title="3、编写项目，初始化项目！使用SpringBoot初始化！"></a>3、编写项目，初始化项目！使用SpringBoot初始化！</h1><h1 id="4、导入依赖"><a href="#4、导入依赖" class="headerlink" title="4、导入依赖"></a>4、导入依赖</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 数据库驱动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="5、填写properties配置"><a href="#5、填写properties配置" class="headerlink" title="5、填写properties配置"></a>5、填写properties配置</h1><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.datasource.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">spring.datasource.password</span>=<span class="string">123456</span></span><br><span class="line"><span class="attr">spring.datasource.url</span>=<span class="string">jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8</span></span><br><span class="line"><span class="attr">spring.datasource.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="6、填写测试类，读取数据库"><a href="#6、填写测试类，读取数据库" class="headerlink" title="6、填写测试类，读取数据库"></a>6、填写测试类，读取数据库</h1><p>原先我们使用mybatis：pojo-dao（连接mybatis，配置mapper.xml文件）-service-controller</p>
+<p>现在：</p>
+<ul>
+<li><p>pojo类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在对应的Mapper上面继承基本的类 BaseMapper</span></span><br><span class="line"><span class="meta">@Repository</span> <span class="comment">// 代表持久层</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;User&gt; &#123;</span><br><span class="line">    <span class="comment">// 所有的CRUD操作都已经编写完成了</span></span><br><span class="line">    <span class="comment">// 你不需要像以前的配置一大堆文件了！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>springboot启动类</p>
+<p>添加注解来扫描</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MapperScan(&quot;com.oddfar.mapper&quot;)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继承了BaseMapper，所有的方法都来自己父类</span></span><br><span class="line"><span class="comment">// 我们也可以编写自己的扩展方法！</span></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 参数是一个 Wrapper ，条件构造器，这里我们先不用，填写null</span></span><br><span class="line">    <span class="comment">// 查询全部用户</span></span><br><span class="line">    List&lt;User&gt; users = userMapper.selectList(<span class="literal">null</span>);</span><br><span class="line">    users.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MybatisPlus之快速开始</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-06-16 17:18:22</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/06/16/MybatisPlus之快速开始/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MybatisPlus/">#MybatisPlus</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/16/MybatisPlus%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%97%A5%E5%BF%97/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MybatisPlus之配置日志</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/16/MybatisPlus%E4%B9%8B%E7%AE%80%E4%BB%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MybatisPlus之简介</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93-mybatis-plus"><span class="nav-number">1.</span> <span class="nav-text">1、创建数据库 mybatis_plus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BAuser%E8%A1%A8%E5%B9%B6%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">2、创建user表并插入数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E5%86%99%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE%EF%BC%81%E4%BD%BF%E7%94%A8SpringBoot%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">3、编写项目，初始化项目！使用SpringBoot初始化！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">4.</span> <span class="nav-text">4、导入依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E5%A1%AB%E5%86%99properties%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">5、填写properties配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81%E5%A1%AB%E5%86%99%E6%B5%8B%E8%AF%95%E7%B1%BB%EF%BC%8C%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">6、填写测试类，读取数据库</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
