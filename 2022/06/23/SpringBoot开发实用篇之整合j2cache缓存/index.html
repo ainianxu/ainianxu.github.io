@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            SpringBoot开发实用篇之整合j2cache缓存 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">SpringBoot开发实用篇之整合j2cache缓存</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-06-23 15:25:01</span>
+        <span class="mobile">2022-06-23 15:25</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>​		jetcache可以在限定范围内构建多级缓存，但是灵活性不足，不能随意搭配缓存，本节介绍一种可以随意搭配缓存解决方案的缓存整合框架，j2cache。下面就来讲解如何使用这种缓存框架，以Ehcache与redis整合为例：</p>
+<p><strong>步骤①</strong>：导入j2cache、redis、ehcache坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.oschina.j2cache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>j2cache-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.4-release<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.oschina.j2cache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>j2cache-spring-boot2-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0-release<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​		j2cache的starter中默认包含了redis坐标，官方推荐使用redis作为二级缓存，因此此处无需导入redis坐标</p>
+<p><strong>步骤②</strong>：配置一级与二级缓存，并配置一二级缓存间数据传递方式，配置书写在名称为j2cache.properties的文件中。如果使用ehcache还需要单独添加ehcache的配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1级缓存</span></span><br><span class="line"><span class="string">j2cache.L1.provider_class</span> <span class="string">=</span> <span class="string">ehcache</span></span><br><span class="line"><span class="string">ehcache.configXml</span> <span class="string">=</span> <span class="string">ehcache.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2级缓存</span></span><br><span class="line"><span class="string">j2cache.L2.provider_class</span> <span class="string">=</span> <span class="string">net.oschina.j2cache.cache.support.redis.SpringRedisProvider</span></span><br><span class="line"><span class="string">j2cache.L2.config_section</span> <span class="string">=</span> <span class="string">redis</span></span><br><span class="line"><span class="string">redis.hosts</span> <span class="string">=</span> <span class="string">localhost:6379</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1级缓存中的数据如何到达二级缓存</span></span><br><span class="line"><span class="string">j2cache.broadcast</span> <span class="string">=</span> <span class="string">net.oschina.j2cache.cache.support.redis.SpringRedisPubSubPolicy</span></span><br></pre></td></tr></table></figure>
+
+<p>​		此处配置不能乱配置，需要参照官方给出的配置说明进行。例如1级供应商选择ehcache，供应商名称仅仅是一个ehcache，但是2级供应商选择redis时要写专用的Spring整合Redis的供应商类名SpringRedisProvider，而且这个名称并不是所有的redis包中能提供的，也不是spring包中提供的。因此配置j2cache必须参照官方文档配置，而且还要去找专用的整合包，导入对应坐标才可以使用。</p>
+<p>​		一级与二级缓存最重要的一个配置就是两者之间的数据沟通方式，此类配置也不是随意配置的，并且不同的缓存解决方案提供的数据沟通方式差异化很大，需要查询官方文档进行设置。</p>
+<p><strong>步骤③</strong>：使用缓存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SMSCodeServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">SMSCodeService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CodeUtils codeUtils;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CacheChannel cacheChannel;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendCodeToSMS</span><span class="params">(String tele)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> codeUtils.generator(tele);</span><br><span class="line">        cacheChannel.set(<span class="string">&quot;sms&quot;</span>,tele,code);</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">checkCode</span><span class="params">(SMSCode smsCode)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">code</span> <span class="operator">=</span> cacheChannel.get(<span class="string">&quot;sms&quot;</span>,smsCode.getTele()).asString();</span><br><span class="line">        <span class="keyword">return</span> smsCode.getCode().equals(code);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​		j2cache的使用和jetcache比较类似，但是无需开启使用的开关，直接定义缓存对象即可使用，缓存对象名CacheChannel。</p>
+<p>​		j2cache的使用不复杂，配置是j2cache的核心，毕竟是一个整合型的缓存框架。缓存相关的配置过多，可以查阅j2cache-core核心包中的j2cache.properties文件中的说明。如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#J2Cache configuration</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Cache Broadcast Method</span></span><br><span class="line"><span class="comment"># values:</span></span><br><span class="line"><span class="comment"># jgroups -&gt; use jgroups&#x27;s multicast</span></span><br><span class="line"><span class="comment"># redis -&gt; use redis publish/subscribe mechanism (using jedis)</span></span><br><span class="line"><span class="comment"># lettuce -&gt; use redis publish/subscribe mechanism (using lettuce, Recommend)</span></span><br><span class="line"><span class="comment"># rabbitmq -&gt; use RabbitMQ publisher/consumer mechanism</span></span><br><span class="line"><span class="comment"># rocketmq -&gt; use RocketMQ publisher/consumer mechanism</span></span><br><span class="line"><span class="comment"># none -&gt; don&#x27;t notify the other nodes in cluster</span></span><br><span class="line"><span class="comment"># xx.xxxx.xxxx.Xxxxx your own cache broadcast policy classname that implement net.oschina.j2cache.cluster.ClusterPolicy</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="attr">j2cache.broadcast</span> = <span class="string">redis</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># jgroups properties</span></span><br><span class="line"><span class="attr">jgroups.channel.name</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="attr">jgroups.configXml</span> = <span class="string">/network.xml</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># RabbitMQ properties</span></span><br><span class="line"><span class="attr">rabbitmq.exchange</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="attr">rabbitmq.host</span> = <span class="string">localhost</span></span><br><span class="line"><span class="attr">rabbitmq.port</span> = <span class="string">5672</span></span><br><span class="line"><span class="attr">rabbitmq.username</span> = <span class="string">guest</span></span><br><span class="line"><span class="attr">rabbitmq.password</span> = <span class="string">guest</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># RocketMQ properties</span></span><br><span class="line"><span class="attr">rocketmq.name</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="attr">rocketmq.topic</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="comment"># use ; to split multi hosts</span></span><br><span class="line"><span class="attr">rocketmq.hosts</span> = <span class="string">127.0.0.1:9876</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Level 1&amp;2 provider</span></span><br><span class="line"><span class="comment"># values:</span></span><br><span class="line"><span class="comment"># none -&gt; disable this level cache</span></span><br><span class="line"><span class="comment"># ehcache -&gt; use ehcache2 as level 1 cache</span></span><br><span class="line"><span class="comment"># ehcache3 -&gt; use ehcache3 as level 1 cache</span></span><br><span class="line"><span class="comment"># caffeine -&gt; use caffeine as level 1 cache(only in memory)</span></span><br><span class="line"><span class="comment"># redis -&gt; use redis as level 2 cache (using jedis)</span></span><br><span class="line"><span class="comment"># lettuce -&gt; use redis as level 2 cache (using lettuce)</span></span><br><span class="line"><span class="comment"># readonly-redis -&gt; use redis as level 2 cache ,but never write data to it. if use this provider, you must uncomment `j2cache.L2.config_section` to make the redis configurations available.</span></span><br><span class="line"><span class="comment"># memcached -&gt; use memcached as level 2 cache (xmemcached),</span></span><br><span class="line"><span class="comment"># [classname] -&gt; use custom provider</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"></span><br><span class="line"><span class="attr">j2cache.L1.provider_class</span> = <span class="string">caffeine</span></span><br><span class="line"><span class="attr">j2cache.L2.provider_class</span> = <span class="string">redis</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># When L2 provider isn&#x27;t `redis`, using `L2.config_section = redis` to read redis configurations</span></span><br><span class="line"><span class="comment"># j2cache.L2.config_section = redis</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Enable/Disable ttl in redis cache data (if disabled, the object in redis will never expire, default:true)</span></span><br><span class="line"><span class="comment"># NOTICE: redis hash mode (redis.storage = hash) do not support this feature)</span></span><br><span class="line"><span class="attr">j2cache.sync_ttl_to_redis</span> = <span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># Whether to cache null objects by default (default false)</span></span><br><span class="line"><span class="attr">j2cache.default_cache_null_object</span> = <span class="string">true</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Cache Serialization Provider</span></span><br><span class="line"><span class="comment"># values:</span></span><br><span class="line"><span class="comment"># fst -&gt; using fast-serialization (recommend)</span></span><br><span class="line"><span class="comment"># kryo -&gt; using kryo serialization</span></span><br><span class="line"><span class="comment"># json -&gt; using fst&#x27;s json serialization (testing)</span></span><br><span class="line"><span class="comment"># fastjson -&gt; using fastjson serialization (embed non-static class not support)</span></span><br><span class="line"><span class="comment"># java -&gt; java standard</span></span><br><span class="line"><span class="comment"># fse -&gt; using fse serialization</span></span><br><span class="line"><span class="comment"># [classname implements Serializer]</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"></span><br><span class="line"><span class="attr">j2cache.serialization</span> = <span class="string">json</span></span><br><span class="line"><span class="comment">#json.map.person = net.oschina.j2cache.demo.Person</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Ehcache configuration</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ehcache.configXml = /ehcache.xml</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># ehcache3.configXml = /ehcache3.xml</span></span><br><span class="line"><span class="comment"># ehcache3.defaultHeapSize = 1000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Caffeine configuration</span></span><br><span class="line"><span class="comment"># caffeine.region.[name] = size, xxxx[s|m|h|d]</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="attr">caffeine.properties</span> = <span class="string">/caffeine.properties</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Redis connection configuration</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Redis Cluster Mode</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># single -&gt; single redis server</span></span><br><span class="line"><span class="comment"># sentinel -&gt; master-slaves servers</span></span><br><span class="line"><span class="comment"># cluster -&gt; cluster servers (数据库配置无效，使用 database = 0）</span></span><br><span class="line"><span class="comment"># sharded -&gt; sharded servers  (密码、数据库必须在 hosts 中指定，且连接池配置无效 ; redis://user:password@127.0.0.1:6379/0）</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"></span><br><span class="line"><span class="attr">redis.mode</span> = <span class="string">single</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#redis storage mode (generic|hash)</span></span><br><span class="line"><span class="attr">redis.storage</span> = <span class="string">generic</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## redis pub/sub channel name</span></span><br><span class="line"><span class="attr">redis.channel</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="comment">## redis pub/sub server (using redis.hosts when empty)</span></span><br><span class="line"><span class="attr">redis.channel.host</span> =<span class="string"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#cluster name just for sharded</span></span><br><span class="line"><span class="attr">redis.cluster_name</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## redis cache namespace optional, default[empty]</span></span><br><span class="line"><span class="attr">redis.namespace</span> =<span class="string"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## redis command scan parameter count, default[1000]</span></span><br><span class="line"><span class="comment">#redis.scanCount = 1000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## connection</span></span><br><span class="line"><span class="comment"># Separate multiple redis nodes with commas, such as 192.168.0.10:6379,192.168.0.11:6379,192.168.0.12:6379</span></span><br><span class="line"></span><br><span class="line"><span class="attr">redis.hosts</span> = <span class="string">127.0.0.1:6379</span></span><br><span class="line"><span class="attr">redis.timeout</span> = <span class="string">2000</span></span><br><span class="line"><span class="attr">redis.password</span> =<span class="string"></span></span><br><span class="line"><span class="attr">redis.database</span> = <span class="string">0</span></span><br><span class="line"><span class="attr">redis.ssl</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## redis pool properties</span></span><br><span class="line"><span class="attr">redis.maxTotal</span> = <span class="string">100</span></span><br><span class="line"><span class="attr">redis.maxIdle</span> = <span class="string">10</span></span><br><span class="line"><span class="attr">redis.maxWaitMillis</span> = <span class="string">5000</span></span><br><span class="line"><span class="attr">redis.minEvictableIdleTimeMillis</span> = <span class="string">60000</span></span><br><span class="line"><span class="attr">redis.minIdle</span> = <span class="string">1</span></span><br><span class="line"><span class="attr">redis.numTestsPerEvictionRun</span> = <span class="string">10</span></span><br><span class="line"><span class="attr">redis.lifo</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">redis.softMinEvictableIdleTimeMillis</span> = <span class="string">10</span></span><br><span class="line"><span class="attr">redis.testOnBorrow</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">redis.testOnReturn</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">redis.testWhileIdle</span> = <span class="string">true</span></span><br><span class="line"><span class="attr">redis.timeBetweenEvictionRunsMillis</span> = <span class="string">300000</span></span><br><span class="line"><span class="attr">redis.blockWhenExhausted</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">redis.jmxEnabled</span> = <span class="string">false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Lettuce scheme</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># redis -&gt; single redis server</span></span><br><span class="line"><span class="comment"># rediss -&gt; single redis server with ssl</span></span><br><span class="line"><span class="comment"># redis-sentinel -&gt; redis sentinel</span></span><br><span class="line"><span class="comment"># redis-cluster -&gt; cluster servers</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># Lettuce Mode</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># single -&gt; single redis server</span></span><br><span class="line"><span class="comment"># sentinel -&gt; master-slaves servers</span></span><br><span class="line"><span class="comment"># cluster -&gt; cluster servers (数据库配置无效，使用 database = 0）</span></span><br><span class="line"><span class="comment"># sharded -&gt; sharded servers  (密码、数据库必须在 hosts 中指定，且连接池配置无效 ; redis://user:password@127.0.0.1:6379/0）</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">## redis command scan parameter count, default[1000]</span></span><br><span class="line"><span class="comment">#lettuce.scanCount = 1000</span></span><br><span class="line"><span class="attr">lettuce.mode</span> = <span class="string">single</span></span><br><span class="line"><span class="attr">lettuce.namespace</span> =<span class="string"></span></span><br><span class="line"><span class="attr">lettuce.storage</span> = <span class="string">hash</span></span><br><span class="line"><span class="attr">lettuce.channel</span> = <span class="string">j2cache</span></span><br><span class="line"><span class="attr">lettuce.scheme</span> = <span class="string">redis</span></span><br><span class="line"><span class="attr">lettuce.hosts</span> = <span class="string">127.0.0.1:6379</span></span><br><span class="line"><span class="attr">lettuce.password</span> =<span class="string"></span></span><br><span class="line"><span class="attr">lettuce.database</span> = <span class="string">0</span></span><br><span class="line"><span class="attr">lettuce.sentinelMasterId</span> =<span class="string"></span></span><br><span class="line"><span class="attr">lettuce.maxTotal</span> = <span class="string">100</span></span><br><span class="line"><span class="attr">lettuce.maxIdle</span> = <span class="string">10</span></span><br><span class="line"><span class="attr">lettuce.minIdle</span> = <span class="string">10</span></span><br><span class="line"><span class="comment"># timeout in milliseconds</span></span><br><span class="line"><span class="attr">lettuce.timeout</span> = <span class="string">10000</span></span><br><span class="line"><span class="comment"># redis cluster topology refresh interval in milliseconds</span></span><br><span class="line"><span class="attr">lettuce.clusterTopologyRefresh</span> = <span class="string">3000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"><span class="comment"># memcached server configurations</span></span><br><span class="line"><span class="comment"># refer to https://gitee.com/mirrors/XMemcached</span></span><br><span class="line"><span class="comment">#########################################</span></span><br><span class="line"></span><br><span class="line"><span class="attr">memcached.servers</span> = <span class="string">127.0.0.1:11211</span></span><br><span class="line"><span class="attr">memcached.username</span> =<span class="string"></span></span><br><span class="line"><span class="attr">memcached.password</span> =<span class="string"></span></span><br><span class="line"><span class="attr">memcached.connectionPoolSize</span> = <span class="string">10</span></span><br><span class="line"><span class="attr">memcached.connectTimeout</span> = <span class="string">1000</span></span><br><span class="line"><span class="attr">memcached.failureMode</span> = <span class="string">false</span></span><br><span class="line"><span class="attr">memcached.healSessionInterval</span> = <span class="string">1000</span></span><br><span class="line"><span class="attr">memcached.maxQueuedNoReplyOperations</span> = <span class="string">100</span></span><br><span class="line"><span class="attr">memcached.opTimeout</span> = <span class="string">100</span></span><br><span class="line"><span class="attr">memcached.sanitizeKeys</span> = <span class="string">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><ol>
+<li>j2cache是一个缓存框架，自身不具有缓存功能，它提供多种缓存整合在一起使用的方案</li>
+<li>j2cache需要通过复杂的配置设置各级缓存，以及缓存之间数据交换的方式</li>
+<li>j2cache操作接口通过CacheChannel实现</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：SpringBoot开发实用篇之整合j2cache缓存</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-06-23 15:25:01</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/06/23/SpringBoot开发实用篇之整合j2cache缓存/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/SpringBoot/">#SpringBoot</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/06/23/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88quartz/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpringBoot开发实用篇之整合quartz</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/06/23/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8Bjetcache%E6%96%B9%E6%B3%95%E7%BC%93%E5%AD%98/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpringBoot开发实用篇之jetcache方法缓存</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">总结</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
