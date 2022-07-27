@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            完整项目之手把手教你如何分析开源项目 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">完整项目之手把手教你如何分析开源项目</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-07-12 11:33:20</span>
+        <span class="mobile">2022-07-12 11:33</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="1-如何分析开源项目"><a href="#1-如何分析开源项目" class="headerlink" title="1.如何分析开源项目"></a>1.如何分析开源项目</h2><blockquote>
+<p>学习的方式：</p>
+</blockquote>
+<ol>
+<li>不知道这个代码怎么来的；</li>
+<li>这个代码跑不起来；</li>
+<li>这个项目对我们有什么帮助，不会模块化分析；</li>
+</ol>
+<p><strong>任何一个开源项目，都可以让自己得到提升</strong>。</p>
+<ul>
+<li>代码自动生成：我们平时会写很多业务代码，用Mybatis Plus去生成的，第三方的工具包去生成。</li>
+<li>开源项目：eladmin</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/7TKlFPE9wVqXQWO.png"
+                      alt="img"
+                ></p>
+<blockquote>
+<p><strong>项目简介</strong></p>
+</blockquote>
+<ul>
+<li>一个基于Spring Boot 2.1.0、Spring Boot Jpa、JWT、Spring Security、Redis、Vue的前后端分离的后台管理系统。</li>
+<li><strong>开发文档：</strong> <a class="link"   target="_blank" rel="noopener" href="https://el-admin.vip/" >https://el-admin.vip<i class="fas fa-external-link-alt"></i></a></li>
+<li><strong>体验地址：</strong> <a class="link"   target="_blank" rel="noopener" href="https://el-admin.xin/" >https://el-admin.xin<i class="fas fa-external-link-alt"></i></a></li>
+<li><strong>账号密码：</strong> admin &#x2F; 123456</li>
+</ul>
+<blockquote>
+<p><strong>项目源码</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>后端源码</strong></th>
+<th><strong>前端源码</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>github</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://github.com/elunez/eladmin" >eladmin<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://github.com/elunez/eladmin-web" >eladmin-web<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+<tr>
+<td>码云</td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gitee.com/elunez/eladmin" >eladmin<i class="fas fa-external-link-alt"></i></a></td>
+<td><a class="link"   target="_blank" rel="noopener" href="https://gitee.com/elunez/eladmin-web" >eladmin-web<i class="fas fa-external-link-alt"></i></a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>观察开源项目</p>
+</blockquote>
+<ul>
+<li>后端：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/s7HfIRh4DzpCTem.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>前端：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/GadKhocCiEfHy3U.png"
+                      alt="img"
+                ></p>
+<h2 id="2-开源项目下载"><a href="#2-开源项目下载" class="headerlink" title="2.开源项目下载"></a>2.开源项目下载</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/8SLlsrqbNvp7aW5.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>在码云下载，因为GitHub下载太慢了，下载完毕进行解压。<ul>
+<li>后端：<a class="link"   target="_blank" rel="noopener" href="https://gitee.com/elunez/eladmin" >https://gitee.com/elunez/eladmin<i class="fas fa-external-link-alt"></i></a></li>
+<li>前端：<a class="link"   target="_blank" rel="noopener" href="https://gitee.com/elunez/eladmin-web" >https://gitee.com/elunez/eladmin-web<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+</li>
+<li>解压完不要着急运行，先去观察项目：<ol>
+<li>用了哪些技术（Springboot、Vue、Redis、MQ…）</li>
+<li>是否有数据库</li>
+<li>你的环境是否匹配(Maven、(npm、node.js)、redis…)</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>当需要的环境匹配了，再想办法运行。这里列出项目所需的环境与相关安装教程，方便刚入门的同学：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、JDK：<span class="number">1.8</span>+ </span><br><span class="line">安装教程：https:<span class="comment">//www.runoob.com/java/java-environment-setup.html</span></span><br><span class="line"><span class="number">2</span>、Redis <span class="number">3.0</span>+</span><br><span class="line">安装教程：https:<span class="comment">//www.runoob.com/redis/redis-install.html</span></span><br><span class="line"><span class="number">3</span>、Maven <span class="number">3.0</span>+</span><br><span class="line">安装教程：https:<span class="comment">//www.runoob.com/maven/maven-setup.html</span></span><br><span class="line"><span class="number">4</span>、MYSQL <span class="number">5.5</span><span class="number">.0</span>+</span><br><span class="line">安装教程：https:<span class="comment">//www.runoob.com/mysql/mysql-install.html</span></span><br><span class="line"><span class="number">5</span>、Node v10+ (最好使用 <span class="number">12</span>，高版本可能会有问题)</span><br><span class="line">安装教程：https:<span class="comment">//www.runoob.com/nodejs/nodejs-install-setup.html</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>前端安装完 node 后，最好设置下淘宝的镜像源，不建议使用 cnpm（可能会出现奇怪的问题）。</li>
+</ul>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm</span> config set registry https://registry.npm.taobao.org</span><br><span class="line">配置后可通过下面方式来验证是否成功</span><br><span class="line">npm config get registry</span><br><span class="line"></span><br><span class="line">在 ~/.npmrc 加入下面内容，可以避免安装 node-sass 失败</span><br><span class="line">sass_binary_site=https://npm.taobao.org/mirrors/node-sass/</span><br><span class="line"></span><br><span class="line">.npmrc 文件位于</span><br><span class="line">win：C:\Users\[你的账户名称]\.npmrc</span><br><span class="line">linux：直接使用 vi ~/.npmrc</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>开发准备</p>
+</blockquote>
+<p><strong>提示</strong>：在使用该系统前，还需要做如下准备。</p>
+<ol>
+<li>给 <a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/wochunyang/article/details/81736354" >idea (opens new window)<i class="fas fa-external-link-alt"></i></a>或者 <a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/magi1201/article/details/85995987" >eclipse (opens new window)<i class="fas fa-external-link-alt"></i></a>安装 lombok 插件，我们用它可以省略get，set 方法，可以使代码更简洁。</li>
+<li>了解MapStruct，项目用到了他映射实体，如果你不熟悉可以查看：<a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/3f20ca1a93b0" >熟悉MapStruct(opens new window)<i class="fas fa-external-link-alt"></i></a></li>
+<li>你需要有 Spring boot 的基础。</li>
+<li>你还需要有 <a class="link"   target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/" >Vue (opens new window)<i class="fas fa-external-link-alt"></i></a>的基础。</li>
+</ol>
+<p>注意：因为本项目是前后端分离的，所以需要前后端都启动好，才能进行访问。</p>
+<h2 id="3-如何跑起来"><a href="#3-如何跑起来" class="headerlink" title="3.如何跑起来"></a>3.如何跑起来</h2><ol>
+<li>安装数据库，执行SQL（先创建数据库，编码默认utf8）</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/1bMupsQBzXP4TSd.png"
+                      alt="img"
+                ></p>
+<ol start="2">
+<li>前端跑起来（在文件上全选文件名然后cmd）</li>
+</ol>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="attribute">npm</span> install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务 localhost:8013</span></span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建生产环境</span></span><br><span class="line">npm run build:prod</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>后端项目导入（打开idea——import）</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/QRSdPq185gyuG3o.png"
+                      alt="img"
+                ></p>
+<ol>
+<li>后端项目结构（一般前后端分离项目，前端依赖于后端）</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/XW8VxnO2LqQM4ea.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/MeSbZONsuyXLK8l.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>只要发现Swagger，就需要先进入Swagger-ui页面，因为前后端分离的接口全部都在这里；</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/obsuymRUnx8W4G6.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>打开Redis</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/SqsfvxbuXgIMjGO.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>开发环境重点需要去看端口号：server：port：8000（在总文件application.yml里面）前端也是调这个端口。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/bqQLg1s3rHVzAm9.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>去看Redis的端口号。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/pHf7gtSQnO2ILWC.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>看开发环境dev.yml的JDBC是否有问题。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/J8VChZuKnkywRxp.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>启动后端项目：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/oFM2YNeIDTOzWSv.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>进入页面：localhost:8000&#x2F;swagger-ui.html</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/HwnyOgK6azQjefc.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>前端启动成功！<ul>
+<li>用户名和密码：admin&#x2F;123456</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-前后端分离项目的固定套路"><a href="#4-前后端分离项目的固定套路" class="headerlink" title="4.前后端分离项目的固定套路"></a>4.前后端分离项目的固定套路</h2><ol>
+<li>从前端开始分拆，打开控制台(<code>VS-Code</code>)，点一个接口，分析一波调用关系</li>
+<li>前后端端口调用不一致：前端：8013 后端：8000；研究怎么操作。<ol>
+<li>封装了接口请求 ajax(前后端分离) axios(Vue) request(前端封装)</li>
+<li>找到配置（生产配置、开发环境配置）</li>
+</ol>
+</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/DnOajevwR7MNfW8.png"
+                      alt="img"
+                ></p>
+<ol>
+<li>前后端分离项目的重点：找到接口的调用关系。</li>
+<li>Springboot提供服务、前端调用接口数据、Vue负责渲染页面</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/sT3LaoIgwdDiYr9.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>前端项目固定模板：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/teCJgqYZkPs3XFA.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>每一个接口的后面都在后端有一个一一对应的地址。</li>
+<li>通过抓取前端的请求，找到后端对应的接口。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/4uOC7qJLDfj5REo.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>在前端文件中，找对应的接口文件：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/XwJrmhRx5s4gnpv.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>在后端文件中，找对应的接口文件：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/P4jbT7CGlJrgZOD.png"
+                      alt="img"
+                ></p>
+<ol>
+<li>怎么去跟后端对接？拿到接口的地址：</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/FCrZNcWKH7fxdas.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>去后端找：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/wdKtMuSmNlpobv9.png"
+                      alt="img"
+                ></p>
+<blockquote>
+<p>后端分析套路：Controller ——&gt; Service ——&gt; Dao</p>
+</blockquote>
+<ul>
+<li>从前到后知道怎么分析了，但是如何渲染到视图上的呢？</li>
+<li>看前端：搜索一个接口，查看其地址在哪里调用了。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/7MjXK8wsgcH3CA2.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>Vue标准套路：<ul>
+<li>template：视图层</li>
+<li>script：js操作，接口的调用</li>
+<li>style：页面的样式</li>
+</ul>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/gdhuCVjG57tDJpn.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>当我们要学习一个模块，将这个模块独立抽取出来即可，即删除对应的模块，自行修复删除部分。</li>
+<li>例如：学习用户模块，除了了user模块，还需要删除对应的接口文件：</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/a9f1QW3EpMuH5Re.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/sVtSXBvuF5OELyz.png"
+                      alt="img"
+                ></p>
+<ul>
+<li>如果你想测试这个接口成不成功，在<a class="link"   target="_blank" rel="noopener" href="http://localhost:8000/swagger-ui.html" >Swagger UI<i class="fas fa-external-link-alt"></i></a>里测一下，是否可以将它查出来。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/pfVAGOUHQh7iRlC.png"
+                      alt="img"
+                ></p>
+<h2 id="5-如何找到一个比较好的开源项目"><a href="#5-如何找到一个比较好的开源项目" class="headerlink" title="5.如何找到一个比较好的开源项目"></a>5.如何找到一个比较好的开源项目</h2><blockquote>
+<p>比较有名的开源项目：</p>
+</blockquote>
+<ul>
+<li>layui</li>
+<li>Semantic UI</li>
+<li>Grabient</li>
+<li>Vue Element Admin</li>
+</ul>
+<blockquote>
+<p>查找手段：</p>
+</blockquote>
+<ol>
+<li>找分类（Java、python）</li>
+<li>看收藏（star），大家都觉得不错的，就是比较好的，有学习的价值</li>
+<li>看具有价值</li>
+<li>根据自身的理解情况：Java、SSM、Springboot…阶段性成果。</li>
+<li>如何学习Java：Java进阶路线七个阶段</li>
+</ol>
+<p>后端开发去写前端非常难看，可以使用第三方的：Ant Design Pro 或 Element。</p>
+<blockquote>
+<p>查找步骤：</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/93tSf2DLXmP6V5C.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/XxHd1ZQwcLkURz8.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/12/aXk3Y21GOtrScB9.png"
+                      alt="img"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：完整项目之手把手教你如何分析开源项目</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-07-12 11:33:20</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/07/12/完整项目之手把手教你如何分析开源项目/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/07/12/leetcode%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">leetcode之无重复字符的最长子串</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/07/11/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Swagger/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpringBoot开发实用篇之整合Swagger</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">1.如何分析开源项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">2.开源项目下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A6%82%E4%BD%95%E8%B7%91%E8%B5%B7%E6%9D%A5"><span class="nav-number">3.</span> <span class="nav-text">3.如何跑起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%9B%BA%E5%AE%9A%E5%A5%97%E8%B7%AF"><span class="nav-number">4.</span> <span class="nav-text">4.前后端分离项目的固定套路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E4%B8%80%E4%B8%AA%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">5.如何找到一个比较好的开源项目</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

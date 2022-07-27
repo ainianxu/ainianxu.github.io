@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            ElasticSearch之ElasticSearch实战 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">ElasticSearch之ElasticSearch实战</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-07-26 16:41:53</span>
+        <span class="mobile">2022-07-26 16:41</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/ElasticSearch/">ElasticSearch</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>18 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="1、工程创建（springboot）"><a href="#1、工程创建（springboot）" class="headerlink" title="1、工程创建（springboot）"></a>1、工程创建（springboot）</h2><p><strong>目录结构</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/CkcVQLbtvgWyDp5.png"
+                      alt="img"
+                ></p>
+<h2 id="2、基本编码"><a href="#2、基本编码" class="headerlink" title="2、基本编码"></a>2、基本编码</h2><h3 id="1-导入依赖"><a href="#1-导入依赖" class="headerlink" title="1.导入依赖"></a>1.导入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">elasticsearch.version</span>&gt;</span>7.6.1<span class="tag">&lt;/<span class="name">elasticsearch.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- jsoup解析页面 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 解析网页 爬视频可 研究tiko --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jsoup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsoup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- fastjson --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.70<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ElasticSearch --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-elasticsearch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- thymeleaf --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- web --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- devtools热部署 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--  --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- lombok 需要安装插件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- test --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-导入前端素材"><a href="#2-导入前端素材" class="headerlink" title="2.导入前端素材"></a>2.导入前端素材</h3><h3 id="3-编写-application-preperties配置文件"><a href="#3-编写-application-preperties配置文件" class="headerlink" title="3.编写 application.preperties配置文件"></a>3.编写 <code>application.preperties</code>配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更改端口，防止冲突</span></span><br><span class="line"><span class="string">server.port=9999</span></span><br><span class="line"><span class="comment"># 关闭thymeleaf缓存</span></span><br><span class="line"><span class="string">spring.thymeleaf.cache=false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-测试controller和view"><a href="#4-测试controller和view" class="headerlink" title="4.测试controller和view"></a>4.测试controller和view</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IndexController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&#123;&quot;/&quot;,&quot;index&quot;&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">index</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;index&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问 localhost:9999</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/PypelBZAE1VbrF4.png"
+                      alt="img"
+                ></p>
+<blockquote>
+<p>到这里可以先去编写爬虫，编写之后，回到这里</p>
+</blockquote>
+<h3 id="5-编写Config"><a href="#5-编写Config" class="headerlink" title="5.编写Config"></a>5.编写Config</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ElasticSearchConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RestHighLevelClient <span class="title function_">restHighLevelClient</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">RestHighLevelClient</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestHighLevelClient</span>(</span><br><span class="line">                RestClient.builder(</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">HttpHost</span>(<span class="string">&quot;127.0.0.1&quot;</span>,<span class="number">9200</span>,<span class="string">&quot;http&quot;</span>)</span><br><span class="line">                )</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-编写service"><a href="#6-编写service" class="headerlink" title="6.编写service"></a>6.编写service</h3><blockquote>
+<p>因为是爬取的数据，那么就不走Dao，以下编写都不会编写接口，开发中必须严格要求编写</p>
+</blockquote>
+<p><strong>ContentService</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ContentService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RestHighLevelClient restHighLevelClient;</span><br><span class="line">    <span class="comment">// 1、解析数据放入 es 索引中</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">parseContent</span><span class="params">(String keyword)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">// 获取内容</span></span><br><span class="line">        List&lt;Content&gt; contents = HtmlParseUtil.parseJD(keyword);</span><br><span class="line">        <span class="comment">// 内容放入 es 中</span></span><br><span class="line">        <span class="type">BulkRequest</span> <span class="variable">bulkRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BulkRequest</span>();</span><br><span class="line">        bulkRequest.timeout(<span class="string">&quot;2m&quot;</span>); <span class="comment">// 可更具实际业务是指</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; contents.size(); i++) &#123;</span><br><span class="line">            bulkRequest.add(</span><br><span class="line">                    <span class="keyword">new</span> <span class="title class_">IndexRequest</span>(<span class="string">&quot;jd_goods&quot;</span>)</span><br><span class="line">                            .id(<span class="string">&quot;&quot;</span>+(i+<span class="number">1</span>))</span><br><span class="line">                            .source(JSON.toJSONString(contents.get(i)), XContentType.JSON)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">BulkResponse</span> <span class="variable">bulk</span> <span class="operator">=</span> restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);</span><br><span class="line">        restHighLevelClient.close();</span><br><span class="line">        <span class="keyword">return</span> !bulk.hasFailures();</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">// 2、根据keyword分页查询结果</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">search</span><span class="params">(String keyword, Integer pageIndex, Integer pageSize)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">if</span> (pageIndex &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            pageIndex = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">SearchRequest</span> <span class="variable">jd_goods</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SearchRequest</span>(<span class="string">&quot;jd_goods&quot;</span>);</span><br><span class="line">        <span class="comment">// 创建搜索源建造者对象</span></span><br><span class="line">        <span class="type">SearchSourceBuilder</span> <span class="variable">searchSourceBuilder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SearchSourceBuilder</span>();</span><br><span class="line">        <span class="comment">// 条件采用：精确查询 通过keyword查字段name</span></span><br><span class="line">        <span class="type">TermQueryBuilder</span> <span class="variable">termQueryBuilder</span> <span class="operator">=</span> QueryBuilders.termQuery(<span class="string">&quot;name&quot;</span>, keyword);</span><br><span class="line">        searchSourceBuilder.query(termQueryBuilder);</span><br><span class="line">        searchSourceBuilder.timeout(<span class="keyword">new</span> <span class="title class_">TimeValue</span>(<span class="number">60</span>, TimeUnit.SECONDS));<span class="comment">// 60s</span></span><br><span class="line">        <span class="comment">// 分页</span></span><br><span class="line">        searchSourceBuilder.from(pageIndex);</span><br><span class="line">        searchSourceBuilder.size(pageSize);</span><br><span class="line">        <span class="comment">// 高亮</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">        <span class="comment">// 搜索源放入搜索请求中</span></span><br><span class="line">        jd_goods.source(searchSourceBuilder);</span><br><span class="line">        <span class="comment">// 执行查询，返回结果</span></span><br><span class="line">        <span class="type">SearchResponse</span> <span class="variable">searchResponse</span> <span class="operator">=</span> restHighLevelClient.search(jd_goods, RequestOptions.DEFAULT);</span><br><span class="line">        restHighLevelClient.close();</span><br><span class="line">        <span class="comment">// 解析结果</span></span><br><span class="line">        <span class="type">SearchHits</span> <span class="variable">hits</span> <span class="operator">=</span> searchResponse.getHits();</span><br><span class="line">        List&lt;Map&lt;String,Object&gt;&gt; results = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (SearchHit documentFields : hits.getHits()) &#123;</span><br><span class="line">            Map&lt;String, Object&gt; sourceAsMap = documentFields.getSourceAsMap();</span><br><span class="line">            results.add(sourceAsMap);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回查询的结果</span></span><br><span class="line">        <span class="keyword">return</span> results;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-编写controller"><a href="#7-编写controller" class="headerlink" title="7.编写controller"></a>7.编写controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ContentController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ContentService contentService;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/parse/&#123;keyword&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">parse</span><span class="params">(<span class="meta">@PathVariable(&quot;keyword&quot;)</span> String keyword)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">return</span> contentService.parseContent(keyword);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/search/&#123;keyword&#125;/&#123;pageIndex&#125;/&#123;pageSize&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">parse</span><span class="params">(<span class="meta">@PathVariable(&quot;keyword&quot;)</span> String keyword,</span></span><br><span class="line"><span class="params">                                           <span class="meta">@PathVariable(&quot;pageIndex&quot;)</span> Integer pageIndex,</span></span><br><span class="line"><span class="params">                                           <span class="meta">@PathVariable(&quot;pageSize&quot;)</span> Integer pageSize)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">return</span> contentService.search(keyword,pageIndex,pageSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-测试结果"><a href="#8-测试结果" class="headerlink" title="8.测试结果"></a>8.测试结果</h3><h4 id="8-1解析数据放入-es-索引中"><a href="#8-1解析数据放入-es-索引中" class="headerlink" title="8.1解析数据放入 es 索引中"></a>8.1解析数据放入 es 索引中</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/rNa2skHpcYziq9U.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/lu1icHBOw69DyjE.png"
+                      alt="img"
+                ></p>
+<h3 id="8-2根据keyword分页查询结果"><a href="#8-2根据keyword分页查询结果" class="headerlink" title="8.2根据keyword分页查询结果"></a>8.2根据keyword分页查询结果</h3><h2 id="3、爬虫（jsoup）"><a href="#3、爬虫（jsoup）" class="headerlink" title="3、爬虫（jsoup）"></a>3、爬虫（jsoup）</h2><blockquote>
+<p>数据获取：数据库、消息队列、爬虫、…</p>
+</blockquote>
+<h3 id="1-搜索京东搜索页面，并分析页面"><a href="#1-搜索京东搜索页面，并分析页面" class="headerlink" title="1.搜索京东搜索页面，并分析页面"></a>1.搜索京东搜索页面，并分析页面</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//search.jd.com/search?keyword=java</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1页面如下"><a href="#1-1页面如下" class="headerlink" title="1.1页面如下"></a>1.1页面如下</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/uzoajYpADRyiXMF.png"
+                      alt="img"
+                ></p>
+<h4 id="1-2审查页面元素"><a href="#1-2审查页面元素" class="headerlink" title="1.2审查页面元素"></a>1.2审查页面元素</h4><p><strong>页面列表id：J_goodsList</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/3gz4XFZEJNHjqfv.png"
+                      alt="img"
+                ></p>
+<p><strong>目标元素：img、price、name</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/Mfc74asvXuE1WUq.png"
+                      alt="img"
+                ></p>
+<h3 id="2-爬取数据（获取请求返回的页面信息，筛选出可用的）"><a href="#2-爬取数据（获取请求返回的页面信息，筛选出可用的）" class="headerlink" title="2.爬取数据（获取请求返回的页面信息，筛选出可用的）"></a>2.爬取数据（获取请求返回的页面信息，筛选出可用的）</h3><h4 id="2-1创建HtmlParseUtil，并简单编写"><a href="#2-1创建HtmlParseUtil，并简单编写" class="headerlink" title="2.1创建HtmlParseUtil，并简单编写"></a>2.1创建HtmlParseUtil，并简单编写</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HtmlParseUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">/// 使用前需要联网</span></span><br><span class="line">        <span class="comment">// 请求url</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://search.jd.com/search?keyword=java&quot;</span>;</span><br><span class="line">        <span class="comment">// 1.解析网页(jsoup 解析返回的对象是浏览器Document对象)</span></span><br><span class="line">        <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">URL</span>(url), <span class="number">30000</span>);</span><br><span class="line">        <span class="comment">// 使用document可以使用在js对document的所有操作</span></span><br><span class="line">        <span class="comment">// 2.获取元素（通过id）</span></span><br><span class="line">        <span class="type">Element</span> <span class="variable">j_goodsList</span> <span class="operator">=</span> document.getElementById(<span class="string">&quot;J_goodsList&quot;</span>);</span><br><span class="line">        <span class="comment">// 3.获取J_goodsList ul 每一个 li</span></span><br><span class="line">        <span class="type">Elements</span> <span class="variable">lis</span> <span class="operator">=</span> j_goodsList.getElementsByTag(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">        <span class="comment">// 4.获取li下的 img、price、name</span></span><br><span class="line">        <span class="keyword">for</span> (Element li : lis) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">img</span> <span class="operator">=</span> li.getElementsByTag(<span class="string">&quot;img&quot;</span>).eq(<span class="number">0</span>).attr(<span class="string">&quot;src&quot;</span>);<span class="comment">// 获取li下 第一张图片</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> li.getElementsByClass(<span class="string">&quot;p-name&quot;</span>).eq(<span class="number">0</span>).text();</span><br><span class="line">            <span class="type">String</span> <span class="variable">price</span> <span class="operator">=</span> li.getElementsByClass(<span class="string">&quot;p-price&quot;</span>).eq(<span class="number">0</span>).text();</span><br><span class="line">            System.out.println(<span class="string">&quot;=======================&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;img : &quot;</span> + img);</span><br><span class="line">            System.out.println(<span class="string">&quot;name : &quot;</span> + name);</span><br><span class="line">            System.out.println(<span class="string">&quot;price : &quot;</span> + price);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行结果</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/c7WY2iVC1dMxZ4k.png"
+                      alt="img"
+                ></p>
+<p><strong>原因是啥？</strong></p>
+<blockquote>
+<p>一般图片特别多的网站，所有的图片都是通过延迟加载的</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打印标签内容</span></span><br><span class="line"><span class="type">Elements</span> <span class="variable">lis</span> <span class="operator">=</span> j_goodsList.getElementsByTag(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">System.out.println(lis);</span><br></pre></td></tr></table></figure>
+
+<p>打印所有li标签，发现img标签中并没有属性src的设置，只是data-lazy-ing设置图片加载的地址</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/t4g5oPBe9IjHSEw.png"
+                      alt="img"
+                ></p>
+<h4 id="2-2创建HtmlParseUtil、改写"><a href="#2-2创建HtmlParseUtil、改写" class="headerlink" title="2.2创建HtmlParseUtil、改写"></a>2.2创建HtmlParseUtil、改写</h4><ul>
+<li><p>更改图片获取属性为 <code>data-lazy-img</code></p>
+</li>
+<li><p>与实体类结合，实体类如下</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Content</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> -<span class="number">8049497962627482693L</span>;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String img;</span><br><span class="line">    <span class="keyword">private</span> String price;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>封装为方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HtmlParseUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(parseJD(<span class="string">&quot;java&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Content&gt; <span class="title function_">parseJD</span><span class="params">(String keyword)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">/// 使用前需要联网</span></span><br><span class="line">        <span class="comment">// 请求url</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://search.jd.com/search?keyword=&quot;</span> + keyword;</span><br><span class="line">        <span class="comment">// 1.解析网页(jsoup 解析返回的对象是浏览器Document对象)</span></span><br><span class="line">        <span class="type">Document</span> <span class="variable">document</span> <span class="operator">=</span> Jsoup.parse(<span class="keyword">new</span> <span class="title class_">URL</span>(url), <span class="number">30000</span>);</span><br><span class="line">        <span class="comment">// 使用document可以使用在js对document的所有操作</span></span><br><span class="line">        <span class="comment">// 2.获取元素（通过id）</span></span><br><span class="line">        <span class="type">Element</span> <span class="variable">j_goodsList</span> <span class="operator">=</span> document.getElementById(<span class="string">&quot;J_goodsList&quot;</span>);</span><br><span class="line">        <span class="comment">// 3.获取J_goodsList ul 每一个 li</span></span><br><span class="line">        <span class="type">Elements</span> <span class="variable">lis</span> <span class="operator">=</span> j_goodsList.getElementsByTag(<span class="string">&quot;li&quot;</span>);</span><br><span class="line"><span class="comment">//        System.out.println(lis);</span></span><br><span class="line">        <span class="comment">// 4.获取li下的 img、price、name</span></span><br><span class="line">        <span class="comment">// list存储所有li下的内容</span></span><br><span class="line">        List&lt;Content&gt; contents = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Content&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Element li : lis) &#123;</span><br><span class="line">            <span class="comment">// 由于网站图片使用懒加载，将src属性替换为data-lazy-img</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">img</span> <span class="operator">=</span> li.getElementsByTag(<span class="string">&quot;img&quot;</span>).eq(<span class="number">0</span>).attr(<span class="string">&quot;data-lazy-img&quot;</span>);<span class="comment">// 获取li下 第一张图片</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> li.getElementsByClass(<span class="string">&quot;p-name&quot;</span>).eq(<span class="number">0</span>).text();</span><br><span class="line">            <span class="type">String</span> <span class="variable">price</span> <span class="operator">=</span> li.getElementsByClass(<span class="string">&quot;p-price&quot;</span>).eq(<span class="number">0</span>).text();</span><br><span class="line">            <span class="comment">// 封装为对象</span></span><br><span class="line">            <span class="type">Content</span> <span class="variable">content</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Content</span>(name,img,price);</span><br><span class="line">            <span class="comment">// 添加到list中</span></span><br><span class="line">            contents.add(content);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        System.out.println(contents);</span></span><br><span class="line">        <span class="comment">// 5.返回 list</span></span><br><span class="line">        <span class="keyword">return</span> contents;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果展示</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/n6tGhsMVz2RTH9X.png"
+                      alt="img"
+                ></p>
+<h2 id="4、搜索高亮"><a href="#4、搜索高亮" class="headerlink" title="4、搜索高亮"></a>4、搜索高亮</h2><blockquote>
+<p>在3、的基础上添加内容</p>
+</blockquote>
+<h3 id="4-1ContentService"><a href="#4-1ContentService" class="headerlink" title="4.1ContentService"></a>4.1ContentService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 3、 在2的基础上进行高亮查询</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">highlightSearch</span><span class="params">(String keyword, Integer pageIndex, Integer pageSize)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">SearchRequest</span> <span class="variable">searchRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SearchRequest</span>(<span class="string">&quot;jd_goods&quot;</span>);</span><br><span class="line">    <span class="type">SearchSourceBuilder</span> <span class="variable">searchSourceBuilder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SearchSourceBuilder</span>();</span><br><span class="line">    <span class="comment">// 精确查询，添加查询条件</span></span><br><span class="line">    <span class="type">TermQueryBuilder</span> <span class="variable">termQueryBuilder</span> <span class="operator">=</span> QueryBuilders.termQuery(<span class="string">&quot;name&quot;</span>, keyword);</span><br><span class="line">    searchSourceBuilder.timeout(<span class="keyword">new</span> <span class="title class_">TimeValue</span>(<span class="number">60</span>, TimeUnit.SECONDS));</span><br><span class="line">    searchSourceBuilder.query(termQueryBuilder);</span><br><span class="line">    <span class="comment">// 分页</span></span><br><span class="line">    searchSourceBuilder.from(pageIndex);</span><br><span class="line">    searchSourceBuilder.size(pageSize);</span><br><span class="line">    <span class="comment">// 高亮 =========</span></span><br><span class="line">    <span class="type">HighlightBuilder</span> <span class="variable">highlightBuilder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HighlightBuilder</span>();</span><br><span class="line">    highlightBuilder.field(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">    highlightBuilder.preTags(<span class="string">&quot;&lt;span style=&#x27;color:red&#x27;&gt;&quot;</span>);</span><br><span class="line">    highlightBuilder.postTags(<span class="string">&quot;&lt;/span&gt;&quot;</span>);</span><br><span class="line">    searchSourceBuilder.highlighter(highlightBuilder);</span><br><span class="line">    <span class="comment">// 执行查询</span></span><br><span class="line">    searchRequest.source(searchSourceBuilder);</span><br><span class="line">    <span class="type">SearchResponse</span> <span class="variable">searchResponse</span> <span class="operator">=</span> restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);</span><br><span class="line">    <span class="comment">// 解析结果 ==========</span></span><br><span class="line">    <span class="type">SearchHits</span> <span class="variable">hits</span> <span class="operator">=</span> searchResponse.getHits();</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; results = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (SearchHit documentFields : hits.getHits()) &#123;</span><br><span class="line">        <span class="comment">// 使用新的字段值（高亮），覆盖旧的字段值</span></span><br><span class="line">        Map&lt;String, Object&gt; sourceAsMap = documentFields.getSourceAsMap();</span><br><span class="line">        <span class="comment">// 高亮字段</span></span><br><span class="line">        Map&lt;String, HighlightField&gt; highlightFields = documentFields.getHighlightFields();</span><br><span class="line">        <span class="type">HighlightField</span> <span class="variable">name</span> <span class="operator">=</span> highlightFields.get(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        <span class="comment">// 替换</span></span><br><span class="line">        <span class="keyword">if</span> (name != <span class="literal">null</span>)&#123;</span><br><span class="line">            Text[] fragments = name.fragments();</span><br><span class="line">            <span class="type">StringBuilder</span> <span class="variable">new_name</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">            <span class="keyword">for</span> (Text text : fragments) &#123;</span><br><span class="line">                new_name.append(text);</span><br><span class="line">            &#125;</span><br><span class="line">            sourceAsMap.put(<span class="string">&quot;name&quot;</span>,new_name.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        results.add(sourceAsMap);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2ContentController"><a href="#4-2ContentController" class="headerlink" title="4.2ContentController"></a>4.2ContentController</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/h_search/&#123;keyword&#125;/&#123;pageIndex&#125;/&#123;pageSize&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; <span class="title function_">highlightParse</span><span class="params">(<span class="meta">@PathVariable(&quot;keyword&quot;)</span> String keyword,</span></span><br><span class="line"><span class="params">                                       <span class="meta">@PathVariable(&quot;pageIndex&quot;)</span> Integer pageIndex,</span></span><br><span class="line"><span class="params">                                       <span class="meta">@PathVariable(&quot;pageSize&quot;)</span> Integer pageSize)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">return</span> contentService.highlightSearch(keyword,pageIndex,pageSize);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3结果展示"><a href="#4-3结果展示" class="headerlink" title="4.3结果展示"></a>4.3结果展示</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/pTNrncGS43DU8fu.png"
+                      alt="img"
+                ></p>
+<h2 id="5、前后端分离（简单使用Vue）"><a href="#5、前后端分离（简单使用Vue）" class="headerlink" title="5、前后端分离（简单使用Vue）"></a>5、前后端分离（简单使用Vue）</h2><blockquote>
+<p>删除Controller 方法上的 <a class="link"   target="_blank" rel="noopener" href="https://github.com/ResponseBody" >@ResponseBody<i class="fas fa-external-link-alt"></i></a>注解</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/7YkxcN3ObJSpAqu.png"
+                      alt="img"
+                ></p>
+<h3 id="5-1下载并引入Vue-min-js和axios-js"><a href="#5-1下载并引入Vue-min-js和axios-js" class="headerlink" title="5.1下载并引入Vue.min.js和axios.js"></a>5.1下载并引入Vue.min.js和axios.js</h3><blockquote>
+<p>如果安装了nodejs，可以按如下步骤，没有可以到后面素材处下载</p>
+</blockquote>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install vue</span><br><span class="line">npm install axios</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/ChdTpvF9WnGrjM5.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/oPHI1BgFxGVLsD4.png"
+                      alt="img"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/KTfzU3YLgdnXN56.png"
+                      alt="img"
+                ></p>
+<h3 id="5-2修改静态页面"><a href="#5-2修改静态页面" class="headerlink" title="5.2修改静态页面"></a>5.2修改静态页面</h3><h4 id="5-2-1引入js"><a href="#5-2-1引入js" class="headerlink" title="5.2.1引入js"></a>5.2.1引入js</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script th:src=&quot;@&#123;/js/vue.min.js&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script th:src=&quot;@&#123;/js/axios.min.js&#125;&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-2修改后的index-html"><a href="#5-2-2修改后的index-html" class="headerlink" title="5.2.2修改后的index.html"></a>5.2.2修改后的index.html</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;/&gt;</span><br><span class="line">    &lt;title&gt;狂神说Java-ES仿京东实战&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; th:href=&quot;@&#123;/css/style.css&#125;&quot;/&gt;</span><br><span class="line">    &lt;script th:src=&quot;@&#123;/js/jquery.min.js&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body class=&quot;pg&quot;&gt;</span><br><span class="line">&lt;div class=&quot;page&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot; class=&quot; mallist tmall- page-not-market &quot;&gt;</span><br><span class="line">        &lt;!-- 头部搜索 --&gt;</span><br><span class="line">        &lt;div id=&quot;header&quot; class=&quot; header-list-app&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;headerLayout&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;headerCon &quot;&gt;</span><br><span class="line">                    &lt;!-- Logo--&gt;</span><br><span class="line">                    &lt;h1 id=&quot;mallLogo&quot;&gt;</span><br><span class="line">                        &lt;img th:src=&quot;@&#123;/images/jdlogo.png&#125;&quot; alt=&quot;&quot;&gt;</span><br><span class="line">                    &lt;/h1&gt;</span><br><span class="line">                    &lt;div class=&quot;header-extra&quot;&gt;</span><br><span class="line">                        &lt;!--搜索--&gt;</span><br><span class="line">                        &lt;div id=&quot;mallSearch&quot; class=&quot;mall-search&quot;&gt;</span><br><span class="line">                            &lt;form name=&quot;searchTop&quot; class=&quot;mallSearch-form clearfix&quot;&gt;</span><br><span class="line">                                &lt;fieldset&gt;</span><br><span class="line">                                    &lt;legend&gt;天猫搜索&lt;/legend&gt;</span><br><span class="line">                                    &lt;div class=&quot;mallSearch-input clearfix&quot;&gt;</span><br><span class="line">                                        &lt;div class=&quot;s-combobox&quot; id=&quot;s-combobox-685&quot;&gt;</span><br><span class="line">                                            &lt;div class=&quot;s-combobox-input-wrap&quot;&gt;</span><br><span class="line">                                                &lt;input v-model=&quot;keyword&quot;  type=&quot;text&quot; autocomplete=&quot;off&quot; id=&quot;mq&quot;</span><br><span class="line">                                                       class=&quot;s-combobox-input&quot;  aria-haspopup=&quot;true&quot;&gt;</span><br><span class="line">                                            &lt;/div&gt;</span><br><span class="line">                                        &lt;/div&gt;</span><br><span class="line">                                        &lt;button type=&quot;submit&quot; @click.prevent=&quot;searchKey&quot; id=&quot;searchbtn&quot;&gt;搜索&lt;/button&gt;</span><br><span class="line">                                    &lt;/div&gt;</span><br><span class="line">                                &lt;/fieldset&gt;</span><br><span class="line">                            &lt;/form&gt;</span><br><span class="line">                            &lt;ul class=&quot;relKeyTop&quot;&gt;</span><br><span class="line">                                &lt;li&gt;&lt;a&gt;狂神说Java&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                &lt;li&gt;&lt;a&gt;狂神说前端&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                &lt;li&gt;&lt;a&gt;狂神说Linux&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                &lt;li&gt;&lt;a&gt;狂神说大数据&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                &lt;li&gt;&lt;a&gt;狂神聊理财&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                            &lt;/ul&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;!-- 商品详情页面 --&gt;</span><br><span class="line">        &lt;div id=&quot;content&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;main&quot;&gt;</span><br><span class="line">                &lt;!-- 品牌分类 --&gt;</span><br><span class="line">                &lt;form class=&quot;navAttrsForm&quot;&gt;</span><br><span class="line">                    &lt;div class=&quot;attrs j_NavAttrs&quot; style=&quot;display:block&quot;&gt;</span><br><span class="line">                        &lt;div class=&quot;brandAttr j_nav_brand&quot;&gt;</span><br><span class="line">                            &lt;div class=&quot;j_Brand attr&quot;&gt;</span><br><span class="line">                                &lt;div class=&quot;attrKey&quot;&gt;</span><br><span class="line">                                    品牌</span><br><span class="line">                                &lt;/div&gt;</span><br><span class="line">                                &lt;div class=&quot;attrValues&quot;&gt;</span><br><span class="line">                                    &lt;ul class=&quot;av-collapse row-2&quot;&gt;</span><br><span class="line">                                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt; 狂神说 &lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                        &lt;li&gt;&lt;a href=&quot;#&quot;&gt; Java &lt;/a&gt;&lt;/li&gt;</span><br><span class="line">                                    &lt;/ul&gt;</span><br><span class="line">                                &lt;/div&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                &lt;/form&gt;</span><br><span class="line">                &lt;!-- 排序规则 --&gt;</span><br><span class="line">                &lt;div class=&quot;filter clearfix&quot;&gt;</span><br><span class="line">                    &lt;a class=&quot;fSort fSort-cur&quot;&gt;综合&lt;i class=&quot;f-ico-arrow-d&quot;&gt;&lt;/i&gt;&lt;/a&gt;</span><br><span class="line">                    &lt;a class=&quot;fSort&quot;&gt;人气&lt;i class=&quot;f-ico-arrow-d&quot;&gt;&lt;/i&gt;&lt;/a&gt;</span><br><span class="line">                    &lt;a class=&quot;fSort&quot;&gt;新品&lt;i class=&quot;f-ico-arrow-d&quot;&gt;&lt;/i&gt;&lt;/a&gt;</span><br><span class="line">                    &lt;a class=&quot;fSort&quot;&gt;销量&lt;i class=&quot;f-ico-arrow-d&quot;&gt;&lt;/i&gt;&lt;/a&gt;</span><br><span class="line">                    &lt;a class=&quot;fSort&quot;&gt;价格&lt;i class=&quot;f-ico-triangle-mt&quot;&gt;&lt;/i&gt;&lt;i class=&quot;f-ico-triangle-mb&quot;&gt;&lt;/i&gt;&lt;/a&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;!-- 商品详情 --&gt;</span><br><span class="line">                &lt;div class=&quot;view grid-nosku&quot; &gt;</span><br><span class="line">                    &lt;div class=&quot;product&quot; v-for=&quot;result in results&quot;&gt;</span><br><span class="line">                        &lt;div class=&quot;product-iWrap&quot;&gt;</span><br><span class="line">                            &lt;!--商品封面--&gt;</span><br><span class="line">                            &lt;div class=&quot;productImg-wrap&quot;&gt;</span><br><span class="line">                                &lt;a class=&quot;productImg&quot;&gt;</span><br><span class="line">                                    &lt;img :src=&quot;result.img&quot;&gt;</span><br><span class="line">                                &lt;/a&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                            &lt;!--价格--&gt;</span><br><span class="line">                            &lt;p class=&quot;productPrice&quot;&gt;</span><br><span class="line">                                &lt;em v-text=&quot;result.price&quot;&gt;&lt;/em&gt;</span><br><span class="line">                            &lt;/p&gt;</span><br><span class="line">                            &lt;!--标题--&gt;</span><br><span class="line">                            &lt;p class=&quot;productTitle&quot;&gt;</span><br><span class="line">                                &lt;a v-html=&quot;result.name&quot;&gt;&lt;/a&gt;</span><br><span class="line">                            &lt;/p&gt;</span><br><span class="line">                            &lt;!-- 店铺名 --&gt;</span><br><span class="line">                            &lt;div class=&quot;productShop&quot;&gt;</span><br><span class="line">                                &lt;span&gt;店铺： 狂神说Java &lt;/span&gt;</span><br><span class="line">                            &lt;/div&gt;</span><br><span class="line">                            &lt;!-- 成交信息 --&gt;</span><br><span class="line">                            &lt;p class=&quot;productStatus&quot;&gt;</span><br><span class="line">                                &lt;span&gt;月成交&lt;em&gt;999笔&lt;/em&gt;&lt;/span&gt;</span><br><span class="line">                                &lt;span&gt;评价 &lt;a&gt;3&lt;/a&gt;&lt;/span&gt;</span><br><span class="line">                            &lt;/p&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    &lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script th:src=&quot;@&#123;/js/vue.min.js&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script th:src=&quot;@&#123;/js/axios.min.js&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            &quot;keyword&quot;: &#x27;&#x27;, // 搜索的关键字</span><br><span class="line">            &quot;results&quot;:[] // 后端返回的结果</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            searchKey()&#123;</span><br><span class="line">                var keyword = this.keyword;</span><br><span class="line">                console.log(keyword);</span><br><span class="line">                axios.get(&#x27;h_search/&#x27;+keyword+&#x27;/0/20&#x27;).then(response=&gt;&#123;</span><br><span class="line">                    console.log(response.data);</span><br><span class="line">                    this.results=response.data;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-3测试"><a href="#5-2-3测试" class="headerlink" title="5.2.3测试"></a>5.2.3测试</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/07/27/N5UwlpWKZXE9srq.png"
+                      alt="img"
+                ></p>
+<h2 id="6、安装包及前端素材"><a href="#6、安装包及前端素材" class="headerlink" title="6、安装包及前端素材"></a>6、安装包及前端素材</h2><p>链接: <a class="link"   target="_blank" rel="noopener" href="https://pan.baidu.com/s/14CIHvUmXsK_8KHRrXkH1iA" >https://pan.baidu.com/s/14CIHvUmXsK_8KHRrXkH1iA<i class="fas fa-external-link-alt"></i></a> 提取码: 2n99 复制这段内容后打开百度网盘手机App，操作更方便哦</p>
+<p>使用term（精确查询）时，三个问题，问题如下：</p>
+<ul>
+<li><p>字段值必须是一个词（索引中存在的词），才能匹配</p>
+<ul>
+<li><p>问题：中文字符串，term查询时无法查询到数据（比如，“编程”两字在文档中存在，但是搜索不到）</p>
+</li>
+<li><p>原因：索引为配置中文分词器（默认使用standard，即所有中文字符串都会被切分为单个中文汉字作为单词），所以没有超过1个汉字的词，也就无法匹配，进而查不到数据</p>
+</li>
+<li><p>解决：创建索引时配置中文分词器，如</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PUT example</span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mappings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;properties&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;text&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;analyzer&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ik_max_word&quot;</span>  <span class="comment">// ik分词器</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查询的英文字符只能是小写，大写都无效</p>
+</li>
+<li><p>查询时英文单词必须是完整的</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：ElasticSearch之ElasticSearch实战</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-07-26 16:41:53</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/07/26/ElasticSearch之ElasticSearch实战/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/ElasticSearch/">#ElasticSearch</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/07/26/ElasticSearch%E4%B9%8BSpringBoot%E6%95%B4%E5%90%88/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">ElasticSearch之SpringBoot整合</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%B7%A5%E7%A8%8B%E5%88%9B%E5%BB%BA%EF%BC%88springboot%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1、工程创建（springboot）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%9F%BA%E6%9C%AC%E7%BC%96%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">2、基本编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">1.导入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%BC%E5%85%A5%E5%89%8D%E7%AB%AF%E7%B4%A0%E6%9D%90"><span class="nav-number">2.2.</span> <span class="nav-text">2.导入前端素材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%BC%96%E5%86%99-application-preperties%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">3.编写 application.preperties配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B5%8B%E8%AF%95controller%E5%92%8Cview"><span class="nav-number">2.4.</span> <span class="nav-text">4.测试controller和view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BC%96%E5%86%99Config"><span class="nav-number">2.5.</span> <span class="nav-text">5.编写Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E7%BC%96%E5%86%99service"><span class="nav-number">2.6.</span> <span class="nav-text">6.编写service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BC%96%E5%86%99controller"><span class="nav-number">2.7.</span> <span class="nav-text">7.编写controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">2.8.</span> <span class="nav-text">8.测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE%E6%94%BE%E5%85%A5-es-%E7%B4%A2%E5%BC%95%E4%B8%AD"><span class="nav-number">2.8.1.</span> <span class="nav-text">8.1解析数据放入 es 索引中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2%E6%A0%B9%E6%8D%AEkeyword%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C"><span class="nav-number">2.9.</span> <span class="nav-text">8.2根据keyword分页查询结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%88%AC%E8%99%AB%EF%BC%88jsoup%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">3、爬虫（jsoup）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%90%9C%E7%B4%A2%E4%BA%AC%E4%B8%9C%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2%EF%BC%8C%E5%B9%B6%E5%88%86%E6%9E%90%E9%A1%B5%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">1.搜索京东搜索页面，并分析页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1%E9%A1%B5%E9%9D%A2%E5%A6%82%E4%B8%8B"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1页面如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2%E5%AE%A1%E6%9F%A5%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.2.</span> <span class="nav-text">1.2审查页面元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%88%AC%E5%8F%96%E6%95%B0%E6%8D%AE%EF%BC%88%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E8%BF%94%E5%9B%9E%E7%9A%84%E9%A1%B5%E9%9D%A2%E4%BF%A1%E6%81%AF%EF%BC%8C%E7%AD%9B%E9%80%89%E5%87%BA%E5%8F%AF%E7%94%A8%E7%9A%84%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">2.爬取数据（获取请求返回的页面信息，筛选出可用的）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1%E5%88%9B%E5%BB%BAHtmlParseUtil%EF%BC%8C%E5%B9%B6%E7%AE%80%E5%8D%95%E7%BC%96%E5%86%99"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1创建HtmlParseUtil，并简单编写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2%E5%88%9B%E5%BB%BAHtmlParseUtil%E3%80%81%E6%94%B9%E5%86%99"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2创建HtmlParseUtil、改写</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%90%9C%E7%B4%A2%E9%AB%98%E4%BA%AE"><span class="nav-number">4.</span> <span class="nav-text">4、搜索高亮</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1ContentService"><span class="nav-number">4.1.</span> <span class="nav-text">4.1ContentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2ContentController"><span class="nav-number">4.2.</span> <span class="nav-text">4.2ContentController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">4.3.</span> <span class="nav-text">4.3结果展示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%EF%BC%88%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8Vue%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">5、前后端分离（简单使用Vue）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%BC%95%E5%85%A5Vue-min-js%E5%92%8Caxios-js"><span class="nav-number">5.1.</span> <span class="nav-text">5.1下载并引入Vue.min.js和axios.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2%E4%BF%AE%E6%94%B9%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.2.</span> <span class="nav-text">5.2修改静态页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1%E5%BC%95%E5%85%A5js"><span class="nav-number">5.2.1.</span> <span class="nav-text">5.2.1引入js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2%E4%BF%AE%E6%94%B9%E5%90%8E%E7%9A%84index-html"><span class="nav-number">5.2.2.</span> <span class="nav-text">5.2.2修改后的index.html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-3%E6%B5%8B%E8%AF%95"><span class="nav-number">5.2.3.</span> <span class="nav-text">5.2.3测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%AE%89%E8%A3%85%E5%8C%85%E5%8F%8A%E5%89%8D%E7%AB%AF%E7%B4%A0%E6%9D%90"><span class="nav-number">6.</span> <span class="nav-text">6、安装包及前端素材</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
