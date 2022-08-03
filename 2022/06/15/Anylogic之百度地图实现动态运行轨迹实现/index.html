@@ -1,222 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fang">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Anylogic之百度地图实现动态运行轨迹实现 | Hexo</title><meta name="keywords" content="Anylogic"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="​	要求：一个基于离线百度地图(此方法在线也适用)实时展示车或者其他对象的运行轨迹，且在运行过程中需要车头方向随着角度进行变化。 1、创建地图1234567891011121314151617181920212223&lt;html&gt;	&lt;head&gt;		&lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anylogic之百度地图实现动态运行轨迹实现">
+<meta property="og:url" content="http://example.com/2022/06/15/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8C%E8%BD%A8%E8%BF%B9%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​	要求：一个基于离线百度地图(此方法在线也适用)实时展示车或者其他对象的运行轨迹，且在运行过程中需要车头方向随着角度进行变化。 1、创建地图1234567891011121314151617181920212223&lt;html&gt;	&lt;head&gt;		&lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;h">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2022-06-15T01:21:00.000Z">
+<meta property="article:modified_time" content="2022-06-15T03:22:03.835Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Anylogic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/06/15/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8C%E8%BD%A8%E8%BF%B9%E5%AE%9E%E7%8E%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Anylogic之百度地图实现动态运行轨迹实现',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-15 11:22:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <title>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-            Anylogic之百度地图实现动态运行轨迹实现 |
-        
-        念~旭
-    </title>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/style.css">
-
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
-<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-
-<body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
-
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
-
-
-<main class="page-container">
-
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                念~旭
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
-        </div>
-
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">Anylogic之百度地图实现动态运行轨迹实现</span>
-        </div>
-
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/favicon.ico">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Fang</span>
-                        
-                            <span class="author-label">Lv7</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-06-15 09:21:00</span>
-        <span class="mobile">2022-06-15 09:21</span>
-    </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/Anylogic/">Anylogic</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>3k Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>16 Mins</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
-
-                    </div>
-                </div>
-            </div>
-        
-
-        <div class="article-content markdown-body">
-            <p>​	要求：一个基于离线百度地图(此方法在线也适用)实时展示车或者其他对象的运行轨迹，且在运行过程中需要车头方向随着角度进行变化。</p>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Anylogic之百度地图实现动态运行轨迹实现</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-06-15T01:21:00.000Z" title="Created 2022-06-15 09:21:00">2022-06-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-06-15T03:22:03.835Z" title="Updated 2022-06-15 11:22:03">2022-06-15</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Anylogic之百度地图实现动态运行轨迹实现"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>​	要求：一个基于离线百度地图(此方法在线也适用)实时展示车或者其他对象的运行轨迹，且在运行过程中需要车头方向随着角度进行变化。</p>
 <h1 id="1、创建地图"><a href="#1、创建地图" class="headerlink" title="1、创建地图"></a>1、创建地图</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0, user-scalable=no&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">		<span class="selector-tag">body</span>, <span class="selector-tag">html</span>,<span class="selector-id">#allmap</span> &#123;<span class="attribute">width</span>: <span class="number">100%</span>;<span class="attribute">height</span>: <span class="number">100%</span>;<span class="attribute">overflow</span>: hidden;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">font-family</span>:<span class="string">&quot;微软雅黑&quot;</span>;&#125;</span></span><br><span class="line"><span class="language-css">		</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=密匙&quot;</span>&gt;</span>	</span><br><span class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>单个标注点沿直线的轨迹运动<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;allmap&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="comment">// 百度地图API功能</span></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> map=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;allmap&quot;</span>); <span class="comment">// 创建map实例</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.36239048877775</span>, <span class="number">39.938322220559</span>), <span class="number">15</span>);<span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);<span class="comment">//鼠标滚轮缩放</span></span></span><br><span class="line"><span class="language-javascript">	map.<span class="title function_">addControl</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">MapTypeControl</span>()); <span class="comment">//添加切换地图类型附件</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="2、绘制折线路径点"><a href="#2、绘制折线路径点" class="headerlink" title="2、绘制折线路径点"></a>2、绘制折线路径点</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">PointArr</span> = [</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.938322220559</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93793496684673</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36239048877775</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93760303333522</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.936883838492925</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93627528306042</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93577737001302</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36246235321855</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93527945331416</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36260608210014</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93472620825511</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36260608210014</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.933785681309004</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36274981098174</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9334537275117</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93295579377289</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.932402529780596</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93184926128044</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36267794654094</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.93063205471247</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36274981098174</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92902752181022</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92841889596463</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92781026466464</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92703563512155</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.926260996743295</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36282167542254</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.925541681766745</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36289353986334</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36296540430413</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92410302895963</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36332472650813</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9228303491527</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36382777759371</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9228303491527</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36469015088329</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922775014707135</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36619930414005</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922719680216495</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36655862634404</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92288568355318</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36627116858085</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9242690289156</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36670235522564</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36742099963362</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3684989662456</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924324362144105</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.36943320397597</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37029557726555</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37094235723274</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92437969532753</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37158913719992</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3723796460487</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92443502846588</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37302642601588</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92449036155915</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37360134154227</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37439185039105</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924545694607346</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37496676591743</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924545694607346</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37546981700302</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37582913920701</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924656360568505</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37669151249659</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924656360568505</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37719456358218</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92471169348146</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37776947910857</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37848812351655</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924822359172175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37906303904293</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.37963795456932</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924822359172175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.924767026349365</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92443502846588</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38006914121411</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.923992362096946</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3801410056549</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92332835713435</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3801410056549</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9229410179086</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802128700957</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92227700266861</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802847345365</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92155764550042</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3802847345365</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92089361673764</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.920229581483945</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91962087679934</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.918956829104815</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91829277491945</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3804284634181</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91762871424328</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3804284634181</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91696464707632</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805721922997</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91524911018613</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805003278589</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914806383957064</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3805003278589</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914363654843264</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3803565989773</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38186575223406</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91331216163647</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38315931216843</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3844528721028</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38553083871477</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91331216163647</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38739931417552</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913422845898175</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3885491452283</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913367503789864</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.38977084072187</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91358887195269</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39092067177464</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91353352997958</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39199863838661</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39415457161057</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9136442138807</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39551999598574</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91381023939432</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.3967416914793</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913754897601514</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913865581142055</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.913920922844696</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39817898029527</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91469570194906</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39817898029527</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.915304450761944</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91624523365416</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39810711585447</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91707532538824</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39796338697288</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91773939147339</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39803525141367</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9184587890743</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39796338697288</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91912284163695</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39789152253208</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92045092728972</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9212256319304</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92200032773621</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39774779365048</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.922719680216495</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39767592920968</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.923605026657604</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39753220032809</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92460102761046</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39753220032809</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.925541681766745</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92637165990969</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.928474225812344</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39896948914405</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92958081330031</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39997559131523</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92958081330031</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40148474457199</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92974679986831</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40292203338795</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40443118664471</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40579661101988</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92980212863415</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40716203539505</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92991278603061</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40852745977021</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92985745735493</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4088867819742</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92991278603061</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4090305108558</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.929470155362914</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4091023752966</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.928861533484174</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4091023752966</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92786559500822</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4092461041782</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92637165990969</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40946169750059</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92388169505393</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40953356194139</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92244300708714</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92161298093767</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.92039559090589</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40938983305979</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.919178179057525</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91685396858412</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91574717374566</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40960542638219</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.914751042975595</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40974915526378</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91419763068185</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40802440868462</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91414228920457</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40665898430946</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91419763068185</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40594033990148</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91408694768221</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40594033990148</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91309079257217</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40579661101988</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.9118179064571</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40608406878307</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91087706226448</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40615593322387</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.91010223961911</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40629966210547</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.909272062695706</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40608406878307</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90871860577934</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40615593322387</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90766702522079</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40601220434228</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90689216597646</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.4050061021711</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40320949115115</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.40134101569039</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90661542839114</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39904135358485</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90683681854954</span>&#125;,</span><br><span class="line">			&#123;<span class="string">&quot;lng&quot;</span>:<span class="number">116.39746033588729</span>,<span class="string">&quot;lat&quot;</span>:<span class="number">39.90667077599834</span>&#125;]</span><br></pre></td></tr></table></figure>
@@ -237,380 +164,4 @@
 <h1 id="8、删除折线覆盖物"><a href="#8、删除折线覆盖物" class="headerlink" title="8、删除折线覆盖物"></a>8、删除折线覆盖物</h1><p>在这个基础上添加一个功能，当小车到达终点时，将绘制的折线全部删除。在百度地图中所有的覆盖物都是通过map.addOverlay存储的，也就是存在同一个地方，正好轨迹覆盖物是折线，那就找到所有的折线覆盖物删除即可。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addMarkerEnd</span>(<span class="params">point, name,mapInit,trackUnit,prePoint,p</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span>(name==<span class="string">&quot;小车行驶&quot;</span>)&#123;</span><br><span class="line">              <span class="keyword">if</span>(carMk)&#123;<span class="comment">//先判断第一次进来的时候这个值有没有定义，有的话就清除掉上一次的。然后在进行画图标。第一次进来时候没有定义也就不走这块，直接进行画图标</span></span><br><span class="line">                  mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              &#125;</span><br><span class="line">              carMk = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(point,&#123;<span class="attr">icon</span>:drivingPoint&#125;);  <span class="comment">// 创建标注</span></span><br><span class="line">              <span class="title function_">getCarAngle</span>(point,prePoint);<span class="comment">// js求解两点之间的角度</span></span><br><span class="line">              carMk.<span class="title function_">setRotation</span>(<span class="title function_">getCarAngle</span>(point,prePoint)-<span class="number">90</span>);<span class="comment">// 旋转的角度</span></span><br><span class="line">              mapInit.<span class="title function_">addOverlay</span>(carMk);               <span class="comment">// 将标注添加到地图中</span></span><br><span class="line">		<span class="comment">//carMk.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画</span></span><br><span class="line">          &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">              mapInit.<span class="title function_">removeOverlay</span>(carMk);</span><br><span class="line">              <span class="keyword">var</span> allOverlay = map.<span class="title function_">getOverlays</span>();<span class="comment">////返回地图上的所有覆盖物</span></span><br><span class="line">                  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allOverlay.<span class="property">length</span>; i++)&#123;</span><br><span class="line">                      <span class="keyword">if</span>(allOverlay[i].<span class="title function_">toString</span>().<span class="title function_">indexOf</span>(<span class="string">&quot;Polyline&quot;</span>) &gt; <span class="number">0</span>) </span><br><span class="line">                      &#123;<span class="comment">//删除折线</span></span><br><span class="line">                          map.<span class="title function_">removeOverlay</span>(allOverlay[i]);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              <span class="comment">// carMk = new BMap.Marker(point,&#123;icon:terminalPoint&#125;);  // 创建标注</span></span><br><span class="line">              <span class="comment">// mapInit.addOverlay(carMk);</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
 
-
-        </div>
-
-        
-            <div class="post-copyright-info">
-                <div class="article-copyright-info-container">
-    <ul>
-        <li>Post title：Anylogic之百度地图实现动态运行轨迹实现</li>
-        <li>Post author：Fang</li>
-        <li>Create time：2022-06-15 09:21:00</li>
-        <li>
-            Post link：https://ainianxu.github.io/2022/06/15/Anylogic之百度地图实现动态运行轨迹实现/
-        </li>
-        <li>
-            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
-        </li>
-    </ul>
-</div>
-
-            </div>
-        
-
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/Anylogic/">#Anylogic</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/06/15/Anylogic%E4%B9%8B%E8%B7%AF%E4%B9%A6%E5%AE%9E%E7%8E%B0%E4%B8%80%E8%BE%B9%E8%B5%B0%E4%B8%80%E8%BE%B9%E7%94%BB/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Anylogic之路书实现一边走一边画</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2022/06/14/SpringBoot%E8%BF%90%E7%BB%B4%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%97%A5%E5%BF%97/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">SpringBoot运维实用篇之日志</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
-            <div class="comment-container">
-                <div class="comments-container">
-    <div id="comment-anchor"></div>
-    <div class="comment-area-title">
-        <i class="fas fa-comments">&nbsp;Comments</i>
-    </div>
-    
-
-        
-            
-    <div class="valine-container">
-        <script data-pjax
-                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
-        <div id="vcomments"></div>
-        <script data-pjax>
-            function loadValine() {
-                new Valine({
-                    el: '#vcomments',
-                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
-                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
-                    meta: ['nick', 'mail', 'link'],
-                    avatar: 'wavatar',
-                    enableQQ: true,
-                    placeholder: '😜 尽情吐槽吧~',
-                    lang: 'en'.toLowerCase()
-                });
-
-                function getAuthor(language) {
-                    switch (language) {
-                        case 'en':
-                            return 'Author';
-                        case 'zh-CN':
-                            return '博主';
-                        default:
-                            return 'Master';
-                    }
-                }
-
-                // Add "Author" identify
-                const getValineDomTimer = setInterval(() => {
-                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
-                    if (vcards.length > 0) {
-                        let author = 'Fang';
-
-                        if (author) {
-                            for (let vcard of vcards) {
-                                const vnick_dom = vcard.querySelector('.vhead .vnick');
-                                const vnick = vnick_dom.innerHTML;
-                                if (vnick === author) {
-                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
-                                }
-                            }
-                        }
-                        clearInterval(getValineDomTimer);
-                    } else {
-                        clearInterval(getValineDomTimer);
-                    }
-                }, 2000);
-            }
-
-            if ('true') {
-                const loadValineTimeout = setTimeout(() => {
-                    loadValine();
-                    clearTimeout(loadValineTimeout);
-                }, 1000);
-            } else {
-                window.addEventListener('DOMContentLoaded', loadValine);
-            }
-        </script>
-    </div>
-
-
-
-        
-    
-</div>
-
-            </div>
-        
-    </div>
-</div>
-
-
-                
-            </div>
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-            <li class="go-comment">
-                <i class="fas fa-comment"></i>
-            </li>
-        
-    </ul>
-</div>
-
-        </div>
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E5%9C%B0%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">1、创建地图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E7%BB%98%E5%88%B6%E6%8A%98%E7%BA%BF%E8%B7%AF%E5%BE%84%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2、绘制折线路径点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E5%B0%8F%E8%BD%A6%E5%9B%BE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">3、设置小车图标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E5%B1%95%E7%A4%BA%E5%AE%9E%E6%97%B6%E7%94%BB%E7%BA%BF%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">4、展示实时画线的效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E7%BB%98%E5%88%B6%E8%BF%90%E5%8A%A8%E8%B7%AF%E5%BE%84%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">5、绘制运动路径调用方法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6%E3%80%81%E6%A8%A1%E6%8B%9F%E5%87%BA%E8%BF%90%E5%8A%A8%E6%95%88%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">6、模拟出运动效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7%E3%80%81%E8%8E%B7%E5%BE%97%E8%A7%92%E5%BA%A6%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">7、获得角度的函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8%E3%80%81%E5%88%A0%E9%99%A4%E6%8A%98%E7%BA%BF%E8%A6%86%E7%9B%96%E7%89%A9"><span class="nav-number">8.</span> <span class="nav-text">8、删除折线覆盖物</span></a></li></ol>
-    </div>
-</div>
-        </aside>
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
-
-
-<div class="post-scripts pjax">
-    
-        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
-    
-</div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
-
-        document.addEventListener('pjax:send', () => {
-            KEEP.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            KEEP.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            KEEP.refresh();
-        });
-    });
-</script>
-
-
-
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2022/06/15/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8C%E8%BD%A8%E8%BF%B9%E5%AE%9E%E7%8E%B0/">http://example.com/2022/06/15/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8C%E8%BD%A8%E8%BF%B9%E5%AE%9E%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Anylogic/">Anylogic</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/15/Anylogic%E4%B9%8B%E8%B7%AF%E4%B9%A6%E5%AE%9E%E7%8E%B0%E4%B8%80%E8%BE%B9%E8%B5%B0%E4%B8%80%E8%BE%B9%E7%94%BB/"><img class="prev-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Anylogic之路书实现一边走一边画</div></div></a></div><div class="next-post pull-right"><a href="/2022/06/14/SpringBoot%E8%BF%90%E7%BB%B4%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%97%A5%E5%BF%97/"><img class="next-cover" src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">SpringBoot运维实用篇之日志</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/06/04/Anylogic%E4%B9%8BSpringBoot%E6%95%B4%E5%90%88Ecahrts%E5%8A%A8%E6%80%81%E5%9B%BE%E8%A1%A8/" title="Anylogic之SpringBoot整合Ecahrts动态图表"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-04</div><div class="title">Anylogic之SpringBoot整合Ecahrts动态图表</div></div></a></div><div><a href="/2022/06/09/Anylogic%E4%B9%8BUDP%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="Anylogic之UDP实现数据可视化"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-09</div><div class="title">Anylogic之UDP实现数据可视化</div></div></a></div><div><a href="/2022/04/25/Anylogic%E4%B9%8B%E5%9F%BA%E4%BA%8E%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%81%9A%E7%83%AD%E5%8A%9B%E5%9B%BE/" title="Anylogic之基于百度地图做热力图"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-25</div><div class="title">Anylogic之基于百度地图做热力图</div></div></a></div><div><a href="/2022/06/05/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E4%BB%8E%E5%90%8E%E5%8F%B0%E8%8E%B7%E5%8F%96%E5%AE%9E%E6%97%B6%E5%9D%90%E6%A0%87%E7%82%B9%E4%BB%A5%E5%AE%9E%E7%8E%B0%E8%BD%A6%E8%BE%86%E5%AE%9E%E6%97%B6%E8%B7%9F%E8%B8%AA/" title="Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-05</div><div class="title">Anylogic之百度地图从后台获取实时坐标点以实现车辆实时跟踪</div></div></a></div><div><a href="/2022/06/07/Anylogic%E4%B9%8Becharts%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="Anylogic之echarts实现数据可视化"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-07</div><div class="title">Anylogic之echarts实现数据可视化</div></div></a></div><div><a href="/2022/04/14/Anylogic%E4%B9%8B%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%AF%BC%E8%88%AA/" title="Anylogic之百度地图导航"><img class="cover" src="/" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-14</div><div class="title">Anylogic之百度地图导航</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E5%9C%B0%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1、创建地图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E7%BB%98%E5%88%B6%E6%8A%98%E7%BA%BF%E8%B7%AF%E5%BE%84%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">2、绘制折线路径点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E8%AE%BE%E7%BD%AE%E5%B0%8F%E8%BD%A6%E5%9B%BE%E6%A0%87"><span class="toc-number">3.</span> <span class="toc-text">3、设置小车图标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E5%B1%95%E7%A4%BA%E5%AE%9E%E6%97%B6%E7%94%BB%E7%BA%BF%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-number">4.</span> <span class="toc-text">4、展示实时画线的效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81%E7%BB%98%E5%88%B6%E8%BF%90%E5%8A%A8%E8%B7%AF%E5%BE%84%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">5、绘制运动路径调用方法：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81%E6%A8%A1%E6%8B%9F%E5%87%BA%E8%BF%90%E5%8A%A8%E6%95%88%E6%9E%9C"><span class="toc-number">6.</span> <span class="toc-text">6、模拟出运动效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81%E8%8E%B7%E5%BE%97%E8%A7%92%E5%BA%A6%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">7.</span> <span class="toc-text">7、获得角度的函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8%E3%80%81%E5%88%A0%E9%99%A4%E6%8A%98%E7%BA%BF%E8%A6%86%E7%9B%96%E7%89%A9"><span class="toc-number">8.</span> <span class="toc-text">8、删除折线覆盖物</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

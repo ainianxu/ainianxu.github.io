@@ -1,784 +1,209 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fang">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/7/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-08-03 15:47:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <title>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        念~旭
-    </title>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/style.css">
-
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
-<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
-
-
-<body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
-
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
-
-
-<main class="page-container">
-
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                念~旭
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
-        </div>
-
-        <div class="page-main-content-middle">
-
-            <div class="main-content">
-
-                
-                    <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">
-                        SpringBoot开发实用篇之ES查询文档
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        按id查询文档：
-12345678@Test//按id查询void testGet() throws IOException &#123;    GetRequest request = new GetRequest(&quot;books&quot...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 22 2022 16:46:08 GMT+0800">2022-06-22</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/">
-                        SpringBoot开发实用篇之ES添加文档
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        创建索引（IK分词器）：
-123456789101112131415161718192021222324252627282930313233@Testvoid testCreateIndexByIK() throws IOException &#12...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 22 2022 16:20:10 GMT+0800">2022-06-22</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88ES%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%93%8D%E4%BD%9C/">
-                        SpringBoot开发实用篇之整合ES客户端操作
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		使用springboot整合ES该如何进行呢？老规矩，导入坐标，做配置，使用API接口操作。整合Redis如此，整合MongoDB如此，整合ES依然如此。太没有新意了，其实不是没有新意，这就是springboot的强大之处，所有东西都做成相同规...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jun 22 2022 09:08:17 GMT+0800">2022-06-22</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88ES%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">
-                        SpringBoot开发实用篇之ES文档操作
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        目前我们已经有了索引了，但是索引中还没有数据，所以要先添加数据，ES中称数据为文档，下面进行文档操作。
-
-添加文档，有三种方式
-12345678910POST请求	http://localhost:9200/books/_doc		#使用系统生成id...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 22:35:01 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C/">
-                        SpringBoot开发实用篇之ES索引操作
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		ES中保存有我们要查询的数据，只不过格式和数据库存储数据格式不同而已。在ES中我们要先创建倒排索引，这个索引的功能又点类似于数据库的表，然后将数据添加到倒排索引中，添加的数据称为文档。所以要进行ES的操作要先创建索引，再添加文档，这样才能进行后...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 22:19:21 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">
-                        SpringBoot开发实用篇之ES下载与安装
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        windows版安装包下载地址：https://www.elastic.co/cn/downloads/elasticsearch
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/23/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Memcached%E7%BC%93%E5%AD%98/" title="SpringBoot开发实用篇之整合Memcached缓存">SpringBoot开发实用篇之整合Memcached缓存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-23T01:08:53.000Z" title="Created 2022-06-23 09:08:53">2022-06-23</time></span></div><div class="content">​		按照之前的套路，其实变更缓存并不繁琐，但是springboot并没有支持使用memcached作为其缓存解决方案，也就是说在type属性中没有memcached的配置选项，这里就需要更变一下处理方式了。在整合之前先安装memcached。
+安装​		windows版安装包下载地址：https://www.runoob.com/memcached/window-install-memcached.html
 ​		下载的安装包是解压缩就能使用的zip文件，解压缩完毕后会得到如下文件
 
-
-bin目录：包含所有的可执行命令
-co...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 21:39:25 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E7%AE%80%E4%BB%8B/">
-                        SpringBoot开发实用篇之ES简介
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		NoSQL解决方案已经讲完了两种技术的整合了，Redis可以使用内存加载数据并实现数据快速访问，MongoDB可以在内存中存储类似对象的数据并实现数据的快速访问，在企业级开发中对于速度的追求是永无止境的。下面要讲的内容也是一款NoSQL解决方案...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 16:58:26 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E7%AE%80%E4%BB%8B/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Mongodb/">
-                        SpringBoot开发实用篇之整合Mongodb
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		使用springboot整合MongDB该如何进行呢？其实springboot为什么使用的开发者这么多，就是因为他的套路几乎完全一样。导入坐标，做配置，使用API接口操作。整合Redis如此，整合MongoDB同样如此。
-​		第一，先导入对应...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 16:40:52 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Mongodb/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BMongodb%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">
-                        SpringBoot开发实用篇之Mongodb基础操作
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		创建数据库：在左侧菜单中使用右键创建，输入数据库名称即可
-​		创建集合：在Collections上使用右键创建，输入集合名称即可，集合等同于数据库中的表的作用
-​		新增文档：（文档是一种类似json格式的数据，初学者可以先把数据理解为就是j...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 16:23:31 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BMongodb%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BMongodb%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">
-                        SpringBoot开发实用篇之Mongodb下载与安装
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​		windows版安装包下载地址：https://www.mongodb.com/try/download
-​		下载的安装包也有两种形式，一种是一键安装的msi文件，还有一种是解压缩就能使用的zip文件，哪种形式都行，本课程采用解压缩zip文件...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jun 21 2022 15:41:30 GMT+0800">2022-06-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BMongodb%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/page/6/"
-        >Prev</a>
-    
-
-    
-        <a class="next btn"
-           href="/page/8/"
-        >Next</a>
-    
-</div>
-
-    </div>
-</div>
-
-
-                
-            </div>
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
-
-
-<div class="post-scripts pjax">
-    
-</div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
-
-        document.addEventListener('pjax:send', () => {
-            KEEP.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            KEEP.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            KEEP.refresh();
-        });
-    });
-</script>
-
-
-
-</body>
-</html>
+​		可执行文件只有一个memcached.exe，使用该文件可以将memcached作为系统服务启动，执行此文件时会出现报错信息，如下：
+
+​		此处出现问题的原因是注册系统服务时需要使用管理员权限，当前账号权限不足导致安装服务失败，切换管理员账号权限启动命令行
+​		然后再次执行安装服务的命令即可，如下：
+1memcached.exe -d install
+
+​		服务安装完毕后可以使用命令启动和停止服务，如下：
+12memcached.exe -d start		# 启动服务memcached.e ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/23/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Redis%E7%BC%93%E5%AD%98/" title="SpringBoot开发实用篇之整合Redis缓存">SpringBoot开发实用篇之整合Redis缓存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-23T00:56:07.000Z" title="Created 2022-06-23 08:56:07">2022-06-23</time></span></div><div class="content">​		上节使用Ehcache替换了springboot内置的缓存技术，其实springboot支持的缓存技术还很多，下面使用redis技术作为缓存解决方案来实现手机验证码案例。
+​		比对使用Ehcache的过程，加坐标，改缓存实现类型为ehcache，做Ehcache的配置。如果还成redis做缓存呢？一模一样，加坐标，改缓存实现类型为redis，做redis的配置。差别之处只有一点，redis的配置可以在yml文件中直接进行配置，无需制作独立的配置文件。
+步骤①：导入redis的坐标
+1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;&lt;/dependency&gt;
+
+步骤②：配置缓存技术实现使用redis
+123456spring:  redis:    host: localhost    port: 6379  cach ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Ehcache%E7%BC%93%E5%AD%98/" title="SpringBoot开发实用篇之整合Ehcache缓存">SpringBoot开发实用篇之整合Ehcache缓存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T13:37:32.000Z" title="Created 2022-06-22 21:37:32">2022-06-22</time></span></div><div class="content">Ehcache是一种缓存技术，使用springboot整合Ehcache其实就是变更一下缓存技术的实现方式，话不多说，直接开整
+步骤①：导入Ehcache的坐标
+1234&lt;dependency&gt;    &lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;    &lt;artifactId&gt;ehcache&lt;/artifactId&gt;&lt;/dependency&gt;
+
+​		此处为什么不是导入Ehcache的starter，而是导入技术坐标呢？其实springboot整合缓存技术做的是通用格式，不管你整合哪种缓存技术，只是实现变化了，操作方式一样。这也体现出springboot技术的优点，统一同类技术的整合方式。
+步骤②：配置缓存技术实现使用Ehcache
+12345spring:  cache:    type: ehcache    ehcache:      config: ehcache.xml
+
+​		配置缓存的类型type为ehcache，此处需要说明一下，当前springboot可以整合的缓存技术中包含 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%89%8B%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81%E6%A1%88%E4%BE%8B/" title="SpringBoot开发实用篇之手机验证码案例">SpringBoot开发实用篇之手机验证码案例</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T10:48:16.000Z" title="Created 2022-06-22 18:48:16">2022-06-22</time></span></div><div class="content">​		为了便于下面演示各种各样的缓存技术，我们创建一个手机验证码的案例环境，模拟使用缓存保存手机验证码的过程。
+​		手机验证码案例需求如下：
+
+输入手机号获取验证码，组织文档以短信形式发送给用户（页面模拟）
+输入手机号和验证码验证结果
+
+​		为了描述上述操作，我们制作两个表现层接口，一个用来模拟发送短信的过程，其实就是根据用户提供的手机号生成一个验证码，然后放入缓存，另一个用来模拟验证码校验的过程，其实就是使用传入的手机号和验证码进行匹配，并返回最终匹配结果。下面直接制作本案例的模拟代码，先以上例中springboot提供的内置缓存技术来完成当前案例的制作。
+步骤①：导入springboot提供的缓存技术对应的starter
+1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;&lt;/dependency&gt;
+
+步骤②：启用缓存，在引导类 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BSpring%E7%BC%93%E5%AD%98%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" title="SpringBoot开发实用篇之Spring缓存使用方式">SpringBoot开发实用篇之Spring缓存使用方式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T09:16:23.000Z" title="Created 2022-06-22 17:16:23">2022-06-22</time></span></div><div class="content">​		springboot技术提供有内置的缓存解决方案，可以帮助开发者快速开启缓存技术，并使用缓存技术进行数据的快速操作，例如读取缓存数据和写入数据到缓存。
+步骤①：导入springboot提供的缓存技术对应的starter
+1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;&lt;/dependency&gt;
+
+步骤②：启用缓存，在引导类上方标注注解@EnableCaching配置springboot程序中可以使用缓存
+12345678@SpringBootApplication//开启缓存功能@EnableCachingpublic class Springboot19CacheApplication &#123;    public static void main(String[] args) &#123;        SpringA ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E7%BC%93%E5%AD%98%E7%9A%84%E4%BD%9C%E7%94%A8/" title="SpringBoot开发实用篇之缓存的作用">SpringBoot开发实用篇之缓存的作用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T09:05:18.000Z" title="Created 2022-06-22 17:05:18">2022-06-22</time></span></div><div class="content">​		企业级应用主要作用是信息处理，当需要读取数据时，由于受限于数据库的访问效率，导致整体系统性能偏低。
+
+​	 	应用程序直接与数据库打交道，访问效率低
+​		为了改善上述现象，开发者通常会在应用程序与数据库之间建立一种临时的数据存储机制，该区域中的数据在内存中保存，读写速度较快，可以有效解决数据库访问效率低下的问题。这一块临时存储数据的区域就是缓存。
+
+​		缓存是什么？缓存是一种介于数据永久存储介质与应用程序之间的数据临时存储介质，使用缓存可以有效的减少低速数据读取过程的次数（例如磁盘IO），提高系统性能。此外缓存不仅可以用于提高永久性存储介质的数据读取效率，还可以提供临时的数据存储空间。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" title="SpringBoot开发实用篇之ES查询文档">SpringBoot开发实用篇之ES查询文档</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T08:46:08.000Z" title="Created 2022-06-22 16:46:08">2022-06-22</time></span></div><div class="content">按id查询文档：
+12345678@Test//按id查询void testGet() throws IOException &#123;    GetRequest request = new GetRequest(&quot;books&quot;,&quot;1&quot;);    GetResponse response = client.get(request, RequestOptions.DEFAULT);    String json = response.getSourceAsString();    System.out.println(json);&#125;
+
+​		根据id查询文档使用的请求对象是GetRequest。
+按条件查询文档：
+123456789101112131415161718@Test//按条件查询void testSearch() throws IOException &#123;    SearchRequest request = new SearchRequest(&quot;books&quot;);    SearchSource ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/" title="SpringBoot开发实用篇之ES添加文档">SpringBoot开发实用篇之ES添加文档</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T08:20:10.000Z" title="Created 2022-06-22 16:20:10">2022-06-22</time></span></div><div class="content">创建索引（IK分词器）：
+123456789101112131415161718192021222324252627282930313233@Testvoid testCreateIndexByIK() throws IOException &#123;    CreateIndexRequest request = new CreateIndexRequest(&quot;books&quot;);    String json = &quot;&#123;\n&quot; +            &quot;    \&quot;mappings\&quot;:&#123;\n&quot; +            &quot;        \&quot;properties\&quot;:&#123;\n&quot; +            &quot;            \&quot;id\&quot;:&#123;\n&quot; +            &quot;                \&quot;type\&quot;:\&quot;keyword ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/22/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88ES%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%93%8D%E4%BD%9C/" title="SpringBoot开发实用篇之整合ES客户端操作">SpringBoot开发实用篇之整合ES客户端操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-22T01:08:17.000Z" title="Created 2022-06-22 09:08:17">2022-06-22</time></span></div><div class="content">​		使用springboot整合ES该如何进行呢？老规矩，导入坐标，做配置，使用API接口操作。整合Redis如此，整合MongoDB如此，整合ES依然如此。太没有新意了，其实不是没有新意，这就是springboot的强大之处，所有东西都做成相同规则，对开发者来说非常友好。
+​		下面就开始springboot整合ES，操作步骤如下：
+步骤①：导入springboot整合ES的starter坐标
+1234&lt;dependency&gt;    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;    &lt;artifactId&gt;spring-boot-starter-data-elasticsearch&lt;/artifactId&gt;&lt;/dependency&gt;
+
+步骤②：进行基础配置
+1234spring:  elasticsearch:    rest:      uris: http://localhost:9200
+
+​		配置ES服务器地址，端口9200
+步骤③：使用springboot ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/06/21/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8BES%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/" title="SpringBoot开发实用篇之ES文档操作">SpringBoot开发实用篇之ES文档操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-21T14:35:01.000Z" title="Created 2022-06-21 22:35:01">2022-06-21</time></span></div><div class="content">目前我们已经有了索引了，但是索引中还没有数据，所以要先添加数据，ES中称数据为文档，下面进行文档操作。
+
+添加文档，有三种方式
+12345678910POST请求	http://localhost:9200/books/_doc		#使用系统生成idPOST请求	http://localhost:9200/books/_create/1	#使用指定idPOST请求	http://localhost:9200/books/_doc/1		#使用指定id，不存在创建，存在更新（版本递增）文档通过请求参数传递，数据格式json&#123;    &quot;name&quot;:&quot;springboot&quot;,    &quot;type&quot;:&quot;springboot&quot;,    &quot;description&quot;:&quot;springboot&quot;&#125;  
+
+查询文档
+12GET请求	http://localhost:9200/books/_doc/1		 #查询单个文档 		GET请求	http://localhost: ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#content-inner">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/#content-inner">31</a><a class="extend next" rel="next" href="/page/8/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Ajaxj/" style="font-size: 1.1em; color: #999">Ajaxj</a> <a href="/tags/Anylogic/" style="font-size: 1.25em; color: #999fa8">Anylogic</a> <a href="/tags/Controller/" style="font-size: 1.1em; color: #999">Controller</a> <a href="/tags/ElasticSearch/" style="font-size: 1.22em; color: #999ea5">ElasticSearch</a> <a href="/tags/JavaWeb/" style="font-size: 1.38em; color: #99a4b3">JavaWeb</a> <a href="/tags/Java%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 1.13em; color: #999a9c">Java中间件</a> <a href="/tags/Linux/" style="font-size: 1.19em; color: #999da2">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 1.47em; color: #99a8bc">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 1.28em; color: #99a0ab">MybatisPlus</a> <a href="/tags/Redis/" style="font-size: 1.22em; color: #999ea5">Redis</a> <a href="/tags/Servlet/" style="font-size: 1.1em; color: #999">Servlet</a> <a href="/tags/Spring/" style="font-size: 1.28em; color: #99a0ab">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 1.5em; color: #99a9bf">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 1.25em; color: #999fa8">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 1.32em; color: #99a2ad">SpringMVC</a> <a href="/tags/Vue/" style="font-size: 1.32em; color: #99a2ad">Vue</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 1.41em; color: #99a5b6">java基础</a> <a href="/tags/leetcode/" style="font-size: 1.19em; color: #999da2">leetcode</a> <a href="/tags/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" style="font-size: 1.1em; color: #999">乱七八糟</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.16em; color: #999b9f">反射</a> <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/" style="font-size: 1.25em; color: #999fa8">完整项目</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.44em; color: #99a7b9">机器学习</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.19em; color: #999da2">注解</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.35em; color: #99a3b0">深度学习</a> <a href="/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">遇到的问题</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">面试题</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">July 2022</span><span class="card-archive-list-count">38</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">June 2022</span><span class="card-archive-list-count">103</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">72</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">30</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">15</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">307</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-08-03T07:47:31.159Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

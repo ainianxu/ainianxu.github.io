@@ -1,796 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fang">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-08-03 15:47:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <title>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        念~旭
-    </title>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/style.css">
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/19/Java%E4%B8%AD%E9%97%B4%E4%BB%B6%E4%B9%8BGit/" title="Java中间件之Git">Java中间件之Git</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-19T06:47:59.000Z" title="Created 2022-07-19 14:47:59">2022-07-19</time></span></div><div class="content">1、版本控制1.什么是版本控制版本控制（Revision control）是一种在开发的过程中用于管理我们对文件、目录或工程等内容的修改历史，方便查看更改历史记录，备份以便恢复以前的版本的软件工程技术。
 
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
-<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
+实现跨区域多人协同开发
+追踪和记载一个或者多个文件的历史记录
+组织和保护你的源代码和文档
+统计工作量
+并行开发、提高开发效率
+跟踪记录整个软件的开发过程
+减轻开发人员的负担，节省时间，同时降低人为错误
 
+简单说就是用于管理多人协同开发项目的技术。
+没有进行版本控制或者版本控制本身缺乏正确的流程管理，在软件开发过程中将会引入很多问题，如软件代码的一致性、软件内容的冗余、软件过程的事物性、软件开发过程中的并发性、软件源代码的安全性，以及软件的整合等问题。
+无论是工作还是学习，或者是自己做笔记，都经历过这样一个阶段！我们就迫切需要一个版本控制工具！
+多人开发就必须要使用版本控制！
+2.常见的版本控制工具我们学习的东西，一定是当下最流行的！
+主流的版本控制器有如下这些：
 
-<body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+Git
+SVN（Subversion）
+CVS（Concurrent Versions System）
+VSS（Mico ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/17/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Dubbo%E5%92%8CZookeeper/" title="SpringBoot开发实用篇之整合Dubbo和Zookeeper">SpringBoot开发实用篇之整合Dubbo和Zookeeper</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-17T08:21:31.000Z" title="Created 2022-07-17 16:21:31">2022-07-17</time></span></div><div class="content">1、什么是分布式系统？在《分布式系统原理与范型》一书中有如下定义：“分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像单个相关系统”；
+分布式系统是由一组通过网络进行通信、为了完成共同的任务而协调工作的计算机节点组成的系统。分布式系统的出现是为了用廉价的、普通的机器完成单个计算机无法完成的计算、存储任务。其目的是利用更多的机器，处理更多的数据。
+分布式系统（distributed system）是建立在网络之上的软件系统。
+首先需要明确的是，只有当单个节点的处理能力无法满足日益增长的计算、存储任务的时候，且硬件的提升（加内存、加磁盘、使用更好的CPU）高昂到得不偿失的时候，应用程序也不能进一步优化的时候，我们才需要考虑分布式系统。因为，分布式系统要解决的问题本身就是和单机系统一样的，而由于分布式系统多节点、通过网络通信的拓扑结构，会引入很多单机系统没有的问题，为了解决这些问题又会引入更多的机制、协议，带来更多的问题。。。
+1.Dubbo文档随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，急需一个治理系统确保架构有 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/15/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E9%9B%86%E6%88%90Shiro/" title="SpringBoot开发实用篇之集成Shiro">SpringBoot开发实用篇之集成Shiro</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-15T03:28:53.000Z" title="Created 2022-07-15 11:28:53">2022-07-15</time></span></div><div class="content">1、Shiro简介1. 什么是Shiro？
+Apache Shiro是一个强大且易用的Java安全框架
+可以完成身份验证、授权、密码和会话管理
+Shiro可以完成，认证，授权，加密，会话管理，Web集成，缓存等。
+Shiro 不仅可以用在 JavaSE 环境中，也可以用在 JavaEE 环境中
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
-
-
-<main class="page-container">
-
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                念~旭
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
+官网： http://shiro.apache.org/
+2. 有哪些功能？
+Authentication：身份认证&#x2F;登录，验证用户是不是拥有相应的身份；
+Authorization：授权，即权限验证，验证某个已认证的用户是否拥有某个权限；即判断用户是否能做事情，常见的如：验证某个用户是否拥有某个角色。或者细粒度的验证某个用户对某个资源是否具有某个权限；
+Session Manager：会话管理，即用户登录后就是一次会话，在没有退出之前，它的所有信息都在会话中；会话可以是普通JavaSE环境的，也可以是如Web环境的；
+Cryptography：加密，保护数据的安全性，如密码加密存储到数据库，而不是明文存储；
+Web Support：Web支持，可以非常容易的集成到Web环境；
+Ca ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/13/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E9%9B%86%E6%88%90SpringSecurity/" title="SpringBoot开发实用篇之集成SpringSecurity">SpringBoot开发实用篇之集成SpringSecurity</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-13T03:00:51.000Z" title="Created 2022-07-13 11:00:51">2022-07-13</time></span></div><div class="content">1、简介在 Web 开发中，安全一直是非常重要的一个方面。安全虽然属于应用的非功能性需求，但是应该在应用开发的初期就考虑进来。如果在应用开发的后期才考虑安全的问题，就可能陷入一个两难的境地：一方面，应用存在严重的安全漏洞，无法满足用户的要求，并可能造成用户的隐私数据被攻击者窃取；另一方面，应用的基本架构已经确定，要修复安全漏洞，可能需要对系统的架构做出比较重大的调整，因而需要更多的开发时间，影响应用的发布进程。因此，从应用开发的第一天就应该把安全相关的因素考虑进来，并在整个应用的开发过程中。
+市面上存在比较有名的：Shiro，Spring Security ！
+这里需要阐述一下的是，每一个框架的出现都是为了解决某一问题而产生了，那么Spring Security框架的出现是为了解决什么问题呢？
+首先我们看下它的官网介绍：Spring Security
+Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto s ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/12/leetcode%E4%B9%8B%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" title="leetcode之无重复字符的最长子串">leetcode之无重复字符的最长子串</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-12T15:11:16.000Z" title="Created 2022-07-12 23:11:16">2022-07-12</time></span></div><div class="content">1、问题描述
+2、思路以这个字符串为例：abcabcbb，当i等于3时，也就是指向了第二个a, 此时我就需要查之前有没有出现过a, 如果出现了是在哪一个位置出现的。然后通过last[index] 查到等于1, 也就是说，如果start 依然等于0的话，那么当前窗口就有两个a了，也就是字符串重复了，所以我们需要移动当前窗口的start指针，移动到什么地方呢？移动到什么地方，窗口内就没有重复元素了呢？ 对了，就是a上一次出现的位置的下一个位置，就是1 + 1 &#x3D; 2。当start &#x3D;&#x3D; 2, 当前窗口就没有了重复元素，那么以当前字符为结尾的最长无重复子串就是bca,然后再和之前的res取最大值。然后i指向后面的位置，按照同样思路计算。
+3、代码123456789101112131415161718192021class Solution &#123;    public int lengthOfLongestSubstring(String s) &#123;        // 记录字符上一次出现的位置        int[] last = new int ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/12/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E4%B9%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" title="完整项目之手把手教你如何分析开源项目">完整项目之手把手教你如何分析开源项目</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-12T03:33:20.000Z" title="Created 2022-07-12 11:33:20">2022-07-12</time></span></div><div class="content">1.如何分析开源项目
+学习的方式：
 
 
-        </div>
+不知道这个代码怎么来的；
+这个代码跑不起来；
+这个项目对我们有什么帮助，不会模块化分析；
 
-        <div class="page-main-content-middle">
+任何一个开源项目，都可以让自己得到提升。
 
-            <div class="main-content">
+代码自动生成：我们平时会写很多业务代码，用Mybatis Plus去生成的，第三方的工具包去生成。
+开源项目：eladmin
 
-                
-                    <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
-        
-            <li class="home-article-item">
 
-                
 
-                <h3 class="home-article-title">
-                    <a href="/2022/07/11/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Swagger/">
-                        SpringBoot开发实用篇之整合Swagger
-                    </a>
-                </h3>
+项目简介
 
-                <div class="home-article-content markdown-body">
-                    
-                        1、Swagger简介1.前后端分离Vue + SpringBoot
+
+一个基于Spring Boot 2.1.0、Spring Boot Jpa、JWT、Spring Security、Redis、Vue的前后端分离的后台管理系统。
+开发文档： https://el-admin.vip
+体验地址： https://el-admin.xin
+账号密码： admin &#x2F; 123456
+
+
+项目源码
+
+
+
+
+
+后端源码
+前端源码
+
+
+
+github
+eladmin
+eladmin-web
+
+
+码云
+eladmin
+eladmin-web
+
+
+
+观察开源项目
+
+
+后端：
+
+
+
+前端：
+
+
+2.开源项目下载
+
+在码云下载，因为GitHub下载太慢了，下载完毕进行解压。
+后端：https://gitee.com/elunez/eladmin ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/11/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Swagger/" title="SpringBoot开发实用篇之整合Swagger">SpringBoot开发实用篇之整合Swagger</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-11T04:17:02.000Z" title="Created 2022-07-11 12:17:02">2022-07-11</time></span></div><div class="content">1、Swagger简介1.前后端分离Vue + SpringBoot
 2.后端时代：前端只用管理静态页面；html ⇒ 后端。模板引擎JSP ⇒ 后端是主力。
 3.前后端分离时代：
 后端：后端控制层，服务层，数据访问层【后端团队】
-前端：前端控制层，...
-                    
-                </div>
+前端：前端控制层，视图层【前端团队】
+伪造后端数据，json。已经存在了，不需要后端，前端工程依旧能够跑起来。
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jul 11 2022 12:17:02 GMT+0800">2022-07-11</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringBoot/">SpringBoot</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2022/07/11/SpringBoot%E5%BC%80%E5%8F%91%E5%AE%9E%E7%94%A8%E7%AF%87%E4%B9%8B%E6%95%B4%E5%90%88Swagger/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
+前后端如何交互？ &#x3D;&#x3D;&#x3D;&gt; API
+前后端相对独立，松耦合；
+前后端甚至可以部署在不同的服务器上；
 
-            </li>
-        
-            <li class="home-article-item">
+4.产生一个问题：
+前后端集成联调，前端人员无法和后端人员无法做到，“即时协商，尽早解决”，最终导致问题集中爆发；
 
-                
+5.解决方案：
+首先指定schema[计划的提纲]，实时更新最新API，降低集成的风险；
+早些年：指定word计划文档；
+前后端分离：
+前端测试后端接口：postman
+后端提供接口，需要实时更新最新的消息及改动！
 
-                <h3 class="home-article-title">
-                    <a href="/2022/07/08/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
-                        leetcode之两数相加
-                    </a>
-                </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        题目描述给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+
+6.Swagger
+号称世界上最流行的Api框架
+RestFul Api 文档在线自动生成工具 &#x3D;&gt; Api文档与Api定义同步更新
+直接运行，可以在线测试A ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/08/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" title="leetcode之两数相加">leetcode之两数相加</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-08T13:44:20.000Z" title="Created 2022-07-08 21:44:20">2022-07-08</time></span></div><div class="content">题目描述给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
 请你将两个数相加，并以相同形式返回一个表示和的链表。
 你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
 
-12...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Jul 08 2022 21:44:20 GMT+0800">2022-07-08</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/leetcode/">leetcode</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/08/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/07/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                        leetcode之两数之和
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        题目描述给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+12345678910111213141516171819202122class Solution &#123;    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;        ListNode root = new ListNode(0);        ListNode cursor = root;        int carry = 0;        while(l1 != null || l2 != null || carry != 0) &#123;            int l1Val = l1 != null ? l1.val : 0;            int l2Val = l2 != null ? l2.val : 0;       ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/07/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" title="leetcode之两数之和">leetcode之两数之和</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-07T15:08:28.000Z" title="Created 2022-07-07 23:08:28">2022-07-07</time></span></div><div class="content">题目描述给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
 示例:
-1234给定 nums = ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Thu Jul 07 2022 23:08:28 GMT+0800">2022-07-07</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/leetcode/">leetcode</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/07/leetcode%E4%B9%8B%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/06/SpringCloud%E4%B9%8BSpring-Cloud-Config-%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE/">
-                        SpringCloud之Spring Cloud Config 分布式配置
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持。使用Config Server，您可以在所有环境中管理应用程序的外部属性。客户端和服务器上的概念映射与Spring Environment和PropertySour...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 06 2022 11:18:19 GMT+0800">2022-07-06</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/06/SpringCloud%E4%B9%8BSpring-Cloud-Config-%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/06/SpringCloud%E4%B9%8BZull%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3/">
-                        SpringCloud之Zull路由网关
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、什么是zuul?Zull包含了对请求的路由(用来跳转的)和过滤两个最主要功能：
-其中路由功能负责将外部请求转发到具体的微服务实例上，是实现外部访问统一入口的基础，而过滤器功能则负责对请求的处理过程进行干预，是实现请求校验，服务聚合等功能的基础。Z...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 06 2022 07:31:41 GMT+0800">2022-07-06</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/06/SpringCloud%E4%B9%8BZull%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/05/SpringCloud%E4%B9%8BHystrix%E6%96%AD%E8%B7%AF%E5%99%A8/">
-                        SpringCloud之Hystrix断路器
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、概述1、分布式系统面临的问题 
-复杂分布式体系结构中的应用程序有数十个依赖关系，每个依赖关系在某些时候将不可避免的失败！
-
-2、 服务雪崩
-多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其他的微服务，这就是...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 05 2022 19:33:02 GMT+0800">2022-07-05</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/05/SpringCloud%E4%B9%8BHystrix%E6%96%AD%E8%B7%AF%E5%99%A8/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/05/SpringCloud%E4%B9%8BFeign%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E5%9F%BA%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF/">
-                        SpringCloud之Feign：负载均衡(基于服务端)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、简介Feign是声明式Web Service客户端，它让微服务之间的调用变得更简单，类似controller调用service。SpringCloud集成了Ribbon和Eureka，可以使用Feigin提供负载均衡的http客户端
-只需要创建一...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 05 2022 19:12:42 GMT+0800">2022-07-05</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/05/SpringCloud%E4%B9%8BFeign%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E5%9F%BA%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/04/SpringCloud%E4%B9%8BRibbon%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/">
-                        SpringCloud之Ribbon：负载均衡(基于客户端)
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、负载均衡以及Ribbon
-Ribbon是什么？
-
-
-Spring Cloud Ribbon 是基于Netflix Ribbon 实现的一套客户端负载均衡的工具。
-简单的说，Ribbon 是 Netflix 发布的开源项目，主要功能是提供客户端的软...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jul 04 2022 18:23:52 GMT+0800">2022-07-04</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/04/SpringCloud%E4%B9%8BRibbon%EF%BC%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/03/SpringCloud%E4%B9%8BEureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/">
-                        SpringCloud之Eureka服务注册中心
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、什么是EurekaNetflix 在设计Eureka 时，遵循的就是CAP原则
-12345CAP原则又称CAP定理，指的是在一个分布式系统中一致性（Consistency）可用性（Availability）分区容错性（Partition tole...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 03 2022 15:12:55 GMT+0800">2022-07-03</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/03/SpringCloud%E4%B9%8BEureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/07/03/SpringCloud%E4%B9%8BRest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA/">
-                        SpringCloud之Rest微服务构建
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、 介绍
-我们会使用一个Dept部门模块做一个微服务通用案例Consumer消费者(Client)通过REST调用Provider提供者(Server)提供的服务。
-回顾Spring，SpringMVC，Mybatis等以往学习的知识。
-Maven...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 03 2022 09:46:42 GMT+0800">2022-07-03</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/SpringCloud/">SpringCloud</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/07/03/SpringCloud%E4%B9%8BRest%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%84%E5%BB%BA/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/page/2/"
-        >Prev</a>
-    
-
-    
-        <a class="next btn"
-           href="/page/4/"
-        >Next</a>
-    
-</div>
-
-    </div>
-</div>
-
-
-                
-            </div>
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
-
-
-<div class="post-scripts pjax">
-    
-</div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
-
-        document.addEventListener('pjax:send', () => {
-            KEEP.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            KEEP.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            KEEP.refresh();
-        });
-    });
-</script>
-
-
-
-</body>
-</html>
+1234给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]
+
+方法一：暴力枚举1、思路及算法最容易想到的方法是枚举数组中的每一个数 x，寻找数组中是否存在 target - x。
+当我们使用遍历整个数组的方式寻找 target - x 时，需要注意到每一个位于 x 之前的元素都已经和 x 匹配过，因此不需要再进行匹配。而每一个元素不能被使用两次，所以我们只需要在 x 后面的元素中寻找 target - x。
+1234567891011121314151617181920212223import java.util.Arrays;public class leetcode &#123;        public int[] twoSum(int[] nums,  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/07/06/SpringCloud%E4%B9%8BSpring-Cloud-Config-%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE/" title="SpringCloud之Spring Cloud Config 分布式配置">SpringCloud之Spring Cloud Config 分布式配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-06T03:18:19.000Z" title="Created 2022-07-06 11:18:19">2022-07-06</time></span></div><div class="content">Spring Cloud Config为分布式系统中的外部配置提供服务器和客户端支持。使用Config Server，您可以在所有环境中管理应用程序的外部属性。客户端和服务器上的概念映射与Spring Environment和PropertySource抽象相同，因此它们与Spring应用程序非常契合，但可以与任何以任何语言运行的应用程序一起使用。随着应用程序通过从开发人员到测试和生产的部署流程，您可以管理这些环境之间的配置，并确定应用程序具有迁移时需要运行的一切。服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境，以及可以访问用于管理内容的各种工具。很容易添加替代实现，并使用Spring配置将其插入。
+1、概述1、分布式系统面临的–配置文件问题
+微服务意味着要将单体应用中的业务拆分成一个个子服务，每个服务的粒度相对较小，因此系统中会出现大量的服务，由于每个服务都需要必要的配置信息才能运行，所以一套集中式的，动态的配置管理设施是必不可少的。spring cloud提供了configServer来解决这个问题，我们每一个微服务自己带着一个application.yml， ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/#content-inner">31</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Ajaxj/" style="font-size: 1.1em; color: #999">Ajaxj</a> <a href="/tags/Anylogic/" style="font-size: 1.25em; color: #999fa8">Anylogic</a> <a href="/tags/Controller/" style="font-size: 1.1em; color: #999">Controller</a> <a href="/tags/ElasticSearch/" style="font-size: 1.22em; color: #999ea5">ElasticSearch</a> <a href="/tags/JavaWeb/" style="font-size: 1.38em; color: #99a4b3">JavaWeb</a> <a href="/tags/Java%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 1.13em; color: #999a9c">Java中间件</a> <a href="/tags/Linux/" style="font-size: 1.19em; color: #999da2">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 1.47em; color: #99a8bc">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 1.28em; color: #99a0ab">MybatisPlus</a> <a href="/tags/Redis/" style="font-size: 1.22em; color: #999ea5">Redis</a> <a href="/tags/Servlet/" style="font-size: 1.1em; color: #999">Servlet</a> <a href="/tags/Spring/" style="font-size: 1.28em; color: #99a0ab">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 1.5em; color: #99a9bf">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 1.25em; color: #999fa8">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 1.32em; color: #99a2ad">SpringMVC</a> <a href="/tags/Vue/" style="font-size: 1.32em; color: #99a2ad">Vue</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 1.41em; color: #99a5b6">java基础</a> <a href="/tags/leetcode/" style="font-size: 1.19em; color: #999da2">leetcode</a> <a href="/tags/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" style="font-size: 1.1em; color: #999">乱七八糟</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.16em; color: #999b9f">反射</a> <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/" style="font-size: 1.25em; color: #999fa8">完整项目</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.44em; color: #99a7b9">机器学习</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.19em; color: #999da2">注解</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.35em; color: #99a3b0">深度学习</a> <a href="/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">遇到的问题</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">面试题</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">July 2022</span><span class="card-archive-list-count">38</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">June 2022</span><span class="card-archive-list-count">103</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">72</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">30</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">15</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">307</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-08-03T07:47:31.159Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

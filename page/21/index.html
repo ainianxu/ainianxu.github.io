@@ -1,811 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fang">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/21/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/21/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-08-03 15:47:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <title>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        念~旭
-    </title>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/style.css">
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8BResultMap%E7%BB%93%E6%9E%9C%E6%98%A0%E5%B0%84/" title="Mybatis之ResultMap结果映射">Mybatis之ResultMap结果映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T09:07:57.000Z" title="Created 2022-05-03 17:07:57">2022-05-03</time></span></div><div class="content">要解决的问题：属性名和字段名不一致
 
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
-<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
+1.查询为null的问题1.我们假设将数据库的字段名设置为id,name,pwd
+2.而我们Java的实体类设计
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950package com.fang.pojo;public class User &#123;    private int id;    private String name;    private String password;    public User() &#123;    &#125;    public User(int id, String name, String password) &#123;        this.id = id;        this.name = name;        this.password = password;    &#125;    public int getId() &#123;     ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/" title="Mybatis之生命周期和作用域">Mybatis之生命周期和作用域</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T08:46:20.000Z" title="Created 2022-05-03 16:46:20">2022-05-03</time></span></div><div class="content">作用域（Scope）和生命周期
+理解我们目前已经讨论过的不同作用域和生命周期类是至关重要的，因为错误的使用会导致非常严重的 并发问题。
+分析一下Mybatis的执行过程！
+作用域理解
 
+SqlSessionFactoryBuilder 的作用在于创建 SqlSessionFactory，创建成功后， SqlSessionFactoryBuilder 就失去了作用，所以它只能存在于创建 SqlSessionFactory 的方法中， 而不要让其长期存在。因此 SqlSessionFactoryBuilder 实例的最佳作用域是方法作用域（也就是 局部方法变量）。 
+SqlSessionFactory 可以被认为是一个数据库连接池，它的作用是创建 SqlSession 接口对象。因为 MyBatis 的本质就是 Java 对数据库的操作，所以 SqlSessionFactory 的生命周期存在于整个 MyBatis 的应用之中，所以一旦创建了 SqlSessionFactory，就要长期保存它，直至不再使用 MyBatis 应用，所以可以认为 SqlSessionFactory 的生命周期 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E6%98%A0%E5%B0%84%E5%99%A8%E8%AF%B4%E6%98%8E/" title="Mybatis之配置之映射器说明">Mybatis之配置之映射器说明</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T08:16:39.000Z" title="Created 2022-05-03 16:16:39">2022-05-03</time></span></div><div class="content">1.mappers
+映射器（mapper） : 定义映射SQL语句文件 
+既然 MyBatis 的行为其他元素已经配置完了，我们现在就要定义 SQL 映射语句了。但是首先我们 需要告诉 MyBatis 到哪里去找到这些语句。 Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用， 或完全限定资源定位符（包括 file:&#x2F;&#x2F;&#x2F; 的 URL），或类名和包名等。映射器是MyBatis中最核心 的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配 置。而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL 语句，非常简洁。
 
-<body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
+2..引入资源方式1234&lt;!-- 使用相对于类路径的资源引用 --&gt;&lt;mappers&gt;&lt;mapper resource=&quot;org/mybatis/builder/PostMapper.xml&quot;/&gt;&lt;/m ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%88%AB%E5%90%8D%E4%BC%98%E5%8C%96/" title="Mybatis之配置之别名优化">Mybatis之配置之别名优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T07:55:46.000Z" title="Created 2022-05-03 15:55:46">2022-05-03</time></span></div><div class="content">typeAliases优化类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全 限定名的冗余。
+在mybatis-config.xml中配置别名，当这样配置时， User 可以用在任何使用 com.kuang.pojo.User 的地方。
+ 1234&lt;!--配置别名,注意顺序--&gt;&lt;typeAliases&gt;    &lt;typeAlias type=&quot;com.fang.pojo.User&quot; alias=&quot;user&quot;/&gt;&lt;/typeAliases&gt;
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
+也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean，比如:
+123&lt;typeAliases&gt;    &lt;package name=&quot;com.fang.pojo&quot;/&gt;&lt;/typeAliases&gt;
 
+每一个在包 com.kuang.pojo 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的 非限定类名来 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8B%E9%85%8D%E7%BD%AE%E4%B9%8B%E5%B1%9E%E6%80%A7%E4%BC%98%E5%8C%96/" title="Mybatis之配置之属性优化">Mybatis之配置之属性优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T07:15:57.000Z" title="Created 2022-05-03 15:15:57">2022-05-03</time></span></div><div class="content">1.核心配置文件
+mybatis-config.xml 系统核心配置文件 
+MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 
+能配置的内容如下：
 
-<main class="page-container">
+1234567891011121314configuration（配置）properties（属性）settings（设置）typeAliases（类型别名）typeHandlers（类型处理器）objectFactory（对象工厂）plugins（插件）environments（环境配置）environment（环境变量）transactionManager（事务管理器）dataSource（数据源）databaseIdProvider（数据库厂商标识）mappers（映射器）&lt;!-- 注意元素节点的顺序！顺序不对会报错 --&gt;
 
-    
+2.environments元素1234567891011&lt;environments default=&quot;development&quot;&gt;    &lt;environment id=&quot;development&quot;&gt;  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8BMap%E5%92%8C%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2%E6%8B%93%E5%B1%95/" title="Mybatis之Map和模糊查询拓展">Mybatis之Map和模糊查询拓展</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T03:25:13.000Z" title="Created 2022-05-03 11:25:13">2022-05-03</time></span></div><div class="content">1.万能的Map
+在接口方法中，参数直接传递Map；
 
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                念~旭
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
+12//使用MapUser selectUserByNP2(Map&lt;String,Object&gt; map);
 
 
-        </div>
+编写sql语句的时候，需要传递参数类型，参数类型为map
 
-        <div class="page-main-content-middle">
+123&lt;select id=&quot;selectUserByNP2&quot; parameterType=&quot;map&quot; resultType=&quot;com.fang.pojo.User&quot;&gt;    select * from mybatis.user where name = #&#123;username&#125; and pwd = #&#123;pwd&#125;&lt;/select&gt;
 
-            <div class="main-content">
 
-                
-                    <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
-        
-            <li class="home-article-item">
+在使用方法的时候，Map的 key 为 sql中取的值即可，没有顺序要求！
 
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/03/Mybatis%E4%B9%8BMyBatis%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/">
-                        Mybatis之MyBatis实现CRUD操作
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1.namespace配置文件中namespace中的名称为对应Mapper接口或者Dao接口的完整包名,必须一致！
+1234567891011@Test    public void selectUserByNP2()&#123;    SqlSession session = MybatisUtils.getSession();   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/03/Mybatis%E4%B9%8BMyBatis%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/" title="Mybatis之MyBatis实现CRUD操作">Mybatis之MyBatis实现CRUD操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-03T02:03:58.000Z" title="Created 2022-05-03 10:03:58">2022-05-03</time></span></div><div class="content">1.namespace配置文件中namespace中的名称为对应Mapper接口或者Dao接口的完整包名,必须一致！
 2.select
 select标签是mybatis中最常用的标签之一 
 select语句有很多属性可以详细配置每一条SQL语句 
-i...
-                    
-                </div>
+id 
+命名空间中唯一的标识符 
+接口中的方法名与映射文件中的SQL语句ID 一一对应
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue May 03 2022 10:03:58 GMT+0800">2022-05-03</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2022/05/03/Mybatis%E4%B9%8BMyBatis%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
+parameterType 
+传入SQL语句的参数类型 。【万能的Map，可以多尝试使用】
 
-            </li>
-        
-            <li class="home-article-item">
 
-                
+resultType 
+SQL语句返回值类型。【完整的类名或者别名】
 
-                <h3 class="home-article-title">
-                    <a href="/2022/05/02/Mybatis%E4%B9%8BMyBatis%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">
-                        Mybatis之MyBatis第一个程序
-                    </a>
-                </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        第一个Mybatis程序思路流程：搭建环境–&gt;导入Mybatis—&gt;编写代码—&gt;测试
+
+
+
+需求：根据id查询用户
+
+在UserMapper.java中添加对应方法
+
+12//根据id查询用户User selectUserById(int id);
+
+2.在UserMapper.xml中添加Select语句
+123&lt;select id=&quot;selectUserById&quot; resultType=&quot;com.fang.pojo.User&quot;&gt;    select * from user where id = #&#123;id& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/02/Mybatis%E4%B9%8BMyBatis%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/" title="Mybatis之MyBatis第一个程序">Mybatis之MyBatis第一个程序</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T09:07:37.000Z" title="Created 2022-05-02 17:07:37">2022-05-02</time></span></div><div class="content">第一个Mybatis程序思路流程：搭建环境–&gt;导入Mybatis—&gt;编写代码—&gt;测试
 1.我们先搭建实验数据库，我是直接在IDEA中先连接上数据库，然后输入以下代码
-123456789101112create database `m...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 02 2022 17:07:37 GMT+0800">2022-05-02</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/02/Mybatis%E4%B9%8BMyBatis%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/02/Mybatis%E4%B9%8B%E4%BB%80%E4%B9%88%E6%98%AFMybatis/">
-                        Mybatis之Mybatis简介
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1.什么是MyBatis
+123456789101112create database `mybatis`;use `mybatis`;drop table if exists `user`;create table `user`(    `id` int(20) not null ,    `name` varchar(20) default null ,    `pwd` varchar(20) default null ,    primary key (`id`))engine=InnoDB default charset=utf8;insert into user (id, name, pwd) values (1,&#x27;x&#x27;,&#x27;123456&#x27;),(2,&#x27;y&#x27;,&#x27;abcdef&#x27;),(3,&#x27;z&#x27;,&#x27;987654&#x2 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/02/Mybatis%E4%B9%8B%E4%BB%80%E4%B9%88%E6%98%AFMybatis/" title="Mybatis之Mybatis简介">Mybatis之Mybatis简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T07:35:55.000Z" title="Created 2022-05-02 15:35:55">2022-05-02</time></span></div><div class="content">1.什么是MyBatis
 MyBatis 是一款优秀的持久层框架 
 MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集的过程 
-MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 实体...
-                    
-                </div>
+MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 实体类 【Plain Old Java Objects,普通的 Java对象】映射成数据库中的记录。 
+MyBatis 本是apache的一个开源项目ibatis, 2010年这个项目由apache 迁移到了google code，并 且改名为MyBatis 。
+2013年11月迁移到Github .
+Mybatis官方文档 : http://www.mybatis.org/mybatis-3/zh/index.html 
+GitHub : https://github.com/mybatis/mybatis-3
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon May 02 2022 15:35:55 GMT+0800">2022-05-02</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Mybatis/">Mybatis</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
+2.持久化持久化是将程序数据在持久状态和瞬时状态间转换的机制。 
 
-    <a href="/2022/05/02/Mybatis%E4%B9%8B%E4%BB%80%E4%B9%88%E6%98%AFMybatis/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/">
-                        反射之Java反射
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
+即把数据（如内存中的对象）保存到可永久保存的存储设备中（如磁盘）。持久化的主要应用是将内存中的对象存储在数据库中，或者存储在磁盘文件中、XML数据文件中等等。 
+J ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/" title="反射之Java反射">反射之Java反射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-01T09:57:17.000Z" title="Created 2022-05-01 17:57:17">2022-05-01</time></span></div><div class="content">
 1. 类的加载过程
 2.类的加载与ClassLoader的理解加载： 
 
 将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构， 然后生成一个代表这个类的java.lang.Class对象.
 
-链接：将Java类的二...
-                    
-                </div>
+链接：将Java类的二进制代码合并到JVM的运行状态之中的过程。 
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 17:57:17 GMT+0800">2022-05-01</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
+验证：确保加载的类信息符合JVM规范，没有安全方面的问题 
+准备：正式为类变量（static）分配内存并设置类变量默认初始值的阶段，这些内存都将在方法区中进行分配。
+解析：虚拟机常量池内的符号引用（常量名）替换为直接引用（地址）的过程。
 
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
+初始化： 
 
-            </li>
-        
-            <li class="home-article-item">
+执行类构造器()方法的过程。类构造器()方法是由编译期自动收集类中所有类变量的赋值动作 和静态代码块中的语句合并产生的。（类构造器是构造类信息的，不是构造该类对象的构造 器）。 
+当初始化一个类的时候，如果发现其父类还没有进行初始化，则需要先触发其父类的初始化。
+虚拟机会保证一个类的()方法在多线程环境中被正确加锁和同步。
 
-                
 
-                <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%8F%8D%E5%B0%84/">
-                        反射之Java内存分析
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-1. 类的加载过程
-2.类的加载与ClassLoader的理解加载： 
-
-将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区的运行时数据结构， 然后生成一个代表这个类的java.lang.Class对象.
-
-链接：将Java类的二...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 17:57:17 GMT+0800">2022-05-01</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8BJava%E5%8F%8D%E5%B0%84/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E8%BF%B0/">
-                        反射之反射概述
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、静态 VS 动态语言动态语言
-
-是一类在运行时可以改变其结构的语言：例如新的函数、对象、甚至代码可以被引进，已有的 函数可以被删除或是其他结构上的变化。通俗点说就是在运行时代码可以根据某些条件改变自 身结构。
-
-主要动态语言：Object-C、C...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 09:27:18 GMT+0800">2022-05-01</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E5%8F%8D%E5%B0%84/">反射</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/01/%E5%8F%8D%E5%B0%84%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%A6%82%E8%BF%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/05/01/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
-                        注解之自定义注解
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-使用 @interface自定义注解时 , 自动继承了java.lang.annotation.Annotation接口 
-分析 :
-@ interface用来声明一个注解 , 格式 : public @ interface 注解名 { 定义内容 ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun May 01 2022 06:42:49 GMT+0800">2022-05-01</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/05/01/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/30/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E4%B9%8B%E8%AE%A9%E5%9B%BE%E7%89%87%E5%8F%98%E6%B8%85%E6%99%B0/">
-                        乱七八糟之调用百度智慧云让图片变清晰
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-首先我们建立一个百度智慧云账号登录进去就可以创建应用了
-
-
-https://login.bce.baidu.com/?account=&amp;redirect=http%3A%2F%2Fconsole.bce.baidu.com%2Fai%2F%...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Apr 30 2022 17:18:02 GMT+0800">2022-04-30</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/">乱七八糟</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/30/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F%E4%B9%8B%E8%AE%A9%E5%9B%BE%E7%89%87%E5%8F%98%E6%B8%85%E6%99%B0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/30/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E5%85%83%E6%B3%A8%E8%A7%A3/">
-                        注解之元注解
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-元注解的作用就是负责注解其他注解 , Java定义了4个标准的meta-annotation类型,他们被用来提供 对其他annotation类型作说明 .
-
-这些类型和它们所支持的类在java.lang.annotation包中可以找到 .( @T...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Apr 30 2022 11:02:34 GMT+0800">2022-04-30</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/30/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E5%85%83%E6%B3%A8%E8%A7%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2022/04/30/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E5%86%85%E7%BD%AE%E6%B3%A8%E8%A7%A3/">
-                        注解之内置注解
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        
-@Override
-定义在 java.lang.Override 中 , 此注释只适用于修辞方法 , 表示一个方法声明打算重写超类中 的另一个方法声明.
-
-
-@Deprecated 
-定义在java.lang.Deprecated中 , 此注释可以...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Apr 30 2022 10:21:35 GMT+0800">2022-04-30</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%B3%A8%E8%A7%A3/">注解</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2022/04/30/%E6%B3%A8%E8%A7%A3%E4%B9%8B%E5%86%85%E7%BD%AE%E6%B3%A8%E8%A7%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/page/20/"
-        >Prev</a>
-    
-
-    
-        <a class="next btn"
-           href="/page/22/"
-        >Next</a>
-    
-</div>
-
-    </div>
-</div>
-
-
-                
-            </div>
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
-
-
-<div class="post-scripts pjax">
-    
-</div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
-
-        document.addEventListener('pjax:send', () => {
-            KEEP.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            KEEP.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            KEEP.refresh();
-        });
-    });
-</script>
-
-
-
-</body>
-</html>
+1234567891011121314151617181920212223242526public class dem ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/20/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/#content-inner">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/#content-inner">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/#content-inner">31</a><a class="extend next" rel="next" href="/page/22/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Ajaxj/" style="font-size: 1.1em; color: #999">Ajaxj</a> <a href="/tags/Anylogic/" style="font-size: 1.25em; color: #999fa8">Anylogic</a> <a href="/tags/Controller/" style="font-size: 1.1em; color: #999">Controller</a> <a href="/tags/ElasticSearch/" style="font-size: 1.22em; color: #999ea5">ElasticSearch</a> <a href="/tags/JavaWeb/" style="font-size: 1.38em; color: #99a4b3">JavaWeb</a> <a href="/tags/Java%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 1.13em; color: #999a9c">Java中间件</a> <a href="/tags/Linux/" style="font-size: 1.19em; color: #999da2">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 1.47em; color: #99a8bc">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 1.28em; color: #99a0ab">MybatisPlus</a> <a href="/tags/Redis/" style="font-size: 1.22em; color: #999ea5">Redis</a> <a href="/tags/Servlet/" style="font-size: 1.1em; color: #999">Servlet</a> <a href="/tags/Spring/" style="font-size: 1.28em; color: #99a0ab">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 1.5em; color: #99a9bf">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 1.25em; color: #999fa8">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 1.32em; color: #99a2ad">SpringMVC</a> <a href="/tags/Vue/" style="font-size: 1.32em; color: #99a2ad">Vue</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 1.41em; color: #99a5b6">java基础</a> <a href="/tags/leetcode/" style="font-size: 1.19em; color: #999da2">leetcode</a> <a href="/tags/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" style="font-size: 1.1em; color: #999">乱七八糟</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.16em; color: #999b9f">反射</a> <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/" style="font-size: 1.25em; color: #999fa8">完整项目</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.44em; color: #99a7b9">机器学习</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.19em; color: #999da2">注解</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.35em; color: #99a3b0">深度学习</a> <a href="/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">遇到的问题</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">面试题</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">July 2022</span><span class="card-archive-list-count">38</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">June 2022</span><span class="card-archive-list-count">103</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">72</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">30</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">15</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">307</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-08-03T07:47:31.159Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

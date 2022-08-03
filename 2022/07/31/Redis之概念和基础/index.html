@@ -1,0 +1,532 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Redis之概念和基础 | Hexo</title><meta name="keywords" content="Redis"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Nosql概述为什么使用Nosql 1、单机Mysql时代   90年代,一个网站的访问量一般不会太大，单个数据库完全够用。随着用户增多，网站出现以下问题  数据量增加到一定程度，单机数据库就放不下了 数据的索引（B+ Tree）,一个机器内存也存放不下 访问量变大后（读写混合），一台服务器承受不住。   2、Memcached(缓存) + Mysql + 垂直拆分（读写分离）  网站80%的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis之概念和基础">
+<meta property="og:url" content="http://example.com/2022/07/31/Redis%E4%B9%8B%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、Nosql概述为什么使用Nosql 1、单机Mysql时代   90年代,一个网站的访问量一般不会太大，单个数据库完全够用。随着用户增多，网站出现以下问题  数据量增加到一定程度，单机数据库就放不下了 数据的索引（B+ Tree）,一个机器内存也存放不下 访问量变大后（读写混合），一台服务器承受不住。   2、Memcached(缓存) + Mysql + 垂直拆分（读写分离）  网站80%的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-31T01:43:38.000Z">
+<meta property="article:modified_time" content="2022-07-31T07:41:11.165Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/07/31/Redis%E4%B9%8B%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Redis之概念和基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-31 15:41:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Redis之概念和基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-07-31T01:43:38.000Z" title="Created 2022-07-31 09:43:38">2022-07-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-07-31T07:41:11.165Z" title="Updated 2022-07-31 15:41:11">2022-07-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Redis之概念和基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、Nosql概述"><a href="#一、Nosql概述" class="headerlink" title="一、Nosql概述"></a>一、Nosql概述</h2><h3 id="为什么使用Nosql"><a href="#为什么使用Nosql" class="headerlink" title="为什么使用Nosql"></a>为什么使用Nosql</h3><blockquote>
+<p>1、单机Mysql时代</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2022/07/31/QTZ6O4UCwHBNILr.png" alt="image-20220731094658860"></p>
+<p>90年代,一个网站的访问量一般不会太大，单个数据库完全够用。随着用户增多，网站出现以下问题</p>
+<ol>
+<li>数据量增加到一定程度，单机数据库就放不下了</li>
+<li>数据的索引（B+ Tree）,一个机器内存也存放不下</li>
+<li>访问量变大后（读写混合），一台服务器承受不住。</li>
+</ol>
+<blockquote>
+<p>2、Memcached(缓存) + Mysql + 垂直拆分（读写分离）</p>
+</blockquote>
+<p>网站80%的情况都是在读，每次都要去查询数据库的话就十分的麻烦！所以说我们希望减轻数据库的压力，我们可以使用缓存来保证效率！</p>
+<p><img src="https://s2.loli.net/2022/07/31/tokD7OR9QnqIhKw.png" alt="image-20220731094749202"></p>
+<p>优化过程经历了以下几个过程：</p>
+<ol>
+<li>优化数据库的数据结构和索引(难度大)</li>
+<li>文件缓存，通过IO流获取比每次都访问数据库效率略高，但是流量爆炸式增长时候，IO流也承受不了</li>
+<li>MemCache,当时最热门的技术，通过在数据库和数据库访问层之间加上一层缓存，第一次访问时查询数据库，将结果保存到缓存，后续的查询先检查缓存，若有直接拿去使用，效率显著提升。</li>
+</ol>
+<blockquote>
+<p>3、分库分表 + 水平拆分 + Mysql集群</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2022/07/31/PCjRHO4tzuYMmvw.png" alt="image-20220731094917403"></p>
+<blockquote>
+<p>4、如今最近的年代</p>
+</blockquote>
+<p> 如今信息量井喷式增长，各种各样的数据出现（用户定位数据，图片数据等），大数据的背景下关系型数据库（RDBMS）无法满足大量数据要求。Nosql数据库就能轻松解决这些问题。</p>
+<blockquote>
+<p>目前一个基本的互联网项目</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2022/07/31/165KAZy4rJMEcao.png" alt="image-20220731095012020"></p>
+<blockquote>
+<p>为什么要用NoSQL ？</p>
+</blockquote>
+<p>用户的个人信息，社交网络，地理位置。用户自己产生的数据，用户日志等等爆发式增长！<br>这时候我们就需要使用NoSQL数据库的，Nosql可以很好的处理以上的情况！</p>
+<h3 id="什么是Nosql"><a href="#什么是Nosql" class="headerlink" title="什么是Nosql"></a>什么是Nosql</h3><p><strong>NoSQL &#x3D; Not Only SQL（不仅仅是SQL）</strong></p>
+<p>Not Only Structured Query Language</p>
+<p>关系型数据库：列+行，同一个表下数据的结构是一样的。</p>
+<p>非关系型数据库：数据存储没有固定的格式，并且可以进行横向扩展。</p>
+<p>NoSQL泛指非关系型数据库，随着web2.0互联网的诞生，传统的关系型数据库很难对付web2.0时代！尤其是超大规模的高并发的社区，暴露出来很多难以克服的问题，NoSQL在当今大数据环境下发展的十分迅速，Redis是发展最快的。</p>
+<h3 id="Nosql特点"><a href="#Nosql特点" class="headerlink" title="Nosql特点"></a>Nosql特点</h3><ol>
+<li><p>方便扩展（数据之间没有关系，很好扩展！）</p>
+</li>
+<li><p>大数据量高性能（Redis一秒可以写8万次，读11万次，NoSQL的缓存记录级，是一种细粒度的缓存，性能会比较高！）</p>
+</li>
+<li><p>数据类型是多样型的！（不需要事先设计数据库，随取随用）</p>
+</li>
+<li><p>传统的 RDBMS 和 NoSQL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">传统的 RDBMS(关系型数据库)</span><br><span class="line">- 结构化组织</span><br><span class="line">- SQL</span><br><span class="line">- 数据和关系都存在单独的表中 row col</span><br><span class="line">- 操作，数据定义语言</span><br><span class="line">- 严格的一致性</span><br><span class="line">- 基础的事务</span><br><span class="line">- ...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Nosql</span><br><span class="line">- 不仅仅是数据</span><br><span class="line">- 没有固定的查询语言</span><br><span class="line">- 键值对存储，列存储，文档存储，图形数据库（社交关系）</span><br><span class="line">- 最终一致性</span><br><span class="line">- CAP定理和BASE</span><br><span class="line">- 高性能，高可用，高扩展</span><br><span class="line">- ...</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>了解：3V + 3高</p>
+</blockquote>
+<p>大数据时代的3V ：主要是<strong>描述问题</strong>的</p>
+<ol>
+<li>海量Velume</li>
+<li>多样Variety</li>
+<li>实时Velocity</li>
+</ol>
+<p>大数据时代的3高 ： 主要是<strong>对程序的要求</strong></p>
+<ol>
+<li>高并发</li>
+<li>高可扩</li>
+<li>高性能</li>
+</ol>
+<p>真正在公司中的实践：NoSQL + RDBMS 一起使用才是最强的。</p>
+<h3 id="阿里巴巴演进分析"><a href="#阿里巴巴演进分析" class="headerlink" title="阿里巴巴演进分析"></a>阿里巴巴演进分析</h3><p>推荐阅读：阿里云的这群疯子<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/653511">https://yq.aliyun.com/articles/653511</a></p>
+<p><img src="https://s2.loli.net/2022/07/31/C9E6l4iqtGHp3Dm.png" alt="image-20220731095353749"></p>
+<p><img src="https://s2.loli.net/2022/07/31/FRLkcy7Y9xCN4sT.png" alt="image-20220731095503385"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 商品信息</span></span><br><span class="line">- 一般存放在关系型数据库：Mysql,阿里巴巴使用的Mysql都是经过内部改动的。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 商品描述、评论(文字居多)</span></span><br><span class="line">- 文档型数据库：MongoDB</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图片</span></span><br><span class="line">- 分布式文件系统 FastDFS</span><br><span class="line">- 淘宝：TFS</span><br><span class="line">- Google: GFS</span><br><span class="line">- Hadoop: HDFS</span><br><span class="line">- 阿里云: oss</span><br><span class="line"></span><br><span class="line"><span class="comment"># 商品关键字 用于搜索</span></span><br><span class="line">- 搜索引擎：solr,elasticsearch</span><br><span class="line">- 阿里：Isearch 多隆</span><br><span class="line"></span><br><span class="line"><span class="comment"># 商品热门的波段信息</span></span><br><span class="line">- 内存数据库：Redis，Memcache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 商品交易，外部支付接口</span></span><br><span class="line">- 第三方应用</span><br></pre></td></tr></table></figure>
+
+<h3 id="NoSQL数据模型简介"><a href="#NoSQL数据模型简介" class="headerlink" title="NoSQL数据模型简介"></a>NoSQL数据模型简介</h3><blockquote>
+<p>案例设计</p>
+</blockquote>
+<p>&#x3D;&#x3D;以一个电商客户，订单，订购，地址模型来对比下关系型数据库和非关系型数据库&#x3D;&#x3D; </p>
+<p><strong>传统的关系型数据库你如何设计？</strong> </p>
+<p>ER图（1:1&#x2F;1:N&#x2F;N:N,主外键等常见） </p>
+<ul>
+<li>用户对应多个订单多个地址 </li>
+<li>每个订单对应每个商品、价格、地址 </li>
+<li>每个商品对应产品</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/07/31/1fvW7eVGIHon5h4.png" alt="image-20220731101106574"></p>
+<blockquote>
+<p>NoSQL你如何设计</p>
+</blockquote>
+<p>可以尝试使用<strong>BSON</strong>。 </p>
+<p>BSON是一种类json的一种二进制形式的存储格式，简称Binary JSON，它和JSON一样，支持内嵌的文档 对象和数组对象 </p>
+<p>用BSon画出构建的数据模型</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;customer&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="number">1000</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;Z3&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;billingAddress&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;city&quot;</span><span class="punctuation">:</span><span class="string">&quot;beijing&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;orders&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="number">17</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;customerId&quot;</span><span class="punctuation">:</span><span class="number">1000</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;orderItems&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;productId&quot;</span><span class="punctuation">:</span><span class="number">27</span><span class="punctuation">,</span><span class="attr">&quot;price&quot;</span><span class="punctuation">:</span><span class="number">77.5</span><span class="punctuation">,</span><span class="attr">&quot;productName&quot;</span><span class="punctuation">:</span><span class="string">&quot;thinking in java&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;shippingAddress&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;city&quot;</span><span class="punctuation">:</span><span class="string">&quot;beijing&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">                <span class="attr">&quot;orderPayment&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;ccinfo&quot;</span><span class="punctuation">:</span><span class="string">&quot;111-222-</span></span><br><span class="line"><span class="string">                333&quot;</span><span class="punctuation">,</span><span class="attr">&quot;txnid&quot;</span><span class="punctuation">:</span><span class="string">&quot;asdfadcd334&quot;</span><span class="punctuation">,</span><span class="attr">&quot;billingAddress&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;city&quot;</span><span class="punctuation">:</span><span class="string">&quot;beijing&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>想想关系模型数据库你如何查？如果按照我们新设计的BSon，是不是查询起来很简单。 </p>
+<ul>
+<li>高并发的操作是不太建议有关联查询的，互联网公司用冗余数据来避免关联查询 </li>
+<li>分布式事务是支持不了太多的并发的</li>
+</ul>
+<h3 id="Nosql的四大分类"><a href="#Nosql的四大分类" class="headerlink" title="Nosql的四大分类"></a>Nosql的四大分类</h3><blockquote>
+<p><strong>KV键值对</strong></p>
+</blockquote>
+<ul>
+<li>新浪：<strong>Redis</strong></li>
+<li>美团：Redis + Tair</li>
+<li>阿里、百度：Redis + Memcache</li>
+</ul>
+<blockquote>
+<p><strong>文档型数据库（bson数据格式）：</strong></p>
+</blockquote>
+<ul>
+<li><strong>MongoDB</strong>(掌握)<ul>
+<li>基于分布式文件存储的数据库。C++编写，用于处理大量文档。</li>
+<li>MongoDB是RDBMS和NoSQL的中间产品。MongoDB是非关系型数据库中功能最丰富的，NoSQL中最像关系型数据库的数据库。</li>
+</ul>
+</li>
+<li>ConthDB</li>
+</ul>
+<blockquote>
+<p><strong>列存储数据库</strong></p>
+</blockquote>
+<ul>
+<li><strong>HBase</strong>(大数据必学)</li>
+<li>分布式文件系统</li>
+</ul>
+<blockquote>
+<p><strong>图关系数据库</strong></p>
+</blockquote>
+<ul>
+<li><p>它不是放图形的，放的是关系比如:朋友圈社交网络、广告推荐系统 </p>
+</li>
+<li><p>社交网络，推荐系统等。专注于构建关系图谱 </p>
+</li>
+<li><p>Neo4J, InfoGrid</p>
+</li>
+<li><p><strong>Neo4j</strong>、InfoGrid</p>
+</li>
+</ul>
+<blockquote>
+<p>四者对比</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>分类</strong></th>
+<th><strong>Examples举例</strong></th>
+<th><strong>典型应用场景</strong></th>
+<th><strong>数据模型</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>键值对（key-value）</strong></td>
+<td>Tokyo Cabinet&#x2F;Tyrant, Redis, Voldemort, Oracle BDB</td>
+<td>内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等。</td>
+<td>Key 指向 Value 的键值对，通常用hash table来实现</td>
+<td>查找速度快</td>
+<td>数据无结构化，通常只被当作字符串或者二进制数据</td>
+</tr>
+<tr>
+<td><strong>列存储数据库</strong></td>
+<td>Cassandra, HBase, Riak</td>
+<td>分布式的文件系统</td>
+<td>以列簇式存储，将同一列数据存在一起</td>
+<td>查找速度快，可扩展性强，更容易进行分布式扩展</td>
+<td>功能相对局限</td>
+</tr>
+<tr>
+<td><strong>文档型数据库</strong></td>
+<td>CouchDB, MongoDb</td>
+<td>Web应用（与Key-Value类似，Value是结构化的，不同的是数据库能够了解Value的内容）</td>
+<td>Key-Value对应的键值对，Value为结构化数据</td>
+<td>数据结构要求不严格，表结构可变，不需要像关系型数据库一样需要预先定义表结构</td>
+<td>查询性能不高，而且缺乏统一的查询语法。</td>
+</tr>
+<tr>
+<td><strong>图形(Graph)数据库</strong></td>
+<td>Neo4J, InfoGrid, Infinite Graph</td>
+<td>社交网络，推荐系统等。专注于构建关系图谱</td>
+<td>图结构</td>
+<td>利用图结构相关算法。比如最短路径寻址，N度关系查找等</td>
+<td>很多时候需要对整个图做计算才能得出需要的信息，而且这种结构不太好做分布式的集群</td>
+</tr>
+</tbody></table>
+<h3 id="CAP-BASE"><a href="#CAP-BASE" class="headerlink" title="CAP + BASE"></a>CAP + BASE</h3><blockquote>
+<p>传统的ACID分别是什么？</p>
+</blockquote>
+<p>关系型数据库遵循ACID规则，事务在英文中是transaction，和现实世界中的交易很类似，它有如下四个 特性： </p>
+<ul>
+<li>A (Atomicity) 原子性</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原子性很容易理解，也就是说事务里的所有操作要么全部做完，要么都不做，事务成功的条件是事务</span><br><span class="line">里的所有操作都成功，只要有一个操作失败，整个事务就失败，需要回滚。</span><br><span class="line">比如银行转账，从A账户转100元至B账户，分为两个步骤：</span><br><span class="line">1）从A账户取100元；</span><br><span class="line">2）存入100元至B账户。</span><br><span class="line">这两步要么一起完成，要么一起不完成，如果只完成第一步，第二步失败，钱会莫名其妙少了100元。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>C (Consistency) 一致性</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">事务前后数据的完整性必须保持一致。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>I (Isolation) 隔离性</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">所谓的独立性是指并发的事务之间不会互相影响，如果一个事务要访问的数据正在被另外一个事务修改，只要另外一个事务未提交，所访问的数据就不受未提交事务的影响。比如现有有个交易是从A账户转100元至B账户，在这个交易还未完成的情况下，如果此时B查询自己的账户，是看不到新增加的100元的</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>D (Durability) 持久性</li>
+</ul>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">持久性是指一旦事务提交后，它所做的修改将会永久的保存在数据库上，即使出现宕机也不会丢失</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>CAP（三进二）</p>
+</blockquote>
+<ul>
+<li>C : Consistency（强一致性） </li>
+<li>A : Availability（可用性） </li>
+<li>P : Partition tolerance（分区容错性）</li>
+</ul>
+<p><strong>CAP理论就是说在分布式存储系统中，最多只能实现上面的两点。</strong> </p>
+<ul>
+<li>而由于当前的网络硬件肯定会出现延迟丢包等问题，所以分区容错性是我们必须需要实现的。 </li>
+<li>所以我们只能在一致性和可用性之间进行权衡，没有NoSQL系统能同时保证这三点。</li>
+<li>注意：分布式架构的时候必须做出取舍。 </li>
+<li>一致性和可用性之间取一个平衡。多余大多数web应用，其实并不需要强一致性。 </li>
+<li>因此牺牲C换取P，这是目前分布式数据库产品的方向</li>
+</ul>
+<p><strong>一致性与可用性的决择</strong> </p>
+<ul>
+<li>对于web2.0网站来说，关系数据库的很多主要特性却往往无用武之地</li>
+</ul>
+<p><strong>数据库事务一致性需求</strong> </p>
+<ul>
+<li>很多web实时系统并不要求严格的数据库事务，对读一致性的要求很低， 有些场合对写一致性要求并不高。允许实现最终一致性。</li>
+</ul>
+<p><strong>数据库的写实时性和读实时性需求</strong></p>
+<ul>
+<li>对关系数据库来说，插入一条数据之后立刻查询，是肯定可以读出来这条数据的，但是对于很多web应 用来说，并不要求这么高的实时性，比方说发一条消息之后，过几秒乃至十几秒之后，我的订阅者才看到这条动态是完全可以接受的。</li>
+</ul>
+<p><strong>对复杂的SQL查询，特别是多表关联查询的需求</strong> </p>
+<ul>
+<li>任何大数据量的web系统，都非常忌讳多个大表的关联查询，以及复杂的数据分析类型的报表查询，特别是SNS类型的网站，从需求以及产品设计角度，就避免了这种情况的产生。往往更多的只是单表的主键查询，以及单表的简单条件分页查询，SQL的功能被极大的弱化了。</li>
+</ul>
+<p><strong>CAP理论的核心</strong>是：一个分布式系统不可能同时很好的满足一致性，可用性和分区容错性这三个需求， 最多只能同时较好的满足两个。因此，根据 CAP 原理将 NoSQL 数据库分成了满足CA 原则、满足 CP 原则和满足 AP 原则三大类： </p>
+<ul>
+<li>CA - 单点集群，满足一致性，可用性的系统，通常在可扩展性上不太强大。 </li>
+<li>CP - 满足一致性，分区容忍性的系统，通常性能不是特别高。 </li>
+<li>AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。</li>
+</ul>
+<p><img src="https://s2.loli.net/2022/07/31/saHrbd4uiLkXMQw.png" alt="image-20220731103159480"></p>
+<blockquote>
+<p>BASE 理论</p>
+</blockquote>
+<p>BASE理论是由eBay架构师提出的。BASE是对CAP中一致性和可用性权衡的结果，其来源于对大规模互联网分布式系统实践的总结，是基于CAP定律逐步演化而来。其核心思想是即使无法做到强一致性，但每个应用都可以根据自身业务特点，采用适当的方式来使系统达到最终一致性。 </p>
+<p><strong>BASE就是为了解决关系数据库强一致性引起的问题而引起的可用性降低而提出的解决方案。</strong> </p>
+<p>BASE其实是下面三个术语的缩写： </p>
+<ul>
+<li>基本可用(Basically Available)： 基本可用是指分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用。电商大促时，为了应对访问量激增，部分用户可能会被引导到降级页面，服 务层也可能只提供降级服务。这就是损失部分可用性的体现。 </li>
+<li>软状态(Soft State)： 软状态是指允许系统存在中间状态，而该中间状态不会影响系统整体可用性。分布式存储中一般一份数据至少会有三个副本，允许不同节点间副本同步的延时就是软状态的 体现。MySQL Replication 的异步复制也是一种体现。 </li>
+<li>最终一致性(Eventual Consistency)： 最终一致性是指系统中的所有数据副本经过一定时间后，最终能够达到一致的状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况。</li>
+</ul>
+<p>它的思想是通过让系统放松对某一时刻数据一致性的要求来换取系统整体伸缩性和性能上改观。为什么这么说呢，缘由就在于大型系统往往由于地域分布和极高性能的要求，不可能采用分布式事务来完成这些指标，要想获得这些指标，我们必须采用另外一种方式来完成，这里BASE就是解决这个问题的办法！ </p>
+<p><strong>解释：</strong></p>
+<ol>
+<li>分布式：不同的多台服务器上面部署不同的服务模块（工程），他们之间通过Rpc通信和调用，对外提供服务和组内协作。 </li>
+<li>集群：不同的多台服务器上面部署相同的服务模块，通过分布式调度软件进行统一的调度，对外提供服务和访问。</li>
+</ol>
+<h2 id="二、Redis入门"><a href="#二、Redis入门" class="headerlink" title="二、Redis入门"></a>二、Redis入门</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
+<p>Redis是什么？</p>
+</blockquote>
+<p>Redis（Remote Dictionary Server )，即远程字典服务。</p>
+<p>是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、<strong>Key-Value数据库</strong>，并提供多种语言的API。</p>
+<p>与memcached一样，为了保证效率，<strong>数据都是缓存在内存中</strong>。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+<blockquote>
+<p>Redis能该干什么？</p>
+</blockquote>
+<ol>
+<li>内存存储、持久化，内存是断电即失的，所以需要持久化（RDB、AOF）</li>
+<li>高效率、用于高速缓冲</li>
+<li>发布订阅系统</li>
+<li>地图信息分析</li>
+<li>计时器、计数器(eg：浏览量)</li>
+<li>。。。</li>
+</ol>
+<blockquote>
+<p>特性</p>
+</blockquote>
+<ol>
+<li><p>多样的数据类型</p>
+</li>
+<li><p>持久化</p>
+</li>
+<li><p>集群</p>
+</li>
+<li><p>事务</p>
+<p>…</p>
+</li>
+</ol>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>官网：<a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io/</a></p>
+<p>推荐使用Linux服务器学习。</p>
+<p>windows版本的Redis已经停更很久了…</p>
+<h3 id="Windows安装"><a href="#Windows安装" class="headerlink" title="Windows安装"></a>Windows安装</h3><p><a target="_blank" rel="noopener" href="https://github.com/dmajkic/redis">https://github.com/dmajkic/redis</a></p>
+<ol>
+<li>解压安装包</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/07/31/ZCnvV5wEN3IpSd2.png" alt="image-20220731100319010"></p>
+<ol start="2">
+<li>开启redis-server.exe</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/07/31/hDvPnUXkpGf32TH.png" alt="image-20220731100523660"></p>
+<ol start="3">
+<li>启动redis-cli.exe测试</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/07/31/qaelOUPy6I2AbuB.png" alt="image-20220731100429502"></p>
+<p>&#x3D;&#x3D;重要提示&#x3D;&#x3D;</p>
+<p>由于企业里面做Redis开发，99%都是Linux版的运用和安装，几乎不会涉及到Windows版，上一步的讲解只是为了知识的完整性，Windows版不作为重点，大家可以自己玩，企业实战就认一个版：Linux版 <a target="_blank" rel="noopener" href="http://www.redis.cn/topics/introduction">http://www.redis.cn/topics/introduction</a></p>
+<p><img src="https://s2.loli.net/2022/07/31/gHMmTn5wYL6dEi9.png" alt="image-20220731104024115"></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><p>下载地址 <a target="_blank" rel="noopener" href="http://download.redis.io/releases/redis-5.0.7.tar.gz">http://download.redis.io/releases/redis-5.0.7.tar.gz</a></p>
+<p><img src="https://s2.loli.net/2022/07/31/enOcTtk9soKLNZ6.png" alt="image-20220731104352775"></p>
+<blockquote>
+<p>安装步骤</p>
+</blockquote>
+<p>1、下载获得 redis-5.0.7.tar.gz 后将它放到我们Linux的目录下 &#x2F;opt<br>2、&#x2F;opt 目录下，解压命令 ： tar -zxvf redis-5.0.7.tar.gz<br>3、解压完成后出现文件夹：redis-5.0.7<br>4、进入目录： cd redis-5.0.7<br>5、在 redis-5.0.7 目录下执行 make 命令</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">运行make命令时故意出现的错误解析：</span><br><span class="line">1.  安装gcc (gcc是linux下的一个编译程序，是c程序的编译工具)</span><br><span class="line">     能上网: yum install gcc-c++</span><br><span class="line">     版本测试: gcc-v</span><br><span class="line">2. 二次make</span><br><span class="line">3. Jemalloc/jemalloc.h: 没有那个文件或目录</span><br><span class="line">    运行 make distclean 之后再make</span><br><span class="line">4. Redis Test（可以不用执行）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>6、如果make完成后继续执行 make install </p>
+<p>7、查看默认安装目录：usr&#x2F;local&#x2F;bin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/usr 这是一个非常重要的目录，类似于windows下的Program Files,存放用户的程序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>8、拷贝配置文件（备用）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/bin</span><br><span class="line"><span class="built_in">ls</span> -l</span><br><span class="line"><span class="comment"># 在redis的解压目录下备份redis.conf</span></span><br><span class="line"><span class="built_in">mkdir</span> myredis</span><br><span class="line"><span class="built_in">cp</span> redis.conf myredis <span class="comment"># 拷一个备份，养成良好的习惯，我们就修改这个文件</span></span><br><span class="line"><span class="comment"># 修改配置保证可以后台应用</span></span><br><span class="line">vim redis.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2022/07/31/QP4rpS3GdkbODH2.png" alt="image-20220731105313751"></p>
+<ul>
+<li>A、redis.conf配置文件中daemonize守护线程，默认是NO。</li>
+<li>B、daemonize是用来指定redis是否要用守护线程的方式启动。</li>
+</ul>
+<p><strong>daemonize 设置yes或者no区别</strong> </p>
+<ul>
+<li>daemonize:yes <ul>
+<li>redis采用的是单进程多线程的模式。当redis.conf中选项daemonize设置成yes时，代表开启守护进程模式。在该模式下，redis会在后台运行，并将进程pid号写入至redis.conf选项pidfile设置的文件中，此时redis将一直运行，除非手动kill该进程。</li>
+</ul>
+</li>
+<li>daemonize:no <ul>
+<li>当daemonize选项设置成no时，当前界面将进入redis的命令行界面，exit强制退出或者关闭连接工具(putty,xshell等)都会导致redis进程退出。</li>
+</ul>
+</li>
+</ul>
+<p>9、启动测试一下！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 【shell】启动redis服务</span></span><br><span class="line">[root@192 bin]<span class="comment"># cd /usr/local/bin</span></span><br><span class="line">[root@192 bin]<span class="comment"># redis-server /opt/redis-5.0.7/redis.conf</span></span><br><span class="line"><span class="comment"># redis客户端连接===&gt; 观察地址的变化，如果连接ok,是直接连上的，redis默认端口号 6379</span></span><br><span class="line">[root@192 bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 helloworld</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get k1</span><br><span class="line"><span class="string">&quot;helloworld&quot;</span></span><br><span class="line"><span class="comment"># 【shell】ps显示系统当前进程信息</span></span><br><span class="line">[root@192 myredis]<span class="comment"># ps -ef|grep redis</span></span><br><span class="line">root 	16005 1 0 04:45 ? 00:00:00 redis-server</span><br><span class="line">127.0.0.1:6379</span><br><span class="line">root 	16031 15692 0 04:47 pts/0 00:00:00 redis-cli -p 6379</span><br><span class="line">root 	16107 16076 0 04:51 pts/2 00:00:00 grep --color=auto redis</span><br><span class="line"><span class="comment"># 【redis】关闭连接</span></span><br><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">not connected&gt; <span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 【shell】ps显示系统当前进程信息</span></span><br><span class="line">[root@192 myredis]<span class="comment"># ps -ef|grep redis</span></span><br><span class="line">root 16140 16076 0 04:53 pts/2 00:00:00 grep --color=auto redis</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试性能"><a href="#测试性能" class="headerlink" title="测试性能"></a>测试性能</h3><blockquote>
+<p>redis压力测试工具—–Redis-benchmark</p>
+</blockquote>
+<p>Redis-benchmark是官方自带的Redis性能测试工具，可以有效的测试Redis服务的性能。</p>
+<p><img src="https://s2.loli.net/2022/07/31/Xir7vlhqImUQ8cu.png" alt="image-20220731110630245"></p>
+<p><strong>redis-benchmark：</strong>Redis官方提供的性能测试工具，参数选项如下：</p>
+<img src="https://s2.loli.net/2022/07/31/gUpVMhkslobIemn.png" alt="image-20220731110707298" style="zoom: 80%;" />
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试一：100个并发连接，100000个请求，检测host为localhost 端口为6379的redis服务器性能</span></span><br><span class="line">redis-benchmark -h localhost -p 6379 -c 100 -n 100000</span><br><span class="line"><span class="comment"># 测试出来的所有命令只举例一个！</span></span><br><span class="line">====== SET ======</span><br><span class="line">100000 requests completed <span class="keyword">in</span> 1.88 seconds <span class="comment"># 对集合写入测试</span></span><br><span class="line">100 parallel clients <span class="comment"># 每次请求有100个并发客户端</span></span><br><span class="line">3 bytes payload <span class="comment"># 每次写入3个字节的数据，有效载荷</span></span><br><span class="line">keep alive: 1 <span class="comment"># 保持一个连接，一台服务器来处理这些请求</span></span><br><span class="line">17.05% &lt;= 1 milliseconds</span><br><span class="line">97.35% &lt;= 2 milliseconds</span><br><span class="line">99.97% &lt;= 3 milliseconds</span><br><span class="line">100.00% &lt;= 3 milliseconds <span class="comment"># 所有请求在 3 毫秒内完成</span></span><br><span class="line">53248.14 requests per second <span class="comment"># 每秒处理 53248.14 次请求</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><blockquote>
+<p>redis默认有16个数据库</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看 redis.conf ，里面有默认的配置</span><br><span class="line">databases 16</span><br><span class="line"><span class="comment"># Set the number of databases. The default database is DB 0, you can select</span></span><br><span class="line"><span class="comment"># a different one on a per-connection basis using SELECT &lt;dbid&gt; where</span></span><br><span class="line"><span class="comment"># dbid is a number between 0 and &#x27;databases&#x27;-1</span></span><br><span class="line">databases 16</span><br></pre></td></tr></table></figure>
+
+<p>默认使用的第0个;</p>
+<p>16个数据库为：DB 0~DB 15<br>默认使用DB 0 ，可以使用<code>select n</code>切换到DB n，<code>dbsize</code>可以查看当前数据库的大小，与key数量相关。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; config get databases <span class="comment"># 命令行查看数据库数量databases</span></span><br><span class="line">1) <span class="string">&quot;databases&quot;</span></span><br><span class="line">2) <span class="string">&quot;16&quot;</span></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; select 8 <span class="comment"># 切换数据库 DB 8</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379[8]&gt; dbsize <span class="comment"># 查看数据库大小</span></span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不同数据库之间 数据是不能互通的，并且dbsize 是根据库中key的个数。</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> name sakura </span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; SELECT 8</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379[8]&gt; get name <span class="comment"># db8中并不能获取db0中的键值对。</span></span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379[8]&gt; DBSIZE <span class="comment">#Dbsize查看当前数据库的key的数量</span></span><br><span class="line">(<span class="built_in">integer</span>) 0</span><br><span class="line">127.0.0.1:6379[8]&gt; SELECT 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">1) <span class="string">&quot;counter:__rand_int__&quot;</span></span><br><span class="line">2) <span class="string">&quot;mylist&quot;</span></span><br><span class="line">3) <span class="string">&quot;name&quot;</span></span><br><span class="line">4) <span class="string">&quot;key:__rand_int__&quot;</span></span><br><span class="line">5) <span class="string">&quot;myset:__rand_int__&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; DBSIZE <span class="comment"># size和key个数相关</span></span><br><span class="line">(<span class="built_in">integer</span>) 5</span><br></pre></td></tr></table></figure>
+
+<p><code>keys *</code> ：查看当前数据库中所有的key。</p>
+<p><code>flushdb</code>：清空当前数据库中的键值对。</p>
+<p><code>flushall</code>：清空所有数据库的键值对。</p>
+<blockquote>
+<p><strong>Redis是单线程的，Redis是基于内存操作的。</strong></p>
+</blockquote>
+<p>Redis的性能瓶颈不是CPU,而是机器内存和网络带宽。</p>
+<p>那么为什么Redis的速度如此快呢，性能这么高呢？QPS达到10W+</p>
+<blockquote>
+<p><strong>Redis为什么单线程还这么快？</strong></p>
+</blockquote>
+<ul>
+<li>误区1：高性能的服务器一定是多线程的？</li>
+<li>误区2：多线程（CPU上下文会切换！）一定比单线程效率高！</li>
+</ul>
+<p>核心：Redis是将所有的数据放在内存中的，所以说使用单线程去操作效率就是最高的，多线程（CPU上下文会切换：耗时的操作！），对于内存系统来说，如果没有上下文切换效率就是最高的，多次读写都是在一个CPU上的，在内存存储数据情况下，单线程就是最佳的方案。</p>
+<p>因为一次CPU上下文的切换大概在 1500ns 左右。从内存中读取 1MB 的连续数据，耗时大约为 250us， 假设1MB的数据由多个线程读取了1000次，那么就有1000次时间上下文的切换，那么就有1500ns * 1000 &#x3D; 1500us ，我单线程的读完1MB数据才250us ,你光时间上下文的切换就用了1500us了，我还不算你每次读一点数据的时间。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2022/07/31/Redis%E4%B9%8B%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80/">http://example.com/2022/07/31/Redis%E4%B9%8B%E6%A6%82%E5%BF%B5%E5%92%8C%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Redis之五大数据类型</div></div></a></div><div class="next-post pull-right"><a href="/2022/07/26/ElasticSearch%E4%B9%8BElasticSearch%E5%AE%9E%E6%88%98/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">ElasticSearch之ElasticSearch实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Redis之三种特殊数据类型</div></div></a></div><div><a href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Redis之Java</div></div></a></div><div><a href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Redis之事务</div></div></a></div><div><a href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Redis之五大数据类型</div></div></a></div><div><a href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Redis之小进阶</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Nosql%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、Nosql概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8Nosql"><span class="toc-number">1.1.</span> <span class="toc-text">为什么使用Nosql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNosql"><span class="toc-number">1.2.</span> <span class="toc-text">什么是Nosql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nosql%E7%89%B9%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">Nosql特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E6%BC%94%E8%BF%9B%E5%88%86%E6%9E%90"><span class="toc-number">1.4.</span> <span class="toc-text">阿里巴巴演进分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQL%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B"><span class="toc-number">1.5.</span> <span class="toc-text">NoSQL数据模型简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nosql%E7%9A%84%E5%9B%9B%E5%A4%A7%E5%88%86%E7%B1%BB"><span class="toc-number">1.6.</span> <span class="toc-text">Nosql的四大分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAP-BASE"><span class="toc-number">1.7.</span> <span class="toc-text">CAP + BASE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Redis%E5%85%A5%E9%97%A8"><span class="toc-number">2.</span> <span class="toc-text">二、Redis入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.2.</span> <span class="toc-text">环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.</span> <span class="toc-text">Windows安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%AE%89%E8%A3%85"><span class="toc-number">2.4.</span> <span class="toc-text">Linux安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%80%A7%E8%83%BD"><span class="toc-number">2.5.</span> <span class="toc-text">测试性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">2.6.</span> <span class="toc-text">基础知识</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

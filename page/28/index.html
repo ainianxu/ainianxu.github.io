@@ -1,171 +1,257 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Hexo Theme Keep">
-    <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Fang">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/28/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/28/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-08-03 15:47:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <title>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-        念~旭
-    </title>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-<link rel="stylesheet" href="/css/style.css">
-
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
-    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
-  </script>
-<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/29/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day01%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%AE%BA/" title="深度学习 day01 深度学习概论">深度学习 day01 深度学习概论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-29T08:05:08.000Z" title="Created 2021-07-29 16:05:08">2021-07-29</time></span></div><div class="content">01 什么是神经网络深度学习指的是训练神经网络
 
 
-<body>
-<div class="progress-bar-container">
-    
-        <span class="scroll-progress-bar"></span>
-    
-
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
+ReLU（修正线性单元）函数：修正指的是取不小于0的值。下图就是根据这个函数画的单神经元网络。
 
 
-<main class="page-container">
 
-    
-
-    <div class="page-main-content">
-
-        <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                念~旭
-            </a>
-        </div>
-
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
-                                LINKS
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                ABOUT
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">LINKS</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">ABOUT</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
+下面是有更多特征时的神经网络：神经网络的一部分神奇之处在于不管训练集多大，只要输入x就能得到输出y，所有的中间过程都是自己完成的。神经网络你自己决定中间这个节点是什么，我们只给你四个输入特征随便你怎么计算，因此在神经网络中，输入层在中间层连接数是很高的。
 
 
-        </div>
+02 用神经网络进行监督学习
+下面是神经网络创造价值的一些案例：对于图像领域一般使用CNN（卷积神经网络）；对于序列数据经常使用RNN（循环神经网络），其中语言最自然的表示方式也是序列；而对于复杂的应用就需要更加复杂的混合神经网络结构
 
-        <div class="page-main-content-middle">
 
-            <div class="main-content">
 
-                
-                    <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
-        
-            <li class="home-article-item">
+下图分别是：标准神经网络、卷积神经网络、循环神经网络
 
-                
 
-                <h3 class="home-article-title">
-                    <a href="/2021/07/21/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A71/">
-                        java day13 面向对象三大特征1
-                    </a>
-                </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        01 封装
+机器学习被应用于结构化数据和非结构化数据：结构化数据是数据的数据库；非结构化数据就好比语音、图像、自然语言。
+
+
+03 为什么深度学习会兴起？
+下面是训练带有标签样本的不同的算法，随着数据量的增加各个算法的表现变化。可以看出神经网络比其他算法要好得多。
+
+
+
+提升计算速度：左图通过改 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/28/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A72/" title="java day13 面向对象三大特征2">java day13 面向对象三大特征2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-28T15:06:48.000Z" title="Created 2021-07-28 23:06:48">2021-07-28</time></span></div><div class="content">01 方法重写
+重写：需要有继承关系，子类重写父类的方法！
+
+方法名必须相同
+参数列表必须相同
+修饰符：范围可以扩大但是不能缩小（public&gt;Protected&gt;Default&gt;private）
+抛出的异常：范围可以缩小但是不能扩大
+快捷键：Alt+Insert(override)
+
+
+为什么需要重写：因为父类的功能，子类不一定需要，或者不一定满足
+
+静态的方法和非静态方法差别很大：
+
+静态方法：方法的调用只和左边定义的数据类型有关
+
+12345678910111213141516171819202122public class Person &#123;    public static void print()&#123;        System.out.println(&quot;Person&quot;);    &#125;&#125;public class Student extends Person &#123;    public static void print()&#123;        System.out.println(&quot ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/26/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day18%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B%EF%BC%9A%E7%85%A7%E7%89%87OCR%EF%BC%88%E5%85%89%E5%AD%A6%E5%AD%97%E7%AC%A6%E8%AF%86%E5%88%AB%EF%BC%89/" title="机器学习 day18应用举例：照片OCR（光学字符识别）">机器学习 day18应用举例：照片OCR（光学字符识别）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-26T09:00:44.000Z" title="Created 2021-07-26 17:00:44">2021-07-26</time></span></div><div class="content">01 问题描述与 OCR pipeline照片OCR问题注重的是如何让计算机读出照片中的文字信息（照片OCR对于读取文档来说很简单，但是对于数码照片来说还是很难的）
+
+
+照片OCR当你输入文字时，计算机就能自动的帮你找到相册里带有这些文字的照片，它有如下几个步骤：
+给定某个照片，将其图像扫描一遍。
+找出照片中的文字信息
+找出照片中的文字信息之后，将重点关注这些文字区域，并对区域中的文字进行识别，当它正确读出这些文字之后，他会将这些文字内容显示并记录下来。
+
+
+
+
+
+总体来说步骤分为三类：文字检测、字符分割以及字符分类（其实还有个拼写校正）。
+
+
+
+像这样的系统，我们把它称为机器学习流水线：首先有一个照片，然后把它传给文字检测系统，识别出文字区域后，将文字区域中的单个字符分割出来，最后对这些单个字母进行识别。
+
+
+02 滑动窗口关于流水线中每个独立的组件的工作原理，主要讲一个叫滑动窗口分类器。
+
+
+照片OCR问题难在文字区域对应的矩形具有不同的长宽比例，而对于行人检测来说，人们的长宽比基本相同。
+
+
+
+建立一个行人检测系统，我们可以这么做：假如决定要把比例标准定为82 * 36（当然其他 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day17%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习 day17大规模机器学习">机器学习 day17大规模机器学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-25T10:16:43.000Z" title="Created 2021-07-25 18:16:43">2021-07-25</time></span></div><div class="content">01 学习大数据集大规模机器学习就是处理大数据集的算法
+
+
+一种获取高性能的机器学习系统的途径是采用低偏差的学习算法并用大数据进行训练。
+大数据集学习的特有问题是计算问题。
+在训练一亿个样本之前，我们可以随机选择一亿个样本中的一千个样本，然后用这一千个样本来训练我们的算法。如果用一千个样本训练效果也是一样的话，在训练大量的模型前预先检查往往也是一个明智的选择。如果效果相同的话，可以根据这一千个样本绘制学习曲线，如果画出左图高方差的曲线那么增加训练集还是有作用的，如果是右边高偏差的算法，样本也不会比训练1000个更好了，如果是右图那么自然而然地会添加额外地特征项或在神经网络中添加额外地隐藏单元，这样最终可能得到左边的图。
+
+
+02 随机梯度下降当我们训练集很大时，梯度下降算法的计算量会变得非常大，因此对普通的梯度下降法进行改良为随机梯度下降法，使得算法能够应用于大规模的数据训练。
+
+
+先来回顾下线性回归：第一个式子是假设函数，第二个式子是代价函数，第三个式子是不断地更新参数sita来使得代价函数趋于最小，右图是构建的三维函数可以看出是弓形。
+
+
+
+在参数初始值，运行梯度下降算法，将会不断 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day16%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" title="机器学习 day16推荐系统">机器学习 day16推荐系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-24T09:10:02.000Z" title="Created 2021-07-24 17:10:02">2021-07-24</time></span></div><div class="content">01 问题规划特征对于机器学习来说是十分重要的，机器学习领域有一个伟大的想法，对于某些问题有一些算法可以自动的学习一系列合适的特征。
+
+
+我们为什么要谈论推荐系统？
+它是机器学习中的一个重要的应用，比如说亚马逊会根据你之前所买的书来给你推荐一些书。
+有一些环境能让你开发某个算法来学习使用哪些特征，而推荐系统就是那些环境中的一个例子，通过推荐系统我们能领悟一些特征学习的思想。
+
+
+推荐系统问题的组成：以电影评分为例，先说下这些符号的意思。n_u表示用户的数量、n_m表示电影的数量、r(i,j)代表用户j是否对电影i进行评价（&#x3D;1代表评价了），当用户对电影进行评分后会得到一个值y(i,j)，它代表用户j对电影i所给出的评分（0~5星表示）。
+因此推荐系统的问题是给出r(i,j)和y(i,j)数据然后去查找那些没有评分的电影，并试图预测这些电影的评价星级。
+
+
+
+总结：如果我们想开发一个推荐系统，那我们应该想出一个学习算法，一个能自动为我们填补那些缺失值的算法，这样就可以知道用户还有哪些电影没看过并推荐新电影给用户。
+
+02 基于内容的推荐算法
+我们用x_1（一部电影为爱情片的程度 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day15%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="机器学习 day15异常检测">机器学习 day15异常检测</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-23T12:42:36.000Z" title="Created 2021-07-23 20:42:36">2021-07-23</time></span></div><div class="content">01 问题动机异常检测主要用在非监督学习，但从某些角度看，跟有监督学习问题是非常相似的。
+
+
+异常检测问题就是我们希望知道新的测试数据是否有某种异常，换句话说新的测试数据是否需要进一步测试。如下面这个图（飞机引擎的例子），其中x_1、x_2是飞机引擎的特征。通过测试发现如果x_test在对应点里面，那么他就不存在异常，如果在对应的外面，那么就存在异常。
+
+
+
+我们通常认定这m个数据都是异常或者都不是异常的，我们需要一个算法告诉我们一个新的样本数据是否异常。因此我们要做的就是给定无标签训练集，我们对数据建模即p(x)，也就是对x的分布概率建模。如果测试集的概率p低于阈值那么就将其标为异常，否则正常。越中心的点概率越高。
+
+
+
+异常检测最常见的应用是欺诈检测，例如许多购物网站常用来识别异常用户。可以针对不同的用户活动计算特征变量x^(i)，于是建立一个模型来表示用户表现出各种行为的可能性。x_1也许是用户登陆的频率，x_2也许是用户访问某个页面的次数……，然后根据这些数据建立一个模型p(x),就可以用这个模型发现网站上行为可疑的人。
+另一个例子就是上面的飞机引擎例子。
+第三个是数据中心的计 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/21/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A71/" title="java day13 面向对象三大特征1">java day13 面向对象三大特征1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-21T14:31:46.000Z" title="Created 2021-07-21 22:31:46">2021-07-21</time></span></div><div class="content">01 封装
 我们程序设计追求高内聚低耦合。
 高内聚：类的内部数据操作细节自己完成，不允许外部干涉。
 低耦合：仅暴露少量的方法给外部使用。
@@ -178,93 +264,48 @@
 系统可维护增加了
 
 
-属性私有，ge...
-                    
-                </div>
+属性私有，get&#x2F;set
+信息隐藏：禁止直接访问一个对象中数据的实际表示，而应通过操作接口来访问。
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 21 2021 22:31:46 GMT+0800">2021-07-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/21/java%20day13%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A71/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day14%E9%99%8D%E7%BB%B4/">
-                        机器学习 day14降维
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 目标 I：数据压缩
+123456789101112131415161718192021public class Student &#123;    //属性私有    private String name;//姓名    private int id;//学号    private char sex;//性别    //get 获得这个数据    public String getName()&#123;        return this.name;    &#125;    //set 给这个数据设置值    public void setName(String name)&#123;        this.name = name;    &#125;& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day14%E9%99%8D%E7%BB%B4/" title="机器学习 day14降维">机器学习 day14降维</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-21T07:38:53.000Z" title="Created 2021-07-21 15:38:53">2021-07-21</time></span></div><div class="content">01 目标 I：数据压缩
 想要使用降维的的原因：
 数据压缩，数据压缩不仅能使数据占用少量的内存或硬盘空间，还能对算法进行加速。
 
 
 如果特征高度相关，那么真的可能需要降低维数。
-将二维降到一维：两个特征变成一个特征，把每个样本都保持为一个数字，这样就...
-                    
-                </div>
+将二维降到一维：两个特征变成一个特征，把每个样本都保持为一个数字，这样就能把内存需求（数据空间需求）减半。
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Jul 21 2021 15:38:53 GMT+0800">2021-07-21</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2021/07/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day14%E9%99%8D%E7%BB%B4/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
 
-            </li>
-        
-            <li class="home-article-item">
+从三维降到二维：
 
-                
 
-                <h3 class="home-article-title">
-                    <a href="/2021/07/20/java%20day12%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-                        java day12 面向对象
-                    </a>
-                </h3>
+02 目标 II：可视化
+想要使用降维的的原因：
 
-                <div class="home-article-content markdown-body">
-                    
-                        01 什么是面向对象
+可视化数据：将数据从50维或者更高维降到三维或者两维，这样就可以将其在图中画出来更好的理解他。
+
+
+50维数据：
+
+
+
+
+从50维降到2维，通常我们要了解z特征大致意味着什么。
+
+
+
+并画出2维图像
+
+
+03 主成分分析问题规划1对于降维问题最常用的一种算法叫主成分分析方法(PCA)的算法，本节课会试着用公式准确的表述PCA的用途。
+
+
+PCA所做的就是试图寻找一个投影平面对数据进行投影，使得能最小化这个距离。（PCA所作的是找到一个低维平面也就是图中的线，然后将数据投影到上面，使得蓝色的小线段（投影误差）长度平方最小）。对比可得选择橘色的而不选择粉色的。
+
+
+
+在应用PCA之前最常规的做法是先进行均值归一化和特征规范化使得特 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/20/java%20day12%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" title="java day12 面向对象">java day12 面向对象</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-20T13:54:18.000Z" title="Created 2021-07-20 21:54:18">2021-07-20</time></span></div><div class="content">01 什么是面向对象
 属性+方法&#x3D;类 
 面向过程思想
 步骤清晰简单，第一步做什么，第二部做什么….
@@ -276,561 +317,48 @@
 面向对象适合处理复杂的问题
 
 
-对于描述复杂的事务，为了从宏...
-                    
-                </div>
+对于描述复杂的事务，为了从宏观上把握，从整体上合理分析，我们需要使用面向对象的思想来分析整个系统。但是，具体到微观操作，仍然需要面向过程的思想。
+面向对象编程的本质：以类的方式组织代码，以对象的组织（封装）数据。
+三大特性：封装、继承、多态
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 20 2021 21:54:18 GMT+0800">2021-07-20</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
+02 回顾方法
+当一个类调用静态方法时，调用形式：类名+方法名
 
-    <a href="/2021/07/20/java%20day12%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day13%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
-                        机器学习 day13无监督学习
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 无监督学习
+12345678910public class Student &#123;    public static void say() &#123;        System.out.println(&quot;hello&quot;);    &#125;&#125;public class Hello &#123;    public static void main(String[] args) &#123;        Student.say();&#1 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info"><a class="article-title" href="/2021/07/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day13%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" title="机器学习 day13无监督学习">机器学习 day13无监督学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-07-20T08:31:47.000Z" title="Created 2021-07-20 16:31:47">2021-07-20</time></span></div><div class="content">01 无监督学习
 无监督学习：训练集没有标签，也就是图上的点没有任何标签信息。我们要将这系列无标签的数据，输入到算法中，然后我们要让算法找到一些隐含在数据中的结构，这个图中数据集中的点两组分开的簇，这种能够找到这些簇的算法叫做聚类算法。
 
 
-02 K...
-                    
-                </div>
+02 K-Means算法K均值算法是现在最为广泛运用的聚类算法
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Tue Jul 20 2021 16:31:47 GMT+0800">2021-07-20</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2021/07/20/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day13%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
+通过K均值算法将下图分为两个簇的具体操作：
+随机生成两点（聚类中心），选取两点的原因是想将数据聚成两类。
 
-            </li>
-        
-            <li class="home-article-item">
 
-                
+K均值算法是个迭代算法，可以做两件事：簇分配和移动聚类中心。
+K均值算法每次内循环的第一步是要进行簇分配，观察图中的绿点，是接近哪个聚类中心，距离哪个近就分配给哪个。
 
-                <h3 class="home-article-title">
-                    <a href="/2021/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day12%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">
-                        机器学习 day12支持向量机
-                    </a>
-                </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        01 优化目标支持向量机（SVM）在学习复杂的非线性方程时，能够提供一种更为清晰和更加强大的方式。
 
+根据离红色或者蓝色聚类中心的远近，将每个点染成红色或者蓝色。
 
-从逻辑回归开始，稍作改动成为支持向量机
-观察下逻辑回归的假设函数和sigmoid激活函数
 
 
+K均值算法每次内循环的第二步是移动聚类中心，将两个聚类中心移动到同色点的均值处。
 
 
 
-观察逻辑回归的代价函数，当把整个假设函数的定义...
-                    
-                </div>
+接着我们进入下一个簇分配步骤：再次检查所有的无标签样本，然后根据这些点离红色或者蓝色聚类中心的远近，将其染成红色或者蓝色。
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Jul 19 2021 19:00:32 GMT+0800">2021-07-19</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2021/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day12%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
 
-            </li>
-        
-            <li class="home-article-item">
+再一次移动聚类中心，将两个聚类中心移动到同色点的均值处。
 
-                
 
-                <h3 class="home-article-title">
-                    <a href="/2021/07/18/java%20day11%20%E6%95%B0%E7%BB%84/">
-                        java day11 稀疏数组
-                    </a>
-                </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        稀疏数组1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465...
-                    
-                </div>
+以此类推，不断重复上面操作，得到最终结果。
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 18 2021 23:39:09 GMT+0800">2021-07-18</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
 
-    <a href="/2021/07/18/java%20day11%20%E6%95%B0%E7%BB%84/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
 
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day11%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
-                        机器学习 day11机器学习系统设计
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 确定执行的优先级在实际工作过程中，我们应该优先处理哪些事情
-
-
-以邮件筛选为例，选择邮件的特征向量的方法。通常我们会挑选出在训练集中出现频率最多的n个单词，将其作为特征向量。
-
-
-
-如何在有限时间里让垃圾邮件分类器具有高精准度和低错误率。
-用更...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Jul 18 2021 16:07:04 GMT+0800">2021-07-18</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/18/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day11%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/17/java%20day10%20%E6%95%B0%E7%BB%84/">
-                        java day10 冒泡排序
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 冒泡排序冒泡排序：两层循环，外层冒泡轮数，里层依次比较。
-12345678910111213141516171819202122232425public class Hello &#123;    public static void main...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jul 17 2021 23:00:12 GMT+0800">2021-07-17</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/17/java%20day10%20%E6%95%B0%E7%BB%84/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day10%E5%BA%94%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BB%BA%E8%AE%AE/">
-                        机器学习 day10应用机器学习的建议
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 决定下一步做什么
-开发一个机器学习系统，或者想试着改进一个机器学习系统的性能，应如何决定选择哪条路。不要随意选择。
-
-
-
-机器学习诊断法能够提前发现某些方法是无效的。
-
-
-02 评估假设
-将所有数据分为训练集和测试集，最经典的分割方法就是按照7...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Jul 17 2021 16:50:51 GMT+0800">2021-07-17</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/17/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20day10%E5%BA%94%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BB%BA%E8%AE%AE/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/16/java%20day09%20%E6%95%B0%E7%BB%84/">
-                        java day09 数组
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        01 数组的使用
-配合for循环使用
-
-12345678910111213141516171819202122232425public class Hello &#123;    public static void main(String[] ar...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Jul 16 2021 22:32:13 GMT+0800">2021-07-16</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/16/java%20day09%20%E6%95%B0%E7%BB%84/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-    </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
-    
-        <a class="prev btn"
-           href="/page/27/"
-        >Prev</a>
-    
-
-    
-        <a class="next btn"
-           href="/page/29/"
-        >Next</a>
-    
-</div>
-
-    </div>
-</div>
-
-
-                
-            </div>
-
-        </div>
-
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2021</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
-        </div>
-        
-        
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    
-
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="arrow-up fas fa-arrow-up"></i>
-                <span class="percent"></span>
-            </li>
-        
-    </ul>
-</div>
-
-    </div>
-
-    
-
-    <div class="image-viewer-container">
-    <img src="">
-</div>
-
-
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-</main>
-
-
-
-
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
-
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
-
-
-<div class="post-scripts pjax">
-    
-</div>
-
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        window.pjax = new Pjax({
-            selectors: [
-                'head title',
-                '.page-container',
-                '.pjax'
-            ],
-            history: true,
-            debug: false,
-            cacheBust: false,
-            timeout: 0,
-            analytics: false,
-            currentUrlFullReload: false,
-            scrollRestoration: false,
-            // scrollTo: true,
-        });
-
-        document.addEventListener('pjax:send', () => {
-            KEEP.utils.pjaxProgressBarStart();
-        });
-
-        document.addEventListener('pjax:complete', () => {
-            KEEP.utils.pjaxProgressBarEnd();
-            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
-            KEEP.refresh();
-        });
-    });
-</script>
-
-
-
-</body>
-</html>
+X^( ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/27/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/27/#content-inner">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/#content-inner">29</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/#content-inner">31</a><a class="extend next" rel="next" href="/page/29/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">307</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之小进阶"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/" title="Redis之小进阶">Redis之小进阶</a><time datetime="2022-07-31T06:56:48.000Z" title="Created 2022-07-31 14:56:48">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之Java"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8BJava/" title="Redis之Java">Redis之Java</a><time datetime="2022-07-31T06:47:34.000Z" title="Created 2022-07-31 14:47:34">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之事务"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%8B%E5%8A%A1/" title="Redis之事务">Redis之事务</a><time datetime="2022-07-31T06:46:19.000Z" title="Created 2022-07-31 14:46:19">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之三种特殊数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%B8%89%E7%A7%8D%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之三种特殊数据类型">Redis之三种特殊数据类型</a><time datetime="2022-07-31T06:40:15.000Z" title="Created 2022-07-31 14:40:15">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis之五大数据类型"/></a><div class="content"><a class="title" href="/2022/07/31/Redis%E4%B9%8B%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis之五大数据类型">Redis之五大数据类型</a><time datetime="2022-07-31T06:25:38.000Z" title="Created 2022-07-31 14:25:38">2022-07-31</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Ajaxj/" style="font-size: 1.1em; color: #999">Ajaxj</a> <a href="/tags/Anylogic/" style="font-size: 1.25em; color: #999fa8">Anylogic</a> <a href="/tags/Controller/" style="font-size: 1.1em; color: #999">Controller</a> <a href="/tags/ElasticSearch/" style="font-size: 1.22em; color: #999ea5">ElasticSearch</a> <a href="/tags/JavaWeb/" style="font-size: 1.38em; color: #99a4b3">JavaWeb</a> <a href="/tags/Java%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 1.13em; color: #999a9c">Java中间件</a> <a href="/tags/Linux/" style="font-size: 1.19em; color: #999da2">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 1.47em; color: #99a8bc">Mybatis</a> <a href="/tags/MybatisPlus/" style="font-size: 1.28em; color: #99a0ab">MybatisPlus</a> <a href="/tags/Redis/" style="font-size: 1.22em; color: #999ea5">Redis</a> <a href="/tags/Servlet/" style="font-size: 1.1em; color: #999">Servlet</a> <a href="/tags/Spring/" style="font-size: 1.28em; color: #99a0ab">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 1.5em; color: #99a9bf">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 1.25em; color: #999fa8">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 1.32em; color: #99a2ad">SpringMVC</a> <a href="/tags/Vue/" style="font-size: 1.32em; color: #99a2ad">Vue</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 1.41em; color: #99a5b6">java基础</a> <a href="/tags/leetcode/" style="font-size: 1.19em; color: #999da2">leetcode</a> <a href="/tags/%E4%B9%B1%E4%B8%83%E5%85%AB%E7%B3%9F/" style="font-size: 1.1em; color: #999">乱七八糟</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 1.16em; color: #999b9f">反射</a> <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/" style="font-size: 1.25em; color: #999fa8">完整项目</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.44em; color: #99a7b9">机器学习</a> <a href="/tags/%E6%B3%A8%E8%A7%A3/" style="font-size: 1.19em; color: #999da2">注解</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.35em; color: #99a3b0">深度学习</a> <a href="/tags/%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">遇到的问题</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1.16em; color: #999b9f">面试题</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">July 2022</span><span class="card-archive-list-count">38</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">June 2022</span><span class="card-archive-list-count">103</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">72</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">30</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">August 2021</span><span class="card-archive-list-count">15</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">307</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-08-03T07:47:31.159Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
