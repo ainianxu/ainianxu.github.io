@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Docker之Swarm及其他命令 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Docker之Swarm及其他命令</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-17 16:49:27</span>
+        <span class="mobile">2022-08-17 16:49</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><p>集群 </p>
+<h3 id="购买服务器"><a href="#购买服务器" class="headerlink" title="购买服务器"></a>购买服务器</h3><blockquote>
+<p>4台服务器 2G！</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/7tiOPBIpUxW8Twy.png"
+                      alt="image-20220817165601442"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/fE59Rn41dyxCake.png"
+                      alt="image-20220817165621757"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/mZIPF4nQ6RV8eUj.png"
+                      alt="image-20220817165638971"
+                ></p>
+<p>到此，服务器购买完毕！1主，3从！</p>
+<h3 id="四台机器安装docker"><a href="#四台机器安装docker" class="headerlink" title="四台机器安装docker"></a>四台机器安装docker</h3><p>和我们单机安装一样</p>
+<p>技巧： xshell直接同步操作，省时间！</p>
+<h3 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/kLOlJdh5q2ND3Um.png"
+                      alt="image-20220817170629718"
+                ></p>
+<h3 id="搭建集群"><a href="#搭建集群" class="headerlink" title="搭建集群"></a>搭建集群</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/CG86e2KDk5Ppw79.png"
+                      alt="image-20220817170905170"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/7oDizhgsUVAyupj.png"
+                      alt="image-20220817170926065"
+                ></p>
+<p>私网、公网！ 172.24.82.149 用自己的！</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/A18FtI3KpfmjTPk.png"
+                      alt="image-20220817170951779"
+                ></p>
+<p>初始化结点<code>docker swarm init</code></p>
+<p>docker swarm join 加入一个结点！</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 获取令牌</span></span><br><span class="line">docker swarm <span class="keyword">join</span>-token manager</span><br><span class="line">docker swarm <span class="keyword">join</span>-token worker</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2ze58v8acnlxsnjoulk6Z ~]<span class="comment"># docker swarm join --token SWMTKN-1-3vovnwb5pkkno2i3u2a42yrxc1dk51zxvto5hrm4asgn37syfn-0xkrprkuyyhrx7cidg381pdir 172.16.250.97:2377</span></span><br><span class="line">This node joined a swarm as a worker.</span><br></pre></td></tr></table></figure>
+
+<p>把后面的结点都搭建进去</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/EG3Un2TcYVRArlL.png"
+                      alt="image-20220817171243652"
+                ></p>
+<p>100台！</p>
+<ol>
+<li>生成主节点init</li>
+<li>加入（管理者，worker）</li>
+</ol>
+<h3 id="Raft协议"><a href="#Raft协议" class="headerlink" title="Raft协议"></a>Raft协议</h3><p>双主双从：假设一个结点挂了！其他结点是否可以用！</p>
+<p>Raft协议：保证大多数结点存活才可以使用，只要&gt;1, 集群至少大于3台！</p>
+<p>实验：</p>
+<p>1、将docker1机器停止。宕机！双主，另外一个结点也不能使用了！</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/PvALn6fJTWldIBz.png"
+                      alt="image-20220817171724722"
+                ></p>
+<p>2、可以将其他节点离开docker swarm leave</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/TleLVoPdN7qjQDs.png"
+                      alt="image-20220817171749004"
+                ></p>
+<p>3、worker就是工作的，管理结点操作！ 3台结点设置为了管理结点。</p>
+<p>十分简单：集群，可用！ 3个主节点。 &gt; 1台管理结点存活！</p>
+<p>Raft协议：保证大多数结点存活，才可以使用，高可用！</p>
+<h3 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h3><p>弹性、扩缩容！集群！</p>
+<p>以后告别 docker run！</p>
+<p>docker-compose up！启动一个项目。单机！</p>
+<p>集群： swarm <code>docker-service</code></p>
+<p>k8s service</p>
+<p>容器 &#x3D;&gt; 服务！</p>
+<p>容器 &#x3D;&gt; 服务！ &#x3D;&gt; 副本！</p>
+<p>redis &#x3D;&gt; 10个副本！（同时开启10个redis容器）</p>
+<p>体验：创建服务、动态扩容服务、动态更新服务</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/NAwv5EFGQa1lcLb.png"
+                      alt="image-20220817172059318"
+                ></p>
+<p>灰度发布：金丝雀发布！</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/1CjAbmxeBFo3ckQ.png"
+                      alt="image-20220817172658036"
+                ></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker run 容器启动！ 不具有扩缩容器</span><br><span class="line">docker service 服务！ 具有扩缩容器，滚动更新！</span><br></pre></td></tr></table></figure>
+
+<p>查看服务 REPLICAS</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/2et8G9qK1VbOPWY.png"
+                      alt="image-20220817172758195"
+                ></p>
+<p>动态扩缩容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker service update --replicas 3 my-nginx</span></span><br><span class="line">1/3: running   [==================================================&gt;] </span><br><span class="line">1/3: running   [==================================================&gt;] </span><br><span class="line">2/3: running   [==================================================&gt;] </span><br><span class="line">3/3: running   [==================================================&gt;] </span><br><span class="line">verify: Service converged </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker service scale my-nginx=5</span></span><br><span class="line">my-nginx scaled to 5</span><br><span class="line">overall progress: 3 out of 5 tasks </span><br><span class="line">overall progress: 3 out of 5 tasks </span><br><span class="line">overall progress: 3 out of 5 tasks </span><br><span class="line">overall progress: 5 out of 5 tasks </span><br><span class="line">1/5: running   [==================================================&gt;] </span><br><span class="line">2/5: running   [==================================================&gt;] </span><br><span class="line">3/5: running   [==================================================&gt;] </span><br><span class="line">4/5: running   [==================================================&gt;] </span><br><span class="line">5/5: running   [==================================================&gt;] </span><br><span class="line">verify: Service converged </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker service scale my-nginx=1</span></span><br><span class="line">my-nginx scaled to 1</span><br><span class="line">overall progress: 1 out of 1 tasks </span><br><span class="line">1/1: running   [==================================================&gt;] </span><br><span class="line">verify: Service converged </span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>服务，集群中任意的节点都可以访问。服务可以有多个副本动态扩缩容实现高可用！ </p>
+<p>弹性、扩缩容！ 10台！ 10000台！ 卖给别人！ 虚拟化！ </p>
+<p>服务的高可用，任何企业，云！</p>
+<h3 id="概念的总结"><a href="#概念的总结" class="headerlink" title="概念的总结"></a>概念的总结</h3><p><strong>swarm</strong></p>
+<p>集群的管理和编号，docker可以初始化一个swarm集群，其他结点可以加入。（管理，工作者）</p>
+<p><strong>Node</strong></p>
+<p>就是一个docker结点，多个结点就组成了一个网络集群（管理、工作者）</p>
+<p><strong>Service</strong></p>
+<p>任务，可以在管理结点或者工作结点来运行。核心，用户访问。</p>
+<p><strong>Task</strong></p>
+<p>容器内的命令、细节任务！</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/vR4fDtx325yShrZ.png"
+                      alt="image-20220817173955349"
+                ></p>
+<p>逻辑是不变的。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/CRihD43Kkmx1ABH.png"
+                      alt="image-20220817174214252"
+                > </p>
+<p>命令 -&gt; 管理 -&gt; api -&gt; 调度 -&gt; 工作节点（创建Task容器维护创建！）</p>
+<blockquote>
+<p>服务副本与全局服务</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/Jjq2gwKEh64MmGu.png"
+                      alt="image-20220817175131757"
+                ></p>
+<p>调整service以什么方式运行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--mode string                        </span></span><br><span class="line">Service mode (replicated <span class="keyword">or</span> <span class="keyword">global</span>) (<span class="keyword">default</span> &quot;replicated&quot;)</span><br><span class="line"></span><br><span class="line">docker service <span class="keyword">create</span> <span class="comment">--mode replicated --name mytom tomcat:7 默认的</span></span><br><span class="line"></span><br><span class="line">docker service <span class="keyword">create</span> <span class="comment">--mode global  --name haha alpine ping www.baidu.com</span></span><br></pre></td></tr></table></figure>
+
+<p>拓展： 网络模式 “PublishMode”:”ingress”</p>
+<p>Swarm:</p>
+<p>Overlay:</p>
+<p>ingress:特殊的Overlay网络！负载均衡的功能！ipvs vip！</p>
+<p>虽然docker在4台机器上，实际网络是同一个！ ingress 网络 ，是一个特殊的 Overlay 网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker network ls</span></span><br><span class="line">NETWORK ID          NAME                DRIVER              SCOPE</span><br><span class="line">74cecd37149f        bridge              bridge              <span class="built_in">local</span></span><br><span class="line">168d35c86dd5        docker_gwbridge     bridge              <span class="built_in">local</span></span><br><span class="line">2b8f4eb9c2e5        host                host                <span class="built_in">local</span></span><br><span class="line">dmddfc14n7r3        ingress             overlay             swarm</span><br><span class="line">8e0f5f648e69        none                null                <span class="built_in">local</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker network inspect ingress</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;ingress&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Id&quot;</span>: <span class="string">&quot;dmddfc14n7r3vms5vgw0k5eay&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Created&quot;</span>: <span class="string">&quot;2020-08-17T10:29:07.002315919+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;swarm&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;overlay&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EnableIPv6&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;IPAM&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Options&quot;</span>: null,</span><br><span class="line">            <span class="string">&quot;Config&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;Subnet&quot;</span>: <span class="string">&quot;10.0.0.0/24&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;Gateway&quot;</span>: <span class="string">&quot;10.0.0.1&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Internal&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Attachable&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Ingress&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;ConfigFrom&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Network&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;ConfigOnly&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Containers&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;ingress-sbox&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;ingress-endpoint&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;9d6ec47ec8309eb209f4ff714fbe728abe9d88f9f1cc7e96e9da5ebd95adb1c4&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:0a:00:00:02&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;10.0.0.2/24&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;com.docker.network.driver.overlay.vxlanid_list&quot;</span>: <span class="string">&quot;4096&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="string">&quot;Peers&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;cea454a89163&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IP&quot;</span>: <span class="string">&quot;172.16.250.96&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;899a05b64e09&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IP&quot;</span>: <span class="string">&quot;172.16.250.99&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;81d65a0e8c03&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IP&quot;</span>: <span class="string">&quot;172.16.250.97&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;36b31096f7e2&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IP&quot;</span>: <span class="string">&quot;172.16.250.98&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他命令学习方式"><a href="#其他命令学习方式" class="headerlink" title="其他命令学习方式"></a>其他命令学习方式</h2><h3 id="Docker-Stack"><a href="#Docker-Stack" class="headerlink" title="Docker Stack"></a>Docker Stack</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker-compose 单机部署项目</span><br><span class="line">docker stack 集群部署</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 单机</span></span><br><span class="line">docker-compose up -d wordpress.yaml</span><br><span class="line"><span class="comment"># 集群</span></span><br><span class="line">docker stack deploy wordpress.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-Secret"><a href="#Docker-Secret" class="headerlink" title="Docker Secret"></a>Docker Secret</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">安全！配置密码！证书！</span><br><span class="line"> </span><br><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker secret --help</span></span><br><span class="line"> </span><br><span class="line">Usage:  docker secret COMMAND</span><br><span class="line"> </span><br><span class="line">Manage Docker secrets</span><br><span class="line"> </span><br><span class="line">Commands:</span><br><span class="line">  create      Create a secret from a file or STDIN as content</span><br><span class="line">  inspect     Display detailed information on one or more secrets</span><br><span class="line">  <span class="built_in">ls</span>          List secrets</span><br><span class="line">  <span class="built_in">rm</span>          Remove one or more secrets</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-Config"><a href="#Docker-Config" class="headerlink" title="Docker Config"></a>Docker Config</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">配置！</span><br><span class="line">[root@iZ2ze58v8acnlxsnjoulk5Z ~]<span class="comment"># docker config --help</span></span><br><span class="line"> </span><br><span class="line">Usage:  docker config COMMAND</span><br><span class="line"> </span><br><span class="line">Manage Docker configs</span><br><span class="line"> </span><br><span class="line">Commands:</span><br><span class="line">  create      Create a config from a file or STDIN</span><br><span class="line">  inspect     Display detailed information on one or more configs</span><br><span class="line">  <span class="built_in">ls</span>          List configs</span><br><span class="line">  <span class="built_in">rm</span>          Remove one or more configs</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Docker之Swarm及其他命令</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-17 16:49:27</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/17/Docker之Swarm及其他命令/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/17/Docker%E4%B9%8BCompose/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之Compose</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-Swarm"><span class="nav-number">1.</span> <span class="nav-text">Docker Swarm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">购买服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%8F%B0%E6%9C%BA%E5%99%A8%E5%AE%89%E8%A3%85docker"><span class="nav-number">1.2.</span> <span class="nav-text">四台机器安装docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">1.4.</span> <span class="nav-text">搭建集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raft%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.5.</span> <span class="nav-text">Raft协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%93%E4%BC%9A"><span class="nav-number">1.6.</span> <span class="nav-text">体会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E7%9A%84%E6%80%BB%E7%BB%93"><span class="nav-number">1.7.</span> <span class="nav-text">概念的总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">其他命令学习方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Stack"><span class="nav-number">2.1.</span> <span class="nav-text">Docker Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Secret"><span class="nav-number">2.2.</span> <span class="nav-text">Docker Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Config"><span class="nav-number">2.3.</span> <span class="nav-text">Docker Config</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

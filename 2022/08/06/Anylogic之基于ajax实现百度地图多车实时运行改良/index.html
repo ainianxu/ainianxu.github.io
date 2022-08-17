@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Anylogic之基于ajax实现百度地图多车实时运行改良 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Anylogic之基于ajax实现百度地图多车实时运行改良</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-06 11:09:30</span>
+        <span class="mobile">2022-08-06 11:09</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Anylogic/">Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>改良后：使用一个数据库存两个车的数据，将公共代码封装成一个函数进行调用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;initial-scale=1.0, user-scalable=no&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-id">#allmap</span> &#123;</span></span><br><span class="line"><span class="language-css">          <span class="attribute">height</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">          <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-class">.input-card</span> <span class="selector-class">.btn</span>&#123;</span></span><br><span class="line"><span class="language-css">          <span class="attribute">margin-right</span>: <span class="number">1.2rem</span>;</span></span><br><span class="line"><span class="language-css">          <span class="attribute">width</span>: <span class="number">9rem</span>;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">      <span class="selector-class">.input-card</span> <span class="selector-class">.btn</span><span class="selector-pseudo">:last-child</span>&#123;</span></span><br><span class="line"><span class="language-css">          <span class="attribute">margin-right</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">      &#125;</span></span><br><span class="line"><span class="language-css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://api.map.baidu.com/api?v=2.0&amp;ak=GjxdF4HBRYNY0piKp6K7I4U7lOI7Lyor&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>单个标注点沿直线的轨迹运动<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../js/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;allmap&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-card&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h4</span>&gt;</span>轨迹回放控制<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-item&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;速度x2&quot;</span> <span class="attr">id</span>=<span class="string">&quot;start&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;startAnimation()&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;速度÷2&quot;</span> <span class="attr">id</span>=<span class="string">&quot;pause&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;pauseAnimation()&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-item&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;开始&quot;</span> <span class="attr">id</span>=<span class="string">&quot;resume&quot;</span> <span class="attr">onClick</span>=<span class="string">&quot;getCars()&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;开始&quot;</span> <span class="attr">id</span>=<span class="string">&quot;stop&quot;</span> <span class="attr">onClick</span>=<span class="string">&quot;getCars1()&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 百度地图API功能</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> map=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Map</span>(<span class="string">&quot;allmap&quot;</span>); <span class="comment">// 创建map实例</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">centerAndZoom</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(<span class="number">116.36239048877775</span>, <span class="number">39.938322220559</span>), <span class="number">15</span>);<span class="comment">// 初始化地图,设置中心点坐标和地图级别</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">enableScrollWheelZoom</span>(<span class="literal">true</span>);<span class="comment">//鼠标滚轮缩放</span></span></span><br><span class="line"><span class="language-javascript">    map.<span class="title function_">addControl</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">MapTypeControl</span>()); <span class="comment">//添加切换地图类型附件</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> time =<span class="number">500</span>;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> <span class="title class_">PointArr</span> = []</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> <span class="title class_">PointArr1</span> = []</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> <span class="title class_">PointArrs</span> = &#123;&#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> myIcon=<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Icon</span>(<span class="string">&quot;./car.png&quot;</span>, <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">50</span>, <span class="number">70</span>), &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">offset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">20</span>,<span class="number">20</span>),</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//相当于CSS精灵</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">imageOffset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, <span class="number">0</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//图片的偏移量。为了是图片底部中心对准坐标点。</span></span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> carMks=[<span class="number">1</span>,<span class="number">2</span>];<span class="comment">//设置车辆图标</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//小车行驶图标</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> drivingPoint = myIcon;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//终点图标</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> terminalPoint = myIcon;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">getCars</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">async</span>: <span class="literal">false</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">cache</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&quot;http://localhost/books&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">type</span>: <span class="string">&#x27;post&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">dataType</span>: <span class="string">&#x27;json&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">result</span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; result.<span class="property">length</span>; k++) &#123;</span></span><br><span class="line"><span class="language-javascript">                    staus = result[k].<span class="property">staus</span>;</span></span><br><span class="line"><span class="language-javascript">                    id = result[k].<span class="property">id</span>;</span></span><br><span class="line"><span class="language-javascript">                    lng = result[k].<span class="property">lng</span>;</span></span><br><span class="line"><span class="language-javascript">                    lat = result[k].<span class="property">lat</span>;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title class_">PointArrs</span> = &#123;staus,id,lng,lat&#125;;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span>(<span class="title class_">PointArrs</span>.<span class="property">id</span> == <span class="string">&#x27;car1&#x27;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title class_">PointArr</span>.<span class="title function_">push</span>(<span class="title class_">PointArrs</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="title class_">PointArrs</span>.<span class="property">id</span> == <span class="string">&#x27;car2&#x27;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title class_">PointArr1</span>.<span class="title function_">push</span>(<span class="title class_">PointArrs</span>);</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">error</span>:<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;获取物资信息失败&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> i = <span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">startAnimation</span> () &#123;</span></span><br><span class="line"><span class="language-javascript">        time = time/<span class="number">2</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">pauseAnimation</span> () &#123;</span></span><br><span class="line"><span class="language-javascript">        time = time*<span class="number">2</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> interval = <span class="built_in">setInterval</span>(fn, time);</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">clearInterval</span>(interval);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">drawLine</span>(map,<span class="title class_">PointArr</span>[i],<span class="title class_">PointArr</span>[i+<span class="number">1</span>]);<span class="comment">//画线调用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">drawLine</span>(map,<span class="title class_">PointArr1</span>[i],<span class="title class_">PointArr1</span>[i+<span class="number">1</span>]);<span class="comment">//画线调用</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        i = i + <span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (time &gt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            interval = <span class="built_in">setInterval</span>(fn, time);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 划线</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">drawLine</span>(<span class="params">map,pointArr,pointArrNext</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (pointArrNext != <span class="literal">undefined</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (pointArr.<span class="property">id</span> == <span class="string">&quot;car1&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title function_">addpl</span>(<span class="number">1</span>);</span></span><br><span class="line"><span class="language-javascript">               &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pointArr.<span class="property">id</span> == <span class="string">&quot;car2&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">addpl</span>(<span class="number">2</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">addpl</span>(<span class="params">y1</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> y1 = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Polyline</span>(</span></span><br><span class="line"><span class="language-javascript">                [</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(pointArr.<span class="property">lng</span>, pointArr.<span class="property">lat</span>),</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(pointArrNext.<span class="property">lng</span>, pointArrNext.<span class="property">lat</span>)</span></span><br><span class="line"><span class="language-javascript">                ],</span></span><br><span class="line"><span class="language-javascript">                &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">strokeColor</span>: <span class="string">&quot;red&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">strokeWeight</span>: <span class="number">7</span>,</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">strokeOpacity</span>: <span class="number">1</span></span></span><br><span class="line"><span class="language-javascript">                &#125;);   <span class="comment">//创建折线</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            map.<span class="title function_">addOverlay</span>(y1);<span class="comment">//将折线添加到地图上</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">addMarkerEnd</span>(<span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(pointArrNext.<span class="property">lng</span>, pointArrNext.<span class="property">lat</span>), pointArrNext.<span class="property">staus</span>, map, pointArrNext, <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Point</span>(pointArr.<span class="property">lng</span>, pointArr.<span class="property">lat</span>), y1);<span class="comment">//添加图标</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">addMarkerEnd</span>(<span class="params">point, name,mapInit,trackUnit,prePoint,p</span>) &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (trackUnit.<span class="property">id</span> == <span class="string">&quot;car1&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (name == <span class="string">&quot;200&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">              <span class="title function_">car</span>(<span class="number">1</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">cardl</span>(<span class="number">1</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (trackUnit.<span class="property">id</span> == <span class="string">&quot;car2&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (name == <span class="string">&quot;200&quot;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">               <span class="title function_">car</span>(<span class="number">2</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">cardl</span>(<span class="number">2</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">car</span>(<span class="params">x1</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (carMks[x1]) &#123;<span class="comment">//先判断第一次进来的时候这个值有没有定义，有的话就清除掉上一次的。然后在进行画图标。第一次进来时候没有定义也就不走这块，直接进行画图标</span></span></span><br><span class="line"><span class="language-javascript">                mapInit.<span class="title function_">removeOverlay</span>(carMks[x1]);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            carMks[x1] = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Marker</span>(point, &#123;<span class="attr">icon</span>: terminalPoint&#125;);  <span class="comment">// 创建标注</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">getCarAngle</span>(point, prePoint);<span class="comment">// js求解两点之间的角度</span></span></span><br><span class="line"><span class="language-javascript">            carMks[x1].<span class="title function_">setRotation</span>(<span class="title function_">getCarAngle</span>(point, prePoint) - <span class="number">90</span>);<span class="comment">// 旋转的角度</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> label = <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Label</span>(trackUnit.<span class="property">id</span>, &#123;<span class="attr">offset</span>: <span class="keyword">new</span> <span class="title class_">BMap</span>.<span class="title class_">Size</span>(<span class="number">0</span>, -<span class="number">30</span>)&#125;);</span></span><br><span class="line"><span class="language-javascript">            label.<span class="title function_">setStyle</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">border</span>: <span class="string">&quot;1px solid rgb(204, 204, 204)&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">color</span>: <span class="string">&quot;rgb(0, 0, 0)&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">borderRadius</span>: <span class="string">&quot;10px&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">padding</span>: <span class="string">&quot;5px&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">background</span>: <span class="string">&quot;rgb(255, 255, 255)&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">            &#125;);</span></span><br><span class="line"><span class="language-javascript">            carMks[x1].<span class="title function_">setLabel</span>(label);</span></span><br><span class="line"><span class="language-javascript">            mapInit.<span class="title function_">addOverlay</span>(carMks[x1]);               <span class="comment">// 将标注添加到地图中</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//小车运行完删除折线</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">cardl</span>(<span class="params">x1</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            mapInit.<span class="title function_">removeOverlay</span>(carMks[x1]);</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> allOverlay = map.<span class="title function_">getOverlays</span>();</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allOverlay.<span class="property">length</span>; i++)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span>(allOverlay[i].<span class="title function_">toString</span>().<span class="title function_">indexOf</span>(<span class="string">&quot;Polyline&quot;</span>) &gt; <span class="number">0</span>)</span></span><br><span class="line"><span class="language-javascript">                &#123;<span class="comment">//删除折线</span></span></span><br><span class="line"><span class="language-javascript">                    map.<span class="title function_">removeOverlay</span>(allOverlay[i]);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//获得角度的函数</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">function</span> <span class="title function_">getCarAngle</span>(<span class="params">n, next</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> ret</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> w1 = n.<span class="property">lat</span> / <span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> j1 = n.<span class="property">lng</span> / <span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> w2 = next.<span class="property">lat</span> / <span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> j2 = next.<span class="property">lng</span> / <span class="number">180</span> * <span class="title class_">Math</span>.<span class="property">PI</span></span></span><br><span class="line"><span class="language-javascript">            ret = <span class="number">4</span> * <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="title class_">Math</span>.<span class="title function_">sin</span>((w1 - w2) / <span class="number">2</span>), <span class="number">2</span>) - <span class="title class_">Math</span>.<span class="title function_">pow</span>(<span class="title class_">Math</span>.<span class="title function_">sin</span>((j1 - j2) / <span class="number">2</span>) * (<span class="title class_">Math</span>.<span class="title function_">cos</span>(w1) - <span class="title class_">Math</span>.<span class="title function_">cos</span>(w2)), <span class="number">2</span>);</span></span><br><span class="line"><span class="language-javascript">            ret = <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(ret);</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// var temp = Math.sin(Math.abs(j1 - j2) / 2) * (Math.cos(w1) + Math.cos(w2));</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> temp = <span class="title class_">Math</span>.<span class="title function_">sin</span>((j1 - j2) / <span class="number">2</span>) * (<span class="title class_">Math</span>.<span class="title function_">cos</span>(w1) + <span class="title class_">Math</span>.<span class="title function_">cos</span>(w2));</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//console.log(temp)</span></span></span><br><span class="line"><span class="language-javascript">            ret = ret / temp;</span></span><br><span class="line"><span class="language-javascript">            ret = <span class="title class_">Math</span>.<span class="title function_">atan</span>(ret) / <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">180</span>;</span></span><br><span class="line"><span class="language-javascript">            ret += <span class="number">90</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// 这里用如此臃肿的if..else是为了判定追踪单个点的具体情况,从而调整ret的值</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (j1 - j2 &lt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span> (w1 - w2 &lt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    ret;</span></span><br><span class="line"><span class="language-javascript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    ret = -ret + <span class="number">180</span>;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span> (w1 - w2 &lt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    ret = <span class="number">180</span> + ret;</span></span><br><span class="line"><span class="language-javascript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    ret = -ret;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> ret;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Anylogic之基于ajax实现百度地图多车实时运行改良</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-06 11:09:30</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/06/Anylogic之基于ajax实现百度地图多车实时运行改良/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Anylogic/">#Anylogic</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/16/Docker%E4%B9%8B%E6%A6%82%E8%BF%B0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之概述</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/06/Anylogic%E4%B9%8B%E5%9F%BA%E4%BA%8Eajax%E5%AE%9E%E7%8E%B0%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%A4%9A%E8%BD%A6%E5%AE%9E%E6%97%B6%E8%BF%90%E8%A1%8C/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Anylogic之基于ajax实现百度地图多车实时运行</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

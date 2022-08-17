@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            RabbitMQ之RabbitMQ 集群 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RabbitMQ之RabbitMQ 集群</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-05 11:05:26</span>
+        <span class="mobile">2022-08-05 11:05</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RabbitMQ/">RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="clustering"><a href="#clustering" class="headerlink" title="clustering"></a>clustering</h2><h3 id="使用集群的原因"><a href="#使用集群的原因" class="headerlink" title="使用集群的原因"></a>使用集群的原因</h3><p>最开始我们介绍了如何安装及运行 RabbitMQ 服务，不过这些是单机版的，无法满足目前真实应用的 要求。如果 RabbitMQ 服务器遇到内存崩溃、机器掉电或者主板故障等情况，该怎么办？单台 RabbitMQ 服务器可以满足每秒 1000 条消息的吞吐量，那么如果应用需要 RabbitMQ 服务满足每秒 10 万条消息的吞吐量呢？购买昂贵的服务器来增强单机 RabbitMQ 务的性能显得捉襟见肘，搭建一个 RabbitMQ 集群才是解决实际问题的关键.</p>
+<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.修改 3 台机器的主机名称</span></span><br><span class="line">vim /etc/hostname</span><br><span class="line"><span class="comment">#2.配置各个节点的 hosts 文件，让各个节点都能互相识别对方</span></span><br><span class="line">vim /etc/hosts</span><br><span class="line">10.211.55.74 node1</span><br><span class="line">10.211.55.75 node2</span><br><span class="line">10.211.55.76 node3</span><br><span class="line"><span class="comment">#3.以确保各个节点的 cookie 文件使用的是同一个值</span></span><br><span class="line"><span class="comment">#在 node1 上执行远程操作命令</span></span><br><span class="line">scp /var/lib/rabbitmq/.erlang.cookie root@node2:/var/lib/rabbitmq/.erlang.cookie</span><br><span class="line">scp /var/lib/rabbitmq/.erlang.cookie root@node3:/var/lib/rabbitmq/.erlang.cookie</span><br><span class="line"><span class="comment">#4.启动 RabbitMQ 服务,顺带启动 Erlang 虚拟机和 RbbitMQ 应用服务(在三台节点上分别执行以</span></span><br><span class="line">下命令)</span><br><span class="line">rabbitmq-server -detached</span><br><span class="line"><span class="comment">#5.在节点 2 执行</span></span><br><span class="line">rabbitmqctl stop_app</span><br><span class="line">(rabbitmqctl stop 会将Erlang 虚拟机关闭，rabbitmqctl stop_app 只关闭 RabbitMQ 服务)</span><br><span class="line">rabbitmqctl reset</span><br><span class="line">rabbitmqctl join_cluster rabbit@node1</span><br><span class="line">rabbitmqctl start_app(只启动应用服务)</span><br><span class="line"><span class="comment">#6.在节点 3 执行</span></span><br><span class="line">rabbitmqctl stop_app</span><br><span class="line">rabbitmqctl reset</span><br><span class="line">rabbitmqctl join_cluster rabbit@node2</span><br><span class="line">rabbitmqctl start_app</span><br><span class="line"><span class="comment">#7.集群状态</span></span><br><span class="line">rabbitmqctl cluster_status</span><br><span class="line"><span class="comment">#8.需要重新设置用户</span></span><br><span class="line">创建账号</span><br><span class="line">rabbitmqctl add_user admin 123</span><br><span class="line">设置用户角色</span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br><span class="line">设置用户权限</span><br><span class="line">rabbitmqctl set_permissions -p <span class="string">&quot;/&quot;</span> admin <span class="string">&quot;.*&quot;</span> <span class="string">&quot;.*&quot;</span> <span class="string">&quot;.*&quot;</span></span><br><span class="line"><span class="comment">#9.解除集群节点(node2 和 node3 机器分别执行)</span></span><br><span class="line">rabbitmqctl stop_app</span><br><span class="line">rabbitmqctl reset</span><br><span class="line">rabbitmqctl start_app</span><br><span class="line">rabbitmqctl cluster_status</span><br><span class="line">rabbitmqctl forget_cluster_node rabbit@node2(node1 机器上执行)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="镜像队列"><a href="#镜像队列" class="headerlink" title="镜像队列"></a>镜像队列</h2><h3 id="使用镜像的原因"><a href="#使用镜像的原因" class="headerlink" title="使用镜像的原因"></a>使用镜像的原因</h3><p>如果 RabbitMQ 集群中只有一个 Broker 节点，那么该节点的失效将导致整体服务的临时性不可用，并 且也可能会导致消息的丢失。可以将所有消息都设置为持久化，并且对应队列的durable属性也设置为true，但 是这样仍然无法避免由于缓存导致的问题：因为消息在发送之后和被写入磁盘井执行刷盘动作之间存在一 个短暂却会产生问题的时间窗。通过 publisherconfirm 机制能够确保客户端知道哪些消息己经存入磁盘，尽管如此，一般不希望遇到因单点故障导致的服务不可用。</p>
+<p>引入镜像队列(Mirror Queue)的机制，可以将队列镜像到集群中的其他 Broker 节点之上，如果集群中 的一个节点失效了，队列能自动地切换到镜像中的另一个节点上以保证服务的可用性。</p>
+<h3 id="搭建步骤-1"><a href="#搭建步骤-1" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.启动三台集群节点</span><br><span class="line">2.随便找一个节点添加 policy</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/dKJm7Ht3YcZyhRS.png"
+                      alt="image-20220805122152075"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.在 node1 上创建一个队列发送一条消息，队列存在镜像队列</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/ksIShW1DoKmBwe2.png"
+                      alt="image-20220805122215902"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.停掉 node1 之后发现 node2 成为镜像队列</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/IqvyFZpUiMPrkbO.png"
+                      alt="image-20220805122240018"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5.就算整个集群只剩下一台机器了 依然能消费队列里面的消息</span><br><span class="line">说明队列里面的消息被镜像队列传递到相应机器里面了</span><br></pre></td></tr></table></figure>
+
+<h2 id="Haproxy-Keepalive-实现高可用负载均衡"><a href="#Haproxy-Keepalive-实现高可用负载均衡" class="headerlink" title="Haproxy+Keepalive 实现高可用负载均衡"></a>Haproxy+Keepalive 实现高可用负载均衡</h2><h3 id="整体架构图"><a href="#整体架构图" class="headerlink" title="整体架构图"></a>整体架构图</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/Xb6SaTsycm5xNOB.png"
+                      alt="image-20220805122324098"
+                ></p>
+<h3 id="Haproxy-实现负载均衡"><a href="#Haproxy-实现负载均衡" class="headerlink" title="Haproxy 实现负载均衡"></a>Haproxy 实现负载均衡</h3><p>HAProxy 提供高可用性、负载均衡及基于TCPHTTP 应用的代理，支持虚拟主机，它是免费、快速并 且可靠的一种解决方案，包括 Twitter,Reddit,StackOverflow,GitHub 在内的多家知名互联网公司在使用。 HAProxy 实现了一种事件驱动、单一进程模型，此模型支持非常大的井发连接数。 扩展 nginx,lvs,haproxy 之间的区别: <a class="link"   target="_blank" rel="noopener" href="http://www.ha97.com/5646.html" >http://www.ha97.com/5646.html<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="搭建步骤-2"><a href="#搭建步骤-2" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.下载 haproxy(在 node1 和 node2)</span></span><br><span class="line">yum -y install haproxy</span><br><span class="line"><span class="comment">#2.修改 node1 和 node2 的 haproxy.cfg</span></span><br><span class="line">vim /etc/haproxy/haproxy.cfg</span><br><span class="line"><span class="comment">#需要修改红色 IP 为当前机器 IP</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/QAtFOnybMxlIgW1.png"
+                      alt="image-20220805122448708"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#3.在两台节点启动 haproxy</span></span><br><span class="line">haproxy -f /etc/haproxy/haproxy.cfg</span><br><span class="line">ps -ef | grep haproxy</span><br><span class="line"><span class="comment">#4.访问地址</span></span><br><span class="line">http://10.211.55.71:8888/stats</span><br></pre></td></tr></table></figure>
+
+<h3 id="Keepalived-实现双机-主备-热备"><a href="#Keepalived-实现双机-主备-热备" class="headerlink" title="Keepalived 实现双机(主备)热备"></a>Keepalived 实现双机(主备)热备</h3><p>试想如果前面配置的 HAProxy 主机突然宕机或者网卡失效，那么虽然 RbbitMQ 集群没有任何故障但是 对于外界的客户端来说所有的连接都会被断开结果将是灾难性的为了确保负载均衡服务的可靠性同样显得 十分重要，这里就要引入 Keepalived 它能够通过自身健康检查、资源接管功能做高可用(双机热备)，实现故障转移.</p>
+<h3 id="搭建步骤-3"><a href="#搭建步骤-3" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.下载 keepalived</span></span><br><span class="line">yum -y install keepalived</span><br><span class="line"><span class="comment">#2.节点 node1 配置文件</span></span><br><span class="line">vim /etc/keepalived/keepalived.conf</span><br><span class="line">把资料里面的 keepalived.conf 修改之后替换</span><br><span class="line"><span class="comment">#3.节点 node2 配置文件</span></span><br><span class="line">需要修改global_defs 的 router_id,如:nodeB</span><br><span class="line">其次要修改 vrrp_instance_VI 中 state 为<span class="string">&quot;BACKUP&quot;</span>；</span><br><span class="line">最后要将priority 设置为小于 100 的值</span><br><span class="line"><span class="comment">#4.添加 haproxy_chk.sh</span></span><br><span class="line">(为了防止 HAProxy 服务挂掉之后 Keepalived 还在正常工作而没有切换到 Backup 上，所以这里需要编写一个脚本来检测 HAProxy 务的状态,当 HAProxy 服务挂掉之后该脚本会自动重启HAProxy 的服务，如果不成功则关闭 Keepalived 服务，这样便可以切换到 Backup 继续工作)</span><br><span class="line">vim /etc/keepalived/haproxy_chk.sh(可以直接上传文件)</span><br><span class="line">修改权限 <span class="built_in">chmod</span> 777 /etc/keepalived/haproxy_chk.sh</span><br><span class="line"><span class="comment">#5.启动 keepalive 命令(node1 和 node2 启动)</span></span><br><span class="line">systemctl start keepalived</span><br><span class="line"><span class="comment">#6. 观察 Keepalived 的日志</span></span><br><span class="line"><span class="built_in">tail</span> -f /var/log/messages -n 200</span><br><span class="line"><span class="comment">#7.观察最新添加的 vip</span></span><br><span class="line">ip add show</span><br><span class="line"><span class="comment">#8. node1 模拟 keepalived 关闭状态</span></span><br><span class="line">systemctl stop keepalived</span><br><span class="line"><span class="comment">#9. 使用 vip 地址来访问 rabbitmq 集群</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Federation-Exchange"><a href="#Federation-Exchange" class="headerlink" title="Federation Exchange"></a>Federation Exchange</h2><h3 id="使用它的原因"><a href="#使用它的原因" class="headerlink" title="使用它的原因"></a>使用它的原因</h3><p>(broker 北京)，(broker 深圳)彼此之间相距甚远，网络延迟是一个不得不面对的问题。有一个在北京 的业务(Client 北京) 需要连接(broker 北京)，向其中的交换器 exchangeA 发送消息，此时的网络延迟很小， (Client 北京)可以迅速将消息发送至 exchangeA 中，就算在开启了 publisherconfirm 机制或者事务机制的情 况下，也可以迅速收到确认信息。此时又有个在深圳的业务(Client 深圳)需要向 exchangeA 发送消息， 那 么(Client 深圳) (broker 北京)之间有很大的网络延迟，(Client 深圳) 将发送消息至 exchangeA 会经历一定 的延迟，尤其是在开启了 publisherconfirm 机制或者事务机制的情况下，(Client 深圳) 会等待很长的延迟 时间来接收(broker 北京)的确认信息，进而必然造成这条发送线程的性能降低，甚至造成一定程度上的阻塞。 </p>
+<p>将业务(Client 深圳)部署到北京的机房可以解决这个问题，但是如果(Client 深圳)调用的另些服务都部 署在深圳，那么又会引发新的时延问题，总不见得将所有业务全部部署在一个机房，那么容灾又何以实现？ 这里 使用 Federation 插件就可以很好地解决这个问题.</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/vcbyZmLQ9B2kzXR.png"
+                      alt="image-20220805122719885"
+                ></p>
+<h3 id="搭建步骤-4"><a href="#搭建步骤-4" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.需要保证每台节点单独运行</span></span><br><span class="line"><span class="comment">#2.在每台机器上开启 federation 相关插件</span></span><br><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_federation</span><br><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_federation_management</span><br><span class="line"><span class="comment">#3.原理图(先运行 consumer 在 node2 创建 fed_exchange)</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/VHW7OA8vxz2ycbB.png"
+                      alt="image-20220805122802792"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.在 downstream(node2)配置 upstream(node1)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/UYKi8GwlPobQRjD.png"
+                      alt="image-20220805122853161"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5.添加 policy</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/3bHGoVhy6rRtnkf.png"
+                      alt="image-20220805122917057"
+                ></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6.成功的前提</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/qPxtiEVRsdKJeUQ.png"
+                      alt="image-20220805122959708"
+                ></p>
+<h2 id="Federation-Queue"><a href="#Federation-Queue" class="headerlink" title="Federation Queue"></a>Federation Queue</h2><h3 id="Federation-Queue-1"><a href="#Federation-Queue-1" class="headerlink" title="Federation Queue"></a>Federation Queue</h3><p>联邦队列可以在多个 Broker 节点(或者集群)之间为单个队列提供均衡负载的功能。一个联邦队列可以 连接一个或者多个上游队列(upstream queue)，并从这些上游队列中获取消息以满足本地消费者消费消息 的需求。</p>
+<h3 id="搭建步骤-5"><a href="#搭建步骤-5" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><blockquote>
+<p>1.原理图</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/UR2TImMiyvc8WdZ.png"
+                      alt="image-20220805123045247"
+                ></p>
+<blockquote>
+<p>2.添加 upstream(同上) </p>
+<p>3.添加 policy</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/mYk32dWwyvFDBqH.png"
+                      alt="image-20220805123112150"
+                ></p>
+<h2 id="Shovel"><a href="#Shovel" class="headerlink" title="Shovel"></a>Shovel</h2><h3 id="使用它的原因-1"><a href="#使用它的原因-1" class="headerlink" title="使用它的原因"></a>使用它的原因</h3><p>Federation 具备的数据转发功能类似，Shovel 够可靠、持续地从一个 Broker 中的队列(作为源端，即 source)拉取数据并转发至另一个 Broker 中的交换器(作为目的端，即 destination)。作为源端的队列和作为 目的端的交换器可以同时位于同一个 Broker，也可以位于不同的 Broker 上。Shovel 可以翻译为”铲子”，是 一种比较形象的比喻，这个”铲子”可以将消息从一方”铲子”另一方。Shovel 行为就像优秀的客户端应用程 序能够负责连接源和目的地、负责消息的读写及负责连接失败问题的处理。</p>
+<p>搭建步骤</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.开启插件(需要的机器都开启)</span></span><br><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_shovel</span><br><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_shovel_management</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2.原理图(在源头发送的消息直接回进入到目的地队列)</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/OgTdWUL3on95esk.png"
+                      alt="image-20220805123233575"
+                ></p>
+<blockquote>
+<p>3.添加 shovel 源和目的地</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/F3Gpu9x5P6TNIMB.png"
+                      alt="image-20220805123254544"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RabbitMQ之RabbitMQ 集群</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-05 11:05:26</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/05/RabbitMQ之RabbitMQ-集群/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/RabbitMQ/">#RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/06/Anylogic%E4%B9%8B%E5%9F%BA%E4%BA%8Eajax%E5%AE%9E%E7%8E%B0%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%E5%A4%9A%E8%BD%A6%E5%AE%9E%E6%97%B6%E8%BF%90%E8%A1%8C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Anylogic之基于ajax实现百度地图多车实时运行</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8BRabbitMQ-%E5%85%B6%E4%BB%96%E7%9F%A5%E8%AF%86%E7%82%B9/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之RabbitMQ 其他知识点</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#clustering"><span class="nav-number">1.</span> <span class="nav-text">clustering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%9B%86%E7%BE%A4%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">使用集群的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.</span> <span class="nav-text">搭建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">镜像队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.1.</span> <span class="nav-text">使用镜像的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">2.2.</span> <span class="nav-text">搭建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Haproxy-Keepalive-%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">3.</span> <span class="nav-text">Haproxy+Keepalive 实现高可用负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text">整体架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Haproxy-%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">Haproxy 实现负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4-2"><span class="nav-number">3.3.</span> <span class="nav-text">搭建步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keepalived-%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%9C%BA-%E4%B8%BB%E5%A4%87-%E7%83%AD%E5%A4%87"><span class="nav-number">3.4.</span> <span class="nav-text">Keepalived 实现双机(主备)热备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4-3"><span class="nav-number">3.5.</span> <span class="nav-text">搭建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Federation-Exchange"><span class="nav-number">4.</span> <span class="nav-text">Federation Exchange</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%83%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">4.1.</span> <span class="nav-text">使用它的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4-4"><span class="nav-number">4.2.</span> <span class="nav-text">搭建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Federation-Queue"><span class="nav-number">5.</span> <span class="nav-text">Federation Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Federation-Queue-1"><span class="nav-number">5.1.</span> <span class="nav-text">Federation Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4-5"><span class="nav-number">5.2.</span> <span class="nav-text">搭建步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shovel"><span class="nav-number">6.</span> <span class="nav-text">Shovel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%83%E7%9A%84%E5%8E%9F%E5%9B%A0-1"><span class="nav-number">6.1.</span> <span class="nav-text">使用它的原因</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

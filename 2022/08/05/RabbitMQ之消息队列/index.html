@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            RabbitMQ之消息队列 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RabbitMQ之消息队列</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-05 10:33:28</span>
+        <span class="mobile">2022-08-05 10:33</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RabbitMQ/">RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>12 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="MQ-的相关概念"><a href="#MQ-的相关概念" class="headerlink" title="MQ 的相关概念"></a>MQ 的相关概念</h2><h3 id="什么是MQ"><a href="#什么是MQ" class="headerlink" title="什么是MQ"></a>什么是MQ</h3><p>MQ(message queue)，从字面意思上看，本质是个队列，FIFO 先入先出，只不过队列中存放的内容是 message 而已，还是一种跨进程的通信机制，用于上下游传递消息。在互联网架构中，MQ 是一种非常常 见的上下游“逻辑解耦+物理解耦”的消息通信服务。使用了 MQ 之后，消息发送上游只需要依赖 MQ，不 用依赖其他服务。</p>
+<h3 id="为什么要用MQ"><a href="#为什么要用MQ" class="headerlink" title="为什么要用MQ"></a>为什么要用MQ</h3><ul>
+<li><strong>流量消峰</strong></li>
+</ul>
+<p>举个例子，如果订单系统最多能处理一万次订单，这个处理能力应付正常时段的下单时绰绰有余，正常时段我们下单一秒后就能返回结果。但是在高峰期，如果有两万次下单操作系统是处理不了的，只能限制订单超过一万后不允许用户下单。使用消息队列做缓冲，我们可以取消这个限制，把一秒内下的订单分散成一段时间来处理，这时有些用户可能在下单十几秒后才能收到下单成功的操作，但是比不能下单的体验要好。</p>
+<ul>
+<li><strong>应用解耦</strong></li>
+</ul>
+<p>以电商应用为例，应用中有订单系统、库存系统、物流系统、支付系统。用户创建订单后，如果耦合 调用库存系统、物流系统、支付系统，任何一个子系统出了故障，都会造成下单操作异常。当转变成基于 消息队列的方式后，系统间调用的问题会减少很多，比如物流系统因为发生故障，需要几分钟来修复。在 这几分钟的时间里，物流系统要处理的内存被缓存在消息队列中，用户的下单操作可以正常完成。当物流 系统恢复后，继续处理订单信息即可，中单用户感受不到物流系统的故障，提升系统的可用性。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/YIVNkdUWa3uxspD.png"
+                      alt="image-20220805103549685"
+                ></p>
+<ul>
+<li><strong>异步处理</strong></li>
+</ul>
+<p>有些服务间调用是异步的，例如 A 调用 B，B 需要花费很长时间执行，但是 A 需要知道 B 什么时候可以执行完。</p>
+<p>以前一般有两种方式，A 过一段时间去调用 B 的查询 api 查询。或者 A 提供一个 callback api， B 执行完之后调用 api 通知 A 服务。这两种方式都不是很优雅。</p>
+<p>使用消息总线，可以很方便解决这个问题， A 调用 B 服务后，只需要监听 B 处理完成的消息，当 B 处理完成后，会发送一条消息给 MQ，MQ 会将此消息转发给 A 服务。这样 A 服务既不用循环调用 B 的查询 api，也不用提供 callback api。同样B 服务也不用 做这些操作。A 服务还能及时的得到异步处理成功的消息。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/NjUdh2yJw9MHRmL.png"
+                      alt="image-20220805103604927"
+                ></p>
+<h3 id="MQ-的分类"><a href="#MQ-的分类" class="headerlink" title="MQ 的分类"></a>MQ 的分类</h3><blockquote>
+<p>ActiveMQ</p>
+</blockquote>
+<p>优点：单机吞吐量万级，时效性 ms 级，可用性高，基于主从架构实现高可用性，消息可靠性较 低的概率丢失数据</p>
+<p>缺点：官方社区现在对 ActiveMQ 5.x 维护越来越少，高吞吐量场景较少使用。</p>
+<blockquote>
+<p>Kafka</p>
+</blockquote>
+<p>大数据的杀手锏，谈到大数据领域内的消息传输，则绕不开 Kafka，这款为<strong>大数据而生</strong>的消息中间件， 以其百万级 TPS 的吞吐量名声大噪，迅速成为大数据领域的宠儿，在数据采集、传输、存储的过程中发挥 着举足轻重的作用。目前已经被 LinkedIn，Uber, Twitter, Netflix 等大公司所采纳。</p>
+<p><strong>优点</strong>：性能卓越，单机写入 TPS 约在百万条&#x2F;秒，最大的优点，就是<strong>吞吐量高</strong>。时效性 ms 级可用性非 常高，kafka 是分布式的，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用,消费者采 用 Pull 方式获取消息, 消息有序, 通过控制能够保证所有消息被消费且仅被消费一次;有优秀的第三方Kafka Web 管理界面 Kafka-Manager；在日志领域比较成熟，被多家公司和多个开源项目使用；功能支持： 功能 较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用</p>
+<p><strong>缺点</strong>：Kafka 单机超过 64 个队列&#x2F;分区，Load 会发生明显的飙高现象，队列越多，load 越高，发送消 息响应时间变长，使用短轮询方式，实时性取决于轮询间隔时间，消费失败不支持重试；支持消息顺序， 但是一台代理宕机后，就会产生消息乱序，<strong>社区更新较慢</strong>；</p>
+<blockquote>
+<p>RocketMQ</p>
+</blockquote>
+<p>RocketMQ 出自阿里巴巴的开源产品，用 Java 语言实现，在设计时参考了 Kafka，并做出了自己的一 些改进。被阿里巴巴广泛应用在订单，交易，充值，流计算，消息推送，日志流式处理，binglog 分发等场 景。</p>
+<p>优点：<strong>单机吞吐量十万级</strong>,可用性非常高，分布式架构，<strong>消息可以做到 0 丢失</strong>,MQ 功能较为完善，还是分 布式的，扩展性好,支<strong>持 10 亿级别的消息堆积</strong>，不会因为堆积导致性能下降,源码是 java 我们可以自己阅 读源码，定制自己公司的 MQ</p>
+<p>缺点：<strong>支持的客户端语言不多</strong>，目前是 java 及 c++，其中 c++不成熟；社区活跃度一般,没有在MQ 核心中去实现 JMS 等接口,有些系统要迁移需要修改大量代码</p>
+<blockquote>
+<p>RabbitMQ</p>
+</blockquote>
+<p>2007 年发布，是一个在AMQP(高级消息队列协议)基础上完成的，可复用的企业消息系统，<strong>是当前最主流的消息中间件之一。</strong></p>
+<p>优点：由于 erlang 语言的高并发特性，性能较好；吞吐量到万级，MQ 功能比较完备,健壮、稳定、易 用、跨平台、支持多种语言 如：Python、Ruby、.NET、Java、JMS、C、PHP、ActionScript、XMPP、STOMP 等，支持 AJAX 文档齐全；开源提供的管理界面非常棒，用起来很好用,社区活跃度高；更新频率相当高</p>
+<p>官网更新：<a class="link"   target="_blank" rel="noopener" href="https://www.rabbitmq.com/news.html" >https://www.rabbitmq.com/news.html(opens new window)<i class="fas fa-external-link-alt"></i></a></p>
+<p>缺点：商业版需要收费,学习成本较高</p>
+<h3 id="MQ-的选择"><a href="#MQ-的选择" class="headerlink" title="MQ 的选择"></a>MQ 的选择</h3><blockquote>
+<p><strong>Kafka</strong></p>
+</blockquote>
+<p>Kafka 主要特点是基于Pull 的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集 和传输，适合产生大量数据的互联网服务的数据收集业务。大型公司建议可以选用，如果有日志采集功能， 肯定是首选 kafka 了。</p>
+<blockquote>
+<p><strong>RocketMQ</strong></p>
+</blockquote>
+<p>天生为<strong>金融互联网</strong>领域而生，对于可靠性要求很高的场景，尤其是电商里面的订单扣款，以及业务削 峰，在大量交易涌入时，后端可能无法及时处理的情况。RoketMQ 在稳定性上可能更值得信赖，这些业务 场景在阿里双 11 已经经历了多次考验，如果你的业务有上述并发场景，建议可以选择 RocketMQ。</p>
+<blockquote>
+<p>RabbitMQ</p>
+</blockquote>
+<p>结合 erlang 语言本身的并发优势，性能好时效性微秒级，社区活跃度也比较高，管理界面用起来十分 方便，如果你的<strong>数据量没有那么大</strong>，中小型公司优先选择功能比较完备的 RabbitMQ。</p>
+<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><h3 id="RabbitMQ-的概念"><a href="#RabbitMQ-的概念" class="headerlink" title="RabbitMQ 的概念"></a>RabbitMQ 的概念</h3><p>RabbitMQ 是一个消息中间件：它接受并转发消息。</p>
+<p>你可以把它当做一个快递站点，当你要发送一个包裹时，你把你的包裹放到快递站，快递员最终会把你的快递送到收件人那里，按照这种逻辑 RabbitMQ 是 一个快递站，一个快递员帮你传递快件。</p>
+<p>RabbitMQ 与快递站的主要区别在于，它不处理快件而是接收， 存储和转发消息数据。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/cGJEUFlWH2Y9Igy.png"
+                      alt="image-20220805104330661"
+                ></p>
+<p>官网：<a class="link"   target="_blank" rel="noopener" href="https://www.rabbitmq.com/#features" >https://www.rabbitmq.com/#features<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="四大核心概念"><a href="#四大核心概念" class="headerlink" title="四大核心概念"></a>四大核心概念</h3><blockquote>
+<p>生产者</p>
+</blockquote>
+<p>产生数据发送消息的程序是生产者</p>
+<blockquote>
+<p>交换机</p>
+</blockquote>
+<p>交换机是 RabbitMQ 非常重要的一个部件，一方面它接收来自生产者的消息，另一方面它将消息 推送到队列中。交换机必须确切知道如何处理它接收到的消息，是将这些消息推送到特定队列还是推 送到多个队列，亦或者是把消息丢弃，这个得有交换机类型决定</p>
+<blockquote>
+<p>队列</p>
+</blockquote>
+<p>队列是 RabbitMQ 内部使用的一种数据结构，尽管消息流经 RabbitMQ 和应用程序，但它们只能存 储在队列中。队列仅受主机的内存和磁盘限制的约束，本质上是一个大的消息缓冲区。许多生产者可 以将消息发送到一个队列，许多消费者可以尝试从一个队列接收数据。这就是我们使用队列的方式</p>
+<blockquote>
+<p>消费者</p>
+</blockquote>
+<p>消费与接收具有相似的含义。消费者大多时候是一个等待接收消息的程序。请注意生产者，消费 者和消息中间件很多时候并不在同一机器上。同一个应用程序既可以是生产者又是可以是消费者。</p>
+<h3 id="RabbitMQ-核心部分"><a href="#RabbitMQ-核心部分" class="headerlink" title="RabbitMQ 核心部分"></a>RabbitMQ 核心部分</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/58ZnqG9jH4PwUJk.png"
+                      alt="image-20220805104537404"
+                ></p>
+<h3 id="各个名词介绍"><a href="#各个名词介绍" class="headerlink" title="各个名词介绍"></a>各个名词介绍</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/I6KvlmGQWuJzNqT.png"
+                      alt="image-20220805104606232"
+                ></p>
+<blockquote>
+<p>Broker</p>
+</blockquote>
+<p>接收和分发消息的应用，RabbitMQ Server 就是 Message Broker</p>
+<blockquote>
+<p>Virtual host</p>
+</blockquote>
+<p>出于多租户和安全因素设计的，把 AMQP 的基本组件划分到一个虚拟的分组中，类似 于网络中的 namespace 概念。当多个不同的用户使用同一个 RabbitMQ server 提供的服务时，可以划分出 多个 vhost，每个用户在自己的 vhost 创建 exchange／queue 等</p>
+<blockquote>
+<p>Connection</p>
+</blockquote>
+<p>publisher／consumer 和 broker 之间的 TCP 连接</p>
+<blockquote>
+<p>Channel</p>
+</blockquote>
+<p>如果每一次访问 RabbitMQ 都建立一个 Connection，在消息量大的时候建立 TCP Connection 的开销将是巨大的，效率也较低。Channel 是在 connection 内部建立的逻辑连接，如果应用程 序支持多线程，通常每个 thread 创建单独的 channel 进行通讯，AMQP method 包含了 channel id 帮助客 户端和 message broker 识别 channel，所以 channel 之间是完全隔离的。Channel 作为轻量级的 Connection 极大减少了操作系统建立 TCP connection 的开销 </p>
+<blockquote>
+<p>Exchange</p>
+</blockquote>
+<p>message 到达 broker 的第一站，根据分发规则，匹配查询表中的 routing key，分发 消息到 queue 中去。常用的类型有：direct (point-to-point), topic (publish-subscribe) and fanout (multicast)</p>
+<blockquote>
+<p>Queue</p>
+</blockquote>
+<p>消息最终被送到这里等待 consumer 取走</p>
+<blockquote>
+<p>Binding</p>
+</blockquote>
+<p>exchange 和 queue 之间的虚拟连接，binding 中可以包含 routing key，Binding 信息被保 存到 exchange 中的查询表中，用于 message 的分发依据</p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><p><strong>1、下载</strong></p>
+<p>官网下载地址：<a class="link"   target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html" >https://www.rabbitmq.com/download.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>这里我们选择的版本号（注意这两版本要求）</p>
+<ul>
+<li><p>rabbitmq-server-3.8.8-1.el7.noarch.rpm</p>
+<p>GitHub：<a class="link"   target="_blank" rel="noopener" href="https://github.com/rabbitmq/rabbitmq-server/releases/tag/v3.8.8" >https://github.com/rabbitmq/rabbitmq-server/releases/tag/v3.8.8<i class="fas fa-external-link-alt"></i></a></p>
+<p>加载下载：<a class="link"   target="_blank" rel="noopener" href="https://packagecloud.io/rabbitmq/rabbitmq-server/packages/el/7/rabbitmq-server-3.8.8-1.el7.noarch.rpm" >https://packagecloud.io/rabbitmq/rabbitmq-server/packages/el/7/rabbitmq-server-3.8.8-1.el7.noarch.rpm<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>erlang-21.3.8.21-1.el7.x86_64.rpm</p>
+<p>官网：<a class="link"   target="_blank" rel="noopener" href="https://www.erlang-solutions.com/downloads/" >https://www.erlang-solutions.com/downloads/<i class="fas fa-external-link-alt"></i></a></p>
+<p>加速：<a class="link"   target="_blank" rel="noopener" href="https://packagecloud.io/rabbitmq/erlang/packages/el/7/erlang-21.3.8.21-1.el7.x86_64.rpm" >https://packagecloud.io/rabbitmq/erlang/packages/el/7/erlang-21.3.8.21-1.el7.x86_64.rpm<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ul>
+<p>Red Hat 8, CentOS 8 和 modern Fedora 版本，把 “el7” 替换成 “el8”</p>
+<p><strong>2、上传文件</strong></p>
+<p>上传到&#x2F;usr&#x2F;local&#x2F;software 目录下(如果没有 software 需要自己创建)</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/DSdvN4rsimR8XT9.png"
+                      alt="image-20220805104951827"
+                ></p>
+<p><strong>3、安装</strong></p>
+<p>上传到 <code>/usr/local/software</code> 目录下(如果没有 software 需要自己创建)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh erlang-21.3.8.21-1.el7.x86_64.rpm</span><br><span class="line">yum install socat -y</span><br><span class="line">rpm -ivh rabbitmq-server-3.8.8-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、启动</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加开机启动 RabbitMQ 服务 </span></span><br><span class="line">chkconfig rabbitmq-server on</span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">systemctl start rabbitmq-server</span><br><span class="line"><span class="comment"># 查看服务状态</span></span><br><span class="line">systemctl status rabbitmq-server</span><br><span class="line"><span class="comment"># 开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> rabbitmq-server</span><br><span class="line"><span class="comment"># 停止服务</span></span><br><span class="line">systemctl stop rabbitmq-server</span><br><span class="line"><span class="comment"># 重启服务</span></span><br><span class="line">systemctl restart rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<h4 id="Web管理界面及授权操作"><a href="#Web管理界面及授权操作" class="headerlink" title="Web管理界面及授权操作"></a>Web管理界面及授权操作</h4><p><strong>1、安装</strong></p>
+<p>默认情况下，是没有安装web端的客户端插件，需要安装才可以生效</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-plugins <span class="built_in">enable</span> rabbitmq_management</span><br></pre></td></tr></table></figure>
+
+<p>安装完毕以后，重启服务即可</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart rabbitmq-server</span><br></pre></td></tr></table></figure>
+
+<p>访问 <a class="link"   target="_blank" rel="noopener" href="http://42.192.149.71:15672/" >http://42.192.149.71:15672<i class="fas fa-external-link-alt"></i></a> ，用默认账号密码(guest)登录，出现权限问题</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/5OBowSelicKLG1F.png"
+                      alt="image-20220805105305297"
+                ></p>
+<p>默认情况只能在 localhost 本机下访问，所以需要添加一个远程登录的用户</p>
+<p><strong>2、添加用户</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建账号和密码</span></span><br><span class="line">rabbitmqctl add_user admin 123456</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置用户角色</span></span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为用户添加资源权限</span></span><br><span class="line"><span class="comment"># set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;</span></span><br><span class="line">rabbitmqctl set_permissions -p <span class="string">&quot;/&quot;</span> admin <span class="string">&quot;.*&quot;</span> <span class="string">&quot;.*&quot;</span> <span class="string">&quot;.*&quot;</span></span><br><span class="line"><span class="comment"># 添加配置、写、读权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#当前用户和角色</span></span><br><span class="line"> rabbitmqctl list_users</span><br></pre></td></tr></table></figure>
+
+<p>用户级别：</p>
+<ol>
+<li><strong>administrator</strong>：可以登录控制台、查看所有信息、可以对 rabbitmq 进行管理</li>
+<li><strong>monitoring</strong>：监控者 登录控制台，查看所有信息</li>
+<li><strong>policymaker</strong>：策略制定者 登录控制台，指定策略</li>
+<li><strong>managment</strong>：普通管理员 登录控制台</li>
+</ol>
+<p>再次登录，用 admin 用户</p>
+<blockquote>
+<p>重置命令</p>
+</blockquote>
+<p>关闭应用的命令为：rabbitmqctl stop_app</p>
+<p>清除的命令为：rabbitmqctl reset</p>
+<p>重新启动命令为：rabbitmqctl start_app</p>
+<h3 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h3><p>官网：<a class="link"   target="_blank" rel="noopener" href="https://registry.hub.docker.com/_/rabbitmq/" >https://registry.hub.docker.com/_/rabbitmq/<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -<span class="built_in">id</span> --name myrabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=123456 -p 15672:15672 rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RabbitMQ之消息队列</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-05 10:33:28</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/05/RabbitMQ之消息队列/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/RabbitMQ/">#RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8B%E5%88%9D%E4%BD%93%E9%AA%8C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之初体验</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/07/31/Redis%E4%B9%8B%E5%B0%8F%E8%BF%9B%E9%98%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Redis之小进阶</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MQ-%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">MQ 的相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMQ"><span class="nav-number">1.1.</span> <span class="nav-text">什么是MQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8MQ"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要用MQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ-%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.</span> <span class="nav-text">MQ 的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MQ-%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.4.</span> <span class="nav-text">MQ 的选择</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">2.</span> <span class="nav-text">RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">RabbitMQ 的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">2.2.</span> <span class="nav-text">四大核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-%E6%A0%B8%E5%BF%83%E9%83%A8%E5%88%86"><span class="nav-number">2.3.</span> <span class="nav-text">RabbitMQ 核心部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%84%E4%B8%AA%E5%90%8D%E8%AF%8D%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.4.</span> <span class="nav-text">各个名词介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%AE%89%E8%A3%85"><span class="nav-number">2.5.</span> <span class="nav-text">Linux安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%8F%8A%E6%8E%88%E6%9D%83%E6%93%8D%E4%BD%9C"><span class="nav-number">2.5.1.</span> <span class="nav-text">Web管理界面及授权操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-%E5%AE%89%E8%A3%85"><span class="nav-number">2.6.</span> <span class="nav-text">Docker 安装</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

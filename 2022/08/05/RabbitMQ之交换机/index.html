@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            RabbitMQ之交换机 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RabbitMQ之交换机</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-05 11:04:31</span>
+        <span class="mobile">2022-08-05 11:04</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RabbitMQ/">RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>14 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Exchanges"><a href="#Exchanges" class="headerlink" title="Exchanges"></a>Exchanges</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>RabbitMQ 消息传递模型的核心思想是: <strong>生产者生产的消息从不会直接发送到队列</strong>。实际上，通常生产者甚至都不知道这些消息传递传递到了哪些队列中。</p>
+<p>相反，**生产者只能将消息发送到交换机(exchange)**，交换机工作的内容非常简单，一方面它接收来自生产者的消息，另一方面将它们推入队列。交换机必须确切知道如何处理收到的消息。是应该把这些消息放到特定队列还是说把他们到许多队列中还是说应该丢弃它们。这就的由交换机的类型来决定。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/7l9xDCGpOdzWoFv.png"
+                      alt="image-20220805114817277"
+                ></p>
+<h3 id="Exchanges-的类型"><a href="#Exchanges-的类型" class="headerlink" title="Exchanges 的类型"></a><strong>Exchanges 的类型</strong></h3><p>​	直接(direct), 主题(topic) ,标题(headers) , 扇出(fanout)</p>
+<h3 id="无名exchange"><a href="#无名exchange" class="headerlink" title="无名exchange"></a><strong>无名exchange</strong></h3><p>​	在前面部分我们对 exchange 一无所知，但仍然能够将消息发送到队列。之前能实现的 原因是因为我们使用的是默认交换，我们通过空字符串(“”)进行标识。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/FdwH7QWfj4DKP3a.png"
+                      alt="image-20220805114854056"
+                ></p>
+<p>第一个参数是交换机的名称。空字符串表示默认或无名称交换机：消息能路由发送到队列中其实是由 routingKey(bindingkey)绑定 key 指定的，如果它存在的话</p>
+<h2 id="临时队列"><a href="#临时队列" class="headerlink" title="临时队列"></a>临时队列</h2><p>之前的章节我们使用的是具有特定名称的队列(还记得 hello 和 ack_queue 吗？)。队列的名称我们来说至关重要，我们需要指定我们的消费者去消费哪个队列的消息。</p>
+<p>每当我们连接到 Rabbit 时，我们都需要一个全新的空队列，为此我们可以创建一个具有<strong>随机名称的队列</strong>，或者能让服务器为我们选择一个随机队列名称那就更好了。其次一旦我们断开了消费者的连接，队列将被自动删除。</p>
+<p>创建临时队列的方式如下: </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> channel.queueDeclare().getQueue();</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/EiKpk7QLTcygUbZ.png"
+                      alt="image-20220805114918233"
+                ></p>
+<h2 id="绑定-bindings"><a href="#绑定-bindings" class="headerlink" title="绑定 bindings"></a>绑定 bindings</h2><p>什么是 bingding 呢，binding 其实是 exchange 和 queue 之间的桥梁，它告诉我们 exchange 和那个队列进行了绑定关系。比如说下面这张图告诉我们的就是 X 与 Q1 和 Q2 进行了绑定</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/69ivxUwOGVWnNsP.png"
+                      alt="image-20220805114936278"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/DmHwL7Anoegas86.png"
+                      alt="image-20220805114955359"
+                ></p>
+<h2 id="Fanout-exchange"><a href="#Fanout-exchange" class="headerlink" title="Fanout exchange"></a>Fanout exchange</h2><h3 id="Fanout-介绍"><a href="#Fanout-介绍" class="headerlink" title="Fanout 介绍"></a>Fanout 介绍</h3><p>Fanout 这种类型非常简单。正如从名称中猜到的那样，它是将接收到的所有消息广播到它知道的 所有队列中。系统中默认有些 exchange 类型</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/DjpWTm6enlKJSqM.png"
+                      alt="image-20220805115027691"
+                ></p>
+<h3 id="Fanout-实战"><a href="#Fanout-实战" class="headerlink" title="Fanout 实战"></a>Fanout 实战</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/1AFJpzfZrgY6EhB.png"
+                      alt="image-20220805115054080"
+                ></p>
+<p>Logs 和临时队列的绑定关系如下图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/4q86ISwhtZQDefr.png"
+                      alt="image-20220805115113841"
+                ></p>
+<p>为了说明这种模式，我们将构建一个简单的日志系统。它将由两个程序组成:第一个程序将发出日志消 息，第二个程序是消费者。其中我们会启动两个消费者，其中一个消费者接收到消息后把日志存储在磁盘，</p>
+<p>ReceiveLogs01 将接收到的消息打印在控制台</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.oddfar.five;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.oddfar.utils.RabbitMqUtils;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.DeliverCallback;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhiyuan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogs01</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, <span class="string">&quot;fanout&quot;</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 生成一个临时的队列 队列的名称是随机的</span></span><br><span class="line"><span class="comment">         * 当消费者断开和该队列的连接时 队列自动删除</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> channel.queueDeclare().getQueue();</span><br><span class="line">        <span class="comment">//把该临时队列绑定我们的 exchange 其中 routingkey(也称之为 binding key)为空字符串</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息,把接收到的消息打印在屏幕........... &quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送回调</span></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;控制台打印接收到的消息&quot;</span> + message);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ReceiveLogs02 把消息写出到文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogs02</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, <span class="string">&quot;fanout&quot;</span>);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 生成一个临时的队列 队列的名称是随机的</span></span><br><span class="line"><span class="comment">         * 当消费者断开和该队列的连接时 队列自动删除</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> channel.queueDeclare().getQueue();</span><br><span class="line">        <span class="comment">//把该临时队列绑定我们的 exchange 其中 routingkey(也称之为 binding key)为空字符串</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息,把接收到的消息写到文件........... &quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送回调</span></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            <span class="type">File</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;D:\\test\\rabbitmq_info.txt&quot;</span>);</span><br><span class="line">            FileUtils.writeStringToFile(file,message,<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;数据写入文件成功&quot;</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;&#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>EmitLog 发送消息给两个消费者接收：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmitLog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 声明一个 exchange</span></span><br><span class="line"><span class="comment">         * 1.exchange 的名称</span></span><br><span class="line"><span class="comment">         * 2.exchange 的类型</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, <span class="string">&quot;fanout&quot;</span>);</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入信息&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (sc.hasNext()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> sc.nextLine();</span><br><span class="line">            channel.basicPublish(EXCHANGE_NAME, <span class="string">&quot;&quot;</span>, <span class="literal">null</span>, message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;生产者发出消息&quot;</span> + message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Direct-exchange"><a href="#Direct-exchange" class="headerlink" title="Direct exchange"></a>Direct exchange</h2><p>在上一节中，我们构建了一个简单的日志记录系统。我们能够向许多接收者广播日志消息。在本节我们将向其中添加一些特别的功能——让某个消费者订阅发布的部分消息。例如我们只把严重错误消息定向存储到日志文件(以节省磁盘空间)，同时仍然能够在控制台上打印所有日志消息。</p>
+<p>我们再次来回顾一下什么是 bindings，绑定是交换机和队列之间的桥梁关系。也可以这么理解： <strong>队列只对它绑定的交换机的消息感兴趣</strong>。绑定用参数：routingKey 来表示也可称该参数为 binding key， 创建绑定我们用代码:channel.queueBind(queueName, EXCHANGE_NAME, “routingKey”);</p>
+<p>绑定之后的意义由其交换类型决定。</p>
+<h3 id="Direct-介绍"><a href="#Direct-介绍" class="headerlink" title="Direct 介绍"></a>Direct 介绍</h3><p>上一节中的我们的日志系统将所有消息广播给所有消费者，对此我们想做一些改变，例如我们希 望将日志消息写入磁盘的程序仅接收严重错误(errros)，而不存储哪些警告(warning)或信息(info)日志 消息避免浪费磁盘空间。Fanout 这种交换类型并不能给我们带来很大的灵活性-它只能进行无意识的 广播，在这里我们将使用 direct 这种类型来进行替换，这种类型的工作方式是，消息只去到它绑定的 routingKey 队列中去。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/WBcNTlZma1eIohq.png"
+                      alt="image-20220805115208217"
+                ></p>
+<p>在上面这张图中，我们可以看到 X 绑定了两个队列，绑定类型是 direct。队列Q1 绑定键为 orange， 队列 Q2 绑定键有两个:一个绑定键为 black，另一个绑定键为 green.</p>
+<p>在这种绑定情况下，生产者发布消息到 exchange 上，绑定键为 orange 的消息会被发布到队列 Q1。绑定键为 blackgreen 和的消息会被发布到队列 Q2，其他消息类型的消息将被丢弃。</p>
+<h3 id="多重绑定"><a href="#多重绑定" class="headerlink" title="多重绑定"></a>多重绑定</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/fejWuHwGZavIrDE.png"
+                      alt="image-20220805115243925"
+                ></p>
+<p>当然如果 exchange 的绑定类型是direct，<strong>但是它绑定的多个队列的 key 如果都相同</strong>，在这种情况下虽然绑定类型是 direct <strong>但是它表现的就和 fanout 有点类似了</strong>，就跟广播差不多，如上图所示。</p>
+<h3 id="Direct-实战"><a href="#Direct-实战" class="headerlink" title="Direct 实战"></a>Direct 实战</h3><p>关系：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/iu7ajlF8ZqRpCAV.png"
+                      alt="image-20220805115301036"
+                ></p>
+<p>交换机：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/uroGCcpWtUYNnyJ.png"
+                      alt="image-20220805115323457"
+                ></p>
+<p>c2：绑定disk，routingKey为error</p>
+<p>c1：绑定console，routingKey为info、warning</p>
+<p>1、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.oddfar.utils.RabbitMqUtils;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.BuiltinExchangeType;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.DeliverCallback;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhiyuan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogsDirect01</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;direct_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> <span class="string">&quot;disk&quot;</span>;</span><br><span class="line">        <span class="comment">//队列声明</span></span><br><span class="line">        channel.queueDeclare(queueName, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//队列绑定</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;error&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送回调</span></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            message = <span class="string">&quot;接收绑定键:&quot;</span> + delivery.getEnvelope().getRoutingKey() + <span class="string">&quot;,消息:&quot;</span> + message;</span><br><span class="line">            System.out.println(<span class="string">&quot;error 消息已经接收：\n&quot;</span> + message);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogsDirect02</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;direct_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> <span class="string">&quot;console&quot;</span>;</span><br><span class="line">        <span class="comment">//队列声明</span></span><br><span class="line">        channel.queueDeclare(queueName, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//队列绑定</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;info&quot;</span>);</span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;warning&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//发送回调</span></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            message = <span class="string">&quot;接收绑定键:&quot;</span> + delivery.getEnvelope().getRoutingKey() + <span class="string">&quot;,消息:&quot;</span> + message;</span><br><span class="line">            System.out.println(<span class="string">&quot;info和warning 消息已经接收：\n&quot;</span> + message);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmitLogDirect</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;direct_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建多个 bindingKey</span></span><br><span class="line">        Map&lt;String, String&gt; bindingKeyMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;info&quot;</span>, <span class="string">&quot;普通 info 信息&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;warning&quot;</span>, <span class="string">&quot;警告 warning 信息&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;错误 error 信息&quot;</span>);</span><br><span class="line">        <span class="comment">//debug 没有消费这接收这个消息 所有就丢失了</span></span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;debug&quot;</span>, <span class="string">&quot;调试 debug 信息&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; bindingKeyEntry : bindingKeyMap.entrySet()) &#123;</span><br><span class="line">            <span class="comment">//获取 key value</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">bindingKey</span> <span class="operator">=</span> bindingKeyEntry.getKey();</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> bindingKeyEntry.getValue();</span><br><span class="line"></span><br><span class="line">            channel.basicPublish(EXCHANGE_NAME, bindingKey, <span class="literal">null</span>, message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;生产者发出消息:&quot;</span> + message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Topics-exchange"><a href="#Topics-exchange" class="headerlink" title="Topics exchange"></a>Topics exchange</h2><h3 id="Topic-的介绍"><a href="#Topic-的介绍" class="headerlink" title="Topic 的介绍"></a>Topic 的介绍</h3><p>在上一个小节中，我们改进了日志记录系统。我们没有使用只能进行随意广播的 fanout 交换机，而是使用了 direct 交换机，从而有能实现有选择性地接收日志。</p>
+<p>尽管使用 direct 交换机改进了我们的系统，但是它仍然存在局限性——比方说我们想接收的日志类型有 info.base 和 info.advantage，某个队列只想 info.base 的消息，那这个时候direct 就办不到了。这个时候就只能使用 <strong>topic</strong> 类型</p>
+<h3 id="Topic的要求"><a href="#Topic的要求" class="headerlink" title="Topic的要求"></a>Topic的要求</h3><p>发送到类型是 topic 交换机的消息的 routing_key 不能随意写，必须满足一定的要求，它必须是<strong>一个单词列表</strong>，<strong>以点号分隔开</strong>。这些单词可以是任意单词</p>
+<p>比如说：”stock.usd.nyse”, “nyse.vmw”, “quick.orange.rabbit”.这种类型的。</p>
+<p>当然这个单词列表最多不能超过 255 个字节。</p>
+<p>在这个规则列表中，其中有两个替换符是大家需要注意的：</p>
+<ul>
+<li>***(星号)可以代替一个单词**</li>
+<li><strong>#(井号)可以替代零个或多个单词</strong></li>
+</ul>
+<h3 id="Topic-匹配案例"><a href="#Topic-匹配案例" class="headerlink" title="Topic 匹配案例"></a>Topic 匹配案例</h3><p>下图绑定关系如下</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/L7u3iXrxAKgcsJm.png"
+                      alt="image-20220805115426677"
+                ></p>
+<ul>
+<li><p>Q1–&gt;绑定的是</p>
+<ul>
+<li>中间带 orange 带 3 个单词的字符串 <code>(*.orange.*)</code></li>
+</ul>
+</li>
+<li><p>Q2–&gt;绑定的是</p>
+<ul>
+<li>最后一个单词是 rabbit 的 3 个单词 <code>(*.*.rabbit)</code></li>
+<li>第一个单词是 lazy 的多个单词 <code>(lazy.#)</code></li>
+</ul>
+</li>
+</ul>
+<p>上图是一个队列绑定关系图，我们来看看他们之间数据接收情况是怎么样的</p>
+<table>
+<thead>
+<tr>
+<th>例子</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>quick.orange.rabbit</td>
+<td>被队列 Q1Q2 接收到</td>
+</tr>
+<tr>
+<td>azy.orange.elephant</td>
+<td>被队列 Q1Q2 接收到</td>
+</tr>
+<tr>
+<td>quick.orange.fox</td>
+<td>被队列 Q1 接收到</td>
+</tr>
+<tr>
+<td>lazy.brown.fox</td>
+<td>被队列 Q2 接收到</td>
+</tr>
+<tr>
+<td>lazy.pink.rabbit</td>
+<td>虽然满足两个绑定但只被队列 Q2 接收一次</td>
+</tr>
+<tr>
+<td>quick.brown.fox</td>
+<td>不匹配任何绑定不会被任何队列接收到会被丢弃</td>
+</tr>
+<tr>
+<td>quick.orange.male.rabbit</td>
+<td>是四个单词不匹配任何绑定会被丢弃</td>
+</tr>
+<tr>
+<td>lazy.orange.male.rabbit</td>
+<td>是四个单词但匹配 Q2</td>
+</tr>
+</tbody></table>
+<p>注意：</p>
+<ul>
+<li>当一个队列绑定键是#，那么这个队列将接收所有数据，就有点像 fanout 了</li>
+<li>如果队列绑定键当中没有#和*出现，那么该队列绑定类型就是 direct 了</li>
+</ul>
+<h3 id="Topic-实战"><a href="#Topic-实战" class="headerlink" title="Topic 实战"></a>Topic 实战</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/frpRKBnxl2YToGF.png"
+                      alt="image-20220805115444639"
+                ></p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.oddfar.seven;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.oddfar.utils.RabbitMqUtils;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.BuiltinExchangeType;</span><br><span class="line"><span class="keyword">import</span> com.rabbitmq.client.Channel;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 发送端</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhiyuan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmitLogTopic</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;topic_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Q1--&gt;绑定的是</span></span><br><span class="line"><span class="comment">         *      中间带 orange 带 3 个单词的字符串(*.orange.*)</span></span><br><span class="line"><span class="comment">         * Q2--&gt;绑定的是</span></span><br><span class="line"><span class="comment">         *      最后一个单词是 rabbit 的 3 个单词(*.*.rabbit)</span></span><br><span class="line"><span class="comment">         *      第一个单词是 lazy 的多个单词(lazy.#)</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        Map&lt;String, String&gt; bindingKeyMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;quick.orange.rabbit&quot;</span>, <span class="string">&quot;被队列 Q1Q2 接收到&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;lazy.orange.elephant&quot;</span>, <span class="string">&quot;被队列 Q1Q2 接收到&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;quick.orange.fox&quot;</span>, <span class="string">&quot;被队列 Q1 接收到&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;lazy.brown.fox&quot;</span>, <span class="string">&quot;被队列 Q2 接收到&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;lazy.pink.rabbit&quot;</span>, <span class="string">&quot;虽然满足两个绑定但只被队列 Q2 接收一次&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;quick.brown.fox&quot;</span>, <span class="string">&quot;不匹配任何绑定不会被任何队列接收到会被丢弃&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;quick.orange.male.rabbit&quot;</span>, <span class="string">&quot;是四个单词不匹配任何绑定会被丢弃&quot;</span>);</span><br><span class="line">        bindingKeyMap.put(<span class="string">&quot;lazy.orange.male.rabbit&quot;</span>, <span class="string">&quot;是四个单词但匹配 Q2&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; bindingKeyEntry : bindingKeyMap.entrySet()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">bindingKey</span> <span class="operator">=</span> bindingKeyEntry.getKey();</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> bindingKeyEntry.getValue();</span><br><span class="line"></span><br><span class="line">            channel.basicPublish(EXCHANGE_NAME, bindingKey, <span class="literal">null</span>, message.getBytes(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            System.out.println(<span class="string">&quot;生产者发出消息：&quot;</span> + message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogsTopic01</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;topic_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);</span><br><span class="line">        <span class="comment">//声明 Q1 队列与绑定关系</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> <span class="string">&quot;Q1&quot;</span>;</span><br><span class="line">        <span class="comment">//声明</span></span><br><span class="line">        channel.queueDeclare(queueName, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//绑定</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;*.orange.*&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息........... &quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot; 接收队列:&quot;</span> + queueName + <span class="string">&quot; 绑定键:&quot;</span> + delivery.getEnvelope().getRoutingKey() + <span class="string">&quot;,消息:&quot;</span> + message);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReceiveLogsTopic02</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;topic_logs&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Channel</span> <span class="variable">channel</span> <span class="operator">=</span> RabbitMqUtils.getChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);</span><br><span class="line">        <span class="comment">//声明 Q2 队列与绑定关系</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> <span class="string">&quot;Q2&quot;</span>;</span><br><span class="line">        <span class="comment">//声明</span></span><br><span class="line">        channel.queueDeclare(queueName, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//绑定</span></span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;*.*.rabbit&quot;</span>);</span><br><span class="line">        channel.queueBind(queueName, EXCHANGE_NAME, <span class="string">&quot;lazy.#&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;等待接收消息........... &quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">DeliverCallback</span> <span class="variable">deliverCallback</span> <span class="operator">=</span> (consumerTag, delivery) -&gt; &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(delivery.getBody(), <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot; 接收队列:&quot;</span> + queueName + <span class="string">&quot; 绑定键:&quot;</span> + delivery.getEnvelope().getRoutingKey() + <span class="string">&quot;,消息:&quot;</span> + message);</span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(queueName, <span class="literal">true</span>, deliverCallback, consumerTag -&gt; &#123;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RabbitMQ之交换机</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-05 11:04:31</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/05/RabbitMQ之交换机/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/RabbitMQ/">#RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8B%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之死信队列</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8B%E5%8F%91%E5%B8%83%E7%A1%AE%E8%AE%A4/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之发布确认</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exchanges"><span class="nav-number">1.</span> <span class="nav-text">Exchanges</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exchanges-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">Exchanges 的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%90%8Dexchange"><span class="nav-number">1.3.</span> <span class="nav-text">无名exchange</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E9%98%9F%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">临时队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A-bindings"><span class="nav-number">3.</span> <span class="nav-text">绑定 bindings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fanout-exchange"><span class="nav-number">4.</span> <span class="nav-text">Fanout exchange</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout-%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">Fanout 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout-%E5%AE%9E%E6%88%98"><span class="nav-number">4.2.</span> <span class="nav-text">Fanout 实战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-exchange"><span class="nav-number">5.</span> <span class="nav-text">Direct exchange</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-%E4%BB%8B%E7%BB%8D"><span class="nav-number">5.1.</span> <span class="nav-text">Direct 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E7%BB%91%E5%AE%9A"><span class="nav-number">5.2.</span> <span class="nav-text">多重绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-%E5%AE%9E%E6%88%98"><span class="nav-number">5.3.</span> <span class="nav-text">Direct 实战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Topics-exchange"><span class="nav-number">6.</span> <span class="nav-text">Topics exchange</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic-%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">6.1.</span> <span class="nav-text">Topic 的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic%E7%9A%84%E8%A6%81%E6%B1%82"><span class="nav-number">6.2.</span> <span class="nav-text">Topic的要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic-%E5%8C%B9%E9%85%8D%E6%A1%88%E4%BE%8B"><span class="nav-number">6.3.</span> <span class="nav-text">Topic 匹配案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic-%E5%AE%9E%E6%88%98"><span class="nav-number">6.4.</span> <span class="nav-text">Topic 实战</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

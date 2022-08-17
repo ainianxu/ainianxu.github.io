@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Docker之Docker 网络讲解 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Docker之Docker 网络讲解</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-16 22:45:19</span>
+        <span class="mobile">2022-08-16 22:45</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>19 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="理解Docker0"><a href="#理解Docker0" class="headerlink" title="理解Docker0"></a>理解Docker0</h2><p>准备工作：清空所有的容器，清空所有的镜像</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> -f $(docker ps -a -q) <span class="comment"># 删除所有容器</span></span><br><span class="line">docker rmi -f $(docker images -qa) <span class="comment"># 删除全部镜像</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们先来做个测试</p>
+</blockquote>
+<p>查看本地ip <code>ip addr</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># ip addr</span></span><br><span class="line"><span class="comment">#本机回环地址</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"><span class="comment">#阿里云的私有IP</span></span><br><span class="line">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 52:54:00:9a:88:4d brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.17.0.6/20 brd 172.17.15.255 scope global eth0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::5054:ff:fe9a:884d/64 scope <span class="built_in">link</span> </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"><span class="comment"># docker网桥</span></span><br><span class="line">3: docker0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc noqueue state DOWN group default </span><br><span class="line">    <span class="built_in">link</span>/ether 02:42:d1:ba:72:7a brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 172.18.0.1/16 brd 172.18.255.255 scope global docker0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::42:d1ff:feba:727a/64 scope <span class="built_in">link</span> </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Docker 是如何处理容器网络访问的？</p>
+</blockquote>
+<p>我们之前安装ES的时候，留过一个问题，就是安装Kibana的问题，Kibana得指定ES的地址！或者我们实际场景中，我们开发了很多微服务项目，那些微服务项目都要连接数据库，需要指定数据库的url地址，通过ip。但是我们用Docker管理的话，假设数据库出问题了，我们重新启动运行一个，这个时候数据库的地址就会发生变化，docker会给每个容器都分配一个ip，且容器和容器之间是可以互相访问的。 我们可以测试下容器之间能不能ping通过。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动tomcat01</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker run -d -P --name tomcat01 tomcat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看tomcat01的ip地址，docker会给每个容器都分配一个ip！</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment">#  docker exec -it tomcat01 ip addr</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">24: eth0@if25: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default </span><br><span class="line">    <span class="built_in">link</span>/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff link-netnsid 0</span><br><span class="line">    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"><span class="comment"># 思考，我们的linux服务器是否可以ping通容器内的tomcat ？可以</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># ping 172.18.0.2</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原理</p>
+</blockquote>
+<p>每一个安装了 Docker 的 linux 主机都有一个 docker0 的虚拟网卡。这是个桥接网卡，使用了 veth-pair 技术！</p>
+<ul>
+<li><p>再次查看主机的 <code>ip addr</code> ：本来有三个网络，启动tomcat容器之后，会多了一个网络！</p>
+</li>
+<li><p>每启动一个容器，linux主机就会多了一个虚拟网卡。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#启动一个tomcat01，主机的ip地址多了个  25: veth2b7cb71@if24</span></span><br><span class="line"><span class="comment">#然后我们在tomcat01容器中查看容器的ip  24: eth0@if25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#我们再启动一个tomcat02观察</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker run -d -P --name tomcat02 tomcat</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后发现linux主机上又多了一个网卡	27: veth4d2bd95@if26</span></span><br><span class="line"><span class="comment"># 我们看下tomcat02的容器内ip地址是	  26: eth0@if27</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat02 ip addr</span></span><br></pre></td></tr></table></figure>
+
+<p>可以发现：只要启动一个容器，就有一对网卡</p>
+<p>veth-pair 就是一对的虚拟设备接口，它都是成对出现的。一端连着协议栈，一端彼此相连着。</p>
+<p>正因为有这个特性，它常常充当着一个桥梁，连接着各种虚拟网络设备！</p>
+<p> “Bridge、OVS 之间的连接”，“Docker 容器之间的连接” 等等，以此构建出非常复杂的虚拟网络结构，比如 OpenStack Neutron。</p>
+</li>
+<li><p>我们来测试下 tomcat01 和 tomcat02 容器间是否可以互相 ping 通</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat02 ping 172.18.0.2</span></span><br><span class="line">PING 172.18.0.2 (172.18.0.2) 56(84) bytes of data.</span><br><span class="line">64 bytes from 172.18.0.2: icmp_seq=1 ttl=64 time=0.095 ms</span><br></pre></td></tr></table></figure>
+
+<p>所以：容器和容器之间是可以互相访问的。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/16/tzA3XUob2IgL91a.png"
+                      alt="image-20220816225257165"
+                ></p>
+<p>结论：tomcat1 和 tomcat2 共用一个路由器。是的，他们使用的一个，就是docker0。任何一个容器启动默认都是 docker0 网络。 docker 默认会给容器分配一个可用 ip 。</p>
+</li>
+</ul>
+<blockquote>
+<p>小结</p>
+</blockquote>
+<p>Docker使用Linux桥接，在宿主机虚拟一个Docker容器网桥(docker0)，Docker启动一个容器时会根据 Docker网桥的网段分配给容器一个IP地址，称为Container-IP，同时Docker网桥是每个容器的默认网 关。因为在同一宿主机内的容器都接入同一个网桥，这样容器之间就能够通过容器的Container-IP直接通信。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/16/RPdjlgD14GA7vYu.png"
+                      alt="image-20220816225338346"
+                ></p>
+<p>Docker 容器网络就很好的利用了 Linux 虚拟网络技术，在本地主机和容器内分别创建一个虚拟接口，并让他们彼此联通（这样一对接口叫 veth pair）；</p>
+<p>Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势就是转发效率极高（因为Linux是在内核中进行数据的复制来实现虚拟接口之间的数据转发，无需通过外部的网络设备交换），对于本地系统和容器系统来说，虚拟接口跟一个正常的以太网卡相比并没有区别，只是他的速度快很多。</p>
+<h2 id="Link参数"><a href="#Link参数" class="headerlink" title="Link参数"></a>Link参数</h2><p>思考一个场景，我们编写一个微服务，数据库连接地址原来是使用ip的，如果ip变化就不行了，那我们能不能使用服务名访问呢？</p>
+<p>就像 <code>jdbc:mysql://mysql:3306</code>，这样的话哪怕 mysql 重启，我们也不需要修改配置了！</p>
+<p>docker提供了 <code>--link</code> 的操作！</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们使用tomcat02，直接通过容器名ping,不使用ip</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat02 ping tomcat01</span></span><br><span class="line"><span class="comment"># ping 不通</span></span><br><span class="line">ping: tomcat01: Name or service not known</span><br><span class="line"></span><br><span class="line"><span class="comment">#我们再启动一个tomcat03，但是启动的时候连接tomcat02</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker run -d -P --name tomcat03 --link tomcat02 tomcat</span></span><br><span class="line">80ed9c4e1f9428598a91c727ed13b7d0534d86d569855d4fb8739baabe5d6b91</span><br><span class="line"></span><br><span class="line"><span class="comment">#这个时候，我们就可以使用tomcat03 ping通 tomcat02 了</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment">#  docker exec -it tomcat03 ping tomcat02</span></span><br><span class="line">PING tomcat02 (172.18.0.3) 56(84) bytes of data.</span><br><span class="line">64 bytes from tomcat02 (172.18.0.3): icmp_seq=1 ttl=64 time=0.092 ms</span><br><span class="line"></span><br><span class="line"><span class="comment"># tomcat3 ping不通 tomcat1</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat03 ping tomcat01</span></span><br><span class="line">ping: tomcat01: Name or service not known</span><br><span class="line"><span class="comment"># tomcat2 ping不通 tomcat3 反向也ping不通</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat02 ping tomcat03</span></span><br><span class="line">ping: tomcat03: Name or service not known</span><br></pre></td></tr></table></figure>
+
+<p>这是为什么呢？</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#进入tomcat03中查看下host配置文件</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat03 cat /etc/hosts</span></span><br><span class="line">127.0.0.1	localhost</span><br><span class="line">::1	localhost ip6-localhost ip6-loopback</span><br><span class="line">fe00::0	ip6-localnet</span><br><span class="line">ff00::0	ip6-mcastprefix</span><br><span class="line">ff02::1	ip6-allnodes</span><br><span class="line">ff02::2	ip6-allrouters</span><br><span class="line"><span class="comment">#发现tomcat2直接被写在这里</span></span><br><span class="line">172.18.0.3	tomcat02 cff25f666b32</span><br><span class="line">172.18.0.4	80ed9c4e1f94</span><br></pre></td></tr></table></figure>
+
+<p>所以这里其实就是配置了一个 hosts 地址而已！</p>
+<p>原因：<code>--link</code> 的时候，直接把需要 link 的主机的域名和 ip 直接配置到了 hosts 文件中了</p>
+<p><code>--link</code> 早都过时了，我们不推荐使用！我们可以使用自定义网络的方式</p>
+<h2 id="自定义网络"><a href="#自定义网络" class="headerlink" title="自定义网络"></a>自定义网络</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>指令列表</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network --help</span></span><br><span class="line"></span><br><span class="line">Usage:  docker network COMMAND</span><br><span class="line"></span><br><span class="line">Manage networks</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  connect     Connect a container to a network</span><br><span class="line">  create      Create a network</span><br><span class="line">  disconnect  Disconnect a container from a network</span><br><span class="line">  inspect     Display detailed information on one or more networks</span><br><span class="line">  <span class="built_in">ls</span>          List networks</span><br><span class="line">  prune       Remove all unused networks</span><br><span class="line">  <span class="built_in">rm</span>          Remove one or more networks</span><br><span class="line"></span><br><span class="line">Run <span class="string">&#x27;docker network COMMAND --help&#x27;</span> <span class="keyword">for</span> more information on a <span class="built_in">command</span>.</span><br></pre></td></tr></table></figure>
+
+<p>查看所有网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network ls</span></span><br><span class="line">NETWORK ID     NAME      DRIVER    SCOPE</span><br><span class="line">4b873066daf7   bridge    bridge    <span class="built_in">local</span></span><br><span class="line">86da632adad6   elastic   bridge    <span class="built_in">local</span></span><br><span class="line">64b606f257e7   host      host      <span class="built_in">local</span></span><br><span class="line">34ab4fdb73c0   none      null      <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+<p>所有网路模式</p>
+<table>
+<thead>
+<tr>
+<th>网络模式</th>
+<th>配置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bridge模式</td>
+<td>–net&#x3D;bridge</td>
+<td>默认值，在 Docker 网桥 docker0 上为容器创建新的网络栈</td>
+</tr>
+<tr>
+<td>none模式</td>
+<td>–net&#x3D;none</td>
+<td>不配置网络，用户可以稍后进入容器，自行配置</td>
+</tr>
+<tr>
+<td>container 模式</td>
+<td>– net&#x3D;container:name&#x2F;id</td>
+<td>容器和另外一个容器共享Network namespace。<br> kubernetes中的pod就是多个容器共享一个Network namespace。</td>
+</tr>
+<tr>
+<td>host模式</td>
+<td>–net&#x3D;host</td>
+<td>容器和宿主机共享Network namespace</td>
+</tr>
+<tr>
+<td>用户自定义</td>
+<td>–net&#x3D;自定义网络</td>
+<td>用户自己使用network相关命令定义网络，创建容器的 时候可以指定为自己定义的网络，就像 <code>elastic</code></td>
+</tr>
+</tbody></table>
+<p>查看一个具体的网络的详细信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network inspect 4b873066daf7</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;bridge&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Id&quot;</span>: <span class="string">&quot;4b873066daf7eca3fd7a79ce17b46dff17a89368cb7f43d01c88dd9ee08d9407&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Created&quot;</span>: <span class="string">&quot;2021-06-11T18:42:36.937993641+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;bridge&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EnableIPv6&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;IPAM&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Options&quot;</span>: null,</span><br><span class="line">            <span class="string">&quot;Config&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                //默认 docker0 是管理这个子网范围内的。0~16，</span><br><span class="line">                //也就是 255*255，去掉0个255，我们有65534可以分配的ip</span><br><span class="line">                //所以 docker0 网络默认可以支持创建6万多个容器ip不重复</span><br><span class="line">                    <span class="string">&quot;Subnet&quot;</span>: <span class="string">&quot;172.18.0.0/16&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;Gateway&quot;</span>: <span class="string">&quot;172.18.0.1&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Internal&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Attachable&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Ingress&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;ConfigFrom&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Network&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;ConfigOnly&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Containers&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;220fac5f16f3cf7f2619131502cb6bb4004f334c3b501a0ceff8804c361cf027&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat01&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;d54c9b71aff1843c3a1609de8eaa85785ebddd8a419ea5fae346fb538568946f&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:ac:12:00:02&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;172.18.0.2/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;80ed9c4e1f9428598a91c727ed13b7d0534d86d569855d4fb8739baabe5d6b91&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat03&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;a6dd8dd8ba2b5b341cbed8318a2463a4e28f1059cc848504a409fbf75ae21f4f&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:ac:12:00:04&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;172.18.0.4/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;cff25f666b32df808923a51e14f2f2686fc9aff161e07c188c28ce15d0b38401&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat02&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;b5b18a038166b64a0308cc4a506f543b92d35b9fc50f5758f8d5daccc1df87bd&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:ac:12:00:03&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;172.18.0.3/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;com.docker.network.bridge.default_bridge&quot;</span>: <span class="string">&quot;true&quot;</span>,</span><br><span class="line">            <span class="string">&quot;com.docker.network.bridge.enable_icc&quot;</span>: <span class="string">&quot;true&quot;</span>,</span><br><span class="line">            <span class="string">&quot;com.docker.network.bridge.enable_ip_masquerade&quot;</span>: <span class="string">&quot;true&quot;</span>,</span><br><span class="line">            <span class="string">&quot;com.docker.network.bridge.host_binding_ipv4&quot;</span>: <span class="string">&quot;0.0.0.0&quot;</span>,</span><br><span class="line">            <span class="string">&quot;com.docker.network.bridge.name&quot;</span>: <span class="string">&quot;docker0&quot;</span>,</span><br><span class="line">            <span class="string">&quot;com.docker.network.driver.mtu&quot;</span>: <span class="string">&quot;1500&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义网卡"><a href="#自定义网卡" class="headerlink" title="自定义网卡"></a>自定义网卡</h3><p><strong>1、先删除之前创建的 tomcat 镜像以及容器</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">rm</span> -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、创建容器</strong></p>
+<p>但是我们知道默认创建的容器都是 docker0 网卡的</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#默认我们不配置网络，也就相当于默认值 --net bridge 使用的docker0</span></span><br><span class="line">docker run -d -P --name tomcat01 --net bridge tomcat</span><br></pre></td></tr></table></figure>
+
+<p>docker0网络的特点</p>
+<ol>
+<li><p>它是默认的 </p>
+</li>
+<li><p>域名访问不通 </p>
+</li>
+<li><p>–link 域名通了，但是删了又不行</p>
+</li>
+</ol>
+<p><strong>3、我们可以让容器创建的时候使用自定义网络</strong></p>
+<p>自定义创建的默认default “bridge” 一个网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver bridge --subnet 192.168.0.0/16 --gateway 192.168.0.1 mynet</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network ls</span></span><br><span class="line">NETWORK ID     NAME      DRIVER    SCOPE</span><br><span class="line">4b873066daf7   bridge    bridge    <span class="built_in">local</span></span><br><span class="line">64b606f257e7   host      host      <span class="built_in">local</span></span><br><span class="line">7f9fbfea6931   mynet     bridge    <span class="built_in">local</span></span><br><span class="line">34ab4fdb73c0   none      null      <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network inspect mynet</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;mynet&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Id&quot;</span>: <span class="string">&quot;7f9fbfea6931271e917c7a932c47d05f311f2fe6f1e694b95e4ef3fcf060446e&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Created&quot;</span>: <span class="string">&quot;2021-06-16T15:56:58.841772626+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;bridge&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EnableIPv6&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;IPAM&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Options&quot;</span>: &#123;&#125;,</span><br><span class="line">            <span class="string">&quot;Config&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;Subnet&quot;</span>: <span class="string">&quot;192.168.0.0/16&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;Gateway&quot;</span>: <span class="string">&quot;192.168.0.1&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Internal&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Attachable&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Ingress&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;ConfigFrom&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Network&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;ConfigOnly&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Containers&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>我们来启动两个容器测试，使用自己的 <code>mynet</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name tomcat-net-01 --net mynet tomcat</span><br><span class="line">docker run -d -P --name tomcat-net-02 --net mynet tomcat</span><br></pre></td></tr></table></figure>
+
+<p>来测试ping容器名和ip试试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 都可以ping通</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat-net-01 ping 192.168.0.3</span></span><br><span class="line">PING 192.168.0.3 (192.168.0.3) 56(84) bytes of data.</span><br><span class="line">64 bytes from 192.168.0.3: icmp_seq=1 ttl=64 time=0.118 ms</span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat-net-01 ping tomcat-net-02</span></span><br><span class="line">PING tomcat-net-02 (192.168.0.3) 56(84) bytes of data.</span><br><span class="line">64 bytes from tomcat-net-02.mynet (192.168.0.3): icmp_seq=1 ttl=64 time=0.059 ms</span><br></pre></td></tr></table></figure>
+
+<p>发现，我们自定义的网络docker都已经帮我们维护好了对应的关系</p>
+<p>所以我们平时都可以这样使用网络，不使用 <code>--link</code> 效果一样，所有东西实时维护好，直接域名 ping 通。</p>
+<h3 id="网络连通"><a href="#网络连通" class="headerlink" title="网络连通"></a>网络连通</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/16/ZkcvYfLWqxIABJ7.png"
+                      alt="image-20220816225944462"
+                ></p>
+<p>docker0和自定义网络肯定不通，我们使用自定义网络的好处就是网络隔离：</p>
+<p>大家公司项目部署的业务都非常多，假设我们有一个商城，我们会有订单业务（操作不同数据），会有订单业务购物车业务（操作不同缓存）。如果在一个网络下，有的程序猿的恶意代码就不能防止了，所以我们就在部署的时候网络隔离，创建两个桥接网卡，比如订单业务（里面的数据库，redis，mq，全部业务都在 order-net 网络下）其他业务在其他网络。</p>
+<p>那关键的问题来了，如何让 tomcat-net-01 访问 tomcat1？</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动默认的容器，在docker0网络下</span></span><br><span class="line">docker run -d -P --name tomcat01 tomcat</span><br><span class="line">docker run -d -P --name tomcat02 tomcat</span><br></pre></td></tr></table></figure>
+
+<p>有个命令 <code>connect</code> 用来连接网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们来测试一下！打通mynet-docker0</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network connect mynet tomcat01</span></span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker network inspect mynet</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;mynet&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Id&quot;</span>: <span class="string">&quot;7f9fbfea6931271e917c7a932c47d05f311f2fe6f1e694b95e4ef3fcf060446e&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Created&quot;</span>: <span class="string">&quot;2021-06-16T15:56:58.841772626+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;bridge&quot;</span>,</span><br><span class="line">        <span class="string">&quot;EnableIPv6&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;IPAM&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;default&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Options&quot;</span>: &#123;&#125;,</span><br><span class="line">            <span class="string">&quot;Config&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">&quot;Subnet&quot;</span>: <span class="string">&quot;192.168.0.0/16&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;Gateway&quot;</span>: <span class="string">&quot;192.168.0.1&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Internal&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Attachable&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Ingress&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;ConfigFrom&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;Network&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;ConfigOnly&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">&quot;Containers&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;52395d45d1fcad0170da201db471ea6ac75c25c9f7d91d10b6260dce2739fd54&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat-net-01&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;3c1aea820c4276b0d0dbe249ebd6f43547baceb7c3e774f8ee4b61b0e4b0b11f&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:c0:a8:00:02&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;192.168.0.2/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            //发现我们的tomcat01就进来这里了</span><br><span class="line">            <span class="string">&quot;c159a99201d5b3f0f6be065d562c1a0e6439b316084361937f9eda9a22e997ab&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat01&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;e11948dcd704e50b8008ee41546ff7c9f506b636f41fb6e6697081fd9d398dc5&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:c0:a8:00:04&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;192.168.0.4/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&quot;f2106d157b5ea6c5bdb87e04b9dc18be2b2e25a41d61e25851ea0afbf1e9ea39&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;tomcat-net-02&quot;</span>,</span><br><span class="line">                <span class="string">&quot;EndpointID&quot;</span>: <span class="string">&quot;3cb8b199df4fca69e1a6428ae0536ff3291f9215f8b9d9303a2ec3402bdc704f&quot;</span>,</span><br><span class="line">                <span class="string">&quot;MacAddress&quot;</span>: <span class="string">&quot;02:42:c0:a8:00:03&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv4Address&quot;</span>: <span class="string">&quot;192.168.0.3/16&quot;</span>,</span><br><span class="line">                <span class="string">&quot;IPv6Address&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: &#123;&#125;,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> tomcat01 可以ping通了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker exec -it tomcat01 ping tomcat-net-01</span></span><br><span class="line">PING tomcat-net-01 (192.168.0.2) 56(84) bytes of data.</span><br><span class="line">64 bytes from tomcat-net-01.mynet (192.168.0.2): icmp_seq=1 ttl=64 time=0.075 ms</span><br></pre></td></tr></table></figure>
+
+<p>tomcat02 依旧ping不通，大家应该就理解了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment">#  docker exec -it tomcat02 ping tomcat-net-01</span></span><br><span class="line">ping: tomcat-net-01: Name or service not known</span><br></pre></td></tr></table></figure>
+
+<p>结论：如果要跨网络操作别人，就需要使用 <code>docker network connect [OPTIONS] NETWORK CONTAINER</code> 连接</p>
+<h2 id="部署-Redis-集群"><a href="#部署-Redis-集群" class="headerlink" title="部署 Redis 集群"></a>部署 Redis 集群</h2><p>创建网卡</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create redis --subnet 172.38.0.0/16</span><br></pre></td></tr></table></figure>
+
+<p>通过脚本创建六个redis配置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> $(<span class="built_in">seq</span> 1 6); \</span><br><span class="line"><span class="keyword">do</span> \</span><br><span class="line"><span class="built_in">mkdir</span> -p /mydata/redis/node-<span class="variable">$&#123;port&#125;</span>/conf</span><br><span class="line"><span class="built_in">touch</span> /mydata/redis/node-<span class="variable">$&#123;port&#125;</span>/conf/redis.conf</span><br><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">EOF &gt;/mydata/redis/node-$&#123;port&#125;/conf/redis.conf</span></span><br><span class="line"><span class="string">port 6379</span></span><br><span class="line"><span class="string">bind 0.0.0.0</span></span><br><span class="line"><span class="string">cluster-enabled yes</span></span><br><span class="line"><span class="string">cluster-config-file nodes.conf</span></span><br><span class="line"><span class="string">cluster-node-timeout 5000</span></span><br><span class="line"><span class="string">cluster-announce-ip 172.38.0.1$&#123;port&#125;</span></span><br><span class="line"><span class="string">cluster-announce-port 6379</span></span><br><span class="line"><span class="string">cluster-announce-bus-port 16379</span></span><br><span class="line"><span class="string">appendonly yes</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>启动6个容器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> port <span class="keyword">in</span> $(<span class="built_in">seq</span> 1 6); \</span><br><span class="line"><span class="keyword">do</span> \</span><br><span class="line"></span><br><span class="line">docker run -p 637<span class="variable">$&#123;port&#125;</span>:6379 -p 1637<span class="variable">$&#123;port&#125;</span>:16379 --name redis-<span class="variable">$&#123;port&#125;</span> \</span><br><span class="line">-v /mydata/redis/node-<span class="variable">$&#123;port&#125;</span>/data:/data \</span><br><span class="line">-v /mydata/redis/node-<span class="variable">$&#123;port&#125;</span>/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-d --net redis --ip 172.38.0.1<span class="variable">$&#123;port&#125;</span> redis:5.0.9-alpine3.11 redis-server /etc/redis/redis.conf; \</span><br><span class="line"></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>进入一个redis，注意这里是 sh命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it redis-1 /bin/sh</span><br></pre></td></tr></table></figure>
+
+<p>创建集群</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379 172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1</span><br></pre></td></tr></table></figure>
+
+<p>连接集群</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看集群信息</span></span><br><span class="line">cluster info</span><br><span class="line"><span class="comment"># 查看节点</span></span><br><span class="line">cluster nodes</span><br></pre></td></tr></table></figure>
+
+<p>此时，六个 redis 已搭建好</p>
+<blockquote>
+<p>测试集群</p>
+</blockquote>
+<p>先 set 一个数据</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> name zhiyuan</span><br><span class="line">-&gt; Redirected to slot [5798] located at 172.38.0.12:6379</span><br><span class="line">OK</span><br><span class="line">172.38.0.12:6379&gt; get name</span><br><span class="line"><span class="string">&quot;zhiyuan&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>停止到存值的容器 <code>redis-1</code></p>
+<p>然后再次 <code>get name</code>，发现依旧可以获取值</p>
+<p>查看节点，发现高可用完全没问题</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Docker之Docker 网络讲解</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-16 22:45:19</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/16/Docker之Docker-网络讲解/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/16/Docker%E4%B9%8BIDEA%E6%95%B4%E5%90%88Docker/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之IDEA整合Docker</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/16/Docker%E4%B9%8BDockerFile/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之DockerFile</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3Docker0"><span class="nav-number">1.</span> <span class="nav-text">理解Docker0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Link%E5%8F%82%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">Link参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">自定义网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BD%91%E5%8D%A1"><span class="nav-number">3.2.</span> <span class="nav-text">自定义网卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%BF%9E%E9%80%9A"><span class="nav-number">3.3.</span> <span class="nav-text">网络连通</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-Redis-%E9%9B%86%E7%BE%A4"><span class="nav-number">4.</span> <span class="nav-text">部署 Redis 集群</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

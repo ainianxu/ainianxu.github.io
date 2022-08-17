@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Docker之容器数据卷 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Docker之容器数据卷</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-16 16:49:23</span>
+        <span class="mobile">2022-08-16 16:49</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Docker/">Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>9 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="什么是数据卷"><a href="#什么是数据卷" class="headerlink" title="什么是数据卷"></a>什么是数据卷</h2><p>数据卷(Data Volume)</p>
+<p><strong>docker的理念回顾：</strong></p>
+<p>将应用和运行的环境打包形成容器运行，运行可以伴随着容器，但是我们对于数据的要求，是希望能够 持久化的！</p>
+<p>就好比，你安装一个MySQL，结果你把容器删了，就相当于删库跑路了，这TM也太扯了吧！</p>
+<p>所以我们希望容器之间有可能可以共享数据，Docker容器产生的数据，如果不通过 docker commit 生成新的镜像，使得数据作为镜像的一部分保存下来，那么当容器删除后，数据自然也就没有了！这样是行不通的！</p>
+<p>为了能保存数据在Docker中我们就可以使用卷！让数据挂载到我们本地！这样数据就不会因为容器删除而丢失了！</p>
+<p><strong>作用：</strong></p>
+<p>卷就是目录或者文件，存在一个或者多个容器中，由 docker 挂载到容器，但不属于联合文件系统，因此能够绕过 Union File System ， 提供一些用于持续存储或共享数据的特性。</p>
+<p>卷的设计目的就是数据的持久化，完全独立于容器的生存周期，因此 Docker 不会在容器删除时删除其挂载的数据卷。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li>数据卷可在容器之间共享或重用数据</li>
+<li>卷中的更改可以直接生效</li>
+<li>数据卷中的更改不会包含在镜像的更新中</li>
+<li>数据卷的生命周期一直持续到没有容器使用它为止</li>
+</ol>
+<p>一句话： 就是容器的持久化，以及容器间的继承和数据共享！</p>
+<h2 id="使用数据卷"><a href="#使用数据卷" class="headerlink" title="使用数据卷"></a>使用数据卷</h2><h3 id="指令-v-方式"><a href="#指令-v-方式" class="headerlink" title="指令 v 方式"></a>指令 v 方式</h3><blockquote>
+<p>方式一：容器中直接使用命令来添加</p>
+</blockquote>
+<p>在用 docker run 命令的时候，使用 -v 标记来创建一个数据卷并挂载到容器里。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v 宿主机绝对路径目录:容器内目录 镜像名</span><br></pre></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /home/d-test:/home centos /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>查看数据卷是否挂载成功 docker inspect 容器id</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES</span><br><span class="line">05fa819084c9   centos    <span class="string">&quot;/bin/bash&quot;</span>   20 seconds ago   Up 20 seconds             friendly_keller</span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment">#  docker inspect 05fa819084c9</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/16/teWIvZyhxMNpbUj.png"
+                      alt="image-20220816165752307"
+                ></p>
+<ul>
+<li>测试容器和宿主机之间数据共享：可以发现，在容器中，创建的会在宿主机中看到！</li>
+</ul>
+<p>容器：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@05fa819084c9 /]<span class="comment"># ls</span></span><br><span class="line">bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  s</span><br><span class="line">[root@05fa819084c9 /]<span class="comment"># cd home</span></span><br><span class="line">[root@05fa819084c9 home]<span class="comment"># ls</span></span><br><span class="line">[root@05fa819084c9 home]<span class="comment"># touch test.java</span></span><br></pre></td></tr></table></figure>
+
+<p>主机：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># cd /home/d-test</span></span><br><span class="line">[root@VM-0-6-centos d-test]<span class="comment"># ls</span></span><br><span class="line">test.java</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试容器停止退出后，主机修改数据是否会同步！</li>
+</ul>
+<ol>
+<li>停止容器 </li>
+<li>在宿主机上修改文件，增加些内容 </li>
+<li>启动刚才停止的容器 </li>
+<li>然后查看对应的文件，发现数据依旧同步！</li>
+</ol>
+<p>主机：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos d-test]<span class="comment"># ls</span></span><br><span class="line">test.java</span><br><span class="line">[root@VM-0-6-centos d-test]<span class="comment"># touch new.java</span></span><br><span class="line">[root@VM-0-6-centos d-test]<span class="comment"># ls</span></span><br><span class="line">new.java  test.java</span><br></pre></td></tr></table></figure>
+
+<p>容器：</p>
+<p><code>docker ps -a</code> 查看所有容器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos home]<span class="comment"># docker start 05fa819084c9</span></span><br><span class="line">05fa819084c9</span><br><span class="line">[root@VM-0-6-centos home]<span class="comment"># docker attach 05fa819084c9</span></span><br><span class="line">[root@05fa819084c9 /]<span class="comment"># cd /home</span></span><br><span class="line">[root@05fa819084c9 home]<span class="comment"># ls</span></span><br><span class="line">new.java  test.java</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装 mysql 测试</p>
+</blockquote>
+<p>1、安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<p>2、启动容器 ，-e 为环境变量</p>
+<p>mysql 的数据不应该放在容器内，应放主机内！先体验下 -v 挂载卷！</p>
+<p>参考官方文档</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<p>连接 mysql 并创建一个数据库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos data]<span class="comment"># mysql -h 127.0.0.1 -P 3310 -u root -p</span></span><br><span class="line">mysql&gt; create database <span class="built_in">test</span>;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">| <span class="built_in">test</span>               |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件-Docker-File-方式"><a href="#文件-Docker-File-方式" class="headerlink" title="文件 Docker File 方式"></a>文件 Docker File 方式</h3><blockquote>
+<p>方式二：通过Docker File 来添加</p>
+</blockquote>
+<p>DockerFile 是用来构建Docker镜像的构建文件，是由一些列命令和参数构成的脚本。</p>
+<p>这里先了解体验一下，后面有详细介绍</p>
+<p><strong>1、编写DockerFile文件</strong></p>
+<p>我们在宿主机 &#x2F;home 目录下新建一个 docker-test-volume文件夹</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> docker-test-volume</span><br></pre></td></tr></table></figure>
+
+<p>出于可移植和分享的考虑，之前使用的 <code>-v 主机目录:容器目录</code> 这种方式不能够直接在 DockerFile 中实现。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos docker-test-volume]<span class="comment"># pwd</span></span><br><span class="line">/home/docker-test-volume</span><br><span class="line">[root@VM-0-6-centos docker-test-volume]<span class="comment"># vim dockerfile1</span></span><br><span class="line">[root@VM-0-6-centos docker-test-volume]<span class="comment"># cat dockerfile1</span></span><br><span class="line">FROM centos</span><br><span class="line">VOLUME [<span class="string">&quot;/dataVolumeContainer1&quot;</span>,<span class="string">&quot;/dataVolumeContainer2&quot;</span>]</span><br><span class="line">CMD <span class="built_in">echo</span> <span class="string">&quot;-------end------&quot;</span></span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>说明：在编写DockerFile文件中使用 VOLUME 来给镜像添加一个或多个数据卷</p>
+<p><strong>2、build生成镜像</strong></p>
+<p>build生成镜像，获得一个新镜像 test-centos，注意最后面有个 <code>.</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f /home/docker-test-volume/dockerfile1 -t test-centos .</span><br></pre></td></tr></table></figure>
+
+<p>然后启动容器：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it test-centos /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>通过上述步骤，容器内的卷目录地址就已经知道了，但是对应的主机目录地址在哪里呢？</p>
+<p><strong>3、查看数据目录</strong></p>
+<p>我们在数据卷中新建一个文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@93343e21a67b /]<span class="comment"># cd dataVolumeContainer1</span></span><br><span class="line">[root@93343e21a67b dataVolumeContainer1]<span class="comment"># touch container.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>查看下这个容器的信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker inspect 93343e21a67b</span><br><span class="line"><span class="comment"># 查看输出的Volumes</span></span><br><span class="line"><span class="string">&quot;Volumes&quot;</span>: &#123;</span><br><span class="line"><span class="string">&quot;/dataVolumeContainer1&quot;</span>: &#123;&#125;,</span><br><span class="line"><span class="string">&quot;/dataVolumeContainer2&quot;</span>: &#123;&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>可以看到挂载的路径</p>
+<p>在主机目录里看到之前在容器里创建的文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># cd /var/lib/docker/volumes/7adb0e2e33503b17abfd453fded4b0cd9d9e8b05e064d248dc47de0da6456788/_data</span></span><br><span class="line">[root@VM-0-6-centos _data]<span class="comment"># ls</span></span><br><span class="line">container.txt</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果访问出现了 cannot open directory: Permission denied</p>
+<p>解决办法：在挂载目录后多加一个 –privileged&#x3D;true参数即可</p>
+<h2 id="匿名和具名挂载"><a href="#匿名和具名挂载" class="headerlink" title="匿名和具名挂载"></a>匿名和具名挂载</h2><h3 id="匿名挂载"><a href="#匿名挂载" class="headerlink" title="匿名挂载"></a>匿名挂载</h3><p><code>-v 容器内路径</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name nginx01 -v /etc/nginx nginx</span><br></pre></td></tr></table></figure>
+
+<p>可通过命令 <code>docker volume ls</code> 查看挂载的列表</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker volume ls</span></span><br><span class="line">DRIVER    VOLUME NAME</span><br><span class="line"><span class="built_in">local</span>     4d0221bc0d8b9e44fb2e878cd3efcacb9b4bd51c8e135d79c549f7a6345f3a24</span><br><span class="line"><span class="built_in">local</span>     7a1e6924fed1cc5ea6a386d9b2542c0ffc53fada1755bc7d09601274dff6ddd0</span><br><span class="line"><span class="built_in">local</span>     7adb0e2e33503b17abfd453fded4b0cd9d9e8b05e064d248dc47de0da6456788</span><br><span class="line"><span class="built_in">local</span>     adaa3053cb2ff95afc7bab51451f4b1167aa1b9056398ed44b0d4cae9580db52</span><br></pre></td></tr></table></figure>
+
+<p>这些没指定名字的都是匿名挂载，我们 -v 只写了容器内路径，并没写容器外路径</p>
+<p>挂载目录是： <code>/var/lib/docker/volumes/VOLUME-NAME/_data</code></p>
+<p>匿名挂载的缺点，就是不好维护，不清楚目录挂载的是哪个容器</p>
+<h3 id="具名挂载"><a href="#具名挂载" class="headerlink" title="具名挂载"></a>具名挂载</h3><p><code>-v 卷名:/容器内路径</code></p>
+<p>例如取名为 juming 来挂载</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker run -d -P --name nginx02 -v juming:/etc/nginx nginx</span></span><br><span class="line">112f36599f077eada56197c22dd3b3a3eaba2e5bb38bf2cb19adc783163991e7</span><br><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker volume ls</span></span><br><span class="line">DRIVER    VOLUME NAME</span><br><span class="line"><span class="built_in">local</span>     4d0221bc0d8b9e44fb2e878cd3efcacb9b4bd51c8e135d79c549f7a6345f3a24</span><br><span class="line"><span class="built_in">local</span>     7a1e6924fed1cc5ea6a386d9b2542c0ffc53fada1755bc7d09601274dff6ddd0</span><br><span class="line"><span class="built_in">local</span>     7adb0e2e33503b17abfd453fded4b0cd9d9e8b05e064d248dc47de0da6456788</span><br><span class="line"><span class="built_in">local</span>     adaa3053cb2ff95afc7bab51451f4b1167aa1b9056398ed44b0d4cae9580db52</span><br><span class="line"><span class="built_in">local</span>     juming</span><br></pre></td></tr></table></figure>
+
+<p>查看挂载的目录：<code>docker volume VOLUME-NAME</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment"># docker volume inspect juming</span></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;CreatedAt&quot;</span>: <span class="string">&quot;2021-06-05T16:32:10+08:00&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Labels&quot;</span>: null,</span><br><span class="line">        <span class="string">&quot;Mountpoint&quot;</span>: <span class="string">&quot;/var/lib/docker/volumes/juming/_data&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;juming&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Options&quot;</span>: null,</span><br><span class="line">        <span class="string">&quot;Scope&quot;</span>: <span class="string">&quot;local&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"><span class="comment"># 怎么判断挂载的是卷名而不是本机目录名？</span></span><br><span class="line">不是/开始就是卷名，是/开始就是目录名</span><br></pre></td></tr></table></figure>
+
+<p>挂载操作中，没指定目录名情况下，默认在 <code>/var/lib/docker/volumes/</code> 目录下</p>
+<ul>
+<li>改变文件的读写权限</li>
+</ul>
+<p>指定容器对我们挂载出来的内容的读写权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name nginx02 -v nginxconfig:/etc/nginx:ro nginx</span><br><span class="line">docker run -d -P --name nginx02 -v nginxconfig:/etc/nginx:rw nginx</span><br></pre></td></tr></table></figure>
+
+<p>ro: readonly 只读</p>
+<p>rw: readwrite 可读可写</p>
+<h2 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h2><p>之前的是主机和容器之间共享数据，那么如何实现容器和容器之间的共享数据呢？</p>
+<p>命名的容器挂载数据卷，其他容器通过挂载这个（父容器）实现数据共享，挂载数据卷的容器，称之为<strong>数据卷容器(Data Volume Container)</strong></p>
+<blockquote>
+<p> 测试容器间传递共享</p>
+</blockquote>
+<p>使用之前的镜像：<code>test-centos</code> 为模板，运行容器 docker01（父容器），docker02，docker03</p>
+<p>他们都会具有容器卷 <code>/dataVolumeContainer1</code> 和 <code>/dataVolumeContainer2</code></p>
+<p><strong>1、先启动一个父容器docker01，然后在 dataVolumeContainer2 新增文件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos _data]<span class="comment"># docker run -it --name docker01 test-centos</span></span><br><span class="line">[root@cd87cb3eb33b /]<span class="comment"># ls -l</span></span><br><span class="line">total 56</span><br><span class="line">lrwxrwxrwx   1 root root    7 Nov  3  2020 bin -&gt; usr/bin</span><br><span class="line">drwxr-xr-x   2 root root 4096 Jun  5 08:56 dataVolumeContainer1</span><br><span class="line">drwxr-xr-x   2 root root 4096 Jun  5 08:56 dataVolumeContainer2</span><br><span class="line">............</span><br><span class="line">[root@cd87cb3eb33b /]<span class="comment"># cd dataVolumeContainer2</span></span><br><span class="line">[root@cd87cb3eb33b dataVolumeContainer2]<span class="comment"># touch docker01.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>退出且不停止容器运行：<code>ctrl+P+Q</code></p>
+<p><strong>2、创建docker02，docker03 让他们继承docker01</strong></p>
+<p>可以看到 docker01 创建的文件存在</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos _data]<span class="comment"># docker run -it --name docker02 --volumes-from docker01 test-centos</span></span><br><span class="line">[root@f81238516f65 /]<span class="comment">#  cd dataVolumeContainer2</span></span><br><span class="line">[root@f81238516f65 dataVolumeContainer2]<span class="comment"># ls</span></span><br><span class="line">docker01.txt</span><br><span class="line">[root@f81238516f65 dataVolumeContainer2]<span class="comment"># touch docker02.txt</span></span><br><span class="line"></span><br><span class="line">[root@VM-0-6-centos _data]<span class="comment"># docker run -it --name docker03 --volumes-from docker01 test-centos</span></span><br><span class="line">[root@c8c41a2a0831 /]<span class="comment"># ls</span></span><br><span class="line">bin  dataVolumeContainer1  dataVolumeContainer2  dev  etc  home  lib  lib64  lost+found  media	mnt  opt  proc	root  run  sbin  srv  sys  tmp	usr  var</span><br><span class="line">[root@c8c41a2a0831 /]<span class="comment"># cd dataVolumeContainer2</span></span><br><span class="line">[root@c8c41a2a0831 dataVolumeContainer2]<span class="comment"># ls</span></span><br><span class="line">docker01.txt  docker02.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、回到docker01发现可以看到 02 和 03 添加的共享文件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-0-6-centos ~]<span class="comment">#  docker attach docker01</span></span><br><span class="line">[root@cd87cb3eb33b dataVolumeContainer2]<span class="comment"># ls -l</span></span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Jun  5 08:56 docker01.txt</span><br><span class="line">-rw-r--r-- 1 root root 0 Jun  5 08:58 docker02.txt</span><br><span class="line">-rw-r--r-- 1 root root 0 Jun  5 09:00 docker03.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除 docker01 后 ，docker02 修改文件后， docker03 还可以正常共享数据</li>
+<li>删除docker02 ，docker03能访问</li>
+<li>新建docker04继承docker03，然后再删除docker03，可以访问</li>
+</ul>
+<blockquote>
+<p>得出结论</p>
+</blockquote>
+<p>容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止。 存储在本机的文件则会一直保留！</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Docker之容器数据卷</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-16 16:49:23</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/16/Docker之容器数据卷/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Docker/">#Docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/16/Docker%E4%B9%8BDockerFile/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之DockerFile</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/16/Docker%E4%B9%8B%E9%95%9C%E5%83%8F%E5%92%8C%E4%BB%93%E5%BA%93/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Docker之镜像和仓库</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="nav-number">1.</span> <span class="nav-text">什么是数据卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%8D%B7"><span class="nav-number">2.</span> <span class="nav-text">使用数据卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-v-%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">指令 v 方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6-Docker-File-%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">文件 Docker File 方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%92%8C%E5%85%B7%E5%90%8D%E6%8C%82%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">匿名和具名挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E6%8C%82%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">匿名挂载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E6%8C%82%E8%BD%BD"><span class="nav-number">3.2.</span> <span class="nav-text">具名挂载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">数据卷容器</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

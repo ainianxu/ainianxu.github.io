@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            RabbitMQ之发布确认高级 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RabbitMQ之发布确认高级</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-05 11:05:02</span>
+        <span class="mobile">2022-08-05 11:05</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RabbitMQ/">RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>在生产环境中由于一些不明原因，导致 RabbitMQ  重启，在 RabbitMQ 重启期间生产者消息投递失败， 导致消息丢失，需要手动处理和恢复。于是，我们开始思考，如何才能进行 RabbitMQ 的消息可靠投递呢？ </p>
+<h2 id="发布确认-springboot-版本"><a href="#发布确认-springboot-版本" class="headerlink" title="发布确认 springboot 版本"></a>发布确认 springboot 版本</h2><h3 id="确认机制方案："><a href="#确认机制方案：" class="headerlink" title="确认机制方案："></a>确认机制方案：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/7JvBagZsbYe8dTS.png"
+                      alt="image-20220805120847898"
+                ></p>
+<h3 id="代码架构图"><a href="#代码架构图" class="headerlink" title="代码架构图"></a>代码架构图</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/Fi1JMh28CtjGBX4.png"
+                      alt="image-20220805120907456"
+                ></p>
+<p>在配置文件当中需要添加</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.rabbitmq.publisher-confirm-type</span>=<span class="string">correlated</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>NONE</code> 值是禁用发布确认模式，是默认值</p>
+</li>
+<li><p><code>CORRELATED</code> 值是发布消息成功到交换器后会触发回调方法</p>
+</li>
+<li><p><code>SIMPLE</code> 值经测试有两种效果，其一效果和 CORRELATED 值一样会触发回调方法，其二在发布消息成功后使用 rabbitTemplate 调用 waitForConfirms 或 waitForConfirmsOrDie 方法等待 broker 节点返回发送结果，根据返回结果来判定下一步的逻辑，要注意的点是 waitForConfirmsOrDie 方法如果返回 false 则会关闭 channel，则接下来无法发送消息到 broker;</p>
+</li>
+</ul>
+<h3 id="添加配置类"><a href="#添加配置类" class="headerlink" title="添加配置类"></a><strong>添加配置类</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConfirmConfig</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明业务 Exchange</span></span><br><span class="line">    <span class="meta">@Bean(&quot;confirmExchange&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">confirmExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(CONFIRM_EXCHANGE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明确认队列</span></span><br><span class="line">    <span class="meta">@Bean(&quot;confirmQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">confirmQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(CONFIRM_QUEUE_NAME).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明确认队列绑定关系</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">queueBinding</span><span class="params">(<span class="meta">@Qualifier(&quot;confirmQueue&quot;)</span> Queue queue,</span></span><br><span class="line"><span class="params">                                <span class="meta">@Qualifier(&quot;confirmExchange&quot;)</span> DirectExchange exchange)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue).to(exchange).with(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息生产者的回调接口"><a href="#消息生产者的回调接口" class="headerlink" title="消息生产者的回调接口"></a><strong>消息生产者的回调接口</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallBack</span> <span class="keyword">implements</span> <span class="title class_">RabbitTemplate</span>.ConfirmCallback &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 交换机不管是否收到消息的一个回调方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> correlationData 消息相关数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ack             交换机是否收到消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cause           为收到消息的原因</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">confirm</span><span class="params">(CorrelationData correlationData, <span class="type">boolean</span> ack, String cause)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> correlationData != <span class="literal">null</span> ? correlationData.getId() : <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (ack) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;交换机已经收到 id 为:&#123;&#125;的消息&quot;</span>, id);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            log.info(<span class="string">&quot;交换机还未收到 id 为:&#123;&#125;消息，原因:&#123;&#125;&quot;</span>, id, cause);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息生产者"><a href="#消息生产者" class="headerlink" title="消息生产者"></a><strong>消息生产者</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/confirm&quot;)</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProducerController</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.exchange&quot;</span>;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RabbitTemplate rabbitTemplate;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyCallBack myCallBack;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//依赖注入 rabbitTemplate 之后再设置它的回调对象</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">        rabbitTemplate.setConfirmCallback(myCallBack);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 消息回调和退回</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;sendMessage/&#123;message&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMessage</span><span class="params">(<span class="meta">@PathVariable</span> String message)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//指定消息 id 为 1</span></span><br><span class="line">        <span class="type">CorrelationData</span> <span class="variable">correlationData1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorrelationData</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">routingKey</span> <span class="operator">=</span> <span class="string">&quot;key1&quot;</span>;</span><br><span class="line">        rabbitTemplate.convertAndSend(CONFIRM_EXCHANGE_NAME, routingKey, message + routingKey, correlationData1);</span><br><span class="line">        log.info(routingKey + <span class="string">&quot;发送消息内容:&#123;&#125;&quot;</span>, message + routingKey);</span><br><span class="line"></span><br><span class="line">        <span class="type">CorrelationData</span> <span class="variable">correlationData2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorrelationData</span>(<span class="string">&quot;2&quot;</span>);</span><br><span class="line">        routingKey = <span class="string">&quot;key2&quot;</span>;</span><br><span class="line">        rabbitTemplate.convertAndSend(CONFIRM_EXCHANGE_NAME, routingKey, message + routingKey, correlationData2);</span><br><span class="line">        log.info(routingKey + <span class="string">&quot;发送消息内容:&#123;&#125;&quot;</span>, message + routingKey);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息消费者"><a href="#消息消费者" class="headerlink" title="消息消费者"></a><strong>消息消费者</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConfirmConsumer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = CONFIRM_QUEUE_NAME)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receiveMsg</span><span class="params">(Message message)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(message.getBody());</span><br><span class="line">        log.info(<span class="string">&quot;接受到队列 confirm.queue 消息:&#123;&#125;&quot;</span>, msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问： <a class="link"   target="_blank" rel="noopener" href="http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD" >http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="结果分析："><a href="#结果分析：" class="headerlink" title="结果分析："></a>结果分析：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/QfTikou7qPLm2xC.png"
+                      alt="image-20220805121032264"
+                ></p>
+<p>可以看到，发送了两条消息，第一条消息的 RoutingKey 为 “key1”，第二条消息的 RoutingKey 为 “key2”，两条消息都成功被交换机接收，也收到了交换机的确认回调，但消费者只收到了一条消息，因为第二条消息的 RoutingKey 与队列的 BindingKey 不一致，也没有其它队列能接收这个消息，所有第二条消息被直接丢弃了。</p>
+<p>丢弃的消息交换机是不知道的，需要解决告诉生产者消息传送失败</p>
+<h2 id="回退消息"><a href="#回退消息" class="headerlink" title="回退消息"></a>回退消息</h2><h3 id="Mandatory-参数"><a href="#Mandatory-参数" class="headerlink" title="Mandatory 参数"></a>Mandatory 参数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitTemplate.setReturnsCallback(myCallBack);</span><br></pre></td></tr></table></figure>
+
+<p>在仅开启了生产者确认机制的情况下，交换机接收到消息后，会直接给消息生产者发送确认消息，如果发现该消息不可路由，那么消息会被直接丢弃，此时生产者是不知道消息被丢弃这个事件的。</p>
+<p>那么如何让无法被路由的消息帮我想办法处理一下？最起码通知我一声，我好自己处理啊。通过设置 mandatory 参数可以在当消息传递过程中不可达目的地时将消息返回给生产者。</p>
+<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a><strong>修改配置</strong></h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#消息退回</span></span><br><span class="line"><span class="attr">spring.rabbitmq.publisher-returns</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改回调接口"><a href="#修改回调接口" class="headerlink" title="修改回调接口"></a><strong>修改回调接口</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallBack</span> <span class="keyword">implements</span> <span class="title class_">RabbitTemplate</span>.ConfirmCallback, RabbitTemplate.ReturnsCallback &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 交换机不管是否收到消息的一个回调方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> correlationData 消息相关数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ack             交换机是否收到消息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> cause           为收到消息的原因</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">confirm</span><span class="params">(CorrelationData correlationData, <span class="type">boolean</span> ack, String cause)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> correlationData != <span class="literal">null</span> ? correlationData.getId() : <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (ack) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;交换机已经收到 id 为:&#123;&#125;的消息&quot;</span>, id);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            log.info(<span class="string">&quot;交换机还未收到 id 为:&#123;&#125;消息，原因:&#123;&#125;&quot;</span>, id, cause);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当消息无法路由的时候的回调方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">returnedMessage</span><span class="params">(ReturnedMessage returned)</span> &#123;</span><br><span class="line"></span><br><span class="line">        log.error(<span class="string">&quot;消息：&#123;&#125;，被交换机 &#123;&#125; 退回，原因：&#123;&#125;，路由key：&#123;&#125;,code:&#123;&#125;&quot;</span>,</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">String</span>(returned.getMessage().getBody()), returned.getExchange(),</span><br><span class="line">                returned.getReplyText(), returned.getRoutingKey(),</span><br><span class="line">                returned.getReplyCode());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>低版本可能没有 <code>RabbitTemplate.ReturnsCallback</code> 请用 <code>RabbitTemplate.ReturnCallback</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">returnedMessage</span><span class="params">(Message message, <span class="type">int</span> replyCode, String replyText, String</span></span><br><span class="line"><span class="params">exchange, String routingKey)</span> &#123;</span><br><span class="line">	log.info(<span class="string">&quot;消息:&#123;&#125;被服务器退回，退回原因:&#123;&#125;, 交换机是:&#123;&#125;, 路由 key:&#123;&#125;&quot;</span>,<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody()),replyText, exchange, routingKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改发送者-ProducerController"><a href="#修改发送者-ProducerController" class="headerlink" title="修改发送者 ProducerController"></a><strong>修改发送者 ProducerController</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//依赖注入 rabbitTemplate 之后再设置它的回调对象</span></span><br><span class="line"><span class="meta">@PostConstruct</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//消息回调</span></span><br><span class="line">    rabbitTemplate.setConfirmCallback(myCallBack);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * true：交换机无法将消息进行路由时，会将该消息返回给生产者</span></span><br><span class="line"><span class="comment">     * false：如果发现消息无法进行路由，则直接丢弃</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    rabbitTemplate.setMandatory(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">//设置回退消息交给谁处理</span></span><br><span class="line">    rabbitTemplate.setReturnsCallback(myCallBack);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问： <a class="link"   target="_blank" rel="noopener" href="http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD" >http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="结果分析：-1"><a href="#结果分析：-1" class="headerlink" title="结果分析："></a>结果分析：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/8NRkwbHIoFOJMV6.png"
+                      alt="image-20220805121145313"
+                ></p>
+<h2 id="备份交换机"><a href="#备份交换机" class="headerlink" title="备份交换机"></a>备份交换机</h2><p>有了 mandatory 参数和回退消息，我们获得了对无法投递消息的感知能力，在生产者的消息无法被投递时发现并处理。但有时候，我们并不知道该如何处理这些无法路由的消息，最多打个日志，然后触发报警，再来手动处理。而通过日志来处理这些无法路由的消息是很不优雅的做法，特别是当生产者所在的服务有多台机器的时候，手动复制日志会更加麻烦而且容易出错。而且设置 mandatory 参数会增加生产者的复杂性，需要添加处理这些被退回的消息的逻辑。如果既不想丢失消息，又不想增加生产者的复杂性，该怎么做呢？</p>
+<p>前面在设置死信队列的文章中，我们提到，可以为队列设置死信交换机来存储那些处理失败的消息，可是这些不可路由消息根本没有机会进入到队列，因此无法使用死信队列来保存消息。 在 RabbitMQ 中，有一种备份交换机的机制存在，可以很好的应对这个问题。</p>
+<p>什么是备份交换机呢？备份交换机可以理解为 RabbitMQ 中交换机的“备胎”，当我们为某一个交换机声明一个对应的备份交换机时，就是为它创建一个备胎，当交换机接收到一条不可路由消息时，将会把这条消息转发到备份交换机中，由备份交换机来进行转发和处理，通常备份交换机的类型为 Fanout ，这样就能把所有消息都投递到与其绑定的队列中，然后我们在备份交换机下绑定一个队列，这样所有那些原交换机无法被路由的消息，就会都进 入这个队列了。当然，我们还可以建立一个报警队列，用独立的消费者来进行监测和报警。</p>
+<h3 id="代码架构图-1"><a href="#代码架构图-1" class="headerlink" title="代码架构图"></a>代码架构图</h3><h3 id="修改配置类"><a href="#修改配置类" class="headerlink" title="修改配置类"></a><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/DBrEZlA29b8HJW5.png"
+                      alt="image-20220805121210626"
+                >修改配置类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConfirmConfig</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">CONFIRM_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;confirm.queue&quot;</span>;</span><br><span class="line">    <span class="comment">//关于备份的</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">BACKUP_EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;backup.exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">BACKUP_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;backup.queue&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">WARNING_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;warning.queue&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    //声明业务 Exchange</span></span><br><span class="line"><span class="comment">    @Bean(&quot;confirmExchange&quot;)</span></span><br><span class="line"><span class="comment">    public DirectExchange confirmExchange() &#123;</span></span><br><span class="line"><span class="comment">        return new DirectExchange(CONFIRM_EXCHANGE_NAME);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明确认队列</span></span><br><span class="line">    <span class="meta">@Bean(&quot;confirmQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">confirmQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(CONFIRM_QUEUE_NAME).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明确认队列绑定关系</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">queueBinding</span><span class="params">(<span class="meta">@Qualifier(&quot;confirmQueue&quot;)</span> Queue queue,</span></span><br><span class="line"><span class="params">                                <span class="meta">@Qualifier(&quot;confirmExchange&quot;)</span> DirectExchange exchange)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue).to(exchange).with(<span class="string">&quot;key1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//************************以下是关于备份的******************************</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明备份 Exchange</span></span><br><span class="line">    <span class="meta">@Bean(&quot;backupExchange&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> FanoutExchange <span class="title function_">backupExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(BACKUP_EXCHANGE_NAME);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明确认 Exchange 交换机的备份交换机</span></span><br><span class="line">    <span class="meta">@Bean(&quot;confirmExchange&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">confirmExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ExchangeBuilder</span> <span class="variable">exchangeBuilder</span> <span class="operator">=</span> ExchangeBuilder.directExchange(CONFIRM_EXCHANGE_NAME)</span><br><span class="line">                .durable(<span class="literal">true</span>)</span><br><span class="line">                <span class="comment">//设置该交换机的备份交换机</span></span><br><span class="line">                .withArgument(<span class="string">&quot;alternate-exchange&quot;</span>, BACKUP_EXCHANGE_NAME);</span><br><span class="line">        <span class="keyword">return</span> exchangeBuilder.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明警告队列</span></span><br><span class="line">    <span class="meta">@Bean(&quot;warningQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">warningQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(WARNING_QUEUE_NAME).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明报警队列绑定关系</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">warningBinding</span><span class="params">(<span class="meta">@Qualifier(&quot;warningQueue&quot;)</span> Queue queue,</span></span><br><span class="line"><span class="params">                                  <span class="meta">@Qualifier(&quot;backupExchange&quot;)</span> FanoutExchange backupExchange)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue).to(backupExchange);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明备份队列</span></span><br><span class="line">    <span class="meta">@Bean(&quot;backQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">backQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(BACKUP_QUEUE_NAME).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明备份队列绑定关系</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">backupBinding</span><span class="params">(<span class="meta">@Qualifier(&quot;backQueue&quot;)</span> Queue queue,</span></span><br><span class="line"><span class="params">                                 <span class="meta">@Qualifier(&quot;backupExchange&quot;)</span> FanoutExchange backupExchange)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue).to(backupExchange);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="报警消费者"><a href="#报警消费者" class="headerlink" title="报警消费者"></a>报警消费者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WarningConsumer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">WARNING_QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;warning.queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = WARNING_QUEUE_NAME)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receiveWarningMsg</span><span class="params">(Message message)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(message.getBody());</span><br><span class="line">        log.error(<span class="string">&quot;报警发现不可路由消息：&#123;&#125;&quot;</span>, msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之前已写过 <code>confirm.exchange</code> 交换机，由于更改配置，需要删掉，不然会报错</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/1vfUFTN5Debmohc.png"
+                      alt="image-20220805121247844"
+                ></p>
+<ul>
+<li>访问： <a class="link"   target="_blank" rel="noopener" href="http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD" >http://localhost:8080/confirm/sendMessage/%E4%BD%A0%E5%A5%BD<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/05/lBCUWjscv9mV8uP.png"
+                      alt="image-20220805121302297"
+                ></p>
+<p>mandatory 参数与备份交换机可以一起使用的时候，如果两者同时开启，消息究竟何去何从？谁优先级高，经过上面结果显示答案是<strong>备份交换机优先级高</strong>。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RabbitMQ之发布确认高级</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-05 11:05:02</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/05/RabbitMQ之发布确认高级/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/RabbitMQ/">#RabbitMQ</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8BRabbitMQ-%E5%85%B6%E4%BB%96%E7%9F%A5%E8%AF%86%E7%82%B9/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之RabbitMQ 其他知识点</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/05/RabbitMQ%E4%B9%8B%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RabbitMQ之延迟队列</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E7%A1%AE%E8%AE%A4-springboot-%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">发布确认 springboot 版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%88%B6%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">确认机制方案：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">1.2.</span> <span class="nav-text">代码架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">1.3.</span> <span class="nav-text">添加配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%94%9F%E4%BA%A7%E8%80%85%E7%9A%84%E5%9B%9E%E8%B0%83%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.4.</span> <span class="nav-text">消息生产者的回调接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-number">1.5.</span> <span class="nav-text">消息生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-number">1.6.</span> <span class="nav-text">消息消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="nav-number">1.7.</span> <span class="nav-text">结果分析：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E9%80%80%E6%B6%88%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">回退消息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mandatory-%E5%8F%82%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">Mandatory 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">修改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%9B%9E%E8%B0%83%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.3.</span> <span class="nav-text">修改回调接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8F%91%E9%80%81%E8%80%85-ProducerController"><span class="nav-number">2.4.</span> <span class="nav-text">修改发送者 ProducerController</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="nav-number">2.5.</span> <span class="nav-text">结果分析：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">3.</span> <span class="nav-text">备份交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%9E%B6%E6%9E%84%E5%9B%BE-1"><span class="nav-number">3.1.</span> <span class="nav-text">代码架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text">修改配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%A5%E8%AD%A6%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-number">3.3.</span> <span class="nav-text">报警消费者</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
