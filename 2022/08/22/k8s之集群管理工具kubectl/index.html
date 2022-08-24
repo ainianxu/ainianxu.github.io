@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之集群管理工具kubectl |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之集群管理工具kubectl</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-22 15:06:20</span>
+        <span class="mobile">2022-08-22 15:06</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>819 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>kubectl是Kubernetes集群的命令行工具，通过kubectl能够对集群本身进行管理，并能够在集群上进行容器化应用的安装和部署</p>
+<h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><p>命令格式如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl [<span class="built_in">command</span>] [<span class="built_in">type</span>] [name] [flags]</span><br></pre></td></tr></table></figure>
+
+<p>参数</p>
+<ul>
+<li>command：指定要对资源执行的操作，例如create、get、describe、delete</li>
+<li>type：指定资源类型，资源类型是大小写敏感的，开发者能够以单数 、复数 和 缩略的形式</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pod pod1</span><br><span class="line">kubectl get pods pod1</span><br><span class="line">kubectl get po pod1</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/6_Kubernetes%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/images/image-20201114095544185.png"
+                      alt="image-20201114095544185"
+                ></p>
+<ul>
+<li>name：指定资源的名称，名称也是大小写敏感的，如果省略名称，则会显示所有的资源，例如</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>flags：指定可选的参数，例如，可用 -s 或者 -server参数指定Kubernetes API server的地址和端口</li>
+</ul>
+<h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><h3 id="kubectl-help-获取更多信息"><a href="#kubectl-help-获取更多信息" class="headerlink" title="kubectl help 获取更多信息"></a>kubectl help 获取更多信息</h3><p>通过 help命令，能够获取帮助信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取kubectl的命令</span></span><br><span class="line">kubectl --<span class="built_in">help</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取某个命令的介绍和使用</span></span><br><span class="line">kubectl get --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><p>常见的基础命令</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">create</td>
+<td align="center">通过文件名或标准输入创建资源</td>
+</tr>
+<tr>
+<td align="center">expose</td>
+<td align="center">将一个资源公开为一个新的Service</td>
+</tr>
+<tr>
+<td align="center">run</td>
+<td align="center">在集群中运行一个特定的镜像</td>
+</tr>
+<tr>
+<td align="center">set</td>
+<td align="center">在对象上设置特定的功能</td>
+</tr>
+<tr>
+<td align="center">get</td>
+<td align="center">显示一个或多个资源</td>
+</tr>
+<tr>
+<td align="center">explain</td>
+<td align="center">文档参考资料</td>
+</tr>
+<tr>
+<td align="center">edit</td>
+<td align="center">使用默认的编辑器编辑一个资源</td>
+</tr>
+<tr>
+<td align="center">delete</td>
+<td align="center">通过文件名，标准输入，资源名称或标签来删除资源</td>
+</tr>
+</tbody></table>
+<h3 id="部署命令"><a href="#部署命令" class="headerlink" title="部署命令"></a>部署命令</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">rollout</td>
+<td align="center">管理资源的发布</td>
+</tr>
+<tr>
+<td align="center">rolling-update</td>
+<td align="center">对给定的复制控制器滚动更新</td>
+</tr>
+<tr>
+<td align="center">scale</td>
+<td align="center">扩容或缩容Pod数量，Deployment、ReplicaSet、RC或Job</td>
+</tr>
+<tr>
+<td align="center">autoscale</td>
+<td align="center">创建一个自动选择扩容或缩容并设置Pod数量</td>
+</tr>
+</tbody></table>
+<h3 id="集群管理命令"><a href="#集群管理命令" class="headerlink" title="集群管理命令"></a>集群管理命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>certificate</td>
+<td>修改证书资源</td>
+</tr>
+<tr>
+<td>cluster-info</td>
+<td>显示集群信息</td>
+</tr>
+<tr>
+<td>top</td>
+<td>显示资源(CPU&#x2F;M)</td>
+</tr>
+<tr>
+<td>cordon</td>
+<td>标记节点不可调度</td>
+</tr>
+<tr>
+<td>uncordon</td>
+<td>标记节点可被调度</td>
+</tr>
+<tr>
+<td>drain</td>
+<td>驱逐节点上的应用，准备下线维护</td>
+</tr>
+<tr>
+<td>taint</td>
+<td>修改节点taint标记</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="故障和调试命令"><a href="#故障和调试命令" class="headerlink" title="故障和调试命令"></a>故障和调试命令</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">describe</td>
+<td align="center">显示特定资源或资源组的详细信息</td>
+</tr>
+<tr>
+<td align="center">logs</td>
+<td align="center">在一个Pod中打印一个容器日志，如果Pod只有一个容器，容器名称是可选的</td>
+</tr>
+<tr>
+<td align="center">attach</td>
+<td align="center">附加到一个运行的容器</td>
+</tr>
+<tr>
+<td align="center">exec</td>
+<td align="center">执行命令到容器</td>
+</tr>
+<tr>
+<td align="center">port-forward</td>
+<td align="center">转发一个或多个</td>
+</tr>
+<tr>
+<td align="center">proxy</td>
+<td align="center">运行一个proxy到Kubernetes API Server</td>
+</tr>
+<tr>
+<td align="center">cp</td>
+<td align="center">拷贝文件或目录到容器中</td>
+</tr>
+<tr>
+<td align="center">auth</td>
+<td align="center">检查授权</td>
+</tr>
+</tbody></table>
+<h3 id="其它命令"><a href="#其它命令" class="headerlink" title="其它命令"></a>其它命令</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">apply</td>
+<td align="center">通过文件名或标准输入对资源应用配置</td>
+</tr>
+<tr>
+<td align="center">patch</td>
+<td align="center">使用补丁修改、更新资源的字段</td>
+</tr>
+<tr>
+<td align="center">replace</td>
+<td align="center">通过文件名或标准输入替换一个资源</td>
+</tr>
+<tr>
+<td align="center">convert</td>
+<td align="center">不同的API版本之间转换配置文件</td>
+</tr>
+<tr>
+<td align="center">label</td>
+<td align="center">更新资源上的标签</td>
+</tr>
+<tr>
+<td align="center">annotate</td>
+<td align="center">更新资源上的注释</td>
+</tr>
+<tr>
+<td align="center">completion</td>
+<td align="center">用于实现kubectl工具自动补全</td>
+</tr>
+<tr>
+<td align="center">api-versions</td>
+<td align="center">打印受支持的API版本</td>
+</tr>
+<tr>
+<td align="center">config</td>
+<td align="center">修改kubeconfig文件（用于访问API，比如配置认证信息）</td>
+</tr>
+<tr>
+<td align="center">help</td>
+<td align="center">所有命令帮助</td>
+</tr>
+<tr>
+<td align="center">plugin</td>
+<td align="center">运行一个命令行插件</td>
+</tr>
+<tr>
+<td align="center">version</td>
+<td align="center">打印客户端和服务版本信息</td>
+</tr>
+</tbody></table>
+<h3 id="目前使用的命令"><a href="#目前使用的命令" class="headerlink" title="目前使用的命令"></a>目前使用的命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个nginx镜像</span></span><br><span class="line">kubectl create deployment nginx --image=nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对外暴露端口</span></span><br><span class="line">kubectl expose deployment nginx --port=80 --<span class="built_in">type</span>=NodePort</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看资源</span></span><br><span class="line">kubectl get pod, svc</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之集群管理工具kubectl</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-22 15:06:20</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/22/k8s之集群管理工具kubectl/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/22/k8s%E4%B9%8BYAML%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之YAML文件详解</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/22/k8s%E4%B9%8BKubeadm%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之Kubeadm和二进制方式对比</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">命令格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">常见命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kubectl-help-%E8%8E%B7%E5%8F%96%E6%9B%B4%E5%A4%9A%E4%BF%A1%E6%81%AF"><span class="nav-number">3.1.</span> <span class="nav-text">kubectl help 获取更多信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.</span> <span class="nav-text">基础命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%91%BD%E4%BB%A4"><span class="nav-number">3.3.</span> <span class="nav-text">部署命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="nav-number">3.4.</span> <span class="nav-text">集群管理命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E5%92%8C%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">故障和调试命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%91%BD%E4%BB%A4"><span class="nav-number">3.6.</span> <span class="nav-text">其它命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%89%8D%E4%BD%BF%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">3.7.</span> <span class="nav-text">目前使用的命令</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

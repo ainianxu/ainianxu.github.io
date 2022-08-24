@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Jenkins之自动构建部署SpringBoot项目 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Jenkins之自动构建部署SpringBoot项目</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-17 22:57:00</span>
+        <span class="mobile">2022-08-17 22:57</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Jenkins/">Jenkins</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li><p>一台服务器</p>
+<p>建议配置2h4g以上（1h2g的属实有点低了）</p>
+</li>
+<li><p>sspringboot项目手动用maven打包，且jar包可正常运行</p>
+<p>如果你的是多模块项目（如图），需要配置好打包，否则启动失败</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/4v6QwFuRnTfiLxc.png"
+                      alt="image-20220817230008319" style="zoom:50%;" 
+                >
+
+<p>就像这样的项目，可浏览文章：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/A_zhiyuan/article/details/120326653" >SpringBoot多模块打包方式<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ul>
+<h2 id="安装Jenkins"><a href="#安装Jenkins" class="headerlink" title="安装Jenkins"></a>安装Jenkins</h2><p>安装教程可看视频：<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wA411c7aS" >https://www.bilibili.com/video/BV1wA411c7aS<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>1、安装</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<p><strong>2、创建目录</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost data]<span class="comment"># mkdir jenkins_home</span></span><br><span class="line">[root@localhost data]<span class="comment"># ls</span></span><br><span class="line">docker  jenkins_home</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、启动</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=jenkins -p 8080:8080 -v /data/jenkins_home:/var/jenkins_home jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+
+<p>启动失败：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost data]<span class="comment"># docker logs  d6b5baf89d6b</span></span><br><span class="line"><span class="built_in">touch</span>: cannot <span class="built_in">touch</span> <span class="string">&#x27;/var/jenkins_home/copy_reference_file.log&#x27;</span>: Permission denied</span><br><span class="line">Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?</span><br><span class="line"><span class="built_in">touch</span>: cannot <span class="built_in">touch</span> <span class="string">&#x27;/var/jenkins_home/copy_reference_file.log&#x27;</span>: Permission denied</span><br><span class="line">Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?</span><br></pre></td></tr></table></figure>
+
+<p>权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R 1000 /data/jenkins_home</span><br></pre></td></tr></table></figure>
+
+<p>再重新启动，等启动工作完毕后</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/CbvhjxNiQr2nDfy.png"
+                      alt="image-20220817230307398"
+                ></p>
+<p>查看容器日志：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs jenkins</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/Ejn3Kf4c1DOUd7a.png"
+                      alt="image-20220817230355698"
+                ></p>
+<p>箭头所指就是密码</p>
+<blockquote>
+<p>方法二：</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost data]<span class="comment"># cd jenkins_home/secrets/</span></span><br><span class="line">[root@localhost secrets]<span class="comment"># ll</span></span><br><span class="line">总用量 20</span><br><span class="line">drwxr-xr-x 2 www www  29 9月  14 18:45 filepath-filters.d</span><br><span class="line">-rw-r----- 1 www www  33 9月  14 18:45 initialAdminPassword</span><br><span class="line">-rw-r--r-- 1 www www  32 9月  14 18:45 jenkins.model.Jenkins.crumbSalt</span><br><span class="line">-rw-r--r-- 1 www www 256 9月  14 18:45 master.key</span><br><span class="line">-rw-r--r-- 1 www www 272 9月  14 18:45 org.jenkinsci.main.modules.instance_identity.InstanceIdentity.KEY</span><br><span class="line">-rw-r--r-- 1 www www   5 9月  14 18:45 slave-to-master-security-kill-switch</span><br><span class="line">drwxr-xr-x 2 www www  26 9月  14 18:45 whitelisted-callables.d</span><br><span class="line">[root@localhost secrets]<span class="comment"># cat initialAdminPassword</span></span><br><span class="line">730edbb8adcd4ae7b58f14ac3ccd001d</span><br></pre></td></tr></table></figure>
+
+<p>Jenkins修改初始密码:<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/John_z1/article/details/88972490" >https://blog.csdn.net/John_z1/article/details/88972490<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>5、进入页面后，选择推荐的插件</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/YdNJfzRjkW4tabT.png"
+                      alt="image-20220817230604871" style="zoom:50%;" 
+                >
+
+<p>全部安装成功后：</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/7eJ5CFI31bLpUfu.png"
+                      alt="image-20220817230625918" style="zoom:50%;" 
+                >
+
+<p>有一些会安装失败（我用的服务器，用虚拟机的由于有墙可能访问不到github）</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/KzmMWLy76TxqcoE.png"
+                      alt="image-20220817230645102" style="zoom:50%;" 
+                >
+
+<p>点击重试后</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/QtY4pA5xrd93gwI.png"
+                      alt="image-20220817230706078"
+                ></p>
+<p>大部分都装上了，有几个可能会装不上，到时候可以手动安装，先点确定</p>
+<p>然后创建用户</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/Y4jd6FC2tewoBM7.png"
+                      alt="image-20220817230735897"
+                ></p>
+<p>下一步，URL为，jenkins的IP:端口</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/Jr3pojeka4u25w7.png"
+                      alt="image-20220817230757442"
+                ></p>
+<h2 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/ig8sECKwJRZNFkQ.png"
+                      alt="image-20220817231013803"
+                ></p>
+<p>搜索插件 ssh（红色代表与jenkins版本不匹配）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/sNlkJrnW1y7ux6p.png"
+                      alt="image-20220817231105487"
+                ></p>
+<p>安装失败重新安装即可！<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/szWalfgeO1Z8PHi.png"
+                      alt="image-20220817231122911" style="zoom:50%;" 
+                ></p>
+<p>第一行表示之前的安装的日志，等图标变成蓝色代表安装成功</p>
+<h2 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h2><p>全局工具配置</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/7mghBIC5nzyoZOU.png"
+                      alt="image-20220817231150061"
+                ></p>
+<p>点新增JDK，选择版本，登录下oracle账号：<a class="link"   href="mailto:&#x32;&#x36;&#57;&#54;&#54;&#55;&#49;&#50;&#56;&#x35;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;" >&#x32;&#x36;&#57;&#54;&#54;&#55;&#49;&#50;&#56;&#x35;&#64;&#113;&#113;&#x2e;&#99;&#x6f;&#109;<i class="fas fa-external-link-alt"></i></a> Oracle123</p>
+<p>账号为up主提供的：<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wA411c7aS" >https://www.bilibili.com/video/BV1wA411c7aS<i class="fas fa-external-link-alt"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/IYk1pe56lmRP4Ef.png"
+                      alt="image-20220817231228970"
+                ></p>
+<p>之后安装maven（如果你的项目不是maven则安装别的插件）</p>
+<h2 id="安装maven"><a href="#安装maven" class="headerlink" title="安装maven"></a>安装maven</h2><p>点击保存</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/ivQxkfhJqjoleRA.png"
+                      alt="image-20220817231241037"
+                ></p>
+<h2 id="配置ssh"><a href="#配置ssh" class="headerlink" title="配置ssh"></a>配置ssh</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/oxLCrpWuvntAHbZ.png"
+                      alt="image-20220817231302982"
+                ></p>
+<p>搜索 ssh</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/7dmMwgK9pYHeBVP.png"
+                      alt="image-20220817231313297"
+                ></p>
+<p>添加ssh的ip和端口 ， 点击添加</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/DmtMWHCETFRBJ43.png"
+                      alt="image-20220817231326578" style="zoom:67%;" 
+                >
+
+<p>添加服务器的账号和密码</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/LFUSGoaNYHWKPRO.png"
+                      alt="image-20220817231341670"
+                ></p>
+<p>检测连接是否成功</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/2VLx6y3m1wSbZfU.png"
+                      alt="image-20220817231356266" style="zoom:80%;" 
+                >
+
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><p><strong>1、新建项目</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/mqXky5TLQbE1CRB.png"
+                      alt="image-20220817231413880" style="zoom:50%;" 
+                >
+
+<p><strong>2、输入任务名称，选择maven</strong></p>
+<p>没有这个项目则下载maven插件（百度即可）</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://plugins.jenkins.io/maven-plugin" >Maven Integration plugin<i class="fas fa-external-link-alt"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/qyDkg4wpURnPZr6.png"
+                      alt="image-20220817231515456"
+                ></p>
+<p><strong>3、设置源码管理</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/eMXZuSv9Gjg6pfU.png"
+                      alt="image-20220817231531177" style="zoom:50%;" 
+                >
+
+<p>记得添加你的gitee账号密码的凭据</p>
+<p><strong>4、设置Maven</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/tpCdIPG5x8XFByf.png"
+                      alt="image-20220817231554733" style="zoom:50%;" 
+                >
+
+<p>设置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clean package</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/cC1UOpaSt5omKji.png"
+                      alt="image-20220817231618381"
+                ></p>
+<p>然后我们先构建下，等待结束</p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/iMyIxeYEh8WZqwg.png"
+                      alt="image-20220817231630882" style="zoom:50%;" 
+                >
+
+<p>但是maven下载依赖速度太慢，我们可以手动关闭构建，把镜像配置为阿里云镜像</p>
+<p><strong>5、修改maven配置</strong></p>
+<p>配置文件在你的jenkins数据目录下，例如我的就是：</p>
+<p><code>/data/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation</code></p>
+<p>按照原先方法修改配置文件，把maven远程仓库地址改成阿里云的。</p>
+<p><strong>6、重新构建</strong></p>
+<p>点击 立即构建</p>
+<p>这次下载速度就快了，构建好的jar包目录在：</p>
+<p><code>/data/jenkins_home/workspace/jekins-test/service/target</code></p>
+<p>jekins-test：是任务名称（我创建任务时，少打了个n）</p>
+<p>选中查看控制台输出</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/U57flLG6R8PMZxr.png"
+                      alt="image-20220817231829152"
+                ></p>
+<p>根据输出就能看到jar的生成目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/emwsX7bagu6BGiQ.png"
+                      alt="image-20220817231759396"
+                ></p>
+<p>然后我们启动看看是否正常</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /data/jenkins_home/workspace/jekins-test/service/target</span><br><span class="line"><span class="built_in">nohup</span> java -jar service-0.0.1-SNAPSHOT.jar &gt; /data/journalism/logs.txt &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构建后自动部署"><a href="#构建后自动部署" class="headerlink" title="构建后自动部署"></a>构建后自动部署</h2><p>8160是我的springboot服务端口</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat  -nlp|grep 8160</span><br></pre></td></tr></table></figure>
+
+<p>强制杀死某个端口进程命令，关闭jar包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fuser -k -n tcp 8160</span><br></pre></td></tr></table></figure>
+
+<p>请先把刚才开启的jar包服务关掉</p>
+<p>设置<strong>构建环境</strong>配置，构建后操作（构建前就不用设置，测试过，填了就出现错误）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/pX7JU8beNTIrd6R.png"
+                      alt="image-20220817231918865"
+                ></p>
+<h2 id="Git提交后自动构建"><a href="#Git提交后自动构建" class="headerlink" title="Git提交后自动构建"></a>Git提交后自动构建</h2><p><strong>1、配置URL构建触发器</strong></p>
+<p>令牌随便输，URL格式就是下面那个英文说明，根据自己的修改</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/pX7JU8beNTIrd6R.png"
+                     
+                ></p>
+<p><strong>2、配置Gitee的WebHooks</strong></p>
+<p>我这里用的Gitee（学校网进GitHub很不稳定，就选择Gitee了）</p>
+<p>Gitee项目里设置URL和秘钥</p>
+<p>为了安全自己写个服务用来访问触发Jenkins构建的URL，不直接输入之前的URL</p>
+<p>例如：我用的php，代码在下方</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/mv9cITAgHiqQL8W.png"
+                      alt="image-20220817232018290"
+                ></p>
+<p><strong>3、添加用户token</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/3CoGSTvuIl8eXk4.png"
+                      alt="image-20220817232033714"
+                ></p>
+<p>生成，保存token信息</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/KaFQYyipb39PvZV.png"
+                      alt="image-20220817232108889"
+                ></p>
+<p>修改url，例如我的，根据自己规则设置</p>
+<p><code>http://用户名:token@ip:端口/job/jekins-test/build?token=设置的token</code></p>
+<p>详情访问：<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/tyrionyang/p/8183819.html" >通过URL触发Jenkins构建<i class="fas fa-external-link-alt"></i></a></p>
+<p>php代码如下（修改URL和秘钥）：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//接收头信息</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">em_getallheaders</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">foreach</span> (<span class="variable">$_SERVER</span> <span class="keyword">as</span> <span class="variable">$name</span> =&gt; <span class="variable">$value</span>)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="title function_ invoke__">substr</span>(<span class="variable">$name</span>, <span class="number">0</span>, <span class="number">5</span>) == <span class="string">&#x27;HTTP_&#x27;</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="variable">$headers</span>[<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="title function_ invoke__">ucwords</span>(<span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27; &#x27;</span>, <span class="title function_ invoke__">substr</span>(<span class="variable">$name</span>, <span class="number">5</span>)))))] = <span class="variable">$value</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="variable">$headers</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//发送请求</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSslPage</span>(<span class="params"><span class="variable">$url</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$ch</span> = <span class="title function_ invoke__">curl_init</span>();</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_SSL_VERIFYPEER, <span class="literal">FALSE</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_HEADER, <span class="literal">false</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_FOLLOWLOCATION, <span class="literal">true</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_URL, <span class="variable">$url</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_REFERER, <span class="variable">$url</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_setopt</span>(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="literal">TRUE</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="title function_ invoke__">curl_exec</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="title function_ invoke__">curl_close</span>(<span class="variable">$ch</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$url</span> = <span class="string">&quot;你的URL&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$headers</span> = <span class="title function_ invoke__">em_getallheaders</span>();</span><br><span class="line"><span class="comment">//是否等于Gitee设置的秘钥</span></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$headers</span>[<span class="string">&#x27;X-Gitee-Token&#x27;</span>] == <span class="string">&quot;你设置的秘钥&quot;</span>)&#123;</span><br><span class="line">    <span class="comment">//调用</span></span><br><span class="line">    <span class="title function_ invoke__">getSslPage</span>(<span class="variable">$url</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;no&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$headers</span>[<span class="string">&#x27;X-Gitee-Token&#x27;</span>]) ;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、完成测试</strong></p>
+<p>更改代码，push到Gitee</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/6TzOUDCoaHv5beV.png"
+                      alt="image-20220817232140829"
+                ></p>
+<p>Gitee请求成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/ljBkyq6zJ92iKe4.png"
+                      alt="image-20220817232151721"
+                ></p>
+<p>jenkins构建成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/17/ls1QmRod5cJB4rS.png"
+                      alt="image-20220817232205343"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Jenkins之自动构建部署SpringBoot项目</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-17 22:57:00</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/17/Jenkins之自动构建部署SpringBoot项目/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Jenkins/">#Jenkins</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/20/k8s%E4%B9%8Bkubernetes%E6%A6%82%E8%BF%B0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之kubernetes概述</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/17/Jenkins%E4%B9%8B%E4%BB%8B%E7%BB%8D/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Jenkins之介绍</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Jenkins"><span class="nav-number">2.</span> <span class="nav-text">安装Jenkins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">插件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jdk"><span class="nav-number">4.</span> <span class="nav-text">安装jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85maven"><span class="nav-number">5.</span> <span class="nav-text">安装maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEssh"><span class="nav-number">6.</span> <span class="nav-text">配置ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">7.</span> <span class="nav-text">构建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%90%8E%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-number">8.</span> <span class="nav-text">构建后自动部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E6%8F%90%E4%BA%A4%E5%90%8E%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA"><span class="nav-number">9.</span> <span class="nav-text">Git提交后自动构建</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

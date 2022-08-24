@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之kubernetes概述 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之kubernetes概述</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-20 11:14:25</span>
+        <span class="mobile">2022-08-20 11:14</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>K8S主要讲的就是Kubernetes，首先Kubernetes首字母为K，末尾为s，中间一共有8个字母，所以简称K8s</p>
+<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><ul>
+<li>Linux操作系统</li>
+<li>Docker</li>
+</ul>
+<h2 id="课程简介"><a href="#课程简介" class="headerlink" title="课程简介"></a>课程简介</h2><ul>
+<li><p>K8s概念和架构</p>
+</li>
+<li><p>从零搭建K8s集群</p>
+<ul>
+<li>基于客户端工具kubeadm搭建（简单，最多半小时）</li>
+<li>基于二进制包方式（能看到内部的架构）</li>
+</ul>
+</li>
+<li><p>K8s核心概念</p>
+<ul>
+<li>Pod：K8s管理的最小单位级，是所有业务类型的基础</li>
+<li>Controller：控制器，有状态，无状态，一次任务，定时任务，守护进程</li>
+<li>Service Ingress：对外暴露端口</li>
+<li>RBAC：安全机制，权限模型</li>
+<li>Helm：下载机制</li>
+<li>持久化存储</li>
+</ul>
+</li>
+<li><p>搭建集群监控平台系统</p>
+</li>
+<li><p>从零搭建高可用K8s集群</p>
+</li>
+<li><p>在集群环境部署项目</p>
+</li>
+</ul>
+<h2 id="K8S概念和特性"><a href="#K8S概念和特性" class="headerlink" title="K8S概念和特性"></a>K8S概念和特性</h2><h3 id="部署发展历程"><a href="#部署发展历程" class="headerlink" title="部署发展历程"></a>部署发展历程</h3><p>我们的项目部署也在经历下面的这样一个历程</p>
+<blockquote>
+<p>传统部署 -&gt; 虚拟化部署时代 -&gt; 容器部署时代</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/21/x8mpD6GzLdgwATQ.png"
+                      alt="image-20201122104102715"
+                ></p>
+<ul>
+<li><strong>传统部署时代</strong>：早期，组织在物理服务器上运行应用程序。无法为物理服务器中的应用程序定义资源边界，这会导致资源分配问题。例如，如果在物理服务器上运行多个应用程序，则可能会出现-一个应用程序占用大部分资源的情况，结果可能导致其他应用程序的性能下降。–种解决方案是在不同的物理服务器上运行每个应用程序，但是由于资源利用不足而无法扩展，并且组织维护许多物理服务器的成本很高。</li>
+<li><strong>虚拟化部署时代</strong>：作为解决方案，引入了虚拟化功能，它允许您在单个物理服务器的CPU.上运行多个虚拟机（VM）。虚拟化功能允许应用程序在VM之间隔离，并提供安全级别，因为一一个应用程序的信息不能被另一应用程序自由地访问。因为虚拟化可以轻松地添加或更新应用程序、降低硬件成本等等，所以虚拟化可以更好地利用物理服务器中的资源，并可以实现更好的可伸缩性。每个VM是一台完整的计算机，在虚拟化硬件之上运行所有组件，包括其自己的操作系统。</li>
+<li><strong>容器部署时代</strong>：容器类似于VM，但是它们具有轻量级的隔离属性，可以在应用程序之间共享操作系统<br>（OS），因此，容器被认为是轻量级的。容器与VM类似，具有自己的文件系统、CPU、内存、进程空间等。由于它们与基础架构分离，因此可以跨云和OS分发进行移植。</li>
+</ul>
+<p>容器因具有许多优势而变得流行起来。下面列出了容器的一些好处：</p>
+<ul>
+<li>敏捷应用程序的创建和部署：与使用VM镜像相比，提高了容器镜像创建的简便性和效率。</li>
+<li>持续开发、集成和部署：通过简单的回滚（由于镜像不可变性），提供可靠且频繁的容器镜像构建和部署。</li>
+<li>关注开发与运维的分离：在构建&#x2F;时而不是在部署时创建应用程序容器镜像，将应用程序与基础架构分离。</li>
+<li>可观察性：不仅可以显示操作系统级别的信息和指标，还可以显示应用程序的运行状况和其他指标信号。</li>
+<li>跨开发、测试和生产的环境一致性：在便携式计算机上与在云中相同地运行。</li>
+<li>云和操作系统分发的可移植性：可在Ubuntu、RHEL、RHEL、CoreOS、本地、Google Kubernetes Engine和其它任何其它地方运行。</li>
+<li>以应用程序为中心的管理：提高抽象级别，从在虚拟硬件上运行OS到使用逻辑资源在OS上运行应用程序。</li>
+<li>松散耦合、分布式、弹性、解放的微服务：应用程序被分解成较小的独立部分，并且可以动态部署和管理-而不是在一台大型单机上器体运行。</li>
+<li>资源隔离：可预测的应用程序性能。</li>
+</ul>
+<h3 id="K8S概述"><a href="#K8S概述" class="headerlink" title="K8S概述"></a>K8S概述</h3><p>kubernetes，简称K8s，是用8 代替8 个字符“ubernete”而成的缩写。是一个开源的，用于管理云平台中多个主机上的容器化的应用，Kubernetes 的目标是让部署容器化的应用简单并且高效（powerful）,Kubernetes 提供了应用部署，规划，更新，维护的一种机制。</p>
+<p>传统的应用部署方式是通过插件或脚本来安装应用。这样做的缺点是应用的运行、配置、管理、所有生存周期将与当前操作系统绑定，这样做并不利于应用的升级更新&#x2F;回滚等操作，当然也可以通过创建虚拟机的方式来实现某些功能，但是虚拟机非常重，并不利于可移植性。</p>
+<p>新的方式是通过部署容器方式实现，每个容器之间互相隔离，每个容器有自己的文件系统，容器之间进程不会相互影响，能区分计算资源。相对于虚拟机，容器能快速部署，由于容器与底层设施、机器文件系统解耦的。</p>
+<blockquote>
+<p>总结：</p>
+<ul>
+<li>K8s是谷歌在2014年发布的容器化集群管理系统</li>
+<li>使用k8s进行容器化应用部署</li>
+<li>使用k8s利于应用扩展</li>
+<li>k8s目标实施让部署容器化应用更加简洁和高效</li>
+</ul>
+</blockquote>
+<h3 id="K8S概述-1"><a href="#K8S概述-1" class="headerlink" title="K8S概述"></a>K8S概述</h3><p>Kubernetes 是一个轻便的和可扩展的开源平台，用于管理容器化应用和服务。通过Kubernetes 能够进行应用的自动化部署和扩缩容。在Kubernetes 中，会将组成应用的容器组合成一个逻辑单元以更易管理和发现。</p>
+<p>Kubernetes 积累了作为Google 生产环境运行工作负载15 年的经验，并吸收了来自于社区的最佳想法和实践。</p>
+<h3 id="K8S功能"><a href="#K8S功能" class="headerlink" title="K8S功能"></a>K8S功能</h3><h4 id="自动装箱"><a href="#自动装箱" class="headerlink" title="自动装箱"></a>自动装箱</h4><p>基于容器对应用运行环境的资源配置要求自动部署应用容器</p>
+<h4 id="自我修复-自愈能力"><a href="#自我修复-自愈能力" class="headerlink" title="自我修复(自愈能力)"></a>自我修复(自愈能力)</h4><p>当容器失败时，会对容器进行重启</p>
+<p>当所部署的Node节点有问题时，会对容器进行重新部署和重新调度</p>
+<p>当容器未通过监控检查时，会关闭此容器直到容器正常运行时，才会对外提供服务</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../../AppData/Roaming/Typora/typora-user-images/image-20220824165531642.png"
+                      alt="image-20220824165531642"
+                ></p>
+<p>如果某个服务器上的应用不响应了，Kubernetes会自动在其它的地方创建一个</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122112241092.png"
+                      alt="image-20201122112241092"
+                ></p>
+<h4 id="水平扩展"><a href="#水平扩展" class="headerlink" title="水平扩展"></a>水平扩展</h4><p>通过简单的命令、用户UI 界面或基于CPU 等资源使用情况，对应用容器进行规模扩大或规模剪裁</p>
+<blockquote>
+<p>当我们有大量的请求来临时，我们可以增加副本数量，从而达到水平扩展的效果</p>
+</blockquote>
+<p>当黄色应用过度忙碌，会来扩展一个应用</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122112301750.png"
+                      alt="image-20201122112301750"
+                ></p>
+<h4 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h4><p>用户不需使用额外的服务发现机制，就能够基于Kubernetes 自身能力实现服务发现和负载均衡</p>
+<blockquote>
+<p>对外提供统一的入口，让它来做节点的调度和负载均衡， 相当于微服务里面的网关？</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20200928101711968.png"
+                      alt="image-20200928101711968"
+                ></p>
+<h4 id="滚动更新"><a href="#滚动更新" class="headerlink" title="滚动更新"></a>滚动更新</h4><p>可以根据应用的变化，对应用容器运行的应用，进行一次性或批量式更新</p>
+<blockquote>
+<p>添加应用的时候，不是加进去就马上可以进行使用，而是需要判断这个添加进去的应用是否能够正常使用</p>
+</blockquote>
+<h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><p>可以根据应用部署情况，对应用容器运行的应用，进行历史版本即时回退</p>
+<blockquote>
+<p>类似于Git中的回滚</p>
+</blockquote>
+<h4 id="密钥和配置管理"><a href="#密钥和配置管理" class="headerlink" title="密钥和配置管理"></a>密钥和配置管理</h4><p>在不需要重新构建镜像的情况下，可以部署和更新密钥和应用配置，类似热部署。</p>
+<h4 id="存储编排"><a href="#存储编排" class="headerlink" title="存储编排"></a>存储编排</h4><p>自动实现存储系统挂载及应用，特别对有状态应用实现数据持久化非常重要</p>
+<p>存储系统可以来自于本地目录、网络存储(NFS、Gluster、Ceph 等)、公共云存储服务</p>
+<h4 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h4><p>提供一次性任务，定时任务；满足批量数据处理和分析的场景</p>
+<h2 id="K8S架构组件"><a href="#K8S架构组件" class="headerlink" title="K8S架构组件"></a>K8S架构组件</h2><h3 id="完整架构图"><a href="#完整架构图" class="headerlink" title="完整架构图"></a>完整架构图</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20200928103059652.png"
+                      alt="image-20200928103059652"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20200928110124821.png"
+                      alt="image-20200928110124821"
+                ></p>
+<h3 id="架构细节"><a href="#架构细节" class="headerlink" title="架构细节"></a>架构细节</h3><p>K8S架构主要包含两部分：Master（主控节点）和 node（工作节点）</p>
+<p>master节点架构图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122113057343.png"
+                      alt="image-20201122113057343"
+                ></p>
+<p>Node节点架构图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122155629990.png"
+                      alt="image-20201122155629990"
+                ></p>
+<p>k8s 集群控制节点，对集群进行调度管理，接受集群外用户去集群操作请求；</p>
+<ul>
+<li><p><strong>master</strong>：主控节点</p>
+<ul>
+<li>API Server：集群统一入口，以restful风格进行操作，同时交给etcd存储<ul>
+<li>提供认证、授权、访问控制、API注册和发现等机制</li>
+</ul>
+</li>
+<li>scheduler：节点的调度，选择node节点应用部署</li>
+<li>controller-manager：处理集群中常规后台任务，一个资源对应一个控制器</li>
+<li>etcd：存储系统，用于保存集群中的相关数据</li>
+</ul>
+</li>
+<li><p><strong>Work node</strong>：工作节点</p>
+<ul>
+<li>Kubelet：master派到node节点代表，管理本机容器<ul>
+<li>一个集群中每个节点上运行的代理，它保证容器都运行在Pod中</li>
+<li>负责维护容器的生命周期，同时也负责Volume(CSI) 和 网络(CNI)的管理</li>
+</ul>
+</li>
+<li>kube-proxy：提供网络代理，负载均衡等操作</li>
+</ul>
+</li>
+<li><p>容器运行环境【<strong>Container Runtime</strong>】</p>
+<ul>
+<li>容器运行环境是负责运行容器的软件</li>
+<li>Kubernetes支持多个容器运行环境：Docker、containerd、cri-o、rktlet以及任何实现Kubernetes CRI (容器运行环境接口) 的软件。</li>
+</ul>
+</li>
+<li><p>fluentd：是一个守护进程，它有助于提升 集群层面日志</p>
+</li>
+</ul>
+<h2 id="K8S核心概念"><a href="#K8S核心概念" class="headerlink" title="K8S核心概念"></a>K8S核心概念</h2><h3 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h3><ul>
+<li>Pod是K8s中最小的单元</li>
+<li>一组容器的集合</li>
+<li>共享网络【一个Pod中的所有容器共享同一网络】</li>
+<li>生命周期是短暂的（服务器重启后，就找不到了）</li>
+</ul>
+<h3 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h3><ul>
+<li>声明在Pod容器中可访问的文件目录</li>
+<li>可以被挂载到Pod中一个或多个容器指定路径下</li>
+<li>支持多种后端存储抽象【本地存储、分布式存储、云存储】</li>
+</ul>
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><ul>
+<li>确保预期的pod副本数量【ReplicaSet】</li>
+<li>无状态应用部署【Deployment】<ul>
+<li>无状态就是指，不需要依赖于网络或者ip</li>
+</ul>
+</li>
+<li>有状态应用部署【StatefulSet】<ul>
+<li>有状态需要特定的条件</li>
+</ul>
+</li>
+<li>确保所有的node运行同一个pod 【DaemonSet】</li>
+<li>一次性任务和定时任务【Job和CronJob】</li>
+</ul>
+<h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><ul>
+<li>定义一组Pod副本数目，版本等</li>
+<li>通过控制器【Controller】维持Pod数目【自动回复失败的Pod】</li>
+<li>通过控制器以指定的策略控制版本【滚动升级、回滚等】</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122161601349.png"
+                      alt="image-20201122161601349"
+                ></p>
+<h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><ul>
+<li>定义一组pod的访问规则</li>
+<li>Pod的负载均衡，提供一个或多个Pod的稳定访问地址</li>
+<li>支持多种方式【ClusterIP、NodePort、LoadBalancer】</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122161132055.png"
+                      alt="image-20201122161132055"
+                ></p>
+<p>可以用来组合pod，同时对外提供服务</p>
+<h3 id="Label"><a href="#Label" class="headerlink" title="Label"></a>Label</h3><p>label：标签，用于对象资源查询，筛选</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122161713638.png"
+                      alt="image-20201122161713638"
+                ></p>
+<h3 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h3><p>命名空间，逻辑隔离</p>
+<ul>
+<li>一个集群内部的逻辑隔离机制【鉴权、资源】</li>
+<li>每个资源都属于一个namespace</li>
+<li>同一个namespace所有资源不能重复</li>
+<li>不同namespace可以资源名重复</li>
+</ul>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>我们通过Kubernetes的API来操作整个集群</p>
+<p>同时我们可以通过 kubectl 、ui、curl 最终发送 http + json&#x2F;yaml 方式的请求给API Server，然后控制整个K8S集群，K8S中所有的资源对象都可以采用 yaml 或 json 格式的文件定义或描述</p>
+<p>如下：使用yaml部署一个nginx的pod</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122162612448.png"
+                      alt="image-20201122162612448"
+                ></p>
+<h2 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/1_Kubernetes%E7%AE%80%E4%BB%8B/images/image-20201122163512535.png"
+                      alt="image-20201122163512535"
+                ></p>
+<ul>
+<li>通过Kubectl提交一个创建RC（Replication Controller）的请求，该请求通过APlserver写入etcd</li>
+<li>此时Controller Manager通过API Server的监听资源变化的接口监听到此RC事件</li>
+<li>分析之后，发现当前集群中还没有它所对应的Pod实例</li>
+<li>于是根据RC里的Pod模板定义一个生成Pod对象，通过APIServer写入etcd</li>
+<li>此事件被Scheduler发现，它立即执行执行一个复杂的调度流程，为这个新的Pod选定一个落户的Node，然后通过API Server讲这一结果写入etcd中</li>
+<li>目标Node上运行的Kubelet进程通过APiserver监测到这个”新生的Pod.并按照它的定义，启动该Pod并任劳任怨地负责它的下半生，直到Pod的生命结束</li>
+<li>随后，我们通过Kubectl提交一个新的映射到该Pod的Service的创建请求</li>
+<li>ControllerManager通过Label标签查询到关联的Pod实例，然后生成Service的Endpoints信息，并通过APIServer写入到etod中，</li>
+<li>接下来，所有Node上运行的Proxy进程通过APIServer查询并监听Service对象与其对应的Endponts信息，建立一个软件方式的负载均衡器来实现Service访问到后端Pod的流量转发功能</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之kubernetes概述</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-20 11:14:25</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/20/k8s之kubernetes概述/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/20/k8s%E4%B9%8B%E6%90%AD%E5%BB%BAK8S%E9%9B%86%E7%BE%A4%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之搭建K8S集群前置知识</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/17/Jenkins%E4%B9%8B%E8%87%AA%E5%8A%A8%E6%9E%84%E5%BB%BA%E9%83%A8%E7%BD%B2SpringBoot%E9%A1%B9%E7%9B%AE/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Jenkins之自动构建部署SpringBoot项目</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">课程简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K8S%E6%A6%82%E5%BF%B5%E5%92%8C%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">K8S概念和特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">4.1.</span> <span class="nav-text">部署发展历程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K8S%E6%A6%82%E8%BF%B0"><span class="nav-number">4.2.</span> <span class="nav-text">K8S概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K8S%E6%A6%82%E8%BF%B0-1"><span class="nav-number">4.3.</span> <span class="nav-text">K8S概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K8S%E5%8A%9F%E8%83%BD"><span class="nav-number">4.4.</span> <span class="nav-text">K8S功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1"><span class="nav-number">4.4.1.</span> <span class="nav-text">自动装箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E4%BF%AE%E5%A4%8D-%E8%87%AA%E6%84%88%E8%83%BD%E5%8A%9B"><span class="nav-number">4.4.2.</span> <span class="nav-text">自我修复(自愈能力)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95"><span class="nav-number">4.4.3.</span> <span class="nav-text">水平扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="nav-number">4.4.4.</span> <span class="nav-text">服务发现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">4.4.5.</span> <span class="nav-text">滚动更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="nav-number">4.4.6.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%86%E9%92%A5%E5%92%8C%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-number">4.4.7.</span> <span class="nav-text">密钥和配置管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BC%96%E6%8E%92"><span class="nav-number">4.4.8.</span> <span class="nav-text">存储编排</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-number">4.4.9.</span> <span class="nav-text">批处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K8S%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">K8S架构组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="nav-number">5.1.</span> <span class="nav-text">完整架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E7%BB%86%E8%8A%82"><span class="nav-number">5.2.</span> <span class="nav-text">架构细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K8S%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">6.</span> <span class="nav-text">K8S核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pod"><span class="nav-number">6.1.</span> <span class="nav-text">Pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Volume"><span class="nav-number">6.2.</span> <span class="nav-text">Volume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller"><span class="nav-number">6.3.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deployment"><span class="nav-number">6.4.</span> <span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service"><span class="nav-number">6.5.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Label"><span class="nav-number">6.6.</span> <span class="nav-text">Label</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Namespace"><span class="nav-number">6.7.</span> <span class="nav-text">Namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">6.8.</span> <span class="nav-text">API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">完整流程</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

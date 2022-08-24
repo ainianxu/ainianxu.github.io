@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之核心技术Helm |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之核心技术Helm</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-24 09:36:30</span>
+        <span class="mobile">2022-08-24 09:36</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Helm就是一个包管理工具【类似于npm】</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/892532-20180224212352306-705544441.png"
+                      alt="892532-20180224212352306-705544441"
+                ></p>
+<h2 id="为什么引入Helm"><a href="#为什么引入Helm" class="headerlink" title="为什么引入Helm"></a>为什么引入Helm</h2><p>首先在原来项目中都是基于yaml文件来进行部署发布的，而目前项目大部分微服务化或者模块化，会分成很多个组件来部署，每个组件可能对应一个deployment.yaml,一个service.yaml,一个Ingress.yaml还可能存在各种依赖关系，这样一个项目如果有5个组件，很可能就有15个不同的yaml文件，这些yaml分散存放，如果某天进行项目恢复的话，很难知道部署顺序，依赖关系等，而所有这些包括</p>
+<ul>
+<li>基于yaml配置的集中存放</li>
+<li>基于项目的打包</li>
+<li>组件间的依赖</li>
+</ul>
+<p>但是这种方式部署，会有什么问题呢？</p>
+<ul>
+<li>如果使用之前部署单一应用，少数服务的应用，比较合适</li>
+<li>但如果部署微服务项目，可能有几十个服务，每个服务都有一套yaml文件，需要维护大量的yaml文件，版本管理特别不方便</li>
+</ul>
+<p>Helm的引入，就是为了解决这个问题</p>
+<ul>
+<li>使用Helm可以把这些YAML文件作为整体管理</li>
+<li>实现YAML文件高效复用</li>
+<li>使用helm应用级别的版本管理</li>
+</ul>
+<h2 id="Helm介绍"><a href="#Helm介绍" class="headerlink" title="Helm介绍"></a>Helm介绍</h2><p>Helm是一个Kubernetes的包管理工具，就像Linux下的包管理器，如yum&#x2F;apt等，可以很方便的将之前打包好的yaml文件部署到kubernetes上。</p>
+<p>Helm有三个重要概念</p>
+<ul>
+<li>helm：一个命令行客户端工具，主要用于Kubernetes应用chart的创建、打包、发布和管理</li>
+<li>Chart：应用描述，一系列用于描述k8s资源相关文件的集合</li>
+<li>Release：基于Chart的部署实体，一个chart被Helm运行后将会生成对应的release，将在K8S中创建出真实的运行资源对象。也就是应用级别的版本管理</li>
+<li>Repository：用于发布和存储Chart的仓库</li>
+</ul>
+<h2 id="Helm组件及架构"><a href="#Helm组件及架构" class="headerlink" title="Helm组件及架构"></a>Helm组件及架构</h2><p>Helm采用客户端&#x2F;服务端架构，有如下组件组成</p>
+<ul>
+<li>Helm CLI是Helm客户端，可以在本地执行</li>
+<li>Tiller是服务器端组件，在Kubernetes集群上运行，并管理Kubernetes应用程序</li>
+<li>Repository是Chart仓库，Helm客户端通过HTTP协议来访问仓库中Chart索引文件和压缩包</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201119095458328.png"
+                      alt="image-20201119095458328"
+                ></p>
+<h2 id="Helm-v3变化"><a href="#Helm-v3变化" class="headerlink" title="Helm v3变化"></a>Helm v3变化</h2><p>2019年11月13日，Helm团队发布了Helm v3的第一个稳定版本</p>
+<p>该版本主要变化如下</p>
+<ul>
+<li><p>架构变化</p>
+<ul>
+<li>最明显的变化是Tiller的删除</li>
+<li>V3版本删除Tiller</li>
+<li>relesase可以在不同命名空间重用</li>
+</ul>
+</li>
+</ul>
+<p>V3之前</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118171523403.png"
+                      alt="image-20201118171523403"
+                ></p>
+<p> V3版本</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118171956054.png"
+                      alt="image-20201118171956054"
+                ></p>
+<h2 id="helm配置"><a href="#helm配置" class="headerlink" title="helm配置"></a>helm配置</h2><p>首先我们需要去 <a class="link"   target="_blank" rel="noopener" href="https://helm.sh/docs/intro/quickstart/" >官网下载<i class="fas fa-external-link-alt"></i></a></p>
+<ul>
+<li>第一步，<a class="link"   target="_blank" rel="noopener" href="https://github.com/helm/helm/releases" >下载helm<i class="fas fa-external-link-alt"></i></a>安装压缩文件，上传到linux系统中</li>
+<li>第二步，解压helm压缩文件，把解压后的helm目录复制到 usr&#x2F;bin 目录中</li>
+<li>使用命令：helm</li>
+</ul>
+<p>我们都知道yum需要配置yum源，那么helm就就要配置helm源</p>
+<h2 id="helm仓库"><a href="#helm仓库" class="headerlink" title="helm仓库"></a>helm仓库</h2><p>添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo add 仓库名  仓库地址 </span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置微软源</span></span><br><span class="line">helm repo add stable http://mirror.azure.cn/kubernetes/charts</span><br><span class="line"><span class="comment"># 配置阿里源</span></span><br><span class="line">helm repo add aliyun https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts</span><br><span class="line"><span class="comment"># 配置google源</span></span><br><span class="line">helm repo add google https://kubernetes-charts.storage.googleapis.com/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">helm repo update</span><br></pre></td></tr></table></figure>
+
+<p>然后可以查看我们添加的仓库地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看全部</span></span><br><span class="line">helm repo list</span><br><span class="line"><span class="comment"># 查看某个</span></span><br><span class="line">helm search repo stable</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118195732281.png"
+                      alt="image-20201118195732281"
+                ></p>
+<p>或者可以删除我们添加的源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo remove stable</span><br></pre></td></tr></table></figure>
+
+<h2 id="helm基本命令"><a href="#helm基本命令" class="headerlink" title="helm基本命令"></a>helm基本命令</h2><ul>
+<li>chart install</li>
+<li>chart upgrade</li>
+<li>chart rollback</li>
+</ul>
+<h2 id="使用helm快速部署应用"><a href="#使用helm快速部署应用" class="headerlink" title="使用helm快速部署应用"></a>使用helm快速部署应用</h2><h3 id="使用命令搜索应用"><a href="#使用命令搜索应用" class="headerlink" title="使用命令搜索应用"></a>使用命令搜索应用</h3><p>首先我们使用命令，搜索我们需要安装的应用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索 weave仓库</span></span><br><span class="line">helm search repo weave</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118200603643.png"
+                      alt="image-20201118200603643"
+                ></p>
+<h3 id="根据搜索内容选择安装"><a href="#根据搜索内容选择安装" class="headerlink" title="根据搜索内容选择安装"></a>根据搜索内容选择安装</h3><p>搜索完成后，使用命令进行安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install ui aliyun/weave-scope</span><br></pre></td></tr></table></figure>
+
+<p>可以通过下面命令，来下载yaml文件【如果】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f weave-scope.yaml</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，通过下面命令即可查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm list</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118203727585.png"
+                      alt="image-20201118203727585"
+                ></p>
+<p>同时可以通过下面命令，查看更新具体的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm status ui</span><br></pre></td></tr></table></figure>
+
+<p>但是我们通过查看 svc状态，发现没有对象暴露端口</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118205031343.png"
+                      alt="image-20201118205031343"
+                ></p>
+<p>所以我们需要修改service的yaml文件，添加NodePort</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit svc ui-weave-scope</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118205129431.png"
+                      alt="image-20201118205129431"
+                ></p>
+<p>这样就可以对外暴露端口了</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118205147631.png"
+                      alt="image-20201118205147631"
+                ></p>
+<p>然后我们通过 ip + 32185 即可访问</p>
+<h3 id="如果自己创建Chart"><a href="#如果自己创建Chart" class="headerlink" title="如果自己创建Chart"></a>如果自己创建Chart</h3><p>使用命令，自己创建Chart</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm create mychart</span><br></pre></td></tr></table></figure>
+
+<p>创建完成后，我们就能看到在当前文件夹下，创建了一个 mychart目录</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118210755621.png"
+                      alt="image-20201118210755621"
+                ></p>
+<h4 id="目录格式"><a href="#目录格式" class="headerlink" title="目录格式"></a>目录格式</h4><ul>
+<li>templates：编写yaml文件存放到这个目录</li>
+<li>values.yaml：存放的是全局的yaml文件</li>
+<li>chart.yaml：当前chart属性配置信息</li>
+</ul>
+<h3 id="在templates文件夹创建两个文件"><a href="#在templates文件夹创建两个文件" class="headerlink" title="在templates文件夹创建两个文件"></a>在templates文件夹创建两个文件</h3><p>我们创建以下两个</p>
+<ul>
+<li>deployment.yaml</li>
+<li>service.yaml</li>
+</ul>
+<p>我们可以通过下面命令创建出yaml文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出deployment.yaml</span></span><br><span class="line">kubectl create deployment web1 --image=nginx --dry-run -o yaml &gt; deployment.yaml</span><br><span class="line"><span class="comment"># 导出service.yaml 【可能需要创建 deployment，不然会报错】</span></span><br><span class="line">kubectl expose deployment web1 --port=80 --target-port=80 --<span class="built_in">type</span>=NodePort --dry-run -o yaml &gt; service.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装mychart"><a href="#安装mychart" class="headerlink" title="安装mychart"></a>安装mychart</h3><p>执行命令创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install web1 mychart</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118213120916.png"
+                      alt="image-20201118213120916"
+                ></p>
+<h3 id="应用升级"><a href="#应用升级" class="headerlink" title="应用升级"></a>应用升级</h3><p>当我们修改了mychart中的东西后，就可以进行升级操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm upgrade web1 mychart</span><br></pre></td></tr></table></figure>
+
+<h2 id="chart模板使用"><a href="#chart模板使用" class="headerlink" title="chart模板使用"></a>chart模板使用</h2><p>通过传递参数，动态渲染模板，yaml内容动态从传入参数生成</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118213630083.png"
+                      alt="image-20201118213630083"
+                ></p>
+<p>刚刚我们创建mychart的时候，看到有values.yaml文件，这个文件就是一些全局的变量，然后在templates中能取到变量的值，下面我们可以利用这个，来完成动态模板</p>
+<ul>
+<li>在values.yaml定义变量和值</li>
+<li>具体yaml文件，获取定义变量值</li>
+<li>yaml文件中大题有几个地方不同<ul>
+<li>image</li>
+<li>tag</li>
+<li>label</li>
+<li>port</li>
+<li>replicas</li>
+</ul>
+</li>
+</ul>
+<h3 id="定义变量和值"><a href="#定义变量和值" class="headerlink" title="定义变量和值"></a>定义变量和值</h3><p>在values.yaml定义变量和值</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118214050899.png"
+                      alt="image-20201118214050899"
+                ></p>
+<h3 id="获取变量和值"><a href="#获取变量和值" class="headerlink" title="获取变量和值"></a>获取变量和值</h3><p>我们通过表达式形式 使用全局变量  <code>&#123;&#123;.Values.变量名称&#125;&#125; </code></p>
+<p>例如： <code>&#123;&#123;.Release.Name&#125;&#125;</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118214413203.png"
+                      alt="image-20201118214413203"
+                ></p>
+<h3 id="安装应用"><a href="#安装应用" class="headerlink" title="安装应用"></a>安装应用</h3><p>在我们修改完上述的信息后，就可以尝试的创建应用了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm install --dry-run web2 mychart</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/15_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFHelm/images/image-20201118214727058.png"
+                      alt="image-20201118214727058"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之核心技术Helm</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-24 09:36:30</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/24/k8s之核心技术Helm/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/24/k8s%E4%B9%8B%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之持久化存储</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/24/README/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之Kubeadm和使用kubeadm-ha脚本一键安装K8S</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BC%95%E5%85%A5Helm"><span class="nav-number">1.</span> <span class="nav-text">为什么引入Helm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Helm%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">Helm介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Helm%E7%BB%84%E4%BB%B6%E5%8F%8A%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">Helm组件及架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Helm-v3%E5%8F%98%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">Helm v3变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#helm%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">helm配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#helm%E4%BB%93%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">helm仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#helm%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">helm基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8helm%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">使用helm快速部署应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E6%90%9C%E7%B4%A2%E5%BA%94%E7%94%A8"><span class="nav-number">8.1.</span> <span class="nav-text">使用命令搜索应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E6%90%9C%E7%B4%A2%E5%86%85%E5%AE%B9%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text">根据搜索内容选择安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E8%87%AA%E5%B7%B1%E5%88%9B%E5%BB%BAChart"><span class="nav-number">8.3.</span> <span class="nav-text">如果自己创建Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">8.3.1.</span> <span class="nav-text">目录格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8templates%E6%96%87%E4%BB%B6%E5%A4%B9%E5%88%9B%E5%BB%BA%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="nav-number">8.4.</span> <span class="nav-text">在templates文件夹创建两个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85mychart"><span class="nav-number">8.5.</span> <span class="nav-text">安装mychart</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8D%87%E7%BA%A7"><span class="nav-number">8.6.</span> <span class="nav-text">应用升级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chart%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">chart模板使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E5%92%8C%E5%80%BC"><span class="nav-number">9.1.</span> <span class="nav-text">定义变量和值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8F%98%E9%87%8F%E5%92%8C%E5%80%BC"><span class="nav-number">9.2.</span> <span class="nav-text">获取变量和值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8"><span class="nav-number">9.3.</span> <span class="nav-text">安装应用</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

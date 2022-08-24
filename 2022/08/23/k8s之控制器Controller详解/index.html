@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之控制器Controller详解 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之控制器Controller详解</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-23 11:23:05</span>
+        <span class="mobile">2022-08-23 11:23</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Statefulset"><a href="#Statefulset" class="headerlink" title="Statefulset"></a>Statefulset</h2><p>Statefulset主要是用来部署有状态应用</p>
+<p>对于StatefulSet中的Pod，每个Pod挂载自己独立的存储，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的存储继续以它的状态提供服务。</p>
+<h3 id="无状态应用"><a href="#无状态应用" class="headerlink" title="无状态应用"></a>无状态应用</h3><p>我们原来使用 deployment，部署的都是无状态的应用，那什么是无状态应用？</p>
+<ul>
+<li>认为Pod都是一样的</li>
+<li>没有顺序要求</li>
+<li>不考虑应用在哪个node上运行</li>
+<li>能够进行随意伸缩和扩展</li>
+</ul>
+<h3 id="有状态应用"><a href="#有状态应用" class="headerlink" title="有状态应用"></a>有状态应用</h3><p>上述的因素都需要考虑到</p>
+<ul>
+<li>让每个Pod独立的</li>
+<li>让每个Pod独立的，保持Pod启动顺序和唯一性</li>
+<li>唯一的网络标识符，持久存储</li>
+<li>有序，比如mysql中的主从</li>
+</ul>
+<p>适合StatefulSet的业务包括数据库服务MySQL 和 PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务</p>
+<p>StatefulSet的另一种典型应用场景是作为一种比普通容器更稳定可靠的模拟虚拟机的机制。传统的虚拟机正是一种有状态的宠物，运维人员需要不断地维护它，容器刚开始流行时，我们用容器来模拟虚拟机使用，所有状态都保存在容器里，而这已被证明是非常不安全、不可靠的。</p>
+<p>使用StatefulSet，Pod仍然可以通过漂移到不同节点提供高可用，而存储也可以通过外挂的存储来提供<br>高可靠性，StatefulSet做的只是将确定的Pod与确定的存储关联起来保证状态的连续性。</p>
+<h3 id="部署有状态应用"><a href="#部署有状态应用" class="headerlink" title="部署有状态应用"></a>部署有状态应用</h3><p>无头service， ClusterIp：none</p>
+<p>这里就需要使用 StatefulSet部署有状态应用</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117202950336.png"
+                      alt="image-20201117202950336"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117203130867.png"
+                      alt="image-20201117203130867"
+                ></p>
+<p>然后通过查看pod，能否发现每个pod都有唯一的名称</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117203217016.png"
+                      alt="image-20201117203217016"
+                ></p>
+<p>然后我们在查看service，发现是无头的service</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117203245641.png"
+                      alt="image-20201117203245641"
+                ></p>
+<p>这里有状态的约定，肯定不是简简单单通过名称来进行约定，而是更加复杂的操作</p>
+<ul>
+<li>deployment：是有身份的，有唯一标识</li>
+<li>statefulset：根据主机名 + 按照一定规则生成域名</li>
+</ul>
+<p>每个pod有唯一的主机名，并且有唯一的域名</p>
+<ul>
+<li>格式：主机名称.service名称.名称空间.svc.cluster.local</li>
+<li>举例：nginx-statefulset-0.default.svc.cluster.local</li>
+</ul>
+<h2 id="DaemonSet"><a href="#DaemonSet" class="headerlink" title="DaemonSet"></a>DaemonSet</h2><p>DaemonSet 即后台支撑型服务，主要是用来部署守护进程</p>
+<p>长期伺服型和批处理型的核心在业务应用，可能有些节点运行多个同类业务的Pod，有些节点上又没有这类的Pod运行；而后台支撑型服务的核心关注点在K8S集群中的节点(物理机或虚拟机)，要保证每个节点上都有一个此类Pod运行。节点可能是所有集群节点，也可能是通过 nodeSelector选定的一些特定节点。典型的后台支撑型服务包括：存储、日志和监控等。在每个节点上支撑K8S集群运行的服务。</p>
+<p>守护进程在我们每个节点上，运行的是同一个pod，新加入的节点也同样运行在同一个pod里面</p>
+<ul>
+<li>例子：在每个node节点安装数据采集工具</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117204430836.png"
+                      alt="image-20201117204430836"
+                ></p>
+<p>这里是不是一个FileBeat镜像，主要是为了做日志采集工作</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117204810350.png"
+                      alt="image-20201117204810350"
+                ></p>
+<p>进入某个 Pod里面，进入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">exec</span> -it ds-test-cbk6v bash</span><br></pre></td></tr></table></figure>
+
+<p>通过该命令后，我们就能看到我们内部收集的日志信息了</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117204912838.png"
+                      alt="image-20201117204912838"
+                ></p>
+<h2 id="Job和CronJob"><a href="#Job和CronJob" class="headerlink" title="Job和CronJob"></a>Job和CronJob</h2><p>一次性任务 和 定时任务</p>
+<ul>
+<li>一次性任务：一次性执行完就结束</li>
+<li>定时任务：周期性执行</li>
+</ul>
+<p>Job是K8S中用来控制批处理型任务的API对象。批处理业务与长期伺服业务的主要区别就是批处理业务的运行有头有尾，而长期伺服业务在用户不停止的情况下永远运行。Job管理的Pod根据用户的设置把任务成功完成就自动退出了。成功完成的标志根据不同的 spec.completions 策略而不同：单Pod型任务有一个Pod成功就标志完成；定数成功行任务保证有N个任务全部成功；工作队列性任务根据应用确定的全局成功而标志成功。</p>
+<h3 id="Job"><a href="#Job" class="headerlink" title="Job"></a>Job</h3><p>Job也即一次性任务</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117205635945.png"
+                      alt="image-20201117205635945"
+                ></p>
+<p>使用下面命令，能够看到目前已经存在的Job</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get <span class="built_in">jobs</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117205948374.png"
+                      alt="image-20201117205948374"
+                ></p>
+<p>在计算完成后，通过命令查看，能够发现该任务已经完成</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210031725.png"
+                      alt="image-20201117210031725"
+                ></p>
+<p>我们可以通过查看日志，查看到一次性任务的结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs pi-qpqff</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210110343.png"
+                      alt="image-20201117210110343"
+                ></p>
+<h3 id="CronJob"><a href="#CronJob" class="headerlink" title="CronJob"></a>CronJob</h3><p>定时任务，cronjob.yaml如下所示</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210309069.png"
+                      alt="image-20201117210309069"
+                ></p>
+<p>这里面的命令就是每个一段时间，这里是通过 cron 表达式配置的，通过 schedule字段</p>
+<p>然后下面命令就是每个一段时间输出 </p>
+<p>我们首先用上述的配置文件，创建一个定时任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f cronjob.yaml</span><br></pre></td></tr></table></figure>
+
+<p>创建完成后，我们就可以通过下面命令查看定时任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get cronjobs</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210611783.png"
+                      alt="image-20201117210611783"
+                ></p>
+<p>我们可以通过日志进行查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl logs hello-1599100140-wkn79</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210722556.png"
+                      alt="image-20201117210722556"
+                ></p>
+<p>然后每次执行，就会多出一个 pod</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/11_Kubernetes%E6%8E%A7%E5%88%B6%E5%99%A8Controller%E8%AF%A6%E8%A7%A3/images/image-20201117210751068.png"
+                      alt="image-20201117210751068"
+                ></p>
+<h2 id="删除svc-和-statefulset"><a href="#删除svc-和-statefulset" class="headerlink" title="删除svc 和 statefulset"></a>删除svc 和 statefulset</h2><p>使用下面命令，可以删除我们添加的svc 和 statefulset</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete svc web</span><br><span class="line"></span><br><span class="line">kubectl delete statefulset --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="Replication-Controller"><a href="#Replication-Controller" class="headerlink" title="Replication Controller"></a>Replication Controller</h2><p>Replication Controller 简称 <strong>RC</strong>，是K8S中的复制控制器。RC是K8S集群中最早的保证Pod高可用的API对象。通过监控运行中的Pod来保证集群中运行指定数目的Pod副本。指定的数目可以是多个也可以是1个；少于指定数目，RC就会启动新的Pod副本；多于指定数目，RC就会杀死多余的Pod副本。</p>
+<p>即使在指定数目为1的情况下，通过RC运行Pod也比直接运行Pod更明智，因为RC也可以发挥它高可用的能力，保证永远有一个Pod在运行。RC是K8S中较早期的技术概念，只适用于长期伺服型的业务类型，比如控制Pod提供高可用的Web服务。</p>
+<h3 id="Replica-Set"><a href="#Replica-Set" class="headerlink" title="Replica Set"></a>Replica Set</h3><p>Replica Set 检查 RS，也就是副本集。RS是新一代的RC，提供同样高可用能力，区别主要在于RS后来居上，能够支持更多种类的匹配模式。副本集对象一般不单独使用，而是作为Deployment的理想状态参数来使用</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之控制器Controller详解</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-23 11:23:05</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/23/k8s之控制器Controller详解/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/23/k8s%E4%B9%8B%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之配置管理</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/23/k8s%E4%B9%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFService/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之核心技术Service</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Statefulset"><span class="nav-number">1.</span> <span class="nav-text">Statefulset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">无状态应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">有状态应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">部署有状态应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DaemonSet"><span class="nav-number">2.</span> <span class="nav-text">DaemonSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Job%E5%92%8CCronJob"><span class="nav-number">3.</span> <span class="nav-text">Job和CronJob</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Job"><span class="nav-number">3.1.</span> <span class="nav-text">Job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CronJob"><span class="nav-number">3.2.</span> <span class="nav-text">CronJob</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4svc-%E5%92%8C-statefulset"><span class="nav-number">4.</span> <span class="nav-text">删除svc 和 statefulset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replication-Controller"><span class="nav-number">5.</span> <span class="nav-text">Replication Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Replica-Set"><span class="nav-number">5.1.</span> <span class="nav-text">Replica Set</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

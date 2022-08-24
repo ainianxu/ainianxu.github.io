@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之YAML文件详解 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之YAML文件详解</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-22 15:57:21</span>
+        <span class="mobile">2022-08-22 15:57</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>780 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>k8s 集群中对资源管理和资源对象编排部署都可以通过声明样式（YAML）文件来解决，也就是可以把需要对资源对象操作编辑到YAML 格式文件中，我们把这种文件叫做资源清单文件，通过kubectl 命令直接使用资源清单文件就可以实现对大量的资源对象进行编排部署了。一般在我们开发的时候，都是通过配置YAML文件来部署集群的。</p>
+<p>YAML文件：就是资源清单文件，用于资源编排</p>
+<h2 id="YAML文件介绍"><a href="#YAML文件介绍" class="headerlink" title="YAML文件介绍"></a>YAML文件介绍</h2><h3 id="YAML概述"><a href="#YAML概述" class="headerlink" title="YAML概述"></a>YAML概述</h3><p>YAML ：仍是一种标记语言。为了强调这种语言以数据做为中心，而不是以标记语言为重点。</p>
+<p>YAML 是一个可读性高，用来表达数据序列的格式。</p>
+<h3 id="YAML-基本语法"><a href="#YAML-基本语法" class="headerlink" title="YAML 基本语法"></a>YAML 基本语法</h3><ul>
+<li>使用空格做为缩进</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</li>
+<li>低版本缩进时不允许使用Tab 键，只允许使用空格</li>
+<li>使用#标识注释，从这个字符一直到行尾，都会被解释器忽略</li>
+<li>使用 — 表示新的yaml文件开始</li>
+</ul>
+<h3 id="YAML-支持的数据结构"><a href="#YAML-支持的数据结构" class="headerlink" title="YAML 支持的数据结构"></a>YAML 支持的数据结构</h3><h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>键值对的集合，又称为映射(mapping) &#x2F; 哈希（hashes） &#x2F; 字典（dictionary）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对象类型：对象的一组键值对，使用冒号结构表示</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">Tom</span></span><br><span class="line"><span class="attr">age:</span> <span class="number">18</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># yaml 也允许另一种写法，将所有键值对写成一个行内对象</span></span><br><span class="line"><span class="attr">hash:</span> &#123;<span class="attr">name:</span> <span class="string">Tom</span>, <span class="attr">age:</span> <span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组类型：一组连词线开头的行，构成一个数组</span></span><br><span class="line">People</span><br><span class="line">- Tom</span><br><span class="line">- Jack</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数组也可以采用行内表示法</span></span><br><span class="line">People: [Tom, Jack]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="YAML文件组成部分"><a href="#YAML文件组成部分" class="headerlink" title="YAML文件组成部分"></a>YAML文件组成部分</h2><p>主要分为了两部分，一个是控制器的定义 和 被控制的对象</p>
+<h3 id="控制器的定义"><a href="#控制器的定义" class="headerlink" title="控制器的定义"></a>控制器的定义</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/7_Kubernetes%E9%9B%86%E7%BE%A4YAML%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/images/image-20201114110444032.png"
+                      alt="image-20201114110444032"
+                ></p>
+<h3 id="被控制的对象"><a href="#被控制的对象" class="headerlink" title="被控制的对象"></a>被控制的对象</h3><p>包含一些 镜像，版本、端口等</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/22/3OTlVXjvmxgsPwz.png"
+                      alt="image-20201114110600165"
+                ></p>
+<h3 id="属性说明"><a href="#属性说明" class="headerlink" title="属性说明"></a>属性说明</h3><p>在一个YAML文件的控制器定义中，有很多属性名称</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性名称</th>
+<th align="center">介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">apiVersion</td>
+<td align="center">API版本</td>
+</tr>
+<tr>
+<td align="center">kind</td>
+<td align="center">资源类型</td>
+</tr>
+<tr>
+<td align="center">metadata</td>
+<td align="center">资源元数据</td>
+</tr>
+<tr>
+<td align="center">spec</td>
+<td align="center">资源规格</td>
+</tr>
+<tr>
+<td align="center">replicas</td>
+<td align="center">副本数量</td>
+</tr>
+<tr>
+<td align="center">selector</td>
+<td align="center">标签选择器</td>
+</tr>
+<tr>
+<td align="center">template</td>
+<td align="center">Pod模板</td>
+</tr>
+<tr>
+<td align="center">metadata</td>
+<td align="center">Pod元数据</td>
+</tr>
+<tr>
+<td align="center">spec</td>
+<td align="center">Pod规格</td>
+</tr>
+<tr>
+<td align="center">containers</td>
+<td align="center">容器配置</td>
+</tr>
+</tbody></table>
+<h2 id="如何快速编写YAML文件"><a href="#如何快速编写YAML文件" class="headerlink" title="如何快速编写YAML文件"></a>如何快速编写YAML文件</h2><p>一般来说，我们很少自己手写YAML文件，因为这里面涉及到了很多内容，我们一般都会借助工具来创建</p>
+<h3 id="使用kubectl-create命令"><a href="#使用kubectl-create命令" class="headerlink" title="使用kubectl create命令"></a>使用kubectl create命令</h3><p>这种方式一般用于资源没有部署的时候，我们可以直接创建一个YAML配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 尝试运行,并不会真正的创建镜像</span></span><br><span class="line">kubectl create deployment web --image=nginx -o yaml --dry-run</span><br></pre></td></tr></table></figure>
+
+<p>或者我们可以输出到一个文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment web --image=nginx -o yaml --dry-run &gt; hello.yaml</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就在文件中直接修改即可</p>
+<h3 id="使用kubectl-get命令导出yaml文件"><a href="#使用kubectl-get命令导出yaml文件" class="headerlink" title="使用kubectl get命令导出yaml文件"></a>使用kubectl get命令导出yaml文件</h3><p>可以首先查看一个目前已经部署的镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deploy</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/7_Kubernetes%E9%9B%86%E7%BE%A4YAML%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/images/image-20201114113115649.png"
+                      alt="image-20201114113115649"
+                ></p>
+<p>然后我们导出 nginx的配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get deploy nginx -o=yaml --<span class="built_in">export</span> &gt; nginx.yaml</span><br></pre></td></tr></table></figure>
+
+<p>然后会生成一个 <code>nginx.yaml</code> 的配置文件</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/7_Kubernetes%E9%9B%86%E7%BE%A4YAML%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/images/image-20201114184538797.png"
+                      alt="image-20201114184538797"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之YAML文件详解</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-22 15:57:21</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/22/k8s之YAML文件详解/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/22/k8s%E4%B9%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFPod/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之核心技术Pod</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/22/k8s%E4%B9%8B%E9%9B%86%E7%BE%A4%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7kubectl/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之集群管理工具kubectl</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YAML%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">YAML文件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">YAML概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">YAML 基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML-%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">YAML 支持的数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">2.3.2.</span> <span class="nav-text">数组</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YAML%E6%96%87%E4%BB%B6%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">YAML文件组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">3.1.</span> <span class="nav-text">控制器的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A2%AB%E6%8E%A7%E5%88%B6%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">被控制的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E"><span class="nav-number">3.3.</span> <span class="nav-text">属性说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E7%BC%96%E5%86%99YAML%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">如何快速编写YAML文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8kubectl-create%E5%91%BD%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">使用kubectl create命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8kubectl-get%E5%91%BD%E4%BB%A4%E5%AF%BC%E5%87%BAyaml%E6%96%87%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">使用kubectl get命令导出yaml文件</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

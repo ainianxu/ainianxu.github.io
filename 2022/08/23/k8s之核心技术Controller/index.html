@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            k8s之核心技术Controller |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s之核心技术Controller</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-23 09:28:56</span>
+        <span class="mobile">2022-08-23 09:28</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k8s/">k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><ul>
+<li>什么是Controller</li>
+<li>Pod和Controller的关系</li>
+<li>Deployment控制器应用场景</li>
+<li>yaml文件字段说明</li>
+<li>Deployment控制器部署应用</li>
+<li>升级回滚</li>
+<li>弹性伸缩</li>
+</ul>
+<h2 id="什么是Controller"><a href="#什么是Controller" class="headerlink" title="什么是Controller"></a>什么是Controller</h2><p>Controller是在集群上管理和运行容器的对象，Controller是实际存在的，Pod是虚拟机的</p>
+<h2 id="Pod和Controller的关系"><a href="#Pod和Controller的关系" class="headerlink" title="Pod和Controller的关系"></a>Pod和Controller的关系</h2><p>Pod是通过Controller实现应用的运维，比如弹性伸缩，滚动升级等</p>
+<p>Pod 和 Controller之间是通过label标签来建立关系，同时Controller又被称为控制器工作负载</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116092431237.png"
+                      alt="image-20201116092431237"
+                ></p>
+<h2 id="Deployment控制器应用"><a href="#Deployment控制器应用" class="headerlink" title="Deployment控制器应用"></a>Deployment控制器应用</h2><ul>
+<li>Deployment控制器可以部署无状态应用</li>
+<li>管理Pod和ReplicaSet</li>
+<li>部署，滚动升级等功能</li>
+<li>应用场景：web服务，微服务</li>
+</ul>
+<p>Deployment表示用户对K8S集群的一次更新操作。Deployment是一个比RS( Replica Set, RS) 应用模型更广的 API 对象，可以是创建一个新的服务，更新一个新的服务，也可以是滚动升级一个服务。滚动升级一个服务，实际是创建一个新的RS，然后逐渐将新 RS 中副本数增加到理想状态，将旧RS中的副本数减少到0的复合操作。</p>
+<p>这样一个复合操作用一个RS是不好描述的，所以用一个更通用的Deployment来描述。以K8S的发展方向，未来对所有长期伺服型的业务的管理，都会通过Deployment来管理。</p>
+<h2 id="Deployment部署应用"><a href="#Deployment部署应用" class="headerlink" title="Deployment部署应用"></a>Deployment部署应用</h2><p>之前我们也使用Deployment部署过应用，如下代码所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectrl create deployment web --image=nginx</span><br></pre></td></tr></table></figure>
+
+<p>但是上述代码不是很好的进行复用，因为每次我们都需要重新输入代码，所以我们都是通过YAML进行配置</p>
+<p>但是我们可以尝试使用上面的代码创建一个镜像【只是尝试，不会创建】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment web --image=nginx --dry-run -o yaml &gt; nginx.yaml</span><br></pre></td></tr></table></figure>
+
+<p>然后输出一个yaml配置文件 <code>nginx.yml</code> ，配置文件如下所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: null</span><br><span class="line">  labels:</span><br><span class="line">    app: web</span><br><span class="line">  name: web</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: web</span><br><span class="line">  strategy: &#123;&#125;</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      creationTimestamp: null</span><br><span class="line">      labels:</span><br><span class="line">        app: web</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - image: nginx</span><br><span class="line">        name: nginx</span><br><span class="line">        resources: &#123;&#125;</span><br><span class="line">status: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116093638951.png"
+                      alt="image-20201116093638951"
+                ></p>
+<h3 id="使用YAML创建Pod"><a href="#使用YAML创建Pod" class="headerlink" title="使用YAML创建Pod"></a>使用YAML创建Pod</h3><p>通过刚刚的代码，我们已经生成了YAML文件，下面我们就可以使用该配置文件快速创建Pod镜像了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f nginx.yaml</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116094046007.png"
+                      alt="image-20201116094046007"
+                ></p>
+<p>但是因为这个方式创建的，我们只能在集群内部进行访问，所以我们还需要对外暴露端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment web --port=80 --<span class="built_in">type</span>=NodePort --target-port=80 --name=web1</span><br></pre></td></tr></table></figure>
+
+<p>关于上述命令，有几个参数</p>
+<ul>
+<li>–port：就是我们内部的端口号</li>
+<li>–target-port：就是暴露外面访问的端口号</li>
+<li>–name：名称</li>
+<li>–type：类型</li>
+</ul>
+<p>同理，我们一样可以导出对应的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment web --port=80 --<span class="built_in">type</span>=NodePort --target-port=80 --name=web1 -o yaml &gt; web1.yaml</span><br></pre></td></tr></table></figure>
+
+<p>得到的web1.yaml如下所示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: <span class="string">&quot;2020-11-16T02:26:53Z&quot;</span></span><br><span class="line">  labels:</span><br><span class="line">    app: web</span><br><span class="line">  managedFields:</span><br><span class="line">  - apiVersion: v1</span><br><span class="line">    fieldsType: FieldsV1</span><br><span class="line">    fieldsV1:</span><br><span class="line">      f:metadata:</span><br><span class="line">        f:labels:</span><br><span class="line">          .: &#123;&#125;</span><br><span class="line">          f:app: &#123;&#125;</span><br><span class="line">      f:spec:</span><br><span class="line">        f:externalTrafficPolicy: &#123;&#125;</span><br><span class="line">        f:ports:</span><br><span class="line">          .: &#123;&#125;</span><br><span class="line">          k:&#123;<span class="string">&quot;port&quot;</span>:80,<span class="string">&quot;protocol&quot;</span>:<span class="string">&quot;TCP&quot;</span>&#125;:</span><br><span class="line">            .: &#123;&#125;</span><br><span class="line">            f:port: &#123;&#125;</span><br><span class="line">            f:protocol: &#123;&#125;</span><br><span class="line">            f:targetPort: &#123;&#125;</span><br><span class="line">        f:selector:</span><br><span class="line">          .: &#123;&#125;</span><br><span class="line">          f:app: &#123;&#125;</span><br><span class="line">        f:sessionAffinity: &#123;&#125;</span><br><span class="line">        f:<span class="built_in">type</span>: &#123;&#125;</span><br><span class="line">    manager: kubectl</span><br><span class="line">    operation: Update</span><br><span class="line">    time: <span class="string">&quot;2020-11-16T02:26:53Z&quot;</span></span><br><span class="line">  name: web2</span><br><span class="line">  namespace: default</span><br><span class="line">  resourceVersion: <span class="string">&quot;113693&quot;</span></span><br><span class="line">  selfLink: /api/v1/namespaces/default/services/web2</span><br><span class="line">  uid: d570437d-a6b4-4456-8dfb-950f09534516</span><br><span class="line">spec:</span><br><span class="line">  clusterIP: 10.104.174.145</span><br><span class="line">  externalTrafficPolicy: Cluster</span><br><span class="line">  ports:</span><br><span class="line">  - nodePort: 32639</span><br><span class="line">    port: 80</span><br><span class="line">    protocol: TCP</span><br><span class="line">    targetPort: 80</span><br><span class="line">  selector:</span><br><span class="line">    app: web</span><br><span class="line">  sessionAffinity: None</span><br><span class="line">  <span class="built_in">type</span>: NodePort</span><br><span class="line">status:</span><br><span class="line">  loadBalancer: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们可以通过下面的命令来查看对外暴露的服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods,svc</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116104021357.png"
+                      alt="image-20201116104021357"
+                ></p>
+<p>然后我们访问对应的url，即可看到 nginx了 <code>http://192.168.177.130:32639/</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116104131968.png"
+                      alt="image-20201116104131968"
+                ></p>
+<h2 id="升级回滚和弹性伸缩"><a href="#升级回滚和弹性伸缩" class="headerlink" title="升级回滚和弹性伸缩"></a>升级回滚和弹性伸缩</h2><ul>
+<li>升级：  假设从版本为1.14 升级到 1.15 ，这就叫应用的升级【升级可以保证服务不中断】</li>
+<li>回滚：从版本1.15 变成 1.14，这就叫应用的回滚</li>
+<li>弹性伸缩：我们根据不同的业务场景，来改变Pod的数量对外提供服务，这就是弹性伸缩</li>
+</ul>
+<h3 id="应用升级和回滚"><a href="#应用升级和回滚" class="headerlink" title="应用升级和回滚"></a>应用升级和回滚</h3><p>首先我们先创建一个 1.14版本的Pod</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  creationTimestamp: null</span><br><span class="line">  labels:</span><br><span class="line">    app: web</span><br><span class="line">  name: web</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: web</span><br><span class="line">  strategy: &#123;&#125;</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      creationTimestamp: null</span><br><span class="line">      labels:</span><br><span class="line">        app: web</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - image: nginx:1.14</span><br><span class="line">        name: nginx</span><br><span class="line">        resources: &#123;&#125;</span><br><span class="line">status: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们先指定版本为1.14，然后开始创建我们的Pod</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f nginx.yaml</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们使用docker images命令，就能看到我们成功拉取到了一个 1.14版本的镜像</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/23/IAsYKHfiPc43BD8.png"
+                      alt="image-20201116105710966"
+                ></p>
+<p>我们使用下面的命令，可以将nginx从 1.14 升级到 1.15</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl <span class="built_in">set</span> image deployment web nginx=nginx:1.15</span><br></pre></td></tr></table></figure>
+
+<p>在我们执行完命令后，能看到升级的过程</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/23/IAsYKHfiPc43BD8.png"
+                     
+                ></p>
+<ul>
+<li>首先是开始的nginx 1.14版本的Pod在运行，然后 1.15版本的在创建</li>
+<li>然后在1.15版本创建完成后，就会暂停1.14版本</li>
+<li>最后把1.14版本的Pod移除，完成我们的升级</li>
+</ul>
+<p>我们在下载 1.15版本，容器就处于ContainerCreating状态，然后下载完成后，就用 1.15版本去替换1.14版本了，这么做的好处就是：升级可以保证服务不中断</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116111614085.png"
+                      alt="image-20201116111614085"
+                ></p>
+<p>我们到我们的node2节点上，查看我们的 docker images;</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116111315000.png"
+                      alt="image-20201116111315000"
+                ></p>
+<p>能够看到，我们已经成功拉取到了 1.15版本的nginx了</p>
+<h4 id="查看升级状态"><a href="#查看升级状态" class="headerlink" title="查看升级状态"></a>查看升级状态</h4><p>下面可以，查看升级状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment web</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/08/23/gtfxZRDHXB6vLpW.png"
+                      alt="image-20201116112139645"
+                ></p>
+<h4 id="查看历史版本"><a href="#查看历史版本" class="headerlink" title="查看历史版本"></a>查看历史版本</h4><p>我们还可以查看历史版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout <span class="built_in">history</span> deployment web</span><br></pre></td></tr></table></figure>
+
+<h4 id="应用回滚"><a href="#应用回滚" class="headerlink" title="应用回滚"></a>应用回滚</h4><p>我们可以使用下面命令，完成回滚操作，也就是回滚到上一个版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout undo deployment web</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以查看状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment web</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201116112524601.png"
+                      alt="image-20201116112524601"
+                ></p>
+<p>同时我们还可以回滚到指定版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout undo deployment web --to-revision=2</span><br></pre></td></tr></table></figure>
+
+<h3 id="弹性伸缩"><a href="#弹性伸缩" class="headerlink" title="弹性伸缩"></a>弹性伸缩</h3><p>弹性伸缩，也就是我们通过命令一下创建多个副本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale deployment web --replicas=10</span><br></pre></td></tr></table></figure>
+
+<p>能够清晰看到，我们一下创建了10个副本</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../../../../../%E6%96%B0%E7%9F%A5%E8%AF%86/LearningNotes-master/K8S/9_Kubernetes%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFController/images/image-20201117092841865.png"
+                      alt="image-20201117092841865"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：k8s之核心技术Controller</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-23 09:28:56</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/23/k8s之核心技术Controller/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/k8s/">#k8s</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/23/k8s%E4%B9%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFService/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之核心技术Service</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/22/k8s%E4%B9%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AFPod/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s之核心技术Pod</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFController"><span class="nav-number">2.</span> <span class="nav-text">什么是Controller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pod%E5%92%8CController%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">Pod和Controller的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment%E6%8E%A7%E5%88%B6%E5%99%A8%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Deployment控制器应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deployment%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">Deployment部署应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8YAML%E5%88%9B%E5%BB%BAPod"><span class="nav-number">5.1.</span> <span class="nav-text">使用YAML创建Pod</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7%E5%9B%9E%E6%BB%9A%E5%92%8C%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9"><span class="nav-number">6.</span> <span class="nav-text">升级回滚和弹性伸缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8D%87%E7%BA%A7%E5%92%8C%E5%9B%9E%E6%BB%9A"><span class="nav-number">6.1.</span> <span class="nav-text">应用升级和回滚</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%87%E7%BA%A7%E7%8A%B6%E6%80%81"><span class="nav-number">6.1.1.</span> <span class="nav-text">查看升级状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">6.1.2.</span> <span class="nav-text">查看历史版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9B%9E%E6%BB%9A"><span class="nav-number">6.1.3.</span> <span class="nav-text">应用回滚</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9"><span class="nav-number">6.2.</span> <span class="nav-text">弹性伸缩</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
