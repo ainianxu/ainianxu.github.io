@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MongoDB之整合SpringBoot |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MongoDB之整合SpringBoot</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-29 16:33:12</span>
+        <span class="mobile">2022-08-29 16:33</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MongoDB/">MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>1.引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--spring data mongodb--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.配置yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span> </span><br><span class="line">  <span class="attr">data:</span> </span><br><span class="line">    <span class="attr">mongodb:</span></span><br><span class="line">      <span class="attr">uri:</span> <span class="string">mongodb://fox:fox@192.168.65.174:27017/test?authSource=admin</span> </span><br><span class="line">      <span class="comment">#uri等同于下面的配置</span></span><br><span class="line">      <span class="comment">#database: test</span></span><br><span class="line">      <span class="comment">#host: 192.168.65.174</span></span><br><span class="line">      <span class="comment">#port: 27017</span></span><br><span class="line">      <span class="comment">#username: fox</span></span><br><span class="line">      <span class="comment">#password: fox</span></span><br><span class="line">      <span class="comment">#authentication-database: admin</span></span><br></pre></td></tr></table></figure>
+
+<p>连接配置参考文档：<a class="link"   target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/connection-string/" >https://docs.mongodb.com/manual/reference/connection-string/<i class="fas fa-external-link-alt"></i></a> </p>
+<p>3.使用时注入mongoTemplate</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">MongoTemplate mongoTemplate;</span><br></pre></td></tr></table></figure>
+
+<h2 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testCollection</span><span class="params">()</span>&#123;   </span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="variable">exists</span> <span class="operator">=</span> mongoTemplate.collectionExists(<span class="string">&quot;emp&quot;</span>); </span><br><span class="line">    <span class="keyword">if</span> (exists) &#123;</span><br><span class="line">        <span class="comment">//删除集合 </span></span><br><span class="line">        mongoTemplate.dropCollection(<span class="string">&quot;emp&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//创建集合</span></span><br><span class="line">    mongoTemplate.createCollection(<span class="string">&quot;emp&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档操作"><a href="#文档操作" class="headerlink" title="文档操作"></a>文档操作</h2><h3 id="相关注解"><a href="#相关注解" class="headerlink" title="相关注解"></a>相关注解</h3><ul>
+<li>@Document<ul>
+<li>修饰范围: 用在类上</li>
+<li>作用: 用来映射这个类的一个对象为mongo中一条文档数据。 </li>
+<li>属性:( value 、collection )用来指定操作的集合名称</li>
+</ul>
+</li>
+<li>@Id<ul>
+<li>修饰范围: 用在成员变量、方法上</li>
+<li>作用: 用来将成员变量的值映射为文档的_id的值</li>
+</ul>
+</li>
+<li>@Field<ul>
+<li>修饰范围: 用在成员变量、方法上</li>
+<li>作用: 用来将成员变量及其值映射为文档中一个key:value对。</li>
+<li>属性:( name , value )用来指定在文档中 key的名称,默认为成员变量名</li>
+</ul>
+</li>
+<li>@Transient <ul>
+<li>修饰范围:用在成员变量、方法上</li>
+<li>作用:用来指定此成员变量不参与文档的序列化</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建实体"><a href="#创建实体" class="headerlink" title="创建实体"></a>创建实体</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Document(&quot;emp&quot;)</span>  <span class="comment">//对应emp集合中的一个文档 @Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Employee</span> &#123;</span><br><span class="line">    <span class="meta">@Id</span>   <span class="comment">//映射文档中的_id </span></span><br><span class="line">    <span class="keyword">private</span> Integer id; </span><br><span class="line">    <span class="meta">@Field(&quot;username&quot;)</span> </span><br><span class="line">    <span class="keyword">private</span> String name; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> Double salary; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> Date birthday;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加文档"><a href="#添加文档" class="headerlink" title="添加文档"></a>添加文档</h3><p>insert方法返回值是新增的Document对象，里面包含了新增后id的值。如果集合不存在会自动创建集合。通过Spring Data MongoDB还会给集合中多加一个class的属性，存储新增时Document对应Java中 类的全限定路径。这么做为了查询时能把Document转换为Java类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Employee</span> <span class="variable">employee</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">1</span>, <span class="string">&quot;小明&quot;</span>, <span class="number">30</span>,<span class="number">10000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加文档</span></span><br><span class="line">    <span class="comment">// sava:  _id存在时更新数据 </span></span><br><span class="line">    <span class="comment">//mongoTemplate.save(employee);</span></span><br><span class="line">    <span class="comment">// insert： _id存在抛出异常   支持批量操作 </span></span><br><span class="line">    mongoTemplate.insert(employee);</span><br><span class="line"></span><br><span class="line">    List&lt;Employee&gt; list = Arrays.asList(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">2</span>, <span class="string">&quot;张三&quot;</span>, <span class="number">21</span>,<span class="number">5000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>()), </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">3</span>, <span class="string">&quot;李四&quot;</span>, <span class="number">26</span>,<span class="number">8000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>()), </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">4</span>, <span class="string">&quot;王五&quot;</span>,<span class="number">22</span>, <span class="number">8000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>()), </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">5</span>, <span class="string">&quot;张龙&quot;</span>,<span class="number">28</span>, <span class="number">6000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>()), </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">6</span>, <span class="string">&quot;赵虎&quot;</span>,<span class="number">24</span>, <span class="number">7000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>()), </span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">Employee</span>(<span class="number">7</span>, <span class="string">&quot;赵六&quot;</span>,<span class="number">28</span>, <span class="number">12000.00</span>, <span class="keyword">new</span> <span class="title class_">Date</span>())); </span><br><span class="line">    <span class="comment">//插入多条数据 </span></span><br><span class="line">    mongoTemplate.insert(list,Employee.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><p>Criteria是标准查询的接口，可以引用静态的Criteria.where的把多个条件组合在一起，就可以轻松地将多个方法标准和查询连接起来，方便我们操作查询语句。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829164216857.png"
+                      alt="image-20220829164216857"
+                ></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testFind</span><span class="params">()</span>&#123;</span><br><span class="line">   System.out.println(<span class="string">&quot;==========查询所有文档===========&quot;</span>); </span><br><span class="line">    <span class="comment">//查询所有文档</span></span><br><span class="line">    List&lt;Employee&gt; list = mongoTemplate.findAll(Employee.class); </span><br><span class="line">    list.forEach(System.out::println);</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;==========根据_id查询===========&quot;</span>); </span><br><span class="line">    <span class="comment">//根据_id查询</span></span><br><span class="line">    <span class="type">Employee</span> <span class="variable">e</span> <span class="operator">=</span> mongoTemplate.findById(<span class="number">1</span>, Employee.class); </span><br><span class="line">    System.out.println(e);</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;==========findOne返回第一个文档===========&quot;</span>); </span><br><span class="line">    <span class="comment">//如果查询结果是多个，返回其中第一个文档对象</span></span><br><span class="line">    <span class="type">Employee</span> <span class="variable">one</span> <span class="operator">=</span> mongoTemplate.findOne(<span class="keyword">new</span> <span class="title class_">Query</span>(), Employee.class); </span><br><span class="line">    System.out.println(one);</span><br><span class="line">    </span><br><span class="line">     System.out.println(<span class="string">&quot;==========条件查询===========&quot;</span>);</span><br><span class="line">    <span class="comment">//new Query() 表示没有条件</span></span><br><span class="line">    <span class="comment">//查询薪资大于等于8000的员工</span></span><br><span class="line">    <span class="comment">//Query query = new Query(Criteria.where(&quot;salary&quot;).gte(8000)); </span></span><br><span class="line">    <span class="comment">//查询薪资大于4000小于10000的员工</span></span><br><span class="line">    <span class="comment">//Query query = new Query(Criteria.where(&quot;salary&quot;).gt(4000).lt(10000)); </span></span><br><span class="line">    <span class="comment">//正则查询（模糊查询）  java中正则不需要有//</span></span><br><span class="line">    <span class="comment">//Query query = new Query(Criteria.where(&quot;name&quot;).regex(&quot;张&quot;));</span></span><br><span class="line">    </span><br><span class="line">     <span class="comment">//and  or  多条件查询</span></span><br><span class="line">    <span class="type">Criteria</span> <span class="variable">criteria</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Criteria</span>(); </span><br><span class="line">    <span class="comment">//and  查询年龄大于25&amp;薪资大于8000的员工</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//criteria.andOperator(Criteria.where(&quot;age&quot;).gt(25),Criteria.where(&quot;salary&quot;).gt (8000));</span></span><br><span class="line">    <span class="comment">//or 查询姓名是张三或者薪资大于8000的员工 </span></span><br><span class="line">    criteria.orOperator(Criteria.where(<span class="string">&quot;name&quot;</span>).is(<span class="string">&quot;张 三&quot;</span>),Criteria.where(<span class="string">&quot;salary&quot;</span>).gt(<span class="number">5000</span>));</span><br><span class="line">    <span class="type">Query</span> <span class="variable">query</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Query</span>(criteria);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//sort排序 </span></span><br><span class="line">    <span class="comment">//query.with(Sort.by(Sort.Order.desc(&quot;salary&quot;)));</span></span><br><span class="line">     <span class="comment">//skip limit 分页  skip用于指定跳过记录数，limit则用于限定返回结果数量。 </span></span><br><span class="line">    query.with(Sort.by(Sort.Order.desc(<span class="string">&quot;salary&quot;</span>))) </span><br><span class="line">            .skip(<span class="number">0</span>)  <span class="comment">//指定跳过记录数</span></span><br><span class="line">            .limit(<span class="number">4</span>);  <span class="comment">//每页显示记录数</span></span><br><span class="line">    </span><br><span class="line">        <span class="comment">//查询结果</span></span><br><span class="line">    List&lt;Employee&gt; employees = mongoTemplate.find( query, Employee.class); </span><br><span class="line">    employees.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testFindByJson</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">//使用json字符串方式查询</span></span><br><span class="line">    <span class="comment">//等值查询</span></span><br><span class="line">    <span class="comment">//String json = &quot;&#123;name:&#x27;张三&#x27;&#125;&quot;;</span></span><br><span class="line">    <span class="comment">//多条件查询</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;$or:[&#123;age:&#123;$gt:25&#125;&#125;,&#123;salary:&#123;$gte:8000&#125;&#125;]&#125;&quot;</span>; </span><br><span class="line">    <span class="type">Query</span> <span class="variable">query</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BasicQuery</span>(json);</span><br><span class="line">        <span class="comment">//查询结果</span></span><br><span class="line">    List&lt;Employee&gt; employees = mongoTemplate.find( query, Employee.class); </span><br><span class="line">    employees.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>在Mongodb中无论是使用客户端API还是使用Spring Data，更新返回结果一定是受行数影响。如果更新后的结果和更新前的结果是相同，返回0。</p>
+<ul>
+<li>updateFirst() 只更新满足条件的第一条记录 </li>
+<li>updateMulti() 更新所有满足条件的记录 </li>
+<li>upsert() 没有符合条件的记录则插入数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//query设置查询条件</span></span><br><span class="line">    <span class="type">Query</span> <span class="variable">query</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Query</span>(Criteria.where(<span class="string">&quot;salary&quot;</span>).gte(<span class="number">15000</span>));</span><br><span class="line">    System.out.println(<span class="string">&quot;==========更新前===========&quot;</span>);</span><br><span class="line">    List&lt;Employee&gt; employees = mongoTemplate.find(query, Employee.class); </span><br><span class="line">    employees.forEach(System.out::println);</span><br><span class="line">     <span class="type">Update</span> <span class="variable">update</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Update</span>(); </span><br><span class="line">    <span class="comment">//设置更新属性 </span></span><br><span class="line">    update.set(<span class="string">&quot;salary&quot;</span>,<span class="number">13000</span>);</span><br><span class="line">    <span class="comment">//updateFirst() 只更新满足条件的第一条记录</span></span><br><span class="line">    <span class="comment">//UpdateResult updateResult = mongoTemplate.updateFirst(query, update, Employee.class);</span></span><br><span class="line">    <span class="comment">//updateMulti() 更新所有满足条件的记录</span></span><br><span class="line">        <span class="comment">//UpdateResult updateResult = mongoTemplate.updateMulti(query, update, Employee.class);</span></span><br><span class="line">    </span><br><span class="line">     <span class="comment">//upsert() 没有符合条件的记录则插入数据 </span></span><br><span class="line">    <span class="comment">//update.setOnInsert(&quot;id&quot;,11);  //指定_id</span></span><br><span class="line">    <span class="type">UpdateResult</span> <span class="variable">updateResult</span> <span class="operator">=</span> mongoTemplate.upsert(query, update, Employee.class);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//返回修改的记录数 </span></span><br><span class="line">    System.out.println(updateResult.getModifiedCount());</span><br><span class="line">    </span><br><span class="line">    System.out.println(<span class="string">&quot;==========更新后===========&quot;</span>); </span><br><span class="line">    employees = mongoTemplate.find(query, Employee.class); </span><br><span class="line">    employees.forEach(System.out::println);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//删除所有文档</span></span><br><span class="line">    <span class="comment">//mongoTemplate.remove(new Query(),Employee.class);</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//条件删除</span></span><br><span class="line">    <span class="type">Query</span> <span class="variable">query</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Query</span>(Criteria.where(<span class="string">&quot;salary&quot;</span>).gte(<span class="number">10000</span>)); </span><br><span class="line">    mongoTemplate.remove(query,Employee.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MongoDB之整合SpringBoot</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-29 16:33:12</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/29/MongoDB之整合SpringBoot/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MongoDB/">#MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之聚合操作</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之文档操作</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">集合操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">文档操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.1.</span> <span class="nav-text">相关注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93"><span class="nav-number">3.2.</span> <span class="nav-text">创建实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3"><span class="nav-number">3.3.</span> <span class="nav-text">添加文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-number">3.4.</span> <span class="nav-text">查询文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3"><span class="nav-number">3.5.</span> <span class="nav-text">更新文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">3.6.</span> <span class="nav-text">删除文档</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

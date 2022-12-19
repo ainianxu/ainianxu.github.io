@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MongoDB之文档操作 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MongoDB之文档操作</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-29 15:47:35</span>
+        <span class="mobile">2022-08-29 15:47</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MongoDB/">MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h2><p>3.2 版本之后新增了 db.collection.insertOne() 和db.collection.insertMany()。</p>
+<h3 id="新增单个文档"><a href="#新增单个文档" class="headerlink" title="新增单个文档"></a>新增单个文档</h3><ul>
+<li>insertOne: 支持writeConcern</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.collection.insertOne( </span><br><span class="line">   &lt;document&gt;,</span><br><span class="line">   &#123;</span><br><span class="line">      writeConcern: &lt;document&gt; </span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>writeConcern 决定一个写操作落到多少个节点上才算成功。writeConcern 的取值包括：<br>0：发起写操作，不关心是否成功；<br>1~集群最大数据节点数：写操作需要被复制到指定节点数才算成功；<br>majority：写操作需要被复制到大多数节点上才算成功。</p>
+</blockquote>
+<ul>
+<li>insert: 若插入的数据主键已经存在，则会抛 DuplicateKeyException 异常，提示主键重复，不保 存当前数据。</li>
+<li>save: 如果 _id 主键存在则更新数据，如果不存在就插入数据。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829155202395.png"
+                      alt="image-20220829155202395"
+                ></p>
+<h3 id="批量新增文档"><a href="#批量新增文档" class="headerlink" title="批量新增文档"></a>批量新增文档</h3><ul>
+<li>insertMany:向指定集合中插入多条文档数据</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.collection.insertMany(</span><br><span class="line">   [ &lt;document 1&gt; , &lt;document 2&gt;, ... ], </span><br><span class="line">   &#123;</span><br><span class="line">      writeConcern: &lt;document&gt;, </span><br><span class="line">      ordered: &lt;boolean&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>writeConcern：写入策略，默认为 1，即要求确认写操作，0 是不要求。</p>
+<p>ordered：指定是否按顺序写入，默认 true，按顺序写入。 </p>
+</blockquote>
+<ul>
+<li>insert和save也可以实现批量插入</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829155357085.png"
+                      alt="image-20220829155357085"
+                ></p>
+<h3 id="测试：批量插入50条随机数据"><a href="#测试：批量插入50条随机数据" class="headerlink" title="测试：批量插入50条随机数据"></a>测试：批量插入50条随机数据</h3><p>编辑脚本book.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tags = [<span class="string">&quot;nosql&quot;</span>,<span class="string">&quot;mongodb&quot;</span>,<span class="string">&quot;document&quot;</span>,<span class="string">&quot;developer&quot;</span>,<span class="string">&quot;popular&quot;</span>];</span><br><span class="line"><span class="keyword">var</span> types = [<span class="string">&quot;technology&quot;</span>,<span class="string">&quot;sociality&quot;</span>,<span class="string">&quot;travel&quot;</span>,<span class="string">&quot;novel&quot;</span>,<span class="string">&quot;literature&quot;</span>]; <span class="keyword">var</span> books=[];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> typeIdx = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*types.<span class="property">length</span>);</span><br><span class="line">    <span class="keyword">var</span> tagIdx = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*tags.<span class="property">length</span>);</span><br><span class="line">    <span class="keyword">var</span> favCount = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">var</span> book = &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;book-&quot;</span>+i,</span><br><span class="line">        <span class="attr">type</span>: types[typeIdx],</span><br><span class="line">        <span class="attr">tag</span>: tags[tagIdx],</span><br><span class="line">        <span class="attr">favCount</span>: favCount,</span><br><span class="line">        <span class="attr">author</span>: <span class="string">&quot;xxx&quot;</span>+i</span><br><span class="line">    &#125;;</span><br><span class="line">    books.<span class="title function_">push</span>(book)</span><br><span class="line">&#125;</span><br><span class="line">db.<span class="property">books</span>.<span class="title function_">insertMany</span>(books);</span><br></pre></td></tr></table></figure>
+
+<p>进入mongo shell，执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load(<span class="string">&quot;books.js&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h2><p>find 查询集合中的若干文档。语法格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(query, projection)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>query ：可选，使用查询操作符指定查询条件</li>
+<li>projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。投影时，id为1的时候，其他字段必须是1；id是0的时候，其他字段可以是 0；如果没有_id字段约束，多个其他字段必须同为0或同为1。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829160011274.png"
+                      alt="image-20220829160011274"
+                ></p>
+<p>如果查询返回的条目数量较多，mongo shell则会自动实现分批显示。默认情况下每次只显示20条，可以输入it命令读取下一批。    </p>
+<p>findOne查询集合中的第一个文档。语法格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.findOne(query, projection)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829160353620.png"
+                      alt="image-20220829160353620"
+                ></p>
+<h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><blockquote>
+<p>指定条件查询</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询带有nosql标签的book文档：</span></span><br><span class="line">db.books.find(&#123;tag:<span class="string">&quot;nosql&quot;</span>&#125;)</span><br><span class="line"><span class="comment">#按照id查询单个book文档： </span></span><br><span class="line">db.books.find(&#123;_id:ObjectId(<span class="string">&quot;61caa09ee0782536660494d9&quot;</span>)&#125;) </span><br><span class="line"><span class="comment">#查询分类为“travel”、收藏数超过60个的book文档： </span></span><br><span class="line">db.books.find(&#123;<span class="built_in">type</span>:<span class="string">&quot;travel&quot;</span>,favCount:&#123;<span class="variable">$gt</span>:60&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查询条件对照表</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>SQL</th>
+<th>MQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a &#x3D; 1</td>
+<td>{a: 1}</td>
+</tr>
+<tr>
+<td>a &lt;&gt; 1</td>
+<td>{a: {$ne: 1}}</td>
+</tr>
+<tr>
+<td>a &gt; 1</td>
+<td>{a: {$gt: 1}}</td>
+</tr>
+<tr>
+<td>a &gt;&#x3D; 1</td>
+<td>{a: {$gte: 1}}</td>
+</tr>
+<tr>
+<td>a &lt; 1</td>
+<td>{a: {$lt: 1}}</td>
+</tr>
+<tr>
+<td>a &lt;&#x3D; 1</td>
+<td>{a: {$lte: 1}}</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>查询逻辑对照表</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>SQL</th>
+<th>MQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a &#x3D; 1 AND b &#x3D; 1</td>
+<td>{a: 1, b: 1}或{$and: [{a: 1}, {b: 1}]}</td>
+</tr>
+<tr>
+<td>a &#x3D; 1 OR b &#x3D; 1</td>
+<td>{$or: [{a: 1}, {b: 1}]}</td>
+</tr>
+<tr>
+<td>a IS NULL</td>
+<td>{a: {$exists: false}}</td>
+</tr>
+<tr>
+<td>a IN (1, 2, 3)</td>
+<td>{a: {$in: [1, 2, 3]}}</td>
+</tr>
+</tbody></table>
+<p>查询逻辑运算符</p>
+<ul>
+<li>$lt: 存在并小于</li>
+<li>$lte: 存在并小于等于</li>
+<li>$gt: 存在并大于</li>
+<li>$gte: 存在并大于等于</li>
+<li>$ne: 不存在或存在但不等于</li>
+<li>$in: 存在并在指定数组中</li>
+<li>$nin: 不存在或不在指定数组中 </li>
+<li>$or: 匹配两个或多个条件中的一个 </li>
+<li>$and: 匹配全部条件</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829161008284.png"
+                      alt="image-20220829161008284"
+                ></p>
+<h3 id="排序-amp-分页"><a href="#排序-amp-分页" class="headerlink" title="排序&amp;分页"></a>排序&amp;分页</h3><blockquote>
+<p>指定排序</p>
+</blockquote>
+<p>在 MongoDB 中使用 sort() 方法对数据进行排序</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定按收藏数（favCount）降序返回 </span></span><br><span class="line">db.books.find(&#123;<span class="built_in">type</span>:<span class="string">&quot;travel&quot;</span>&#125;).<span class="built_in">sort</span>(&#123;favCount:-1&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分页查询 </p>
+</blockquote>
+<p>skip用于指定跳过记录数，limit则用于限定返回结果数量。可以在执行find命令的同时指定skip、limit 参数，以此实现分页的功能。比如，假定每页大小为8条，查询第3页的book文档：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.find().skip(8).<span class="built_in">limit</span>(4)</span><br></pre></td></tr></table></figure>
+
+<h3 id="正则表达式匹配查询"><a href="#正则表达式匹配查询" class="headerlink" title="正则表达式匹配查询"></a>正则表达式匹配查询</h3><p>MongoDB 使用 $regex 操作符来设置匹配字符串的正则表达式。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用正则表达式查找type包含 so 字符串的book </span></span><br><span class="line">db.books.find(&#123;<span class="built_in">type</span>:&#123;<span class="variable">$regex</span>:<span class="string">&quot;so&quot;</span>&#125;&#125;) </span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">db.books.find(&#123;<span class="built_in">type</span>:/so/&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h2><p>可以用update命令对指定的数据进行更新，命令的格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update(query,update,options)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>query：描述更新的查询条件； </li>
+<li>update：描述更新的动作及新的内容； </li>
+<li>options：描述更新的选项<ul>
+<li>upsert:  可选，如果不存在update的记录，是否插入新的记录。默认false，不插入</li>
+<li>multi: 可选，是否按条件查询出的多条记录全部更新。 默认false,只更新找到的第一条记录 </li>
+<li>writeConcern :可选，决定一个写操作落到多少个节点上才算成功。</li>
+</ul>
+</li>
+</ul>
+<h3 id="更新操作符"><a href="#更新操作符" class="headerlink" title="更新操作符"></a>更新操作符</h3><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$set</td>
+<td>{$set:{field:value}}</td>
+<td>指定一个键并更新值，若键不存在则创 建</td>
+</tr>
+<tr>
+<td>$unset</td>
+<td>{$unset : {field : 1 }}</td>
+<td>删除一个键</td>
+</tr>
+<tr>
+<td>$inc</td>
+<td>{$inc : {field : value } }</td>
+<td>对数值类型进行增减</td>
+</tr>
+<tr>
+<td>$rename</td>
+<td>{$rename : {old_field_name : new_field_name } }</td>
+<td>修改字段名称</td>
+</tr>
+<tr>
+<td>$push</td>
+<td>{ $push : {field : value } }</td>
+<td>将数值追加到数组中，若数组不存在则 会进行初始化</td>
+</tr>
+<tr>
+<td>$pushAll</td>
+<td>{$pushAll : {field : value_array }}</td>
+<td>追加多个值到一个数组字段内</td>
+</tr>
+<tr>
+<td>$pull</td>
+<td>{$pull : {field : _value } }</td>
+<td>从数组中删除指定的元素</td>
+</tr>
+<tr>
+<td>$addToSet</td>
+<td>{$addToSet : {field : value } }</td>
+<td>添加元素到数组中，具有排重功能</td>
+</tr>
+<tr>
+<td>$pop</td>
+<td>{$pop : {field : 1 }}</td>
+<td>删除数组的第一个或最后一个元素</td>
+</tr>
+</tbody></table>
+<h3 id="更新单个文档"><a href="#更新单个文档" class="headerlink" title="更新单个文档"></a>更新单个文档</h3><p>某个book文档被收藏了，则需要将该文档的favCount字段自增</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.update(&#123;_id:ObjectId(<span class="string">&quot;61caa09ee0782536660494d9&quot;</span>)&#125;,&#123;<span class="variable">$inc</span>:&#123;favCount:1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829161842815.png"
+                      alt="image-20220829161842815"
+                ></p>
+<h3 id="更新多个文档"><a href="#更新多个文档" class="headerlink" title="更新多个文档"></a>更新多个文档</h3><p>默认情况下，update命令只在更新第一个文档之后返回，如果需要更新多个文档，则可以使用multi选项。<br>将分类为“novel”的文档的增加发布时间（publishedDate）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.update(&#123;<span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span>&#125;,&#123;<span class="variable">$set</span>:&#123;publishedDate:new Date()&#125;&#125;,&#123;<span class="string">&quot;multi&quot;</span>:<span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829161941114.png"
+                      alt="image-20220829161941114"
+                ></p>
+<p>update命令的选项配置较多，为了简化使用还可以使用一些快捷命令: </p>
+<ul>
+<li>updateOne：更新单个文档。</li>
+<li>updateMany：更新多个文档。 </li>
+<li>replaceOne：替换单个文档。</li>
+</ul>
+<h3 id="使用upsert命令"><a href="#使用upsert命令" class="headerlink" title="使用upsert命令"></a>使用upsert命令</h3><p>upsert是一种特殊的更新，其表现为如果目标文档不存在，则执行插入命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.books.update(</span><br><span class="line">    &#123;title:<span class="string">&quot;my book&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="variable">$set</span>:&#123;tags:[<span class="string">&quot;nosql&quot;</span>,<span class="string">&quot;mongodb&quot;</span>],<span class="built_in">type</span>:<span class="string">&quot;none&quot;</span>,author:<span class="string">&quot;fox&quot;</span>&#125;&#125;, </span><br><span class="line">    &#123;upsert:<span class="literal">true</span>&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>nMatched、nModified都为0，表示没有文档被匹配及更新，nUpserted&#x3D;1提示执行了upsert动作</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829162142374.png"
+                      alt="image-20220829162142374"
+                ></p>
+<h3 id="实现replace语义"><a href="#实现replace语义" class="headerlink" title="实现replace语义"></a>实现replace语义</h3><p>update命令中的更新描述（update）通常由操作符描述，如果更新描述中不包含任何操作符，那么 MongoDB会实现文档的replace语义</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.books.update(</span><br><span class="line">    &#123;title:<span class="string">&quot;my book&quot;</span>&#125;, </span><br><span class="line">    &#123;justTitle:<span class="string">&quot;my first book&quot;</span>&#125; </span><br><span class="line">)  </span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829162429690.png"
+                      alt="image-20220829162429690"
+                ></p>
+<h3 id="findAndModify命令"><a href="#findAndModify命令" class="headerlink" title="findAndModify命令"></a>findAndModify命令</h3><p>findAndModify兼容了查询和修改指定文档的功能，findAndModify只能更新单个文档</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//将某个book文档的收藏数（favCount）加1 db.books.findAndModify(&#123; </span><br><span class="line">    query:&#123;_id:ObjectId(<span class="string">&quot;61caa09ee0782536660494dd&quot;</span>)&#125;, </span><br><span class="line">    update:&#123;<span class="variable">$inc</span>:&#123;favCount:1&#125;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>该操作会返回符合查询条件的文档数据，并完成对文档的修改。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829162519574.png"
+                      alt="image-20220829162519574"
+                ></p>
+<p>默认情况下，findAndModify会返回修改前的“旧”数据。如果希望返回修改后的数据，则可以指定new选项</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.books.findAndModify(&#123; </span><br><span class="line">    query:&#123;_id:ObjectId(<span class="string">&quot;61caa09ee0782536660494dd&quot;</span>)&#125;, </span><br><span class="line">    update:&#123;<span class="variable">$inc</span>:&#123;favCount:1&#125;&#125;,</span><br><span class="line">    new: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>与findAndModify语义相近的命令如下： </p>
+<ul>
+<li>findOneAndUpdate：更新单个文档并返回更新前（或更新后）的文档。</li>
+<li>findOneAndReplace：替换单个文档并返回替换前（或替换后）的文档。</li>
+</ul>
+<h2 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h2><h3 id="使用-remove-删除文档"><a href="#使用-remove-删除文档" class="headerlink" title="使用 remove 删除文档"></a>使用 remove 删除文档</h3><ul>
+<li>remove 命令需要配合查询条件使用； </li>
+<li>匹配查询条件的文档会被删除； </li>
+<li>指定一个空文档条件会删除所有文档；</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.user.remove(&#123;age:28&#125;)// 删除age 等于28的记录 </span><br><span class="line">db.user.remove(&#123;age:&#123;<span class="variable">$lt</span>:25&#125;&#125;)   // 删除age 小于25的记录 </span><br><span class="line">db.user.remove( &#123; &#125; ) // 删除所有记录</span><br><span class="line">db.user.remove() //报错</span><br></pre></td></tr></table></figure>
+
+<p>remove命令会删除匹配条件的全部文档，如果希望明确限定只删除一个文档，则需要指定justOne参数，命令格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.remove(query,justOne)</span><br></pre></td></tr></table></figure>
+
+<p>例如：删除满足type:novel条件的首条记录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.remove(&#123;<span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span>&#125;,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-delete-删除文档"><a href="#使用-delete-删除文档" class="headerlink" title="使用 delete 删除文档"></a>使用 delete 删除文档</h3><p>官方推荐使用 deleteOne() 和 deleteMany() 方法删除文档，语法格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.deleteMany (&#123;&#125;)  //删除集合下全部文档</span><br><span class="line">db.books.deleteMany (&#123; <span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span> &#125;)  //删除 <span class="built_in">type</span>等于 novel 的全部文档 </span><br><span class="line">db.books.deleteOne (&#123; <span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span> &#125;)  //删除 <span class="built_in">type</span>等于novel 的一个文档</span><br></pre></td></tr></table></figure>
+
+<p>注意： remove、deleteMany等命令需要对查询范围内的文档逐个删除，如果希望删除整个集合，则使用drop命令会更加高效</p>
+<h3 id="返回被删除文档"><a href="#返回被删除文档" class="headerlink" title="返回被删除文档"></a>返回被删除文档</h3><p>remove、deleteOne等命令在删除文档后只会返回确认性的信息，如果希望获得被删除的文档，则可以使用findOneAndDelete命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.findOneAndDelete(&#123;<span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829163156175.png"
+                      alt="image-20220829163156175"
+                ></p>
+<p>除了在结果中返回删除文档，findOneAndDelete命令还允许定义“删除的顺序”，即按照指定顺序删除找 到的第一个文档</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.findOneAndDelete(&#123;<span class="built_in">type</span>:<span class="string">&quot;novel&quot;</span>&#125;,&#123;<span class="built_in">sort</span>:&#123;favCount:1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>remove、deleteOne等命令只能按默认顺序删除，利用这个特性，findOneAndDelete可以实现队列的先进先出。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MongoDB之文档操作</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-29 15:47:35</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/29/MongoDB之文档操作/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MongoDB/">#MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E6%95%B4%E5%90%88SpringBoot/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之整合SpringBoot</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之快速开始</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">插入文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E5%8D%95%E4%B8%AA%E6%96%87%E6%A1%A3"><span class="nav-number">1.1.</span> <span class="nav-text">新增单个文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%96%B0%E5%A2%9E%E6%96%87%E6%A1%A3"><span class="nav-number">1.2.</span> <span class="nav-text">批量新增文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%EF%BC%9A%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A550%E6%9D%A1%E9%9A%8F%E6%9C%BA%E6%95%B0%E6%8D%AE"><span class="nav-number">1.3.</span> <span class="nav-text">测试：批量插入50条随机数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="nav-number">2.</span> <span class="nav-text">查询文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.1.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F-amp-%E5%88%86%E9%A1%B5"><span class="nav-number">2.2.</span> <span class="nav-text">排序&amp;分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.3.</span> <span class="nav-text">正则表达式匹配查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3"><span class="nav-number">3.</span> <span class="nav-text">更新文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">更新操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%8D%95%E4%B8%AA%E6%96%87%E6%A1%A3"><span class="nav-number">3.2.</span> <span class="nav-text">更新单个文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%A4%9A%E4%B8%AA%E6%96%87%E6%A1%A3"><span class="nav-number">3.3.</span> <span class="nav-text">更新多个文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8upsert%E5%91%BD%E4%BB%A4"><span class="nav-number">3.4.</span> <span class="nav-text">使用upsert命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0replace%E8%AF%AD%E4%B9%89"><span class="nav-number">3.5.</span> <span class="nav-text">实现replace语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#findAndModify%E5%91%BD%E4%BB%A4"><span class="nav-number">3.6.</span> <span class="nav-text">findAndModify命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">删除文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-remove-%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">4.1.</span> <span class="nav-text">使用 remove 删除文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-delete-%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">4.2.</span> <span class="nav-text">使用 delete 删除文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E8%A2%AB%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="nav-number">4.3.</span> <span class="nav-text">返回被删除文档</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

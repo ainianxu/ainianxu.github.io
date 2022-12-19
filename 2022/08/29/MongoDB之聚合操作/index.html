@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MongoDB之聚合操作 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MongoDB之聚合操作</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-29 16:56:21</span>
+        <span class="mobile">2022-08-29 16:56</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MongoDB/">MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>5.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>24 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>聚合操作处理数据记录并返回计算结果(诸如统计平均值，求和等)。聚合操作组值来自多个文档，可以对 分组数据执行各种操作以返回单个结果。聚合操作包含三类：单一作用聚合、聚合管道、MapReduce。</p>
+<ul>
+<li>单一作用聚合：提供了对常见聚合过程的简单访问，操作都从单个集合聚合文档。 </li>
+<li>聚合管道是一个数据聚合的框架，模型基于数据处理流水线的概念。文档进入多级管道，将文档转换为聚合结果。 </li>
+<li>MapReduce操作具有两个阶段：处理每个文档并向每个输入文档发射一个或多个对象的map阶段，以及reduce组合map操作的输出阶段。</li>
+</ul>
+<hr>
+<h2 id="单一作用聚合"><a href="#单一作用聚合" class="headerlink" title="单一作用聚合"></a>单一作用聚合</h2><p>MongoDB提供 db.collection.estimatedDocumentCount(), db.collection.count(), db.collection.distinct() 这类单一作用的聚合函数。 所有这些操作都聚合来自单个集合的文档。虽然这 些操作提供了对公共聚合过程的简单访问，但它们缺乏聚合管道和map-Reduce的灵活性和功能。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829170729522.png"
+                      alt="image-20220829170729522"
+                ></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>db.collection.estimatedDocumentCount()</td>
+<td>忽略查询条件，返回集合或视图中所有文档的计数</td>
+</tr>
+<tr>
+<td>db.collection.count()</td>
+<td>返回与find()集合或视图的查询匹配的文档计数 。等同于 db.collection.find(query).count()构造</td>
+</tr>
+<tr>
+<td>db.collection.distinct()</td>
+<td>在单个集合或视图中查找指定字段的不同值，并在数组中返回结果。</td>
+</tr>
+</tbody></table>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检索books集合中所有文档的计数 </span></span><br><span class="line">db.books.estimatedDocumentCount() </span><br><span class="line"><span class="comment">#计算与查询匹配的所有文档 </span></span><br><span class="line">db.books.count(&#123;favCount:&#123;<span class="variable">$gt</span>:50&#125;&#125;) </span><br><span class="line"><span class="comment">#返回不同type的数组</span></span><br><span class="line">db.books.distinct(<span class="string">&quot;type&quot;</span>) </span><br><span class="line"><span class="comment">#返回收藏数大于90的文档不同type的数组 </span></span><br><span class="line">db.books.distinct(<span class="string">&quot;type&quot;</span>,&#123;favCount:&#123;<span class="variable">$gt</span>:90&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>注意：在分片群集上，如果存在孤立文档或正在进行块迁移，则db.collection.count()没有查询谓词可能 导致计数不准确。要避免这些情况，请在分片群集上使用 db.collection.aggregate()方法。</p>
+<h2 id="聚合管道"><a href="#聚合管道" class="headerlink" title="聚合管道"></a>聚合管道</h2><h3 id="什么是-MongoDB-聚合框架"><a href="#什么是-MongoDB-聚合框架" class="headerlink" title="什么是 MongoDB 聚合框架"></a>什么是 MongoDB 聚合框架</h3><p>MongoDB 聚合框架（Aggregation Framework）是一个计算框架，它可以： </p>
+<ul>
+<li>作用在一个或几个集合上；</li>
+<li>对集合中的数据进行的一系列运算； </li>
+<li>将这些数据转化为期望的形式；</li>
+</ul>
+<p>从效果而言，聚合框架相当于 SQL 查询中的GROUP BY、 LEFT OUTER JOIN 、 AS等。 </p>
+<h3 id="管道（Pipeline）和阶段（Stage）"><a href="#管道（Pipeline）和阶段（Stage）" class="headerlink" title="管道（Pipeline）和阶段（Stage）"></a>管道（Pipeline）和阶段（Stage）</h3><p>整个聚合运算过程称为管道（Pipeline），它是由多个阶段（Stage）组成的， 每个管道： </p>
+<ul>
+<li>接受一系列文档（原始数据）；</li>
+<li>每个阶段对这些文档进行一系列运算；</li>
+<li>结果文档输出给下一个阶段；</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829172754819.png"
+                      alt="image-20220829172754819"
+                ></p>
+<p>聚合管道操作语法</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pipeline = [<span class="variable">$stage1</span>, <span class="variable">$stage2</span>, ...<span class="variable">$stageN</span>]; </span><br><span class="line">db.collection.aggregate(pipeline, &#123;options&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>pipelines 一组数据聚合阶段。除$out、$Merge和$geonear阶段之外，每个阶段都可以在管道中出现多次。</li>
+<li>options 可选，聚合操作的其他参数。包含：查询计划、是否使用临时文件、 游标、最大操作时间、读写策略、强制索引等等</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829181826782.png"
+                      alt="image-20220829181826782"
+                ></p>
+<blockquote>
+<p>常用的管道聚合阶段</p>
+</blockquote>
+<p>聚合管道包含非常丰富的聚合阶段，下面是最常用的聚合阶段</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>描述</th>
+<th>SQL等价运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$match</td>
+<td>筛选条件</td>
+<td>WHERE</td>
+</tr>
+<tr>
+<td>$project</td>
+<td>投影</td>
+<td>AS</td>
+</tr>
+<tr>
+<td>$lookup</td>
+<td>左外连接</td>
+<td>LEFT OUTER JOIN</td>
+</tr>
+<tr>
+<td>$sort</td>
+<td>排序</td>
+<td>ORDER BY</td>
+</tr>
+<tr>
+<td>$group</td>
+<td>分组</td>
+<td>GROUP BY</td>
+</tr>
+<tr>
+<td>$skip&#x2F;$limit</td>
+<td>分页</td>
+<td></td>
+</tr>
+<tr>
+<td>$unwind</td>
+<td>展开数组</td>
+<td></td>
+</tr>
+<tr>
+<td>$graphLookup</td>
+<td>图搜索</td>
+<td></td>
+</tr>
+<tr>
+<td>$facet&#x2F;$bucket</td>
+<td>分面搜索</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>文档：<a class="link"   target="_blank" rel="noopener" href="https://www.mongodb.com/docs/manual/reference/operator/aggregation-pipeline/" >Aggregation Pipeline Stages — MongoDB Manual<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h4><p>准备数据集，执行脚本</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tags = [<span class="string">&quot;nosql&quot;</span>,<span class="string">&quot;mongodb&quot;</span>,<span class="string">&quot;document&quot;</span>,<span class="string">&quot;developer&quot;</span>,<span class="string">&quot;popular&quot;</span>];</span><br><span class="line"><span class="keyword">var</span> types = [<span class="string">&quot;technology&quot;</span>,<span class="string">&quot;sociality&quot;</span>,<span class="string">&quot;travel&quot;</span>,<span class="string">&quot;novel&quot;</span>,<span class="string">&quot;literature&quot;</span>]; <span class="keyword">var</span> books=[];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">50</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> typeIdx = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*types.<span class="property">length</span>); </span><br><span class="line">    <span class="keyword">var</span> tagIdx = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*tags.<span class="property">length</span>); </span><br><span class="line">    <span class="keyword">var</span> tagIdx2 = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*tags.<span class="property">length</span>); </span><br><span class="line">    <span class="keyword">var</span> favCount = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">var</span> username = <span class="string">&quot;xx00&quot;</span>+<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">10</span>); </span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">20</span> + <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>()*<span class="number">15</span>);</span><br><span class="line">    <span class="keyword">var</span> book = &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;book-&quot;</span>+i,</span><br><span class="line">        <span class="attr">type</span>: types[typeIdx],</span><br><span class="line">        <span class="attr">tag</span>: [tags[tagIdx],tags[tagIdx2]], </span><br><span class="line">        <span class="attr">favCount</span>: favCount,</span><br><span class="line">        <span class="attr">author</span>: &#123;<span class="attr">name</span>:username,<span class="attr">age</span>:age&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    books.<span class="title function_">push</span>(book)</span><br><span class="line">&#125;</span><br><span class="line">db.<span class="property">books</span>.<span class="title function_">insertMany</span>(books);</span><br></pre></td></tr></table></figure>
+
+<h4 id="project"><a href="#project" class="headerlink" title="$project"></a>$project</h4><p> 投影操作， 将原始字段投影成指定名称， 如将集合中的 title 投影成 name</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([&#123;<span class="variable">$project</span>:&#123;name:<span class="string">&quot;<span class="variable">$title</span>&quot;</span>&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>$project 可以灵活控制输出文档的格式，也可以剔除不需要的字段</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([&#123;<span class="variable">$project</span>:&#123;name:<span class="string">&quot;<span class="variable">$title</span>&quot;</span>,_id:0,<span class="built_in">type</span>:1,author:1&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>从嵌套文档中排除字段</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$project</span>:&#123;name:<span class="string">&quot;<span class="variable">$title</span>&quot;</span>,_id:0,<span class="built_in">type</span>:1,<span class="string">&quot;author.name&quot;</span>:1&#125;&#125; ])</span><br><span class="line">或者</span><br><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$project</span>:&#123;name:<span class="string">&quot;<span class="variable">$title</span>&quot;</span>,_id:0,<span class="built_in">type</span>:1,author:&#123;name:1&#125;&#125;&#125; ])</span><br></pre></td></tr></table></figure>
+
+<h4 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h4><p>$match用于对文档进行筛选，之后可以在得到的文档子集上做聚合，$match可以使用除了地理空间之外的所有常规查询操作符，在实际应用中尽可能将$match放在管道的前面位置。这样有两个好处：一是 可以快速将不需要的文档过滤掉，以减少管道的工作量；二是如果再投射和分组之前执行$match，查询可以使用索引。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([&#123;<span class="variable">$match</span>:&#123;<span class="built_in">type</span>:<span class="string">&quot;technology&quot;</span>&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>筛选管道操作和其他管道操作配合时候时，尽量放到开始阶段，这样可以减少后续管道操作符要操作的文档数，提升效率</p>
+<h4 id="count"><a href="#count" class="headerlink" title="$count"></a>$count</h4><p>计数并返回与查询匹配的结果数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([    &#123;<span class="variable">$match</span>:&#123;<span class="built_in">type</span>:<span class="string">&quot;technology&quot;</span>&#125;&#125;,    &#123;<span class="variable">$count</span>: <span class="string">&quot;type_count&quot;</span>&#125; ])</span><br></pre></td></tr></table></figure>
+
+<p>$match阶段筛选出type匹配technology的文档，并传到下一阶段； </p>
+<p>$count阶段返回聚合管道中剩余文档的计数，并将该值分配给type_count</p>
+<h4 id="group"><a href="#group" class="headerlink" title="$group"></a>$group</h4><p>按指定的表达式对文档进行分组，并将每个不同分组的文档输出到下一个阶段。输出文档包含一个_id字段，该字段按键包含不同的组。<br>输出文档还可以包含计算字段，该字段保存由$group的_id字段分组的一些accumulator表达式的值。 $group不会输出具体的文档而只是统计信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="variable">$group</span>: &#123; _id: &lt;expression&gt;, &lt;field1&gt;: &#123; &lt;accumulator1&gt; : &lt;expression1&gt; &#125;, ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>id字段是必填的;但是，可以指定id值为null来为整个输入文档计算累计值。 </li>
+<li>剩余的计算字段是可选的，并使用运算符进行计算。 </li>
+<li>_id和表达式可以接受任何有效的表达式。</li>
+</ul>
+<blockquote>
+<p>accumulator操作符</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>类比 sql</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$avg</td>
+<td>计算均值</td>
+<td>avg</td>
+</tr>
+<tr>
+<td>$first</td>
+<td>返回每组第一个文档，如果有排序，按照排序，如果没有按照默认的存储的顺序的第一个文档。</td>
+<td>limit 0,1</td>
+</tr>
+<tr>
+<td>$last</td>
+<td>返回每组最后一个文档，如果有排序，按照排序，如果没有按照默认 的存储的顺序的最后个文档。</td>
+<td></td>
+</tr>
+<tr>
+<td>$max</td>
+<td>根据分组，获取集合中所有文档对应值得最大值。</td>
+<td>max</td>
+</tr>
+<tr>
+<td>$min</td>
+<td>根据分组，获取集合中所有文档对应值得最小值。</td>
+<td>min</td>
+</tr>
+<tr>
+<td>$push</td>
+<td>将指定的表达式的值添加到一个数组中。</td>
+<td></td>
+</tr>
+<tr>
+<td>$addToSet</td>
+<td>将表达式的值添加到一个集合中（无重复值，无序）。</td>
+<td>sum</td>
+</tr>
+<tr>
+<td>$sum</td>
+<td>计算总和</td>
+<td></td>
+</tr>
+<tr>
+<td>$stdDevPop</td>
+<td>返回输入值的总体标准偏差（population standard deviation）</td>
+<td></td>
+</tr>
+<tr>
+<td>$stdDevSamp</td>
+<td>返回输入值的样本标准偏差（the sample standard deviation）</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>$group阶段的内存限制为100M。默认情况下，如果stage超过此限制，$group将产生错误。但是，要允许处理大型数据集，请将allowDiskUse选项设置为true以启用$group操作以写入临时文件。</p>
+<blockquote>
+<p>book的数量，收藏总数和平均值</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:null,count:&#123;<span class="variable">$sum</span>:1&#125;,pop:&#123;<span class="variable">$sum</span>:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>&#125;,avg: &#123;<span class="variable">$avg</span>:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>&#125;&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>统计每个作者的book收藏总数</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:<span class="string">&quot;<span class="variable">$author</span>.name&quot;</span>,pop:&#123;<span class="variable">$sum</span>:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>&#125;&#125;&#125; </span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>统计每个作者的每本book的收藏数</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:&#123;name:<span class="string">&quot;<span class="variable">$author</span>.name&quot;</span>,title:<span class="string">&quot;<span class="variable">$title</span>&quot;</span>&#125;,pop:&#123;<span class="variable">$sum</span>:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>&#125;&#125;&#125; ])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>每个作者的book的type合集</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:<span class="string">&quot;<span class="variable">$author</span>.name&quot;</span>,types:&#123;<span class="variable">$addToSet</span>:<span class="string">&quot;<span class="variable">$type</span>&quot;</span>&#125;&#125;&#125; </span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h4 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h4><p>可以将数组拆分为单独的文档<br>v3.2+支持如下语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="variable">$unwind</span>:</span><br><span class="line">    &#123;</span><br><span class="line">     <span class="comment">#要指定字段路径，在字段名称前加上$符并用引号括起来。</span></span><br><span class="line">      path: &lt;field path&gt;, </span><br><span class="line">      <span class="comment">#可选,一个新字段的名称用于存放元素的数组索引。该名称不能以$开头。 </span></span><br><span class="line">      includeArrayIndex: &lt;string&gt;,</span><br><span class="line">      <span class="comment">#可选，default :false，若为true,如果路径为空，缺少或为空数组，则$unwind输出文档 </span></span><br><span class="line">      preserveNullAndEmptyArrays: &lt;boolean&gt;</span><br><span class="line"> &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>姓名为xx006的作者的book的tag数组拆分为多个文档</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$match</span>:&#123;<span class="string">&quot;author.name&quot;</span>:<span class="string">&quot;xx006&quot;</span>&#125;&#125;, </span><br><span class="line">    &#123;<span class="variable">$unwind</span>:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>每个作者的book的tag合集</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([</span><br><span class="line">    &#123;<span class="variable">$unwind</span>:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:<span class="string">&quot;<span class="variable">$author</span>.name&quot;</span>,types:&#123;<span class="variable">$addToSet</span>:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>&#125;&#125;&#125; </span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>案例 </p>
+</blockquote>
+<p>示例数据</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">db.books.insert([</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;title&quot;</span> : <span class="string">&quot;book-51&quot;</span>, </span><br><span class="line">    <span class="string">&quot;type&quot;</span> : <span class="string">&quot;technology&quot;</span>, </span><br><span class="line">    <span class="string">&quot;favCount&quot;</span> : 11, </span><br><span class="line">     <span class="string">&quot;tag&quot;</span>:[],</span><br><span class="line">    <span class="string">&quot;author&quot;</span> : &#123; </span><br><span class="line">        <span class="string">&quot;name&quot;</span> : <span class="string">&quot;fox&quot;</span>, </span><br><span class="line">        <span class="string">&quot;age&quot;</span> : 28</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,&#123;</span><br><span class="line">    <span class="string">&quot;title&quot;</span> : <span class="string">&quot;book-52&quot;</span>, </span><br><span class="line">    <span class="string">&quot;type&quot;</span> : <span class="string">&quot;technology&quot;</span>, </span><br><span class="line">    <span class="string">&quot;favCount&quot;</span> : 15, </span><br><span class="line">    <span class="string">&quot;author&quot;</span> : &#123; </span><br><span class="line">        <span class="string">&quot;name&quot;</span> : <span class="string">&quot;fox&quot;</span>, </span><br><span class="line">        <span class="string">&quot;age&quot;</span> : 28</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,&#123;</span><br><span class="line">    <span class="string">&quot;title&quot;</span> : <span class="string">&quot;book-53&quot;</span>, </span><br><span class="line">    <span class="string">&quot;type&quot;</span> : <span class="string">&quot;technology&quot;</span>, </span><br><span class="line">    <span class="string">&quot;tag&quot;</span> : [ </span><br><span class="line">        <span class="string">&quot;nosql&quot;</span>, </span><br><span class="line">        <span class="string">&quot;document&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&quot;favCount&quot;</span> : 20, </span><br><span class="line">    <span class="string">&quot;author&quot;</span> : &#123; </span><br><span class="line">        <span class="string">&quot;name&quot;</span> : <span class="string">&quot;fox&quot;</span>, </span><br><span class="line">        <span class="string">&quot;age&quot;</span> : 28</span><br><span class="line">    &#125;</span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用includeArrayIndex选项来输出数组元素的数组索引</span></span><br><span class="line">db.books.aggregate([</span><br><span class="line">    &#123;<span class="variable">$match</span>:&#123;<span class="string">&quot;author.name&quot;</span>:<span class="string">&quot;fox&quot;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="variable">$unwind</span>:&#123;path:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>, includeArrayIndex: <span class="string">&quot;arrayIndex&quot;</span>&#125;&#125;</span><br><span class="line">])</span><br><span class="line"><span class="comment"># 使用preserveNullAndEmptyArrays选项在输出中包含缺少size字段，null或空数组的文档 </span></span><br><span class="line">db.books.aggregate([</span><br><span class="line">    &#123;<span class="variable">$match</span>:&#123;<span class="string">&quot;author.name&quot;</span>:<span class="string">&quot;fox&quot;</span>&#125;&#125;,</span><br><span class="line">    &#123;<span class="variable">$unwind</span>:&#123;path:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>, preserveNullAndEmptyArrays: <span class="literal">true</span>&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h4 id="limit"><a href="#limit" class="headerlink" title="$limit"></a>$limit</h4><p>限制传递到管道中下一阶段的文档数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$limit</span> : 5 &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>此操作仅返回管道传递给它的前5个文档。 $limit对其传递的文档内容没有影响。<br>注意：当$sort在管道中的$limit之前立即出现时，$sort操作只会在过程中维持前n个结果，其中n是指定的限制，而MongoDB只需要将n个项存储在内存中。</p>
+<h4 id="skip"><a href="#skip" class="headerlink" title="$skip"></a>$skip</h4><p>跳过进入stage的指定数量的文档，并将其余文档传递到管道中的下一个阶段</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$skip</span> : 5 &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>此操作将跳过管道传递给它的前5个文档。 $skip对沿着管道传递的文档的内容没有影响。</p>
+<h4 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h4><p>对所有输入文档进行排序，并按排序顺序将它们返回到管道。<br>语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="variable">$sort</span>: &#123; &lt;field1&gt;: &lt;<span class="built_in">sort</span> order&gt;, &lt;field2&gt;: &lt;<span class="built_in">sort</span> order&gt; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>要对字段进行排序，请将排序顺序设置为1或-1，以分别指定升序或降序排序，如下例所示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([</span><br><span class="line">    &#123;<span class="variable">$sort</span> : &#123;favCount:-1,title:1&#125;&#125; </span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+
+<h4 id="lookup"><a href="#lookup" class="headerlink" title="$lookup"></a>$lookup</h4><p>Mongodb 3.2版本新增，主要用来实现多表关联查询， 相当关系型数据库中多表关联查询。每个输入待处理的文档，经过$lookup 阶段的处理，输出的新文档中会包含一个新生成的数组（可根据需要命名 新key ）。数组列存放的数据是来自被Join集合的适配文档，如果没有，集合为空（即 为[ ])<br>语法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate([&#123;</span><br><span class="line">      <span class="variable">$lookup</span>: &#123;</span><br><span class="line">             from: <span class="string">&quot;&lt;collection to join&gt;&quot;</span>,</span><br><span class="line">             localField: <span class="string">&quot;&lt;field from the input documents&gt;&quot;</span>, </span><br><span class="line">             foreignField: <span class="string">&quot;&lt;field from the documents of the from collection&gt;&quot;</span>, </span><br><span class="line">             as: <span class="string">&quot;&lt;output array field&gt;&quot;</span></span><br><span class="line">           &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>from</td>
+<td>同一个数据库下等待被Join的集合。</td>
+</tr>
+<tr>
+<td>localField</td>
+<td>源集合中的match值，如果输入的集合中，某文档没有 localField这个Key （Field），在处理的过程中，会默认为此文档含有 localField：null的键值对。</td>
+</tr>
+<tr>
+<td>foreignField</td>
+<td>待Join的集合的match值，如果待Join的集合中，文档没有foreignField值，在处 理的过程中，会默认为此文档含有 foreignField：null的键值对。</td>
+</tr>
+<tr>
+<td>as</td>
+<td>为输出文档的新增值命名。如果输入的集合中已存在该值，则会覆盖掉</td>
+</tr>
+</tbody></table>
+<p>注意：null &#x3D; null 此为真</p>
+<p>其语法功能类似于下面的伪SQL语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span>, <span class="operator">&lt;</span>output <span class="keyword">array</span> field<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">FROM</span> collection</span><br><span class="line"><span class="keyword">WHERE</span> <span class="operator">&lt;</span>output <span class="keyword">array</span> field<span class="operator">&gt;</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">                               <span class="keyword">FROM</span> <span class="operator">&lt;</span>collection <span class="keyword">to</span> <span class="keyword">join</span><span class="operator">&gt;</span> </span><br><span class="line">                               <span class="keyword">WHERE</span> <span class="operator">&lt;</span>foreignField<span class="operator">&gt;=</span> <span class="operator">&lt;</span>collection.localField<span class="operator">&gt;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>案例</strong><br>数据准备</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.customer.insert(&#123;customerCode:1,name:<span class="string">&quot;customer1&quot;</span>,phone:<span class="string">&quot;13112345678&quot;</span>,address: <span class="string">&quot;test1&quot;</span>&#125;) db.customer.insert(&#123;customerCode:2,name:<span class="string">&quot;customer2&quot;</span>,phone:<span class="string">&quot;13112345679&quot;</span>,address: <span class="string">&quot;test2&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">db.order.insert(&#123;orderId:1,orderCode:<span class="string">&quot;order001&quot;</span>,customerCode:1,price:200&#125;) db.order.insert(&#123;orderId:2,orderCode:<span class="string">&quot;order002&quot;</span>,customerCode:2,price:400&#125;)</span><br><span class="line"></span><br><span class="line">db.orderItem.insert(&#123;itemId:1,productName:<span class="string">&quot;apples&quot;</span>,qutity:2,orderId:1&#125;) db.orderItem.insert(&#123;itemId:2,productName:<span class="string">&quot;oranges&quot;</span>,qutity:2,orderId:1&#125;) db.orderItem.insert(&#123;itemId:3,productName:<span class="string">&quot;mangoes&quot;</span>,qutity:2,orderId:1&#125;) db.orderItem.insert(&#123;itemId:4,productName:<span class="string">&quot;apples&quot;</span>,qutity:2,orderId:2&#125;) db.orderItem.insert(&#123;itemId:5,productName:<span class="string">&quot;oranges&quot;</span>,qutity:2,orderId:2&#125;) db.orderItem.insert(&#123;itemId:6,productName:<span class="string">&quot;mangoes&quot;</span>,qutity:2,orderId:2&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关联查询</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">db.customer.aggregate([</span><br><span class="line">    &#123;<span class="variable">$lookup</span>: &#123;</span><br><span class="line">       from: <span class="string">&quot;order&quot;</span>, </span><br><span class="line">       localField: <span class="string">&quot;customerCode&quot;</span>, </span><br><span class="line">       foreignField: <span class="string">&quot;customerCode&quot;</span>, </span><br><span class="line">       as: <span class="string">&quot;customerOrder&quot;</span></span><br><span class="line">     &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">db.order.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$lookup</span>: &#123; </span><br><span class="line">               from: <span class="string">&quot;customer&quot;</span>,</span><br><span class="line">               localField: <span class="string">&quot;customerCode&quot;</span>, </span><br><span class="line">               foreignField: <span class="string">&quot;customerCode&quot;</span>, </span><br><span class="line">               as: <span class="string">&quot;curstomer&quot;</span></span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;<span class="variable">$lookup</span>: &#123;</span><br><span class="line">               from: <span class="string">&quot;orderItem&quot;</span>, </span><br><span class="line">               localField: <span class="string">&quot;orderId&quot;</span>, </span><br><span class="line">               foreignField: <span class="string">&quot;orderId&quot;</span>, </span><br><span class="line">               as: <span class="string">&quot;orderItem&quot;</span></span><br><span class="line">             &#125;</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p><strong>聚合操作示例1</strong></p>
+<blockquote>
+<p>统计每个分类的book文档数量</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:<span class="string">&quot;<span class="variable">$type</span>&quot;</span>,total:&#123;<span class="variable">$sum</span>:1&#125;&#125;&#125;, </span><br><span class="line">    &#123;<span class="variable">$sort</span>:&#123;total:-1&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>标签的热度排行，标签的热度则按其关联book文档的收藏数（favCount）来计算</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([ </span><br><span class="line">    &#123;<span class="variable">$match</span>:&#123;favCount:&#123;<span class="variable">$gt</span>:0&#125;&#125;&#125;, </span><br><span class="line">    &#123;<span class="variable">$unwind</span>:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="variable">$group</span>:&#123;_id:<span class="string">&quot;<span class="variable">$tag</span>&quot;</span>,total:&#123;<span class="variable">$sum</span>:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>&#125;&#125;&#125;, </span><br><span class="line">    &#123;<span class="variable">$sort</span>:&#123;total:-1&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>$match阶段：用于过滤favCount&#x3D;0的文档。</li>
+<li>$unwind阶段：用于将标签数组进行展开，这样一个包含3个标签的文档会被拆解为3个条目。 </li>
+<li><ol start="3">
+<li>$group阶段：对拆解后的文档进行分组计算，$sum：”$favCount”表示按favCount字段进行累<br>加。</li>
+</ol>
+</li>
+<li>$sort阶段：接收分组计算的输出，按total得分进行排序。</li>
+</ol>
+<p><strong>统计book文档收藏数[0,10),[10,60),[60,80),[80,100),[100,+∞）</strong><br><a class="link"   target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/operator/aggregation/bucket/" >https://docs.mongodb.com/manual/reference/operator/aggregation/bucket/<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.books.aggregate([&#123;</span><br><span class="line">    <span class="variable">$bucket</span>:&#123; </span><br><span class="line">        groupBy:<span class="string">&quot;<span class="variable">$favCount</span>&quot;</span>, </span><br><span class="line">        boundaries:[0,10,60,80,100], </span><br><span class="line">        default:<span class="string">&quot;other&quot;</span>, </span><br><span class="line">        output:&#123;<span class="string">&quot;count&quot;</span>:&#123;<span class="variable">$sum</span>:1&#125;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;])</span><br></pre></td></tr></table></figure>
+
+<p><strong>聚合操作示例2</strong></p>
+<p>导入邮政编码数据集 :<a class="link"   target="_blank" rel="noopener" href="https://media.mongodb.org/zips.json" >https://media.mongodb.org/zips.json<i class="fas fa-external-link-alt"></i></a><br>使用mongoimport工具导入数据（<a class="link"   target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/database-tools%EF%BC%89" >https://www.mongodb.com/try/download/database-tools）<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongoimport -h 192.168.65.204 -d aggdemo -u fox -p fox --</span><br><span class="line">authenticationDatabase=admin -c zips --file </span><br><span class="line">D:\ProgramData\mongodb\import\zips.json</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>h,–host ：代表远程连接的数据库地址，默认连接本地Mongo数据库；<br>–port：代表远程连接的数据库的端口，默认连接的远程端口27017；<br>-u,–username：代表连接远程数据库的账号，如果设置数据库的认证，需要指定用户账号；<br>-p,–password：代表连接数据库的账号对应的密码；<br>-d,–db：代表连接的数据库；<br>-c,–collection：代表连接数据库中的集合；<br>-f, –fields：代表导入集合中的字段；<br>–type：代表导入的文件类型，包括csv和json,tsv文件，默认json格式；<br>–file：导入的文件名称<br>–headerline：导入csv文件时，指明第一行是列名，不需要导入；</p>
+</blockquote>
+<blockquote>
+<p>返回人口超过1000万的州</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, totalPop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125; &#125; &#125;, </span><br><span class="line">   &#123; <span class="variable">$match</span>: &#123; totalPop: &#123; <span class="variable">$gt</span>: 10*1000*1000 &#125; &#125; &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>这个聚合操作的等价SQL是:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> state, <span class="built_in">SUM</span>(pop) <span class="keyword">AS</span> totalPop <span class="keyword">FROM</span> zips</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> state</span><br><span class="line"><span class="keyword">HAVING</span> totalPop <span class="operator">&gt;=</span> (<span class="number">10</span><span class="operator">*</span><span class="number">1000</span><span class="operator">*</span><span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>返回各州平均城市人口</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: &#123; state: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, city: <span class="string">&quot;<span class="variable">$city</span>&quot;</span> &#125;, cityPop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125; </span><br><span class="line">   &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: <span class="string">&quot;<span class="variable">$_id</span>.state&quot;</span>, avgCityPop: &#123; <span class="variable">$avg</span>: <span class="string">&quot;<span class="variable">$cityPop</span>&quot;</span> &#125; &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>:&#123;avgCityPop:-1&#125;&#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按州返回最大和最小的城市</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [ </span><br><span class="line">   &#123; <span class="variable">$group</span>:</span><br><span class="line">      &#123;</span><br><span class="line">              _id: &#123; state: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, city: <span class="string">&quot;<span class="variable">$city</span>&quot;</span> &#125;,</span><br><span class="line">        pop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>: &#123; pop: 1 &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$group</span>:</span><br><span class="line">      &#123;</span><br><span class="line">        _id : <span class="string">&quot;<span class="variable">$_id</span>.state&quot;</span>,</span><br><span class="line">        biggestCity:  &#123; <span class="variable">$last</span>: <span class="string">&quot;<span class="variable">$_id</span>.city&quot;</span> &#125;,</span><br><span class="line">        biggestPop:   &#123; <span class="variable">$last</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;,</span><br><span class="line">        smallestCity: &#123; <span class="variable">$first</span>: <span class="string">&quot;<span class="variable">$_id</span>.city&quot;</span> &#125;, </span><br><span class="line">        smallestPop:  &#123; <span class="variable">$first</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">  &#123; <span class="variable">$project</span>:</span><br><span class="line">    &#123; _id: 0,</span><br><span class="line">      state: <span class="string">&quot;<span class="variable">$_id</span>&quot;</span>,</span><br><span class="line">      biggestCity:  &#123; name: <span class="string">&quot;<span class="variable">$biggestCity</span>&quot;</span>,  pop: <span class="string">&quot;<span class="variable">$biggestPop</span>&quot;</span> &#125;, </span><br><span class="line">      smallestCity: &#123; name: <span class="string">&quot;<span class="variable">$smallestCity</span>&quot;</span>, pop: <span class="string">&quot;<span class="variable">$smallestPop</span>&quot;</span> &#125; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>: &#123; state: 1 &#125; &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>MapReduce操作将大量的数据处理工作拆分成多个线程并行处理，然后将结果合并在一起。MongoDB 提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。<br>MapReduce具有两个阶段：</p>
+<ol>
+<li>将具有相同Key的文档数据整合在一起的map阶段</li>
+<li>组合map操作的结果进行统计输出的reduce阶段</li>
+</ol>
+<blockquote>
+<p>MapReduce的基本语法</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">db.collection.mapReduce(</span><br><span class="line">   <span class="function"><span class="title">function</span></span>() &#123;emit(key,value);&#125;,  //map 函数 </span><br><span class="line">   <span class="keyword">function</span>(key,values) &#123;<span class="built_in">return</span> reduceFunction&#125;,   //reduce 函数 </span><br><span class="line">   &#123;</span><br><span class="line">      out: &lt;collection&gt;,</span><br><span class="line">      query: &lt;document&gt;,</span><br><span class="line">      <span class="built_in">sort</span>: &lt;document&gt;,</span><br><span class="line">      <span class="built_in">limit</span>: &lt;number&gt;,</span><br><span class="line">     finalize: &lt;<span class="keyword">function</span>&gt;,</span><br><span class="line">     scope: &lt;document&gt;,</span><br><span class="line">     jsMode: &lt;boolean&gt;,</span><br><span class="line">     verbose: &lt;boolean&gt;,</span><br><span class="line">     bypassDocumentValidation: &lt;boolean&gt;</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>map，将数据拆分成键值对，交给reduce函数 </li>
+<li>reduce，根据键将值做统计运算 </li>
+<li>out，可选，将结果汇入指定表 </li>
+<li>quey，可选筛选数据的条件，筛选的数据送入map </li>
+<li>sort，排序完后，送入map</li>
+<li>limit，限制送入map的文档数</li>
+<li>finalize，可选，修改reduce的结果后进行输出 </li>
+<li>scope，可选，指定map、reduce、finalize的全局变量 </li>
+<li>jsMode，可选，默认false。在mapreduce过程中是否将数 据转换成bson格式。 </li>
+<li>verbose，可选，是否在结果中显示时间，默认false</li>
+<li>bypassDocmentValidation，可选，是否略过数据校验</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829225109887.png"
+                      alt="image-20220829225109887"
+                ></p>
+<h2 id="Springboot中整合MongoDB进行聚合操作"><a href="#Springboot中整合MongoDB进行聚合操作" class="headerlink" title="Springboot中整合MongoDB进行聚合操作"></a>Springboot中整合MongoDB进行聚合操作</h2><p>MongoTemplate提供了aggregate方法来实现对数据的聚合操作。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829225214539.png"
+                      alt="image-20220829225214539"
+                ></p>
+<blockquote>
+<p>基于聚合管道mongodb提供的可操作的内容</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829225233836.png"
+                      alt="image-20220829225233836"
+                ></p>
+<blockquote>
+<p>基于聚合操作Aggregation.group，mongodb提供可选的表达式</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829225249700.png"
+                      alt="image-20220829225249700"
+                ></p>
+<p><strong>示例：以聚合管道示例2为例</strong> </p>
+<p>实体结构</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Document(&quot;zips&quot;)</span> </span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span> </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Zips</span> &#123;</span><br><span class="line">    <span class="meta">@Id</span>   <span class="comment">//映射文档中的_id </span></span><br><span class="line">    <span class="keyword">private</span> String id; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> String city; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> Double[] loc; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> Integer pop; </span><br><span class="line">    <span class="meta">@Field</span></span><br><span class="line">    <span class="keyword">private</span> String state;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>返回人口超过1000万的州</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, totalPop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125; &#125; &#125;, </span><br><span class="line">   &#123; <span class="variable">$match</span>: &#123; totalPop: &#123; <span class="variable">$gt</span>: 10*1000*1000 &#125; &#125; &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//$group</span></span><br><span class="line">    <span class="type">GroupOperation</span> <span class="variable">groupOperation</span> <span class="operator">=</span>Aggregation.group(<span class="string">&quot;state&quot;</span>).sum(<span class="string">&quot;pop&quot;</span>).as(<span class="string">&quot;totalPop&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//$match</span></span><br><span class="line">    <span class="type">MatchOperation</span> <span class="variable">matchOperation</span> <span class="operator">=</span> Aggregation.match( Criteria.where(<span class="string">&quot;totalPop&quot;</span>).gte(<span class="number">10</span>*<span class="number">1000</span>*<span class="number">1000</span>));</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// 按顺序组合每一个聚合步骤 </span></span><br><span class="line">    TypedAggregation&lt;Zips&gt; typedAggregation =Aggregation.newAggregation(Zips.class, groupOperation, matchOperation);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//执行聚合操作,如果不使用 Map，也可以使用自定义的实体类来接收数据 </span></span><br><span class="line">    AggregationResults&lt;Map&gt; aggregationResults = mongoTemplate.aggregate(typedAggregation, Map.class);</span><br><span class="line">    <span class="comment">// 取出最终结果</span></span><br><span class="line">    List&lt;Map&gt; mappedResults = aggregationResults.getMappedResults(); </span><br><span class="line">    <span class="keyword">for</span>(Map map:mappedResults)&#123;</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>返回各州平均城市人口</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: &#123; state: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, city: <span class="string">&quot;<span class="variable">$city</span>&quot;</span> &#125;, cityPop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125; &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$group</span>: &#123; _id: <span class="string">&quot;<span class="variable">$_id</span>.state&quot;</span>, avgCityPop: &#123; <span class="variable">$avg</span>: <span class="string">&quot;<span class="variable">$cityPop</span>&quot;</span> &#125; &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>:&#123;avgCityPop:-1&#125;&#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span>&#123; </span><br><span class="line">    <span class="comment">//$group</span></span><br><span class="line">    </span><br><span class="line">        <span class="type">GroupOperation</span> <span class="variable">groupOperation</span> <span class="operator">=</span> Aggregation.group(<span class="string">&quot;state&quot;</span>,<span class="string">&quot;city&quot;</span>).sum(<span class="string">&quot;pop&quot;</span>).as(<span class="string">&quot;cityPop&quot;</span>); </span><br><span class="line">    <span class="comment">//$group</span></span><br><span class="line">    <span class="type">GroupOperation</span> <span class="variable">groupOperation2</span> <span class="operator">=</span> Aggregation.group(<span class="string">&quot;_id.state&quot;</span>).avg(<span class="string">&quot;cityPop&quot;</span>).as(<span class="string">&quot;avgCityPop&quot;</span>); </span><br><span class="line">    <span class="comment">//$sort</span></span><br><span class="line">    <span class="type">SortOperation</span> <span class="variable">sortOperation</span> <span class="operator">=</span> Aggregation.sort(Sort.Direction.DESC,<span class="string">&quot;avgCityPop&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按顺序组合每一个聚合步骤</span></span><br><span class="line">    TypedAggregation&lt;Zips&gt; typedAggregation = Aggregation.newAggregation(Zips.class, </span><br><span class="line">            groupOperation, groupOperation2,sortOperation);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//执行聚合操作,如果不使用 Map，也可以使用自定义的实体类来接收数据 </span></span><br><span class="line">    AggregationResults&lt;Map&gt; aggregationResults = mongoTemplate.aggregate(typedAggregation, Map.class);</span><br><span class="line">    <span class="comment">// 取出最终结果</span></span><br><span class="line">    List&lt;Map&gt; mappedResults = aggregationResults.getMappedResults(); </span><br><span class="line">    <span class="keyword">for</span>(Map map:mappedResults)&#123;</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>按州返回最大和最小的城市</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">db.zips.aggregate( [</span><br><span class="line">   &#123; <span class="variable">$group</span>:</span><br><span class="line">      &#123;</span><br><span class="line">        _id: &#123; state: <span class="string">&quot;<span class="variable">$state</span>&quot;</span>, city: <span class="string">&quot;<span class="variable">$city</span>&quot;</span> &#125;,</span><br><span class="line">        pop: &#123; <span class="variable">$sum</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>: &#123; pop: 1 &#125; &#125;,</span><br><span class="line">   &#123; <span class="variable">$group</span>:</span><br><span class="line">      &#123;</span><br><span class="line">        _id : <span class="string">&quot;<span class="variable">$_id</span>.state&quot;</span>,</span><br><span class="line">        biggestCity:  &#123; <span class="variable">$last</span>: <span class="string">&quot;<span class="variable">$_id</span>.city&quot;</span> &#125;,</span><br><span class="line">        biggestPop:   &#123; <span class="variable">$last</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;,</span><br><span class="line">        smallestCity: &#123; <span class="variable">$first</span>: <span class="string">&quot;<span class="variable">$_id</span>.city&quot;</span> &#125;, </span><br><span class="line">        smallestPop:  &#123; <span class="variable">$first</span>: <span class="string">&quot;<span class="variable">$pop</span>&quot;</span> &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">  &#123; <span class="variable">$project</span>:</span><br><span class="line">    &#123; _id: 0,</span><br><span class="line">      state: <span class="string">&quot;<span class="variable">$_id</span>&quot;</span>,</span><br><span class="line">      biggestCity:  &#123; name: <span class="string">&quot;<span class="variable">$biggestCity</span>&quot;</span>,  pop: <span class="string">&quot;<span class="variable">$biggestPop</span>&quot;</span> &#125;, </span><br><span class="line">      smallestCity: &#123; name: <span class="string">&quot;<span class="variable">$smallestCity</span>&quot;</span>, pop: <span class="string">&quot;<span class="variable">$smallestPop</span>&quot;</span> &#125; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">   &#123; <span class="variable">$sort</span>: &#123; state: 1 &#125; &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>java实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//$group</span></span><br><span class="line">    <span class="type">GroupOperation</span> <span class="variable">groupOperation</span> <span class="operator">=</span> Aggregation </span><br><span class="line">            .group(<span class="string">&quot;state&quot;</span>,<span class="string">&quot;city&quot;</span>).sum(<span class="string">&quot;pop&quot;</span>).as(<span class="string">&quot;pop&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//$sort</span></span><br><span class="line">    <span class="type">SortOperation</span> <span class="variable">sortOperation</span> <span class="operator">=</span> Aggregation </span><br><span class="line">            .sort(Sort.Direction.ASC,<span class="string">&quot;pop&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//$group</span></span><br><span class="line">    <span class="type">GroupOperation</span> <span class="variable">groupOperation2</span> <span class="operator">=</span> Aggregation </span><br><span class="line">            .group(<span class="string">&quot;_id.state&quot;</span>) </span><br><span class="line">            .last(<span class="string">&quot;_id.city&quot;</span>).as(<span class="string">&quot;biggestCity&quot;</span>) </span><br><span class="line">            .last(<span class="string">&quot;pop&quot;</span>).as(<span class="string">&quot;biggestPop&quot;</span>) </span><br><span class="line">            .first(<span class="string">&quot;_id.city&quot;</span>).as(<span class="string">&quot;smallestCity&quot;</span>) </span><br><span class="line">            .first(<span class="string">&quot;pop&quot;</span>).as(<span class="string">&quot;smallestPop&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//$project</span></span><br><span class="line">    <span class="type">ProjectionOperation</span> <span class="variable">projectionOperation</span> <span class="operator">=</span> Aggregation </span><br><span class="line">            .project(<span class="string">&quot;state&quot;</span>,<span class="string">&quot;biggestCity&quot;</span>,<span class="string">&quot;smallestCity&quot;</span>) </span><br><span class="line">            .and(<span class="string">&quot;_id&quot;</span>).as(<span class="string">&quot;state&quot;</span>)</span><br><span class="line">            .andExpression(</span><br><span class="line">                    <span class="string">&quot;&#123; name: \&quot;$biggestCity\&quot;,  pop: \&quot;$biggestPop\&quot; &#125;&quot;</span>) </span><br><span class="line">            .as(<span class="string">&quot;biggestCity&quot;</span>)</span><br><span class="line">            .andExpression(</span><br><span class="line">                    <span class="string">&quot;&#123; name: \&quot;$smallestCity\&quot;, pop: \&quot;$smallestPop\&quot; &#125;&quot;</span> </span><br><span class="line">            ).as(<span class="string">&quot;smallestCity&quot;</span>)</span><br><span class="line">            .andExclude(<span class="string">&quot;_id&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//$sort</span></span><br><span class="line">    <span class="type">SortOperation</span> <span class="variable">sortOperation2</span> <span class="operator">=</span> Aggregation </span><br><span class="line">            .sort(Sort.Direction.ASC,<span class="string">&quot;state&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// 按顺序组合每一个聚合步骤</span></span><br><span class="line">    TypedAggregation&lt;Zips&gt; typedAggregation = Aggregation.newAggregation( </span><br><span class="line">            Zips.class, groupOperation, sortOperation, groupOperation2, </span><br><span class="line">            projectionOperation,sortOperation2);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//执行聚合操作,如果不使用 Map，也可以使用自定义的实体类来接收数据 </span></span><br><span class="line">    AggregationResults&lt;Map&gt; aggregationResults = mongoTemplate </span><br><span class="line">            .aggregate(typedAggregation, Map.class);</span><br><span class="line">    <span class="comment">// 取出最终结果</span></span><br><span class="line">    List&lt;Map&gt; mappedResults = aggregationResults.getMappedResults(); </span><br><span class="line">    <span class="keyword">for</span>(Map map:mappedResults)&#123;</span><br><span class="line">        System.out.println(map);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MongoDB之聚合操作</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-29 16:56:21</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/29/MongoDB之聚合操作/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MongoDB/">#MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/30/MongoDB%E4%B9%8B%E8%A7%86%E5%9B%BE/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之视图</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E6%95%B4%E5%90%88SpringBoot/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之整合SpringBoot</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E4%BD%9C%E7%94%A8%E8%81%9A%E5%90%88"><span class="nav-number">1.</span> <span class="nav-text">单一作用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E7%AE%A1%E9%81%93"><span class="nav-number">2.</span> <span class="nav-text">聚合管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-MongoDB-%E8%81%9A%E5%90%88%E6%A1%86%E6%9E%B6"><span class="nav-number">2.1.</span> <span class="nav-text">什么是 MongoDB 聚合框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%EF%BC%88Pipeline%EF%BC%89%E5%92%8C%E9%98%B6%E6%AE%B5%EF%BC%88Stage%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">管道（Pipeline）和阶段（Stage）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="nav-number">2.2.1.</span> <span class="nav-text">数据准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#project"><span class="nav-number">2.2.2.</span> <span class="nav-text">$project</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#match"><span class="nav-number">2.2.3.</span> <span class="nav-text">$match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#count"><span class="nav-number">2.2.4.</span> <span class="nav-text">$count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#group"><span class="nav-number">2.2.5.</span> <span class="nav-text">$group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unwind"><span class="nav-number">2.2.6.</span> <span class="nav-text">$unwind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#limit"><span class="nav-number">2.2.7.</span> <span class="nav-text">$limit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#skip"><span class="nav-number">2.2.8.</span> <span class="nav-text">$skip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">2.2.9.</span> <span class="nav-text">$sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lookup"><span class="nav-number">2.2.10.</span> <span class="nav-text">$lookup</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapReduce"><span class="nav-number">3.</span> <span class="nav-text">MapReduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Springboot%E4%B8%AD%E6%95%B4%E5%90%88MongoDB%E8%BF%9B%E8%A1%8C%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">Springboot中整合MongoDB进行聚合操作</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

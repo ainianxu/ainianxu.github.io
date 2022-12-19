@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MongoDB之索引 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MongoDB之索引</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-30 09:51:56</span>
+        <span class="mobile">2022-08-30 09:51</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MongoDB/">MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>6.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>28 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="索引介绍"><a href="#索引介绍" class="headerlink" title="索引介绍"></a>索引介绍</h2><p>索引是一种用来快速查询数据的数据结构。B+Tree就是一种常用的数据库索引数据结构，MongoDB 采用B+Tree 做索引，索引创建在colletions上。MongoDB不使用索引的查询，先扫描所有的文档，再匹配符合条件的文档。 使用索引的查询，通过索引找到文档，使用索引能够极大的提升查询效率。</p>
+<h3 id="MongoDB索引数据结构"><a href="#MongoDB索引数据结构" class="headerlink" title="MongoDB索引数据结构"></a>MongoDB索引数据结构</h3><blockquote>
+<p>思考：MongoDB索引数据结构是B-Tree还是B+Tree? </p>
+</blockquote>
+<p>B-Tree说法来源于官方文档，然后就导致了分歧：有人说MongoDB索引数据结构使用的是B-Tree,有的 人又说是B+Tree。</p>
+<ul>
+<li>MongoDB官方文档：<a class="link"   target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/indexes/" >https://docs.mongodb.com/manual/indexes/<i class="fas fa-external-link-alt"></i></a></li>
+<li>MongoDB indexes use a B-tree data structure.</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830095354722.png"
+                      alt="image-20220830095354722"
+                ></p>
+<blockquote>
+<p>WiredTiger官方文档：<a class="link"   target="_blank" rel="noopener" href="https://source.wiredtiger.com/3.0.0/tune_page_size_and_comp.html" >https://source.wiredtiger.com/3.0.0/tune_page_size_and_comp.html<i class="fas fa-external-link-alt"></i></a> </p>
+<p>WiredTiger maintains a table’s data in memory using a data structure called a B-Tree ( B+ Tree to be specific), referring to the nodes of a B-Tree as pages. Internal pages carry only keys. The leaf pages store both keys and values.</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830095416553.png"
+                      alt="image-20220830095416553"
+                ></p>
+<p>参考数据结构网站：<a class="link"   target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" >https://www.cs.usfca.edu/~galles/visualization/Algorithms.html<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="索引的分类"><a href="#索引的分类" class="headerlink" title="索引的分类"></a>索引的分类</h3><ul>
+<li>按照索引包含的字段数量，可以分为单键索引和组合索引（或复合索引）。 </li>
+<li>按照索引字段的类型，可以分为主键索引和非主键索引。 </li>
+<li>按照索引节点与物理记录的对应方式来分，可以分为聚簇索引和非聚簇索引，其中聚簇索引是指索引节点上直接包含了数据记录，而后者则仅仅包含一个指向数据记录的指针。 </li>
+<li>按照索引的特性不同，又可以分为唯一索引、稀疏索引、文本索引、地理空间索引等</li>
+</ul>
+<p>与大多数数据库一样，MongoDB支持各种丰富的索引类型，包括单键索引、复合索引，唯一索引等一 些常用的结构。由于采用了灵活可变的文档类型，因此它也同样支持对嵌套字段、数组进行索引。通过建立合适的索引，我们可以极大地提升数据的检索速度。在一些特殊应用场景，MongoDB还支持地理 空间索引、文本检索索引、TTL索引等不同的特性。</p>
+<h2 id="索引操作"><a href="#索引操作" class="headerlink" title="索引操作"></a>索引操作</h2><h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><blockquote>
+<p>创建索引语法格式</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.createIndex(keys, options)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Key 值为你要创建的索引字段，1 按升序创建索引， -1  按降序创建索引</li>
+<li>可选参数列表如下：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background</td>
+<td>Boolean</td>
+<td>建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引，即增加 “background” 可选参数。 “background” 默认值为false。</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>Boolean</td>
+<td>建立的索引是否唯一。指定为true创建唯一索引。默认值为false.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称。</td>
+</tr>
+<tr>
+<td>dropDups</td>
+<td>Boolean</td>
+<td>3.0+版本已废弃。在建立唯一索引时是否删除重复记录,指定 true 创建唯一索引。默认值为 false.</td>
+</tr>
+<tr>
+<td>sparse</td>
+<td>Boolean</td>
+<td>对文档中不存在的字段数据不启用索引；这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false.</td>
+</tr>
+<tr>
+<td>expireAfterSeconds</td>
+<td>integer</td>
+<td>指定一个以秒为单位的数值，完成 TTL设定，设定集 合的生存时间。</td>
+</tr>
+<tr>
+<td>v</td>
+<td>index version</td>
+<td>索引的版本号。默认的索引版本取决于mongod创建 索引时运行的版本。</td>
+</tr>
+<tr>
+<td>weights</td>
+<td>document</td>
+<td>索引权重值，数值在 1 到 99,999 之间，表示该索引 相对于其他索引字段的得分权重。</td>
+</tr>
+<tr>
+<td>default_language</td>
+<td>string</td>
+<td>对于文本索引，该参数决定了停用词及词干和词器的 规则的列表。 默认为英语</td>
+</tr>
+<tr>
+<td>language_override</td>
+<td>string</td>
+<td>对于文本索引，该参数指定了包含在文档中的字段 名，语言覆盖默认的language，默认值为 language.</td>
+</tr>
+</tbody></table>
+<p>注意：3.0.0 版本前创建索引方法为 db.collection.ensureIndex()</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建索引后台执行</span></span><br><span class="line">db.values.createIndex(&#123;open: 1, close: 1&#125;, &#123;background: <span class="literal">true</span>&#125;)</span><br><span class="line"><span class="comment"># 创建唯一索引</span></span><br><span class="line">db.values.createIndex(&#123;title:1&#125;,&#123;unique:<span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看索引信息 </span></span><br><span class="line">db.books.getIndexes() </span><br><span class="line"><span class="comment">#查看索引键 </span></span><br><span class="line">db.books.getIndexKeys()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查看索引占用空间</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.totalIndexSize([is_detail])</span><br></pre></td></tr></table></figure>
+
+<p>is_detail：可选参数，传入除0或false外的任意数据，都会显示该集合中每个索引的大小及总大小。如果传入0或false则只显示该集合中所有索引的总大小。默认值为false。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830100537937.png"
+                      alt="image-20220830100537937"
+                ></p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除集合指定索引</span></span><br><span class="line">db.col.dropIndex(<span class="string">&quot;索引名称&quot;</span>)</span><br><span class="line"><span class="comment">#删除集合所有索引</span></span><br><span class="line">db.col.dropIndexes()</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h2><h3 id="单键索引（Single-Field-Indexes）"><a href="#单键索引（Single-Field-Indexes）" class="headerlink" title="单键索引（Single Field Indexes）"></a>单键索引（Single Field Indexes）</h3><p>在某一个特定的字段上建立索引 mongoDB在ID上建立了唯一的单键索引,所以经常会使用id来进行查询； 在索引字段上进行精确匹配、排序以及范围查找都会使用此索引</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830100852763.png"
+                      alt="image-20220830100852763"
+                ></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.createIndex(&#123;title:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830100913784.png"
+                      alt="image-20220830100913784"
+                ></p>
+<blockquote>
+<p>对内嵌文档字段创建索引</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830100944904.png"
+                      alt="image-20220830100944904"
+                ></p>
+<h3 id="复合索引（Compound-Index）"><a href="#复合索引（Compound-Index）" class="headerlink" title="复合索引（Compound Index）"></a>复合索引（Compound Index）</h3><p>复合索引是多个字段组合而成的索引，其性质和单字段索引类似。但不同的是，复合索引中字段的顺序、字段的升降序对查询性能有直接的影响，因此在设计复合索引时则需要考虑不同的查询场景。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830102152170.png"
+                      alt="image-20220830102152170"
+                ></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.books.createIndex(&#123;<span class="built_in">type</span>:1,favCount:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830102245434.png"
+                      alt="image-20220830102245434"
+                ></p>
+<h3 id="多键索引（Multikey-Index）"><a href="#多键索引（Multikey-Index）" class="headerlink" title="多键索引（Multikey Index）"></a>多键索引（Multikey Index）</h3><p>在数组的属性上建立索引。针对这个数组的任意值的查询都会定位到这个文档,既多个索引入口或者键值引用同一个文档</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830102330508.png"
+                      alt="image-20220830102330508"
+                ></p>
+<blockquote>
+<p>准备inventory集合</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.insertMany([</span><br><span class="line">&#123; _id: 5, <span class="built_in">type</span>: <span class="string">&quot;food&quot;</span>, item: <span class="string">&quot;aaa&quot;</span>, ratings: [ 5, 8, 9 ] &#125;, &#123; _id: 6, <span class="built_in">type</span>: <span class="string">&quot;food&quot;</span>, item: <span class="string">&quot;bbb&quot;</span>, ratings: [ 5, 9 ] &#125;,</span><br><span class="line">&#123; _id: 7, <span class="built_in">type</span>: <span class="string">&quot;food&quot;</span>, item: <span class="string">&quot;ccc&quot;</span>, ratings: [ 9, 5, 8 ] &#125;, &#123; _id: 8, <span class="built_in">type</span>: <span class="string">&quot;food&quot;</span>, item: <span class="string">&quot;ddd&quot;</span>, ratings: [ 9, 5 ] &#125;,</span><br><span class="line">&#123; _id: 9, <span class="built_in">type</span>: <span class="string">&quot;food&quot;</span>, item: <span class="string">&quot;eee&quot;</span>, ratings: [ 5, 9, 5 ] &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建多键索引</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.createIndex( &#123; ratings: 1 &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>多键索引很容易与复合索引产生混淆，复合索引是多个字段的组合，而多键索引则仅仅是在一个字段上 出现了多键（multi key）。而实质上，多键索引也可以出现在复合字段上</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建复合多键索引</span></span><br><span class="line">db.inventory.createIndex( &#123; item:1,ratings: 1&#125; )</span><br></pre></td></tr></table></figure>
+
+<p>注意： MongoDB并不支持一个复合索引中同时出现多个数组字段 </p>
+<blockquote>
+<p>嵌入文档的索引数组</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.insertMany([</span><br><span class="line">&#123;</span><br><span class="line">  _id: 1,</span><br><span class="line">  item: <span class="string">&quot;abc&quot;</span>,</span><br><span class="line">  stock: [</span><br><span class="line">    &#123; size: <span class="string">&quot;S&quot;</span>, color: <span class="string">&quot;red&quot;</span>, quantity: 25 &#125;,</span><br><span class="line">    &#123; size: <span class="string">&quot;S&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 10 &#125;, </span><br><span class="line">    &#123; size: <span class="string">&quot;M&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 50 &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  _id: 2,</span><br><span class="line">  item: <span class="string">&quot;def&quot;</span>,</span><br><span class="line">  stock: [</span><br><span class="line">    &#123; size: <span class="string">&quot;S&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 20 &#125;,</span><br><span class="line">    &#123; size: <span class="string">&quot;M&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 5 &#125;,</span><br><span class="line">    &#123; size: <span class="string">&quot;M&quot;</span>, color: <span class="string">&quot;black&quot;</span>, quantity: 10 &#125;, </span><br><span class="line">    &#123; size: <span class="string">&quot;L&quot;</span>, color: <span class="string">&quot;red&quot;</span>, quantity: 2 &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  _id: 3,</span><br><span class="line">  item: <span class="string">&quot;ijk&quot;</span>,</span><br><span class="line">  stock: [</span><br><span class="line">    &#123; size: <span class="string">&quot;M&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 15 &#125;,</span><br><span class="line">    &#123; size: <span class="string">&quot;L&quot;</span>, color: <span class="string">&quot;blue&quot;</span>, quantity: 100 &#125;, </span><br><span class="line">    &#123; size: <span class="string">&quot;L&quot;</span>, color: <span class="string">&quot;red&quot;</span>, quantity: 25 &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>在包含嵌套对象的数组字段上创建多键索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.inventory.createIndex( &#123; <span class="string">&quot;stock.size&quot;</span>: 1, <span class="string">&quot;stock.quantity&quot;</span>: 1 &#125; )</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830102657115.png"
+                      alt="image-20220830102657115"
+                ></p>
+<h3 id="地理空间索引（Geospatial-Index）"><a href="#地理空间索引（Geospatial-Index）" class="headerlink" title="地理空间索引（Geospatial Index）"></a>地理空间索引（Geospatial Index）</h3><p>在移动互联网时代，基于地理位置的检索（LBS）功能几乎是所有应用系统的标配。MongoDB为地理空 间检索提供了非常方便的功能。地理空间索引（2dsphereindex）就是专门用于实现位置检索的一种 殊索引。</p>
+<p><strong>案例：MongoDB如何实现“查询附近商家”？</strong></p>
+<p>假设商家的数据模型如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.restaurant.insert(&#123; </span><br><span class="line">    restaurantId: 0, </span><br><span class="line">    restaurantName:<span class="string">&quot;兰州牛肉面&quot;</span>, </span><br><span class="line">    location : &#123;</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">&quot;Point&quot;</span>, </span><br><span class="line">        coordinates: [ -73.97, 40.77 ] </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>创建一个2dsphere索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.restaurant.createIndex(&#123;location : <span class="string">&quot;2dsphere&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>查询附近10000米商家信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.restaurant.find( &#123;</span><br><span class="line">    location:&#123;</span><br><span class="line">        <span class="variable">$near</span> :&#123;</span><br><span class="line">            <span class="variable">$geometry</span> :&#123;</span><br><span class="line">                <span class="built_in">type</span> : <span class="string">&quot;Point&quot;</span> , </span><br><span class="line">                coordinates : [  -73.88, 40.78 ]</span><br><span class="line">            &#125; ,</span><br><span class="line">            <span class="variable">$maxDistance</span>:10000</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$near查询操作符，用于实现附近商家的检索，返回数据结果会按距离排序。 </li>
+<li>$geometry操作符用于指定一个GeoJSON格式的地理空间对象，type&#x3D;Point表示地理坐标点， coordinates则是用户当前所在的经纬度位置；$maxDistance限定了最大距离，单位是米。</li>
+</ul>
+<h3 id="全文索引（Text-Indexes）"><a href="#全文索引（Text-Indexes）" class="headerlink" title="全文索引（Text Indexes）"></a>全文索引（Text Indexes）</h3><p>MongoDB支持全文检索功能，可通过建立文本索引来实现简易的分词检索。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.reviews.createIndex( &#123; comments: <span class="string">&quot;text&quot;</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>$text操作符可以在有text index的集合上执行文本检索。$text将会使用空格和标点符号作为分隔符对检索字符串进行分词， 并且对检索字符串中所有的分词结果进行一个逻辑上的 OR 操作。<br>全文索引能解决快速文本查找的需求，比如有一个博客文章集合，需要根据博客的内容来快速查找，则 可以针对博客内容建立文本索引。</p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p>数据准备</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.stores.insert(</span><br><span class="line">   [</span><br><span class="line">     &#123; _id: 1, name: <span class="string">&quot;Java Hut&quot;</span>, description: <span class="string">&quot;Coffee and cakes&quot;</span> &#125;,</span><br><span class="line">     &#123; _id: 2, name: <span class="string">&quot;Burger Buns&quot;</span>, description: <span class="string">&quot;Gourmet hamburgers&quot;</span> &#125;,</span><br><span class="line">     &#123; _id: 3, name: <span class="string">&quot;Coffee Shop&quot;</span>, description: <span class="string">&quot;Just coffee&quot;</span> &#125;,</span><br><span class="line">     &#123; _id: 4, name: <span class="string">&quot;Clothes Clothes Clothes&quot;</span>, description: <span class="string">&quot;Discount clothing&quot;</span> &#125;,</span><br><span class="line">     &#123; _id: 5, name: <span class="string">&quot;Java Shopping&quot;</span>, description: <span class="string">&quot;Indonesian goods&quot;</span> &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>创建name和description的全文索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.stores.createIndex(&#123;name: <span class="string">&quot;text&quot;</span>, description: <span class="string">&quot;text&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>测试<br>通过$text操作符来查寻数据中所有包含“coffee”,”shop”，“java”列表中任何词语的商店</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.stores.find(&#123;<span class="variable">$text</span>: &#123;<span class="variable">$search</span>: <span class="string">&quot;java coffee shop&quot;</span>&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>MongoDB的文本索引功能存在诸多限制，而官方并未提供中文分词的功能，这使得该功能的应用场景十分受限。</p>
+<h3 id="Hash索引（Hashed-Indexes）"><a href="#Hash索引（Hashed-Indexes）" class="headerlink" title="Hash索引（Hashed Indexes）"></a>Hash索引（Hashed Indexes）</h3><p>不同于传统的B-Tree索引,哈希索引使用hash函数来创建索引。在索引字段上进行精确匹配,但不支持范围查询,不支持多键hash； Hash索引上的入口是均匀分布的,在分片集合中非常有用；</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users. createIndex(&#123;username : <span class="string">&#x27;hashed&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="通配符索引（Wildcard-Indexes）"><a href="#通配符索引（Wildcard-Indexes）" class="headerlink" title="通配符索引（Wildcard Indexes）"></a>通配符索引（Wildcard Indexes）</h3><p>MongoDB的文档模式是动态变化的，而通配符索引可以建立在一些不可预知的字段上，以此实现查询的加速。MongoDB 4.2 引入了通配符索引来支持对未知或任意字段的查询。</p>
+<h4 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h4><p>准备商品数据，不同商品属性不一样</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">db.products.insert([</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;product_name&quot;</span> : <span class="string">&quot;Spy Coat&quot;</span>, </span><br><span class="line">      <span class="string">&quot;product_attributes&quot;</span> : &#123;</span><br><span class="line">        <span class="string">&quot;material&quot;</span> : [ <span class="string">&quot;Tweed&quot;</span>, <span class="string">&quot;Wool&quot;</span>, <span class="string">&quot;Leather&quot;</span> ], </span><br><span class="line">        <span class="string">&quot;size&quot;</span> : &#123;</span><br><span class="line">          <span class="string">&quot;length&quot;</span> : 72,</span><br><span class="line">          <span class="string">&quot;units&quot;</span> : <span class="string">&quot;inches&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;product_name&quot;</span> : <span class="string">&quot;Spy Pen&quot;</span>, </span><br><span class="line">      <span class="string">&quot;product_attributes&quot;</span> : &#123;</span><br><span class="line">         <span class="string">&quot;colors&quot;</span> : [ <span class="string">&quot;Blue&quot;</span>, <span class="string">&quot;Black&quot;</span> ],</span><br><span class="line">                  <span class="string">&quot;secret_feature&quot;</span> : &#123; </span><br><span class="line">           <span class="string">&quot;name&quot;</span> : <span class="string">&quot;laser&quot;</span>, </span><br><span class="line">           <span class="string">&quot;power&quot;</span> : <span class="string">&quot;1000&quot;</span>, </span><br><span class="line">           <span class="string">&quot;units&quot;</span> : <span class="string">&quot;watts&quot;</span>,</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;product_name&quot;</span> : <span class="string">&quot;Spy Book&quot;</span> </span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>创建通配符索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.products.createIndex( &#123; <span class="string">&quot;product_attributes.$**&quot;</span> : 1 &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>测试<br>通配符索引可以支持任意单字段查询 product_attributes或其嵌入字段：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.products.find( &#123; <span class="string">&quot;product_attributes.size.length&quot;</span> : &#123; <span class="variable">$gt</span> : 60 &#125; &#125; ) db.products.find( &#123; <span class="string">&quot;product_attributes.material&quot;</span> : <span class="string">&quot;Leather&quot;</span> &#125; ) db.products.find( &#123; <span class="string">&quot;product_attributes.secret_feature.name&quot;</span> : <span class="string">&quot;laser&quot;</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong> </p>
+<ul>
+<li>通配符索引不兼容的索引类型或属性</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830103545433.png"
+                      alt="image-20220830103545433"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830103555165.png"
+                      alt="image-20220830103555165"
+                ></p>
+<ul>
+<li>通配符索引是稀疏的，不索引空字段。因此，通配符索引不能支持查询字段不存在的文档。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通配符索引不能支持以下查询</span></span><br><span class="line">db.products.find( &#123;<span class="string">&quot;product_attributes&quot;</span> : &#123; <span class="variable">$exists</span> : <span class="literal">false</span> &#125; &#125; ) db.products.aggregate([</span><br><span class="line">  &#123; <span class="variable">$match</span> : &#123; <span class="string">&quot;product_attributes&quot;</span> : &#123; <span class="variable">$exists</span> : <span class="literal">false</span> &#125; &#125; &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通配符索引为文档或数组的内容生成条目，而不是文档&#x2F;数组本身。因此通配符索引不能支持精确的文档&#x2F;数组相等匹配。通配符索引可以支持查询字段等于空文档{}的情况。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#通配符索引不能支持以下查询:</span></span><br><span class="line">db.products.find(&#123; <span class="string">&quot;product_attributes.colors&quot;</span> : [ <span class="string">&quot;Blue&quot;</span>, <span class="string">&quot;Black&quot;</span> ] &#125; )</span><br><span class="line">db.products.aggregate([&#123;</span><br><span class="line">  <span class="variable">$match</span> : &#123; <span class="string">&quot;product_attributes.colors&quot;</span> : [ <span class="string">&quot;Blue&quot;</span>, <span class="string">&quot;Black&quot;</span> ] &#125; </span><br><span class="line">  &#125;])</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引属性"><a href="#索引属性" class="headerlink" title="索引属性"></a>索引属性</h2><h3 id="唯一索引（Unique-Indexes）"><a href="#唯一索引（Unique-Indexes）" class="headerlink" title="唯一索引（Unique Indexes）"></a>唯一索引（Unique Indexes）</h3><p>在现实场景中，唯一性是很常见的一种索引约束需求，重复的数据记录会带来许多处理上的麻烦，比如订单的编号、用户的登录名等。通过建立唯一性索引，可以保证集合中文档的指定字段拥有唯一值。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建唯一索引 </span></span><br><span class="line">db.values.createIndex(&#123;title:1&#125;,&#123;unique:<span class="literal">true</span>&#125;)</span><br><span class="line"><span class="comment"># 复合索引支持唯一性约束 </span></span><br><span class="line">db.values.createIndex(&#123;title:1，<span class="built_in">type</span>:1&#125;,&#123;unique:<span class="literal">true</span>&#125;) </span><br><span class="line"><span class="comment">#多键索引支持唯一性约束</span></span><br><span class="line">db.inventory.createIndex( &#123; ratings: 1 &#125;,&#123;unique:<span class="literal">true</span>&#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>唯一性索引对于文档中缺失的字段，会使用null值代替，因此不允许存在多个文档缺失索引字段的情况。 </li>
+<li>对于分片的集合，唯一性约束必须匹配分片规则。换句话说，为了保证全局的唯一性，分片键必须作为唯一性索引的前缀字段。</li>
+</ul>
+<h3 id="部分索引（Partial-Indexes）"><a href="#部分索引（Partial-Indexes）" class="headerlink" title="部分索引（Partial Indexes）"></a>部分索引（Partial Indexes）</h3><p>部分索引仅对满足指定过滤器表达式的文档进行索引。通过在一个集合中为文档的一个子集建立索引， 部分索引具有更低的存储需求和更低的索引创建和维护的性能成本。3.2新版功能。 </p>
+<p>部分索引提供了稀疏索引功能的超集，应该优先于稀疏索引。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.restaurants.createIndex( </span><br><span class="line">   &#123; cuisine: 1, name: 1 &#125;, </span><br><span class="line">   &#123; partialFilterExpression: &#123; rating: &#123; <span class="variable">$gt</span>: 5 &#125; &#125; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>partialFilterExpression选项接受指定过滤条件的文档: </p>
+<ul>
+<li>等式表达式(例如:field: value或使用$eq操作符)</li>
+<li>$exists: true</li>
+<li>$gt， $gte， $lt， $lte </li>
+<li>$type</li>
+<li>顶层的$and</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 符合条件，使用索引</span></span><br><span class="line">db.restaurants.find( &#123; cuisine: <span class="string">&quot;Italian&quot;</span>, rating: &#123; <span class="variable">$gte</span>: 8 &#125; &#125; )</span><br><span class="line"><span class="comment"># 不符合条件，不能使用索引</span></span><br><span class="line">db.restaurants.find( &#123; cuisine: <span class="string">&quot;Italian&quot;</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h4><p>restaurants集合数据</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">db.restaurants.insert(&#123;</span><br><span class="line">   <span class="string">&quot;_id&quot;</span> : ObjectId(<span class="string">&quot;5641f6a7522545bc535b5dc9&quot;</span>), </span><br><span class="line">   <span class="string">&quot;address&quot;</span> : &#123;</span><br><span class="line">      <span class="string">&quot;building&quot;</span> : <span class="string">&quot;1007&quot;</span>,</span><br><span class="line">      <span class="string">&quot;coord&quot;</span> : [</span><br><span class="line">         -73.856077,</span><br><span class="line">         40.848447</span><br><span class="line">      ],</span><br><span class="line">      <span class="string">&quot;street&quot;</span> : <span class="string">&quot;Morris Park Ave&quot;</span>,</span><br><span class="line">      <span class="string">&quot;zipcode&quot;</span> : <span class="string">&quot;10462&quot;</span></span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="string">&quot;borough&quot;</span> : <span class="string">&quot;Bronx&quot;</span>,</span><br><span class="line">   <span class="string">&quot;cuisine&quot;</span> : <span class="string">&quot;Bakery&quot;</span>,</span><br><span class="line">   <span class="string">&quot;rating&quot;</span> : &#123; <span class="string">&quot;date&quot;</span> : ISODate(<span class="string">&quot;2014-03-03T00:00:00Z&quot;</span>), </span><br><span class="line">                <span class="string">&quot;grade&quot;</span> : <span class="string">&quot;A&quot;</span>,</span><br><span class="line">                <span class="string">&quot;score&quot;</span> : 2</span><br><span class="line">              &#125;,</span><br><span class="line">   <span class="string">&quot;name&quot;</span> : <span class="string">&quot;Morris Park Bake Shop&quot;</span>,</span><br><span class="line">   <span class="string">&quot;restaurant_id&quot;</span> : <span class="string">&quot;30075445&quot;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>创建索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.restaurants.createIndex(</span><br><span class="line">   &#123; borough: 1, cuisine: 1 &#125;,</span><br><span class="line">   &#123; partialFilterExpression: &#123; <span class="string">&#x27;rating.grade&#x27;</span>: &#123; <span class="variable">$eq</span>: <span class="string">&quot;A&quot;</span> &#125; &#125; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.restaurants.find( &#123; borough: <span class="string">&quot;Bronx&quot;</span>, <span class="string">&#x27;rating.grade&#x27;</span>: <span class="string">&quot;A&quot;</span> &#125; ) db.restaurants.find( &#123; borough: <span class="string">&quot;Bronx&quot;</span>, cuisine: <span class="string">&quot;Bakery&quot;</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p><strong>唯一约束结合部分索引使用导致唯一约束失效的问题</strong> </p>
+<p>注意：如果同时指定了partialFilterExpression和唯一约束，那么唯一约束只适用于满足筛选器表达式的文档。如果文档不满足筛选条件，那么带有惟一约束的部分索引不会阻止插入不满足惟一约束的文档。</p>
+<h4 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a>案例2</h4><p>users集合数据准备</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insertMany( [</span><br><span class="line">   &#123; username: <span class="string">&quot;david&quot;</span>, age: 29 &#125;,</span><br><span class="line">   &#123; username: <span class="string">&quot;amanda&quot;</span>, age: 35 &#125;, </span><br><span class="line">   &#123; username: <span class="string">&quot;rajiv&quot;</span>, age: 57 &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>创建索引，指定username字段和部分过滤器表达式age: {$gte: 21}的唯一约束。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.users.createIndex(</span><br><span class="line">   &#123; username: 1 &#125;,</span><br><span class="line">   &#123; unique: <span class="literal">true</span>, partialFilterExpression: &#123; age: &#123; <span class="variable">$gte</span>: 21 &#125; &#125; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>测试 </p>
+<p>索引防止了以下文档的插入，因为文档已经存在，且指定的用户名和年龄字段大于21:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.insertMany( [</span><br><span class="line">   &#123; username: <span class="string">&quot;david&quot;</span>, age: 27 &#125;,</span><br><span class="line">   &#123; username: <span class="string">&quot;amanda&quot;</span>, age: 25 &#125;, </span><br><span class="line">   &#123; username: <span class="string">&quot;rajiv&quot;</span>, age: 32 &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>但是，以下具有重复用户名的文档是允许的，因为唯一约束只适用于年龄大于或等于21岁的文档。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.users.insertMany( [</span><br><span class="line">   &#123; username: <span class="string">&quot;david&quot;</span>, age: 20 &#125;,</span><br><span class="line">   &#123; username: <span class="string">&quot;amanda&quot;</span> &#125;,</span><br><span class="line">   &#123; username: <span class="string">&quot;rajiv&quot;</span>, age: null &#125; ] )</span><br></pre></td></tr></table></figure>
+
+<h3 id="稀疏索引（Sparse-Indexes）"><a href="#稀疏索引（Sparse-Indexes）" class="headerlink" title="稀疏索引（Sparse Indexes）"></a>稀疏索引（Sparse Indexes）</h3><p>索引的稀疏属性确保索引只包含具有索引字段的文档的条目，索引将跳过没有索引字段的文档。<br>特性： 只对存在字段的文档进行索引（包括字段值为null的文档）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#不索引不包含xmpp_id字段的文档</span></span><br><span class="line">db.addresses.createIndex( &#123; <span class="string">&quot;xmpp_id&quot;</span>: 1 &#125;, &#123; sparse: <span class="literal">true</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>如果稀疏索引会导致查询和排序操作的结果集不完整，MongoDB将不会使用该索引，除非hint()明确指定索引。</p>
+<h4 id="案例1-1"><a href="#案例1-1" class="headerlink" title="案例1"></a>案例1</h4><p>数据准备</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.scores.insertMany([</span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;newbie&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;abby&quot;</span>, <span class="string">&quot;score&quot;</span> : 82&#125;, </span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;nina&quot;</span>, <span class="string">&quot;score&quot;</span> : 90&#125; </span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+
+<p>创建稀疏索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.scores.createIndex( &#123; score: 1 &#125; , &#123; sparse: <span class="literal">true</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用稀疏索引</span></span><br><span class="line">db.scores.find( &#123; score: &#123; <span class="variable">$lt</span>: 90 &#125; &#125; )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 即使排序是通过索引字段，MongoDB也不会选择稀疏索引来完成查询，以返回完整的结果 </span></span><br><span class="line">db.scores.find().<span class="built_in">sort</span>( &#123; score: -1 &#125; )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要使用稀疏索引，使用hint()显式指定索引</span></span><br><span class="line">db.scores.find().<span class="built_in">sort</span>( &#123; score: -1 &#125; ).hint( &#123; score: 1 &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>同时具有稀疏性和唯一性的索引可以防止集合中存在字段值重复的文档，但允许不包含此索引字段的文 档插入。</p>
+<h4 id="案例2-1"><a href="#案例2-1" class="headerlink" title="案例2"></a>案例2</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建具有唯一约束的稀疏索引</span></span><br><span class="line">db.scores.createIndex( &#123; score: 1 &#125; , &#123; sparse: <span class="literal">true</span>, unique: <span class="literal">true</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<p>测试 </p>
+<p>这个索引将允许插入具有唯一的分数字段值或不包含分数字段的文档。因此，给定scores集合中的现有文档，索引允许以下插入操作:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.scores.insertMany( [</span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;AAAAAAA&quot;</span>, <span class="string">&quot;score&quot;</span>: 43 &#125;, </span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;BBBBBBB&quot;</span>, <span class="string">&quot;score&quot;</span>: 34 &#125;, </span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;CCCCCCC&quot;</span> &#125;,</span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;CCCCCCC&quot;</span> &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<p>索引不允许添加下列文件，因为已经存在评分为82和90的文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.scores.insertMany( [</span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;AAAAAAA&quot;</span>, <span class="string">&quot;score&quot;</span>: 82 &#125;, </span><br><span class="line">   &#123; <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;BBBBBBB&quot;</span>, <span class="string">&quot;score&quot;</span>: 90 &#125;</span><br><span class="line">] )</span><br></pre></td></tr></table></figure>
+
+<h3 id="TTL索引（TTL-Indexes）"><a href="#TTL索引（TTL-Indexes）" class="headerlink" title="TTL索引（TTL Indexes）"></a>TTL索引（TTL Indexes）</h3><p>在一般的应用系统中，并非所有的数据都需要永久存储。例如一些系统事件、用户消息等，这些数据随着时间的推移，其重要程度逐渐降低。更重要的是，存储这些大量的历史数据需要花费较高的成本，因此项目中通常会对过期且不再使用的数据进行老化处理。<br>通常的做法如下：</p>
+<p>方案一：为每个数据记录一个时间戳，应用侧开启一个定时器，按时间戳定期删除过期的数据。</p>
+<p>方案二：数据按日期进行分表，同一天的数据归档到同一张表，同样使用定时器删除过期的表。</p>
+<p>对于数据老化，MongoDB提供了一种更加便捷的做法：TTL（Time To Live）索引。TTL索引需要声明在一个日期类型的字段中，TTL 索引是特殊的单字段索引，MongoDB 可以使用它在一定时间或特定时钟时间后自动从集合中删除文档。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 TTL 索引，TTL 值为3600秒</span></span><br><span class="line">db.eventlog.createIndex( &#123; <span class="string">&quot;lastModifiedDate&quot;</span>: 1 &#125;, &#123; expireAfterSeconds: 3600 &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>对集合创建TTL索引之后，MongoDB会在周期性运行的后台线程中对该集合进行检查及数据清理工作。 除了数据老化功能，TTL索引具有普通索引的功能，同样可以用于加速数据的查询。<br>TTL 索引不保证过期数据会在过期后立即被删除。文档过期和 MongoDB 从数据库中删除文档的时间之 间可能存在延迟。删除过期文档的后台任务每 60 秒运行一次。因此，在文档到期和后台任务运行之间 的时间段内，文档可能会保留在集合中。</p>
+<h4 id="案例-2"><a href="#案例-2" class="headerlink" title="案例"></a>案例</h4><p>数据准备</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.log_events.insertOne( &#123; </span><br><span class="line">   <span class="string">&quot;createdAt&quot;</span>: new Date(), </span><br><span class="line">   <span class="string">&quot;logEvent&quot;</span>: 2, </span><br><span class="line">   <span class="string">&quot;logMessage&quot;</span>: <span class="string">&quot;Success!&quot;</span> </span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>创建TTL索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.log_events.createIndex( &#123; <span class="string">&quot;createdAt&quot;</span>: 1 &#125;, &#123; expireAfterSeconds: 20 &#125; )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可变的过期时间 </p>
+</blockquote>
+<p>TTL索引在创建之后，仍然可以对过期时间进行修改。这需要使用collMod命令对索引的定义进行变更</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.runCommand(&#123;collMod:<span class="string">&quot;log_events&quot;</span>,index:&#123;keyPattern: &#123;createdAt:1&#125;,expireAfterSeconds:600&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830105132497.png"
+                      alt="image-20220830105132497"
+                ></p>
+<blockquote>
+<p>使用约束</p>
+</blockquote>
+<p>TTL索引的确可以减少开发的工作量，而且通过数据库自动清理的方式会更加高效、可靠，但是在使用 TTL索引时需要注意以下的限制：</p>
+<ul>
+<li>TTL索引只能支持单个字段，并且必须是非_id字段。</li>
+<li>TTL索引不能用于固定集合。 </li>
+<li>TTL索引无法保证及时的数据老化，MongoDB会通过后台的TTLMonitor定时器来清理老化数据， 默认的间隔时间是1分钟。当然如果在数据库负载过高的情况下，TTL的行为则会进一步受到影响。 </li>
+<li>TTL索引对于数据的清理仅仅使用了remove命令，这种方式并不是很高效。因此TTL Monitor在运行期间对系统CPU、磁盘都会造成一定的压力。相比之下，按日期分表的方式操作会更加高效。</li>
+</ul>
+<h3 id="隐藏索引（Hidden-Indexes）"><a href="#隐藏索引（Hidden-Indexes）" class="headerlink" title="隐藏索引（Hidden Indexes）"></a>隐藏索引（Hidden Indexes）</h3><p>隐藏索引对查询规划器不可见，不能用于支持查询。通过对规划器隐藏索引，用户可以在不实际删除索引的情况下评估删除索引的潜在影响。如果影响是负面的，用户可以取消隐藏索引，而不必重新创建已删除的索引。4.4新版功能。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建隐藏索引</span></span><br><span class="line">db.restaurants.createIndex(&#123; borough: 1 &#125;,&#123; hidden: <span class="literal">true</span> &#125;); </span><br><span class="line"><span class="comment"># 隐藏现有索引</span></span><br><span class="line">db.restaurants.hideIndex( &#123; borough: 1&#125; );</span><br><span class="line">db.restaurants.hideIndex( <span class="string">&quot;索引名称&quot;</span> )</span><br><span class="line"><span class="comment"># 取消隐藏索引</span></span><br><span class="line">db.restaurants.unhideIndex( &#123; borough: 1&#125; ); db.restaurants.unhideIndex( <span class="string">&quot;索引名称&quot;</span> );</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.scores.insertMany([</span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;newbie&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;abby&quot;</span>, <span class="string">&quot;score&quot;</span> : 82&#125;, </span><br><span class="line">    &#123;<span class="string">&quot;userid&quot;</span> : <span class="string">&quot;nina&quot;</span>, <span class="string">&quot;score&quot;</span> : 90&#125; </span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+
+<p>创建隐藏索引</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.scores.createIndex( </span><br><span class="line">   &#123; userid: 1 &#125;,</span><br><span class="line">   &#123; hidden: <span class="literal">true</span> &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>查看索引信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.scores.getIndexes()</span><br></pre></td></tr></table></figure>
+
+<p>索引属性hidden只在值为true时返回</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830105447459.png"
+                      alt="image-20220830105447459"
+                ></p>
+<p>测试</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不使用索引 </span></span><br><span class="line">db.scores.find(&#123;userid:<span class="string">&quot;abby&quot;</span>&#125;).explain()</span><br><span class="line"><span class="comment">#取消隐藏索引</span></span><br><span class="line">db.scores.unhideIndex( &#123; userid: 1&#125; ); </span><br><span class="line"><span class="comment">#使用索引 </span></span><br><span class="line">db.scores.find(&#123;userid:<span class="string">&quot;abby&quot;</span>&#125;).explain()</span><br></pre></td></tr></table></figure>
+
+<h2 id="索引使用建议"><a href="#索引使用建议" class="headerlink" title="索引使用建议"></a>索引使用建议</h2><blockquote>
+<p>为每一个查询建立合适的索引 </p>
+</blockquote>
+<p>这个是针对于数据量较大比如说超过几十上百万（文档数目）数量级的集合。如果没有索引MongoDB 需要把所有的Document从盘上读到内存，这会对MongoDB服务器造成较大的压力并影响到其他请求的执行。</p>
+<blockquote>
+<p>创建合适的复合索引，不要依赖于交叉索引 </p>
+</blockquote>
+<p>如果你的查询会使用到多个字段，MongoDB有两个索引技术可以使用：交叉索引和复合索引。交叉索引就是针对每个字段单独建立一个单字段索引，然后在查询执行时候使用相应的单字段索引进行索引交叉而得到查询结果。交叉索引目前触发率较低，所以如果你有一个多字段查询的时候，建议使用复合索引能够保证索引正常的使用。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查找所有年龄小于30岁的深圳市马拉松运动员</span></span><br><span class="line">db.athelets.find(&#123;sport: <span class="string">&quot;marathon&quot;</span>, location: <span class="string">&quot;sz&quot;</span>, age: &#123;<span class="variable">$lt</span>: 30&#125;&#125;&#125;) </span><br><span class="line"><span class="comment">#创建复合索引</span></span><br><span class="line">db.athelets.createIndex(&#123;sport:1, location:1, age:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>复合索引字段顺序：匹配条件在前，范围条件在后（Equality First, Range After） </p>
+</blockquote>
+<p>前面的例子，在创建复合索引时如果条件有匹配和范围之分，那么匹配条件（sport: “marathon”) 应该在复合索引的前面。范围条件(age: &lt;30)字段应该放在复合索引的后面。 </p>
+<blockquote>
+<p>尽可能使用覆盖索引（Covered Index）</p>
+</blockquote>
+<blockquote>
+<p>建索引要在后台运行 </p>
+</blockquote>
+<p>在对一个集合创建索引时，该集合所在的数据库将不接受其他读写操作。对大数据量的集合建索引，建议使用后台运行选项 {background: true}</p>
+<h2 id="explain执行计划详解"><a href="#explain执行计划详解" class="headerlink" title="explain执行计划详解"></a>explain执行计划详解</h2><p>通常我们需要关心的问题： </p>
+<ul>
+<li>查询是否使用了索引</li>
+<li>索引是否减少了扫描的记录数量 </li>
+<li>是否存在低效的内存排序</li>
+</ul>
+<p>MongoDB提供了explain命令，它可以帮助我们评估指定查询模型（querymodel）的执行计划，根据实际情况进行调整，然后提高查询效率。</p>
+<p>explain()方法的形式如下:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find().explain(&lt;verbose&gt;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>verbose  可选参数，表示执行计划的输出模式，默认queryPlanner</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模式名字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>queryPlanner</td>
+<td>执行计划的详细信息，包括查询计划、集合信息、查询条件、最佳执行计划、查询方式和 MongoDB 服务信息等</td>
+</tr>
+<tr>
+<td>exectionStats</td>
+<td>最佳执行计划的执行情况和被拒绝的计划等信息</td>
+</tr>
+<tr>
+<td>allPlansExecution</td>
+<td>选择并执行最佳执行计划，并返回最佳执行计划和其他执行计划的执行情况</td>
+</tr>
+</tbody></table>
+<h3 id="queryPlanner"><a href="#queryPlanner" class="headerlink" title="queryPlanner"></a>queryPlanner</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 未创建title的索引 </span></span><br><span class="line">db.books.find(&#123;title:<span class="string">&quot;book-1&quot;</span>&#125;).explain(<span class="string">&quot;queryPlanner&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830110141287.png"
+                      alt="image-20220830110141287"
+                ></p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>plannerVersion</td>
+<td>执行计划的版本</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>查询的集合</td>
+</tr>
+<tr>
+<td>indexFilterSet</td>
+<td>是否使用索引</td>
+</tr>
+<tr>
+<td>parsedQuery</td>
+<td>查询条件</td>
+</tr>
+<tr>
+<td>winningPlan</td>
+<td>最佳执行计划</td>
+</tr>
+<tr>
+<td>stage</td>
+<td>查询方式</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>过滤条件</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>查询顺序</td>
+</tr>
+<tr>
+<td>rejectedPlans</td>
+<td>拒绝的执行计划</td>
+</tr>
+<tr>
+<td>serverInfo</td>
+<td>mongodb服务器信息</td>
+</tr>
+</tbody></table>
+<h3 id="executionStats"><a href="#executionStats" class="headerlink" title="executionStats"></a>executionStats</h3><p>executionStats 模式的返回信息中包含了 queryPlanner 模式的所有字段，并且还包含了最佳执行计划的执行情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建索引 </span></span><br><span class="line">db.books.createIndex(&#123;title:1&#125;)</span><br><span class="line">db.books.find(&#123;title:<span class="string">&quot;book-1&quot;</span>&#125;).explain(<span class="string">&quot;executionStats&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220830110439124.png"
+                      alt="image-20220830110439124"
+                ></p>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>winningPlan.inputStage</td>
+<td>用来描述子stage， 并且为其父stage提 供文档和索引关键字</td>
+</tr>
+<tr>
+<td>winningPlan.inputStage.stage</td>
+<td>子查询方式</td>
+</tr>
+<tr>
+<td>winningPlan.inputStage.keyPattern</td>
+<td>所扫描的index内容</td>
+</tr>
+<tr>
+<td>winningPlan.inputStage.indexName</td>
+<td>索引名</td>
+</tr>
+<tr>
+<td>winningPlan.inputStage.isMultiKey</td>
+<td>是否是Multikey。如 果索引建立在array 上，将是true</td>
+</tr>
+<tr>
+<td>executionStats.executionSuccess</td>
+<td>是否执行成功</td>
+</tr>
+<tr>
+<td>executionStats.nReturned</td>
+<td>返回的个数</td>
+</tr>
+<tr>
+<td>executionStats.executionTimeMillis</td>
+<td>这条语句执行时间</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.executionTimeMillisEstimate</td>
+<td>检索文档获取数据的时间</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.inputStage.executionTimeMillisEstimate</td>
+<td>扫描获取数据的时间</td>
+</tr>
+<tr>
+<td>executionStats.totalKeysExamined</td>
+<td>索引扫描次数</td>
+</tr>
+<tr>
+<td>executionStats.totalDocsExamined</td>
+<td>文档扫描次数</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.isEOF</td>
+<td>是否到达 steam 结 尾，1 或者 true 代 表已到达结尾</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.works</td>
+<td>工作单元数，一个查 询会分解成小的工作 单元</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.advanced</td>
+<td>优先返回的结果数</td>
+</tr>
+<tr>
+<td>executionStats.executionStages.docsExamined</td>
+<td>文档检查数</td>
+</tr>
+</tbody></table>
+<h3 id="allPlansExecution"><a href="#allPlansExecution" class="headerlink" title="allPlansExecution"></a>allPlansExecution</h3><p>allPlansExecution返回的信息包含 executionStats 模式的内容，且包含allPlansExecution:[]块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;allPlansExecution&quot;</span> : [</span><br><span class="line">      &#123;</span><br><span class="line">         <span class="string">&quot;nReturned&quot;</span> : &lt;int&gt;, </span><br><span class="line">         <span class="string">&quot;executionTimeMillisEstimate&quot;</span> : &lt;int&gt;, </span><br><span class="line">         <span class="string">&quot;totalKeysExamined&quot;</span> : &lt;int&gt;, </span><br><span class="line">         <span class="string">&quot;totalDocsExamined&quot;</span> :&lt;int&gt;, </span><br><span class="line">         <span class="string">&quot;executionStages&quot;</span> : &#123;</span><br><span class="line">            <span class="string">&quot;stage&quot;</span> : &lt;STAGEA&gt;, </span><br><span class="line">            <span class="string">&quot;nReturned&quot;</span> : &lt;int&gt;, </span><br><span class="line">            <span class="string">&quot;executionTimeMillisEstimate&quot;</span> : &lt;int&gt;, </span><br><span class="line">            ...</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">               &#125;, </span><br><span class="line">      ... </span><br><span class="line">   ]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>stage状态</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>COLLSCAN</td>
+<td>全表扫描</td>
+</tr>
+<tr>
+<td>IXSCAN</td>
+<td>索引扫描</td>
+</tr>
+<tr>
+<td>FETCH</td>
+<td>根据索引检索指定文档</td>
+</tr>
+<tr>
+<td>SHARD_MERGE</td>
+<td>将各个分片返回数据进行合并</td>
+</tr>
+<tr>
+<td>SORT</td>
+<td>在内存中进行了排序</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>使用limit限制返回数</td>
+</tr>
+<tr>
+<td>SKIP</td>
+<td>使用skip进行跳过</td>
+</tr>
+<tr>
+<td>IDHACK</td>
+<td>对_id进行查询</td>
+</tr>
+<tr>
+<td>SHARDING_FILTER</td>
+<td>通过mongos对分片数据进行查询</td>
+</tr>
+<tr>
+<td>COUNTSCAN</td>
+<td>count不使用Index进行count时的stage返回</td>
+</tr>
+<tr>
+<td>COUNT_SCAN</td>
+<td>count使用了Index进行count时的stage返回</td>
+</tr>
+<tr>
+<td>SUBPLA</td>
+<td>未使用到索引的$or查询的stage返回</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>使用全文索引进行查询时候的stage返回</td>
+</tr>
+<tr>
+<td>PROJECTION</td>
+<td>限定返回字段时候stage的返回</td>
+</tr>
+</tbody></table>
+<p>执行计划的返回结果中尽量不要出现以下stage: </p>
+<ul>
+<li>COLLSCAN(全表扫描)</li>
+<li>SORT(使用sort但是无index) </li>
+<li>不合理的SKIP </li>
+<li>SUBPLA(未用到index的$or) </li>
+<li>COUNTSCAN(不使用index进行count)</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MongoDB之索引</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-30 09:51:56</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/30/MongoDB之索引/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MongoDB/">#MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/09/06/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97%E4%B9%8B%E5%87%91%E9%9B%B6%E9%92%B1%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">动态规划系列之凑零钱问题</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/30/MongoDB%E4%B9%8B%E8%A7%86%E5%9B%BE/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之视图</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">索引介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB%E7%B4%A2%E5%BC%95%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">MongoDB索引数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">索引的分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="nav-number">2.1.</span> <span class="nav-text">创建索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95"><span class="nav-number">2.2.</span> <span class="nav-text">查看索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="nav-number">2.3.</span> <span class="nav-text">删除索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">索引类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%94%AE%E7%B4%A2%E5%BC%95%EF%BC%88Single-Field-Indexes%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">单键索引（Single Field Indexes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%88Compound-Index%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">复合索引（Compound Index）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%94%AE%E7%B4%A2%E5%BC%95%EF%BC%88Multikey-Index%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">多键索引（Multikey Index）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95%EF%BC%88Geospatial-Index%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">地理空间索引（Geospatial Index）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95%EF%BC%88Text-Indexes%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">全文索引（Text Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">3.5.1.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash%E7%B4%A2%E5%BC%95%EF%BC%88Hashed-Indexes%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">Hash索引（Hashed Indexes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6%E7%B4%A2%E5%BC%95%EF%BC%88Wildcard-Indexes%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">通配符索引（Wildcard Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-1"><span class="nav-number">3.7.1.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">索引属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%EF%BC%88Unique-Indexes%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">唯一索引（Unique Indexes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%B4%A2%E5%BC%95%EF%BC%88Partial-Indexes%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">部分索引（Partial Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1"><span class="nav-number">4.2.1.</span> <span class="nav-text">案例1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B2"><span class="nav-number">4.2.2.</span> <span class="nav-text">案例2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E7%B4%A2%E5%BC%95%EF%BC%88Sparse-Indexes%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">稀疏索引（Sparse Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">案例1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B2-1"><span class="nav-number">4.3.2.</span> <span class="nav-text">案例2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TTL%E7%B4%A2%E5%BC%95%EF%BC%88TTL-Indexes%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">TTL索引（TTL Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-2"><span class="nav-number">4.4.1.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E8%97%8F%E7%B4%A2%E5%BC%95%EF%BC%88Hidden-Indexes%EF%BC%89"><span class="nav-number">4.5.</span> <span class="nav-text">隐藏索引（Hidden Indexes）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B-3"><span class="nav-number">4.5.1.</span> <span class="nav-text">案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.</span> <span class="nav-text">索引使用建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explain%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E8%AF%A6%E8%A7%A3"><span class="nav-number">6.</span> <span class="nav-text">explain执行计划详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#queryPlanner"><span class="nav-number">6.1.</span> <span class="nav-text">queryPlanner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#executionStats"><span class="nav-number">6.2.</span> <span class="nav-text">executionStats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#allPlansExecution"><span class="nav-number">6.3.</span> <span class="nav-text">allPlansExecution</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

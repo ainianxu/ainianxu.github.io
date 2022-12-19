@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            MongoDB之快速开始 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MongoDB之快速开始</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-08-29 15:10:53</span>
+        <span class="mobile">2022-08-29 15:10</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MongoDB/">MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="linux安装MongoDB"><a href="#linux安装MongoDB" class="headerlink" title="linux安装MongoDB"></a>linux安装MongoDB</h2><p>环境准备：</p>
+<ul>
+<li>linux系统： centos7</li>
+<li>安装MongoDB社区版</li>
+</ul>
+<p>下载MongoDB Community Server<br>下载地址：<a class="link"   target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community" >https://www.mongodb.com/try/download/community<i class="fas fa-external-link-alt"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829151346373.png"
+                      alt="image-20220829151346373"
+                ></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载MongoDB</span></span><br><span class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel70-4.4.9.tgz </span><br><span class="line">tar -zxvf mongodb-linux-x86_64-rhel70-4.4.9.tgz</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动MongoDB-Server"><a href="#启动MongoDB-Server" class="headerlink" title="启动MongoDB Server"></a>启动MongoDB Server</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建dbpath和logpath</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /mongodb/data /mongodb/log  /mongodb/conf </span><br><span class="line"><span class="comment">#进入mongodb目录，启动mongodb服务</span></span><br><span class="line">bin/mongod --port=27017 --dbpath=/mongodb/data </span><br><span class="line">--logpath=/mongodb/log/mongodb.log \ </span><br><span class="line">--bind_ip=0.0.0.0 --fork</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>–dbpath :指定数据文件存放目录<br>–logpath :指定日志文件，注意是指定文件不是目录<br>–logappend :使用追加的方式记录日志<br>–port:指定端口，默认为27017<br>–bind_ip:默认只监听localhost网卡<br>–fork: 后台启动<br>–auth: 开启认证模式</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829151738922.png"
+                      alt="image-20220829151738922"
+                ></p>
+<blockquote>
+<p><strong>添加环境变量</strong></p>
+</blockquote>
+<p>修改&#x2F;etc&#x2F;profile，添加环境变量,方便执行MongoDB命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> MONGODB_HOME=/usr/local/soft/mongodb</span><br><span class="line">PATH=<span class="variable">$PATH</span>:<span class="variable">$MONGODB_HOME</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>然后执行source &#x2F;etc&#x2F;profile 重新加载环境变量</p>
+<h3 id="利用配置文件启动服务"><a href="#利用配置文件启动服务" class="headerlink" title="利用配置文件启动服务"></a><strong>利用配置文件启动服务</strong></h3><p>编辑&#x2F;mongodb&#x2F;conf&#x2F;mongo.conf文件，内容如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">systemLog:</span><br><span class="line">    destination: file</span><br><span class="line">    path: /mongodb/log/mongod.log <span class="comment"># log path</span></span><br><span class="line">    logAppend: <span class="literal">true</span></span><br><span class="line">storage:</span><br><span class="line">    dbPath: /mongodb/data <span class="comment"># data directory</span></span><br><span class="line">    engine: wiredTiger <span class="comment">#存储引擎</span></span><br><span class="line">    journal: <span class="comment">#是否启用journal日志</span></span><br><span class="line">  	  enabled: <span class="literal">true</span></span><br><span class="line">net:</span><br><span class="line">    bindIp: 0.0.0.0</span><br><span class="line">    port: 27017 <span class="comment"># port</span></span><br><span class="line">processManagement:</span><br><span class="line">    fork: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：一定要yaml格式 </p>
+<p>启动mongod</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /mongodb/conf/mongo.conf</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>关闭MongoDB服务</strong> </p>
+</blockquote>
+<p>方式1：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --port=27017 --dbpath=/mongodb/data --shutdown</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829152144844.png"
+                      alt="image-20220829152144844"
+                ></p>
+<p>方式2：<br>进入mongo shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin </span><br><span class="line">db.shutdownServer()</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829152213212.png"
+                      alt="image-20220829152213212"
+                ></p>
+<h2 id="Mongo-shell使用"><a href="#Mongo-shell使用" class="headerlink" title="Mongo shell使用"></a>Mongo shell使用</h2><p>mongo是MongoDB的交互式JavaScript Shell界面，它为系统管理员提供了强大的界面，并为开发人员提供了直接测试数据库查询和操作的方法。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo --port=27017</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>–port:指定端口，默认为27017<br>–host:连接的主机地址，默认127.0.0.1</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829152313411.png"
+                      alt="image-20220829152313411"
+                ></p>
+<h3 id="JavaScript支持"><a href="#JavaScript支持" class="headerlink" title="JavaScript支持"></a>JavaScript支持</h3><p>mongo shell是基于JavaScript语法的，MongoDB使用了SpiderMonkey作为其内部的JavaScript解释器引擎，这是由Mozilla官方提供的JavaScript内核解释器，该解释器也被同样用于大名鼎鼎的Firefox浏览器产品之中。SpiderMonkey对ECMA Script标准兼容性非常好，可以支持ECMA Script 6。可以通过下 面的命令检查JavaScript解释器的版本：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829152430977.png"
+                      alt="image-20220829152430977"
+                ></p>
+<h3 id="mongo-shell常用命令"><a href="#mongo-shell常用命令" class="headerlink" title="mongo shell常用命令"></a>mongo shell常用命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>show dbs |show databases</td>
+<td>显示数据库列表</td>
+</tr>
+<tr>
+<td>use 数据库名</td>
+<td>切换数据库，如果不存在创建数据库</td>
+</tr>
+<tr>
+<td>db.dropDatabase()</td>
+<td>删除数据库</td>
+</tr>
+<tr>
+<td>show collections| show tables</td>
+<td>显示当前数据库的集合列表</td>
+</tr>
+<tr>
+<td>db.集合名.stats()</td>
+<td>查看集合详情</td>
+</tr>
+<tr>
+<td>db.集合名.drop()</td>
+<td>删除集合</td>
+</tr>
+<tr>
+<td>show users</td>
+<td>显示当前数据库的用户列表</td>
+</tr>
+<tr>
+<td>show roles</td>
+<td>显示当前数据库的角色列表</td>
+</tr>
+<tr>
+<td>show profile</td>
+<td>显示最近发生的操作</td>
+</tr>
+<tr>
+<td>load(“xxx.js”)</td>
+<td>执行一个JavaScript脚本文件</td>
+</tr>
+<tr>
+<td>exit |quit()</td>
+<td>退出当前shell</td>
+</tr>
+<tr>
+<td>help</td>
+<td>查看mongodb支持哪些命令</td>
+</tr>
+<tr>
+<td>db.help()</td>
+<td>查询当前数据库支持的方法</td>
+</tr>
+<tr>
+<td>db.集合名.help()</td>
+<td>显示集合的帮助信息</td>
+</tr>
+<tr>
+<td>db.version()</td>
+<td>查看数据库版本</td>
+</tr>
+</tbody></table>
+<h3 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看所有库</span></span><br><span class="line">show dbs</span><br><span class="line"><span class="comment"># 切换到指定数据库，不存在则创建 </span></span><br><span class="line">use <span class="built_in">test</span></span><br><span class="line"><span class="comment"># 删除当前数据库 </span></span><br><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看集合</span></span><br><span class="line">show collections</span><br><span class="line"><span class="comment">#创建集合</span></span><br><span class="line">db.createCollection(<span class="string">&quot;emp&quot;</span>) </span><br><span class="line"><span class="comment">#删除集合</span></span><br><span class="line">db.emp.drop()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建集合语法</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(name, options)</span><br></pre></td></tr></table></figure>
+
+<p><strong>options参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>capped</td>
+<td>布尔</td>
+<td>（可选）如果为true，则创建固定集合。固定集合是指有着固定大小的集合， 当达到最大值时，它会自动覆盖最早的文档。</td>
+</tr>
+<tr>
+<td>size</td>
+<td>数值</td>
+<td>（可选）为固定集合指定一个最大值（以字节计）。如果 capped 为 true，也需要指定该字段。</td>
+</tr>
+<tr>
+<td>max</td>
+<td>数值</td>
+<td>（可选）指定固定集合中包含文档的最大数量。</td>
+</tr>
+</tbody></table>
+<p>注意： 当集合不存在时，向集合中插入文档也会创建集合</p>
+<h2 id="安全认证"><a href="#安全认证" class="headerlink" title="安全认证"></a>安全认证</h2><h3 id="创建管理员账号"><a href="#创建管理员账号" class="headerlink" title="创建管理员账号"></a>创建管理员账号</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置管理员用户名密码需要切换到admin库</span></span><br><span class="line">use admin</span><br><span class="line"><span class="comment">#创建管理员 </span></span><br><span class="line">db.createUser(&#123;user:<span class="string">&quot;fox&quot;</span>,<span class="built_in">pwd</span>:<span class="string">&quot;fox&quot;</span>,roles:[<span class="string">&quot;root&quot;</span>]&#125;) </span><br><span class="line"><span class="comment"># 查看所有用户信息</span></span><br><span class="line">show <span class="built_in">users</span></span><br><span class="line"><span class="comment">#删除用户</span></span><br><span class="line">db.dropUser(<span class="string">&quot;fox&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829154210470.png"
+                      alt="image-20220829154210470"
+                ></p>
+<h3 id="常用权限"><a href="#常用权限" class="headerlink" title="常用权限"></a>常用权限</h3><table>
+<thead>
+<tr>
+<th>权限名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read</td>
+<td>允许用户读取指定数据库</td>
+</tr>
+<tr>
+<td>readWrite</td>
+<td>允许用户读写指定数据库</td>
+</tr>
+<tr>
+<td>dbAdmin</td>
+<td>允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统 计或访问system.profile</td>
+</tr>
+<tr>
+<td>dbOwner</td>
+<td>允许用户在指定数据库中执行任意操作，增、删、改、查等</td>
+</tr>
+<tr>
+<td>userAdmin</td>
+<td>允许用户向system.users集合写入，可以在指定数据库里创建、删 除和管理用户</td>
+</tr>
+<tr>
+<td>clusterAdmin</td>
+<td>只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管 理权限</td>
+</tr>
+<tr>
+<td>readAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有分片和复制集相关函数的管 理权限</td>
+</tr>
+<tr>
+<td>readWriteAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有数据库的读写权限</td>
+</tr>
+<tr>
+<td>userAdminAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有数据库的userAdmin权限</td>
+</tr>
+<tr>
+<td>dbAdminAnyDatabase</td>
+<td>只在admin数据库中可用，赋予用户所有数据库的dbAdmin权限</td>
+</tr>
+<tr>
+<td>root</td>
+<td>只在admin数据库中可用。超级账号，超级权限</td>
+</tr>
+</tbody></table>
+<p>用户认证，返回1表示认证成功</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829154531037.png"
+                      alt="image-20220829154531037"
+                ></p>
+<h3 id="创建应用数据库用户"><a href="#创建应用数据库用户" class="headerlink" title="创建应用数据库用户"></a>创建应用数据库用户</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use appdb </span><br><span class="line">db.createUser(&#123;user:<span class="string">&quot;appdb&quot;</span>,<span class="built_in">pwd</span>:<span class="string">&quot;fox&quot;</span>,roles:[<span class="string">&quot;dbOwner&quot;</span>]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，MongoDB不会启用鉴权，以鉴权模式启动MongoDB</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /mongodb/conf/mongo.conf --auth</span><br></pre></td></tr></table></figure>
+
+<p>启用鉴权之后，连接MongoDB的相关操作都需要提供身份认证。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 192.168.65.174:27017 -u fox -p fox --authenticationDatabase=admin</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/image-20220829154640467.png"
+                      alt="image-20220829154640467"
+                ></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MongoDB之快速开始</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-08-29 15:10:53</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/08/29/MongoDB之快速开始/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/MongoDB/">#MongoDB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之文档操作</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/08/29/MongoDB%E4%B9%8B%E4%BB%8B%E7%BB%8D/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MongoDB之介绍</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E5%AE%89%E8%A3%85MongoDB"><span class="nav-number">1.</span> <span class="nav-text">linux安装MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8MongoDB-Server"><span class="nav-number">1.1.</span> <span class="nav-text">启动MongoDB Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.2.</span> <span class="nav-text">利用配置文件启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mongo-shell%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Mongo shell使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript%E6%94%AF%E6%8C%81"><span class="nav-number">2.1.</span> <span class="nav-text">JavaScript支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mongo-shell%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">mongo shell常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="nav-number">2.4.</span> <span class="nav-text">集合操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">安全认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%AE%A1%E7%90%86%E5%91%98%E8%B4%A6%E5%8F%B7"><span class="nav-number">3.1.</span> <span class="nav-text">创建管理员账号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%9D%83%E9%99%90"><span class="nav-number">3.2.</span> <span class="nav-text">常用权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E6%88%B7"><span class="nav-number">3.3.</span> <span class="nav-text">创建应用数据库用户</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
