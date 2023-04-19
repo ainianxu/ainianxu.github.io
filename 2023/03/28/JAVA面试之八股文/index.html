@@ -195,12 +195,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>33.6k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>119 Mins</span>
         </span>
     
     
@@ -216,7 +216,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="1、Java基础"><a href="#1、Java基础" class="headerlink" title="1、Java基础"></a>1、Java基础</h1><h2 id="1-面向对象"><a href="#1-面向对象" class="headerlink" title="1.面向对象"></a>1.面向对象</h2><p>什么是面向对象？</p>
+            <h1 id="一、Java基础"><a href="#一、Java基础" class="headerlink" title="一、Java基础"></a>一、Java基础</h1><h2 id="1、面向对象"><a href="#1、面向对象" class="headerlink" title="1、面向对象"></a>1、面向对象</h2><p>什么是面向对象？</p>
 <p>对比面向过程，是两种不同的处理问题的角度 </p>
 <ul>
 <li>面向过程更注重事情的每一个步骤及顺序，</li>
@@ -239,7 +239,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../../../../../../AppData/Roaming/Typora/typora-user-images/image-20230329162932835.png"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304021019415.png"
                       alt="image-20230329162932835"
                 ></p>
 <h2 id="3、-x3D-x3D-和equals比较"><a href="#3、-x3D-x3D-和equals比较" class="headerlink" title="3、&#x3D;&#x3D;和equals比较"></a>3、&#x3D;&#x3D;和equals比较</h2><p><strong>&#x3D;&#x3D;：</strong>如果比较的对象是基本数据类型，则比较数值是否相等；如果比较的是引用数据类型，则比较的是对象的地址是否相等。</p>
@@ -285,6 +285,1215 @@
 <li>场景：经常需要改变字符串内容时使用后面两个</li>
 <li>优先使用StringBuilder，多线程使用共享变量时使用StringBuffer</li>
 </ul>
+<h2 id="7、重载和重写的区别"><a href="#7、重载和重写的区别" class="headerlink" title="7、重载和重写的区别"></a>7、重载和重写的区别</h2><p><strong>重载：</strong> 发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。 </p>
+<p><strong>重写：</strong> 发生在父子类中，方法名、参数列表必须相同，返回值范围小于等于父类，抛出的异常范围小于等于父类，访问修饰符范围大于等于父类；如果父类方法访问修饰符为private则子类就不能重写该方 法。</p>
+<h2 id="8、接口和抽象类的区别"><a href="#8、接口和抽象类的区别" class="headerlink" title="8、接口和抽象类的区别"></a>8、接口和抽象类的区别</h2><ul>
+<li>抽象类可以存在普通成员函数，而接口中只能存在public abstract 方法。 </li>
+<li>抽象类中的成员变量可以是各种类型的，而接口中的成员变量只能是public static final类型的。 </li>
+<li>抽象类只能继承一个，接口可以实现多个。</li>
+</ul>
+<ol>
+<li><strong>接口的设计目的</strong>，是对类的行为进行约束（更准确的说是一种“有”约束，因为<strong>接口不能规定类不可以有什么行为</strong>），也就是提供一种机制，可以强制要求不同的类具有相同的行为。<strong>它只约束了行为的有无， 但不对如何实现行为进行限制。</strong> </li>
+<li><strong>而抽象类的设计目的</strong>，<strong>是代码复用</strong>。当不同的类具有某些相同的行为(记为行为集合A)，且其中一部分行为的实现方式一致时（A的非真子集，记为B），可以让这些类都派生于一个抽象类。在这个抽象类中实现了B，避免让所有的子类来实现B，这就达到了代码复用的目的。而A减B的部分，留给各个子类自己实现。正是因为A-B在这里没有实现，所以抽象类不允许实例化出来（否则当调用到A-B时，无法执行）。 </li>
+<li>抽象类是对类本质的抽象，表达的是 is a 的关系，比如： BMW is a Car 。抽象类包含并实现子类的通用特性，将子类存在差异化的特性进行抽象，交由子类去实现。 </li>
+<li>而接口是对行为的抽象，表达的是 like a 的关系。比如： Bird like a Aircraft （像飞行器一样可以飞），但其本质上 is a Bird 。<strong>接口的核心是定义行为，即实现类可以做什么</strong>，至于实现类主体是谁、 是如何实现的，接口并不关心。 </li>
+<li>使用场景：<strong>当你关注一个事物的本质的时候，用抽象类；当你关注一个操作的时候，用接口。</strong> </li>
+<li><strong>抽象类的功能要远超过接口</strong>，但是，定义抽象类的代价高。因为高级语言来说（从实际设计上来说也是）每个类只能继承一个类。在这个类中，你必须继承或编写出其所有子类的所有共性。虽然接口在功能上会弱化许多，但是它只是针对一个动作的描述。而且你可以在一个类中同时实现多个接口。在设计阶段会降低难度</li>
+</ol>
+<h2 id="9、List和Set的区别"><a href="#9、List和Set的区别" class="headerlink" title="9、List和Set的区别"></a>9、List和Set的区别</h2><ul>
+<li>List：有序，按对象进入的顺序保存对象，可重复，允许多个Null元素对象，可以使用Iterator取出所有元素，在逐一遍历，还可以使用get(int index)获取指定下标的元素 </li>
+<li>Set：无序，不可重复，最多允许有一个Null元素对象，取元素时只能用Iterator接口取得所有元素，在逐一遍历各个元素</li>
+</ul>
+<h2 id="10、ArrayList和LinkedList区别"><a href="#10、ArrayList和LinkedList区别" class="headerlink" title="10、ArrayList和LinkedList区别"></a>10、ArrayList和LinkedList区别</h2><p>ArrayList：基于动态数组，<strong>连续内存存储</strong>，适合下标访问（随机访问），<strong>扩容机制</strong>：因为数组长度固定，超出长度存数据时需要新建数组，然后将老数组的数据拷贝到新数组，如果不是尾部插入数据还会涉及到元素的移动（往后复制一份，插入新元素），使用尾插法并指定初始容量可以极大提升性能、甚至超过linkedList（需要创建大量的node对象）</p>
+<p>LinkedList：基于链表，可以存储在<strong>分散的内存</strong>中，适合做数据插入及删除操作，不适合查询：需要逐一遍历</p>
+<p><strong>遍历LinkedList必须使用iterator不能使用for循环</strong>，因为每次for循环体内通过get(i)取得某一元素时都需要对list重新进行遍历，性能消耗极大。 </p>
+<p><strong>另外不要试图使用indexOf等返回元素索引</strong>，并利用其进行遍历，使用indexOf对list进行了遍历，当结果为空时会遍历整个列表。</p>
+<h2 id="11、HashMap和HashTable有什么区别？其底层实现是什-么？"><a href="#11、HashMap和HashTable有什么区别？其底层实现是什-么？" class="headerlink" title="11、HashMap和HashTable有什么区别？其底层实现是什 么？"></a>11、HashMap和HashTable有什么区别？其底层实现是什 么？</h2><ol>
+<li>区别 ： <ul>
+<li>HashMap方法没有synchronized修饰，线程非安全，HashTable线程安全； </li>
+<li>HashMap允许key和value为null，而HashTable不允许</li>
+</ul>
+</li>
+<li>底层实现：数组+链表实现 —&gt;jdk8开始链表高度到8、数组长度超过64，链表转变为红黑树，元素以内部类Node节点存在<ul>
+<li>计算key的hash值，二次hash然后对数组长度取模，对应到数组下标， </li>
+<li>如果没有产生hash冲突(下标位置没有元素)，则直接创建Node存入数组， </li>
+<li>如果产生hash冲突，先进行equal比较，相同则取代该元素，不同，则判断链表高度插入链表，链 表高度达到8，并且数组长度到64则转变为红黑树，长度低于6则将红黑树转回链表 </li>
+<li>key为null，存在下标0的位置</li>
+</ul>
+</li>
+</ol>
+<h2 id="12、什么是字节码？采用字节码的好处是什么？"><a href="#12、什么是字节码？采用字节码的好处是什么？" class="headerlink" title="12、什么是字节码？采用字节码的好处是什么？"></a>12、什么是字节码？采用字节码的好处是什么？</h2><ol>
+<li>java中的编译器和解释器：<ul>
+<li>Java中引入了虚拟机的概念，即在机器和编译程序之间加入了一层抽象的虚拟的机器。这台<strong>虚拟的机器</strong>在任何平台上都提供给<strong>编译程序一个的共同的接口</strong>。</li>
+<li>编译程序只需要面向虚拟机，生成虚拟机能够理解的代码，然后由解释器来将虚拟机代码转换为特定系统的机器码执行。在Java中，<strong>这种供虚拟机理解的代码叫做字节码（即扩展名为 .class的文件）</strong>，它不面向任何特定的处理器，只面向虚拟机。 </li>
+<li>每一种平台的解释器是不同的，但是实现的虚拟机是相同的。Java源程序经过编译器编译后变成字节码，字节码由虚拟机解释执行，虚拟机将每一条要执行的字节码送给解释器，解释器将其翻译成特定机器上的机器码，然后在特定的机器上运行。这也就是解释了Java的编译与解释并存的特点。 <strong>Java源代码—-&gt;编译器—-&gt;jvm可执行的Java字节码(即虚拟指令)—-&gt;jvm—-&gt;jvm中解释器—–&gt;机器可执行的二进制机器码—-&gt;程序运行</strong>。</li>
+</ul>
+</li>
+<li>采用字节码的好处： <ul>
+<li>Java语言通过字节码的方式，在一定程度上解决了<strong>传统解释型语言执行效率低的问题</strong>，同时又保留了解释型语言可移植的特点。所以Java程序运行时比较高效，而且，<strong>由于字节码并不专对一种特定的机器</strong>， 因此，<strong>Java程序无须重新编译便可在多种不同的计算机上运行。</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="13、Java中的异常体系"><a href="#13、Java中的异常体系" class="headerlink" title="13、Java中的异常体系"></a>13、Java中的异常体系</h2><ul>
+<li>Java中的所有异常都来自顶级父类Throwable。 </li>
+<li>Throwable下有两个子类Exception和Error。</li>
+<li><strong>Error</strong>是程序无法处理的错误，一旦出现这个错误，则程序将被迫停止运行。 </li>
+<li><strong>Exception</strong>不会导致程序停止，又分为两个部分RunTimeException运行时异常和CheckedException检查异常。 </li>
+<li>RunTimeException常常发生在程序运行过程中，会导致程序当前线程执行失败。CheckedException常常发生在程序编译过程中，会导致程序编译不通过。</li>
+</ul>
+<h2 id="14、Java类加载器"><a href="#14、Java类加载器" class="headerlink" title="14、Java类加载器"></a>14、Java类加载器</h2><ul>
+<li>JDK自带有三个类加载器：bootstrapClassLoader、ExtClassLoader、AppClassLoader。 </li>
+<li>BootStrapClassLoader是ExtClassLoader的父类加载器，默认负责加载%JAVA_HOME%lib下的jar包和 class文件。</li>
+<li>ExtClassLoader是AppClassLoader的父类加载器，负责加载%JAVA_HOME%&#x2F;lib&#x2F;ext文件夹下的jar包和 class类。</li>
+<li>AppClassLoader是自定义类加载器的父类，负责加载classpath下的类文件。系统类加载器，线程上下文加载器 </li>
+<li>继承ClassLoader实现自定义类加载器</li>
+</ul>
+<h2 id="15、双亲委托模型"><a href="#15、双亲委托模型" class="headerlink" title="15、双亲委托模型"></a>15、双亲委托模型</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304041128289.png"
+                      alt="image-20230404112832991"
+                ></p>
+<p><strong>双亲委派模型的好处：</strong> </p>
+<ul>
+<li>主要是为了安全性，避免用户自己编写的类动态替换 Java的一些核心类，比如 String。 </li>
+<li>同时也避免了<strong>类的重复加载</strong>，因为 JVM中<strong>区分不同类</strong>，不仅仅是<strong>根据类名</strong>，<strong>相同的 class文件被不同的 ClassLoader加载就是不同的两个类</strong></li>
+</ul>
+<h2 id="二、线程、并发相关"><a href="#二、线程、并发相关" class="headerlink" title="二、线程、并发相关"></a>二、线程、并发相关</h2><h2 id="1、线程的生命周期？线程有几种状态"><a href="#1、线程的生命周期？线程有几种状态" class="headerlink" title="1、线程的生命周期？线程有几种状态"></a>1、线程的生命周期？线程有几种状态</h2><ol>
+<li>线程通常有五种状态，<strong>创建，就绪，运行、阻塞和死亡</strong>状态。 </li>
+<li>阻塞的情况又分为三种： <ul>
+<li><strong>等待阻塞</strong>：运行的线程执行<strong>wait</strong>方法，该线程会释放占用的所有资源，JVM会把该线程放入“等待 池”中。进入这个状态后，是不能自动唤醒的，<strong>必须依靠其他线程调用notify或notifyAll方法才能被唤醒</strong>，wait是object类的方法 </li>
+<li><strong>同步阻塞：</strong>运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入“锁池”中。</li>
+<li><strong>其他阻塞：</strong>运行的线程执行<strong>sleep或join</strong>方法，或者发出了<strong>I&#x2F;O请求</strong>时，<strong>JVM会把该线程置为阻塞状态</strong>。当sleep状态超时、join等待线程终止或者超时、或者I&#x2F;O处理完毕时，线程重新转入就绪状态。 sleep是Thread类的方法</li>
+</ul>
+</li>
+<li>新建状态（New）：新创建了一个线程对象。</li>
+<li>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权。 </li>
+<li>运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码。</li>
+<li>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。</li>
+<li>死亡状态（Dead）：线程执行完了或者因异常退出了run方法，该线程结束生命周期。</li>
+</ol>
+<h2 id="2、sleep-、wait-、join-、yield-的区别"><a href="#2、sleep-、wait-、join-、yield-的区别" class="headerlink" title="2、sleep()、wait()、join()、yield()的区别"></a>2、sleep()、wait()、join()、yield()的区别</h2><ol>
+<li><strong>锁池：</strong>所有需要<strong>竞争同步锁的线程</strong>都会放在锁池当中，比如当前对象的锁已经被其中一个线程得到，则其他线程需要在这个锁池进行等待，当前面的线程释放同步锁后锁池中的线程去竞争同步锁，当某个线程得到后会进入就绪队列进行等待cpu资源分配。</li>
+<li><strong>等待池：</strong>当我们调用wait（）方法后，线程会放到等待池当中，等待池的线程是不会去竞争同步锁。只有调用了 notify（）或notifyAll()后等待池的线程才会开始去竞争锁，notify（）是随机从等待池选出一个线程放到锁池，而notifyAll()是将等待池的所有线程放到锁池当中。</li>
+<li>sleep 是 Thread 类的静态本地方法，wait 则是 Object 类的本地方法。</li>
+<li>sleep方法不会释放lock，但是wait会释放，而且会加入到等待队列中。</li>
+<li>sleep就是把cpu的执行资格和执行权释放出去，不再运行此线程，当定时时间结束再取回cpu资源，参与cpu的调度，获取到cpu资源后就可以继续运行了。而<strong>如果sleep时该线程有锁，那么sleep不会释放这个锁</strong>，而是把锁带着进入了冻结状态，也就是说其他需要这个锁的线程根本不可能获取到这个锁。也就是说无法执行程序。如果<strong>在睡眠期间</strong>其他线程调用了这个线程的interrupt方法，那么这个线程也会抛出interruptexception异常返回，这点和wait是一样的。</li>
+<li>sleep方法不依赖于同步器synchronized，但是wait需要依赖synchronized关键字。</li>
+<li>sleep不需要被唤醒（休眠之后推出阻塞），但是wait需要（不指定时间需要被别人中断）。</li>
+<li>sleep 一般用于当前线程休眠，或者轮循暂停操作，<strong>wait 则多用于多线程之间的通信</strong>。</li>
+<li>sleep 会让出 CPU 执行时间且强制上下文切换，而 wait 则不一定，wait 后可能还是有机会重新竞争到锁继续执行的。</li>
+<li><strong>yield（）</strong>执行后线程直接进入<strong>就绪状态</strong>，马上释放了cpu的执行权，但是依然保留了cpu的执行资格， 所以有可能cpu下次进行线程调度还会让这个线程获取到执行权继续执行 </li>
+<li><strong>join（）</strong>执行后线程进入<strong>阻塞状态</strong>，例如在线程B中调用线程A的join（），那线程B会进入到阻塞队列，直到线程A结束或中断线程</li>
+</ol>
+<h2 id="3、对线程安全的理解"><a href="#3、对线程安全的理解" class="headerlink" title="3、对线程安全的理解"></a>3、对线程安全的理解</h2><p>不是线程安全、应该是内存安全，堆是共享内存，可以被所有线程访问</p>
+<blockquote>
+<p>当多个线程访问一个对象时，如果不用进行额外的同步控制或其他的协调操作，调用这个对象的行为都可以获得正确的结果，我们就说这个对象是线程安全的</p>
+</blockquote>
+<ol>
+<li><strong>堆</strong>是进程和线程共有的空间，分全局堆和局部堆。<strong>全局堆</strong>就是所有没有分配的空间，<strong>局部堆</strong>就是用户配的空间。堆在<strong>操作系统</strong>对进程初始化的时候分配，运行过程中也可以向系统要额外的堆，但是用完了要还给操作系统，要不然就是内存泄漏</li>
+</ol>
+<blockquote>
+<p>在Java中，堆是Java虚拟机所管理的内存中最大的一块，是所有线程共享的一块内存区域，在虚拟机启动时创建。堆所存在的内存区域的唯一目的就是&#x3D;&#x3D;存放对象实例&#x3D;&#x3D;，几乎所有的对象实例以及数组都在这里分配内存。</p>
+</blockquote>
+<ol start="2">
+<li><strong>栈</strong>是每个线程独有的，保存其运行状态和局部自动变量的。栈在线程开始的时候初始化，每个线程的栈互相独立，因此，栈是线程安全的。操作系统在切换线程的时候会自动切换栈。栈空间不需要在高级语言里面显式的分配和释放。</li>
+<li>目前主流操作系统都是多任务的，即多个进程同时运行。为了保证安全，<strong>每个进程只能访问分配给自己的内存空间</strong>，而不能访问别的进程的，这是由操作系统保障的。 </li>
+<li>在每个进程的内存空间中都会有一块特殊的公共区域，通常称为堆（内存）。进程内的所有线程都可以访问到该区域，这就是造成问题的潜在原因。</li>
+</ol>
+<h2 id="4、Thread、Runable的区别"><a href="#4、Thread、Runable的区别" class="headerlink" title="4、Thread、Runable的区别"></a>4、Thread、Runable的区别</h2><p>Thread和Runnable的实质是继承关系，没有可比性。无论使用Runnable还是Thread，都会new Thread，然后执行run方法。用法上，如果有<strong>复杂的线程操作</strong>需求，那就选择继承<strong>Thread</strong>，如果只是<strong>简单</strong>的执行一个任务，那就实现<strong>runnable</strong>。</p>
+<h2 id="5、对守护线程的理解"><a href="#5、对守护线程的理解" class="headerlink" title="5、对守护线程的理解"></a>5、对守护线程的理解</h2><ol>
+<li><strong>守护线程：</strong>为所有非守护线程提供服务的线程；任何一个守护线程都是整个JVM中所有非守护线程的保姆； </li>
+<li>守护线程类似于整个进程的一个默默无闻的小喽喽；它的生死无关重要，它却<strong>依赖整个进程而运行</strong>；哪天其他线程结束了，没有要执行的了，程序就结束了，理都没理守护线程，就把它中断了；</li>
+<li>注意： 由于守护线程的终止是自身无法控制的，因此千万不要把IO、File等重要操作逻辑分配给它；因为它不靠谱； </li>
+<li>守护线程的作用是什么？ <ul>
+<li><strong>GC垃圾回收线程</strong>：就是一个经典的守护线程，当我们的程序中不再有任何运行的Thread,程序就不会再产生垃圾，垃圾回收器也就无事可做，所以当垃圾回收线程是JVM上仅剩的线程时，垃圾回收线程会自动离开。它始终在<strong>低级别</strong>的状态中运行，用于实时监控和管理系统中的可回收资源。 </li>
+<li>应用场景：（1）来为其它线程提供服务支持的情况；（2） 或者在任何情况下，程序结束时，这个线程必须正常且立刻关闭，就可以作为守护线程来使用；<strong>反之</strong>，如果一个正在执行某个操作的线程必须要正确地关闭掉否则就会出现不好的后果的话，那么这个线程就不能是守护线程，而是<strong>用户线程</strong>。通常都是些关键的事务，比方说，数据库录入或者更新，这些操作都是不能中断的。</li>
+<li>thread.setDaemon(true)必须在thread.start()之前设置，否则会跑出一个 IllegalThreadStateException异常。你不能把正在运行的常规线程设置为守护线程。 </li>
+<li>在Daemon线程中产生的新线程也是Daemon的。 </li>
+<li><strong>守护线程不能用于去访问固有资源</strong>，比如读写操作或者计算逻辑。因为它会在任何时候甚至在一个操作的中间发生中断。 Java自带的多线程框架，比如<strong>ExecutorService，会将守护线程转换为用户线程</strong>，所以如果要使用后台线程就不能用Java的线程池。</li>
+</ul>
+</li>
+</ol>
+<h2 id="6、ThreadLocal的原理和使用场景"><a href="#6、ThreadLocal的原理和使用场景" class="headerlink" title="6、ThreadLocal的原理和使用场景"></a>6、ThreadLocal的原理和使用场景</h2><ol>
+<li>每一个 <strong>Thread</strong> 对象均含有一个 <strong>ThreadLocalMap</strong> 类型的成员变量 <strong>threadLocals</strong> ，它存储本线程中所有<strong>ThreadLocal</strong>对象及其对应的值</li>
+<li><strong>ThreadLocalMap</strong> 由一个个 <strong>Entry</strong> 对象构成</li>
+<li><strong>Entry</strong> 继承自  <strong>WeakReference&lt;ThreadLocal&lt; ? &gt;&gt;</strong> ，一个 <strong>Entry</strong> 由 <strong>ThreadLocal</strong> 对象和 <strong>Object</strong> 构成。由此可见， <strong>Entry</strong> 的key是ThreadLocal对象，并且是一个弱引用。<strong>当没指向key的强引用后，该 key就会被垃圾收集器回收</strong></li>
+<li>当执行set方法时，<strong>ThreadLocal</strong>首先会获取当前线程对象，然后获取当前线程的<strong>ThreadLocalMap</strong>对象。再以当前ThreadLocal对象为key，将值存储进<strong>ThreadLocalMap</strong>对象中。</li>
+<li>get方法执行过程类似。<strong>ThreadLocal</strong>首先会获取当前线程对象，然后获取当前线程的<strong>ThreadLocalMap</strong> 对象。再以当前<strong>ThreadLocal</strong>对象为key，获取对应的value。</li>
+<li>由于每一条线程均含有各自私有的<strong>ThreadLocalMap</strong>容器，这些容器相互独立互不影响，因此<strong>不会存在线程安全性问题</strong>，从而也无需使用同步机制来保证多条线程访问容器的互斥性。</li>
+</ol>
+<p><strong>使用场景：</strong> </p>
+<ol>
+<li>在进行对象跨层传递的时候，使用ThreadLocal可以避免多次传递，打破层次间的约束。</li>
+<li>线程间数据隔离 </li>
+<li>进行事务操作，用于存储线程事务信息。 </li>
+<li>数据库连接，Session会话管理。</li>
+</ol>
+<blockquote>
+<p>Spring框架在事务开始时会给当前线程绑定一个Jdbc Connection,在整个事务过程都是使用该线程绑定的connection来执行数据库操作，实现了事务的<strong>隔离性</strong>。Spring框架里面就是用的<strong>ThreadLocal</strong>来实现这种隔离</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304072117299.png"
+                      alt="image-20230407211707824"
+                ></p>
+<h2 id="7、ThreadLocal内存泄露原因，如何避免"><a href="#7、ThreadLocal内存泄露原因，如何避免" class="headerlink" title="7、ThreadLocal内存泄露原因，如何避免"></a>7、ThreadLocal内存泄露原因，如何避免</h2><ol>
+<li>内存泄露为<strong>程序在申请内存后，无法释放已申请的内存空间</strong>，一次内存泄露危害可以忽略，但内存泄露堆积后果很严重，无论多少内存，迟早会被占光。</li>
+<li>不再会被使用的<strong>对象或者</strong>变量占用的内存不能被回收，就是内存泄露。</li>
+<li><strong>强引用：</strong>使用最普遍的引用(new)，一个<strong>对象具有强引用，不会被垃圾回收器回收</strong>。当内存空间不足， Java虚拟机宁愿抛出OutOfMemoryError错误，使程序异常终止，也不回收这种对象。</li>
+<li>如果想<strong>取消</strong>强引用和某个对象之间的<strong>关联</strong>，可以<strong>显式地将引用赋值为null</strong>，这样可以使JVM在合适的时间<strong>就会回收</strong>该对象。</li>
+<li><strong>弱引用：</strong>JVM进行垃圾回收时，无论内存是否充足，都会回收被弱引用关联的对象。在java中，用 java.lang.ref.WeakReference类来表示。<strong>可以在缓存中使用弱引用。</strong></li>
+<li><strong>ThreadLocal的实现原理</strong>，每一个Thread维护一个ThreadLocalMap，<strong>key为使用弱引用的ThreadLocal 实例，value为线程变量的副本</strong></li>
+<li><strong>ThreadLocalMap</strong>使用<strong>ThreadLocal</strong>的弱引用作为<strong>key</strong>，如果一个<strong>ThreadLocal</strong>不存在外部强引用时， <strong>Key(ThreadLocal)<strong>势必会被GC回收，这样就会</strong>导致ThreadLocalMap中key为null</strong>， 而value还存在着强引用，只有<strong>thread</strong>线程退出以后,value的强引用链条才会断掉，<strong>但如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链</strong>（红色链条）</li>
+<li><strong>key使用强引用：</strong>当threadLocalMap的key为<strong>强引用</strong>回收ThreadLocal时，因为ThreadLocalMap还持有ThreadLocal的强引用，<strong>如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</strong></li>
+<li><strong>key使用弱引用：</strong>当ThreadLocalMap的key为<strong>弱引用</strong>回收ThreadLocal时，由于ThreadLocalMap持有ThreadLocal的弱引用，<strong>即使没有手动删除，ThreadLocal也会被回收。</strong><strong><strong>当key为null</strong></strong>，在下一次ThreadLocalMap调用 set(),get()，remove()方法的时候会被**清除value值。</li>
+<li>因此，<strong>ThreadLocal内存泄漏的根源是：</strong>由于ThreadLocalMap的生命周期跟Thread一样长，<strong>如果没有手动删除对应key就会导致内存泄漏</strong>，而不是因为弱引用。</li>
+<li><strong>ThreadLocal正确的使用方法：</strong><ul>
+<li>每次使用完<strong>ThreadLocal</strong>都调用它的<strong>remove()方法清除数据</strong> </li>
+<li>将<strong>ThreadLocal</strong>变量定义成<strong>private static</strong>，这样就一直存在ThreadLocal的强引用，也就能保证任何时候都能通过ThreadLocal的弱引用访问到Entry的value值，进而清除掉 。</li>
+</ul>
+</li>
+</ol>
+<h2 id="8、并发、并行、串行的区别"><a href="#8、并发、并行、串行的区别" class="headerlink" title="8、并发、并行、串行的区别"></a>8、并发、并行、串行的区别</h2><ol>
+<li><strong>串行</strong>在时间上不可能发生重叠，前一个任务没搞定，下一个任务就只能等着 </li>
+<li><strong>并行</strong>在时间上是重叠的，两个任务在同一时刻互不干扰的同时执行。 </li>
+<li><strong>并发</strong>允许两个任务彼此干扰。统一时间点、只有一个任务运行，交替执行</li>
+</ol>
+<h2 id="9、并发的三大特性"><a href="#9、并发的三大特性" class="headerlink" title="9、并发的三大特性"></a>9、并发的三大特性</h2><ol>
+<li><strong>原子性</strong>是指在一个操作中cpu不可以在中途暂停然后再调度，<strong>即不被中断操作，要不全部执行完成，要不都不执行</strong>。就好比转账，从账户A向账户B转1000元，那么必然包括2个操作：从账户A减去1000元， 往账户B加上1000元。2个操作必须全部完成。</li>
+<li>那<strong>程序中原子性</strong>指的是<strong>最小的操作单元</strong>，比如自增操作，它本身其实并不是原子性操作，分了3步的， 包括读取变量的原始值、进行加1操作、写入工作内存。所以在多线程中，有可能一个线程还没自增完，可能才执行到第二部，另一个线程就已经读取了值，导致结果错误。<strong>那如果我们能保证自增操作是一个原子性的操作，那么就能保证其他线程读取到的一定是自增后的数据。</strong></li>
+<li><strong>可见性：</strong>当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。 <strong>若两个线程在不同的cpu</strong>，那么线程1改变了i的值还没刷新到主存，线程2又使用了i，那么这个i值肯定还是之前的，线程1对变量的修改线程没看到<strong>这就是可见性问题。</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程1</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">stop</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">while</span>(!stop)&#123;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//线程2</span></span><br><span class="line">stop = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果线程2改变了stop的值，线程1一定会停止吗？<strong>不一定。</strong>当线程2更改了stop变量的值之后，<strong>但</strong>是还没来得及写入主存当中，线程2转去做其他事情了，那么线程1由于不知道线程2对stop变量的更改，因此还会一直循环下去。</p>
+</blockquote>
+<ol start="4">
+<li><strong>有序性：</strong>虚拟机在进行代码编译时，对于那些改变顺序之后不会对最终结果造成影响的代码，虚拟机不一定会按照我们写的代码的顺序来执行，有可能将他们重排序。实际上，<strong>对于有些代码进行重排序之后</strong>，虽然对变量的值没有造成影响，但<strong>有可能会出现线程安全问题。</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="type">bool</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">()</span> &#123;</span><br><span class="line">    a = <span class="number">2</span>; <span class="comment">//1</span></span><br><span class="line">    flag = <span class="literal">true</span>; <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">multiply</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123; <span class="comment">//3</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> a * a;<span class="comment">//4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>write方法里的1和2做了重排序，线程1先对flag赋值为true，随后执行到线程2，ret直接计算出结果， 再到线程1，这时候a才赋值为2,很明显迟了一步</p>
+</blockquote>
+<ol start="5">
+<li><strong>volatile</strong>本身就包含了禁止指令重排序的语义，而<strong>synchronized</strong>关键字是由“一个变量在同一时刻只允许一条线程对其进行lock操作”这条规则明确的。</li>
+<li>synchronized关键字同时满足以上三种特性，但是volatile关键字不满足原子性。</li>
+<li>在某些情况下，<strong>volatile的同步机制的性能确实要优于锁</strong>(使用synchronized关键字或 java.util.concurrent包里面的锁)，因为volatile的总开销要比锁低。 </li>
+<li>我们<strong>判断使用volatile还是加锁的唯一依据</strong>就是volatile的语义能否满足使用的场景(原子性)</li>
+</ol>
+<h2 id="10、volatile"><a href="#10、volatile" class="headerlink" title="10、volatile"></a>10、volatile</h2><ol>
+<li><strong>保证被volatile修饰的共享变量对所有线程总是可见的</strong>，也就是当一个线程修改了一个被volatile修饰共享变量的值，新值总是可以被其他线程立即得知。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程1</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">stop</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">while</span>(!stop)&#123;</span><br><span class="line">	doSomething();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//线程2</span></span><br><span class="line">stop = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果线程2改变了stop的值，线程1一定会停止吗？不一定。当线程2更改了stop变量的值之后，但 是还没来得及写入主存当中，线程2转去做其他事情了，那么线程1由于不知道线程2对stop变量的 更改，因此还会一直循环下去。</p>
+</blockquote>
+<ol start="2">
+<li>禁止指令重排序优化。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="type">bool</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">()</span> &#123;</span><br><span class="line">    a = <span class="number">2</span>; <span class="comment">//1</span></span><br><span class="line">    flag = <span class="literal">true</span>; <span class="comment">//2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">multiply</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123; <span class="comment">//3</span></span><br><span class="line">    	<span class="type">int</span> <span class="variable">ret</span> <span class="operator">=</span> a * a;<span class="comment">//4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>write方法里的1和2做了重排序，线程1先对flag赋值为true，随后执行到线程2，ret直接计算出结果， 再到线程1，这时候a才赋值为2,很明显迟了一步。</p>
+</blockquote>
+<ol start="3">
+<li>但是用volatile修饰之后就变得不一样了<ul>
+<li>使用volatile关键字会强制将修改的值立即写入主存； </li>
+<li>使用volatile关键字的话，当线程2进行修改时，会导致线程1的工作内存中缓存变量stop的缓存行无效（反映到硬件层的话，就是CPU的L1或者L2缓存中对应的缓存行无效）；</li>
+<li>由于线程1的工作内存中缓存变量stop的缓存行无效，所以线程1再次读取变量stop的值时会去主存读取。</li>
+<li>inc++; 其实是两个步骤，先加加，然后再赋值。不是原子性操作，所以volatile不能保证线程安全。</li>
+</ul>
+</li>
+</ol>
+<h2 id="11、为什么用线程池？解释下线程池参数？"><a href="#11、为什么用线程池？解释下线程池参数？" class="headerlink" title="11、为什么用线程池？解释下线程池参数？"></a>11、为什么用线程池？解释下线程池参数？</h2><ol>
+<li>降低资源消耗；提高线程利用率，降低创建和销毁线程的消耗。</li>
+<li>提高响应速度；任务来了，直接有线程可用可执行，而不是先创建线程，再执行。</li>
+<li>提高线程的可管理性；线程是稀缺资源，使用线程池可以统一分配调优监控。<ul>
+<li><strong>corePoolSize</strong> 代表<strong>核心线程数</strong>，也就是正常情况下创建工作的线程数，这些线程创建后并不会消除，而是一种常驻线程 </li>
+<li><strong>maxinumPoolSize</strong>代表的是<strong>最大线程数</strong>，它与核心线程数相对应，表示最大允许被创建的线程数，比如当前任务较多，<strong>将核心线程数都用完了，还无法满足需求时，此时就会创建新的线程，但是线程池内线程总数不会超过最大线程数</strong> </li>
+<li><strong>keepAliveTime</strong> 、 <strong>unit</strong> 表示<strong>超出核心线程数之外的线程的空闲存活时间</strong>，也就是核心线程不会消除，但是超出核心线程数的部分线程如果空闲一定的时间则会被消除,我们可以通过 <strong>setKeepAliveTime</strong> 来设置空闲时间 </li>
+<li><strong>workQueue</strong> <strong>用来存放待执行的任务</strong>，假设我们现在核心线程都已被使用，还有任务进来则全部放入队列，<strong>直到整个队列被放满但任务还再持续进入则会开始创建新的线程</strong> </li>
+<li><strong>ThreadFactory</strong> 实际上是一个线程工厂，用来<strong>生产线程执行任务</strong>。我们可以选择使用默认的创建工厂，<strong>产生的线程都在同一个组内，拥有相同的优先级，且都不是守护线程</strong>。当然我们也可以选择自定义线程工厂，一般我们会根据业务来制定不同的线程工厂 </li>
+<li><strong>Handler</strong> <strong>任务拒绝策略</strong>，有两种情况，第一种是当我们调用 <strong>shutdown</strong> 等方法关闭线程池后，这时候即使线程池内部还有没执行完的任务正在执行，但是由于线程池已经关闭，我们再继续想线程池提交任务就会遭到拒绝。另一种情况就是<strong>当达到最大线程数</strong>，线程池已经没有能力继续处理新提交的任务时，这是也就拒绝</li>
+</ul>
+</li>
+</ol>
+<h2 id="12、简述线程池处理流程"><a href="#12、简述线程池处理流程" class="headerlink" title="12、简述线程池处理流程"></a>12、简述线程池处理流程</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304101520546.png"
+                      alt="image-20230410151953274"
+                ></p>
+<h2 id="13、线程池中阻塞队列的作用？为什么是先添加列队而不是先创建最大线程？"><a href="#13、线程池中阻塞队列的作用？为什么是先添加列队而不是先创建最大线程？" class="headerlink" title="13、线程池中阻塞队列的作用？为什么是先添加列队而不是先创建最大线程？"></a>13、线程池中阻塞队列的作用？为什么是先添加列队而不是先创建最大线程？</h2><ol>
+<li>一般的队列只能保证作为一个有限长度的缓冲区，如果超出了缓冲长度，就无法保留当前的任务了，<strong>阻塞队列通过阻塞可以保留住当前想要继续入队的任务</strong>。</li>
+<li>阻塞队列可以<strong>保证任务队列中没有任务时阻塞获取任务的线程，使得线程进入wait状态，释放cpu资源。</strong> </li>
+<li>阻塞队列自带<strong>阻塞和唤醒</strong>的功能，不需要额外处理，无任务执行时,线程池利用阻塞队列的<strong>take</strong>方法挂起，从而<strong>维持核心线程的存活、不至于一直占用cpu资源</strong></li>
+<li><strong>在创建新线程的时候，是要获取全局锁的</strong>，这个时候其它的就得阻塞，影响了整体效率。</li>
+</ol>
+<blockquote>
+<p>就好比一个企业里面有10个（core）正式工的名额，最多招10个正式工，要是任务超过正式工人数 （task &gt; core）的情况下，工厂领导（线程池）不是首先扩招工人，还是这10人，但是任务可以稍微积压一下，即先放到队列去（代价低）。10个正式工慢慢干，迟早会干完的，要是任务还在继续增加，超过正式工的加班忍耐极限了（队列满了），就的招外包帮忙了（注意是临时工）要是正式工加上外包还是不能完成任务，那新来的任务就会被领导拒绝了（线程池的拒绝策略）。</p>
+</blockquote>
+<h2 id="14、线程池中线程复用原理"><a href="#14、线程池中线程复用原理" class="headerlink" title="14、线程池中线程复用原理"></a>14、线程池中线程复用原理</h2><ol>
+<li><strong>线程池将线程和任务进行解耦</strong>，线程是线程，任务是任务，摆脱了之前通过 Thread 创建线程时的 一个线程必须对应一个任务的限制。</li>
+<li>在线程池中，同一个线程可以从阻塞队列中不断获取新任务来执行，其<strong>核心原理</strong>在于线程池对 Thread 进行了封装，并不是每次执行任务都会调用 Thread.start() 来创建新线程，而是让每个线程去 执行一个“循环任务”，在这个“循环任务”中不停检查是否有任务需要被执行，如果有则直接执行，也就是调用任务中的 run 方法，将 run 方法当成一个普通的方法执行，<strong>通过这种方式只使用固定的线程就将所有任务的 run 方法串联起来</strong>。</li>
+</ol>
+<h1 id="三、spring"><a href="#三、spring" class="headerlink" title="三、spring"></a>三、spring</h1><h2 id="1、如何实现一个IOC容器"><a href="#1、如何实现一个IOC容器" class="headerlink" title="1、如何实现一个IOC容器"></a>1、如何实现一个IOC容器</h2><ol>
+<li><strong>配置文件</strong>配置包扫描路径 </li>
+<li><strong>递归包</strong>扫描获取.class文件 </li>
+<li><strong>反射、确定</strong>需要交给IOC管理的类 </li>
+<li>对需要注入的类进行<strong>依赖注入</strong><ul>
+<li>配置文件中指定需要扫描的包路径 </li>
+<li>定义一些注解，分别表示访问控制层、业务服务层、数据持久层、依赖注入注解、获取配置文件注解</li>
+<li>从配置文件中获取需要扫描的包路径，获取到当前路径下的文件信息及文件夹信息，我们将当前路径下所有以.class结尾的文件添加到一个Set集合中进行存储</li>
+<li>遍历这个set集合，获取在类上有指定注解的类，并将其交给IOC容器，定义一个安全的Map用来存储这些对象 </li>
+<li>遍历这个IOC容器，获取到每一个类的实例，判断里面是有有依赖其他的类的实例，然后进行递归注入</li>
+</ul>
+</li>
+</ol>
+<h2 id="2、spring是什么？"><a href="#2、spring是什么？" class="headerlink" title="2、spring是什么？"></a>2、spring是什么？</h2><ol>
+<li>轻量级的开源的J2EE框架。<strong>它是一个容器框架，用来装javabean</strong>（java对象），<strong>中间层框架（万能胶）可以起一个连接作用</strong>，比如说把Struts和hibernate粘合在一起运用，可以让我们的企业开发更快、更简洁</li>
+<li>Spring是一个轻量级的<strong>控制反转（IoC)和面向切面（AOP）</strong>的容器框架<ul>
+<li>从<strong>大小与开销</strong>两方面而言Spring都是轻量级的。</li>
+<li>通过<strong>控制反转(IoC)<strong>的技术达到</strong>松耦合</strong>的目的</li>
+<li>提供了<strong>面向切面</strong>编程的丰富支持，<strong>允许通过分离应用的业务逻辑与系统级服务进行内聚性的开发</strong></li>
+<li><strong>包含并管理</strong>应用对象(Bean)的<strong>配置和生命周期</strong>，这个意义上是一个容器。</li>
+<li>将简单的组件配置、<strong>组合</strong>成为复杂的应用，这个意义上是一个框架。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3、谈谈你对AOP的理解"><a href="#3、谈谈你对AOP的理解" class="headerlink" title="3、谈谈你对AOP的理解"></a>3、谈谈你对AOP的理解</h2><ol>
+<li>系统是由许多不同的组件所组成的<strong>，每一个组件各负责一块特定功能</strong>。除了实现自身核心功能之外，这些组件还经常承担着额外的职责。例如日志、事务管理和安全这样的核心服务经常融入到自身具有核心业务逻辑的组件中去。<strong>这些系统服务经常被称为横切关注点</strong>，因为它们会跨越系统的多个组件。 </li>
+<li><strong>当我们需要为分散的对象引入公共行为的时候</strong>，OOP则显得无能为力。也就是说，OOP允许你定义从上到下的关系，但并不适合定义从左到右的关系。例如日志功能。 </li>
+<li><strong>日志代码往往水平地散布在所有对象层次中，而与它所散布到的对象的核心功能毫无关系。</strong> 在OOP设计中，它导致了大量代码的重复，而不利于各个模块的重用。 </li>
+<li>AOP：将程序中的<strong>交叉业务逻辑</strong>（比如安全，日志，事务等）<strong>，封装成一个切面，然后注入到目标对象</strong> （具体业务逻辑）中去。AOP可以对<strong>某个</strong>对象或<strong>某些</strong>对象<strong>的功能</strong>进行增强，比如对象中的方法进行增强，&#x3D;&#x3D;可以在执行某个方法之前额外的做一些事情，在某个方法执行之后额外的做一些事情&#x3D;&#x3D;</li>
+</ol>
+<h2 id="4、谈谈你对IOC的理解"><a href="#4、谈谈你对IOC的理解" class="headerlink" title="4、谈谈你对IOC的理解"></a>4、谈谈你对IOC的理解</h2><ol>
+<li>容器概念、控制反转、依赖注入：<ul>
+<li><strong>ioc容器</strong>：实际上就是个<strong>map（key，value）</strong>，<strong>里面存的是各种对象</strong>（在xml里配置的bean节点、 @repository、@service、@controller、@component），在项目启动的时候会读取配置文件里面的<strong>bean</strong>节点，根据<strong>全限定类名</strong>使用<strong>反射</strong>创建对象放到map里、扫描到打上上述注解的类还是通过反射创建对象放到map里。 </li>
+<li>这个时候map里就有各种对象了，接下来我们在代码里需要用到里面的对象时，再<strong>通过DI注入</strong> （autowired、resource等注解，xml里bean节点内的ref属性，项目启动的时候会读取xml节点ref属性根据id注入，也会扫描这些注解，根据类型或id注入；id就是对象名）。</li>
+</ul>
+</li>
+<li>控制反转：<ul>
+<li>没有引入IOC容器之前，对象A依赖于对象B，那么对象A在初始化或者运行到某一点的时候，自己必须主动去创建对象B或者使用已经创建的对象B。无论是创建还是使用对象B，<strong>控制权都在自己手上。</strong> </li>
+<li>引入IOC容器之后，对象A与对象B之间失去了直接联系，当对象A运行到需要对象B的时候，IOC容器会主动创建一个对象B<strong>注入</strong>到对象A需要的地方。</li>
+<li>通过前后的对比，不难看出来：<strong>对象A获得依赖对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了</strong>，这就是“控制反转”这个名称的由来。 </li>
+<li>全部对象的控制权全部上缴给“第三方”IOC容器，所以，IOC容器成了整个系统的关键核心，<strong>它起到了一 种类似“粘合剂”的作用</strong>，把系统中的所有对象粘合在一起发挥作用，<strong>如果没有这个“粘合剂”，对象与对象之间会彼此失去联系</strong>，这就是有人把IOC容器比喻成“粘合剂”的由来。</li>
+</ul>
+</li>
+<li>依赖注入<ul>
+<li>“获得依赖对象的过程被反转了”。<strong>控制被反转之后，获得依赖对象的过程由自身管理变为了由IOC容器主动注入。</strong>&#x3D;&#x3D;依赖注入是实现IOC的方法，就是由IOC容器在运行期间，动态地将某种依赖关系注入到对象之中。&#x3D;&#x3D;</li>
+</ul>
+</li>
+</ol>
+<h2 id="5、BeanFactory和ApplicationContext有什么区别？"><a href="#5、BeanFactory和ApplicationContext有什么区别？" class="headerlink" title="5、BeanFactory和ApplicationContext有什么区别？"></a>5、BeanFactory和ApplicationContext有什么区别？</h2><ol>
+<li><p>ApplicationContext是BeanFactory的子接口 </p>
+</li>
+<li><p>ApplicationContext提供了更完整的功能：</p>
+<p>①继承MessageSource，因此<strong>支持国际化</strong>。 </p>
+<p>②<strong>统一的资源文件访问方式</strong>。 </p>
+<p>③<strong>提供在监听器中注册bean的事件。</strong> </p>
+<p>④<strong>同时加载多个配置文件。</strong> </p>
+<p>⑤<strong>载入多个（有继承关系）上下文</strong> ，使得每一个上下文都专注于一个特定的层次，比如应用的web层。</p>
+<ul>
+<li><strong>BeanFactroy</strong>采用的是<strong>延迟加载形式</strong>来注入Bean的，即只有在使用到某个Bean时(调用 getBean())，才对该Bean进行加载实例化。这样，我们就不能发现一些存在的Spring的配置问 题。如果Bean的某一个属性没有注入，BeanFacotry加载后，直至第一次使用调用getBean方法才会抛出异常。</li>
+<li><strong>ApplicationContext</strong>，它是<strong>在容器启动</strong>时，<strong>一次性创建了所有的Bean</strong>。这样，在容器启动时，我 们就可以发现Spring中存在的配置错误，这样有利于检查所依赖属性是否注入。 <strong>ApplicationContext启动后</strong>预载入所有的<strong>单实例Bean</strong>，通过预载入单实例bean ,确保当你需要的时候，你就不用等待，因为它们已经创建好了。 </li>
+<li>相对于基本的<strong>BeanFactory</strong>，<strong>ApplicationContext</strong> 唯一的<strong>不足</strong>是占用内存空间。当应用程序配置 Bean较多时，程序启动较慢。 </li>
+<li>BeanFactory通常以编程的方式被创建，<strong>ApplicationContext还能以声明的方式创建</strong>，如使用 ContextLoader。 </li>
+<li>BeanFactory和ApplicationContext都支持BeanPostProcessor、BeanFactoryPostProcessor的使用，但两者之间的区别是：<strong>BeanFactory需要手动注册，而ApplicationContext则是自动注册。</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="6、描述一下Spring-Bean的生命周期？"><a href="#6、描述一下Spring-Bean的生命周期？" class="headerlink" title="6、描述一下Spring Bean的生命周期？"></a>6、描述一下Spring Bean的生命周期？</h2><ol>
+<li><strong>解析类</strong>得到BeanDefinition </li>
+<li>如果有多个构造方法，则要<strong>推断构造方法</strong> </li>
+<li>确定好构造方法后，<strong>进行实例化得到一个对象</strong></li>
+<li>对对象中的加了**@Autowired注解<strong>的属性</strong>进行属性填充** </li>
+<li><strong>回调Aware方法</strong>，比如BeanNameAware，BeanFactoryAware </li>
+<li><strong>调用BeanPostProcessor的初始化前的方法</strong> </li>
+<li><strong>调用初始化方法</strong> </li>
+<li><strong>调用</strong>BeanPostProcessor的<strong>初始化后的方法</strong>，<strong>在这里会进行AOP</strong> </li>
+<li><strong>如果当前创建的bean是单例的则会把bean放入单例池</strong> </li>
+<li><strong>使用bean</strong> </li>
+<li><strong>Spring容器关闭时调用DisposableBean中destory()方法</strong></li>
+</ol>
+<h2 id="7、解释下Spring支持的几种bean的作用域。"><a href="#7、解释下Spring支持的几种bean的作用域。" class="headerlink" title="7、解释下Spring支持的几种bean的作用域。"></a>7、解释下Spring支持的几种bean的作用域。</h2><ul>
+<li><strong>singleton</strong>：默认，<strong>每个容器中只有一个bean的实例</strong>，单例的模式由BeanFactory自身来维护。该对象的生命周期是与Spring IOC容器一致的（但在第一次被注入时才会创建）。 </li>
+<li><strong>prototype</strong>：为每一个bean请求提供一个实例。<strong>在每次注入时都会创建一个新的对象</strong> </li>
+<li><strong>request</strong>：bean被定义为在每个HTTP请求中创建一个单例对象，也就是说在<strong>单个请求中都会复用这一个单例对象</strong>。 </li>
+<li><strong>session</strong>：与request范围类似，<strong>确保每个session中有一个bean的实例</strong>，在session过期后，bean 会随之失效。 </li>
+<li><strong>application</strong>：<strong>bean被定义为在ServletContext的生命周期中复用一个单例对象。</strong> </li>
+<li><strong>websocket</strong>：bean被定义为在websocket的生命周期中复用一个单例对象。</li>
+<li><strong>global-session</strong>：全局作用域，global-session和Portlet应用相关。当你的应用部署在Portlet容器中工作时，它包含很多portlet。如果你想要声明让所有的portlet共用全局的存储变量的话，那么 这全局变量需要存储在global-session中。<strong>全局作用域与Servlet中的session作用域效果相同。</strong></li>
+</ul>
+<h2 id="8、Spring框架中的单例Bean是线程安全的么？"><a href="#8、Spring框架中的单例Bean是线程安全的么？" class="headerlink" title="8、Spring框架中的单例Bean是线程安全的么？"></a>8、Spring框架中的单例Bean是线程安全的么？</h2><ol>
+<li>Spring中的Bea<strong>n默认是单例模式</strong>的，<strong>框架并没有对bean进行多线程的封装处理。</strong> </li>
+<li><strong>如果Bean是有状态的</strong>，那就需要<strong>开发人员自己</strong>来<strong>进行线程安全的保证</strong>，最简单的办法就是改变bean的作用域 <strong>把 “singleton”改为’‘protopyte’</strong> ，这样每次请求Bean就相当于是 new Bean()， 这样就可以保证线程的安全了。<ul>
+<li><strong>有状态</strong>就是有数据存储功能 </li>
+<li><strong>无状态</strong>就是不会保存数据，controller、service和dao层本身并不是线程安全的，只是如果只是调用里面的方法，而且多线程调用一个实例的方法，会在内存中复制变量，这是自己的线程的工作内存，是安全的。</li>
+</ul>
+</li>
+<li><strong>Dao会操作数据库Connection</strong>，Connection是带有状态的，比如说数据库事务<strong>，Spring的事务管理器使用Threadlocal为不同线程维护了一套独立的connection副本</strong>，保证线程之间不会互相影响（Spring 是如何保证事务获取同一个Connection的）</li>
+<li><strong>不要在bean中声明任何有状态的实例变量或类变量</strong>，如果必须如此，那么就<strong>使用ThreadLocal把变量变为线程私有的</strong>，如果bean的实例变量或类变量需要在多个线程之间<strong>共享</strong>，那么就<strong>只能使用 synchronized、lock、CAS等这些实现线程同步的方法了</strong>。</li>
+</ol>
+<h2 id="9、Spring-框架中都用到了哪些设计模式？"><a href="#9、Spring-框架中都用到了哪些设计模式？" class="headerlink" title="9、Spring 框架中都用到了哪些设计模式？"></a>9、Spring 框架中都用到了哪些设计模式？</h2><ol>
+<li><strong>简单工厂：</strong>由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类。</li>
+</ol>
+<blockquote>
+<p>Spring中的BeanFactory就是简单工厂模式的体现，根据传入一个唯一的标识来获得Bean对象，但是否是在<strong>传入参数后创建还是传入参数前</strong>创建这个要根据具体情况来定。</p>
+</blockquote>
+<ol start="2">
+<li><strong>工厂方法：</strong></li>
+</ol>
+<blockquote>
+<p><strong>实现了FactoryBean接口的bean是一类叫做factory的bean</strong>。其特点是，spring会在使用&#x3D;&#x3D;getBean()&#x3D;&#x3D;调用获得该bean时，会自动调用该bean的&#x3D;&#x3D;getObject()&#x3D;&#x3D;方法，<strong>所以返回的不是factory这个bean，而是这个 bean.getOjbect()方法的返回值。</strong></p>
+</blockquote>
+<ol start="3">
+<li><strong>单例模式：</strong>保证一个类仅有一个实例，并提供一个访问它的全局访问点BeanFactory</li>
+</ol>
+<blockquote>
+<p><strong>spring对单例的实现：</strong> spring中的单例模式完成了后半句话，即提供了全局的访问点BeanFactory。但没有从构造器级别去控制单例，这是因为<strong>spring管理的是任意的java对象</strong>。</p>
+</blockquote>
+<ol start="4">
+<li><strong>适配器模式：</strong></li>
+</ol>
+<blockquote>
+<p>Spring定义了一个适配接口，使得每一种<strong>Controller</strong>有一种对应的适配器实现类，&#x3D;&#x3D;让适配器代替controller执行相应的方法&#x3D;&#x3D;。这样在扩展Controller时，只需要增加一个适配器类就完成了SpringMVC 的扩展了。</p>
+</blockquote>
+<ol start="5">
+<li><strong>装饰器模式：</strong>动态地给一个对象<strong>添加一些额外的职责</strong>。就增加功能来说，Decorator模式相比生成子类更为灵活。</li>
+</ol>
+<blockquote>
+<p>Spring中用到的包装器模式在类名上有两种表现：一种是类名中含有&#x3D;&#x3D;Wrapper&#x3D;&#x3D;，另一种是类名中含有&#x3D;&#x3D;Decorato&#x3D;&#x3D;</p>
+</blockquote>
+<ol start="6">
+<li><strong>动态代理：</strong></li>
+</ol>
+<blockquote>
+<p>切面在应用运行的时刻被织入。一般情况下，在织入切面时，<strong>AOP容器会为目标对象创建动态的创建一个代理对象</strong>。SpringAOP就是以这种方式织入切面的。 </p>
+<p><strong>织入：</strong>把切面应用到目标对象并创建新的代理对象的过程。</p>
+</blockquote>
+<ol start="7">
+<li><strong>观察者模式：</strong></li>
+</ol>
+<blockquote>
+<p>spring的事件驱动模型使用的是观察者模式 ，<strong>Spring中Observer模式常用的地方是listener的实现。</strong></p>
+</blockquote>
+<ol start="8">
+<li><strong>策略模式：</strong></li>
+</ol>
+<blockquote>
+<p><strong>Spring框架的资源访问Resource接口</strong>。该接口提供了更强的资源访问能力，Spring 框架本身大量使用了 Resource 接口来访问底层资源。</p>
+</blockquote>
+<ol start="9">
+<li>模板方法：父类定义了骨架（调用哪些方法及顺序），某些特定方法由子类实现。 <strong>最大的好处：</strong>代码复用，减少重复代码。除了子类要实现的特定方法，其他方法及方法调用顺序都在父类中预先写好了。</li>
+</ol>
+<h2 id="10、Spring事务的实现方式和原理以及隔离级别？"><a href="#10、Spring事务的实现方式和原理以及隔离级别？" class="headerlink" title="10、Spring事务的实现方式和原理以及隔离级别？"></a>10、Spring事务的实现方式和原理以及隔离级别？</h2><ol>
+<li><p>在使用Spring框架时，可以有<strong>两种使用事务</strong>的方式，一种是编程式的，一种是申明式的， <strong>@Transactional</strong>注解就是申明式的。 </p>
+</li>
+<li><p>首先，事务这个概念是数据库层面的，<strong>Spring只是基于数据库中的事务进行了扩展</strong>，以及提供了一些能让程序员更加方便操作事务的方式。 </p>
+</li>
+<li><p>比如我们可以通过在某个方法上增加**@Transactional<strong>注解，就可以开启事务，</strong>这个方法中所有的sql都会在一个事务中执行，统一成功或失败。** </p>
+</li>
+<li><p>在一个方法上加了@Transactional注解后，Spring会基于这个类生成一个代理对象，会将这个代理对象作为bean，当在使用这个代理对象的方法时，如果这个方法上<strong>存在@Transactional注解</strong>，那么代理逻辑会先把事务的<strong>自动提交设置为false</strong>，然后再去执行原本的业务逻辑方法，如果执行业务逻辑方法没有出现异常，那么代理逻辑中就会将事务进行提交，如果执行业务逻辑方法出现了异常，那么则会将事务进行回滚。 </p>
+</li>
+<li><p>当然，<strong>针对哪些异常回滚事务是可以配置的</strong>，可以利用@Transactional注解中的<strong>rollbackFor</strong>属性进行配置，默认情况下会对RuntimeException和Error进行回滚。</p>
+</li>
+<li><p><strong>spring事务隔离级别</strong>就是数据库的隔离级别：外加一个默认级别 </p>
+<ul>
+<li><p>read uncommitted（未提交读） </p>
+</li>
+<li><p>read committed（提交读、不可重复读） </p>
+</li>
+<li><p>repeatable read（可重复读） </p>
+</li>
+<li><p>serializable（可串行化）</p>
+</li>
+<li><blockquote>
+<p>数据库的配置隔离级别是Read Commited,而Spring配置的隔离级别是Repeatable Read，请问这时隔离 级别是以哪一个为准？ </p>
+<p>&#x3D;&#x3D;以Spring配置的为准，如果spring设置的隔离级别数据库不支持，效果取决于数据库&#x3D;&#x3D;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="11、spring事务传播机制"><a href="#11、spring事务传播机制" class="headerlink" title="11、spring事务传播机制"></a>11、spring事务传播机制</h2><ol>
+<li>多个事务方法相互调用时,<strong>事务如何在这些方法间传播</strong></li>
+</ol>
+<blockquote>
+<p>方法A是一个事务的方法，方法A执行过程中调用了方法B，那么方法B有无事务以及方法B对事务的要求不同都会对方法A的事务具体执行造成影响，同时方法A的事务对方法B的事务执行也有影响，<strong>这种影响具体是什么就由两个方法所定义的事务传播类型所决定。</strong></p>
+</blockquote>
+<ol start="2">
+<li><strong>REQUIRED</strong>(Spring默认的事务传播类型)：<strong>如果当前没有事务，则自己新建一个事务</strong>，如果当前存在事务，则加入这个事务</li>
+<li><strong>SUPPORTS</strong>：当前存在事务，则加入当前事务，<strong>如果当前没有事务，就以非事务方法执行</strong></li>
+<li><strong>MANDATORY</strong>：当前存在事务，则加入当前事务，<strong>如果当前事务不存在，则抛出异常</strong></li>
+<li><strong>REQUIRES_NEW</strong>：创建一个新事务，如果<strong>存在当前事务，则挂起该事务。</strong> </li>
+<li><strong>NOT_SUPPORTED</strong>：<strong>以非事务方式执行</strong>,如果当前存在事务，则挂起当前事务 </li>
+<li><strong>NEVER</strong>：不使用事务，如果<strong>当前事务存在，则抛出异常</strong> </li>
+<li><strong>NESTED</strong>：<strong>如果当前事务存在，则在嵌套事务中执行</strong>，否则REQUIRED的操作一样（开启一个事务）</li>
+<li><strong>NESTED和REQUIRES_NEW的区别:</strong> <ul>
+<li><strong>REQUIRES_NEW</strong>是新建一个事务并且新开启的这个事务与原有事务无关，而<strong>NESTED</strong>则是当前存在事务时（我们把当前事务称之为父事务）会开启一个嵌套事务（称之为一个子事务）。 <strong>在NESTED情况下父事务回滚时， 子事务也会回滚</strong>，而<strong>在REQUIRES_NEW情况下，原有事务回滚，不会影响新开启的事务</strong>。</li>
+</ul>
+</li>
+<li><strong>NESTED和REQUIRED的区别:</strong> <ul>
+<li><strong>REQUIRED</strong>情况下，调用方存在事务时，则<strong>被调用方和调用方使用同一事务</strong>，那么被调用方出现异常时，由于共用一个事务，所以无论调用方是否catch其异常，事务都会回滚，而在<strong>NESTED</strong>情况下，被调用方发生异常时，调用方可以<strong>catch</strong>其异常，这样<strong>只有子事务回滚</strong>，<strong>父事务不受影响</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="12、spring事务什么时候会失效"><a href="#12、spring事务什么时候会失效" class="headerlink" title="12、spring事务什么时候会失效?"></a>12、spring事务什么时候会失效?</h2><ol>
+<li><strong>spring事务的原理是AOP</strong>，进行了切面增强，那么失效的根本原因是这个AOP不起作用了！常见情况有如下几种： <ul>
+<li><strong>发生自调用</strong>，类里面使用this调用本类的方法（this通常省略），此时这个<strong>this对象不是代理类，而是UserService对象本身！</strong> 解决方法很简单，让那个this变成UserService的代理类即可！ </li>
+<li><strong>方法不是public的</strong>：**@Transactional 只能用于 public 的方法上<strong>，否则事务不会失效，</strong>如果要用在非public方法上，可以开启 &#x3D;&#x3D;AspectJ&#x3D;&#x3D; 代理模式。**</li>
+<li><strong>数据库不支持事务</strong> </li>
+<li><strong>没有被spring管理</strong> </li>
+<li><strong>异常被吃掉，事务不会回滚</strong>(或者抛出的异常没有被定义，默认为RuntimeException)</li>
+</ul>
+</li>
+</ol>
+<h2 id="13、什么是bean的自动装配，有哪些方式？"><a href="#13、什么是bean的自动装配，有哪些方式？" class="headerlink" title="13、什么是bean的自动装配，有哪些方式？"></a>13、什么是bean的自动装配，有哪些方式？</h2><ol>
+<li>开启<strong>自动装配</strong>，只需要在<strong>xml</strong>配置文件中定义“<strong>autowire</strong>”属性</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cutomer&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.xxx.xxx.Customer&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>autowire属性有<strong>五种</strong>装配的方式：</li>
+</ol>
+<ul>
+<li>no – 缺省情况下，自动配置是通过“ref”属性手动设定 。</li>
+</ul>
+<blockquote>
+<p>&#x3D;&#x3D;手动装配&#x3D;&#x3D;：以value或ref的方式明确指定属性值都是手动装配。 </p>
+<p>&#x3D;&#x3D;需要通过‘ref’属性来连接bean。&#x3D;&#x3D;</p>
+</blockquote>
+<ul>
+<li>byName-<strong>根据bean的属性名称</strong>进行自动装配。</li>
+</ul>
+<blockquote>
+<p>Cutomer的属性名称是person，Spring会将bean id为person的bean通过setter方法进行自动装配。</p>
+<bean id="cutomer" class="com.xxx.xxx.Cutomer" autowire="byName"/>
+<bean id="person" class="com.xxx.xxx.Person"/>
+</blockquote>
+<ul>
+<li>byType-<strong>根据bean的类型</strong>进行自动装配。</li>
+</ul>
+<blockquote>
+<p>Cutomer的属性person的类型为Person，Spirng会将Person类型通过setter方法进行自动装配。</p>
+<bean id="cutomer" class="com.xxx.xxx.Cutomer" autowire="byType"/>
+<bean id="person" class="com.xxx.xxx.Person"/>
+</blockquote>
+<ul>
+<li>constructor-<strong>类似byType</strong>，不过是应用于构造器的参数。<strong>如果一个bean与构造器参数的类型形同，则进行自动装配</strong>，否则导致异常。</li>
+</ul>
+<blockquote>
+<p>Cutomer构造函数的参数person的类型为Person，Spirng会将Person类型通过构造方法进行自动装配。</p>
+<bean id="cutomer" class="com.xxx.xxx.Cutomer" autowire="construtor"/>
+<bean id="person" class="com.xxx.xxx.Person"/>
+</blockquote>
+<ul>
+<li><strong>autodetect</strong>-如果有默认的构造器，则通过constructor方式进行自动装配，否则使用byType方式 进行自动装配。</li>
+</ul>
+<blockquote>
+<p>如果有默认的构造器，则通过constructor方式进行自动装配，否则使用byType方式进行自动装配。</p>
+</blockquote>
+<p>@Autowired自动装配bean，可以在字段、setter方法、构造函数上使用。</p>
+<h1 id="四、springmvc"><a href="#四、springmvc" class="headerlink" title="四、springmvc"></a>四、springmvc</h1><h2 id="1、Spring-Boot、Spring-MVC-和-Spring-有什么区别"><a href="#1、Spring-Boot、Spring-MVC-和-Spring-有什么区别" class="headerlink" title="1、Spring Boot、Spring MVC 和 Spring 有什么区别"></a>1、Spring Boot、Spring MVC 和 Spring 有什么区别</h2><ol>
+<li><strong>spring是一个IOC容器</strong>，用来管理Bean<strong>，使用依赖注入实现控制反转</strong>，可以很方便的整合各种框架，提供AOP机制弥补OOP的代码重复问题、更方便将不同类不同方法中的<strong>共同处理抽取成切面</strong>、自动注入给方法执行，比如日志、异常等 </li>
+<li><strong>springmvc是spring对web框架的一个解决方案</strong>，提供了一个总的前端控制器Servlet，用来接收请求， 然后定义了一套<strong>路由策略</strong>（url到handle的映射）及<strong>适配执行handle</strong>，将handle结果使用视图解析技术生成视图展现给前端 </li>
+<li><strong>springboot是spring提供的一个快速开发工具包</strong>，让程序员能更方便、更快速的开发spring+springmvc 应用，简化了配置（约定了默认配置），整合了一系列的解决方案（starter机制）、redis、 mongodb、es，可以开箱即用</li>
+</ol>
+<h2 id="2、SpringMVC-工作流程"><a href="#2、SpringMVC-工作流程" class="headerlink" title="2、SpringMVC 工作流程"></a>2、SpringMVC 工作流程</h2><ol>
+<li>用户发送请求至前端控制器 <strong>DispatcherServlet</strong>。 </li>
+<li>DispatcherServlet 收到请求调用 <strong>HandlerMapping</strong> 处理器映射器。 </li>
+<li>处理器映射器<strong>找到具体的处理器</strong>(可以根据 xml 配置、注解进行查找)，<strong>生成处理器及处理器拦截器</strong> (如果有则生成)一并返回给 <strong>DispatcherServlet</strong>。</li>
+<li><strong>DispatcherServlet</strong> 调用 <strong>HandlerAdapter</strong> 处理器适配器。</li>
+<li><strong>HandlerAdapter</strong> 经过适配调用具体的处理器(<strong>Controller</strong>，也叫后端控制器) </li>
+<li><strong>Controller</strong> 执行完成返回 <strong>ModelAndView</strong>。</li>
+<li><strong>HandlerAdapter</strong> 将 <strong>controller</strong> 执行结果 <strong>ModelAndView</strong> 返回给 <strong>DispatcherServlet</strong>。</li>
+<li><strong>DispatcherServlet</strong> 将 <strong>ModelAndView</strong> 传给 <strong>ViewReslover</strong> 视图解析器。</li>
+<li><strong>ViewReslover</strong> 解析后返回具体 <strong>View</strong>。</li>
+<li><strong>DispatcherServlet</strong> 根据 <strong>View</strong> 进行渲染视图（即将模型数据填充至视图中）。</li>
+<li><strong>DispatcherServlet</strong> 响应用户。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304111654953.png"
+                      alt="image-20230411165405637"
+                ></p>
+<h2 id="3、Spring-MVC的主要组件？"><a href="#3、Spring-MVC的主要组件？" class="headerlink" title="3、Spring MVC的主要组件？"></a>3、Spring MVC的主要组件？</h2><p><strong>Handler</strong>：也就是处理器。它直接应对着MVC中的<strong>C也就是Controller层</strong>，它的具体表现形式有很多，可以是类，也可以是方法。<strong>在Controller层中@RequestMapping标注的所有方法都可以看成是一个 Handler</strong>，只要可以实际处理请求就可以是Handler</p>
+<hr>
+<ol>
+<li><strong>HandlerMapping：</strong>initHandlerMappings(context)，处理器映射器，根据用户请求的资源uri来查找Handler的。在 SpringMVC中会有很多请求，<strong>每个请求都需要一个Handler处理</strong>，<strong>具体接收到一个请求之后使用哪个 Handler进行</strong>，这就是HandlerMapping需要做的事。</li>
+<li><strong>HandlerAdapter：</strong>initHandlerAdapters(context)，适配器。因为<strong>SpringMVC中的Handler可以是任意的形式，只要能处理请求就ok</strong>，但是Servlet需要的处理方法的结构却是固定的，都是<strong>以request和response为参数</strong>的方法<strong>。如何让固定的Servlet处理方法调用灵活的Handler来进行处理呢？这就是HandlerAdapter要做的事情。</strong> Handler是用来干活的工具；<strong>HandlerMapping</strong>用于根据需要干的活找到相应的工具；<strong>HandlerAdapter</strong> 是使用工具干活的人。</li>
+<li><strong>HandlerExceptionResolver：</strong>initHandlerExceptionResolvers(context)， 其它组件都是用来干活的。在干活的过程中难免会出现问题，出问题后怎么办呢？这就需要有一个专门的角色<strong>对异常情况进行处理</strong>，在SpringMVC中就是 HandlerExceptionResolver。具体来说，<strong>此组件的作用是根据异常设置ModelAndView，之后再交给 render方法进行渲染。</strong></li>
+<li><strong>ViewResolver：</strong>initViewResolvers(context)，<strong>ViewResolver用来将String类型的视图名和Locale解析为View类型的视图。</strong>View是用来渲染页面的，也就是将程序返回的参数填入模板里，生成html（也可能是其它类型） 文件。这里就有两个关键问题：<strong>使用哪个模板？用什么技术（规则）填入参数？这其实是ViewResolver 主要要做的工作</strong>，ViewResolver需要找到渲染所用的模板和所用的技术（也就是视图的类型）进行渲染，具体的渲染过程则交由不同的视图自己完成。</li>
+<li><strong>RequestToViewNameTranslator：</strong>initRequestToViewNameTranslator(context)，ViewResolver是根据ViewName查找View，但有的 Handler处理完后并没有设置View也没有设置ViewName，这时就需要从request获取ViewName了， <strong>如何从request中获取ViewName就是RequestToViewNameTranslator要做的事情了。</strong> RequestToViewNameTranslator在Spring MVC容器里<strong>只可以配置一个</strong>，所以所有request到 ViewName的转换规则都要在一个Translator里面全部实现。</li>
+<li><strong>LocaleResolver：</strong>initLocaleResolver(context)， 解析视图需要两个参数：一是视图名，另一个是Locale。视图名是处理器返回的，<strong>Locale是从哪里来的？这就是LocaleResolver要做的事情。</strong>LocaleResolver用于从request 解析出Locale，<strong>Locale</strong>就是zh-cn之类，表示一个区域，<strong>有了这个就可以对不同区域的用户显示不同的结果</strong>。<strong>SpringMVC</strong>主要有<strong>两个地方</strong>用到了<strong>Locale</strong>：一是ViewResolver视图解析的时候；二是用到国际化资源或者主题的时候。</li>
+<li><strong>ThemeResolver：</strong>initThemeResolver(context)，用于解析主题。<strong>SpringMVC中一个主题对应一个properties文件</strong>，里面存放着跟当前主题相关的所有资源、如图片、css样式等。SpringMVC的主题也支持国际化，同一个主题不同区域也可以显示不同的风格。SpringMVC中跟主题相关的类有 ThemeResolver、ThemeSource 和Theme。主题是通过一系列资源来具体体现的，<strong>要得到一个主题的资源，首先要得到资源的名称，这是ThemeResolver的工作</strong>。<strong>然后通过主题名称找到对应的主题（可以理解为一个配置）文件，这是 ThemeSource的工作</strong>。最后从主题中获取资源就可以了。</li>
+<li><strong>MultipartResolver：</strong>initMultipartResolver(context)，<strong>用于处理上传请求</strong>。处理方法是将普通的request包装成 MultipartHttpServletRequest，后者可以直接调用getFile方法获取File，如果上传多个文件，还可以调用getFileMap得到FileName-&gt;File结构的Map<strong>。此组件中一共有三个方法</strong>，作用分别是判断是不是上传请求，将request包装成MultipartHttpServletRequest、处理完后清理上传过程中产生的临时资源。</li>
+<li><strong>FlashMapManager：</strong>initFlashMapManager(context)，用来管理FlashMap的，<strong>FlashMap主要用在redirect中传递参数</strong>。</li>
+</ol>
+<h1 id="五、springBoot"><a href="#五、springBoot" class="headerlink" title="五、springBoot"></a>五、springBoot</h1><h2 id="1、什么是-Spring-Boot？"><a href="#1、什么是-Spring-Boot？" class="headerlink" title="1、什么是 Spring Boot？"></a>1、什么是 Spring Boot？</h2><ol>
+<li>多年来，随着新功能的增加，spring变得越来越复杂。只需访问<a class="link"   target="_blank" rel="noopener" href="https://spring.io/projects%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%88%91%E4%BB%AC%E5%B0%B1%E4%BC%9A%E7%9C%8B%E5%88%B0%E5%8F%AF%E4%BB%A5%E5%9C%A8%E6%88%91%E4%BB%AC%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E6%89%80%E6%9C%89Spring%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%8D%E5%90%8C%E5%8A%9F%E8%83%BD%E3%80%82%E5%A6%82%E6%9E%9C%E5%BF%85%E9%A1%BB%E5%90%AF%E5%8A%A8%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84Spring%E9%A1%B9%E7%9B%AE%EF%BC%8C%E6%88%91%E4%BB%AC%E5%BF%85%E9%A1%BB%E6%B7%BB%E5%8A%A0%E6%9E%84%E5%BB%BA%E8%B7%AF%E5%BE%84%E6%88%96%E6%B7%BB%E5%8A%A0Maven%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%EF%BC%8C%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E6%B7%BB%E5%8A%A0spring%E9%85%8D%E7%BD%AE%E3%80%82%E5%9B%A0%E6%AD%A4%EF%BC%8C**%E5%BC%80%E5%A7%8B%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84spring%E9%A1%B9%E7%9B%AE%E9%9C%80%E8%A6%81%E5%BE%88%E5%A4%9A%E5%8A%AA%E5%8A%9B**%EF%BC%8C%E5%9B%A0%E4%B8%BA%E6%88%91%E4%BB%AC%E7%8E%B0%E5%9C%A8%E5%BF%85%E9%A1%BB%E4%BB%8E%E5%A4%B4%E5%BC%80%E5%A7%8B%E5%81%9A%E6%89%80%E6%9C%89%E4%BA%8B%E6%83%85%E3%80%82" >https://spring.io/projects页面，我们就会看到可以在我们的应用程序中使用的所有Spring项目的不同功能。如果必须启动一个新的Spring项目，我们必须添加构建路径或添加Maven依赖关系，配置应用程序服务器，添加spring配置。因此，**开始一个新的spring项目需要很多努力**，因为我们现在必须从头开始做所有事情。<i class="fas fa-external-link-alt"></i></a></li>
+<li>Spring Boot是解决这个问题的方法。Spring Boot已经建立在现有spring框架之上。使用spring启动，我们避免了之前我们必须做的所有样板代码和配置。因此，<strong>Spring Boot可以帮助我们以最少的工作量，更加健壮地使用现有的Spring功能</strong></li>
+</ol>
+<h2 id="2、为什么要用SpringBoot"><a href="#2、为什么要用SpringBoot" class="headerlink" title="2、为什么要用SpringBoot"></a>2、为什么要用SpringBoot</h2><ol>
+<li><strong>独立运行：</strong>Spring Boot而且内嵌了各种servlet容器，Tomcat、Jetty等，现在不再需要打成war包部署到容器中，<strong>Spring Boot只要打成一个可执行的 jar包就能独立运行</strong>，所有的依赖包都在一个jar包内。 </li>
+<li><strong>简化配置：</strong> spring-boot-starter-web启动器自动依赖其他组件，<strong>简少了maven的配置</strong>。</li>
+<li><strong>自动配置：</strong>Spring Boot能根据当前类路径下的类、jar包来<strong>自动配置bean</strong>，如添加一个spring-boot-starter-web启动器就能拥有web的功能，无需其他配置。 </li>
+<li><strong>无代码生成和XML配置：</strong>Spring Boot配置过程中<strong>无代码生成，也无需XML配置文件就能完成所有配置工作</strong>，这一切都是借助于条件注解完成的，这也是Spring4.x的核心功能之一。</li>
+<li><strong>应用监控：</strong>Spring Boot提供一系列端点可以监控服务及应用，做健康检测</li>
+</ol>
+<h2 id="3、Spring-Boot-有哪些优点？"><a href="#3、Spring-Boot-有哪些优点？" class="headerlink" title="3、Spring Boot 有哪些优点？"></a>3、Spring Boot 有哪些优点？</h2><ol>
+<li>减少开发，测试时间和努力。</li>
+<li>使用 JavaConfig 有助于避免使用 XML。</li>
+<li>避免大量的 Maven 导入和各种版本冲突。</li>
+<li>提供意见发展方法。 </li>
+<li>通过提供默认值快速开始开发。</li>
+<li><strong>没有单独的 Web 服务器需要</strong>。这意味着你不再需要启动 Tomcat，Glassfish或其他任何东西。</li>
+<li><strong>需要更少的配置</strong> 因为没有 web.xml 文件。只需添加用@ Configuration 注释的类，然后添加用@Bean 注释的方法，Spring 将自动加载对象并像以前一样对其进行管理。您甚至可以将@Autowired 添加到 bean 方法中，以使 Spring 自动装入需要的依赖关系中。 </li>
+<li>基于环境的配置使用这些属性，您可以将您正在使用的环境传递到应用程序：-Dspring.profiles.active &#x3D; {enviornment}。在加载主应 用程序属性文件后，Spring 将在（application{environment} .properties）中加载后续的应用程序属性文件。</li>
+</ol>
+<h2 id="4、Spring-Boot-自动配置原理？"><a href="#4、Spring-Boot-自动配置原理？" class="headerlink" title="4、Spring Boot 自动配置原理？"></a>4、Spring Boot 自动配置原理？</h2><ol>
+<li>@Import + @Configuration + Spring spi</li>
+<li>自动配置类由各个starter提供，<strong>使用@Configuration + @Bean定义配置类</strong>，放到METAINF&#x2F;spring.factories下</li>
+<li>使用<strong>Spring spi****扫描</strong>META-INF&#x2F;spring.factories下的配置类 </li>
+<li>使用**@Import导入**自动配置类</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304111736514.png"
+                      alt="image-20230411173651260"
+                ></p>
+<h2 id="5、如何理解-Spring-Boot-中的-Starter"><a href="#5、如何理解-Spring-Boot-中的-Starter" class="headerlink" title="5、如何理解 Spring Boot 中的 Starter"></a>5、如何理解 Spring Boot 中的 Starter</h2><ol>
+<li><strong>Starters是什么：</strong> Starters可以理解为<strong>启动器</strong>，它包含了一系列可以集成到应用里面的依赖包，你可以一站式集成Spring及其他技术，而不需要到处找示例代 码和依赖包。如你想使用Spring JPA访问数据库，只要加入springboot-starter-data-jpa启动器依赖就能使用了。Starters包含了许多项目中 需要用到的依赖，它们能快速持续的运行，都是一系列得到支持的管理传递性依赖。</li>
+<li>使用spring + springmvc使用，如果需要引入mybatis等框架，需要到xml中定义mybatis需要的bean </li>
+<li><strong>starter就是定义一个starter的jar包</strong>，写一个**@Configuration<strong>配置类、将这些</strong>bean<strong>定义在里面，然后在 <strong>starter</strong>包的</strong>META-INF&#x2F;spring.factories**中写入该配置类，springboot会按照约定来加载该配置类 </li>
+<li>开发人员只需要将相应的starter包依赖进应用，进行相应的属性配置（使用默认配置时，不需要配置），就可以直接进行代码开发，使用对应的功能了，比如mybatis-spring-boot–starter，springboot-starter-redis</li>
+</ol>
+<h2 id="6、什么是嵌入式服务器？为什么要使用嵌入式服务器"><a href="#6、什么是嵌入式服务器？为什么要使用嵌入式服务器" class="headerlink" title="6、什么是嵌入式服务器？为什么要使用嵌入式服务器?"></a>6、什么是嵌入式服务器？为什么要使用嵌入式服务器?</h2><ol>
+<li>节省了下载安装tomcat，应用也不需要再打war包，然后放到webapp目录下再运行 </li>
+<li>只需要一个安装了 Java 的虚拟机，就可以直接在上面部署应用程序了 </li>
+<li><strong>springboot已经内置了tomcat.jar，运行main方法时会去启动tomcat，并利用tomcat的spi机制加载springmvc</strong></li>
+</ol>
+<h2 id="7、Spring-Boot中常⽤注解及其底层实现"><a href="#7、Spring-Boot中常⽤注解及其底层实现" class="headerlink" title="7、Spring Boot中常⽤注解及其底层实现"></a>7、Spring Boot中常⽤注解及其底层实现</h2><ol>
+<li><p><strong>@SpringBootApplication注解：</strong>这个注解标识了⼀个SpringBoot⼯程，它实际上是另外三个注解的组合，这三个注解是： </p>
+<ul>
+<li><strong>@SpringBootConfiguration：</strong>这个注解实际就是⼀个@Configuration，表示启动类也是⼀个配置类 </li>
+<li><strong>@EnableAutoConfiguration：</strong>向Spring容器中导⼊了⼀个Selector，⽤来加载ClassPath下 SpringFactories中所定义的⾃动配置类，将这些⾃动加载为配置Bean</li>
+<li><strong>@ComponentScan：</strong>标识扫描路径，因为默认是没有配置实际扫描路径，所以SpringBoot扫描的路径是启动类所在的当前⽬录</li>
+</ul>
+<ol start="2">
+<li><strong>@Bean注解：</strong>⽤来定义Bean，类似于XML中的标签，Spring在启动时，会对加了@Bean注解的⽅法进⾏解析，将⽅法的名字做为beanName，并通过执⾏⽅法得到bean对象 </li>
+<li><strong>@Controller、@Service、@ResponseBody、@Autowired</strong></li>
+</ol>
+</li>
+</ol>
+<h2 id="8、Spring-Boot是如何启动Tomcat的"><a href="#8、Spring-Boot是如何启动Tomcat的" class="headerlink" title="8、Spring Boot是如何启动Tomcat的"></a>8、Spring Boot是如何启动Tomcat的</h2><ol>
+<li>⾸先，SpringBoot在启动时会先创建⼀个Spring容器 </li>
+<li>在创建Spring容器过程中，会利⽤**@ConditionalOnClass<strong>技术来判断当前</strong>classpath**中是否存在 Tomcat依赖，如果存在则会⽣成⼀个启动Tomcat的Bean</li>
+<li>Spring容器创建完之后，就会获取启动Tomcat的Bean，并创建Tomcat对象，并绑定端⼝等，然后启动Tomcat</li>
+</ol>
+<h2 id="9、Spring-Boot中配置⽂件的加载顺序是怎样的？"><a href="#9、Spring-Boot中配置⽂件的加载顺序是怎样的？" class="headerlink" title="9、Spring Boot中配置⽂件的加载顺序是怎样的？"></a>9、Spring Boot中配置⽂件的加载顺序是怎样的？</h2><p>优先级从⾼到低，⾼优先级的配置覆盖低优先级的配置，所有配置会形成互补配置。 </p>
+<ol>
+<li><strong>命令行参数</strong>。所有的配置都可以在命令⾏上进⾏指定；</li>
+<li><strong>Java系统属性</strong>（System.getProperties()）；</li>
+<li><strong>操作系统环境变量</strong> ； </li>
+<li><strong>jar包外部的</strong>application-{profile}.properties或application.yml(带spring.profile)配置⽂件 </li>
+<li><strong>jar包内部</strong>的application-{profile}.properties或application.yml(带spring.profile)配置⽂件 再来加载不带profile </li>
+<li>jar包外部的application.properties或application.yml(不带spring.profile)配置⽂件 </li>
+<li>jar包内部的application.properties或application.yml(不带spring.profile)配置⽂件 </li>
+<li><strong>@Configuration注解类上的@PropertySource</strong></li>
+</ol>
+<h2 id="10、Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？"><a href="#10、Spring-Boot-的核心注解是哪个？它主要由哪几个注解组成的？" class="headerlink" title="10、Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？"></a>10、Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？</h2><p>启动类上面的注解是**@SpringBootApplication**，它也是 Spring Boot 的核心注解，主要组合包含了以下 3 个注解：  </p>
+<ul>
+<li>@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。 </li>
+<li>@EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能： </li>
+<li>@SpringBootApplication(exclude &#x3D; { DataSourceAutoConfiguration.class })。 </li>
+<li>@ComponentScan：Spring组件扫描</li>
+</ul>
+<h2 id="11、运行Spring-Boot有哪几种方式"><a href="#11、运行Spring-Boot有哪几种方式" class="headerlink" title="11、运行Spring Boot有哪几种方式"></a>11、运行Spring Boot有哪几种方式</h2><ol>
+<li><strong>打包</strong>用命令或者放到容器中运行 </li>
+<li>用 <strong>Maven</strong>&#x2F;Gradle 插件运行 </li>
+<li>直接执行 <strong>main</strong> 方法运行</li>
+</ol>
+<h2 id="12、如何在Spring-Boot启动的时候运行一些特定的代码？"><a href="#12、如何在Spring-Boot启动的时候运行一些特定的代码？" class="headerlink" title="12、如何在Spring Boot启动的时候运行一些特定的代码？"></a>12、如何在Spring Boot启动的时候运行一些特定的代码？</h2><ol>
+<li>如果你想在Spring Boot启动的时候运行一些特定的代码</li>
+<li>你可以实现接口<strong>ApplicationRunner</strong>或者<strong>CommandLineRunner</strong>，这两个接口实现方式一样，它们都只提供了一个run方法。</li>
+<li><strong>CommandLineRunner</strong>：启动获取命令行参数</li>
+</ol>
+<h2 id="13、Spring-Boot-需要独立的容器运行吗？"><a href="#13、Spring-Boot-需要独立的容器运行吗？" class="headerlink" title="13、Spring Boot 需要独立的容器运行吗？"></a>13、Spring Boot 需要独立的容器运行吗？</h2><ol>
+<li>可以不需要，内置了 Tomcat&#x2F; Jetty 等容器</li>
+</ol>
+<h2 id="14、Spring-Boot中的监视器是什么？"><a href="#14、Spring-Boot中的监视器是什么？" class="headerlink" title="14、Spring Boot中的监视器是什么？"></a>14、Spring Boot中的监视器是什么？</h2><ol>
+<li><strong>Spring boot actuato</strong>r是spring启动框架中的重要功能之一。</li>
+<li>Spring boot监视器可帮助您访问<strong>生产环境中正在运行的应用程序的当前状态。</strong> </li>
+<li><strong>有几个指标必须在生产环境中进行检查和监控</strong>。即使一些外部应用程序可能正在使用这些服务来向相关人员触发警报消息。</li>
+<li>监视器模块<strong>公开了一组可直接作为HTTP URL访问的REST端点</strong>来检查状态</li>
+</ol>
+<h2 id="15、如何使用Spring-Boot实现异常处理？"><a href="#15、如何使用Spring-Boot实现异常处理？" class="headerlink" title="15、如何使用Spring Boot实现异常处理？"></a>15、如何使用Spring Boot实现异常处理？</h2><ol>
+<li>Spring提供了一种使用<strong>ControllerAdvice</strong>处理异常的非常有用的方法。 </li>
+<li>我们通过实现一个<strong>ControlerAdvice</strong>类，来处理控制器类抛出的所有异常</li>
+</ol>
+<h2 id="16、springboot常用的starter有哪些"><a href="#16、springboot常用的starter有哪些" class="headerlink" title="16、springboot常用的starter有哪些"></a>16、springboot常用的starter有哪些</h2><ol>
+<li>spring-boot-starter-web 嵌入tomcat和web开发需要servlet与jsp支持 </li>
+<li>spring-boot-starter-data-jpa 数据库支持 </li>
+<li>spring-boot-starter-data-redis redis数据库支持 </li>
+<li>spring-boot-starter-data-solr solr支持 </li>
+<li>mybatis-spring-boot-starter 第三方的mybatis集成starter</li>
+</ol>
+<h2 id="17、SpringBoot-实现热部署有哪几种方式"><a href="#17、SpringBoot-实现热部署有哪几种方式" class="headerlink" title="17、SpringBoot 实现热部署有哪几种方式"></a>17、SpringBoot 实现热部署有哪几种方式</h2><ol>
+<li>Spring Loaded </li>
+<li>Spring-boot-devtools</li>
+</ol>
+<h2 id="18、Spring-Boot-的核心配置文件有哪几个？它们的区别是什么？"><a href="#18、Spring-Boot-的核心配置文件有哪几个？它们的区别是什么？" class="headerlink" title="18、Spring Boot 的核心配置文件有哪几个？它们的区别是什么？"></a>18、Spring Boot 的核心配置文件有哪几个？它们的区别是什么？</h2><ol>
+<li>Spring Boot 的核心配置文件是 application 和 bootstrap 配置文件。 </li>
+<li>application 配置文件这个容易理解，主要用于 Spring Boot 项目的自动化配置。 </li>
+<li>bootstrap 配置文件有以下几个应用场景。<ul>
+<li>使用 Spring Cloud Config 配置中心时，这时需要在 bootstrap 配置文件中<strong>添加连接到配置中心的配置属性来加载外部配置中心的配置信息</strong>；</li>
+<li>一些<strong>固定的不能被覆盖的属性</strong>；</li>
+<li><strong>一些加密&#x2F;解密的场景</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="19、什么是-JavaConfig？"><a href="#19、什么是-JavaConfig？" class="headerlink" title="19、什么是 JavaConfig？"></a>19、什么是 JavaConfig？</h2><p>Spring <strong>JavaConfig</strong> 是 Spring 社区的产品，它<strong>提供了配置 Spring IoC 容器的纯Java方法</strong>。因此它有助于避免使用 XML 配置。使用 JavaConfig 的优点在于：</p>
+<ol>
+<li><strong>面向对象的配置</strong>。由于配置被定义为 JavaConfig 中的类，因此用户可以充分利用 Java 中的面向对象功能。<strong>一个配置类可以继承另一 个，重写它的@Bean 方法</strong>等。 </li>
+<li><strong>减少或消除 XML 配置</strong>。基于依赖注入原则的外化配置的好处已被证明。但是，许多开发人员不希望在 XML 和 Java 之间来回切换。 <strong>JavaConfig 为开发人员提供了一种纯 Java 方法来配置与 XML 配置概念相似的 Spring 容器</strong>。从技术角度来讲，只使用 JavaConfig 配置类来 配置容器是可行的，但实际上很多人认为将JavaConfig 与 XML 混合匹配是理想的。</li>
+<li><strong>类型安全和重构友好</strong>。JavaConfig 提供了一种类型安全的方法来配置 Spring容器。由于 Java 5.0 对泛型的支持，现在可以按类型而不是按名称检索 bean，不需要任何强制转换或基于字符串的查找。</li>
+</ol>
+<h2 id="20、如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？"><a href="#20、如何重新加载-Spring-Boot-上的更改，而无需重新启动服务器？" class="headerlink" title="20、如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？"></a>20、如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？</h2><p>这可以使用 DEV 工具来实现。通过这种依赖关系，您可以节省任何更改，嵌入式tomcat 将重新启动。Spring Boot 有一个开发工具 （DevTools）模块，它有助于提高开发人员的生产力。<strong>Java 开发人员面临的一个主要挑战是将文件更改自动部署到服务器并自动重启服务 器。</strong>开发人员可以重新加载 Spring Boot 上的更改，而无需重新启动服务器。这将消除每次手动部署更改的需要。Spring Boot 在发布它的第一个版本时没有这个功能。这是开发人员最需要的功能。DevTools 模块完全满足开发人员的需求。该模块将在生产环境中被禁用。它还 提供 H2 数据库控制台以更好地测试应用程序。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="21、如何在-Spring-Boot-中禁用-Actuator-端点安全性？"><a href="#21、如何在-Spring-Boot-中禁用-Actuator-端点安全性？" class="headerlink" title="21、如何在 Spring Boot 中禁用 Actuator 端点安全性？"></a>21、如何在 Spring Boot 中禁用 Actuator 端点安全性？</h2><p>默认情况下，所有敏感的 HTTP 端点都是安全的，只有具有 ACTUATOR 角色的用户才能访问它们。<strong>安全性是使用标准的 HttpServletRequest.isUserInRole 方法实施的</strong>。 我们可以使用来禁用安全性。<strong>只有在执行机构端点在防火墙后访问时，才建议禁用安全 性。</strong></p>
+<h2 id="22、如何在自定义端口上运行-Spring-Boot-应用程序？"><a href="#22、如何在自定义端口上运行-Spring-Boot-应用程序？" class="headerlink" title="22、如何在自定义端口上运行 Spring Boot 应用程序？"></a>22、如何在自定义端口上运行 Spring Boot 应用程序？</h2><p>为了在自定义端口上运行 Spring Boot 应用程序，您可以在<strong>application.properties</strong> 中指定端口。 </p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server.port</span> = <span class="string">8090</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="23、什么是-YAML？"><a href="#23、什么是-YAML？" class="headerlink" title="23、什么是 YAML？"></a>23、什么是 YAML？</h2><ol>
+<li>YAML 是一种人类可读的<strong>数据序列化语言</strong>。它通常用于配置文件。 </li>
+<li>与属性文件相比，如果我们想要在配置文件中添加复杂的属性，YAML 文件就更加结构化，而且更少混淆。可以看出 <strong>YAML 具有分层配置数据。</strong></li>
+</ol>
+<h2 id="24、如何实现-Spring-Boot-应用程序的安全性？"><a href="#24、如何实现-Spring-Boot-应用程序的安全性？" class="headerlink" title="24、如何实现 Spring Boot 应用程序的安全性？"></a>24、如何实现 Spring Boot 应用程序的安全性？</h2><p>为了实现 Spring Boot 的安全性，我们使用 <strong>spring-boot-starter-security</strong> 依赖项，并且必须添<strong>加安全配置</strong>。它只需要很少的代码。配置类将必须扩展<strong>WebSecurityConfigurerAdapter</strong> 并覆盖其方法。</p>
+<h2 id="25、如何使用-Spring-Boot-实现分页和排序？"><a href="#25、如何使用-Spring-Boot-实现分页和排序？" class="headerlink" title="25、如何使用 Spring Boot 实现分页和排序？"></a>25、如何使用 Spring Boot 实现分页和排序？</h2><p>使用 Spring Boot 实现分页非常简单。<strong>使用 Spring Data-JPA 可以实现将可分页的传递给存储库方法。</strong></p>
+<h2 id="26、什么是-Swagger？你用-Spring-Boot-实现了它吗？"><a href="#26、什么是-Swagger？你用-Spring-Boot-实现了它吗？" class="headerlink" title="26、什么是 Swagger？你用 Spring Boot 实现了它吗？"></a>26、什么是 Swagger？你用 Spring Boot 实现了它吗？</h2><ol>
+<li>Swagger 广泛用于<strong>可视化 API</strong>，使用 Swagger UI 为前端开发人员提供在线沙箱。</li>
+<li>Swagger 是用于<strong>生成 RESTful Web 服务的可视化</strong>表示的工具，规范和完整框架实现。</li>
+<li><strong>Swagger 就是将项目中所有（想要暴露的）接口展现在页面上，并且可以进行接口调用和测试的服务。</strong></li>
+<li><strong>它使文档能够以与服务器相同的速度更新</strong>。当通过 Swagger 正确定义时，消费者可以使用最少量的实现逻辑 来理解远程服务并与其进行交互。因此，<strong>Swagger 消除了调用服务时的猜测</strong>。</li>
+</ol>
+<h2 id="27、什么是-Spring-Profiles？"><a href="#27、什么是-Spring-Profiles？" class="headerlink" title="27、什么是 Spring Profiles？"></a>27、什么是 Spring Profiles？</h2><p><strong>Spring Profiles 允许用户根据配置文件（dev，test，prod 等）来注册 bean</strong>。因此，<strong>当应用程序在开发中运行时，只有某些 bean 可以加 载</strong>，而在 PRODUCTION中，某些其他 bean 可以加载。<strong>假设我们的要求是 Swagger 文档仅适用于 QA 环境，并且禁用所有其他文档。这可以使用配置文件来完成</strong>。Spring Boot 使得使用配置文件非常简单。 </p>
+<h2 id="28、什么是-Spring-Batch？"><a href="#28、什么是-Spring-Batch？" class="headerlink" title="28、什么是 Spring Batch？"></a>28、什么是 Spring Batch？</h2><ol>
+<li><strong>Spring Boot Batch</strong> <strong>提供可重用的函数</strong>，这些函数在处理大量记录时非常重要，包括日志&#x2F;跟踪，事务管理，作业处理统计信息，作业重新启动，跳过和资源管理。</li>
+<li>还提供了更先进的技术服务和功能，<strong>通过优化和分区技术，可以实现极高批量和高性能批处理作业</strong>。简单以及复杂的大批量批处理作业可以高度可扩展的方式利用框架处理重要大量的信息。</li>
+</ol>
+<h2 id="29、什么是-FreeMarker-模板？"><a href="#29、什么是-FreeMarker-模板？" class="headerlink" title="29、什么是 FreeMarker 模板？"></a>29、什么是 FreeMarker 模板？</h2><p><strong>FreeMarker</strong> 是一个基于 Java 的模板引擎，最初专注于使用 MVC 软件架构<strong>进行动态网页生成</strong>。<strong>使用 Freemarker 的主要优点是表示层和业务层的完全分离</strong>。程序员可以处理应用程序代码，而设计人员可以处理 html 页面设计。最后使用freemarker 可以将这些结合起来，给出最终的输出页面。</p>
+<h2 id="30、什么是-CSRF-攻击？"><a href="#30、什么是-CSRF-攻击？" class="headerlink" title="30、什么是 CSRF 攻击？"></a>30、什么是 CSRF 攻击？</h2><p><strong>CSRF 代表跨站请求伪造</strong>。这是一种攻击，迫使最终用户在当前通过身份验证的Web 应用程序上<strong>执行不需要的操作</strong>。<strong>CSRF 攻击专门针对状态改变请求，而不是数据窃取</strong>，因为攻击者无法查看对伪造请求的响应。 </p>
+<h2 id="31、什么是-WebSockets？"><a href="#31、什么是-WebSockets？" class="headerlink" title="31、什么是 WebSockets？"></a>31、什么是 WebSockets？</h2><ol>
+<li><strong>WebSocket 是一种计算机通信协议</strong>，通过单个 TCP 连接提供全双工通信信道。 </li>
+<li><strong>WebSocket 是双向的</strong> -使用 WebSocket 客户端或服务器可以发起消息发送。 </li>
+<li><strong>WebSocket 是全双工的</strong> -客户端和服务器通信是相互独立的。 </li>
+<li><strong>单个TCP 连接</strong> -初始连接使用 HTTP，然后将此连接升级到基于套接字的连接。然后这个单一连接用于所有未来的通信</li>
+<li>Light -与 http 相比，<strong>WebSocket 消息数据交换要轻得多</strong>。</li>
+</ol>
+<h2 id="32、什么是-AOP？"><a href="#32、什么是-AOP？" class="headerlink" title="32、什么是 AOP？"></a>32、什么是 AOP？</h2><p>在软件开发过程中，<strong>跨越应用程序多个点的功能</strong>称为<strong>交叉问题</strong>。这些交叉问题与应用程序的主要业务逻辑不同。因此，将这些横切关注与业务逻辑分开是<strong>面向方面编程</strong>（AOP）的地方。</p>
+<h2 id="33、什么是-Apache-Kafka？"><a href="#33、什么是-Apache-Kafka？" class="headerlink" title="33、什么是 Apache Kafka？"></a>33、什么是 Apache Kafka？</h2><p>Apache Kafka 是一个<strong>分布式发布 - 订阅消息系统</strong>。它是一个可扩展的，容错的发布 - 订阅消息系统，它使我们能够构建分布式应用程序。 这是一个 Apache 顶级项目。<strong>Kafka 适合离线和在线消息消费。</strong></p>
+<h2 id="34、我们如何监视所有-Spring-Boot-微服务？"><a href="#34、我们如何监视所有-Spring-Boot-微服务？" class="headerlink" title="34、我们如何监视所有 Spring Boot 微服务？"></a>34、我们如何监视所有 Spring Boot 微服务？</h2><ol>
+<li>Spring Boot 提供<strong>监视器端点</strong>以<strong>监控各个微服务的度量</strong>。这些端点对于获取有关应用程序的信息（如它们是否已启动）以及它们的组件（如 数据库等）是否正常运行很有帮助。</li>
+<li>但是，使用监视器的一个<strong>主要缺点或困难</strong>是，我们<strong>必须单独打开应用程序的知识点以了解其状态或健康状况</strong>。想象一下涉及 50 个应用程序的微服务，管理员将不得不击中所有 50 个应用程序的执行终端。为了帮助我们处理这种情况，<strong>我们将使用位于的开源项目。 它建立在 Spring Boot Actuator 之上，</strong>它提供了一个 Web UI，使我们能够可视化多个应用程序的度量。</li>
+</ol>
+<h2 id="35、Spring-Boot-的配置文件有哪几种格式？它们有什么区别？"><a href="#35、Spring-Boot-的配置文件有哪几种格式？它们有什么区别？" class="headerlink" title="35、Spring Boot 的配置文件有哪几种格式？它们有什么区别？"></a>35、Spring Boot 的配置文件有哪几种格式？它们有什么区别？</h2><p>properties 和 .yml，它们的区别主要是书写格式不同。</p>
+<ol>
+<li>.properties</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.user.name = javastack</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>.yml（另外，.yml 格式不支持 @PropertySource 注解导入配置）</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">app:</span></span><br><span class="line">	<span class="attr">user:</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">javastack</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="36、开启-Spring-Boot-特性有哪几种方式？"><a href="#36、开启-Spring-Boot-特性有哪几种方式？" class="headerlink" title="36、开启 Spring Boot 特性有哪几种方式？"></a>36、开启 Spring Boot 特性有哪几种方式？</h2><ol>
+<li>继承spring-boot-starter-parent项目</li>
+<li>导入spring-boot-dependencies项目依赖</li>
+</ol>
+<h2 id="37、Spring-Boot-有哪几种读取配置的方式？"><a href="#37、Spring-Boot-有哪几种读取配置的方式？" class="headerlink" title="37、Spring Boot 有哪几种读取配置的方式？"></a>37、Spring Boot 有哪几种读取配置的方式？</h2><p>Spring Boot 可以通过 <strong>@PropertySource,@Value,@Environment, @ConfigurationProperties</strong> 来绑定变量</p>
+<h2 id="38、Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？"><a href="#38、Spring-Boot-支持哪些日志框架？推荐和默认的日志框架是哪个？" class="headerlink" title="38、Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？"></a>38、Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？</h2><p>Spring Boot 支持 <strong>Java Util Logging, Log4j2, Lockback</strong> 作为日志框架，如果你使用 Starters 启动器，Spring Boot 将使用 <strong>Logback</strong> 作为<strong>默认日志框架</strong></p>
+<h2 id="38、Spring-Boot-如何定义多套不同环境配置？"><a href="#38、Spring-Boot-如何定义多套不同环境配置？" class="headerlink" title="38、Spring Boot 如何定义多套不同环境配置？"></a>38、Spring Boot 如何定义多套不同环境配置？</h2><p>提供多套配置文件，如：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">applcation.properties</span></span><br><span class="line"><span class="attr">application-dev.properties</span></span><br><span class="line"><span class="attr">application-test.properties</span></span><br><span class="line"><span class="attr">application-prod.properties</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="39、Spring-Boot-可以兼容老-Spring-项目吗，如何做？"><a href="#39、Spring-Boot-可以兼容老-Spring-项目吗，如何做？" class="headerlink" title="39、Spring Boot 可以兼容老 Spring 项目吗，如何做？"></a>39、Spring Boot 可以兼容老 Spring 项目吗，如何做？</h2><p>可以兼容，使用 <strong>@ImportResource</strong> 注解导入老 Spring 项目配置文件。</p>
+<h2 id="40、保护-Spring-Boot-应用有哪些方法？"><a href="#40、保护-Spring-Boot-应用有哪些方法？" class="headerlink" title="40、保护 Spring Boot 应用有哪些方法？"></a>40、保护 Spring Boot 应用有哪些方法？</h2><ul>
+<li>在生产中使用HTTPS </li>
+<li>使用Snyk检查你的依赖关系 </li>
+<li>升级到最新版本 </li>
+<li>启用CSRF保护 </li>
+<li>使用内容安全策略防止XSS攻击</li>
+</ul>
+<h1 id="六、Mybatis"><a href="#六、Mybatis" class="headerlink" title="六、Mybatis"></a>六、Mybatis</h1><h2 id="1、mybatis的优缺点"><a href="#1、mybatis的优缺点" class="headerlink" title="1、mybatis的优缺点"></a>1、mybatis的优缺点</h2><p><strong>优点：</strong> </p>
+<ol>
+<li>基于 SQL 语句编程，相当灵活，不会对应用程序或者数据库的现有设计造成任何影响，SQL 写在 XML 里，解除 sql 与程序代码的耦合，便于统一管理；提供 XML 标签， 支持编写动态 SQL 语句， <strong>并可重用</strong>。 </li>
+<li>与 JDBC 相比，减少了 50%以上的代码量，消除了 JDBC 大量冗余的代码，<strong>不需要手动开关连接</strong>； </li>
+<li><strong>很好的与各种数据库兼容</strong>（ 因为 MyBatis 使用 JDBC 来连接数据库，所以只要JDBC 支持的数据库 MyBatis 都支持）。</li>
+<li><strong>能够与 Spring 很好的集成</strong>； </li>
+<li><strong>提供映射标签</strong>， 支持对象与数据库的 ORM 字段关系映射； 提供对象关系映射标签， 支持对象关 系组件维护。</li>
+</ol>
+<p><strong>缺点：</strong> </p>
+<ol>
+<li>SQL 语句的编写工作量较大， 尤其当字段多、关联表多时， 对开发人员编写SQL 语句的功底有一 定要求。</li>
+<li>SQL 语句依赖于数据库， 导致数据库移植性差， <strong>不能随意更换数据库。</strong></li>
+</ol>
+<h2 id="2、-和-的区别是什么？"><a href="#2、-和-的区别是什么？" class="headerlink" title="2、#{}和${}的区别是什么？"></a>2、#{}和${}的区别是什么？</h2><ol>
+<li><strong>#{}<strong>是预编译处理、是</strong>占位符</strong>， <strong>${}<strong>是字符串替换、是</strong>拼接符</strong>。</li>
+<li>Mybatis 在处理**#{}<strong>时，会将 sql 中的#{}替换为?号，</strong>调用 PreparedStatement 来赋值；** </li>
+<li>Mybatis 在处理**${}<strong>时， 就是</strong>把${}替换成变量的值**，调用 Statement 来赋值；</li>
+<li>#{} 的变量替换是在DBMS 中、变量替换后，**#{} 对应的变量自动加上单引号** </li>
+<li>${} 的变量替换是在 DBMS 外、变量替换后，**${} 对应的变量不会加上单引号** </li>
+<li><strong>使用#{}可以有效的防止 SQL 注入</strong>， 提高系统安全性。</li>
+</ol>
+<h2 id="3、简述-Mybatis-的插件运行原理，如何编写一个插件。"><a href="#3、简述-Mybatis-的插件运行原理，如何编写一个插件。" class="headerlink" title="3、简述 Mybatis 的插件运行原理，如何编写一个插件。"></a>3、简述 Mybatis 的插件运行原理，如何编写一个插件。</h2><p>答： Mybatis 只支持针对 <strong>ParameterHandler、ResultSetHandler、StatementHandler、Executor</strong> 这 4 种接口的插件， Mybatis 使用 JDK 的动态代理， 为需要拦截的接口生成代理对象以实现接口方法拦 截功能， 每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke() 方法， <strong>拦截那些你指定需要拦截的方法。</strong></p>
+<p><strong>编写插件：</strong> 实现 Mybatis 的 Interceptor 接口并复写 intercept()方法， 然后在给插件编写注解， 指定要拦截哪一个接口的哪些方法即可， 在配置文件中配置编写的插件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Intercepts(&#123;@Signature(type = StatementHandler.class, method = &quot;query&quot;, args =</span></span><br><span class="line"><span class="meta">&#123;Statement.class, ResultHandler.class&#125;),</span></span><br><span class="line"><span class="meta">@Signature(type = StatementHandler.class, method = &quot;update&quot;, args =</span></span><br><span class="line"><span class="meta">&#123;Statement.class&#125;),</span></span><br><span class="line"><span class="meta">@Signature(type = StatementHandler.class, method = &quot;batch&quot;, args = &#123;</span></span><br><span class="line"><span class="meta">Statement.class &#125;)&#125;)</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line">invocation.proceed()执行具体的业务逻</span><br></pre></td></tr></table></figure>
+
+<h1 id="七、Mysql"><a href="#七、Mysql" class="headerlink" title="七、Mysql"></a>七、Mysql</h1><h2 id="1、索引的基本原理"><a href="#1、索引的基本原理" class="headerlink" title="1、索引的基本原理"></a>1、索引的基本原理</h2><ol>
+<li>索引用来快速地寻找那些具有特定值的记录。如果没有索引，一般来说执行查询时遍历整张表。 </li>
+<li><strong>索引的原理：就是把无序的数据变成有序的查询</strong> <ul>
+<li>把创建了索引的列的内容进行排序 </li>
+<li>对排序结果生成倒排表 </li>
+<li>在倒排表内容上拼上数据地址链 </li>
+<li>在查询的时候，先拿到倒排表内容，再取出数据地址链，从而拿到具体数据</li>
+</ul>
+</li>
+</ol>
+<h2 id="2、mysql聚簇和非聚簇索引的区别"><a href="#2、mysql聚簇和非聚簇索引的区别" class="headerlink" title="2、mysql聚簇和非聚簇索引的区别"></a>2、mysql聚簇和非聚簇索引的区别</h2><ol>
+<li>都是B+树的数据结构</li>
+</ol>
+<ul>
+<li><strong>聚簇索引：将数据存储与索引放到了一块</strong>、并且是按照一定的顺序组织的，找到索引也就找到了数据，<strong>数据的物理存放顺序与索引顺序是一致的</strong>，即：只要索引是相邻的，那么对应的数据一定也是 相邻地存放在磁盘上的</li>
+<li><strong>非聚簇索引：</strong>叶子节点不存储数据、<strong>存储的是数据行地址</strong>，也就是说根据索引查找到数据行的位置 再取磁盘查找数据，这个就有点类似一本树的目录，<strong>比如我们要找第三章第一节，那我们先在这个 目录里面找，找到对应的页码后再去对应的页码看文章。</strong></li>
+</ul>
+<ol start="2">
+<li><p>优势： </p>
+<ul>
+<li>查询通过聚簇索引可以直接获取数据，相比非聚簇索引需要第二次查询（非覆盖索引的情况下）效率要高</li>
+<li><strong>聚簇索引</strong>对于范围查询的效率很高，因为<strong>其数据是按照大小排列的</strong></li>
+<li><strong>聚簇索引适合用在排序的场合</strong>，非聚簇索引不适合</li>
+</ul>
+</li>
+<li><p>劣势：</p>
+<ul>
+<li><strong>维护索引很昂贵</strong>，特别是插入新行或者主键被更新导至要分页(page split)的时候。建议在大量插入新行后，选在负载较低的时间段，通过OPTIMIZE TABLE优化表，<strong>因为必须被移动的行数据可能造成碎片</strong>。使用独享表空间可以弱化碎片</li>
+<li>表因为使用UUId（随机ID）作为主键，使数据存储稀疏，这就会出现聚簇索引有可能有比全表扫面更慢，所以<strong>建议使用int的auto_increment作为主键</strong></li>
+<li><strong>如果主键比较大的话，那辅助索引将会变的更大</strong>，因为辅助索引的叶子存储的是主键值；过长的主键值，会导致非叶子节点占用占用更多的物理空间</li>
+</ul>
+</li>
+<li><p>InnoDB中一定有主键，<strong>主键一定是聚簇索引</strong>，<strong>不手动设置</strong>、则会<strong>使用unique</strong>索引，没有unique索引， 则会<strong>使用数据库内部的一个行的隐藏id</strong>来当作主键索引。<strong>在聚簇索引之上创建的索引称之为辅助索引</strong>， <strong>辅助索引访问数据总是需要二次查找</strong>，非聚簇索引都是辅助索引，像复合索引、前缀索引、唯一索引， <strong>辅助索引叶子节点存储的</strong>不再是行的物理位置，而<strong>是主键值</strong></p>
+</li>
+<li><p><strong>MyISM使用的是非聚簇索引，没有聚簇索引</strong>，非聚簇索引的两棵B+树看上去没什么不同，节点的结构完全一致只是存储的内容不同而已，<strong>主键索引B+树的节点存储了主键，辅助键索引B+树存储了辅助键。</strong>表数据存储在独立的地方，这两颗B+树的叶子节点都使用一个地址指向真正的表数据，对于表数据来说，这两个键没有任何差别。<strong>由于索引树是独立的，通过辅助键检索无需访问主键的索引树。</strong></p>
+</li>
+<li><p>如果<strong>涉及到大数据量的排序、全表扫描、count之类的操作的话</strong>，还是<strong>MyISAM占优势</strong>些，因为<strong>索引所占空间小</strong>，这些操作是需要在内存中完成的。</p>
+</li>
+</ol>
+<h2 id="3、mysql索引的数据结构，各自优劣"><a href="#3、mysql索引的数据结构，各自优劣" class="headerlink" title="3、mysql索引的数据结构，各自优劣"></a>3、mysql索引的数据结构，各自优劣</h2><ol>
+<li>索引的数据结构和具体存储引擎的实现有关，在<strong>MySQL中使用较多的索引有Hash索引，B+树索引等</strong>， <strong>InnoDB存储引擎</strong>的默认索引实现为<strong>：B+树索引</strong>。对于哈希索引来说，底层的数据结构就是哈希表，因 此在<strong>绝大多数需求为单条记录查询的时候，可以选择哈希索引</strong>，查询性能最快；<strong>其余大部分场景，建议选择BTree索引</strong>。</li>
+<li><strong>B+树：</strong>B+树是一个平衡的多叉树，<strong>从根节点到每个叶子节点的高度差值不超过1，而且同层级的节点间有指针相互链接。</strong>在B+树上的常规检索，从根节点到叶子节点的搜索效率基本相当，不会出现大幅波动，而且<strong>基于索引的顺序扫描时，也可以利用双向指针快速左右移动</strong>，效率非常高。因此，B+树索引被广泛应用 于数据库、文件系统等场景。</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304141946206.png"
+                      alt="image-20230414194615001"
+                ></p>
+<ol start="3">
+<li><strong>哈希索引：</strong>哈希索引就是<strong>采用一定的哈希算法</strong>，把键值换算成新的哈希值，检索时不需要类似B+树那样从根节点到叶子节点逐级查找，<strong>只需一次哈希算法</strong>即可立刻定位到相应的位置，速度非常快</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304141950820.png"
+                      alt="image-20230414195004603"
+                ></p>
+<ol start="4">
+<li>如果是<strong>等值查询</strong>，那么<strong>哈希索引</strong>明显有绝对优势，因为只需要经过一次算法即可找到相应的键值；<strong>前提是键值都是唯一的</strong>。如果键值不是唯一的，就需要先找到该键所在位置，然后再根据链表往后扫描，直到找到相应的数据；</li>
+<li>如果是<strong>范围查询</strong>检索，这时候哈希索引就毫无用武之地了，因为<strong>原先是有序的键值，经过哈希算法后， 有可能变成不连续的了</strong>，就没办法再利用索引完成范围查询检索；</li>
+<li><strong>哈希索引</strong>也<strong>没办法利用索引完成排序</strong>，<strong>以及like ‘xxx%’ 这样的部分模糊查询</strong>（这种部分模糊查询，其实本质上也是范围查询）；</li>
+<li><strong>哈希索引也不支持多列联合索引的最左匹配规则；</strong></li>
+<li><strong>B+树索引的关键字检索效率比较平均</strong>，不像B树那样波动幅度大，<strong>在有大量重复键值情况下，哈希索引的效率也是极低的</strong>，因为存在哈希碰撞问题。</li>
+</ol>
+<h2 id="4、索引涉及的原则"><a href="#4、索引涉及的原则" class="headerlink" title="4、索引涉及的原则"></a>4、索引涉及的原则</h2><ol>
+<li>查询<strong>更快</strong>、占用空间<strong>更小</strong></li>
+<li>适合索引的列是出现在<strong>where子句中的列</strong>，或者连接子句中指定的列 </li>
+<li><strong>基数较小</strong>的表，索引<strong>效果较差</strong>，没有必要在此列建立索引</li>
+<li>使用短索引，<strong>如果对长字符串列进行索引，应该指定一个前缀长度</strong>，这样能够节省大量索引空间， 如果搜索词超过索引前缀长度，则使用索引排除不匹配的行，然后检查其余行是否可能匹配。 </li>
+<li><strong>不要过度索引</strong>。索引需要额外的磁盘空间，并降低写操作的性能。在修改表内容的时候，索引会进行更新甚至重构，索引列越多，这个时间就会越长。所以<strong>只保持需要的索引有利于查询即可</strong>。</li>
+<li><strong>定义有外键的数据列一定要建立索引。</strong></li>
+<li><strong>更新频繁字段不适合创建索引</strong> </li>
+<li><strong>若是不能有效区分数据的列</strong>不适合做索引列(如性别，男女未知，最多也就三种，区分度实在太低)</li>
+<li><strong>尽量的扩展索引，不要新建索引</strong>。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可。 </li>
+<li>对于那些<strong>查询中很少涉及的列</strong>，<strong>重复值比较多的列</strong>不要建立索引。 </li>
+<li>对于<strong>定义为text、image和bit的数据类型的列</strong>不要建立索引。</li>
+</ol>
+<h2 id="5、锁的类型有哪些"><a href="#5、锁的类型有哪些" class="headerlink" title="5、锁的类型有哪些"></a>5、锁的类型有哪些</h2><ol>
+<li>基于锁的<strong>属性</strong>分类：<strong>共享锁、排他锁</strong>。</li>
+<li>基于锁的<strong>粒度</strong>分类：<strong>行级锁(INNODB)、表级锁(INNODB、MYISAM)、页级锁(BDB引擎 )、记录锁、间隙锁、临键锁</strong>。 </li>
+<li>基于锁的<strong>状态</strong>分类：<strong>意向共享锁、意向排它锁</strong>。<ul>
+<li><strong>共享锁(Share Lock)：</strong>共享锁又称读锁，<strong>简称S锁</strong>；当一个事务为数据加上读锁之后，其他事务只能对该数据加读锁，而不能对数据加写锁，直到所有的读锁释放之后其他事务才能对其进行加持写锁。<strong>共享锁的特性主要是为了支持并发的读取数据</strong>，读取数据的时候不支持修改，避免出现<strong>重复读</strong>的问题。</li>
+<li><strong>排他锁（eXclusive Lock）：</strong>排他锁又称写锁，<strong>简称X锁</strong>；当一个事务为数据加上写锁时，其他请求将不能再为数据加任何锁，直到该锁释放之后，其他事务才能对数据进行加锁。<strong>排他锁的目的是在数据修改时候，不允许其他人同时修 改，也不允许其他人读取</strong>。避免了出现<strong>脏数据和脏读</strong>的问题。</li>
+<li><strong>表锁：</strong>表锁是指上锁的时候<strong>锁住的是整个表</strong>，当下一个事务访问该表的时候，必须等前一个事务释放了锁才能进行对表进行访问； 特点： 粒度大，加锁简单，容易冲突；</li>
+<li><strong>行锁：</strong>行锁是指<strong>上锁的时候锁住的是表的某一行或多行记录</strong>，其他事务访问同一张表时，只有被锁住的记录不能访问，其他的记录可正常访问； 特点：粒度小，加锁比表锁麻烦，不容易冲突，<strong>相比表锁支持的并发要高</strong>；</li>
+<li><strong>记录锁(Record Lock)：</strong>记录锁也属于行锁中的一种，只不过<strong>记录锁的范围只是表中的某一条记录</strong>，记录锁是说事务在加锁后锁住的只是表的某一条记录。 <strong>精准条件命中</strong>，并且命中的条件字段是唯一索引。加了记录锁之后数据可以<strong>避免</strong>数据在查询的时候被修改的<strong>重复读</strong>问题，也<strong>避免了</strong>在修改的事务未提交前被其他事务<strong>读取的脏读问题</strong>。</li>
+<li><strong>页锁：</strong>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。<strong>表级锁</strong>速度快，但冲突多，<strong>行级</strong>冲突少，但速度慢。所以取了<strong>折中的页级</strong>，<strong>一次锁定相邻的一组记录</strong>。 特点：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般</li>
+<li><strong>间隙锁(Gap Lock)：</strong>属于行锁中的一种，间隙锁是在事务加锁后其<strong>锁住的是表记录的某一个区间</strong>，当表的相邻ID之间出现空 隙则会形成一个区间，遵循<strong>左开右闭</strong>原则。 范围查询并且查询未命中记录，查询条件必须命中索引、<strong>间隙锁只会出现在REPEATABLE_READ（重复读)的事务级别中。</strong> 触发条件：防止幻读问题，<strong>事务并发的时候，如果没有间隙锁</strong>，就会发生如下图的问题，<strong>在同一个事务里，A事务的两次查询出的结果会不一样</strong>。 比如表里面的数据ID 为 1,4,5,7,10 ,那么会形成以下几个间隙区间，-n-1区间，1-4区间，7-10 区间，10-n区间 （-n代表负无穷大，n代表正无穷大）</li>
+<li><strong>临建锁(Next-Key Lock)：</strong>也属于行锁的一种，并且它是INNODB的行锁默认算法，总结来说<strong>它就是记录锁和间隙锁的组合</strong>，<strong>临键锁会把查询出来的记录锁住，同时也会把该范围查询内的所有间隙空间也会锁住</strong>，再之它会把相邻的下一个区间也会锁住；触发条件：范围查询并命中，查询命中了索引。 结合记录锁和间隙锁的特性，<strong>临键锁避免了在范围查询时出现脏读、重复读、幻读问题。</strong> <strong>加了临键锁之后，在范围区间内数据不允许被修改和插 入。</strong></li>
+<li>如果当事务A加锁成功之后就设置一个状态告诉后面的人，已经有人对表里的行加了一个排他锁了，你们不能对整个表加共享锁或排它锁了，那么后面需要对整个表加锁的人只需要获取这个状态就知道自己是不是可以对表加锁，避免了对整个索引树的每个节点扫描是否加锁，而这个状态就是<strong>意向锁</strong>。</li>
+<li><strong>意向共享锁：</strong>当一个事务试图对整个表进行加共享锁之前，<strong>首先需要获得这个表的意向共享锁</strong>。</li>
+<li><strong>意向排他锁：</strong>当一个事务试图对整个表进行加排它锁之前，<strong>首先需要获得这个表的意向排它锁。</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="6、InnoDB存储引擎的锁的算法"><a href="#6、InnoDB存储引擎的锁的算法" class="headerlink" title="6、InnoDB存储引擎的锁的算法"></a>6、InnoDB存储引擎的锁的算法</h2><ol>
+<li>Record lock：<strong>单个行记录</strong>上的锁 </li>
+<li>Gap lock：间隙锁，<strong>锁定一个范围</strong>，不包括记录本身 </li>
+<li>Next-key lock：record+gap：<strong>锁定一个范围，包含记录本身</strong></li>
+<li>innodb对于<strong>行的查询使用next-key lock</strong> </li>
+<li>Next-locking keying为了解决<strong>Phantom Problem幻读问题</strong> </li>
+<li>当查询的<strong>索引含有唯一属性时</strong>，将next-key lock<strong>降级为</strong>record key </li>
+<li><strong>Gap锁</strong>设计的目的是为了<strong>阻止多个事务将记录插入到同一范围内</strong>，而这会导致幻读问题的产生 </li>
+<li><strong>有两种方式显式关闭gap锁</strong>：（除了外键约束和唯一性检查外，其余情况仅使用record lock） A. <strong>将事务隔离级别设置为RC</strong> B. <strong>将参数innodb_locks_unsafe_for_binlog设置为1</strong></li>
+</ol>
+<h2 id="7、关心过业务系统里面的sql耗时吗？统计过慢查询吗？对慢-查询都怎么优化过？"><a href="#7、关心过业务系统里面的sql耗时吗？统计过慢查询吗？对慢-查询都怎么优化过？" class="headerlink" title="7、关心过业务系统里面的sql耗时吗？统计过慢查询吗？对慢 查询都怎么优化过？"></a>7、关心过业务系统里面的sql耗时吗？统计过慢查询吗？对慢 查询都怎么优化过？</h2><ol>
+<li>在业务系统中，除了使用主键进行的查询，其他的都会在测试库上测试其耗时，<strong>慢查询的统计主要由运维在做</strong>，会定期将业务中的慢查询反馈给我们。 </li>
+<li>慢查询的优化首先要搞明白慢的原因是什么？<strong>是查询条件没有命中索引？是load了不需要的数据列？还是数据量太大？</strong> 所以优化也是针对这三个方向来的<ul>
+<li>首先<strong>分析语句</strong>，看看是否load了额外的数据，可能是查询了多余的行并且抛弃掉了，可能是加载了许多结果中并不需要的列，<strong>对语句进行分析以及重写。</strong> </li>
+<li><strong>分析语句的执行计划</strong>，然后获得其使用索引的情况，<strong>之后修改语句或者修改索引</strong>，使得语句可以尽可能的命中索引。 </li>
+<li>如果对语句的优化已经无法进行，可以考虑表中的数据量是否太大，<strong>如果是的话可以进行横向或者纵向的分表。</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="8、事务的基本特性和隔离级别"><a href="#8、事务的基本特性和隔离级别" class="headerlink" title="8、事务的基本特性和隔离级别"></a>8、事务的基本特性和隔离级别</h2><ol>
+<li>事务基本特性ACID分别是：<ul>
+<li><strong>原子性</strong>指的是一个事务中的操作要么全部成功，要么全部失败。 </li>
+<li><strong>一致性</strong>指的是数据库总是从一个一致性的状态转换到另外一个一致性的状态。比如A转账给B100块钱， 假设A只有90块，支付之前我们数据库里的数据都是符合约束的,但是如果事务执行成功了,我们的数据库 数据就破坏约束了,因此事务不能成功,这里我们说事务提供了一致性的保证 </li>
+<li><strong>隔离性</strong>指的是一个事务的修改在<strong>最终提交前，对其他事务是不可见的。</strong> </li>
+<li><strong>持久性</strong>指的是一旦事务提交，<strong>所做的修改就会永久保存到数据库中。</strong></li>
+</ul>
+</li>
+<li>隔离性有4个隔离级别，分别是：<ul>
+<li><strong>read uncommit 读未提交</strong>，可能会读到其他事务未提交的数据，也叫做<strong>脏读</strong>。 用户本来应该读取到id&#x3D;1的用户age应该是10，结果读取到了其他事务还没有提交的事务，结果读取结果age&#x3D;20，这就是脏读。 </li>
+<li><strong>read commit 读已提交</strong>，<strong>两次读取结果不一致，叫做不可重复读。</strong> 不可重复读解决了脏读的问题，他只会读取已经提交的事务。 用户开启事务读取id&#x3D;1用户，查询到age&#x3D;10，再次读取发现结果&#x3D;20，在同一个事务里同一个查询读取到不同的结果叫做不可重复读。 </li>
+<li><strong>repeatable read 可重复复读</strong>，这是mysql的默认级别，就是<strong>每次读取结果都一样</strong>，但是有<strong>可能产生幻读</strong>。 </li>
+<li><strong>serializable 串行</strong>，一般是不会使用的，<strong>他会给每一行读取的数据加锁，会导致大量超时和锁竞争的问题。</strong></li>
+</ul>
+</li>
+<li><strong>脏读(Drity Read)：</strong>某个事务已更新一份数据，另一个事务在此时读取了同一份数据，由于某些原因， 前一个RollBack了操作，则后一个事务所读取的数据就会是不正确的。 </li>
+<li>**不可重复读(Non-repeatable read):**在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。 </li>
+<li><strong>幻读(Phantom Read):</strong> <strong>在一个事务的两次查询中数据笔数不一致</strong>，例如有一个事务查询了几列(Row)数 据，而另一个事务却在此时插入了新的几列数据，先前的事务在接下来的查询中，就会发现有几列数据是它先前所没有的。</li>
+</ol>
+<h2 id="9、ACID靠什么保证的？"><a href="#9、ACID靠什么保证的？" class="headerlink" title="9、ACID靠什么保证的？"></a>9、ACID靠什么保证的？</h2><ol>
+<li><p><strong>A原子性由undo log日志保证</strong>，它记录了需要回滚的日志信息，事务回滚时撤销已经执行成功的sql </p>
+</li>
+<li><p><strong>C一致性由其他三大特性保证</strong>、程序代码要保证业务上的一致性</p>
+</li>
+<li><p>I隔离性由<strong>MVCC</strong>来保证</p>
+</li>
+<li><p>D持久性由<strong>内存+redo log来保证</strong>，mysql修改数据同时在内存和redo log记录这次操作，宕机的时候可以从redo log恢复</p>
+<blockquote>
+<p>InnoDB redo log 写盘，InnoDB 事务进入 prepare 状态。 如果前面 prepare 成功，binlog 写盘，再继续将事务日志持久化到 binlog，如果持久化成功，那么 InnoDB 事务则进入 commit 状态(在 redo log 里面写一个 commit 记录)</p>
+<p>redolog的刷盘会在系统空闲时进行</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="10、什么是MVCC"><a href="#10、什么是MVCC" class="headerlink" title="10、什么是MVCC"></a>10、什么是MVCC</h2><ol>
+<li><strong>多版本并发控制：</strong>读取数据时通过一种类似<strong>快照</strong>的方式将数据保存下来，这样读锁就和写锁不冲突了， 不同的事务session会看到自己特定版本的数据，版本链 </li>
+<li><strong>MVCC</strong>只在 <strong>READ COMMITTED</strong> 和 <strong>REPEATABLE READ</strong> 两个隔离级别下工作。其他两个隔离级别够和 MVCC不兼容, 因为 <strong>READ UNCOMMITTED</strong> 总是读取最新的数据行, 而不是符合当前事务版本的数据 行。而 <strong>SERIALIZABLE</strong> 则会对所有读取的行都加锁。</li>
+<li><strong>聚簇索引</strong>记录中有两个必要的隐藏列：<ul>
+<li><strong>trx_id：</strong>用来<strong>存储</strong>每次对某条聚簇索引<strong>记录</strong>进行<strong>修改的</strong>时候的<strong>事务id</strong>。 </li>
+<li><strong>roll_pointer：</strong>每次对哪条聚簇索引记录有修改的时候，都会把老版本写入undo日志中。这个 roll_pointer就是存了一个指针，<strong>它指向这条聚簇索引记录的上一个版本的位置</strong>，通过它来获得上一个版本的记录信息。(注意插入操作的undo日志没有这个属性，因为它没有老版本)</li>
+</ul>
+</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304171724470.png"
+                      alt="image-20230417172415231"
+                ></p>
+<ol start="4">
+<li>开始事务时创建readview，<strong>readView维护当前活动的事务id</strong>，即未提交的事务id，排序生成一个数组访问数据，获取数据中的事务id（获取的是事务id最大的记录），<strong>对比readview</strong>：</li>
+<li>如果在readview的<strong>左边</strong>（比readview都<strong>小</strong>），<strong>可以访问</strong>（在左边意味着该事务已经提交） </li>
+<li>如果在readview的<strong>右边</strong>（比readview都<strong>大</strong>）或者就在readview<strong>中</strong>，<strong>不可以访问</strong>，获取roll_pointer，取上一版本重新对比（在右边意味着，该事务在readview生成之后出现，在readview中意味着该事务还未提交） </li>
+<li><strong>已提交读隔离级别</strong>下的事务在<strong>每次</strong>查询的开始都会<strong>生成</strong>一个独立的ReadView,而<strong>可重复读隔离级别</strong>则在<strong>第一次</strong>读的时候<strong>生成</strong>一个ReadView，之后的读都复用之前的ReadView。 </li>
+<li>这就是Mysql的MVCC,通过版本链，<strong>实现多版本，可并发读-写，写-读</strong>。通过ReadView生成策略的不同实现不同的隔离级别。</li>
+</ol>
+<h2 id="11、分表后非sharding-key的查询怎么处理，分表后的排序？"><a href="#11、分表后非sharding-key的查询怎么处理，分表后的排序？" class="headerlink" title="11、分表后非sharding_key的查询怎么处理，分表后的排序？"></a>11、分表后非sharding_key的查询怎么处理，分表后的排序？</h2><ol>
+<li><strong>可以做一个mapping表</strong>，比如这时候商家要查询订单列表怎么办呢？不带user_id查询的话你总不能扫全表吧？所以我们可以<strong>做一个映射关系表</strong>，保存商家和用户的关系，查询的时候先通过商家查询到用户列表，再通过user_id去查询。 </li>
+<li><strong>宽表</strong>，对数据实时性要求不是很高的场景，比如<strong>查询订单列表，可以把订单表同步到离线（实时） 数仓，再基于数仓去做成一张宽表，再基于其他如es提供查询服务。</strong></li>
+<li><strong>数据量不是很大的话</strong>，比如后台的一些查询之类的，也可以通过<strong>多线程扫表</strong>，然后再<strong>聚合结果</strong>的方式来做。或者<strong>异步的形式</strong>也是可以的。</li>
+<li><strong>排序字段是唯一索引：</strong><ul>
+<li>首先<strong>第一页的查询</strong>：<strong>将各表的结果集进行合并，然后再次排序</strong> </li>
+<li><strong>第二页及以后的查询</strong>，需要<strong>传入上一页排序字段的最后一个值，及排序方式。</strong> </li>
+<li><strong>根据排序方式，及这个值进行查询。</strong>如排序字段date，上一页最后值为3，排序方式降序。查询的时候sql为select … from table where date &lt; 3 order by date desc limit 0,10。这样再将几个表的结果合并排序即可。</li>
+</ul>
+</li>
+</ol>
+<h2 id="12、mysql主从同步原理"><a href="#12、mysql主从同步原理" class="headerlink" title="12、mysql主从同步原理"></a>12、mysql主从同步原理</h2><ol>
+<li>mysql主从同步的过程：</li>
+<li>Mysql的主从复制中主要有三个线程： master（binlog dump thread）、slave（I&#x2F;O thread 、SQL thread） ，<strong>Master一条线程和Slave中的两条线程。</strong><ul>
+<li>主节点 binlog，<strong>主从复制的基础是主库记录数据库的所有变更记录到 binlog</strong>。binlog是数据库服务器启动的那一刻起，保存所有修改数据库结构或内容的一个文件。 </li>
+<li>主节点 log dump 线程，<strong>当 binlog 有变动时</strong>，log dump 线程读取其内容并发送给从节点。 </li>
+<li>从节点 I&#x2F;O线程接收 binlog 内容，并将<strong>其写入到 relay log 文件中。</strong> </li>
+<li><strong>从节点的SQL线程读取 relay log 文件内容对数据更新进行重放</strong>，最终保证主从数据库的一致性。</li>
+</ul>
+</li>
+</ol>
+<p>注：<strong>主从节点使用 binglog 文件 + position 偏移量来定位主从同步的位置</strong>，从节点会保存其已接收到的偏移量，如果从节点发生宕机重启，则会自动从 position 的位置发起同步。</p>
+<ol start="3">
+<li>由于<strong>mysql默认的复制方式是异步的</strong>，主库把日志发送给从库后不关心从库是否已经处理，这样<strong>会产生一个问题</strong>就是假设主库挂了，从库处理失败了，这时候从库升为主库后，日志就丢失了。由此产生两个概念。</li>
+<li><strong>全同步复制：</strong>主库写入binlog后强制同步日志到从库，<strong>所有的从库都执行完成后才返回给客户端</strong>，但是很显然这个方式的话性能会受到严重影响。</li>
+<li><strong>半同步复制：</strong>和全同步不同的是，半同步复制的逻辑是这样，从库写入日志成功后返回ACK确认给主库，<strong>主库收到至少一个从库的确认就认为写操作完成。</strong></li>
+</ol>
+<h2 id="13、简述mysql中索引类型及对数据库的性能的影响"><a href="#13、简述mysql中索引类型及对数据库的性能的影响" class="headerlink" title="13、简述mysql中索引类型及对数据库的性能的影响"></a>13、简述mysql中索引类型及对数据库的性能的影响</h2><ol>
+<li><strong>普通索引：</strong>允许被索引的数据列包含重复的值。 </li>
+<li><strong>唯一索引：</strong>可以保证数据记录的唯一性。</li>
+<li><strong>主键：</strong>是一种特殊的唯一索引，在一张表中只能定义一个主键索引，主键用于唯一标识一条记录，使用 关键字 <strong>PRIMARY KEY</strong> 来创建。 </li>
+<li><strong>联合索引：</strong>索引可以覆盖多个数据列，如像INDEX(columnA, columnB)索引。 </li>
+<li><strong>全文索引：</strong>通过建立<strong>倒排</strong>索引 ,可以极大的提升检索效率,<strong>解决判断字段是否包含的问题</strong>，是目前搜索引擎使用的一种关键技术。可以通过ALTER TABLE table_name ADD FULLTEXT (column);创建全文索引</li>
+<li>索引可以极大的提高数据的查询速度。 </li>
+<li>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。 <strong>但是</strong>会降低插入、删除、更新表的速度，因为在执行这些写操作时，还要操作索引文件 </li>
+<li>索引需要占物理空间，<strong>除了数据表占数据空间之外，每一个索引还要占一定的物理空间</strong>，如果要建立聚簇索引，那么需要的空间就会更大，如果非聚集索引很多，一旦聚集索引改变，那么所有非聚集索引都会跟着变。</li>
+</ol>
+<h2 id="14、mysql执行计划怎么看"><a href="#14、mysql执行计划怎么看" class="headerlink" title="14、mysql执行计划怎么看"></a>14、mysql执行计划怎么看</h2><ol>
+<li><strong>执行计划就是sql的执行查询的顺序，以及如何使用索引查询，返回的结果集的行数</strong> EXPLAIN SELECT * from A where X&#x3D;? and Y&#x3D;?</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304171928354.png"
+                      alt="image-20230417192832210"
+                ></p>
+<ol start="2">
+<li>id ：是一个有顺序的编号，是查询的顺序号，有几个 select 就显示几行。id的顺序是按 select 出现 的顺序增长的。id列的值越大执行优先级越高越先执行，id列的值相同则从上往下执行，id列的值为 NULL最后执行。</li>
+<li>selectType 表示查询中每个select子句的类型<ul>
+<li>SIMPLE： 表示此查询不包含 UNION 查询或子查询 </li>
+<li>PRIMARY： 表示此查询是最外层的查询（包含子查询） </li>
+<li>SUBQUERY： 子查询中的第一个 SELECT </li>
+<li>UNION： 表示此查询是 UNION 的第二或随后的查询 </li>
+<li>DEPENDENT UNION： UNION 中的第二个或后面的查询语句, 取决于外面的查询 </li>
+<li>UNION RESULT, UNION 的结果 </li>
+<li>DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查 询的结果. </li>
+<li>DERIVED：衍生，表示导出表的SELECT（FROM子句的子查询）</li>
+</ul>
+</li>
+<li>table：表示该语句查询的表</li>
+<li>type：优化sql的重要字段，也是我们判断sql性能和优化程度重要指标。他的取值类型范围：<ul>
+<li>const：通过索引一次命中，匹配一行数据 </li>
+<li>system: 表中只有一行记录，相当于系统表； </li>
+<li>eq_ref：唯一性索引扫描，对于每个索引键，表中只有一条记录与之匹配 </li>
+<li>ref: 非唯一性索引扫描,返回匹配某个值的所有 </li>
+<li>range: 只检索给定范围的行，使用一个索引来选择行，一般用于between、&lt;、&gt;； </li>
+<li>index: 只遍历索引树； </li>
+<li>ALL: 表示全表扫描，这个类型的查询是性能最差的查询之一。 那么基本就是随着表的数量增多， 执行效率越慢。</li>
+</ul>
+</li>
+<li>执行效率： ALL &lt; index &lt; range&lt; ref &lt; eq_ref &lt; const &lt; system。<strong>最好是避免ALL和index</strong></li>
+<li>.possible_keys：它表示Mysql在执行该sql语句的时候，可能用到的索引信息，仅仅是可能，实际不一 定会用到。 </li>
+<li>key：此字段是 mysql 在当前查询时所真正使用到的索引。 他是possible_keys的子集 </li>
+<li>key_len：表示查询优化器使用了索引的字节数，这个字段可以评估组合索引是否完全被使用，这也是 我们优化sql时，评估索引的重要指标 </li>
+<li>rows：mysql 查询优化器根据统计信息，估算该sql返回结果集需要扫描读取的行数，这个值相关重 要，索引优化之后，扫描读取的行数越多，说明索引设置不对，或者字段传入的类型之类的问题，说明 要优化空间越大 </li>
+<li>filtered：返回结果的行占需要读到的行(rows列的值)的百分比，就是百分比越高，说明需要查询到 数据越准确， 百分比越小，说明查询到的数据量大，而结果集很少</li>
+<li>extra<ul>
+<li>using filesort ：表示 mysql 对结果集进行外部排序，不能通过索引顺序达到排序效果。一般有 using filesort都建议优化去掉，因为这样的查询 cpu 资源消耗大，延时大。</li>
+<li>using index：覆盖索引扫描，表示查询在索引树中就可查找所需数据，不用扫描表数据文件，往往说明性能不错。.</li>
+<li>using temporary：查询有使用临时表, 一般出现于排序， 分组和多表 join 的情况， 查询效率不高，建议优化。 </li>
+<li>using where ：sql使用了where过滤,效率较高。</li>
+</ul>
+</li>
+</ol>
+<h1 id="八、redis"><a href="#八、redis" class="headerlink" title="八、redis"></a>八、redis</h1><h2 id="1、RDB-和-AOF-机制"><a href="#1、RDB-和-AOF-机制" class="headerlink" title="1、RDB 和 AOF 机制"></a>1、RDB 和 AOF 机制</h2><ol>
+<li><strong>RDB：Redis DataBase</strong></li>
+<li><strong>在指定的时间间隔内将内存中的数据集快照写入磁盘</strong>，实际操作过程是fork一个子进程，先将数据集写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储。</li>
+<li><strong>优点：</strong><ul>
+<li><strong>整个Redis数据库将只包含一个文件 dump.rdb</strong>，方便持久化。 </li>
+<li>容灾性好，<strong>方便备份</strong>。 </li>
+<li>性能最大化，<strong>fork 子进程来完成写操作</strong>，让<strong>主进程继续处理命令</strong>，所以是 <strong>IO 最大化</strong>。使用<strong>单独子进程来进行持久化</strong>，<strong>主进程不会进行任何 IO 操作</strong>，保证了 <strong>redis 的高性能</strong></li>
+<li>相对于数据集大时，比 <strong>AOF</strong> 的启动效率更高。</li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li><strong>数据安全性低。****RDB 是间隔一段时间进行持久化</strong>，如果持久化之间 redis 发生故障，会发生数据丢失。所以这种方式更适合数据要求不严谨的时候) </li>
+<li>由于<strong>RDB是通过fork子进程来协助完成数据持久化工作的</strong>，因此，如果当数据集较大时，可能会导致整个服务器停止服务几百毫秒，甚至是1秒钟。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li><strong>AOF：Append Only File</strong></li>
+<li>以<strong>日志的形式记录</strong>服务器所处理的每一个<strong>写、删除</strong>操作，<strong>查询</strong>操作不会记录，<strong>以文本的方式记录</strong>，可以打开文件看到详细的操作记录</li>
+<li><strong>优点：</strong><ul>
+<li><strong>数据安全</strong>，Redis中提供了3种同步策略，即<strong>每秒同步、每修改同步和不同步</strong>。事实上，<strong>每秒同步</strong>也是异步完成的，其效率也是非常高的，所差的是一旦系统出现宕机现象，那么这一秒钟之内修改的数据将会丢失。而<strong>每修改同步</strong>，我们可以将其视为同步持久化，即每次发生的数据变化都会被立即记录到磁 盘中。</li>
+<li><strong>通过 append 模式写文件</strong>，即使中途服务器宕机也不会破坏已经存在的内容，可以通过 <strong>redischeck-aof</strong> 工具解决数据一致性问题。 </li>
+<li>AOF 机制的 rewrite 模式。<strong>定期对AOF文件进行重写，以达到压缩的目的</strong></li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li>AOF 文件比 RDB 文件大，且恢复速度慢。 </li>
+<li>数据集大的时候，比 rdb 启动效率低。 </li>
+<li>运行效率没有RDB高</li>
+</ul>
+</li>
+<li>AOF文件比RDB更新频率高，<strong>优先使用AOF还原数据。</strong> </li>
+<li><strong>AOF</strong>比RDB<strong>更安全也更大</strong> </li>
+<li><strong>RDB</strong>性能比AOF<strong>好</strong> </li>
+<li>如果两个都配了<strong>优先加载AOF</strong></li>
+</ol>
+<h2 id="2、Redis的过期键的删除策略"><a href="#2、Redis的过期键的删除策略" class="headerlink" title="2、Redis的过期键的删除策略"></a>2、Redis的过期键的删除策略</h2><ol>
+<li><strong>Redis是key-value数据库</strong>，我们可以设置Redis中缓存的key的过期时间。<strong>Redis的过期策略就是指当 Redis中缓存的key过期了，Redis如何处理。</strong><ul>
+<li><strong>惰性过期：</strong> <strong>只有当访问一个key时，才会判断该key是否已过期，过期则清除。</strong>该策略可以最大化地节省CPU资源，却对内存非常不友好。极端情况可能出现大量的过期key没有再次被访问，从而不会被清除，占用大量内存。 </li>
+<li><strong>定期过期：</strong> <strong>每隔一定的时间，会扫描一定数量的数据库的expires字典中一定数量的key，并清除其中已过期的key。</strong>该策略是一个折中方案。通过调整<strong>定时扫描的时间间隔</strong>和<strong>每次扫描的限定耗时</strong>， 可以在不同情况下使得CPU和内存资源达到最优的平衡效果。</li>
+</ul>
+</li>
+<li>(<strong>expires字典会保存所有设置了过期时间的key的过期时间数据</strong>，其中，<strong>key</strong>是指向键空间中的某个键的指针，<strong>value</strong>是该键的毫秒精度的UNIX时间戳表示的过期时间。<strong>键空间是指该Redis集群中保存的所有键。</strong>)</li>
+<li>Redis中<strong>同时使用了</strong>惰性过期和定期过期两种过期策略。</li>
+</ol>
+<h2 id="3、Redis线程模型、单线程快的原因"><a href="#3、Redis线程模型、单线程快的原因" class="headerlink" title="3、Redis线程模型、单线程快的原因"></a>3、Redis线程模型、单线程快的原因</h2><ol>
+<li><strong>Redis基于Reactor模式开发了网络事件处理器</strong>，这个处理器叫做文件事件处理器 file event handler。 这个文件事件处理器，它<strong>是单线程的</strong>，所以 Redis 才叫做单线程的模型，<strong>它采用IO多路复用机制来同时监听多个Socket，根据Socket上的事件类型来选择对应的事件处理器来处理这个事件。</strong>可以<strong>实现高性能的网络通信模型</strong>，又可以<strong>跟内部其他单线程的模块</strong>进行<strong>对接</strong>，保证了 Redis 内部的线程模型的简单性。<strong>文件事件处理器的结构包含4个部分</strong>：<strong>多个Socket、IO多路复用程序、文件事件分派器以及事件处理器</strong> （命令请求处理器、命令回复处理器、连接应答处理器等）。</li>
+<li>多个 Socket 可能并发的产生不同的操作，每个操作对应不同的文件事件，但是IO多路复用程序会监听多个Socket，会将 Socket 放入一个队列中排队，每次从队列中取出一个 Socket 给事件分派器，<strong>事件分派器把 Socket 给对应的事件处理器。</strong></li>
+<li>然后<strong>一个 Socket 的事件处理完之后，IO多路复用程序才会将队列中的下一个 Socket 给事件分派器</strong>。文件事件分派器会根据每个 Socket 当前产生的事件，来选择对应的事件处理器来处理。</li>
+<li><strong>单线程快的原因：</strong><ul>
+<li><strong>纯内存操作</strong> </li>
+<li><strong>核心</strong>是基于非阻塞的IO多路复用机制 </li>
+<li>单线程反而<strong>避免了</strong>多线程的频繁<strong>上下文切换</strong>带来的性能问题</li>
+</ul>
+</li>
+</ol>
+<h2 id="4、简述Redis事务实现"><a href="#4、简述Redis事务实现" class="headerlink" title="4、简述Redis事务实现"></a>4、简述Redis事务实现</h2><ol>
+<li><strong>事务开始</strong>：<strong>MULTI命令的执行</strong>，标识着一个事务的开始。MULTI命令会将客户端状态的 flags 属性中打开 REDIS_MULTI 标识来完成的。</li>
+<li><strong>命令入队：</strong> <strong>当一个客户端切换到事务状态之后，服务器会根据这个客户端发送来的命令来执行不同的操作。</strong>如果客户端发送的命令为<strong>MULTI</strong>、<strong>EXEC</strong>、<strong>WATCH</strong>、<strong>DISCARD</strong>中的一个，立即执行这个命令，否则将命令放入一 个事务队列里面，然后向客户端返回 <strong>QUEUED</strong> 回复<ul>
+<li>如果客户端发送的命令为 <strong>EXEC、DISCARD、WATCH、MULTI</strong> 四个命令的其中一个，那么服务器立即执行这个命令。 </li>
+<li>如果客户端发送的是四个命令以外的其他命令，那么服务器并不立即执行这个命令。 <strong>首先</strong>检查此命令的格式是否正确，如果不正确，服务器会在客户端状态（redisClient）的 flags 属性关闭 REDIS_MULTI 标识，并且返回错误信息给客户端。 如果正确，将这个命令放入一个事务队列里面，然后向客户端返回 QUEUED 回复</li>
+<li>事务队列是按照<strong>FIFO</strong>的方式保存入队的命令</li>
+</ul>
+</li>
+<li><strong>事务执行：</strong>客户端发送 <strong>EXEC</strong> 命令，服务器执行 EXEC 命令逻辑。<ul>
+<li>如果客户端状态的 flags 属性不包含 REDIS_MULTI 标识，或者包含 REDIS_DIRTY_CAS 或者 REDIS_DIRTY_EXEC 标识，那么就直接<strong>取消事务</strong>的执行。 </li>
+<li>否则客户端处于<strong>事务状态（flags 有 REDIS_MULTI 标识）</strong>，服务器会遍历客户端的事务队列，然后执行事务队列中的所有命令，最后将返回结果全部返回给客户端；</li>
+</ul>
+</li>
+<li><strong>redis 不支持事务回滚机制</strong>，但是它会检查每一个事务中的命令是否错误。</li>
+<li>Redis 事务<strong>不支持</strong>检查那些程序员自己逻辑错误。例如对 String 类型的数据库键执行对 HashMap 类型的操作！<ul>
+<li><strong>WATCH</strong> 命令是一个<strong>乐观锁</strong>，可以为 Redis 事务提供 check-and-set （<strong>CAS</strong>）行为。可以<strong>监控一个或多个键</strong>，<strong>一旦其中有一个键被修改（或删除），之后的事务就不会执行</strong>，监控一直持续到EXEC命令。 </li>
+<li><strong>MULTI</strong>命令<strong>用于开启一个事务</strong>，它总是返回OK。MULTI执行之后，客户端可以继续向服务器发送任意多条命令，这些命令不会立即被执行，而是被放到一个队列中，<strong>当EXEC命令被调用时，所有队列中的命令才会被执行。</strong> </li>
+<li><strong>EXEC</strong>：<strong>执行所有事务块内的命令</strong>。返回事务块内所有命令的返回值，按命令执行的先后顺序排列。当操作被打断时，返回空值 nll 。 <strong>通过调用DISCARD，客户端可以清空事务队列，并放弃执行事务， 并且客户端会从事务状态中退出</strong>。 </li>
+<li><strong>UNWATCH</strong>命令可以取消watch对所有key的监控。</li>
+</ul>
+</li>
+</ol>
+<h2 id="5、redis集群方案"><a href="#5、redis集群方案" class="headerlink" title="5、redis集群方案"></a>5、redis集群方案</h2><ol>
+<li><strong>哨兵模式：</strong>sentinel，哨兵是 redis 集群中非常重要的一个组件，主要有以下功能：<ul>
+<li><strong>集群监控</strong>：<strong>负责监控</strong> redis master 和 slave 进程是否正常工作。 </li>
+<li><strong>消息通知</strong>：如果某个 redis 实例有故障，那么<strong>哨兵负责发送消息</strong>作为报警通知给管理员。 </li>
+<li><strong>故障转移</strong>：如果 master node <strong>挂掉</strong>了，会<strong>自动转移</strong>到 slave node 上。 </li>
+<li><strong>配置中心</strong>：如果<strong>故障转移发生了</strong>，通知 client 客户端新的 master 地址。</li>
+</ul>
+</li>
+<li><strong>哨兵用于实现 redis 集群的高可用</strong>，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作。<ul>
+<li>故障转移时，判断一个 master node 是否宕机了，<strong>需要大部分的哨兵都同意才行</strong>，涉及到了分布式选举 </li>
+<li>即使<strong>部分哨兵节点挂掉了</strong>，<strong>哨兵集群还是能正常工作</strong>的 </li>
+<li>哨兵通常需要 3 个实例，来保证自己的健壮性。 </li>
+<li>哨兵 + redis 主从的部署架构，是不保证数据零丢失的，只能保证 redis 集群的高可用性。 </li>
+<li>对于哨兵 + redis 主从这种复杂的部署架构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li>
+</ul>
+</li>
+<li><strong>Redis Cluster是一种服务端Sharding技术</strong>，3.0版本开始正式提供。采用slot(槽)的概念，一共分成 16384个槽。将请求发送到任意节点，接收到请求的节点会将查询请求发送到正确的节点上执行。<strong>方案说明</strong><ul>
+<li><strong>通过哈希的方式</strong>，将数据分片，每个节点均分存储一定哈希槽(哈希值)区间的数据，默认分配了 16384 个槽位</li>
+<li><strong>每份数据分片会存储在多个互为主从的多节点上</strong> </li>
+<li>数据写入<strong>先</strong>写主节点，<strong>再</strong>同步到从节点(支持配置为阻塞同步) </li>
+<li>同一分片多个节点间的数据<strong>不保持强一致性</strong> </li>
+<li>读取数据时，当客户端操作的key没有分配在该节点上时，redis会返回转向指令，指向正确的节点 </li>
+<li><strong>扩容时需要需要把旧节点的数据迁移一部分到新节点</strong></li>
+</ul>
+</li>
+<li>在 redis cluster 架构下，<strong>每个 redis 要放开两个端口号</strong>，比如一个是 6379，另外一个就是 加1w 的端 口号，比如 16379。</li>
+<li>16379 端口号是<strong>用来进行节点间通信的</strong>，也就是 cluster bus 的通信，<strong>用来进行故障检测、配置更新、 故障转移授权</strong>。cluster bus 用了另外一种二进制的协议，gossip 协议，用于节点间进行高效的数据交换，占用更少的网络带宽和处理时间。</li>
+<li><strong>优点：</strong><ul>
+<li>无中心架构，<strong>支持动态扩容</strong>，对业务透明 </li>
+<li>具备**Sentinel的监控和自动Failover(故障转移)**能力 </li>
+<li><strong>客户端</strong>不需要连接集群所有节点<strong>，连接集群中任何一个可用节点即可</strong> </li>
+<li>高性能，客户端直连redis服务，<strong>免去了proxy代理的损耗</strong></li>
+</ul>
+</li>
+<li><strong>缺点：</strong><ul>
+<li>运维也很复杂，数据迁移需要人工干预 </li>
+<li>只能使用0号数据库 </li>
+<li>不支持批量操作(pipeline管道操作) </li>
+<li>分布式逻辑和存储模块耦合等</li>
+</ul>
+</li>
+<li><strong>Redis Sharding</strong>是Redis Cluster出来之前，业界普遍使用的多Redis实例集群方法。<strong>其主要思想是采用哈希算法将Redis数据的key进行散列，通过hash函数，特定的key会映射到特定的Redis节点上。</strong>Java redis客户端驱动jedis，支持Redis Sharding功能，即ShardedJedis以及结合缓存池的 ShardedJedisPool<ul>
+<li><strong>优点：</strong>服务端的Redis实例彼此独立，相互无关联，每个Redis实例像单服务器一样运行， 非常容易线性扩展，系统的灵活性很强</li>
+<li><strong>缺点：</strong>由于sharding处理放到客户端，规模进一步扩大时给运维带来挑战。 客户端sharding不支持动态增删节点。服务端Redis实例群拓扑结构有变化时，每个客户端都需要更新 调整。连接不能共享，当应用规模增大时，资源浪费制约优化</li>
+</ul>
+</li>
+</ol>
+<h2 id="6、redis-主从复制的核心原理"><a href="#6、redis-主从复制的核心原理" class="headerlink" title="6、redis 主从复制的核心原理"></a>6、redis 主从复制的核心原理</h2><ol>
+<li><strong>通过执行slaveof命令或设置slaveof选项，让一个服务器去复制另一个服务器的数据。</strong>主数据库可以进行读写操作，当写操作导致数据变化时会自动将数据同步给从数据库。<strong>而从数据库一般是只读的</strong>，并接受主数据库同步过来的数据。<strong>一个主数据库可以拥有多个从数据库，而一个从数据库只能拥有一个主数据库</strong>。</li>
+<li><strong>全量复制：</strong><ul>
+<li><strong>主节点通过bgsave命令fork子进程进行RDB持久化</strong>，该过程是非常消耗CPU、内存(页表复制)、硬盘IO的 </li>
+<li><strong>主节点通过网络将RDB文件发送给从节点</strong>，对主从节点的带宽都会带来很大的消耗 </li>
+<li><strong>从节点清空老数据、载入新RDB文件的过程是阻塞的，无法响应客户端的命令</strong>；如果从节点执行 bgrewriteaof，也会带来额外的消耗</li>
+</ul>
+</li>
+<li><strong>部分复制：</strong><ul>
+<li><strong>复制偏移量：</strong>执行复制的双方，主从节点，分别会维护一个复制偏移量offset</li>
+<li><strong>复制积压缓冲区：</strong>主节点内部维护了一个固定长度的、先进先出(FIFO)队列作为复制积压缓冲区， <strong>当主从节点offset的差距过大超过缓冲区长度时，将无法执行部分复制，只能执行全量复制。</strong> </li>
+<li><strong>服务器运行ID(runid)：</strong>每个Redis节点，都有其运行ID，运行ID由节点在启动时自动生成，<strong>主节点会将自己的运行ID发送给从节点，从节点会将主节点的运行ID存起来。</strong> 从节点Redis<strong>断开重连</strong>的时候，就是根据运行ID来判断同步的进度：<ul>
+<li><strong>如果从节点保存的runid与主节点现在的runid相同</strong>，说明主从节点之前同步过，主节点会继续尝试<strong>使用部分复制</strong>(到底能不能部分复制还要看offset和复制积压缓冲区的情况)； </li>
+<li><strong>如果从节点保存的runid与主节点现在的runid不同</strong>，说明从节点在断线前同步的Redis节点并不是当前的主节点，<strong>只能进行全量复制</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过程原理：</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202304181626277.png"
+                      alt="image-20230418162652021"
+                ></p>
+<h2 id="7、缓存雪崩、缓存穿透、缓存击穿"><a href="#7、缓存雪崩、缓存穿透、缓存击穿" class="headerlink" title="7、缓存雪崩、缓存穿透、缓存击穿"></a>7、缓存雪崩、缓存穿透、缓存击穿</h2><ol>
+<li><strong>缓存雪崩</strong>是指<strong>缓存同一时间大面积的失效</strong>，所以，后面的请求都会落到数据库上，造成数据库短时间内承受大量请求而崩掉。</li>
+<li><strong>解决方案：</strong><ul>
+<li>缓存数据的<strong>过期时间设置随机</strong>，防止同一时间大量数据过期现象发生。 </li>
+<li><strong>给每一个缓存数据增加相应的缓存标记</strong>，记录缓存是否失效，如果缓存标记失效，则更新数据缓存。 </li>
+<li>缓存预热 </li>
+<li>互斥锁</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li><strong>缓存穿透</strong>是指<strong>缓存和数据库中都没有的数据</strong>，导致所有的请求都落到数据库上，造成数据库短时间内承受大量请求而崩掉。</li>
+<li><strong>解决方案：</strong><ul>
+<li><strong>接口层增加校验</strong>，如用户鉴权校验，id做基础校验，id&lt;&#x3D;0的直接拦截； </li>
+<li>从缓存取不到的数据，在数据库中也没有取到，这时也可以将key-value对写为key-null，<strong>缓存有效时间可以设置短点</strong>，如30秒（设置太长会导致正常情况也没法使用）。这样可以防止攻击用反复用同一个id暴力攻击 </li>
+<li><strong>采用布隆过滤器</strong>，<strong>将所有可能存在的数据哈希到一个足够大的 bitmap 中</strong>，一个一定不存在的数据会被这个 bitmap 拦截掉，从而避免了对底层存储系统的查询压力</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li><strong>缓存击穿</strong>是指<strong>缓存中没有但数据库中有的数据</strong>（一般是缓存时间到期），这时由于并发用户特别多，同时读缓存没读到数据，又同时去数据库去取数据，引起数据库压力瞬间增大，造成过大压力。和缓存雪崩不同的是，<strong>缓存击穿指并发查&#x3D;&#x3D;同一&#x3D;&#x3D;条数据，缓存雪崩是不同数据都过期了，&#x3D;&#x3D;很多&#x3D;&#x3D;数据都查不到从而查数据库</strong>。</li>
+<li><strong>解决方案：</strong><ul>
+<li>设置热点数据永远不过期。 </li>
+<li>加互斥锁</li>
+</ul>
+</li>
+</ol>
 
         </div>
 
@@ -560,7 +1769,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81Java%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">1、Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">1.面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81JDK%E3%80%81JRE%E3%80%81JVM"><span class="nav-number">1.2.</span> <span class="nav-text">2、JDK、JRE、JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81-x3D-x3D-%E5%92%8Cequals%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.</span> <span class="nav-text">3、&#x3D;&#x3D;和equals比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81hashCode%E4%B8%8Eequals"><span class="nav-number">1.4.</span> <span class="nav-text">4、hashCode与equals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81final"><span class="nav-number">1.5.</span> <span class="nav-text">5、final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81String%E3%80%81StringBuffer%E3%80%81StringBuilder"><span class="nav-number">1.6.</span> <span class="nav-text">6、String、StringBuffer、StringBuilder</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81Java%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一、Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">1、面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81JDK%E3%80%81JRE%E3%80%81JVM"><span class="nav-number">1.2.</span> <span class="nav-text">2、JDK、JRE、JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81-x3D-x3D-%E5%92%8Cequals%E6%AF%94%E8%BE%83"><span class="nav-number">1.3.</span> <span class="nav-text">3、&#x3D;&#x3D;和equals比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81hashCode%E4%B8%8Eequals"><span class="nav-number">1.4.</span> <span class="nav-text">4、hashCode与equals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81final"><span class="nav-number">1.5.</span> <span class="nav-text">5、final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81String%E3%80%81StringBuffer%E3%80%81StringBuilder"><span class="nav-number">1.6.</span> <span class="nav-text">6、String、StringBuffer、StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.7.</span> <span class="nav-text">7、重载和重写的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.8.</span> <span class="nav-text">8、接口和抽象类的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81List%E5%92%8CSet%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.9.</span> <span class="nav-text">9、List和Set的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81ArrayList%E5%92%8CLinkedList%E5%8C%BA%E5%88%AB"><span class="nav-number">1.10.</span> <span class="nav-text">10、ArrayList和LinkedList区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81HashMap%E5%92%8CHashTable%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E5%85%B6%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%98%AF%E4%BB%80-%E4%B9%88%EF%BC%9F"><span class="nav-number">1.11.</span> <span class="nav-text">11、HashMap和HashTable有什么区别？其底层实现是什 么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%9F%E9%87%87%E7%94%A8%E5%AD%97%E8%8A%82%E7%A0%81%E7%9A%84%E5%A5%BD%E5%A4%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">12、什么是字节码？采用字节码的好处是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81Java%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E4%BD%93%E7%B3%BB"><span class="nav-number">1.13.</span> <span class="nav-text">13、Java中的异常体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">1.14.</span> <span class="nav-text">14、Java类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%E3%80%81%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.15.</span> <span class="nav-text">15、双亲委托模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3"><span class="nav-number">1.16.</span> <span class="nav-text">二、线程、并发相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F%E7%BA%BF%E7%A8%8B%E6%9C%89%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">1.17.</span> <span class="nav-text">1、线程的生命周期？线程有几种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81sleep-%E3%80%81wait-%E3%80%81join-%E3%80%81yield-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.18.</span> <span class="nav-text">2、sleep()、wait()、join()、yield()的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%AF%B9%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.19.</span> <span class="nav-text">3、对线程安全的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Thread%E3%80%81Runable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.20.</span> <span class="nav-text">4、Thread、Runable的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%AF%B9%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.21.</span> <span class="nav-text">5、对守护线程的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81ThreadLocal%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.22.</span> <span class="nav-text">6、ThreadLocal的原理和使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81ThreadLocal%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E5%8E%9F%E5%9B%A0%EF%BC%8C%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D"><span class="nav-number">1.23.</span> <span class="nav-text">7、ThreadLocal内存泄露原因，如何避免</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E5%B9%B6%E5%8F%91%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E4%B8%B2%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.24.</span> <span class="nav-text">8、并发、并行、串行的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="nav-number">1.25.</span> <span class="nav-text">9、并发的三大特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81volatile"><span class="nav-number">1.26.</span> <span class="nav-text">10、volatile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F%E8%A7%A3%E9%87%8A%E4%B8%8B%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="nav-number">1.27.</span> <span class="nav-text">11、为什么用线程池？解释下线程池参数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E7%AE%80%E8%BF%B0%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.28.</span> <span class="nav-text">12、简述线程池处理流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%88%E6%B7%BB%E5%8A%A0%E5%88%97%E9%98%9F%E8%80%8C%E4%B8%8D%E6%98%AF%E5%85%88%E5%88%9B%E5%BB%BA%E6%9C%80%E5%A4%A7%E7%BA%BF%E7%A8%8B%EF%BC%9F"><span class="nav-number">1.29.</span> <span class="nav-text">13、线程池中阻塞队列的作用？为什么是先添加列队而不是先创建最大线程？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-number">1.30.</span> <span class="nav-text">14、线程池中线程复用原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81spring"><span class="nav-number">2.</span> <span class="nav-text">三、spring</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAIOC%E5%AE%B9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">1、如何实现一个IOC容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81spring%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">2、spring是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9AOP%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">3、谈谈你对AOP的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E8%B0%88%E8%B0%88%E4%BD%A0%E5%AF%B9IOC%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">2.4.</span> <span class="nav-text">4、谈谈你对IOC的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81BeanFactory%E5%92%8CApplicationContext%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">5、BeanFactory和ApplicationContext有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8BSpring-Bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">6、描述一下Spring Bean的生命周期？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E8%A7%A3%E9%87%8A%E4%B8%8BSpring%E6%94%AF%E6%8C%81%E7%9A%84%E5%87%A0%E7%A7%8Dbean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%82"><span class="nav-number">2.7.</span> <span class="nav-text">7、解释下Spring支持的几种bean的作用域。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BE%8BBean%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E4%B9%88%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">8、Spring框架中的单例Bean是线程安全的么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81Spring-%E6%A1%86%E6%9E%B6%E4%B8%AD%E9%83%BD%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">9、Spring 框架中都用到了哪些设计模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81Spring%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E5%92%8C%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">10、Spring事务的实现方式和原理以及隔离级别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81spring%E4%BA%8B%E5%8A%A1%E4%BC%A0%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="nav-number">2.11.</span> <span class="nav-text">11、spring事务传播机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81spring%E4%BA%8B%E5%8A%A1%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%A4%B1%E6%95%88"><span class="nav-number">2.12.</span> <span class="nav-text">12、spring事务什么时候会失效?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFbean%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.13.</span> <span class="nav-text">13、什么是bean的自动装配，有哪些方式？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81springmvc"><span class="nav-number">3.</span> <span class="nav-text">四、springmvc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Spring-Boot%E3%80%81Spring-MVC-%E5%92%8C-Spring-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">1、Spring Boot、Spring MVC 和 Spring 有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81SpringMVC-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">2、SpringMVC 工作流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Spring-MVC%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BB%84%E4%BB%B6%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">3、Spring MVC的主要组件？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81springBoot"><span class="nav-number">4.</span> <span class="nav-text">五、springBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Boot%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">1、什么是 Spring Boot？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8SpringBoot"><span class="nav-number">4.2.</span> <span class="nav-text">2、为什么要用SpringBoot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Spring-Boot-%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E7%82%B9%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">3、Spring Boot 有哪些优点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Spring-Boot-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">4、Spring Boot 自动配置原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3-Spring-Boot-%E4%B8%AD%E7%9A%84-Starter"><span class="nav-number">4.5.</span> <span class="nav-text">5、如何理解 Spring Boot 中的 Starter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.6.</span> <span class="nav-text">6、什么是嵌入式服务器？为什么要使用嵌入式服务器?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81Spring-Boot%E4%B8%AD%E5%B8%B8%E2%BD%A4%E6%B3%A8%E8%A7%A3%E5%8F%8A%E5%85%B6%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.7.</span> <span class="nav-text">7、Spring Boot中常⽤注解及其底层实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81Spring-Boot%E6%98%AF%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8Tomcat%E7%9A%84"><span class="nav-number">4.8.</span> <span class="nav-text">8、Spring Boot是如何启动Tomcat的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81Spring-Boot%E4%B8%AD%E9%85%8D%E7%BD%AE%E2%BD%82%E4%BB%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">4.9.</span> <span class="nav-text">9、Spring Boot中配置⽂件的加载顺序是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81Spring-Boot-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%B3%A8%E8%A7%A3%E6%98%AF%E5%93%AA%E4%B8%AA%EF%BC%9F%E5%AE%83%E4%B8%BB%E8%A6%81%E7%94%B1%E5%93%AA%E5%87%A0%E4%B8%AA%E6%B3%A8%E8%A7%A3%E7%BB%84%E6%88%90%E7%9A%84%EF%BC%9F"><span class="nav-number">4.10.</span> <span class="nav-text">10、Spring Boot 的核心注解是哪个？它主要由哪几个注解组成的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E8%BF%90%E8%A1%8CSpring-Boot%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">4.11.</span> <span class="nav-text">11、运行Spring Boot有哪几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8Spring-Boot%E5%90%AF%E5%8A%A8%E7%9A%84%E6%97%B6%E5%80%99%E8%BF%90%E8%A1%8C%E4%B8%80%E4%BA%9B%E7%89%B9%E5%AE%9A%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9F"><span class="nav-number">4.12.</span> <span class="nav-text">12、如何在Spring Boot启动的时候运行一些特定的代码？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81Spring-Boot-%E9%9C%80%E8%A6%81%E7%8B%AC%E7%AB%8B%E7%9A%84%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E5%90%97%EF%BC%9F"><span class="nav-number">4.13.</span> <span class="nav-text">13、Spring Boot 需要独立的容器运行吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81Spring-Boot%E4%B8%AD%E7%9A%84%E7%9B%91%E8%A7%86%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.14.</span> <span class="nav-text">14、Spring Boot中的监视器是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Spring-Boot%E5%AE%9E%E7%8E%B0%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.15.</span> <span class="nav-text">15、如何使用Spring Boot实现异常处理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E3%80%81springboot%E5%B8%B8%E7%94%A8%E7%9A%84starter%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">4.16.</span> <span class="nav-text">16、springboot常用的starter有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17%E3%80%81SpringBoot-%E5%AE%9E%E7%8E%B0%E7%83%AD%E9%83%A8%E7%BD%B2%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">4.17.</span> <span class="nav-text">17、SpringBoot 实现热部署有哪几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18%E3%80%81Spring-Boot-%E7%9A%84%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9C%89%E5%93%AA%E5%87%A0%E4%B8%AA%EF%BC%9F%E5%AE%83%E4%BB%AC%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.18.</span> <span class="nav-text">18、Spring Boot 的核心配置文件有哪几个？它们的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-JavaConfig%EF%BC%9F"><span class="nav-number">4.19.</span> <span class="nav-text">19、什么是 JavaConfig？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20%E3%80%81%E5%A6%82%E4%BD%95%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD-Spring-Boot-%E4%B8%8A%E7%9A%84%E6%9B%B4%E6%94%B9%EF%BC%8C%E8%80%8C%E6%97%A0%E9%9C%80%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9F"><span class="nav-number">4.20.</span> <span class="nav-text">20、如何重新加载 Spring Boot 上的更改，而无需重新启动服务器？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8-Spring-Boot-%E4%B8%AD%E7%A6%81%E7%94%A8-Actuator-%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9F"><span class="nav-number">4.21.</span> <span class="nav-text">21、如何在 Spring Boot 中禁用 Actuator 端点安全性？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3%E4%B8%8A%E8%BF%90%E8%A1%8C-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%9F"><span class="nav-number">4.22.</span> <span class="nav-text">22、如何在自定义端口上运行 Spring Boot 应用程序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-YAML%EF%BC%9F"><span class="nav-number">4.23.</span> <span class="nav-text">23、什么是 YAML？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24%E3%80%81%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-Spring-Boot-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%9F"><span class="nav-number">4.24.</span> <span class="nav-text">24、如何实现 Spring Boot 应用程序的安全性？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Spring-Boot-%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5%E5%92%8C%E6%8E%92%E5%BA%8F%EF%BC%9F"><span class="nav-number">4.25.</span> <span class="nav-text">25、如何使用 Spring Boot 实现分页和排序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Swagger%EF%BC%9F%E4%BD%A0%E7%94%A8-Spring-Boot-%E5%AE%9E%E7%8E%B0%E4%BA%86%E5%AE%83%E5%90%97%EF%BC%9F"><span class="nav-number">4.26.</span> <span class="nav-text">26、什么是 Swagger？你用 Spring Boot 实现了它吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Profiles%EF%BC%9F"><span class="nav-number">4.27.</span> <span class="nav-text">27、什么是 Spring Profiles？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Spring-Batch%EF%BC%9F"><span class="nav-number">4.28.</span> <span class="nav-text">28、什么是 Spring Batch？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#29%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-FreeMarker-%E6%A8%A1%E6%9D%BF%EF%BC%9F"><span class="nav-number">4.29.</span> <span class="nav-text">29、什么是 FreeMarker 模板？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-CSRF-%E6%94%BB%E5%87%BB%EF%BC%9F"><span class="nav-number">4.30.</span> <span class="nav-text">30、什么是 CSRF 攻击？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#31%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-WebSockets%EF%BC%9F"><span class="nav-number">4.31.</span> <span class="nav-text">31、什么是 WebSockets？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#32%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-AOP%EF%BC%9F"><span class="nav-number">4.32.</span> <span class="nav-text">32、什么是 AOP？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#33%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF-Apache-Kafka%EF%BC%9F"><span class="nav-number">4.33.</span> <span class="nav-text">33、什么是 Apache Kafka？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#34%E3%80%81%E6%88%91%E4%BB%AC%E5%A6%82%E4%BD%95%E7%9B%91%E8%A7%86%E6%89%80%E6%9C%89-Spring-Boot-%E5%BE%AE%E6%9C%8D%E5%8A%A1%EF%BC%9F"><span class="nav-number">4.34.</span> <span class="nav-text">34、我们如何监视所有 Spring Boot 微服务？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35%E3%80%81Spring-Boot-%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%A0%BC%E5%BC%8F%EF%BC%9F%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">4.35.</span> <span class="nav-text">35、Spring Boot 的配置文件有哪几种格式？它们有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#36%E3%80%81%E5%BC%80%E5%90%AF-Spring-Boot-%E7%89%B9%E6%80%A7%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">4.36.</span> <span class="nav-text">36、开启 Spring Boot 特性有哪几种方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37%E3%80%81Spring-Boot-%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">4.37.</span> <span class="nav-text">37、Spring Boot 有哪几种读取配置的方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#38%E3%80%81Spring-Boot-%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%EF%BC%9F%E6%8E%A8%E8%8D%90%E5%92%8C%E9%BB%98%E8%AE%A4%E7%9A%84%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6%E6%98%AF%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">4.38.</span> <span class="nav-text">38、Spring Boot 支持哪些日志框架？推荐和默认的日志框架是哪个？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#38%E3%80%81Spring-Boot-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E5%A4%9A%E5%A5%97%E4%B8%8D%E5%90%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%9F"><span class="nav-number">4.39.</span> <span class="nav-text">38、Spring Boot 如何定义多套不同环境配置？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39%E3%80%81Spring-Boot-%E5%8F%AF%E4%BB%A5%E5%85%BC%E5%AE%B9%E8%80%81-Spring-%E9%A1%B9%E7%9B%AE%E5%90%97%EF%BC%8C%E5%A6%82%E4%BD%95%E5%81%9A%EF%BC%9F"><span class="nav-number">4.40.</span> <span class="nav-text">39、Spring Boot 可以兼容老 Spring 项目吗，如何做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#40%E3%80%81%E4%BF%9D%E6%8A%A4-Spring-Boot-%E5%BA%94%E7%94%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">4.41.</span> <span class="nav-text">40、保护 Spring Boot 应用有哪些方法？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81Mybatis"><span class="nav-number">5.</span> <span class="nav-text">六、Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81mybatis%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">5.1.</span> <span class="nav-text">1、mybatis的优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.2.</span> <span class="nav-text">2、#{}和${}的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%AE%80%E8%BF%B0-Mybatis-%E7%9A%84%E6%8F%92%E4%BB%B6%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86%EF%BC%8C%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6%E3%80%82"><span class="nav-number">5.3.</span> <span class="nav-text">3、简述 Mybatis 的插件运行原理，如何编写一个插件。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81Mysql"><span class="nav-number">6.</span> <span class="nav-text">七、Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%B4%A2%E5%BC%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">1、索引的基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81mysql%E8%81%9A%E7%B0%87%E5%92%8C%E9%9D%9E%E8%81%9A%E7%B0%87%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">6.2.</span> <span class="nav-text">2、mysql聚簇和非聚簇索引的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81mysql%E7%B4%A2%E5%BC%95%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%8C%E5%90%84%E8%87%AA%E4%BC%98%E5%8A%A3"><span class="nav-number">6.3.</span> <span class="nav-text">3、mysql索引的数据结构，各自优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E7%B4%A2%E5%BC%95%E6%B6%89%E5%8F%8A%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">6.4.</span> <span class="nav-text">4、索引涉及的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E9%94%81%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">6.5.</span> <span class="nav-text">5、锁的类型有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81InnoDB%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E9%94%81%E7%9A%84%E7%AE%97%E6%B3%95"><span class="nav-number">6.6.</span> <span class="nav-text">6、InnoDB存储引擎的锁的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%85%B3%E5%BF%83%E8%BF%87%E4%B8%9A%E5%8A%A1%E7%B3%BB%E7%BB%9F%E9%87%8C%E9%9D%A2%E7%9A%84sql%E8%80%97%E6%97%B6%E5%90%97%EF%BC%9F%E7%BB%9F%E8%AE%A1%E8%BF%87%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%90%97%EF%BC%9F%E5%AF%B9%E6%85%A2-%E6%9F%A5%E8%AF%A2%E9%83%BD%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96%E8%BF%87%EF%BC%9F"><span class="nav-number">6.7.</span> <span class="nav-text">7、关心过业务系统里面的sql耗时吗？统计过慢查询吗？对慢 查询都怎么优化过？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">6.8.</span> <span class="nav-text">8、事务的基本特性和隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81ACID%E9%9D%A0%E4%BB%80%E4%B9%88%E4%BF%9D%E8%AF%81%E7%9A%84%EF%BC%9F"><span class="nav-number">6.9.</span> <span class="nav-text">9、ACID靠什么保证的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFMVCC"><span class="nav-number">6.10.</span> <span class="nav-text">10、什么是MVCC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E5%88%86%E8%A1%A8%E5%90%8E%E9%9D%9Esharding-key%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%8C%E5%88%86%E8%A1%A8%E5%90%8E%E7%9A%84%E6%8E%92%E5%BA%8F%EF%BC%9F"><span class="nav-number">6.11.</span> <span class="nav-text">11、分表后非sharding_key的查询怎么处理，分表后的排序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%90%86"><span class="nav-number">6.12.</span> <span class="nav-text">12、mysql主从同步原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E7%AE%80%E8%BF%B0mysql%E4%B8%AD%E7%B4%A2%E5%BC%95%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">6.13.</span> <span class="nav-text">13、简述mysql中索引类型及对数据库的性能的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E6%80%8E%E4%B9%88%E7%9C%8B"><span class="nav-number">6.14.</span> <span class="nav-text">14、mysql执行计划怎么看</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81redis"><span class="nav-number">7.</span> <span class="nav-text">八、redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81RDB-%E5%92%8C-AOF-%E6%9C%BA%E5%88%B6"><span class="nav-number">7.1.</span> <span class="nav-text">1、RDB 和 AOF 机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Redis%E7%9A%84%E8%BF%87%E6%9C%9F%E9%94%AE%E7%9A%84%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5"><span class="nav-number">7.2.</span> <span class="nav-text">2、Redis的过期键的删除策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E3%80%81%E5%8D%95%E7%BA%BF%E7%A8%8B%E5%BF%AB%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">7.3.</span> <span class="nav-text">3、Redis线程模型、单线程快的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E7%AE%80%E8%BF%B0Redis%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0"><span class="nav-number">7.4.</span> <span class="nav-text">4、简述Redis事务实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81redis%E9%9B%86%E7%BE%A4%E6%96%B9%E6%A1%88"><span class="nav-number">7.5.</span> <span class="nav-text">5、redis集群方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81redis-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">7.6.</span> <span class="nav-text">6、redis 主从复制的核心原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-number">7.7.</span> <span class="nav-text">7、缓存雪崩、缓存穿透、缓存击穿</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
