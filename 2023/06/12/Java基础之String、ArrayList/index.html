@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            Java基础之String、ArrayList |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"source/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Java基础之String、ArrayList</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2023-06-12 09:27:46</span>
+        <span class="mobile">2023-06-12 09:27</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/java%E5%9F%BA%E7%A1%80/">java基础</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="1、String"><a href="#1、String" class="headerlink" title="1、String"></a>1、String</h1><ol>
+<li>String类定义的变量可以用于存储字符串，同时String类提供了很多操作字符串的功能，我们可以直接使用。</li>
+<li>应用场景：<ul>
+<li>登陆时需要跟正确的用户名和密码进行比较</li>
+<li>敏感词替换</li>
+<li>搜索时将包含关键词的信息展示</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="1-String概述"><a href="#1-String概述" class="headerlink" title="1.String概述"></a>1.String概述</h2><ol>
+<li>String是什么，可以做什么？<ul>
+<li>字符串类型，可以定义字符串遍历指向字符串对象</li>
+</ul>
+</li>
+<li>String是不可变字符串的原因？<ul>
+<li>String变量<strong>每次的修改</strong>其实都是<strong>产生并指向了新的字符串对象</strong>。</li>
+<li>原来的字符串对象都是没有改变的，所以称<strong>不可变字符串</strong>。</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-String类创建对象的2种方式"><a href="#2-String类创建对象的2种方式" class="headerlink" title="2.String类创建对象的2种方式"></a>2.String类创建对象的2种方式</h2><ol>
+<li>直接使用” “定义（推荐方法）<ul>
+<li>String name &#x3D; “小方”</li>
+</ul>
+</li>
+<li>通过String类的构造器创建对象</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">构造器</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public String()</td>
+<td align="center">创建一个空白字符串对象，不含有任何内容</td>
+</tr>
+<tr>
+<td align="center">public String(String original)</td>
+<td align="center">根据传入的字符串内容，来创建字符串对象</td>
+</tr>
+<tr>
+<td align="center">public String(char[] chs)</td>
+<td align="center">根据字符数组的内容，来创建字符串对象</td>
+</tr>
+<tr>
+<td align="center">public String(byte[] chs)</td>
+<td align="center">根据字节数组的内容，来创建字符串对象</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>两种创建方式有什么区别吗？<ul>
+<li>以“”方式给出的字符串对象，在字符串常量池中存储，而且<strong>相同内容只会在其中存储一份</strong>。</li>
+<li>通过构造器new对象，每new一次都会产生一个新对象，放在堆内存中。</li>
+</ul>
+</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202306120956356.png"
+                      alt="image-20230612095634635"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202306120956454.png"
+                      alt="image-20230612095659145"
+                ></p>
+<h2 id="3-常见的面试题"><a href="#3-常见的面试题" class="headerlink" title="3.常见的面试题"></a>3.常见的面试题</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202306121001525.png"
+                      alt="image-20230612100105285"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/ainianxu/image/master/202306121004710.png"
+                      alt="image-20230612100426493"
+                ></p>
+<ul>
+<li>第二个图的第一个为什么是false呢？是因为s1指向的常量池，而s3涉及到了变量，只要涉及到变量就在堆内存中，所以他们的地址不一样，也就是false了。</li>
+</ul>
+<h2 id="4-String类常用API"><a href="#4-String类常用API" class="headerlink" title="4.String类常用API"></a>4.String类常用API</h2><ol>
+<li>针对于字符串的内容比较<ul>
+<li>不适合用”&#x3D;&#x3D; “比较，因为 “&#x3D;&#x3D;”比较的是地址。（基本数据类型比较时使用）</li>
+<li>推荐使用String类提供的”equals”比较：只关心内容一样即可</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">方法名</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public boolean equals (Object anobject)</td>
+<td align="center">将此字符串与指定对象进行比较。只关心字符内容是否一致！</td>
+</tr>
+<tr>
+<td align="center">public boolean equalsIgnoreCase (String anotherString)</td>
+<td align="center">将此字符串与指定对象进行比较，忽略大小写比较字符串。只关心字符内容是否一致！</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>String类常用API-遍历、替换、截取、分割操作</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">方法名</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public int length()</td>
+<td align="center">返回此字符串的长度</td>
+</tr>
+<tr>
+<td align="center">public char charAt(int index)</td>
+<td align="center">获取某个索引位置处的字符</td>
+</tr>
+<tr>
+<td align="center">public char[] toCharArray():</td>
+<td align="center">将当前字符串转换成字符数组返回</td>
+</tr>
+<tr>
+<td align="center">public String substring(int beginIndex, int endIndex)</td>
+<td align="center">根据开始和结束索引进行截取，得到新的字符串（包前不包后）</td>
+</tr>
+<tr>
+<td align="center">public String substring(int beginIndex)</td>
+<td align="center">从传入的索引处截取，截取到末尾，得到新的字符串</td>
+</tr>
+<tr>
+<td align="center">public String replace(CharSequence target, CharSequence replacement)</td>
+<td align="center">使用新值，将字符串中的旧值替换，得到新的字符串</td>
+</tr>
+<tr>
+<td align="center">public String[] split(String regex)</td>
+<td align="center">根据传入的规则切割字符串，得到字符串数组返回</td>
+</tr>
+</tbody></table>
+<h2 id="5-String类案例"><a href="#5-String类案例" class="headerlink" title="5.String类案例"></a>5.String类案例</h2><ol>
+<li><p>String类开发验证码功能</p>
+<ul>
+<li>需求：随机产生一个5位的验证码，每位可能是数字、大写字母、小写字母。</li>
+<li>分析:<ul>
+<li>定义一个String类型的变量存储验a-zA-ZO-9之间的全部字符。</li>
+<li>循环5次，随机一个范围内的索引，获取对应字符连接起来即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模拟用户登录功能</p>
+<ul>
+<li>需求：模拟用户登录功能，最多只给三次机会。</li>
+<li>分析：<ul>
+<li>系统后台定义好正确的登录名称，密码。</li>
+<li>使用循环控制三次，让用户输入正确的登录名和密码，判断是否登录成功，登录成功则不再进行登录；登录失败给出提示，并让用户继续登录。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>手机号码屏蔽</p>
+<ul>
+<li>需求：以字符串的形式从键盘接受一个手机号，将中间四位号码屏蔽</li>
+<li>分析：<ul>
+<li>键盘录入一个字符串，用Scanner实现。</li>
+<li>截取字符串前三位，截取字符串后四位，一拼接。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="2、ArrayList"><a href="#2、ArrayList" class="headerlink" title="2、ArrayList"></a>2、ArrayList</h1><h2 id="1-集合概述"><a href="#1-集合概述" class="headerlink" title="1.集合概述"></a>1.集合概述</h2><ol>
+<li>数组和集合的元素存储的个数问题？<ul>
+<li>数组定义后类型确定，长度固定</li>
+<li>集合类型可以不固定，大小是可变的。</li>
+</ul>
+</li>
+<li>数组和集合适合的场景<ul>
+<li>数组适合做数据个数和类型确定的场景</li>
+<li>集合适合做数据个数不确定，且要做增删元素的场景</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-ArrayList集合入门"><a href="#2-ArrayList集合入门" class="headerlink" title="2.ArrayList集合入门"></a>2.ArrayList集合入门</h2><ol>
+<li>ArrayList是集合中的一种，它支持索引。</li>
+<li>ArrayList集合的对象获取</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ArrayList list&#x3D; new ArrayList();</td>
+<td align="center">创建一个空的集合对象</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>ArrayList集合添加元素的方法</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">方法名</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public boolean add(E e)</td>
+<td align="center">将指定的元素追加到此集合的末尾</td>
+</tr>
+<tr>
+<td align="center">public void add(int index,E element)</td>
+<td align="center">在此集合中的指定位置插入指定的元素</td>
+</tr>
+</tbody></table>
+<h2 id="3-ArrayList对于泛型的支持"><a href="#3-ArrayList对于泛型的支持" class="headerlink" title="3.ArrayList对于泛型的支持"></a>3.ArrayList对于泛型的支持</h2><ol>
+<li>泛型就相当于一个标记，就跟厕所贴上男生还是女生一样，只允许特定人进入</li>
+<li><strong>泛型概述</strong>：ArrayList&lt; E &gt;：其实就是一个泛型类，可以在编译阶段约束集合对象只能操作某种数据类型。</li>
+<li>举例<ul>
+<li>ArrayList<String>：此集合只能操作字符串类型的元素。</li>
+<li>ArrayList<Integer>：此集合只能操作整数类型的元素。</li>
+<li>集合中只能存储引用类型，不支持基本数据类型</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-ArrayList常用API"><a href="#4-ArrayList常用API" class="headerlink" title="4.ArrayList常用API"></a>4.ArrayList常用API</h2><table>
+<thead>
+<tr>
+<th align="center">方法名</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public E get(int index)</td>
+<td align="center">返回指定索引处的元素</td>
+</tr>
+<tr>
+<td align="center">public int size()</td>
+<td align="center">返回集合中的元素的个数</td>
+</tr>
+<tr>
+<td align="center">public E remove(int index)</td>
+<td align="center">删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td align="center">public boolean remove(Object o)</td>
+<td align="center">删除指定的元素，返回删除是否成功</td>
+</tr>
+<tr>
+<td align="center">public E set(int index,E element)</td>
+<td align="center">修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+</tbody></table>
+<h2 id="5-ArrayList集合案例"><a href="#5-ArrayList集合案例" class="headerlink" title="5.ArrayList集合案例"></a>5.ArrayList集合案例</h2><ol>
+<li><p>遍历并删除元素值</p>
+<ul>
+<li>需求：<ul>
+<li>某个班级的考试在系统上进行，成绩大致为：98，77，66，89，79，50，100</li>
+<li>现在需要先把成绩低于80分以下的数据去掉。</li>
+</ul>
+</li>
+<li>分析：<ul>
+<li>定义ArrayList集合存储多名学员的成绩。</li>
+<li>遍历集合每个元素，如果元素值低于80分，去掉它。</li>
+</ul>
+</li>
+<li>从集合中遍历元素，并筛选出元素删除它，应该怎么解决？<ul>
+<li>从集合后面遍历然后删除，可以避免漏掉元素。</li>
+<li>要是在集合前面遍历，那么在循环整个集合的里面让i–</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>影片信息在程序中的表示</p>
+<ul>
+<li>需求：某影院系统需要在后台存储上述三部电影，然后依次展示出来。</li>
+<li>分析<ul>
+<li>定义一个电影类，定义一个集合存储电影对象。</li>
+<li>创建3个电影对象，封装相关数据，把3个对象存入到集合中去。</li>
+<li>遍历集合中的3个对象，输出相关信息。</li>
+</ul>
+</li>
+<li><strong>结论</strong>：集合中存储的元素并不是对象本身，而是对象的地址。</li>
+</ul>
+</li>
+</ol>
+<p>3.学生信息系统的数据搜索</p>
+<ul>
+<li>需求：后台程序需要存储如上学生信息并展示，然后要提供按照学号搜索学生信息的功能。</li>
+<li>分析</li>
+<li>定义Student类，定义ArrayList集合存储如上学生对象信息，并遍历展示出来。</li>
+<li>提供一个方法，可以接收ArrayList集合，和要搜索的学号，返回搜索到的学生对象信息，并展示。</li>
+<li>使用死循环，让用户可以不停的搜索。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Java基础之String、ArrayList</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2023-06-12 09:27:46</li>
+        <li>
+            Post link：https://ainianxu.github.io/2023/06/12/Java基础之String、ArrayList/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/java%E5%9F%BA%E7%A1%80/">#java基础</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2023/06/13/Java%E5%AE%9E%E4%B9%A0%E4%B9%8BRuoYi-Vue/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Java实习之RuoYi-Vue</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2023/06/09/%E8%8B%B1%E8%AF%AD%E4%BD%9C%E6%96%87%E6%A8%A1%E6%9D%BF/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">英语作文模板</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81String"><span class="nav-number">1.</span> <span class="nav-text">1、String</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-String%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.String概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-String%E7%B1%BB%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%842%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">2.String类创建对象的2种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B8%B8%E8%A7%81%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">3.常见的面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-String%E7%B1%BB%E5%B8%B8%E7%94%A8API"><span class="nav-number">1.4.</span> <span class="nav-text">4.String类常用API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-String%E7%B1%BB%E6%A1%88%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">5.String类案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81ArrayList"><span class="nav-number">2.</span> <span class="nav-text">2、ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.集合概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-ArrayList%E9%9B%86%E5%90%88%E5%85%A5%E9%97%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.ArrayList集合入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-ArrayList%E5%AF%B9%E4%BA%8E%E6%B3%9B%E5%9E%8B%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">2.3.</span> <span class="nav-text">3.ArrayList对于泛型的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ArrayList%E5%B8%B8%E7%94%A8API"><span class="nav-number">2.4.</span> <span class="nav-text">4.ArrayList常用API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-ArrayList%E9%9B%86%E5%90%88%E6%A1%88%E4%BE%8B"><span class="nav-number">2.5.</span> <span class="nav-text">5.ArrayList集合案例</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
