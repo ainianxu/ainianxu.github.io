@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Fang">
+    
+    <title>
+        
+            完整项目之Spring Cloud + Vue 前后端分离1 |
+        
+        念~旭
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/favicon.ico","favicon":"/images/favicon.ico","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"source/images/bg.svg","description":"进来就别走了！"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.4"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                念~旭
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">完整项目之Spring Cloud + Vue 前后端分离1</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.ico">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Fang</span>
+                        
+                            <span class="author-label">Lv7</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-07 10:50:36</span>
+        <span class="mobile">2022-01-07 10:50</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>11.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>54 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="第1章-配置环境"><a href="#第1章-配置环境" class="headerlink" title="第1章 配置环境"></a>第1章 配置环境</h1><ul>
+<li><p>在Spring官网中点进这个Initializr，配置你想要的。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/6wagXDIZQGcebUt.png"
+                      alt="image-20211023162707337"
+                ></p>
+<ul>
+<li>然后安装nodejs，在IDEA中的Local输入npm get registry；如果不是淘宝镜像，那么就输入这个npm set registry <a class="link"   target="_blank" rel="noopener" href="http://registry.npm.taobao.org;再重新输入npm/" >http://registry.npm.taobao.org；再重新输入npm<i class="fas fa-external-link-alt"></i></a> get registry查看，等待他安装完配置即可。</li>
+<li>再下载一个git</li>
+</ul>
+</li>
+</ul>
+<h1 id="第2章-使用Maven搭建SpringCloud项目"><a href="#第2章-使用Maven搭建SpringCloud项目" class="headerlink" title="第2章 使用Maven搭建SpringCloud项目"></a>第2章 使用Maven搭建SpringCloud项目</h1><h2 id="2-1-使用Eureka搭建注册中心"><a href="#2-1-使用Eureka搭建注册中心" class="headerlink" title="2-1 使用Eureka搭建注册中心"></a><strong>2-1 使用Eureka搭建注册中心</strong></h2><ul>
+<li>Maven两大核心功能：依赖管理（Jar包管理）+构建项目（项目打包）</li>
+<li>SpringCloud是管理多个SpringBoot应用的微服务框架</li>
+<li>项目初始化，要把代码管理优先做好，不管是学习还是工作，养成阶段性提交代码的习惯，代码管理工具选择git。</li>
+<li>一个项目里不是所有文件都需要提交到git中，.gitignore会帮我们自动排除。</li>
+<li>SpringBoot之所以流行就是因为只需要一个类，只有一个main函数就可以启动Java项目。</li>
+<li>Maven父子模块结构，父框架只需要一个pom.xml，子模块是正常的maven项目</li>
+<li>SpringBoot默认继承Tomcat</li>
+</ul>
+<h2 id="2-2-搭建业务模块-system"><a href="#2-2-搭建业务模块-system" class="headerlink" title="2-2 搭建业务模块-system"></a><strong>2-2 搭建业务模块-system</strong></h2><hr>
+<p>本章将介绍使用Maven搭建SpringCloud微服务项目，学习微服务核心组件：注册中心Eureka和路由Gateway。</p>
+<hr>
+<p>解决注册中心无法启动的问题：</p>
+<ul>
+<li>在resources文件下建立application.properties默认配置文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=eureka <span class="comment">//应用名字</span></span><br><span class="line">server.port=<span class="number">8761</span><span class="comment">//运行端口</span></span><br><span class="line">    <span class="comment">/*因为本身就是注册中心，所以下面必须是false*/</span></span><br><span class="line">eureka.client.fetch-registry=<span class="literal">false</span></span><br><span class="line">eureka.client.refresh-with-eureka=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>接下来需要在启动文件加注解：@EnableEurekaServer</p>
+</li>
+<li><p>version control窗口可以看到未提交的修改记录，也可以用看到整个项目包括其他人提交记录</p>
+</li>
+<li><p>springboot默认集成slf4框架，它定义了一些日志接口，规范日志输出，真正的实现是logback或者log4j，我们代码中写的都是slf4j的代码</p>
+</li>
+<li><p>一定要看好依赖项是否正确<a class="link"   target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies" >https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>一般不用配置版本，用自带的好一些</p>
+</li>
+</ul>
+<p>新建一个Maven子项目system</p>
+<ul>
+<li><p>2020版本idea version control 不见了 解决办法：可以进入Settings&#x2F;Preferences&#x2F;Version Control&#x2F;Commit将Use non-modal commit interface取消勾选</p>
+</li>
+<li><p>maven父子模块的配置：在子模块中使用parent标签指向父模块，在父模块中使用module标签引入子模块</p>
+</li>
+<li><p>只需添加两个依赖：添加依赖项发现他不主动下载了，因此我们就使用自己添加的阿里云镜像吧。在C:\Program Files\JetBrains\IntelliJ IDEA 2021.2.3\plugins\maven\lib\maven3\conf的setting.xml中添加下面代码（注意是添加不是替换奥）</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">&lt;id&gt;nexus-aliyun&lt;/id&gt;</span><br><span class="line">&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">&lt;name&gt;Nexus aliyun&lt;/name&gt;</span><br><span class="line">&lt;url&gt;http:<span class="comment">//maven.aliyun.com/nexus/content/groups/public&lt;/url&gt;</span></span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>由于注册中心都是接口开放出去的，所以我们注解用的RestController（返回的json格式的数据），如果返回的是页面就用Controller</li>
+</ul>
+<p>将system注册到注册中心：（只需要改三个地方）</p>
+<ul>
+<li>第一个就是之前增加的那个client依赖</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二个就是在配置文件中增加配置，指向注册中心的地址</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=system</span><br><span class="line">server.port=<span class="number">9001</span></span><br><span class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//localhost:8761/eureka/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三个就是在启动类里添加@EnableEurekaClient注解</li>
+</ul>
+<h2 id="2-3-搭建路由模块-gateway"><a href="#2-3-搭建路由模块-gateway" class="headerlink" title="2-3 搭建路由模块-gateway"></a><strong>2-3 搭建路由模块-gateway</strong></h2><ul>
+<li>SpringCloud的网关组件这里我们使用gateway。</li>
+<li>网关的主要功能：限流（流量控制）；重试（请求失败时重试，慎用）；跨域（前后端不在同一个域）；路由（转发请求）；鉴权（登陆校验，签名校验）等</li>
+</ul>
+<p>首先新建一个Maven子项目gateway：</p>
+<ul>
+<li>也是需要放入依赖的，然后修改相应配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<p>路由转发：将外部请求转发到实际的业务，模块进行处理。在application.properties添加如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring.application.name=gateway</span><br><span class="line">server.port=<span class="number">9000</span></span><br><span class="line">eureka.client.service-url.defaultZone=http:<span class="comment">//localhost:8761/eureka/</span></span><br><span class="line"></span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].id=system </span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].uri=http:<span class="comment">//192.168.0.105:9001</span></span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].predicates[<span class="number">0</span>].name=Path</span><br><span class="line">spring.cloud.gateway.routes[<span class="number">0</span>].predicates[<span class="number">0</span>].args[<span class="number">0</span>]=/system<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>目的就是将9001地址对外隐藏，暴露9000地址，访问的时：localhost:9000&#x2F;system&#x2F;*<em>，实际处理是localhost:9001&#x2F;system&#x2F;</em> * *</p>
+</li>
+<li><p>我们想要在之前test前面加一个&#x2F;system，可以在system模块下的application.properties中添加：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.servlet.context-path=/system <span class="comment">//这样/system就算是根目录，以后所有添加下的文件夹都在它下面</span></span><br></pre></td></tr></table></figure>
+
+<p>这时<a class="link"   target="_blank" rel="noopener" href="http://192.168.0.64:9001/system/test" >192.168.0.64:9001&#x2F;system&#x2F;test<i class="fas fa-external-link-alt"></i></a>和<a class="link"   target="_blank" rel="noopener" href="http://192.168.0.64:9001/system/test" >192.168.0.64:9000&#x2F;system&#x2F;test<i class="fas fa-external-link-alt"></i></a>都可以进行访问</p>
+<h1 id="第3章-SpringBoot项目技术整合"><a href="#第3章-SpringBoot项目技术整合" class="headerlink" title="第3章 SpringBoot项目技术整合"></a>第3章 SpringBoot项目技术整合</h1><hr>
+<p>本章将介绍单个SpringBoot的纯后端应用的搭建，集成Mybatis框架及代码生成器，并集成热部署DevTools，学习单个应用的环境搭建及提高开发效率的准备。</p>
+<hr>
+<h2 id="3-1-集成持久层框架Mybatis"><a href="#3-1-集成持久层框架Mybatis" class="headerlink" title="3-1 集成持久层框架Mybatis"></a>3-1 集成持久层框架Mybatis</h2><hr>
+<p>持久层：负责数据持久化，即将数据存储到数据库或硬盘等，断电也不会丢失数据。Mybatis是半自动ORM，Mybatis可以操作的花样更多，是首选的持久层框架。</p>
+<hr>
+<p>System模块集成Mybatis框架：</p>
+<ul>
+<li><p>数据库的准备工作1：创建一个本项目独用的数据库courseimooc</p>
+</li>
+<li><p>数据库的准备工作2：创建courseimooc数据库专用用户，创建用户时，主机填写：localhost表示创建的用户，只能本机登陆数据库，远程不能登陆；填写%，表示允许本地和远程登陆数据库。然后对用户添加权限</p>
+</li>
+<li><p>数据库的准备工作3：创建一张表</p>
+</li>
+<li><p>引入Mybatis架包：Maven父子模块增加jar包依赖：先在父pom.xml中增加jar包依赖，再在子pom.xml中增加jar包依赖，子pom.xml不带版本号。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 集成mybatis --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;<span class="number">1.3</span><span class="number">.2</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;<span class="number">8.0</span><span class="number">.23</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还得另外配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql:<span class="comment">//localhost:3306/courseimooc?characterEncoding=UTF8&amp;autoReconnect=true</span></span><br><span class="line">spring.datasource.username=courseimooc</span><br><span class="line">spring.datasource.password=你自己的数据库密码</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver <span class="comment">//增加mysql驱动</span></span><br><span class="line">mybatis.mapper-locations=classpath:/mapper<span class="comment">/*.xml</span></span><br></pre></td></tr></table></figure>
+
+<p>mybatis使用实例：增加TestMapper.xml，放在resources&#x2F;mapper目录下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">&quot;com.course.system.mapper.TestMapper&quot;</span>&gt;</span><br><span class="line">    &lt;select id=<span class="string">&quot;list&quot;</span> resultType=<span class="string">&quot;com.course.system.domain.Test&quot;</span>&gt;</span><br><span class="line">        select `id` ,`name` from `test`;<span class="comment">//真傻逼奥，记得加分号</span></span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+
+<p>一个项目一般会有controller，service，mapper三层，其中controller是请求的入口，service负责逻辑，mapper负责持久层</p>
+<h2 id="3-2-项目优化"><a href="#3-2-项目优化" class="headerlink" title="3-2 项目优化"></a>3-2 项目优化</h2><ul>
+<li>记住你的mysql版本号一定要对。</li>
+<li>改时区法一：手动在 URL 上设置<code>jdbc:mysql://localhost:3306/数据库名?serverTimezone</code></li>
+<li>法二：</li>
+<li><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/Ub2K4BpOfnsTL1q.png"
+                      alt="在这里插入图片描述"
+                ></li>
+<li>又他妈碰到了个问题，xml文件无法识别数据库的表名和字段，无法点击表名链接到数据源。在此我首先修改了<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/iLqs67rPvKkJ5Mo.png"
+                      alt="image-20211027202858490"
+                ></li>
+</ul>
+<p>其次改了这才好：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/fyIkR32SCBomFKj.png"
+                      alt="image-20211027203133551"
+                ></p>
+<ul>
+<li>查看差异：ctrl+alt+shift+D</li>
+</ul>
+<p>集成热部署DevTools:哪个包需要增加就在哪个包pom.xml下添加依赖。</p>
+<ul>
+<li>增加devtools依赖</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 热部署DevTools --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>设置idea，ctrl+alt+s打开设置窗口，找到Compiler，自动构建就是代码编写时，自动编译。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/49GfABl6Ls3EVNc.png"
+                      alt="image-20211028171821556"
+                ></p>
+</li>
+<li><p>要在运行时自动编译<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/oQZiAwaDeJnjqBE.png"
+                      alt="image-20211028173953487"
+                ></p>
+</li>
+<li><p>随着项目的增加热部署的优势就更能体现了</p>
+</li>
+</ul>
+<p>优化mybatis日志：在system的application.properties中添加</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.level.com.course.system.mapper=trace</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-搭建服务模块-server"><a href="#3-3-搭建服务模块-server" class="headerlink" title="3-3 搭建服务模块-server"></a>3-3 搭建服务模块-server</h2><hr>
+<p>为什么要构建公共模块？业务拓展后，需要对表加一个字段，这时，如果要保持实体类和表结构一致，则所有模块的实体都要改，费时费力，如果哪个模块用到新的字段，就改哪实体类，时间一长，所有的实体类和表都对应不上，并且这种策略不能用mybatis代码生成器。</p>
+<hr>
+<ul>
+<li><p>新建公共模块-server：</p>
+<ol>
+<li>就是把system的com.course.system全部复制到server中，然后将system中的pom.xml中的依赖复制到server中，删除第一个配置client。</li>
+</ol>
+</li>
+<li><p>system集成server模块：</p>
+<ol>
+<li>在course中引入架包：</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.course&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;server&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;<span class="number">0.0</span><span class="number">.1</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>迁移完后记得在systemapplication中添加@ComponentScan(“com.course”)，如果类中用了@Controller，@Repository，@Service,@Component四大注解标识之一了，那么如果不加上@ComponentScan，Spring就不会自动扫描类上的四大注解中的任何一个，那么四大注解下的类就不会被Spring扫描到，更不会装入Spring容器中，因此你配置的四大注解就失去了作用。</p>
+</li>
+<li><p>ctrl+shift+f代表查看代码在哪有</p>
+</li>
+</ol>
+<ul>
+<li>集中配置<ol>
+<li>如果直接将system中的application.properties复制到server中，那么server作为jar包被依赖，它的resources下的配置文件会和system下的配置文件冲突，生效的还是system的。那么我们应该怎么做呢？我们要做的就是在resources下新建一个config文件夹，将其移动到该文件夹中，spring默认会读config下的配置文件。<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/d8EMgiFlxkytILr.png"
+                      alt="image-20211029160302143"
+                ></li>
+</ol>
+</li>
+</ul>
+<h2 id="3-4-集成mybatis-generator"><a href="#3-4-集成mybatis-generator" class="headerlink" title="3-4 集成mybatis generator"></a>3-4 集成mybatis generator</h2><ul>
+<li><p>idea集成mybatis-generator生成mybatis代码</p>
+<ol>
+<li>父pom.xml里增加mybatic-generator插件</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- mybatis generator 自动生成代码插件 --&gt;</span><br><span class="line">&lt;plugin&gt;</span><br><span class="line">   &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;<span class="number">1.3</span><span class="number">.7</span>&lt;/version&gt;</span><br><span class="line">   &lt;configuration&gt;</span><br><span class="line">      &lt;configurationFile&gt;src/main/resources/generator/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">      &lt;overwrite&gt;<span class="literal">true</span>&lt;/overwrite&gt;</span><br><span class="line">      &lt;verbose&gt;<span class="literal">true</span>&lt;/verbose&gt;</span><br><span class="line">   &lt;/configuration&gt;</span><br><span class="line">   &lt;dependencies&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;<span class="number">8.0</span><span class="number">.23</span>&lt;/version&gt;</span><br><span class="line">      &lt;/dependency&gt;</span><br><span class="line">   &lt;/dependencies&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>添加配置文件generatorConfig.xml：加上反引号&#96;&#96;后，一些mysql的关键字就可以当作表明或者字段名来使用。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">&lt;!DOCTYPE generatorConfiguration</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">    &lt;context id=<span class="string">&quot;Mysql&quot;</span> targetRuntime=<span class="string">&quot;MyBatis3&quot;</span> defaultModelType=<span class="string">&quot;flat&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property name=<span class="string">&quot;autoDelimitKeywords&quot;</span> value=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;beginningDelimiter&quot;</span> value=<span class="string">&quot;`&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;endingDelimiter&quot;</span> value=<span class="string">&quot;`&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!--覆盖生成XML文件--&gt;</span><br><span class="line">        &lt;plugin type=<span class="string">&quot;org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin&quot;</span> /&gt;</span><br><span class="line">        &lt;!-- 生成的实体类添加toString()方法 --&gt;</span><br><span class="line">        &lt;plugin type=<span class="string">&quot;org.mybatis.generator.plugins.ToStringPlugin&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 不生成注释 --&gt;</span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=<span class="string">&quot;suppressAllComments&quot;</span> value=<span class="string">&quot;true&quot;</span>/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line"></span><br><span class="line">        &lt;jdbcConnection driverClass=<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span></span><br><span class="line">                        connectionURL=<span class="string">&quot;jdbc:mysql://localhost:3306/courseimooc&quot;</span></span><br><span class="line">                        userId=<span class="string">&quot;courseimooc&quot;</span></span><br><span class="line">                        password=<span class="string">&quot;你自己的数据库密码&quot;</span>&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- domain类的位置 --&gt;</span><br><span class="line">        &lt;javaModelGenerator targetProject=<span class="string">&quot;src\main\java&quot;</span></span><br><span class="line">                            targetPackage=<span class="string">&quot;com.course.server.domain&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- mapper xml的位置 --&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetProject=<span class="string">&quot;src\main\resources&quot;</span></span><br><span class="line">                         targetPackage=<span class="string">&quot;mapper&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- mapper类的位置 --&gt;</span><br><span class="line">        &lt;javaClientGenerator targetProject=<span class="string">&quot;src\main\java&quot;</span></span><br><span class="line">                             targetPackage=<span class="string">&quot;com.course.server.mapper&quot;</span></span><br><span class="line">                             type=<span class="string">&quot;XMLMAPPER&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;test&quot;</span> domainObjectName=<span class="string">&quot;Test&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;chapter&quot;</span> domainObjectName=<span class="string">&quot;Chapter&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;section&quot;</span> domainObjectName=<span class="string">&quot;Section&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;course&quot;</span> domainObjectName=<span class="string">&quot;Course&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;course_content&quot;</span> domainObjectName=<span class="string">&quot;CourseContent&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;course_content_file&quot;</span> domainObjectName=<span class="string">&quot;CourseContentFile&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;teacher&quot;</span> domainObjectName=<span class="string">&quot;Teacher&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;file&quot;</span> domainObjectName=<span class="string">&quot;File&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;user&quot;</span> domainObjectName=<span class="string">&quot;User&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;resource&quot;</span> domainObjectName=<span class="string">&quot;Resource&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;role&quot;</span> domainObjectName=<span class="string">&quot;Role&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;role_resource&quot;</span> domainObjectName=<span class="string">&quot;RoleResource&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;role_user&quot;</span> domainObjectName=<span class="string">&quot;RoleUser&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;member&quot;</span> domainObjectName=<span class="string">&quot;Member&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;sms&quot;</span> domainObjectName=<span class="string">&quot;Sms&quot;</span>/&gt;--&gt;</span><br><span class="line">&lt;!--        &lt;table tableName=<span class="string">&quot;test&quot;</span> domainObjectName=<span class="string">&quot;Test&quot;</span>/&gt;--&gt;</span><br><span class="line">        &lt;table tableName=<span class="string">&quot;chapter&quot;</span> domainObjectName=<span class="string">&quot;chapter&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>创建一个maven启动命令mybatis-generator:generate  -e</li>
+</ol>
+<p>  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/9TC2ZJKRAFqal75.png"
+                      alt="image-20211029163400461"
+                ></p>
+<p>  generatorConfig.xml是放在server模块下，所以这里选择server目录。</p>
+<ul>
+<li><p>解决mapper.xml重复生成代码问题：业务扩展，表结构发生变动时，需要重新生成持久层代码。这对编码有一个要求：生成器生成的四个文件绝对不可以手动修改。</p>
+</li>
+<li><p>generatorConfig.xml里增加这个，原来的xml会被覆盖，所以绝对不要在生成的xml手动修改代码，因为下次再生成时，手动修改的代码会被覆盖掉。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--覆盖生成XML文件--&gt;</span><br><span class="line">&lt;plugin type=<span class="string">&quot;org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>通过Example，可以帮助我们写入where、order by，distinct等，需要熟练掌握，可以极大提高单表开发效率。</p>
+</li>
+<li><p>小技巧：ctrl+alt+v，快速生成一个变量</p>
+</li>
+<li><p>要按多个条件查询数据库，在java中表达式后面继续.andXXX；？是jdbc占位符，可用于防注入攻击，mybatis底层也是jdbc实现的</p>
+</li>
+</ul>
+<h1 id="第4章-使用Vue-cli-4搭建管理控台"><a href="#第4章-使用Vue-cli-4搭建管理控台" class="headerlink" title="第4章 使用Vue cli 4搭建管理控台"></a>第4章 使用Vue cli 4搭建管理控台</h1><hr>
+<p>本章将介绍Vue cli和bootstrap的使用。Vue是MVVM框架，其代码结构类似于Angular、微信小程序。Bootstrap是一个响应式框架，一套代码可适应PC，手机屏幕。本章使用Vue cli 4 + Bootstrap 3搭建控台管理应用，学习单页面应用搭建及响应式设计</p>
+<hr>
+<h2 id="4-1-使用vue-cli创建admin项目"><a href="#4-1-使用vue-cli创建admin项目" class="headerlink" title="4-1 使用vue cli创建admin项目"></a>4-1 使用vue cli创建admin项目</h2><ul>
+<li>vue用法一：直接引入vue.js，适用于现成的jsp项目，thymeleaf项目等。这种用法不算前后端分离，发布时依然是前后端一起部署的。</li>
+<li>vue用法二：使用vuecli新建项目，前后端分离开发，分离部署</li>
+<li>idea默认使用windows自带的命令行，可以通过设置改为git bash<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/M5hdT9NGqlz6ELA.png"
+                      alt="image-20211030102237979"
+                ></li>
+<li>vuecli安装按照这个来<a class="link"   target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/guide/installation.html" >https://cli.vuejs.org/zh/guide/installation.html<i class="fas fa-external-link-alt"></i></a></li>
+<li>vuecli初始安装带了babel和eslint插件，babel：JavaScript编译器；eslint：代码规范检查</li>
+<li>main.js是vue入口文件，用来初始化vue实例并集成所需要的插件</li>
+</ul>
+<h2 id="4-2-集成bootstrap后台管理模板ace"><a href="#4-2-集成bootstrap后台管理模板ace" class="headerlink" title="4-2 集成bootstrap后台管理模板ace"></a>4-2 集成bootstrap后台管理模板ace</h2><hr>
+<p>Bootstrap来自推特，是目前最受欢迎的响应式框架。它基于html，css，JavaScript，简单易扩展，因此有很多第三方模板，栅格系统是bootstrap的布局核心。</p>
+<hr>
+<ul>
+<li>ace admin模板介绍：<a class="link"   target="_blank" rel="noopener" href="http://ace.jeka.by/" >http://ace.jeka.by/<i class="fas fa-external-link-alt"></i></a></li>
+<li>admin增加ace模板：<ol>
+<li>批量替换小技巧：找到要批量替换的公共点，可以包含特殊字符，”&#x3D;等，替换的时候，也加上这些特殊字符。ctrl+r替换</li>
+<li>建议把下面两个勾选，方便快速定位<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2022/03/01/udvR7gNbxGrLBPe.png"
+                      alt="image-20211030152932223"
+                ></li>
+<li>eslintrc.js,用于检测代码规范。是一把双刃剑，一些检测没必要，可以通过修改配置禁用掉</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-3-集成路由vue-route"><a href="#4-3-集成路由vue-route" class="headerlink" title="4-3 集成路由vue-route"></a>4-3 集成路由vue-route</h2><ul>
+<li><p>这里使用vue-route的版本是v3.5.3   npm install <a class="link"   href="mailto:&#x76;&#117;&#x65;&#45;&#114;&#x6f;&#117;&#x74;&#101;&#x72;&#64;&#x33;&#x2e;&#x35;&#46;&#51;" >&#x76;&#117;&#x65;&#45;&#114;&#x6f;&#117;&#x74;&#101;&#x72;&#64;&#x33;&#x2e;&#x35;&#46;&#51;<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>在命令行cd admin 然后npm install –save vue-router。</p>
+</li>
+<li><p>router-view是路由嵌套标签，一般配合父子路由使用</p>
+</li>
+<li><p>ctrl+alt+l：格式化代码</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;下只能由一个div标签，所以需要用一个div把多个div标签括起来</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ctrl+f：搜索页面</p>
+</li>
+<li><p>在<code>script</code>标签里写的js代码是全局的，会影响其他页面</p>
+</li>
+</ul>
+<h2 id="4-4-控台欢迎页面开发"><a href="#4-4-控台欢迎页面开发" class="headerlink" title="4-4 控台欢迎页面开发"></a>4-4 控台欢迎页面开发</h2><p>mouted的使用：解决两个页面样式冲突问题</p>
+<ul>
+<li>created执行更早，在界面渲染之前执行，常用于加载初始化数据。mounted在界面渲染之后执行，常用于对界面元素的初始化操作</li>
+<li>组件每次加载，mounted都会再次执行</li>
+</ul>
+<p>使用router-view增加welcome子组件：</p>
+<ul>
+<li>router-view一般配合子路由使用；子路由配置不要以“&#x2F;”开头</li>
+<li>在哪使用welcome就在哪加入<code>router-view</code></li>
+</ul>
+<p>控台页面元素修改：</p>
+<ul>
+<li>响应式设计的一个体现：根据屏幕分辨率不同，弹窗显示在不同位置</li>
+<li>在git中提交记录选择checkout菜单，可以让本地代码回到过去某一个提交点</li>
+<li>ctrl+y：删除当前选中的行，只要某一行有部分被选中，这一行就会全部删除</li>
+<li>data-toggle：用于按钮和模态框（弹出层）的事件绑定</li>
+<li>active open：当前菜单是激活样式，并且把当前菜单的子菜单展开</li>
+</ul>
+<h1 id="第5章-单表管理功能前后端开发"><a href="#第5章-单表管理功能前后端开发" class="headerlink" title="第5章 单表管理功能前后端开发"></a>第5章 单表管理功能前后端开发</h1><hr>
+<p>本章将演示控台单表增删改查的前后端开发，重点学习前后端数据交互，Vue ajax库axios的使用，使用Vue自定义组件制作分页组件，Mybatis分页插件pagehelper的使用等功能。介绍常用的公共组件的使用，包括前端确认框、提示框、等待框，后端复制工具类、统一日志AOP等。</p>
+<hr>
+<h2 id="5-1-大章列表查询功能开发1"><a href="#5-1-大章列表查询功能开发1" class="headerlink" title="5-1 大章列表查询功能开发1"></a>5-1 大章列表查询功能开发1</h2><hr>
+<p>完成单表的增删改查：</p>
+<ul>
+<li>控台单表增删改查的前后端开发，重点学习前后端数据交互，vue ajax库axios的使用</li>
+</ul>
+<p>通用组件的开发：分页、确认框、提示框、等待框等：</p>
+<ul>
+<li>常用的公共组件：确认框、提示框、等待框，统一日志拦截器等。使用vue自定义组件制作分页组件，mybatis分页插件pagehelper的使用</li>
+</ul>
+<hr>
+<p>增加maven子项目business：</p>
+<ul>
+<li>shift+F6重命名。重命名就是重构，会将所有引用到的地方都一起改名，甚至是注释掉的代码也会一起修改。</li>
+<li>将system中一堆文件复制过去</li>
+</ul>
+<p>大章表设计及持久层代码生成：</p>
+<ul>
+<li>DTO：数据传输对象，用于数据传输。</li>
+<li>domain内的实体，是mybatis-generator自动生成的，不允许手动修改，一旦修改，再次生成实体类时，所做的修改会被覆盖。</li>
+<li>domain作用于service和mapper；dto作用于controller和service。</li>
+<li>ctrl+alt+v为表达式生成一个变量</li>
+<li>BeanUtils是Spring提供的一个工具类，用于实体间的复制。后续会对BeanUtils做封闭，简化使用，提高开发效率。</li>
+</ul>
+<h2 id="5-2-大章列表查询功能开发2"><a href="#5-2-大章列表查询功能开发2" class="headerlink" title="5-2 大章列表查询功能开发2"></a>5-2 大章列表查询功能开发2</h2><p>新增chapter子页面并添加子路由，并使用假数据制作表格：</p>
+<ul>
+<li>shift+tab，反向缩进</li>
+</ul>
+<p>点击sidebar实现菜单页面跳转：</p>
+<ul>
+<li>二级菜单要显示出激活模式，只需要添加active样式</li>
+<li>silbings,jquery的方法，获取所有兄弟节点</li>
+<li><code>&lt;router-link to=&quot;&quot;&gt;</code>类似于<code>&lt;a href=&quot;&quot;&gt;</code>，用于链接跳转</li>
+<li>约定id的命名要和路由相关</li>
+</ul>
+<p>通用的sidebar点击激活样式方法：</p>
+<ul>
+<li>vue内置的watch，用来监测vue实例上的数据变动，$route也是一个变量。</li>
+<li>在router.js添加name，是为了通过name属性值，得到菜单id的值。约定优于配置</li>
+<li>在admin.vue添加watch，此时如果从login页面登陆跳转到welcome页面，welcome并不会有激活样式，这里的watch，只在admin下面的子组件互相跳转时有用。为了解决这个问题，需要在初始化也执行一句激活代码。</li>
+<li>还有一点需要注意，我们要把this变成本地变量，js中有this关键字，代表当前执行方法的对象。养成习惯，在方法开头，声明本地变量_this代替this。</li>
+</ul>
+<h2 id="5-3-大章列表查询功能开发3"><a href="#5-3-大章列表查询功能开发3" class="headerlink" title="5-3 大章列表查询功能开发3"></a>5-3 大章列表查询功能开发3</h2><p>集成axios完成前后端交互</p>
+<ul>
+<li><p>–save：在pacjage.json添加依赖。（不加–save的话，只是去下载插件，项目中并没有依赖插件） npm install axios –save</p>
+</li>
+<li><p>以vue属性的方式使用axios：修改main.js</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios from <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$ajax = axios;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Vue.prototype.xxx，可以理解为Vue组件的全局变量。可以在任意Vue组件中，使用this.xxx来获取这个值。$是代表Vue全局 在chapter.vue中使用$ajax</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list()&#123;</span><br><span class="line">  let _this=<span class="built_in">this</span>;</span><br><span class="line">  _this.$ajax.get(<span class="string">&#x27;http://192.168.0.105:9002/business/chapter/list&#x27;</span>).then((respond)=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">&quot;查询大章列表结果:&quot;</span>,respond);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>CORS，跨站点资源分享，属于跨域问题，同个IP的不同端口间的访问也属于跨域，前后端分离必然有跨域问题。解决跨域问题：增加CorsConfiguration.java在server中</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedHeaders(CorsConfiguration.ALL)</span><br><span class="line">                .allowedMethods(CorsConfiguration.ALL)</span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>); <span class="comment">// 1小时内不需要再预检（发OPTIONS请求）</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>ctrl+shift++：展开所有层级；+-：收缩所有层级</p>
+</li>
+<li><p>使用data定义组件内的变量，可以用于做双向数据绑定。</p>
+</li>
+<li><p>显示真实数据就是使用data定义变量，定义一个数组，在methods中将查询到的结果返回，再在特定的行里面引用样式的数据。</p>
+</li>
+<li><p>没用了CorsResponseHeaderFilter.java</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.gateway.filter.GatewayFilterChain;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.gateway.filter.GlobalFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.Ordered;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpHeaders;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.server.ServerWebExchange;</span><br><span class="line"><span class="keyword">import</span> reactor.core.publisher.Mono;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跨域请求头重复处理过滤器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorsResponseHeaderFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 指定此过滤器位于NettyWriteResponseFilter之后</span></span><br><span class="line">        <span class="comment">// 即待处理完响应体后接着处理响应头</span></span><br><span class="line">        <span class="keyword">return</span> NettyWriteResponseFilter.WRITE_RESPONSE_FILTER_ORDER + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@SuppressWarnings(&quot;serial&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> chain.filter(exchange).then(Mono.defer(() -&gt; &#123;</span><br><span class="line">            exchange.getResponse().getHeaders().entrySet().stream()</span><br><span class="line">                    .filter(kv -&gt; (kv.getValue() != <span class="literal">null</span> &amp;&amp; kv.getValue().size() &gt; <span class="number">1</span>))</span><br><span class="line">                    .filter(kv -&gt; (kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)</span><br><span class="line">                            || kv.getKey().equals(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS)))</span><br><span class="line">                    .forEach(kv -&gt;</span><br><span class="line">                    &#123;</span><br><span class="line">                        kv.setValue(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;() &#123;&#123;</span><br><span class="line">                            add(kv.getValue().get(<span class="number">0</span>));</span><br><span class="line">                        &#125;&#125;);</span><br><span class="line">                    &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">        &#125;));</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用gateway路由转发：使用gateway路由转发，vue页面只访问gateway</p>
+<ul>
+<li><p>单个SpringBoot应用使用CorsConfig解决跨域问题。使用SpringCloud Gateway的，使用CorsWebFilter解决跨域问题。</p>
+</li>
+<li><p>现在统一在gateway中使用跨域配置，在GatewayApplication.java中添加配置</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.gateway;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.CorsConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.CorsWebFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.util.pattern.PathPatternParser;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GatewayApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">LOG</span> <span class="operator">=</span> LoggerFactory.getLogger(GatewayApplication.class);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">SpringApplication</span> <span class="variable">app</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SpringApplication</span>(GatewayApplication.class);</span><br><span class="line">		<span class="type">Environment</span> <span class="variable">env</span> <span class="operator">=</span> app.run(args).getEnvironment();</span><br><span class="line">		LOG.info(<span class="string">&quot;启动成功！！&quot;</span>);</span><br><span class="line">		LOG.info(<span class="string">&quot;Gateway地址: \thttp://127.0.0.1:&#123;&#125;&quot;</span>, env.getProperty(<span class="string">&quot;server.port&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 配置跨域</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> CorsWebFilter <span class="title function_">corsFilter</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">CorsConfiguration</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line"></span><br><span class="line">		config.setAllowCredentials(Boolean.TRUE);</span><br><span class="line">		config.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">		config.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">		config.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">		config.setMaxAge(<span class="number">3600L</span>);</span><br><span class="line"></span><br><span class="line">		<span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">source</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>(<span class="keyword">new</span> <span class="title class_">PathPatternParser</span>());</span><br><span class="line">		source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, config);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CorsWebFilter</span>(source);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果配置的是ip端口，那么发布到生产时就可能会访问不到，就算配置了maven多环境，也需要提前知道上线后的IP和端口，因此就需要lb:&#x2F;&#x2F;(负载均衡)loadbalance：使用lb:&#x2F;&#x2F;+注册中心名字作为路由转发</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.cloud.gateway.routes[<span class="number">1</span>].uri=http:<span class="comment">//192.168.0.105:9002//替换</span></span><br><span class="line">spring.cloud.gateway.routes[<span class="number">1</span>].uri=lb:<span class="comment">//business</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-4-分页功能开发"><a href="#5-4-分页功能开发" class="headerlink" title="5-4 分页功能开发"></a>5-4 分页功能开发</h2><p>集成分页插件pagehelper:</p>
+<ul>
+<li><p>mybatis-generator生成的代码是不带分页功能的，使用pagehelper插件来拓展分页功能。</p>
+</li>
+<li><p>首先在course的pom.xml添加插件依赖，其次server中也添加，不过没有版本号</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- mybatis分页插件pagehelper --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;pagehelper-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;<span class="number">1.2</span><span class="number">.10</span>&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用就是在ChapterService中添加：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PageHelper.startPage(<span class="number">1</span>,<span class="number">1</span>);<span class="comment">//查询第一条语句</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>分页功能的关键字：limit。从日志看出该sql执行的是limit 1，相当于limit 0 1，即从第0行开始，查1条。</p>
+</li>
+<li><p>插件分页语句规则：调用startPage方法之后，执行的第一个select语句会进行分页。</p>
+</li>
+<li><p>分页查询功能需要两条sql，一条是查总记录数（通过每页条数计算出总共有多少页），一条是查当前页的记录。</p>
+</li>
+</ul>
+<p>分页参数前后端交互：分页参数前后端交互，axios的post请求默认是以流的形式传递参数，所以controller里的参数要加@RequestBody注解</p>
+<ul>
+<li><p>使用泛型的地方都可以用Object代替，但是泛型可以在编译期就发现问题，并且避免了代码中写强制类型转换。</p>
+</li>
+<li><p>接口请求参数传递，尽量使用post。使用get请求在url里拼参数的话，会使url变得很长，有些浏览器或服务器会对url长度做限制，导致请求失败。</p>
+</li>
+<li><p>日志输出时，变量使用点位符，比如LOG.info(“输出：id&#x3D;{},姓名&#x3D;{},id,name”)，而不是LOG.info(“输出：id&#x3D;”+id+”,姓名&#x3D;”+name)</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestBody</span><span class="comment">//在controller中使用流的形式和$ajax的post相对应</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-5前端分页组件的使用"><a href="#5-5前端分页组件的使用" class="headerlink" title="5-5前端分页组件的使用"></a>5-5前端分页组件的使用</h2><p>增加一个刷新按钮：</p>
+<ul>
+<li>fa样式是fontawesome图标，可以百度搜“fontawesome”查看所有图标的样式</li>
+<li>v-bind:list&#x3D;”list”，前面的list，是分页组件暴露出来的一个回调方法，后面的list，是chapter组件的list方法。</li>
+<li>props，定义父组件向子组件传递的参数，可以是一个函数或数据。本组件中暴漏了两个参数list和itemCount给外部。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">  &lt;button v-on:click=&quot;list()&quot; class=&quot;btn btn-white btn-default btn-round&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;ace-icon fa fa-refresh red2&quot;&gt;&lt;/i&gt;</span><br><span class="line">    刷新</span><br><span class="line">  &lt;/button&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>前端分页组件的使用：</p>
+<ul>
+<li>首先在admin软件包中的components添加pagination.vue</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;pagination&quot;</span> role=<span class="string">&quot;group&quot;</span> aria-label=<span class="string">&quot;分页&quot;</span>&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> class=<span class="string">&quot;btn btn-default btn-white btn-round&quot;</span> </span><br><span class="line">            v-bind:disabled=<span class="string">&quot;page === 1&quot;</span></span><br><span class="line">            v-on:click=<span class="string">&quot;selectPage(1)&quot;</span>&gt;</span><br><span class="line">      <span class="number">1</span></span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> class=<span class="string">&quot;btn btn-default btn-white btn-round&quot;</span> </span><br><span class="line">            v-bind:disabled=<span class="string">&quot;page === 1&quot;</span></span><br><span class="line">            v-on:click=<span class="string">&quot;selectPage(page - 1)&quot;</span>&gt;</span><br><span class="line">      上一页</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;button v-<span class="keyword">for</span>=<span class="string">&quot;p in pages&quot;</span> v-bind:id=<span class="string">&quot;&#x27;page-&#x27; + p&quot;</span> </span><br><span class="line">            type=<span class="string">&quot;button&quot;</span> class=<span class="string">&quot;btn btn-default btn-white btn-round&quot;</span></span><br><span class="line">            v-bind:class=<span class="string">&quot;&#123;&#x27;btn-primary active&#x27;:page == p&#125;&quot;</span> </span><br><span class="line">            v-on:click=<span class="string">&quot;selectPage(p)&quot;</span>&gt;</span><br><span class="line">      &#123;&#123;p&#125;&#125;</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> class=<span class="string">&quot;btn btn-default btn-white btn-round&quot;</span> </span><br><span class="line">            v-bind:disabled=<span class="string">&quot;page === pageTotal&quot;</span></span><br><span class="line">            v-on:click=<span class="string">&quot;selectPage(page + 1)&quot;</span>&gt;</span><br><span class="line">      下一页</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;button&quot;</span> class=<span class="string">&quot;btn btn-default btn-white btn-round&quot;</span></span><br><span class="line">            v-bind:disabled=<span class="string">&quot;page === pageTotal&quot;</span></span><br><span class="line">            v-on:click=<span class="string">&quot;selectPage(pageTotal)&quot;</span>&gt;</span><br><span class="line">    这是两个大括号里面是 分页总数||<span class="number">1</span></span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">    &amp;nbsp;</span><br><span class="line">    &lt;span class=<span class="string">&quot;m--padding-10&quot;</span>&gt;</span><br><span class="line">        每页</span><br><span class="line">        &lt;select v-model=<span class="string">&quot;size&quot;</span>&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;1&quot;</span>&gt;<span class="number">1</span>&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;5&quot;</span>&gt;<span class="number">5</span>&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;10&quot;</span>&gt;<span class="number">10</span>&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;20&quot;</span>&gt;<span class="number">20</span>&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;50&quot;</span>&gt;<span class="number">50</span>&lt;/option&gt;</span><br><span class="line">            &lt;option value=<span class="string">&quot;100&quot;</span>&gt;<span class="number">100</span>&lt;/option&gt;</span><br><span class="line">        &lt;/select&gt;</span><br><span class="line">        条，共【&#123;&#123;total&#125;&#125;】条</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">&#x27;pagination&#x27;</span>,</span><br><span class="line">    props: &#123;</span><br><span class="line">      list: &#123;</span><br><span class="line">        type: Function,</span><br><span class="line">        <span class="keyword">default</span>: <span class="literal">null</span></span><br><span class="line">      &#125;,</span><br><span class="line">      itemCount: Number <span class="comment">// 显示的页码数，比如总共有100页，只显示10页，其它用省略号表示</span></span><br><span class="line">    &#125;,</span><br><span class="line">    data: function () &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        total: <span class="number">0</span>, <span class="comment">// 总行数</span></span><br><span class="line">        size: <span class="number">10</span>, <span class="comment">// 每页条数</span></span><br><span class="line">        page: <span class="number">0</span>, <span class="comment">// 当前页码</span></span><br><span class="line">        pageTotal: <span class="number">0</span>, <span class="comment">// 总页数</span></span><br><span class="line">        pages: [], <span class="comment">// 显示的页码数组</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 渲染分页组件</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> page</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> total</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      render(page, total) &#123;</span><br><span class="line">        <span class="type">let</span> <span class="variable">_this</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">        _this.page = page;</span><br><span class="line">        _this.total = total;</span><br><span class="line">        _this.pageTotal = Math.ceil(total / _this.size);</span><br><span class="line">        _this.pages = _this.getPageItems(_this.pageTotal, page, _this.itemCount || <span class="number">5</span>);</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 查询某一页</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> page</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      selectPage(page) &#123;</span><br><span class="line">        <span class="type">let</span> <span class="variable">_this</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">if</span> (page &lt; <span class="number">1</span>) &#123;</span><br><span class="line">          page = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (page &gt; _this.pageTotal) &#123;</span><br><span class="line">          page = _this.pageTotal;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.page !== page) &#123;</span><br><span class="line">          _this.page = page;</span><br><span class="line">          <span class="keyword">if</span> (_this.list) &#123;</span><br><span class="line">            _this.list(page);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 当前要显示在页面上的页码</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> total</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> current</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@param</span> length</span></span><br><span class="line"><span class="comment">       * <span class="doctag">@returns</span> &#123;Array&#125;</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      getPageItems(total, current, length) &#123;</span><br><span class="line">        <span class="type">let</span> <span class="variable">items</span> <span class="operator">=</span> [];</span><br><span class="line">        <span class="keyword">if</span> (length &gt;= total) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="type">let</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= total; i++) &#123;</span><br><span class="line">            items.push(i);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="type">let</span> <span class="variable">base</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">          <span class="comment">// 前移</span></span><br><span class="line">          <span class="keyword">if</span> (current - <span class="number">0</span> &gt; Math.floor((length - <span class="number">1</span>) / <span class="number">2</span>)) &#123;</span><br><span class="line">            <span class="comment">// 后移</span></span><br><span class="line">            base = Math.min(total, current - <span class="number">0</span> + Math.ceil((length - <span class="number">1</span>) / <span class="number">2</span>)) - length;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">for</span> (<span class="type">let</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= length; i++) &#123;</span><br><span class="line">            items.push(base + i);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">  .pagination &#123;</span><br><span class="line">    vertical-align: middle !important;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">    margin-top: <span class="number">0</span>;</span><br><span class="line">    margin-bottom: 10px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .pagination button &#123;</span><br><span class="line">    margin-right: 5px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .btn-primary.active &#123;</span><br><span class="line">    background-color: #2f7bba !important;</span><br><span class="line">    border-color: #<span class="number">27689d</span> !important;</span><br><span class="line">    color: white !important;</span><br><span class="line">    font-weight: <span class="number">600</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*.pagination select &#123;*/</span></span><br><span class="line">  <span class="comment">/*vertical-align: middle !important;*/</span></span><br><span class="line">  <span class="comment">/*font-size: 16px;*/</span></span><br><span class="line">  <span class="comment">/*margin-top: 0;*/</span></span><br><span class="line">  <span class="comment">/*&#125;*/</span></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次在chapter.vue中：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;import Pagination from &quot;../../components/pagination&quot;;&lt;/script&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;pagination ref=&quot;pagination&quot; v-bind:list=&quot;list&quot; v-bind:itemCount=&quot;8&quot;&gt;&lt;/pagination&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    components: &#123;Pagination&#125;,&#125;</span><br><span class="line">list(page) &#123;</span><br><span class="line">        let _this = this;</span><br><span class="line">        Loading.show();</span><br><span class="line">        _this.$ajax.post(process.env.VUE_APP_SERVER + &#x27;/business/admin/chapter/list&#x27;, &#123;</span><br><span class="line">          page: page,</span><br><span class="line">          size: _this.$refs.pagination.size,</span><br><span class="line">        &#125;).then((response)=&gt;&#123;</span><br><span class="line"> 		 let resp = response.data;</span><br><span class="line">          _this.chapters = resp.list;</span><br><span class="line">          _this.$refs.pagination.render(page, resp.total);</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-6-增加新增大章功能"><a href="#5-6-增加新增大章功能" class="headerlink" title="5-6 增加新增大章功能"></a>5-6 增加新增大章功能</h2><p>页面设计与前端代码开发：</p>
+<ul>
+<li>$(“.modal”)里的modal是css的选择器，模态框代码里有class&#x3D;”modal”样式，.modal()是内置的方法用于弹出或关闭模态框</li>
+<li>可以使用$(“.modal”).modal({backdrop:’static’})；禁止点空白的地方关闭，某些场景需求会用到这个功能。</li>
+<li><code>&lt;label for=&quot;id&quot;&gt;</code>有个场景会经常用到：点击复选框checkbox时选中，使用label for后，点击label的文字，也能选中复制框</li>
+<li>模态框弹出和关闭，可以用js代码，也可以用button属性：data-dismiss&#x3D;”cdd选择器”关闭；data-toggle&#x3D;”css选择器”打开。</li>
+</ul>
+<p>短ID设计与后端代码开发：</p>
+<ul>
+<li><p>面试：为什么不用自增ID？自增ID至少有三个问题：1.ID是连续，容易被探测；2.需要+1次查询才能得到id的值；3.分布式存储中，id会出现重复。</p>
+</li>
+<li><p>uuid是根据机器、时间等多个维度生成的32位16进制数，有生之年不会重复。</p>
+</li>
+<li><p>短ID是根据将32位ID，转为62进制8位ID，减少存储空间。原理是将uuid转为10进制，再对62取余。也可以再添加两个符号，转为64进制。</p>
+</li>
+<li><p>在server中添加一个UuidUtil</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.util;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UuidUtil</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String[] chars = <span class="keyword">new</span> <span class="title class_">String</span>[] &#123; <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;f&quot;</span>,</span><br><span class="line">            <span class="string">&quot;g&quot;</span>, <span class="string">&quot;h&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;j&quot;</span>, <span class="string">&quot;k&quot;</span>, <span class="string">&quot;l&quot;</span>, <span class="string">&quot;m&quot;</span>, <span class="string">&quot;n&quot;</span>, <span class="string">&quot;o&quot;</span>, <span class="string">&quot;p&quot;</span>, <span class="string">&quot;q&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="string">&quot;s&quot;</span>,</span><br><span class="line">            <span class="string">&quot;t&quot;</span>, <span class="string">&quot;u&quot;</span>, <span class="string">&quot;v&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="string">&quot;x&quot;</span>, <span class="string">&quot;y&quot;</span>, <span class="string">&quot;z&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>,</span><br><span class="line">            <span class="string">&quot;6&quot;</span>, <span class="string">&quot;7&quot;</span>, <span class="string">&quot;8&quot;</span>, <span class="string">&quot;9&quot;</span>, <span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>, <span class="string">&quot;E&quot;</span>, <span class="string">&quot;F&quot;</span>, <span class="string">&quot;G&quot;</span>, <span class="string">&quot;H&quot;</span>, <span class="string">&quot;I&quot;</span>,</span><br><span class="line">            <span class="string">&quot;J&quot;</span>, <span class="string">&quot;K&quot;</span>, <span class="string">&quot;L&quot;</span>, <span class="string">&quot;M&quot;</span>, <span class="string">&quot;N&quot;</span>, <span class="string">&quot;O&quot;</span>, <span class="string">&quot;P&quot;</span>, <span class="string">&quot;Q&quot;</span>, <span class="string">&quot;R&quot;</span>, <span class="string">&quot;S&quot;</span>, <span class="string">&quot;T&quot;</span>, <span class="string">&quot;U&quot;</span>, <span class="string">&quot;V&quot;</span>,</span><br><span class="line">            <span class="string">&quot;W&quot;</span>, <span class="string">&quot;X&quot;</span>, <span class="string">&quot;Y&quot;</span>, <span class="string">&quot;Z&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取短UUID</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getShortUuid</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">shortBuffer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line">        <span class="type">String</span> <span class="variable">uuid</span> <span class="operator">=</span> UuidUtil.getUuid();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> uuid.substring(i * <span class="number">4</span>, i * <span class="number">4</span> + <span class="number">4</span>);</span><br><span class="line">            <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> Integer.parseInt(str, <span class="number">16</span>);</span><br><span class="line">            shortBuffer.append(chars[x % <span class="number">0x3E</span>]); <span class="comment">// 对62取余</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> shortBuffer.toString();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获得32位UUID</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getUuid</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">uuid</span> <span class="operator">=</span> UUID.randomUUID().toString();</span><br><span class="line">        <span class="comment">//去掉“-”符号</span></span><br><span class="line">        <span class="keyword">return</span> uuid.replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        System.out.println(getShortUuid());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在ChapterService中添加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(ChapterDto chapterDto)</span>&#123;</span><br><span class="line">    chapterDto.setId(UuidUtil.getShortUuid());</span><br><span class="line">    <span class="type">Chapter</span> <span class="variable">chapter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Chapter</span>();</span><br><span class="line">    BeanUtils.copyProperties(chapterDto,chapter);</span><br><span class="line">    chapterMapper.insert(chapter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在ChapterController中添加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/save&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ChapterDto <span class="title function_">list</span><span class="params">(<span class="meta">@RequestBody</span> ChapterDto chapterDto)</span>&#123;</span><br><span class="line">    chapterService.save(chapterDto);</span><br><span class="line">    <span class="keyword">return</span> chapterDto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chapter.vue中添加方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">save(page)&#123;</span><br><span class="line">  let _this=this;</span><br><span class="line">  _this.$ajax.post(&#x27;http://192.168.0.105:9000/business/admin/chapter/save&#x27;,_this.chapter).then((respond)=&gt;&#123;</span><br><span class="line">    console.log(&quot;保存大章列表结果:&quot;,respond);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>增加复制工具类CopyUtil:</p>
+<ul>
+<li>server中增加代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.BeanUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.CollectionUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CopyUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; List&lt;T&gt; <span class="title function_">copyList</span><span class="params">(List source, Class&lt;T&gt; clazz)</span> &#123;</span><br><span class="line">        List&lt;T&gt; target = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (!CollectionUtils.isEmpty(source))&#123;</span><br><span class="line">            <span class="keyword">if</span> (!CollectionUtils.isEmpty(source))&#123;</span><br><span class="line">                <span class="keyword">for</span> (Object c: source) &#123;</span><br><span class="line">                    <span class="type">T</span> <span class="variable">obj</span> <span class="operator">=</span> copy(c, clazz);</span><br><span class="line">                    target.add(obj);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T <span class="title function_">copy</span><span class="params">(Object source, Class&lt;T&gt; clazz)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (source == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">T</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            obj = clazz.newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        BeanUtils.copyProperties(source, obj);</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>统一返回参数ResponseDto：</p>
+<ul>
+<li>纯接口应用，一般会规范固定的请求参数，如版本号、请求流水等；再规范固定的返回参数，如返回码、返回描述等。方便调用方统一处理。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.dto;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ResponseDto</span>&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务上的成功或失败</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回码</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回泛型数据，自定义类型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> T content;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCode</span><span class="params">(String code)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">getSuccess</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> success;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setSuccess</span><span class="params">(<span class="type">boolean</span> success)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.success = success;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getMessage</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setMessage</span><span class="params">(String message)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.message = message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">getContent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setContent</span><span class="params">(T content)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>(<span class="string">&quot;ResponseDto&#123;&quot;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;success=&quot;</span>).append(success);</span><br><span class="line">        sb.append(<span class="string">&quot;, code=&#x27;&quot;</span>).append(code).append(<span class="string">&#x27;\&#x27;&#x27;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;, message=&#x27;&quot;</span>).append(message).append(<span class="string">&#x27;\&#x27;&#x27;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;, content=&quot;</span>).append(content);</span><br><span class="line">        sb.append(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>列表查询业务上一般都是成功的（查不到数据也是成功的），所以不需要判断success。保存有可能失败，所以<br>需要判断success。</p>
+</li>
+<li><p>问题：同一个页面有多个modal时，用class选择时，会出现重复，所以需要给每个modal增加id属性。</p>
+</li>
+</ul>
+<h2 id="5-7修改删除大章功能"><a href="#5-7修改删除大章功能" class="headerlink" title="5-7修改删除大章功能"></a>5-7修改删除大章功能</h2><p>增加大章修改功能：增加修改大章功能，新增和修改用同一个保存功能，通过传入的参数id有没有值来判断</p>
+<ul>
+<li>新增和编辑功能弹出来的模态框是同一个。vue，controller，service调用的都是同一个方法，只是到service层再根据id是否有值来判断是新增还是删除。</li>
+<li>hidden-md：中等屏幕隐藏，其它可见：hidden-lg：大屏幕隐藏，其它可见。相反的有visible-xx.</li>
+<li>数据显示：将表格行数据显示到表单。反过来，数据修改：修改表单影响表格行数据。解决这个问题可以使用$.extend({},chapter)</li>
+<li>发现问题：对文本编辑后，点击新增弹出文本框，会带出上一次编辑过的值，只需要在add里添加_this.chapter&#x3D;{};即可</li>
+</ul>
+<p>增加大章删除功能：</p>
+<ul>
+<li>restful是一种请求风格。简单理解：通过看url就能知道这个请求时要对什么资源做什么操作。</li>
+<li>1.在前端chapter.vue中删除样式按钮上添加；2.添加del方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//1.</span><br><span class="line">v-on:click=&quot;del(chapter.id)&quot;</span><br><span class="line">//2.</span><br><span class="line">    del(id) &#123;</span><br><span class="line">      let _this = this;</span><br><span class="line">      _this.$ajax.delete(&#x27;http://192.168.0.105:9000/business/admin/chapter/delete/&#x27; + id).then((respond) =&gt; &#123;</span><br><span class="line">        console.log(&quot;删除大章列表结果:&quot;, respond);</span><br><span class="line">        let resp = respond.data;</span><br><span class="line">        if (resp.success) &#123;</span><br><span class="line">          _this.list(1);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chaptercontroller中添加del</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeleteMapping</span> (<span class="string">&quot;/delete/&#123;id&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">public</span> ResponseDto <span class="title function_">del</span><span class="params">(<span class="meta">@PathVariable</span>  String id)</span>&#123;</span><br><span class="line">    <span class="type">ResponseDto</span> <span class="variable">responseDto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResponseDto</span>();</span><br><span class="line">    chapterService.delete(id);</span><br><span class="line">    <span class="keyword">return</span> responseDto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chapterservice添加delete</li>
+</ul>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(String id)</span>&#123;</span><br><span class="line">    chapterMapper.deleteByPrimaryKey(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-8集成前端通用组件"><a href="#5-8集成前端通用组件" class="headerlink" title="5-8集成前端通用组件"></a>5-8集成前端通用组件</h2><p>集成sweetalert2(<a class="link"   target="_blank" rel="noopener" href="https://sweetalert2.github.io/#download)%E7%94%A8%E4%BA%8E%E7%95%8C%E9%9D%A2%E6%B6%88%E6%81%AF%E7%A1%AE%E8%AE%A4%E6%A1%86%EF%BC%9A%E5%9B%A0%E4%B8%BA%E5%88%A0%E9%99%A4%E6%98%AF%E4%B8%80%E4%B8%AA%E6%9C%89%E9%A3%8E%E9%99%A9%E7%9A%84%E6%93%8D%E4%BD%9C" >https://sweetalert2.github.io/#download)用于界面消息确认框：因为删除是一个有风险的操作<i class="fas fa-external-link-alt"></i></a> ，需要有确认的动作</p>
+<ul>
+<li>首先在前端index.html中添加</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//cdn.jsdelivr.net/npm/sweetalert2@11&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次在chapter.vue中的del方法添加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">del(id) &#123;</span><br><span class="line">  <span class="type">let</span> <span class="variable">_this</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">  Swal.fire(&#123;</span><br><span class="line">    title: <span class="string">&#x27;确认删除?&#x27;</span>,</span><br><span class="line">    text: <span class="string">&quot;删除后不可恢复!&quot;</span>,</span><br><span class="line">    icon: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">    showCancelButton: <span class="literal">true</span>,</span><br><span class="line">    confirmButtonColor: <span class="string">&#x27;#3085d6&#x27;</span>,</span><br><span class="line">    cancelButtonColor: <span class="string">&#x27;#d33&#x27;</span>,</span><br><span class="line">    confirmButtonText: <span class="string">&#x27;确认!&#x27;</span></span><br><span class="line">  &#125;).then((result) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (result.isConfirmed) &#123;</span><br><span class="line">      _this.$ajax.delete(<span class="string">&#x27;http://192.168.0.105:9000/business/admin/chapter/delete/&#x27;</span> + id).then((respond) =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">&quot;删除大章列表结果:&quot;</span>, respond);</span><br><span class="line">        <span class="type">let</span> <span class="variable">resp</span> <span class="operator">=</span> respond.data;</span><br><span class="line">        <span class="keyword">if</span> (resp.success) &#123;</span><br><span class="line">          _this.list(<span class="number">1</span>);</span><br><span class="line">          Swal.fire(</span><br><span class="line">              <span class="string">&#x27;删除成功!&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;你的文件已经删除&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;success&#x27;</span></span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>制作消息提示框：制作toast组件，内部用sweetalert2实现</p>
+<ul>
+<li><p>通过修改timer可以设置弹出的时长，设置icon可以设置成成功、错误、警告等</p>
+</li>
+<li><p>如果组件包括html代码，可以用vue组件；如果组件只有js代码，可以用原生的js</p>
+</li>
+<li><p>首先在index.html中引入</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--确认框和提示框--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;//cdn.jsdelivr.net/npm/sweetalert2@11&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%= BASE_URL %&gt;static/js/toast.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--必须是这样的，顺序不能颠倒--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次因为toast是通用的，所以将其单独放在static&#x2F;js&#x2F;toast.js中，代码：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Toast</span> = <span class="title class_">Swal</span>.<span class="title function_">mixin</span>(&#123;</span><br><span class="line">    <span class="attr">toast</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">position</span>: <span class="string">&#x27;top-end&#x27;</span>,</span><br><span class="line">    <span class="attr">showConfirmButton</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">timer</span>: <span class="number">3000</span>,</span><br><span class="line">    <span class="attr">timerProgressBar</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">didOpen</span>: <span class="function">(<span class="params">toast</span>) =&gt;</span> &#123;</span><br><span class="line">        toast.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mouseenter&#x27;</span>, <span class="title class_">Swal</span>.<span class="property">stopTimer</span>)</span><br><span class="line">        toast.<span class="title function_">addEventListener</span>(<span class="string">&#x27;mouseleave&#x27;</span>, <span class="title class_">Swal</span>.<span class="property">resumeTimer</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">toast = &#123;</span><br><span class="line">    <span class="attr">success</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Toast</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>: message</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">error</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Toast</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>: message</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">waning</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Toast</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;waning&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>:message</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chapter.vue引用直接  ：toast.success(“保存成功”);即可</li>
+</ul>
+<p>集成blockUI用于界面等待框：制作Loading组件，内部用jquery blockui插件</p>
+<ul>
+<li><p>等待框的作用：1.让用户知道，后端正在处理，耐心等待；2.防止用户恶意重复点击</p>
+</li>
+<li><p>首先在index引用</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  loading等待框--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery.blockUI/2.70.0-2014.11.23/jquery.blockUI.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%= BASE_URL %&gt;static/js/loading.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>loading.js写代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Loading</span> =&#123;</span><br><span class="line">    <span class="attr">show</span>:<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">        $.<span class="title function_">blockUI</span>(&#123;</span><br><span class="line">            <span class="attr">message</span>: <span class="string">&#x27;&lt;img src=&quot;/static/image/loading.gif&quot;/&gt;&#x27;</span>,</span><br><span class="line">            <span class="attr">css</span>: &#123;</span><br><span class="line">                <span class="attr">padding</span>: <span class="string">&quot;10px&quot;</span>,</span><br><span class="line">                <span class="attr">left</span>: <span class="string">&quot;50%&quot;</span>,</span><br><span class="line">                <span class="attr">width</span>: <span class="string">&quot;80px&quot;</span>,</span><br><span class="line">                <span class="attr">marginLeft</span>: <span class="string">&quot;-40px&quot;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">hide</span>:<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">        <span class="comment">//故意做的延迟，实际不用</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">            $.<span class="title function_">unblockUI</span>();</span><br><span class="line">        &#125;,<span class="number">500</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chapter调用：就是Loading.show();Loading.hide();</li>
+</ul>
+<p>给提示框换个样式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Toast</span> = &#123;</span><br><span class="line">    <span class="attr">success</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Swal</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">position</span>: <span class="string">&#x27;top-end&#x27;</span>,</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>:message,</span><br><span class="line">            <span class="attr">showConfirmButton</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">timer</span>: <span class="number">3000</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">error</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Swal</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">position</span>: <span class="string">&#x27;top-end&#x27;</span>,</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>: message,</span><br><span class="line">            <span class="attr">showConfirmButton</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">timer</span>: <span class="number">3000</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">warning</span>:<span class="keyword">function</span> (<span class="params">message</span>)&#123;</span><br><span class="line">        <span class="title class_">Swal</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">position</span>: <span class="string">&#x27;top-end&#x27;</span>,</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">            <span class="attr">title</span>: message,</span><br><span class="line">            <span class="attr">showConfirmButton</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">timer</span>: <span class="number">3000</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组件化的好处，只需要修改组件代码，就可以改变组件的样式，使用的地方完全不用动</li>
+</ul>
+<p>制作Confirm组件：</p>
+<ul>
+<li>创建confirm.js文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Confirm</span> = &#123;</span><br><span class="line">    <span class="attr">show</span>: <span class="keyword">function</span> (<span class="params">message, callback</span>) &#123;</span><br><span class="line">        <span class="title class_">Swal</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&#x27;确认删除?&#x27;</span>,</span><br><span class="line">            <span class="attr">text</span>: <span class="string">&quot;删除后不可恢复!&quot;</span>,</span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&#x27;warning&#x27;</span>,</span><br><span class="line">            <span class="attr">showCancelButton</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">confirmButtonColor</span>: <span class="string">&#x27;#3085d6&#x27;</span>,</span><br><span class="line">            <span class="attr">cancelButtonColor</span>: <span class="string">&#x27;#d33&#x27;</span>,</span><br><span class="line">            <span class="attr">confirmButtonText</span>: <span class="string">&#x27;确认!&#x27;</span></span><br><span class="line">        &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (result.<span class="property">isConfirmed</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(callback)&#123;<span class="comment">//回调函数</span></span><br><span class="line">                    <span class="title function_">callback</span>();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在chapter.vue的del中使用</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Confirm.show(&quot;删除后不可恢复!&quot;,function ()&#123;</span><br><span class="line">  Loading.show();</span><br><span class="line">  _this.$ajax.delete(&#x27;http://192.168.0.105:9000/business/admin/chapter/delete/&#x27; + id).then((respond) =&gt; &#123;</span><br><span class="line">    Loading.hide();</span><br><span class="line">    console.log(&quot;删除大章列表结果:&quot;, respond);</span><br><span class="line">    let resp = respond.data;</span><br><span class="line">    if (resp.success) &#123;</span><br><span class="line">      _this.list(1);</span><br><span class="line">      Toast.success(&quot;删除成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-9代码优化"><a href="#5-9代码优化" class="headerlink" title="5-9代码优化"></a>5-9代码优化</h2><p>前端代码校验:1.增加工具类tool.js和校验类validator.js2.大章保存非空和长度增加校验</p>
+<ul>
+<li>首先在index引用</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--  通用工具类  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%= BASE_URL %&gt;static/js/tool.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--  校验类  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%= BASE_URL %&gt;static/js/validator.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次增加两个js</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Tool</span> = &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 空校验 null或&quot;&quot;都返回true</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">isEmpty</span>: <span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="keyword">typeof</span> obj == <span class="string">&#x27;string&#x27;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> !obj || obj.<span class="title function_">replace</span>(<span class="regexp">/\s+/g</span>, <span class="string">&quot;&quot;</span>) == <span class="string">&quot;&quot;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (!obj || <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj) === <span class="string">&quot;&#123;&#125;&quot;</span> || obj.<span class="property">length</span> === <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 非空校验</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">isNotEmpty</span>: <span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> !<span class="variable language_">this</span>.<span class="title function_">isEmpty</span>(obj);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 长度校验</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">isLength</span>: <span class="keyword">function</span> (<span class="params">str, min, max</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> $.<span class="title function_">trim</span>(str).<span class="property">length</span> &gt;= min &amp;&amp; $.<span class="title function_">trim</span>(str).<span class="property">length</span> &lt;= max;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Validator</span> = &#123;</span><br><span class="line">    <span class="attr">require</span>: <span class="keyword">function</span> (<span class="params">value, text</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title class_">Tool</span>.<span class="title function_">isEmpty</span>(value)) &#123;</span><br><span class="line">            <span class="title class_">Toast</span>.<span class="title function_">warning</span>(text + <span class="string">&quot;不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">length</span>: <span class="keyword">function</span> (<span class="params">value, text, min, max</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="title class_">Tool</span>.<span class="title function_">isLength</span>(value, min, max)) &#123;</span><br><span class="line">            <span class="title class_">Toast</span>.<span class="title function_">warning</span>(text + <span class="string">&quot;长度&quot;</span> + min + <span class="string">&quot;~&quot;</span> + max + <span class="string">&quot;位&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后在chapter中save方法中调用：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 保存校验</span><br><span class="line">if (!Validator.require(_this.chapter.name, &quot;名称&quot;)</span><br><span class="line">    || !Validator.length(_this.chapter.courseId, &quot;课程ID&quot;, 1, 8)) &#123;</span><br><span class="line">  return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后端代码校验：是为了防止被绕过前端界面，利用第三方工具如postman，直接访问后端接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加了后端校验工具类ValidatorUtil</span><br><span class="line">2.增加了统一异常处理ControllerExceptionHandler，关键字@ControllerAdvice</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义异常可以继承RuntimeException或Exception。一般项目内部的业务异常，可以用RuntimeException，不需要trycatch。如果是开发一些框架或工具类，明确告诉外部需要做异常处理的，可以用Exception。另外还需要考虑事务中的异常处理。在server中建立ValidatorException.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.exception;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ValidatorException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ValidatorException</span><span class="params">(String message)</span>&#123;<span class="built_in">super</span>(message);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次在util中建立ValidatorUtil文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.course.server.exception.ValidatorException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ValidatorUtil</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 空校验（null or &quot;&quot;）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">require</span><span class="params">(Object str, String fieldName)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(str)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ValidatorException</span>(fieldName + <span class="string">&quot;不能为空&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 长度校验</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">length</span><span class="params">(String str, String fieldName, <span class="type">int</span> min, <span class="type">int</span> max)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isEmpty(str)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">length</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(str)) &#123;</span><br><span class="line">            length = str.length();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (length &lt; min || length &gt; max) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ValidatorException</span>(fieldName + <span class="string">&quot;长度&quot;</span> + min + <span class="string">&quot;~&quot;</span> + max + <span class="string">&quot;位&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果直接在chaptercontroller中使用保存校验会出现问题：直接进行后端代码校验会出现问题：现象：后端出异常，导致前后收不到结果，vue中的.then方法没有执行，等待框没有关闭导致不能继续任何操作，只能刷新页面。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存校验</span></span><br><span class="line">ValidatorUtil.require(chapterDto.getName(), <span class="string">&quot;名称&quot;</span>);</span><br><span class="line">ValidatorUtil.require(chapterDto.getCourseId(), <span class="string">&quot;课程ID&quot;</span>);</span><br><span class="line">ValidatorUtil.length(chapterDto.getCourseId(), <span class="string">&quot;课程ID&quot;</span>, <span class="number">1</span>, <span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解决这个问题，写一个统一处理方法就在controller软件包下建一个ControllerExceptionHandler.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.business.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.course.server.dto.ResponseDto;</span><br><span class="line"><span class="keyword">import</span> com.course.server.exception.ValidatorException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ControllerAdvice;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ExceptionHandler;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"><span class="meta">@ControllerAdvice</span><span class="comment">//@ControllerAdvice是Controller增强器，可以对Controller做统一的处理，如异常处理、数据处理等</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ControllerExceptionHandler</span> &#123;</span><br><span class="line">    <span class="meta">@ExceptionHandler(value = ValidatorException.class)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span><span class="comment">//以JISON方式返回</span></span><br><span class="line">    <span class="keyword">public</span> ResponseDto <span class="title function_">validatorExceptionHandler</span><span class="params">(ValidatorException e)</span>&#123;</span><br><span class="line">    <span class="type">ResponseDto</span> <span class="variable">responseDto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ResponseDto</span>();</span><br><span class="line">    responseDto.setSuccess(<span class="literal">false</span>);</span><br><span class="line">    responseDto.setMessage(e.getMessage());</span><br><span class="line">    <span class="keyword">return</span> responseDto;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有时候我们的接口原本是不对外的，或者只跟特定的第三方应用做对接，这时为了内部安全，不应该把参数的校验规则暴露出去，所以需要模糊返回信息。类似登录接门应该返回“用户名或密码错”，而不是“用户名不存在，或“密码错误”（容易被探测）。<strong>所以我们将返回统一信息如下，并设置一个日志返回真正信息。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LOG.warn(e.getMessage());</span><br><span class="line">responseDto.setMessage(<span class="string">&quot;请求参数异常!&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果开发过程中提示“请求参数异常“说明后端有校验拦截，前端没有，此时应该把前端校验加上</p>
+</li>
+<li><p>使用AOP制作一个统一日志输出</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.增加了日志AOP，统一日志输出</span><br><span class="line">2.logback增加了打印日志跟踪号</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>统一日志处理可以用AOP也可以用Spring拦截器</p>
+</li>
+<li><p>约定优于配置。又一个约定：查询类接口以list或query开头，保存用save开头，删除用delete开头</p>
+</li>
+<li><p>首先在chaptercontroller中添加</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">LOG</span> <span class="operator">=</span> LoggerFactory.getLogger(ChapterController.class);</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">BUSINESS_NAME</span> <span class="operator">=</span> <span class="string">&quot;大章&quot;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>logback进行一行修改</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">encoder</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Pattern</span>&gt;</span>%d&#123;ss.SSS&#125; %highlight(%-5level) %blue(%-30logger&#123;30&#125;:%-4line) %green(%-8X&#123;UUID&#125;) %msg%n<span class="tag">&lt;/<span class="name">Pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在server中的config加入LogAspect.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.course.server.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.support.spring.PropertyPreFilters;</span><br><span class="line"><span class="keyword">import</span> com.course.server.util.UuidUtil;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.Signature;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.MDC;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.RequestContextHolder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.context.request.ServletRequestAttributes;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="type">Logger</span> <span class="variable">LOG</span> <span class="operator">=</span> LoggerFactory.getLogger(LogAspect.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 定义一个切点 */</span></span><br><span class="line">    <span class="meta">@Pointcut(&quot;execution(public * com.course.*.controller..*Controller.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">controllerPointcut</span><span class="params">()</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before(&quot;controllerPointcut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doBefore</span><span class="params">(JoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// 日志编号</span></span><br><span class="line">        MDC.put(<span class="string">&quot;UUID&quot;</span>, UuidUtil.getShortUuid());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 开始打印请求日志</span></span><br><span class="line">        <span class="type">ServletRequestAttributes</span> <span class="variable">attributes</span> <span class="operator">=</span> (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();</span><br><span class="line">        <span class="type">HttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> attributes.getRequest();</span><br><span class="line">        <span class="type">Signature</span> <span class="variable">signature</span> <span class="operator">=</span> joinPoint.getSignature();</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> signature.getName();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印业务操作</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">nameCn</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (name.contains(<span class="string">&quot;list&quot;</span>) || name.contains(<span class="string">&quot;query&quot;</span>)) &#123;</span><br><span class="line">            nameCn = <span class="string">&quot;查询&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (name.contains(<span class="string">&quot;save&quot;</span>)) &#123;</span><br><span class="line">            nameCn = <span class="string">&quot;保存&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (name.contains(<span class="string">&quot;delete&quot;</span>)) &#123;</span><br><span class="line">            nameCn = <span class="string">&quot;删除&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            nameCn = <span class="string">&quot;操作&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用反射，获取业务名称</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> signature.getDeclaringType();</span><br><span class="line">        Field field;</span><br><span class="line">        <span class="type">String</span> <span class="variable">businessName</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            field = clazz.getField(<span class="string">&quot;BUSINESS_NAME&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (!StringUtils.isEmpty(field)) &#123;</span><br><span class="line">                businessName = (String) field.get(clazz);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">&quot;未获取到业务名称&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SecurityException e) &#123;</span><br><span class="line">            LOG.error(<span class="string">&quot;获取业务名称失败&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印请求信息</span></span><br><span class="line">        LOG.info(<span class="string">&quot;------------- 【&#123;&#125;】&#123;&#125;开始 -------------&quot;</span>, businessName, nameCn);</span><br><span class="line">        LOG.info(<span class="string">&quot;请求地址: &#123;&#125; &#123;&#125;&quot;</span>, request.getRequestURL().toString(), request.getMethod());</span><br><span class="line">        LOG.info(<span class="string">&quot;类名方法: &#123;&#125;.&#123;&#125;&quot;</span>, signature.getDeclaringTypeName(), name);</span><br><span class="line">        LOG.info(<span class="string">&quot;远程地址: &#123;&#125;&quot;</span>, request.getRemoteAddr());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印请求参数</span></span><br><span class="line">        Object[] args = joinPoint.getArgs();</span><br><span class="line">        Object[] arguments  = <span class="keyword">new</span> <span class="title class_">Object</span>[args.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (args[i] <span class="keyword">instanceof</span> ServletRequest</span><br><span class="line">                    || args[i] <span class="keyword">instanceof</span> ServletResponse</span><br><span class="line">                    || args[i] <span class="keyword">instanceof</span> MultipartFile) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            arguments[i] = args[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排除字段，敏感字段或太长的字段不显示</span></span><br><span class="line">        String[] excludeProperties = &#123;<span class="string">&quot;shard&quot;</span>&#125;;</span><br><span class="line">        <span class="type">PropertyPreFilters</span> <span class="variable">filters</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PropertyPreFilters</span>();</span><br><span class="line">        PropertyPreFilters.<span class="type">MySimplePropertyPreFilter</span> <span class="variable">excludefilter</span> <span class="operator">=</span> filters.addFilter();</span><br><span class="line">        excludefilter.addExcludes(excludeProperties);</span><br><span class="line">        LOG.info(<span class="string">&quot;请求参数: &#123;&#125;&quot;</span>, JSONObject.toJSONString(arguments, excludefilter)); <span class="comment">// 为空的会不打印，但是像图片等长字段也会打印</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;controllerPointcut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">doAround</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> proceedingJoinPoint.proceed();</span><br><span class="line">        <span class="comment">// 排除字段，敏感字段或太长的字段不显示</span></span><br><span class="line">        String[] excludeProperties = &#123;<span class="string">&quot;password&quot;</span>, <span class="string">&quot;shard&quot;</span>&#125;;</span><br><span class="line">        <span class="type">PropertyPreFilters</span> <span class="variable">filters</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PropertyPreFilters</span>();</span><br><span class="line">        PropertyPreFilters.<span class="type">MySimplePropertyPreFilter</span> <span class="variable">excludefilter</span> <span class="operator">=</span> filters.addFilter();</span><br><span class="line">        excludefilter.addExcludes(excludeProperties);</span><br><span class="line">        LOG.info(<span class="string">&quot;返回结果: &#123;&#125;&quot;</span>, JSONObject.toJSONString(result, excludefilter));</span><br><span class="line">        LOG.info(<span class="string">&quot;------------- 结束 耗时：&#123;&#125; ms -------------&quot;</span>, System.currentTimeMillis() - startTime);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当然需要添加依赖：根目录和server依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.60<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- AOP --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>前端增加统一日志输出：在main.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * axias拦截器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">config</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;请求:&quot;</span>,config);</span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;,<span class="function"><span class="params">error</span> =&gt;</span> &#123;&#125;);</span><br><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="keyword">function</span> (<span class="params">response</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;返回结果:&quot;</span>,response);</span><br><span class="line">  <span class="keyword">return</span> response;</span><br><span class="line">&#125;,<span class="function"><span class="params">error</span> =&gt;</span> &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：完整项目之Spring Cloud + Vue 前后端分离1</li>
+        <li>Post author：Fang</li>
+        <li>Create time：2022-01-07 10:50:36</li>
+        <li>
+            Post link：https://ainianxu.github.io/2022/01/07/完整项目之Spring Cloud + Vue 前后端分离1/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE/">#完整项目</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/07/%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E4%B9%8BSpring%20Cloud%20+%20Vue%20%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">完整项目之Spring Cloud + Vue 前后端分离1</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%20day13%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%9A%E5%AE%9E%E4%BE%8B%E6%8E%A2%E7%A9%B6/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习 day13深度卷积网络：实例探究</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'loa9BVbgmyFLwBMHhg1Cycx1-gzGzoHsz',
+                    appKey: '47pIz6ewIXRi5251WyfUpQOB',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😜 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'Fang';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2023&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Fang</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.4</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC1%E7%AB%A0-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">第1章 配置环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC2%E7%AB%A0-%E4%BD%BF%E7%94%A8Maven%E6%90%AD%E5%BB%BASpringCloud%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">第2章 使用Maven搭建SpringCloud项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BD%BF%E7%94%A8Eureka%E6%90%AD%E5%BB%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">2.1.</span> <span class="nav-text">2-1 使用Eureka搭建注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%90%AD%E5%BB%BA%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97-system"><span class="nav-number">2.2.</span> <span class="nav-text">2-2 搭建业务模块-system</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E6%90%AD%E5%BB%BA%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9D%97-gateway"><span class="nav-number">2.3.</span> <span class="nav-text">2-3 搭建路由模块-gateway</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC3%E7%AB%A0-SpringBoot%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E6%95%B4%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">第3章 SpringBoot项目技术整合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%9B%86%E6%88%90%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6Mybatis"><span class="nav-number">3.1.</span> <span class="nav-text">3-1 集成持久层框架Mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">3-2 项目优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97-server"><span class="nav-number">3.3.</span> <span class="nav-text">3-3 搭建服务模块-server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E9%9B%86%E6%88%90mybatis-generator"><span class="nav-number">3.4.</span> <span class="nav-text">3-4 集成mybatis generator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC4%E7%AB%A0-%E4%BD%BF%E7%94%A8Vue-cli-4%E6%90%AD%E5%BB%BA%E7%AE%A1%E7%90%86%E6%8E%A7%E5%8F%B0"><span class="nav-number">4.</span> <span class="nav-text">第4章 使用Vue cli 4搭建管理控台</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BD%BF%E7%94%A8vue-cli%E5%88%9B%E5%BB%BAadmin%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.1.</span> <span class="nav-text">4-1 使用vue cli创建admin项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E9%9B%86%E6%88%90bootstrap%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E6%A8%A1%E6%9D%BFace"><span class="nav-number">4.2.</span> <span class="nav-text">4-2 集成bootstrap后台管理模板ace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E9%9B%86%E6%88%90%E8%B7%AF%E7%94%B1vue-route"><span class="nav-number">4.3.</span> <span class="nav-text">4-3 集成路由vue-route</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E6%8E%A7%E5%8F%B0%E6%AC%A2%E8%BF%8E%E9%A1%B5%E9%9D%A2%E5%BC%80%E5%8F%91"><span class="nav-number">4.4.</span> <span class="nav-text">4-4 控台欢迎页面开发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC5%E7%AB%A0-%E5%8D%95%E8%A1%A8%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text">第5章 单表管理功能前后端开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%A4%A7%E7%AB%A0%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%911"><span class="nav-number">5.1.</span> <span class="nav-text">5-1 大章列表查询功能开发1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E5%A4%A7%E7%AB%A0%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%912"><span class="nav-number">5.2.</span> <span class="nav-text">5-2 大章列表查询功能开发2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E5%A4%A7%E7%AB%A0%E5%88%97%E8%A1%A8%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%913"><span class="nav-number">5.3.</span> <span class="nav-text">5-3 大章列表查询功能开发3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91"><span class="nav-number">5.4.</span> <span class="nav-text">5-4 分页功能开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5%E5%89%8D%E7%AB%AF%E5%88%86%E9%A1%B5%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">5.5.</span> <span class="nav-text">5-5前端分页组件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-%E5%A2%9E%E5%8A%A0%E6%96%B0%E5%A2%9E%E5%A4%A7%E7%AB%A0%E5%8A%9F%E8%83%BD"><span class="nav-number">5.6.</span> <span class="nav-text">5-6 增加新增大章功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7%E4%BF%AE%E6%94%B9%E5%88%A0%E9%99%A4%E5%A4%A7%E7%AB%A0%E5%8A%9F%E8%83%BD"><span class="nav-number">5.7.</span> <span class="nav-text">5-7修改删除大章功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8%E9%9B%86%E6%88%90%E5%89%8D%E7%AB%AF%E9%80%9A%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">5.8.</span> <span class="nav-text">5-8集成前端通用组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-9%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">5.9.</span> <span class="nav-text">5-9代码优化</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.4/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
